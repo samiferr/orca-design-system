@@ -1,0 +1,37 @@
+{% extends "orca/docs/base.html" %}{% load orca %}
+{% block title %}Tokens{% endblock %}
+{% block content %}
+<h1 class="orca-page-title">Tokens</h1>
+<p class="orca-page-subtitle">Generated from <code class="orca-code">orca/tokens.py</code>. Use the CSS names; never raw values.</p>
+
+<section class="docs-section" aria-labelledby="t-brand">
+  <h2 class="orca-section-title" id="t-brand">Brand tokens (the only ones you may change)</h2>
+  {% if brand.notes %}<div class="orca-error-list" style="border-inline-start-color: var(--orca-caution)">{% status_icon "caution" %}<p class="orca-error-list__title">Adjusted for contrast</p><ul>{% for n in brand.notes %}<li>{{ n }}</li>{% endfor %}</ul></div>{% endif %}
+  <table class="docs-table"><thead><tr><th scope="col">CSS</th><th scope="col">Light / paper</th><th scope="col">Dark</th></tr></thead><tbody>
+  {% for name, light, dark in brand_rows %}<tr><td><code class="orca-code">{{ name }}</code></td><td>{% if light|slice:":1" == "#" %}<span class="orca-swatch" style="--orca-swatch: {{ light }}"></span> {% endif %}<code class="orca-code">{{ light }}</code></td><td>{% if dark|slice:":1" == "#" %}<span class="orca-swatch" style="--orca-swatch: {{ dark }}"></span> {% endif %}<code class="orca-code">{{ dark }}</code></td></tr>{% endfor %}
+  </tbody></table>
+</section>
+
+<section class="docs-section" aria-labelledby="t-sem">
+  <h2 class="orca-section-title" id="t-sem">Semantic colours</h2>
+  <table class="docs-table"><thead><tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th><th scope="col">Paper</th><th scope="col">Use</th></tr></thead><tbody>
+  {% for t in semantic %}<tr><td><span class="orca-swatch" style="--orca-swatch: var(--orca-{{ t.name }})"></span> <code class="orca-code">--orca-{{ t.name }}</code></td>
+    <td class="orca-small"><code class="orca-code">{{ t.light }}</code></td><td class="orca-small"><code class="orca-code">{{ t.dark|default:t.light }}</code></td><td class="orca-small"><code class="orca-code">{{ t.paper|default:t.light }}</code></td><td class="orca-small">{{ t.usage }}</td></tr>{% endfor %}
+  </tbody></table>
+</section>
+
+<section class="docs-section" aria-labelledby="t-pal">
+  <h2 class="orca-section-title" id="t-pal">Palette</h2>
+  <div class="docs-palette">
+    <div class="docs-palette__row"><span class="orca-small docs-palette__name">gray</span>{% for step, v in neutral %}<span class="docs-chip" style="background: var(--orca-gray-{{ step }})" title="--orca-gray-{{ step }} {{ v }}"></span>{% endfor %}</div>
+    {% for hue in hues %}<div class="docs-palette__row"><span class="orca-small docs-palette__name">{{ hue }}</span>{% for s in steps %}<span class="docs-chip" style="background: var(--orca-{{ hue }}-{{ s }})" title="--orca-{{ hue }}-{{ s }}"></span>{% endfor %}</div>{% endfor %}
+  </div>
+</section>
+
+<section class="docs-section" aria-labelledby="t-scales">
+  <h2 class="orca-section-title" id="t-scales">Scales</h2>
+  <table class="docs-table"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Group</th><th scope="col">Use</th></tr></thead><tbody>
+  {% for s in scales %}<tr><td><code class="orca-code">--orca-{{ s.name }}</code></td><td class="orca-small"><code class="orca-code">{{ s.value }}</code></td><td class="orca-small">{{ s.group }}</td><td class="orca-small">{{ s.usage }}</td></tr>{% endfor %}
+  </tbody></table>
+</section>
+{% endblock %}

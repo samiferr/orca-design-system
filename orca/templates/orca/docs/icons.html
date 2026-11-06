@@ -1,0 +1,13 @@
+{% extends "orca/docs/base.html" %}{% load orca %}
+{% block title %}Icons{% endblock %}
+{% block content %}
+<h1 class="orca-page-title">Icons</h1>
+<p class="orca-page-subtitle">{{ items|length }} glyphs. Use <code class="orca-code">{% templatetag openblock %} icon "name" {% templatetag closeblock %}</code>. Always pair an icon with a word or an accessible name.</p>
+<ul class="docs-icons">
+  {% for name, svg in items %}<li>{{ svg }}<code class="orca-small">{{ name }}</code></li>{% endfor %}
+</ul>
+<section class="docs-section" aria-labelledby="ic-al">
+  <h2 class="orca-section-title" id="ic-al">Aliases</h2>
+  <p class="orca-row">{% for a, target in aliases %}<span class="orca-tag"><code>{{ a }}</code> → <code>{{ target }}</code></span>{% endfor %}</p>
+</section>
+{% endblock %}

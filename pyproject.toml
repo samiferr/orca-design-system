@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orca-design-system"
+version = "0.1.0"
+description = "ORCA: a Django design system whose every element documents its why, when and how, for developers and AI coding agents."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT AND LGPL-3.0-only AND LicenseRef-Ubuntu-Font-1.0" }
+authors = [{ name = "Sami Ferr" }]
+dependencies = ["Django>=4.2"]
+keywords = ["django", "design-system", "ui", "accessibility", "ai"]
+classifiers = [
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
+  "Programming Language :: Python :: 3",
+]
+
+[project.scripts]
+orca = "orca.__main__:main"
+
+[project.urls]
+Source = "https://github.com/samiferr/orca-design-system"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["orca*"]
+
+[tool.setuptools.package-data]
+orca = ["static/orca/**/*", "templates/orca/**/*", "data/*.json"]

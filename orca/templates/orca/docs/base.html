@@ -1,0 +1,39 @@
+{% load orca static %}<!doctype html>
+<html {% orca_html_attrs %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ORCA primitives{% endblock %} · ORCA design system</title>
+  {% orca_head %}
+  <link rel="stylesheet" href="{% static 'orca/css/docs.css' %}">
+</head>
+<body>
+<a class="orca-skip-link" href="#main">Skip to main content</a>
+<header class="docs-top">
+  {% orca_logo href="" %}
+  <span class="docs-top__title">ORCA primitives</span>
+  <nav class="docs-top__links" aria-label="Catalogue sections">
+    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:index' %}">Elements</a>
+    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:tokens' %}">Tokens</a>
+    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:icons' %}">Icons</a>
+    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:catalogue-json' %}">JSON</a>
+  </nav>
+  <button class="orca-icon-button orca-icon-button--outlined orca-button--dense" type="button" data-orca-theme-toggle aria-label="Change theme">{% icon "sun" %}</button>
+</header>
+<div class="docs-body">
+  <nav class="docs-nav orca-scroll" aria-label="Elements">
+    {% for cat, els in nav %}
+      <details class="docs-nav__group" {% if el.category == cat.key or page == "index" %}open{% endif %}>
+        <summary class="docs-nav__heading"><span class="orca-chevron">{% icon "chevron-down" %}</span>{{ cat.title }} <span class="orca-count orca-count--neutral">{{ els|length }}</span></summary>
+        <ul>
+          {% for e in els %}<li><a href="{% url 'orca:element' e.id %}" {% if page == e.id %}aria-current="page"{% endif %}>{{ e.name }}</a></li>{% endfor %}
+        </ul>
+      </details>
+    {% endfor %}
+  </nav>
+  <main id="main" class="docs-main" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+</body>
+</html>
