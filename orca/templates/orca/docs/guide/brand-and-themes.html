@@ -1,0 +1,60 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">A project changes brand tokens only. Everything else stays fixed so contrast, spacing and behaviour remain tested in every theme.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">The brand keys</h2>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Key</th><th scope="col">CSS</th><th scope="col">Default</th><th scope="col">What it does</th></tr></thead>
+    <tbody>{% for t in brand_tokens %}<tr>
+      <td><code class="orca-code">{{ t.key }}</code></td>
+      <td>{% for c in t.css %}<code class="orca-code">{{ c }}</code> {% empty %}<span class="orca-muted">template only</span>{% endfor %}</td>
+      <td class="orca-small">{% if t.default %}<code class="orca-code">{{ t.default|truncatechars:28 }}</code>{% else %}<span class="orca-muted">empty</span>{% endif %}</td>
+      <td class="orca-small">{{ t.usage }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">How ORCA treats your values</h2>
+  <ul class="docs-list">
+    <li><strong>Accepted liberally.</strong> <code class="orca-code">"0F95A1"</code>, <code class="orca-code">"#06c"</code> and <code class="orca-code">"rgb(15, 149, 161)"</code> all work and are normalised to lowercase hex.</li>
+    <li><strong>Adjusted for readability.</strong> Brand fills that carry text are darkened (or lightened) until <code class="orca-code">--orca-brand-on</code> reads at 4.5:1. The accent is darkened to 4.5:1 on the light and paper grounds; its dark-theme value is derived and lightened to 4.5:1 on the dark grounds.</li>
+    <li><strong>Reported.</strong> Every adjustment appears as the system-check warning <code class="orca-code">orca.W001</code> with the value used, so you can set it explicitly and silence it.</li>
+    <li><strong>Strict about the rest.</strong> Unknown keys and unreadable values are errors (<code class="orca-code">orca.E002</code>), and <code class="orca-code">orca_lint</code> flags any stylesheet that redefines a non-brand <code class="orca-code">--orca-*</code> token.</li>
+  </ul>
+  <p class="orca-p">Current values on this site:</p>
+  <div class="orca-row orca-row--16">
+    <span class="orca-with-icon"><span class="orca-swatch" style="--orca-swatch: var(--orca-brand)"></span>Brand <code class="orca-code">{{ brand.values.color }}</code></span>
+    <span class="orca-with-icon"><span class="orca-swatch" style="--orca-swatch: var(--orca-brand-strong)"></span>Brand fill</span>
+    <span class="orca-with-icon"><span class="orca-swatch" style="--orca-swatch: var(--orca-accent)"></span>Accent</span>
+    <button class="orca-button orca-button--brand orca-button--dense" type="button">Brand button</button>
+    <a class="orca-link" href="{% url 'orca:tokens' %}">Accent link</a>
+  </div>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Examples</h2>
+  <pre class="docs-code"><code># A purple brand with white text: ORCA darkens the fill if needed
+ORCA = {"BRAND": {"color": "#7a1fa2", "on_color": "#ffffff"}}
+
+# A pale accent: ORCA darkens it for light themes and derives the dark one
+ORCA = {"BRAND": {"accent": "#7fb2ff"}}
+
+# Your own typeface (load it yourself, e.g. in your base template)
+ORCA = {"BRAND": {"font_sans": '"Inter", system-ui, sans-serif'}}</code></pre>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Themes</h2>
+  <p class="orca-p">Light, dark and paper share every token name, so components are written once. ORCA has one appearance, Tangerine: square corners, 1.5px borders, filled fields with a bottom border, and a 3px focus ring drawn inside controls.</p>
+  <div class="docs-themes">
+    <div class="docs-theme" data-theme="light"><p class="orca-panel-title">Light</p><p class="orca-small orca-muted">White page, default.</p><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span></div>
+    <div class="docs-theme" data-theme="dark"><p class="orca-panel-title">Dark</p><p class="orca-small orca-muted">#262626 page; floating surfaces lift a step.</p><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span></div>
+    <div class="docs-theme" data-theme="paper"><p class="orca-panel-title">Paper</p><p class="orca-small orca-muted">#f3f3f3 page with deeper fills.</p><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span></div>
+  </div>
+  <ul class="docs-list">
+    <li><code class="orca-code">ORCA["THEME"] = "auto"</code> (default): follows the operating system, and a <code class="orca-code">data-orca-theme-toggle</code> button lets each reader choose; the choice is remembered in their browser.</li>
+    <li><code class="orca-code">"light"</code>, <code class="orca-code">"dark"</code> or <code class="orca-code">"paper"</code>: one theme for everyone, written on <code class="orca-code">&lt;html&gt;</code> by <code class="orca-code">orca_html_attrs</code>.</li>
+    <li>Set the theme on <code class="orca-code">&lt;html&gt;</code> only. The previews above are a documentation-only exception that scopes the theme tokens to a box.</li>
+  </ul>
+</section>
+{% endblock %}

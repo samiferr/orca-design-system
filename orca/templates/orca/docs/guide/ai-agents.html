@@ -1,0 +1,76 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">ORCA is written so a coding agent can choose the right element, write it correctly and have its output checked, without guessing.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Where agents read ORCA</h2>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Source</th><th scope="col">Best for</th></tr></thead>
+    <tbody>
+      <tr><td><code class="orca-code">AGENTS.md</code></td><td>The hard rules and the decision table. Point your agent's instructions file at it.</td></tr>
+      <tr><td><code class="orca-code">python -m orca search &lt;words&gt;</code></td><td>Finding the element for a job by name, guide item or class.</td></tr>
+      <tr><td><code class="orca-code">python -m orca show &lt;id&gt;</code></td><td>Why, when, when not, how, accessibility, tokens, classes and a working example of one element.</td></tr>
+      <tr><td><code class="orca-code">docs/primitives/*.md</code></td><td>Reading a whole category at once.</td></tr>
+      <tr><td><code class="orca-code">docs/catalogue.json</code> or <a class="orca-link orca-link--plain" href="{% url 'orca:catalogue-json' %}">catalogue.json</a></td><td>Tools and retrieval: every element as structured data.</td></tr>
+      <tr><td><code class="orca-code">python manage.py orca_lint</code></td><td>Checking the result before it is committed.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="orca-p">No Django project is needed for the command line: it reads the catalogue directly from the installed package.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Add ORCA to your agent instructions</h2>
+  <pre class="docs-code"><code># UI rules (CLAUDE.md, AGENTS.md or your agent's equivalent)
+This project's interface uses the ORCA design system.
+- Before writing any UI, run `python -m orca search <what you need>` and `python -m orca show <id>`.
+- Copy the element's example and keep its classes and attributes; change only the content.
+- Use --orca-* tokens for every colour, size, radius, shadow, layer and duration.
+- Change brand values only in settings.ORCA["BRAND"].
+- Run `python manage.py orca_lint templates/` and fix every finding before you finish.</code></pre>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">The hard rules</h2>
+  <ol class="docs-list">
+    <li><strong>Tokens only.</strong> Never hard-code a colour, size, radius, shadow, z-index or duration.</li>
+    <li><strong>Brand tokens only can change</strong>, and only in settings.</li>
+    <li><strong>Only classes that exist.</strong> Compose missing pieces from primitives with <code class="orca-code">.orca-stack</code> and <code class="orca-code">.orca-row</code>.</li>
+    <li><strong>One primary action per screen.</strong> A destructive first step is never red; confirm it with <code class="orca-code">--danger</code> in a dialog.</li>
+    <li><strong>Every control has a visible label.</strong> Help between label and field; errors above the field, with an icon and a fix.</li>
+    <li><strong>Status is never colour alone.</strong> A word plus an icon or shape.</li>
+    <li><strong>ORCA icons only;</strong> icon-only buttons need <code class="orca-code">aria-label</code>.</li>
+    <li><strong>Every button has a type; every image has alt.</strong></li>
+    <li><strong>Native controls first:</strong> date inputs, select, dialog, details, progress.</li>
+    <li><strong>Write like ORCA:</strong> sentence case, verbs on buttons, no exclamation marks, digits for numbers, errors that say how to fix.</li>
+  </ol>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Choosing between similar elements</h2>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Need</th><th scope="col">Use</th><th scope="col">Not</th></tr></thead>
+    <tbody>
+      <tr><td>On/off saved with the form</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'checkbox' %}">Checkbox</a></td><td>Switch</td></tr>
+      <tr><td>On/off applied immediately</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'switch' %}">Switch</a></td><td>Checkbox</td></tr>
+      <tr><td>One of up to about 7 options</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'radio' %}">Radio</a></td><td>Select</td></tr>
+      <tr><td>One of many known options</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'select' %}">Select</a></td><td>Radios</td></tr>
+      <tr><td>Small number change</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'number-input' %}">Number input</a></td><td>Select</td></tr>
+      <tr><td>Category or keyword</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'tag' %}">Tag</a></td><td>Badge</td></tr>
+      <tr><td>Record status</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'badge' %}">Badge</a> or <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'status-dot' %}">status dot</a></td><td>Tag</td></tr>
+      <tr><td>Wait with known progress</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'progress-bar' %}">Progress bar</a> with text</td><td>Spinner</td></tr>
+      <tr><td>Region that loads later</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'skeleton' %}">Skeleton</a></td><td>Spinner</td></tr>
+      <tr><td>A date for people</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'date-label' %}">Date label</a>: 6 November 2026</td><td>06/11/2026</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">What the lint catches</h2>
+  <pre class="docs-code"><code>$ python manage.py orca_lint templates/
+templates/cameras/list.html:12: hard-coded colour; use a --orca-* token.
+templates/cameras/list.html:18: icon-only button without aria-label.
+templates/cameras/list.html:22: unknown ORCA class 'orca-buton'. Run `python -m orca search` to find the right one.
+static/css/site.css:4: --orca-text is not a brand token; only brand tokens may be changed (settings.ORCA['BRAND']).
+4 problem(s) found.</code></pre>
+  <p class="orca-p">It exits with status 1 when it finds a problem, so it can gate continuous integration as well as an agent's loop.</p>
+</section>
+{% endblock %}

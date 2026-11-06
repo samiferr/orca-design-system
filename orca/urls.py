@@ -5,7 +5,9 @@ from . import views
 app_name = "orca"
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.home, name="home"),
+    path("primitives/", views.primitives, name="index"),
+    path("guide/<slug:slug>/", views.guide, name="guide"),
     path("tokens/", views.token_list, name="tokens"),
     path("icons/", views.icon_list, name="icons"),
     path("catalogue.json", views.catalogue_json, name="catalogue-json"),

@@ -1,0 +1,82 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">Install the package, add the app, set your brand and load ORCA in your base template. About five minutes.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Requirements</h2>
+  <ul class="docs-list">
+    <li>Python 3.10 or later.</li>
+    <li>Django 4.2 or later, with <code class="orca-code">django.contrib.staticfiles</code>.</li>
+    <li>No JavaScript build step, no CSS framework, no Node. ORCA ships ready-to-serve CSS, fonts and one optional script.</li>
+  </ul>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">1. Install the package</h2>
+  <pre class="docs-code"><code>pip install git+https://github.com/samiferr/orca-design-system.git</code></pre>
+  <p class="orca-p">Pin a version in your requirements file once releases are tagged, for example <code class="orca-code">orca-design-system @ git+https://github.com/samiferr/orca-design-system.git@v0.1.0</code>.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">2. Add the app and your brand</h2>
+  <pre class="docs-code"><code>INSTALLED_APPS = [
+    # ...
+    "django.contrib.staticfiles",
+    "django.contrib.humanize",   # optional: naturaltime for relative times
+    "orca",
+]
+
+ORCA = {
+    "BRAND": {
+        "name": "Acme",
+        "color": "#0f95a1",
+        "logo": "brand/logo.svg",       # in your STATICFILES
+        "favicon": "brand/favicon.svg",
+    },
+    "THEME": "auto",                    # auto, light, dark or paper
+    "DOCS_ENABLED": True,               # serve this documentation in your project
+}</code></pre>
+  <p class="orca-p">Every key is optional. Without <code class="orca-code">ORCA</code> you get the default brand. The full list of brand keys is in <a class="orca-link orca-link--plain" href="{% url 'orca:guide' 'brand-and-themes' %}">Brand and themes</a>.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">3. Load ORCA in your base template</h2>
+  <pre class="docs-code"><code>{% verbatim %}{% load orca %}<!doctype html>
+<html {% orca_html_attrs %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} · Acme</title>
+  {% orca_head %}
+  {# your own stylesheet after ORCA, using --orca-* tokens only #}
+</head>
+<body>
+  <a class="orca-skip-link" href="#main">Skip to main content</a>
+  <main id="main" tabindex="-1">{% block content %}{% endblock %}</main>
+</body>
+</html>{% endverbatim %}</code></pre>
+  <p class="orca-p"><code class="orca-code">{% templatetag openblock %} orca_head {% templatetag closeblock %}</code> writes the token and primitive stylesheets, your brand values, the favicon, the theme restore and the optional script. <code class="orca-code">{% templatetag openblock %} orca_html_attrs {% templatetag closeblock %}</code> writes <code class="orca-code">lang</code> and, when you fix a theme, <code class="orca-code">data-theme</code>.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">4. Optional: serve this documentation</h2>
+  <pre class="docs-code"><code>from django.urls import include, path
+
+urlpatterns = [
+    # ...
+    path("orca/", include("orca.urls")),
+]</code></pre>
+  <p class="orca-p">The pages render with your brand, so they double as a living style guide for your team. Turn them off in production with <code class="orca-code">ORCA["DOCS_ENABLED"] = False</code>.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">5. Check the setup</h2>
+  <pre class="docs-code"><code>python manage.py check
+python manage.py orca_lint templates/</code></pre>
+  <p class="orca-p">System checks report unknown ORCA keys (<code class="orca-code">orca.E001</code>, <code class="orca-code">orca.E002</code>), invalid themes (<code class="orca-code">orca.E003</code>) and brand colours ORCA had to adjust for contrast (<code class="orca-code">orca.W001</code>).</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Content Security Policy</h2>
+  <p class="orca-p">ORCA writes one small inline <code class="orca-code">&lt;style&gt;</code> (brand values) and, with the automatic theme, one inline <code class="orca-code">&lt;script&gt;</code> that restores the reader's theme before the page paints. If your request carries a <code class="orca-code">csp_nonce</code> attribute (as set by django-csp), ORCA adds it to both. To avoid the script, fix a theme or call <code class="orca-code">{% templatetag openblock %} orca_head theme_restore=False {% templatetag closeblock %}</code>.</p>
+</section>
+{% endblock %}

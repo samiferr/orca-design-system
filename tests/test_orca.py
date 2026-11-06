@@ -202,7 +202,7 @@ class TemplateTagTests(SimpleTestCase):
 
 class DocsSiteTests(SimpleTestCase):
     def test_pages(self):
-        for name in ("index", "tokens", "icons", "catalogue-json"):
+        for name in ("home", "index", "tokens", "icons", "catalogue-json"):
             with self.subTest(name=name):
                 self.assertEqual(self.client.get(reverse(f"orca:{name}")).status_code, 200)
 
@@ -213,6 +213,40 @@ class DocsSiteTests(SimpleTestCase):
                 self.assertEqual(res.status_code, 200)
                 self.assertNotContains(res, "Example failed to render")
                 self.assertContains(res, "Why")
+
+    def test_every_guide_page(self):
+        from orca.views import GUIDE
+
+        for slug, title, _ in GUIDE:
+            with self.subTest(slug=slug):
+                res = self.client.get(reverse("orca:guide", args=[slug]))
+                self.assertEqual(res.status_code, 200)
+                self.assertContains(res, f'<h1 class="orca-page-title">{title}</h1>', html=False)
+        self.assertEqual(self.client.get("/orca/guide/nope/").status_code, 404)
+
+    def test_principles_index_lists_every_element_once_per_rule(self):
+        res = self.client.get(reverse("orca:guide", args=["principles"]))
+        for el in registry.all_elements():
+            self.assertContains(res, reverse("orca:element", args=[el.id]))
+
+    def test_static_export_has_no_broken_links(self):
+        from orca.site import export
+
+        with tempfile.TemporaryDirectory() as d:
+            export(d, fragment_index=True)
+            root = Path(d)
+            index = (root / "index.html").read_text()
+            self.assertNotIn("<!doctype", index.lower())
+            self.assertIn("<title>", index)
+            broken = []
+            for page in root.glob("*.html"):
+                html = page.read_text()
+                self.assertNotIn('href="/orca/', html)
+                for target in re.findall(r'(?:href|src)="([^"#?]+)', html):
+                    if ":" not in target and not target.startswith("/") and not (root / target).exists():
+                        broken.append(f"{page.name} -> {target}")
+            self.assertEqual(broken, [])
+            self.assertTrue((root / "static/orca/fonts/UbuntuSans-Variable.woff2").exists())
 
     def test_unknown_element_404(self):
         self.assertEqual(self.client.get("/orca/nope/").status_code, 404)

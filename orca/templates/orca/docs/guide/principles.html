@@ -1,0 +1,29 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">Every element cites the rules it applies. This index runs the other way: each rule, and the elements that apply it. It is generated from the catalogue, so it is always complete.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Sources</h2>
+  <ul class="docs-list">
+    <li><strong>Laws of UX</strong>, Jon Yablonski, 2nd edition, 2024: ten observations about how people perceive and decide.</li>
+    <li><strong>Practical UI</strong>, Adham Dannaway, 2nd edition, 2024: concrete rules for colour, layout, type, writing, buttons and forms. ORCA uses the rule identifiers of the ORCA study guide (F01, C03, R14…).</li>
+    <li><strong>The ORCA Design System Guide</strong>: the inventory and the five levels, after Brad Frost's Atomic Design.</li>
+  </ul>
+  <p class="orca-p">These are guidelines, not laws of nature. When two seem to disagree (familiar versus distinctive, fast versus deliberate), the element's own “why” records the choice ORCA made.</p>
+</section>
+
+{% regroup principles by kind as kinds %}
+{% for kind in kinds %}
+<section class="docs-block-flow" aria-labelledby="k-{{ forloop.counter }}">
+  <h2 class="orca-section-title" id="k-{{ forloop.counter }}">{{ kind.grouper }}</h2>
+  <div class="docs-principles">
+    {% for p in kind.list %}
+    <div class="docs-principle" id="p-{{ p.key }}">
+      <p class="docs-principle__name"><code class="orca-code">{{ p.key }}</code> {{ p.name }}</p>
+      <p class="orca-small orca-muted">{{ p.elements|length }} element{{ p.elements|length|pluralize }}</p>
+      <p class="docs-principle__els">{% for e in p.elements %}<a class="orca-link orca-link--plain orca-small" href="{% url 'orca:element' e.id %}">{{ e.name }}</a>{% if not forloop.last %}<span aria-hidden="true"> · </span>{% endif %}{% endfor %}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

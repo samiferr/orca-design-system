@@ -52,12 +52,24 @@ ORCA = {
 </html>
 ```
 
-Optional catalogue site (live examples of every element):
+## Documentation website
+
+The documentation website is generated from the package itself: an overview, nine guide pages (installation, usage,
+brand and themes, AI agents, principles, accessibility, localization, tooling, roadmap), one page per element with
+live examples, and the token and icon references.
 
 ```python
-# urls.py
+# serve it inside your project, with your brand
 path("orca/", include("orca.urls")),
 ```
+
+```bash
+# or export it as static HTML (one file per page, relative links)
+python demo/manage.py orca_site site/
+```
+
+`.github/workflows/docs.yml` tests, exports and deploys it to GitHub Pages on every push to `main`
+(enable it once: repository Settings, Pages, Source: GitHub Actions).
 
 ## Brand tokens only
 
@@ -86,6 +98,7 @@ python -m orca icons                # icon names and aliases
 python -m orca tokens               # token names and usage
 python manage.py orca_element switch
 python manage.py orca_lint templates/   # check templates and CSS against ORCA's rules
+python manage.py orca_site site/        # export the documentation website
 ```
 
 The same content is in [`docs/primitives/`](docs/primitives/README.md) (Markdown, one file per category) and

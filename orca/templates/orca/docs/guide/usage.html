@@ -1,0 +1,82 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">ORCA is plain HTML with <code class="orca-code">orca-*</code> classes, a handful of template tags and an optional script. Look an element up, copy its example, adapt the content.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">The working loop</h2>
+  <ol class="docs-list">
+    <li>Find the element for the job on the <a class="orca-link orca-link--plain" href="{% url 'orca:index' %}">primitives</a> pages, or with <code class="orca-code">python -m orca search &lt;words&gt;</code>.</li>
+    <li>Read its <strong>when not to use</strong> first: it usually names the element you need instead.</li>
+    <li>Copy the example template, then replace the content. Keep the classes, attributes and structure.</li>
+    <li>Run <code class="orca-code">python manage.py orca_lint</code> before you commit.</li>
+  </ol>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Template tags</h2>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Tag</th><th scope="col">Output</th></tr></thead>
+    <tbody>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_head {% templatetag closeblock %}</code></td><td>Stylesheets, brand values, theme restore, favicon, script. Arguments: <code class="orca-code">script=False</code>, <code class="orca-code">theme_restore=False</code>.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_html_attrs "fr" {% templatetag closeblock %}</code></td><td><code class="orca-code">lang</code> and a fixed <code class="orca-code">data-theme</code> for the <code class="orca-code">&lt;html&gt;</code> element.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} icon "search" {% templatetag closeblock %}</code></td><td>Decorative inline SVG. <code class="orca-code">size="xs|s|m|l|xl"</code>; <code class="orca-code">label="…"</code> only when the icon stands alone.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} status_icon "negative" {% templatetag closeblock %}</code></td><td>The status glyph in its colour: positive, caution, negative, info, neutral.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_logo {% templatetag closeblock %}</code></td><td>Your logo, or the product name as a wordmark. <code class="orca-code">href=""</code> for no link, <code class="orca-code">size="lg"</code>.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_illustration "empty" {% templatetag closeblock %}</code></td><td>Empty, search or error illustration in token colours.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_timezone_options current {% templatetag closeblock %}</code></td><td>Every IANA timezone as grouped <code class="orca-code">&lt;option&gt;</code> elements.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_brand "name" {% templatetag closeblock %}</code></td><td>One brand value from your settings.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="orca-panel-title docs-sub">Filters</h3>
+  <ul class="docs-list">
+    <li><code class="orca-code">{% templatetag openvariable %} minutes|orca_duration {% templatetag closevariable %}</code>: 90 becomes “1 h 30 min”. Accepts an integer of minutes or a <code class="orca-code">timedelta</code>.</li>
+    <li><code class="orca-code">{% templatetag openvariable %} user.get_full_name|orca_initials {% templatetag closevariable %}</code>: “Ada Lovelace” becomes “AL”.</li>
+  </ul>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">A form field, start to finish</h2>
+  <p class="orca-p">Label above the field, help between label and field, error above the field, all linked with <code class="orca-code">aria-describedby</code>.</p>
+  <div class="docs-example"><div class="docs-example__preview">
+    <label class="orca-label" for="u-rtsp">Stream address</label>
+    <p class="orca-help" id="u-rtsp-help">Starts with rtsp://. Find it in the camera's network settings.</p>
+    <p class="orca-error" id="u-rtsp-error">{% icon "error" %}<span>Enter an address that starts with rtsp://, for example rtsp://192.168.1.40/stream1.</span></p>
+    <input class="orca-input" id="u-rtsp" name="rtsp" value="192.168.1.40" aria-invalid="true" aria-describedby="u-rtsp-error u-rtsp-help">
+    <div class="orca-row" style="margin-top: var(--orca-space-24)"><button class="orca-button orca-button--primary" type="submit">Save camera</button><button class="orca-button" type="button">Cancel</button></div>
+  </div></div>
+  <pre class="docs-code"><code>{% verbatim %}<label class="orca-label" for="rtsp">Stream address</label>
+<p class="orca-help" id="rtsp-help">Starts with rtsp://. Find it in the camera's network settings.</p>
+{% if form.rtsp.errors %}
+<p class="orca-error" id="rtsp-error">{% icon "error" %}<span>{{ form.rtsp.errors.0 }}</span></p>
+{% endif %}
+<input class="orca-input" id="rtsp" name="rtsp" value="{{ form.rtsp.value|default:'' }}"
+       {% if form.rtsp.errors %}aria-invalid="true" aria-describedby="rtsp-error rtsp-help"{% else %}aria-describedby="rtsp-help"{% endif %}>{% endverbatim %}</code></pre>
+  <p class="orca-p">Form fields as a ready component arrive with phase 2. Until then, compose them from the label, help text, error text and input primitives as above.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Layout helpers</h2>
+  <p class="orca-p">Primitives do not set outer margins. Space groups with the spacing tokens and the two utilities <code class="orca-code">.orca-stack</code> (a column with an 8px gap) and <code class="orca-code">.orca-row</code> (a wrapping row; <code class="orca-code">.orca-row--16</code> for 16px). For anything else use <code class="orca-code">gap: var(--orca-space-24)</code> and friends in your own CSS.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Optional script behaviours</h2>
+  <p class="orca-p"><code class="orca-code">orca.js</code> only acts on markup that asks for it with a data attribute. Every primitive works without it.</p>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Attribute</th><th scope="col">Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td><code class="orca-code">data-orca-clear</code></td><td>Search clear button empties its input and returns focus.</td></tr>
+      <tr><td><code class="orca-code">data-orca-step="-1"</code></td><td>Number stepper buttons, respecting <code class="orca-code">min</code>, <code class="orca-code">max</code> and <code class="orca-code">step</code>.</td></tr>
+      <tr><td><code class="orca-code">data-orca-otp</code></td><td>OTP boxes advance, go back on Backspace, and spread a pasted code.</td></tr>
+      <tr><td><code class="orca-code">data-orca-toggle</code></td><td>Flips <code class="orca-code">aria-pressed</code>; optional <code class="orca-code">data-orca-label-on</code> / <code class="orca-code">-off</code>.</td></tr>
+      <tr><td><code class="orca-code">data-orca-theme-toggle</code></td><td>Cycles light, dark and paper and remembers the choice.</td></tr>
+      <tr><td><code class="orca-code">data-orca-countdown</code></td><td>Live countdown to the time in its <code class="orca-code">datetime</code> attribute.</td></tr>
+      <tr><td><code class="orca-code">data-orca-copy="id"</code></td><td>Copies the text of the element with that id.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Your own CSS</h2>
+  <p class="orca-p">ORCA's rules live in cascade layers (<code class="orca-code">orca.tokens</code>, <code class="orca-code">orca.base</code>, <code class="orca-code">orca.primitives</code>, <code class="orca-code">orca.utilities</code>), so any unlayered rule of yours wins without <code class="orca-code">!important</code>. Use that for layout only. Read every colour, size, radius, shadow, layer and duration from a <code class="orca-code">--orca-*</code> token, and never redefine a token other than the brand ones.</p>
+</section>
+{% endblock %}

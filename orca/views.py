@@ -1,6 +1,8 @@
-"""The ORCA catalogue site: every element with its why, when, how and a live example.
+"""The ORCA documentation website.
 
-Include it in your project with ``path("orca/", include("orca.urls"))``. Disable with ``ORCA['DOCS_ENABLED'] = False``.
+Everything on it is generated from the package itself (catalogue, tokens, icons), so the site can never drift from
+the code. Serve it with ``path("orca/", include("orca.urls"))``; export it as static HTML with
+``python manage.py orca_site <folder>``. Disable with ``ORCA['DOCS_ENABLED'] = False``.
 """
 
 from __future__ import annotations
@@ -10,11 +12,26 @@ from django.shortcuts import render
 from django.template import Context, Template, TemplateSyntaxError
 from django.utils.safestring import mark_safe
 
-from . import icons, tokens
+from . import __version__, icons, tokens
 from .catalogue import registry
+from .catalogue.guide import PRIMITIVES
 from .conf import compute_brand, docs_enabled
 
 PRELUDE = "{% load orca static %}"
+
+# Guide pages, in reading order: (slug, title, one-line summary)
+GUIDE = [
+    ("installation", "Installation", "Install the package, add the app and load ORCA in your base template."),
+    ("usage", "Usage", "Template tags, filters, the page skeleton and the optional script behaviours."),
+    ("brand-and-themes", "Brand and themes", "The brand tokens a project may change, and the light, dark and paper themes."),
+    ("ai-agents", "For AI agents", "How coding agents look elements up, the hard rules they follow and how their output is checked."),
+    ("principles", "Principles", "The Practical UI and Laws of UX rules ORCA applies, and the elements that apply each one."),
+    ("accessibility", "Accessibility", "Contrast, focus, touch targets, motion and markup commitments, and how they are tested."),
+    ("localization", "Localization", "Translation, right-to-left layouts, text expansion, dates, times and numbers."),
+    ("tooling", "Tooling", "Command line, lint, system checks, the build and the static documentation export."),
+    ("roadmap", "Levels and roadmap", "The five ORCA levels and what each release delivers."),
+]
+GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
 
 
 def render_snippet(html: str) -> str:
@@ -27,18 +44,74 @@ def render_snippet(html: str) -> str:
 
 def _guard():
     if not docs_enabled():
-        raise Http404("The ORCA catalogue is disabled (ORCA['DOCS_ENABLED'] = False).")
+        raise Http404("The ORCA documentation is disabled (ORCA['DOCS_ENABLED'] = False).")
 
 
-def _nav():
-    return [(c, registry.by_category(c.key)) for c in registry.categories()]
+def _ctx(page: str, **extra) -> dict:
+    return {
+        "nav": [(c, registry.by_category(c.key)) for c in registry.categories()],
+        "guide": GUIDE, "page": page, "version": __version__, **extra,
+    }
 
 
-def index(request):
+def _stats() -> dict:
+    els = registry.all_elements()
+    return {
+        "elements": len(els),
+        "guide_items": sum(len(v) for v in PRIMITIVES.values()),
+        "categories": len(registry.categories()),
+        "icons": len(icons.names()),
+        "tokens": len(tokens.semantic_tokens()) + len(tokens.ALL_SCALES),
+        "brand_keys": len(tokens.BRAND_TOKENS),
+    }
+
+
+def home(request):
     _guard()
-    return render(request, "orca/docs/index.html", {
-        "nav": _nav(), "elements": registry.all_elements(), "brand_tokens": tokens.BRAND_TOKENS, "page": "index",
-    })
+    hero = mark_safe(render_snippet("""<div class="orca-row orca-row--16">
+  <button class="orca-button orca-button--primary" type="button">Save camera</button>
+  <button class="orca-button" type="button">Cancel</button>
+  <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
+  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
+</div>"""))
+    return render(request, "orca/docs/home.html", _ctx("home", stats=_stats(), hero=hero, categories=registry.categories()))
+
+
+def primitives(request):
+    _guard()
+    return render(request, "orca/docs/index.html", _ctx(
+        "primitives", elements=registry.all_elements(), brand_tokens=tokens.BRAND_TOKENS,
+    ))
+
+
+def _principles() -> list[dict]:
+    used: dict[str, list] = {}
+    for el in registry.all_elements():
+        for key in el.laws:
+            used.setdefault(key, []).append(el)
+    laws = [{"key": k, "name": registry.LAWS[k], "elements": used.get(k, []), "kind": "Laws of UX"} for k in registry.LAWS]
+    pui = [{"key": k, "name": registry.PRACTICAL_UI[k], "elements": used[k], "kind": "Practical UI"}
+           for k in sorted(registry.PRACTICAL_UI) if k in used]
+    return laws + pui
+
+
+def guide(request, slug):
+    _guard()
+    if slug not in GUIDE_TITLES:
+        raise Http404(f"No guide page {slug!r}")
+    extra = {"title": GUIDE_TITLES[slug], "slug": slug}
+    if slug == "brand-and-themes":
+        extra.update(brand_tokens=tokens.BRAND_TOKENS, brand=compute_brand())
+    if slug == "principles":
+        extra.update(principles=_principles())
+    if slug == "roadmap":
+        extra.update(stats=_stats(), sections=[(s, len(items)) for s, items in PRIMITIVES.items()])
+    if slug == "tooling":
+        extra.update(stats=_stats())
+    index = [s for s, _, _ in GUIDE].index(slug)
+    extra["prev"] = GUIDE[index - 1] if index > 0 else None
+    extra["next"] = GUIDE[index + 1] if index + 1 < len(GUIDE) else None
+    return render(request, f"orca/docs/guide/{slug}.html", _ctx(f"guide-{slug}", **extra))
 
 
 def element(request, element_id):
@@ -48,29 +121,26 @@ def element(request, element_id):
         raise Http404(f"No ORCA element {element_id!r}")
     examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
     related = [registry.get(r) for r in el.related if registry.get(r)]
-    return render(request, "orca/docs/element.html", {
-        "nav": _nav(), "el": el, "examples": examples, "related": related,
-        "category": next(c for c in registry.categories() if c.key == el.category), "page": el.id,
-    })
+    return render(request, "orca/docs/element.html", _ctx(
+        el.id, el=el, examples=examples, related=related,
+        category=next(c for c in registry.categories() if c.key == el.category),
+    ))
 
 
 def token_list(request):
     _guard()
     brand = compute_brand()
-    return render(request, "orca/docs/tokens.html", {
-        "nav": _nav(), "semantic": tokens.semantic_tokens(), "scales": tokens.ALL_SCALES, "brand": brand,
-        "brand_rows": [(k, v, brand.css["dark"][k]) for k, v in brand.css["light"].items()],
-        "brand_tokens": tokens.BRAND_TOKENS, "neutral": tokens.NEUTRAL, "hues": tokens.HUES, "steps": list(tokens.STEPS),
-        "page": "tokens",
-    })
+    return render(request, "orca/docs/tokens.html", _ctx(
+        "tokens", semantic=tokens.semantic_tokens(), scales=tokens.ALL_SCALES, brand=brand,
+        brand_rows=[(k, v, brand.css["dark"][k]) for k, v in brand.css["light"].items()],
+        brand_tokens=tokens.BRAND_TOKENS, neutral=tokens.NEUTRAL, hues=tokens.HUES, steps=list(tokens.STEPS),
+    ))
 
 
 def icon_list(request):
     _guard()
     items = [(name, mark_safe(icons.svg(name, size="m"))) for name in icons.names()]
-    return render(request, "orca/docs/icons.html", {
-        "nav": _nav(), "items": items, "aliases": sorted(icons.ALIASES.items()), "page": "icons",
-    })
+    return render(request, "orca/docs/icons.html", _ctx("icons", items=items, aliases=sorted(icons.ALIASES.items())))
 
 
 def catalogue_json(request):

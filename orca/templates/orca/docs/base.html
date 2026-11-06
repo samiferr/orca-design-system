@@ -2,37 +2,67 @@
 <html {% orca_html_attrs %}>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}ORCA primitives{% endblock %} · ORCA design system</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}ORCA{% endblock %} · ORCA design system</title>
+  <meta name="description" content="{% block description %}ORCA is a Django design system where every element documents its why, when and how, for developers and AI coding agents.{% endblock %}">
   {% orca_head %}
   <link rel="stylesheet" href="{% static 'orca/css/docs.css' %}">
+  <link rel="stylesheet" href="{% static 'orca/css/docs-themes.css' %}">
+  <script src="{% static 'orca/js/docs.js' %}" defer></script>
 </head>
-<body>
+<body class="docs">
 <a class="orca-skip-link" href="#main">Skip to main content</a>
 <header class="docs-top">
-  {% orca_logo href="" %}
-  <span class="docs-top__title">ORCA primitives</span>
-  <nav class="docs-top__links" aria-label="Catalogue sections">
-    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:index' %}">Elements</a>
-    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:tokens' %}">Tokens</a>
-    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:icons' %}">Icons</a>
-    <a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:catalogue-json' %}">JSON</a>
+  <button class="orca-icon-button orca-icon-button--dense docs-top__menu" type="button" aria-controls="docs-nav" aria-expanded="false" aria-label="Show navigation" data-docs-menu>{% icon "menu" %}</button>
+  <a class="docs-top__brand" href="{% url 'orca:home' %}"><span class="orca-logo__mark" aria-hidden="true"></span>ORCA</a>
+  <span class="orca-badge orca-badge--grey docs-top__version">v{{ version }}</span>
+  <nav class="docs-top__links" aria-label="Main">
+    <a href="{% url 'orca:guide' 'installation' %}" {% if page|slice:":6" == "guide-" %}aria-current="page"{% endif %}>Guide</a>
+    <a href="{% url 'orca:index' %}" {% if page == "primitives" or el %}aria-current="page"{% endif %}>Primitives</a>
+    <a href="{% url 'orca:tokens' %}" {% if page == "tokens" %}aria-current="page"{% endif %}>Tokens</a>
+    <a href="{% url 'orca:icons' %}" {% if page == "icons" %}aria-current="page"{% endif %}>Icons</a>
   </nav>
-  <button class="orca-icon-button orca-icon-button--outlined orca-button--dense" type="button" data-orca-theme-toggle aria-label="Change theme">{% icon "sun" %}</button>
+  <button class="orca-icon-button orca-icon-button--outlined orca-icon-button--dense" type="button" data-orca-theme-toggle aria-label="Change theme">{% icon "sun" %}</button>
 </header>
 <div class="docs-body">
-  <nav class="docs-nav orca-scroll" aria-label="Elements">
-    {% for cat, els in nav %}
-      <details class="docs-nav__group" {% if el.category == cat.key or page == "index" %}open{% endif %}>
-        <summary class="docs-nav__heading"><span class="orca-chevron">{% icon "chevron-down" %}</span>{{ cat.title }} <span class="orca-count orca-count--neutral">{{ els|length }}</span></summary>
-        <ul>
-          {% for e in els %}<li><a href="{% url 'orca:element' e.id %}" {% if page == e.id %}aria-current="page"{% endif %}>{{ e.name }}</a></li>{% endfor %}
-        </ul>
-      </details>
-    {% endfor %}
+  <nav class="docs-nav orca-scroll" id="docs-nav" aria-label="Documentation">
+    <div class="docs-nav__filter orca-search">
+      {% icon "search" %}
+      <input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-docs-filter id="docs-filter">
+    </div>
+    <p class="docs-nav__empty orca-small orca-muted" data-docs-empty hidden>No page matches. Try another word.</p>
+    <div class="docs-nav__section">
+      <p class="docs-nav__label">Get started</p>
+      <ul>
+        <li><a href="{% url 'orca:home' %}" {% if page == "home" %}aria-current="page"{% endif %}>Overview</a></li>
+        {% for slug, title, summary in guide %}<li><a href="{% url 'orca:guide' slug %}" {% if page == "guide-"|add:slug %}aria-current="page"{% endif %}>{{ title }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <div class="docs-nav__section">
+      <p class="docs-nav__label"><a href="{% url 'orca:index' %}" {% if page == "primitives" %}aria-current="page"{% endif %}>Primitives</a></p>
+      {% for cat, els in nav %}
+        <details class="docs-nav__group" {% if el.category == cat.key %}open{% endif %}>
+          <summary class="docs-nav__heading"><span class="orca-chevron">{% icon "chevron-down" %}</span><span class="docs-nav__heading-text">{{ cat.title }}</span><span class="orca-count orca-count--neutral">{{ els|length }}</span></summary>
+          <ul>
+            {% for e in els %}<li><a href="{% url 'orca:element' e.id %}" {% if page == e.id %}aria-current="page"{% endif %}>{{ e.name }}</a></li>{% endfor %}
+          </ul>
+        </details>
+      {% endfor %}
+    </div>
+    <div class="docs-nav__section">
+      <p class="docs-nav__label">Reference</p>
+      <ul>
+        <li><a href="{% url 'orca:tokens' %}" {% if page == "tokens" %}aria-current="page"{% endif %}>Tokens</a></li>
+        <li><a href="{% url 'orca:icons' %}" {% if page == "icons" %}aria-current="page"{% endif %}>Icons</a></li>
+        <li><a href="{% url 'orca:catalogue-json' %}">Catalogue JSON</a></li>
+      </ul>
+    </div>
   </nav>
   <main id="main" class="docs-main" tabindex="-1">
     {% block content %}{% endblock %}
+    <footer class="docs-footer orca-small orca-muted">
+      <p>ORCA {{ version }} · Built on Tangerine (Vanilla framework 4.59 values, LGPL-3.0) and Ubuntu Sans (Ubuntu Font Licence). Generated from the <code class="orca-code">orca</code> package: the catalogue, tokens and icons on these pages are the ones you install.</p>
+    </footer>
   </main>
 </div>
 </body>

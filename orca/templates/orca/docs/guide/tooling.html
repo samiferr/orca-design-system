@@ -1,0 +1,47 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">Commands for finding elements, checking projects, maintaining ORCA and publishing this documentation.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Command line (no project needed)</h2>
+  <pre class="docs-code"><code>python -m orca list                 # {{ stats.elements }} elements by category
+python -m orca list inputs          # one category
+python -m orca show button          # why, when, how, example
+python -m orca search date          # by name, guide item or class
+python -m orca icons                # {{ stats.icons }} icon names and the aliases
+python -m orca tokens               # brand keys, semantic colours, scales
+python -m orca json                 # the whole catalogue</code></pre>
+  <p class="orca-p">Installed as a package, the same commands are also available as <code class="orca-code">orca show button</code>.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">In a Django project</h2>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code class="orca-code">manage.py check</code></td><td>Validates <code class="orca-code">settings.ORCA</code>: unknown keys, bad values, colour adjustments.</td></tr>
+      <tr><td><code class="orca-code">manage.py orca_lint [paths]</code></td><td>Checks templates and CSS against ORCA's rules. Defaults to your template and static folders. Exit status 1 on problems.</td></tr>
+      <tr><td><code class="orca-code">manage.py orca_element [id]</code></td><td>Prints an element, or lists every id.</td></tr>
+      <tr><td><code class="orca-code">manage.py orca_site &lt;folder&gt;</code></td><td>Exports this documentation as static HTML, with your brand.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Publishing this documentation</h2>
+  <p class="orca-p">The export writes one HTML file per page with relative links, plus ORCA's static files, so the folder works on any static host or straight from disk.</p>
+  <pre class="docs-code"><code>python demo/manage.py orca_site site/
+python -m http.server --directory site 8000</code></pre>
+  <p class="orca-p">The repository's GitHub Actions workflow (<code class="orca-code">.github/workflows/docs.yml</code>) runs the tests, exports the site and deploys it to GitHub Pages on every push to the main branch. Enable it once under the repository's Settings, Pages, Source: GitHub Actions.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Maintaining ORCA</h2>
+  <pre class="docs-code"><code>python -m orca build                                   # tokens.css, docs/primitives/, catalogue.json
+python -m django test tests --settings=tests.settings  # the suite
+python demo/manage.py runserver                        # this site at /orca/</code></pre>
+  <ul class="docs-list">
+    <li>Tokens live in <code class="orca-code">orca/tokens.py</code>; elements in <code class="orca-code">orca/catalogue/</code>, one module per category.</li>
+    <li>The suite fails when a generated file is stale, when a guide item has no element, when an element lacks its why, when or how, when an example uses a class or token that does not exist, when contrast drops in any theme, or when a page of this site breaks.</li>
+  </ul>
+</section>
+{% endblock %}

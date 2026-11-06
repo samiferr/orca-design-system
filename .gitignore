@@ -6,3 +6,4 @@ build/
 dist/
 demo/db.sqlite3
 demo/staticfiles/
+site/

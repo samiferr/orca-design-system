@@ -1,0 +1,42 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca %}
+{% block lead %}<p class="orca-page-subtitle">ORCA targets WCAG 2.1 AA. The commitments below hold in light, dark and paper, and the ones that can be measured are checked by the test suite.</p>{% endblock %}
+{% block article %}
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Commitments</h2>
+  <div class="docs-table-wrap"><table class="docs-table">
+    <thead><tr><th scope="col">Area</th><th scope="col">Commitment</th><th scope="col">Checked by</th></tr></thead>
+    <tbody>
+      <tr><td>Text contrast</td><td>Body, muted and inactive text read at 4.5:1 on every ground, hover and pressed fill, in every theme.</td><td>Tests</td></tr>
+      <tr><td>Controls</td><td>Control boundaries (<code class="orca-code">--orca-border-strong</code>) and the focus ring hold 3:1.</td><td>Tests</td></tr>
+      <tr><td>Text on fills</td><td>Primary, danger and every solid badge carry text at 4.5:1.</td><td>Tests</td></tr>
+      <tr><td>Brand colours</td><td>Your brand fill and accent are adjusted to 4.5:1 and the adjustment is reported.</td><td>System check <code class="orca-code">orca.W001</code></td></tr>
+      <tr><td>Colour alone</td><td>Status, selection, availability, priority and chart series always add a word, icon, shape or pattern.</td><td>Element rules</td></tr>
+      <tr><td>Focus</td><td>Every interactive element shows a 3px ring on keyboard focus; never removed.</td><td><code class="orca-code">orca_lint</code></td></tr>
+      <tr><td>Targets</td><td>Every control grows to 44px on touch screens and below 620px; labels extend tick targets to the whole row.</td><td>CSS</td></tr>
+      <tr><td>Motion</td><td>Interface motion stays under 400 ms; <code class="orca-code">prefers-reduced-motion</code> stops it.</td><td>CSS</td></tr>
+      <tr><td>Names</td><td>Buttons have a type, icon-only buttons an accessible name, images alt text.</td><td>Tests on examples, <code class="orca-code">orca_lint</code></td></tr>
+      <tr><td>Zoom</td><td>Sizes are in rem and follow the reader's font size; nothing scrolls sideways at 320px.</td><td>CSS</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Known exceptions</h2>
+  <p class="orca-p">Kept from Vanilla framework on purpose, and documented on the tokens they affect:</p>
+  <ul class="docs-list">
+    <li><code class="orca-code">--orca-caution</code> as text is 3.0:1 in light and paper. Never set caution text on its own: pair it with the warning icon, at 16px or more.</li>
+  </ul>
+  <p class="orca-p">Departures ORCA made from Vanilla for accessibility: the light and paper focus colour is darker (<code class="orca-code">#0f6dcc</code>, at least 3.9:1 on every ground instead of 2.3–3.0:1), brand fills are derived to reach 4.5:1, and the switch animates in 0.333s instead of 0.5s.</p>
+</section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">What remains yours</h2>
+  <ul class="docs-list">
+    <li>Writing alt text that describes what matters in each image.</li>
+    <li>Keeping the heading outline in order and one <code class="orca-code">&lt;h1&gt;</code> per page.</li>
+    <li>Moving focus sensibly after actions: to the error summary after a failed submit, back to the opener when a dialog closes.</li>
+    <li>Announcing results that appear without a page load in a <code class="orca-code">role="status"</code> region.</li>
+    <li>Testing with a keyboard and a screen reader, and with people who use them.</li>
+  </ul>
+</section>
+{% endblock %}
