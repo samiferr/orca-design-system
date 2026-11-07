@@ -420,6 +420,70 @@
   --orca-bg-active: #e0e0e0;
   --orca-bg-elevated: #ffffff;
 }
+/* Dense density: on <html> (settings.ORCA["DENSITY"] = "dense") or on any region. */
+[data-density="dense"] {
+  --orca-space-16: 0.75rem;
+  --orca-space-24: 1rem;
+  --orca-space-32: 1.5rem;
+  --orca-space-40: 2rem;
+  --orca-space-48: 2rem;
+  --orca-space-64: 3rem;
+  --orca-space-96: 4rem;
+  --orca-control-sm: 1.25rem;
+  --orca-control-dense: 1.625rem;
+  --orca-control-md: 2rem;
+  --orca-tab-height: 2.5rem;
+  --orca-nav-height: 3rem;
+  --orca-grid-gutter: 1.5rem;
+  --orca-grid-gutter-small: 1rem;
+  --orca-grid-margin: 1rem;
+  --orca-type-display: 100 3.5rem/4rem var(--orca-font-sans);
+  --orca-type-h1: 550 2rem/2.5rem var(--orca-font-sans);
+  --orca-type-h2: 180 2rem/2.5rem var(--orca-font-sans);
+  --orca-type-h3: 550 1.25rem/1.75rem var(--orca-font-sans);
+  --orca-type-h4: 275 1.25rem/1.75rem var(--orca-font-sans);
+  --orca-type-h5: 550 0.875rem/1.25rem var(--orca-font-sans);
+  --orca-type-h6: italic 400 0.875rem/1.25rem var(--orca-font-sans);
+  --orca-type-page-title: 700 1.5rem/2rem var(--orca-font-sans);
+  --orca-type-title: 550 1rem/1.5rem var(--orca-font-sans);
+  --orca-type-body: 400 0.875rem/1.25rem var(--orca-font-sans);
+  --orca-type-body-strong: 550 0.875rem/1.25rem var(--orca-font-sans);
+  --orca-type-detail: 400 0.8125rem/1.125rem var(--orca-font-sans);
+  --orca-type-stat: 550 1.125rem/1.5rem var(--orca-font-sans);
+  --orca-type-code: 400 0.8125rem/1.25rem var(--orca-font-mono);
+}
+/* A comfortable region inside a dense page. */
+[data-density="comfortable"] {
+  --orca-space-16: 1rem;
+  --orca-space-24: 1.5rem;
+  --orca-space-32: 2rem;
+  --orca-space-40: 2.5rem;
+  --orca-space-48: 3rem;
+  --orca-space-64: 4rem;
+  --orca-space-96: 6rem;
+  --orca-control-sm: 1.405rem;
+  --orca-control-dense: 1.82rem;
+  --orca-control-md: 2.32rem;
+  --orca-tab-height: 3rem;
+  --orca-nav-height: 3.5rem;
+  --orca-grid-gutter: 2rem;
+  --orca-grid-gutter-small: 1.5rem;
+  --orca-grid-margin: 1.5rem;
+  --orca-type-display: 100 5.25rem/6rem var(--orca-font-sans);
+  --orca-type-h1: 550 2.625rem/3rem var(--orca-font-sans);
+  --orca-type-h2: 180 2.625rem/3rem var(--orca-font-sans);
+  --orca-type-h3: 550 1.5rem/2rem var(--orca-font-sans);
+  --orca-type-h4: 275 1.5rem/2rem var(--orca-font-sans);
+  --orca-type-h5: 550 1rem/1.5rem var(--orca-font-sans);
+  --orca-type-h6: italic 400 1rem/1.5rem var(--orca-font-sans);
+  --orca-type-page-title: 700 1.75rem/2.25rem var(--orca-font-sans);
+  --orca-type-title: 550 1.125rem/1.5rem var(--orca-font-sans);
+  --orca-type-body: 400 1rem/1.5rem var(--orca-font-sans);
+  --orca-type-body-strong: 550 1rem/1.5rem var(--orca-font-sans);
+  --orca-type-detail: 400 0.875rem/1.25rem var(--orca-font-sans);
+  --orca-type-stat: 550 1.25rem/1.75rem var(--orca-font-sans);
+  --orca-type-code: 400 0.9375rem/1.5rem var(--orca-font-mono);
+}
 /* Brand tokens (defaults). {% orca_head %} re-emits them from settings.ORCA['BRAND']. */
 :root { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "Ubuntu Sans Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #0066cc; --orca-accent-hover: #0057ad; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="paper"]) { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "Ubuntu Sans Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #6699cc; --orca-accent-hover: #7da8d4; } }

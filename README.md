@@ -38,6 +38,7 @@ ORCA = {
         "favicon": "brand/favicon.svg",
     },
     "THEME": "auto",          # auto | light | dark | paper
+    "DENSITY": "comfortable", # comfortable | dense (tighter type, controls and spacing)
 }
 ```
 

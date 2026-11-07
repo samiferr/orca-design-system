@@ -195,6 +195,22 @@ class TemplateTagTests(SimpleTestCase):
         self.assertIn('data-theme="dark"', self.render("{% orca_html_attrs %}"))
         self.assertNotIn("localStorage", self.render("{% orca_head %}"))
 
+    def test_density(self):
+        self.assertNotIn("data-density", self.render("{% orca_html_attrs %}"))
+        self.assertIn('data-density="dense"', self.render('{% orca_html_attrs density="dense" %}'))
+        with self.settings(ORCA={"DENSITY": "dense"}):
+            self.assertIn('data-density="dense"', self.render("{% orca_html_attrs %}"))
+            self.assertNotIn("data-density", self.render('{% orca_html_attrs density="comfortable" %}'))
+        with self.settings(ORCA={"DENSITY": "tiny"}):
+            self.assertIn("orca.E004", [m.id for m in checks.run_checks(tags=["orca"])])
+        css = (ROOT / "orca/static/orca/css/tokens.css").read_text()
+        self.assertIn('[data-density="dense"]', css)
+        # Dense only overrides tokens that exist, keeps text readable and leaves the touch minimum alone.
+        names = {s.name for s in tokens.ALL_SCALES}
+        self.assertEqual(sorted(set(tokens.DENSE) - names), [])
+        self.assertNotIn("control-lg", tokens.DENSE)
+        self.assertIn("0.875rem", tokens.DENSE["type-body"])
+
     def test_filters(self):
         self.assertEqual(self.render("{{ v|orca_duration }}", v=90), "1 h 30 min")
         self.assertEqual(self.render("{{ v|orca_duration }}", v=45), "45 min")

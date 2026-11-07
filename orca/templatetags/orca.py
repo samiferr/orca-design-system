@@ -28,7 +28,7 @@ from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 
 from .. import icons
-from ..conf import brand_style, compute_brand, theme
+from ..conf import brand_style, compute_brand, density as _density, theme
 
 register = template.Library()
 
@@ -72,11 +72,17 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
 
 
 @register.simple_tag
-def orca_html_attrs(lang: str = "en"):
-    """Attributes for <html>: language and, when settings fix one, the theme."""
+def orca_html_attrs(lang: str = "en", density: str = ""):
+    """Attributes for <html>: language, the theme when settings fix one, and the density.
+
+    ``density`` ("comfortable" or "dense") overrides settings.ORCA["DENSITY"] for this page.
+    """
     attrs = f'lang="{escape(lang)}"'
     if theme() != "auto":
         attrs += f' data-theme="{theme()}"'
+    chosen = density if density in ("comfortable", "dense") else _density()
+    if chosen == "dense":
+        attrs += ' data-density="dense"'
     return mark_safe(attrs)
 
 

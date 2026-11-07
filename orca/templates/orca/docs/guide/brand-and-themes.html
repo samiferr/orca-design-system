@@ -57,4 +57,18 @@ ORCA = {"BRAND": {"font_sans": '"Inter", system-ui, sans-serif'}}</code></pre>
     <li>Set the theme on <code class="orca-code">&lt;html&gt;</code> only. The previews above are a documentation-only exception that scopes the theme tokens to a box.</li>
   </ul>
 </section>
+
+<section class="docs-block-flow">
+  <h2 class="orca-section-title">Density</h2>
+  <p class="orca-p">Density is separate from the theme: any theme can be comfortable or dense. Dense tightens the type scale (body 14px, detail 13px), control heights (32px instead of 37px), the top bar and the larger spacing steps, for data-heavy screens such as dashboards, admin tools and this documentation, which uses it.</p>
+  <div class="docs-themes">
+    <div class="docs-theme" data-theme="light" data-density="comfortable"><p class="orca-panel-title">Comfortable</p><p class="orca-small orca-muted">The default.</p><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input" aria-label="Name" value="Gate 1" style="width: 8rem"></div></div>
+    <div class="docs-theme" data-theme="light" data-density="dense"><p class="orca-panel-title">Dense</p><p class="orca-small orca-muted">More on screen.</p><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input" aria-label="Name" value="Gate 1" style="width: 8rem"></div></div>
+  </div>
+  <ul class="docs-list">
+    <li><code class="orca-code">ORCA["DENSITY"] = "dense"</code> writes <code class="orca-code">data-density="dense"</code> on <code class="orca-code">&lt;html&gt;</code> through <code class="orca-code">orca_html_attrs</code>. One template can choose its own: <code class="orca-code">{% templatetag openblock %} orca_html_attrs density="dense" {% templatetag closeblock %}</code>.</li>
+    <li><code class="orca-code">data-density="dense"</code> also works on a single region (a table panel, a sidebar) while the rest of the page stays comfortable.</li>
+    <li>Density never costs accessibility: body text stays at 14px or more, contrast is unchanged, and every control still grows to the 44px touch minimum on touch screens. For long reading, keep the comfortable density.</li>
+  </ul>
+</section>
 {% endblock %}

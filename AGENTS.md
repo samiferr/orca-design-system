@@ -22,6 +22,8 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 1. **Tokens only.** Never hard-code a colour, size, radius, shadow, z-index or duration. Use `var(--orca-*)`.
 2. **Brand tokens only can change**, and only in `settings.ORCA["BRAND"]` (name, logo, favicon, color, on_color,
    accent, accent_dark, font_sans, font_mono). Never redefine another `--orca-*` token.
+   For a tighter interface use the density mode (`ORCA["DENSITY"] = "dense"`, or `data-density="dense"` on a region),
+   never smaller sizes of your own.
 3. **Only classes that exist.** If `python -m orca search` has no element for what you need, compose existing
    primitives with the utilities `.orca-stack` and `.orca-row`; do not invent `orca-*` class names.
 4. **One primary action per screen** (`orca-button--primary`). Secondary actions use the default button; rare ones
