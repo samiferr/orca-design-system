@@ -2,8 +2,8 @@
 {% block title %}{{ el.name }}{% endblock %}
 {% block content %}
 <nav aria-label="Breadcrumb" class="orca-small">
-  <a class="orca-link orca-link--plain" href="{% url 'orca:index' %}">Primitives</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span>
-  <a class="orca-link orca-link--plain" href="{% url 'orca:index' %}#cat-{{ category.key }}">{{ category.title }}</a>
+  <a class="orca-link orca-link--plain" href="{% url level_url %}">{{ level_title }}</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span>
+  <a class="orca-link orca-link--plain" href="{% url level_url %}#cat-{{ category.key }}">{{ category.title }}</a>
 </nav>
 <div class="docs-head">
   <h1 class="orca-page-title">{{ el.name }}</h1>
@@ -29,6 +29,9 @@
   {% if el.classes or el.tokens %}<section class="docs-block"><h2 class="orca-panel-title">Classes and tokens</h2>
     <p class="orca-row">{% for c in el.classes %}<code class="orca-code">{{ c }}</code>{% endfor %}</p>
     <p class="orca-row" style="margin-top: var(--orca-space-8)">{% for t in el.tokens %}<code class="orca-code">--orca-{{ t }}</code>{% endfor %}</p></section>{% endif %}
+  {% if uses or used_by %}<section class="docs-block"><h2 class="orca-panel-title">Built from and used by</h2>
+    {% if uses %}<p class="orca-small orca-muted">Built from</p><p class="orca-row">{% for u in uses %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' u.id %}">{{ u.name }}</a>{% endfor %}</p>{% endif %}
+    {% if used_by %}<p class="orca-small orca-muted" style="margin-top: var(--orca-space-8)">Used by</p><p class="orca-row">{% for u in used_by %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' u.id %}">{{ u.name }}</a>{% endfor %}</p>{% endif %}</section>{% endif %}
   {% if el.guide or related %}<section class="docs-block"><h2 class="orca-panel-title">Guide items and related</h2>
     {% if el.guide %}<p class="orca-small orca-muted">{{ el.guide|join:" · " }}</p>{% endif %}
     {% if related %}<p class="orca-row" style="margin-top: var(--orca-space-8)">{% for r in related %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' r.id %}">{{ r.name }}</a>{% endfor %}</p>{% endif %}</section>{% endif %}

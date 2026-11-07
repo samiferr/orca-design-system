@@ -24,6 +24,12 @@
       <tr><td><code class="orca-code">{% templatetag openblock %} orca_illustration "empty" {% templatetag closeblock %}</code></td><td>Empty, search or error illustration in token colours.</td></tr>
       <tr><td><code class="orca-code">{% templatetag openblock %} orca_timezone_options current {% templatetag closeblock %}</code></td><td>Every IANA timezone as grouped <code class="orca-code">&lt;option&gt;</code> elements.</td></tr>
       <tr><td><code class="orca-code">{% templatetag openblock %} orca_brand "name" {% templatetag closeblock %}</code></td><td>One brand value from your settings.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_field form.name {% templatetag closeblock %}</code></td><td>A complete <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'form-field' %}">form field</a> for any Django widget. Options: <code class="orca-code">switch=True</code>, <code class="orca-code">width="w8"</code>, <code class="orca-code">label</code>, <code class="orca-code">help_text</code>, <code class="orca-code">hide_label=True</code>, <code class="orca-code">horizontal=True</code>.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_form_errors form {% templatetag closeblock %}</code></td><td>Non-field errors as a <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'form-alert' %}">form alert</a> and a linked summary when two or more fields are invalid.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_messages {% templatetag closeblock %}</code></td><td>Django messages as <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'flash-message' %}">flash messages</a>.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_pagination page_obj noun="cameras" {% templatetag closeblock %}</code></td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'pagination' %}">Pagination</a> with gaps and a summary, keeping the other query parameters.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_mini_calendar month selected=day url="/day/{date}/" {% templatetag closeblock %}</code></td><td>A <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'mini-calendar' %}">month grid</a> starting on the locale's first weekday.</td></tr>
+      <tr><td><code class="orca-code">{% templatetag openblock %} orca_sparkline values {% templatetag closeblock %}</code>, <code class="orca-code">{% templatetag openblock %} orca_donut segments {% templatetag closeblock %}</code></td><td>Small charts as inline SVG with text alternatives.</td></tr>
     </tbody>
   </table></div>
   <h3 class="orca-panel-title docs-sub">Filters</h3>
@@ -50,7 +56,7 @@
 {% endif %}
 <input class="orca-input" id="rtsp" name="rtsp" value="{{ form.rtsp.value|default:'' }}"
        {% if form.rtsp.errors %}aria-invalid="true" aria-describedby="rtsp-error rtsp-help"{% else %}aria-describedby="rtsp-help"{% endif %}>{% endverbatim %}</code></pre>
-  <p class="orca-p">Form fields as a ready component arrive with phase 2. Until then, compose them from the label, help text, error text and input primitives as above.</p>
+  <p class="orca-p">With a Django form, <code class="orca-code">{% templatetag openblock %} orca_field form.rtsp {% templatetag closeblock %}</code> writes exactly this markup, for any widget.</p>
 </section>
 
 <section class="docs-block-flow">
@@ -70,7 +76,15 @@
       <tr><td><code class="orca-code">data-orca-toggle</code></td><td>Flips <code class="orca-code">aria-pressed</code>; optional <code class="orca-code">data-orca-label-on</code> / <code class="orca-code">-off</code>.</td></tr>
       <tr><td><code class="orca-code">data-orca-theme-toggle</code></td><td>Cycles light, dark and paper and remembers the choice.</td></tr>
       <tr><td><code class="orca-code">data-orca-countdown</code></td><td>Live countdown to the time in its <code class="orca-code">datetime</code> attribute.</td></tr>
-      <tr><td><code class="orca-code">data-orca-copy="id"</code></td><td>Copies the text of the element with that id.</td></tr>
+      <tr><td><code class="orca-code">data-orca-copy="id"</code></td><td>Copies the text of the element with that id and says “Copied”.</td></tr>
+      <tr><td><code class="orca-code">data-orca-menu</code>, <code class="orca-code">data-orca-listbox</code>, <code class="orca-code">data-orca-combobox</code></td><td>Menus, dropdown selects and comboboxes: opening, arrow keys, Escape, focus return.</td></tr>
+      <tr><td><code class="orca-code">data-orca-tabs</code></td><td>Tab lists: arrow keys, Home, End, panel switching.</td></tr>
+      <tr><td><code class="orca-code">data-orca-dialog-open="id"</code>, <code class="orca-code">data-orca-confirm="…"</code></td><td>Open native dialogs; ask before submitting a form.</td></tr>
+      <tr><td><code class="orca-code">ORCA.toast("…")</code>, <code class="orca-code">data-orca-toast</code>, <code class="orca-code">data-orca-dismiss</code></td><td>Toasts and dismissible alerts.</td></tr>
+      <tr><td><code class="orca-code">data-orca-disclose</code>, <code class="orca-code">data-orca-reveal</code></td><td>Show or hide a panel from a button, or from a select value.</td></tr>
+      <tr><td><code class="orca-code">data-orca-set-date</code>, <code class="orca-code">data-orca-range</code>, <code class="orca-code">data-orca-detect-tz</code>, <code class="orca-code">data-orca-weekdays</code></td><td>Date shortcuts, ordered ranges with their length, browser timezone, weekday presets.</td></tr>
+      <tr><td><code class="orca-code">data-orca-add-row</code>, <code class="orca-code">data-orca-remove-row</code></td><td>Repeating rows from a <code class="orca-code">&lt;template&gt;</code>; Django formsets supported.</td></tr>
+      <tr><td><code class="orca-code">data-orca-carousel</code>, <code class="orca-code">data-orca-filter-list</code>, <code class="orca-code">data-orca-file-list</code>, <code class="orca-code">data-orca-autosubmit</code>, <code class="orca-code">data-orca-theme-choice</code></td><td>Carousel controls, filtering a list as you type, listing chosen files, submitting on change, choosing the theme.</td></tr>
     </tbody>
   </table></div>
 </section>

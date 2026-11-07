@@ -52,6 +52,7 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
     parts = [
         f'<link rel="stylesheet" href="{static("orca/css/tokens.css")}">',
         f'<link rel="stylesheet" href="{static("orca/css/orca.css")}">',
+        f'<link rel="stylesheet" href="{static("orca/css/components.css")}">',
         f"<style{nonce}>{brand_style(brand)}</style>",
         f'<meta name="theme-color" content="{brand.css["light"]["--orca-brand-strong"]}">',
     ]
@@ -63,6 +64,9 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
         parts.append(f"<script{nonce}>{_THEME_RESTORE}</script>")
     if script:
         parts.append(f'<script src="{static("orca/js/orca.js")}" defer></script>')
+        # Status glyphs for toasts the script creates (ORCA.toast)
+        for glyph in ("success", "error", "warning", "info"):
+            parts.append(f'<template data-orca-icon="{glyph}">{icons.svg(glyph)}</template>')
     return mark_safe("\n".join(parts))
 
 
@@ -193,3 +197,55 @@ def orca_initials(value):
     if len(words) == 1:
         return words[0][:2].upper()
     return (words[0][0] + words[-1][0]).upper()
+
+
+# ============================================================================================ component tags
+from .. import components as _c  # noqa: E402
+
+
+@register.inclusion_tag("orca/components/field.html")
+def orca_field(bound_field, switch=False, width="", label=None, help_text=None, hide_label=False, horizontal=False):
+    """One form field, the ORCA way: label, optional marker, help, error and control, all wired with ARIA.
+
+    {% orca_field form.name %}  {% orca_field form.enabled switch=True %}  {% orca_field form.port width="w8" %}
+    """
+    return _c.field_context(bound_field, switch=switch, width=width, label=label, help_text=help_text,
+                            hide_label=hide_label, horizontal=horizontal)
+
+
+@register.inclusion_tag("orca/components/form_errors.html")
+def orca_form_errors(form):
+    """Non-field errors as a callout, and a linked summary when two or more fields are invalid."""
+    return _c.form_errors_context(form)
+
+
+@register.inclusion_tag("orca/components/messages.html", takes_context=True)
+def orca_messages(context):
+    """django.contrib.messages as dismissible ORCA alerts (errors use role=alert)."""
+    return _c.messages_context(context)
+
+
+@register.inclusion_tag("orca/components/pagination.html", takes_context=True)
+def orca_pagination(context, page_obj, noun="items", param="page"):
+    """Pagination with gaps and a summary; keeps the other query parameters (filters, sort)."""
+    return _c.pagination_context(context, page_obj, noun=noun, param=param)
+
+
+@register.inclusion_tag("orca/components/mini_calendar.html")
+def orca_mini_calendar(month=None, selected=None, today=None, url="", nav_url="", events=(), holidays=None,
+                       week_numbers=False):
+    """A month grid in the locale's first weekday. url/nav_url patterns use {date} and {month}."""
+    return _c.mini_calendar_context(month=month, selected=selected, today=today, url=url, nav_url=nav_url,
+                                    events=events, holidays=holidays, week_numbers=week_numbers)
+
+
+@register.simple_tag
+def orca_sparkline(values, label=""):
+    """Inline trend line from a list or a comma-separated string of numbers."""
+    return mark_safe(_c.sparkline_svg(values, label=label))
+
+
+@register.inclusion_tag("orca/components/donut.html")
+def orca_donut(segments, total_label="Total"):
+    """Donut chart with legend from [(label, value), …] or [{"label", "value"}, …]."""
+    return _c.donut_context(segments, total_label=total_label)

@@ -10,4 +10,4 @@ Quick start::
 Look up any element from a terminal: ``python -m orca show button``.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

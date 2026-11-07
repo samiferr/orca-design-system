@@ -18,22 +18,28 @@ from orca.conf import compute_brand
 from orca.views import render_snippet
 
 ROOT = Path(__file__).resolve().parent.parent
-CSS = (ROOT / "orca/static/orca/css/orca.css").read_text()
+CSS = (ROOT / "orca/static/orca/css/orca.css").read_text() + (ROOT / "orca/static/orca/css/components.css").read_text()
 TOKENS_CSS = (ROOT / "orca/static/orca/css/tokens.css").read_text()
 CSS_CLASSES = set(m[1:] for m in re.findall(r"\.orca-[a-z0-9_-]+", CSS))
 CSS_TOKENS = set(re.findall(r"--orca-([a-z0-9-]+)\s*:", TOKENS_CSS))
 
 
 class GuideCoverageTests(SimpleTestCase):
-    def test_every_primitive_of_the_guide_is_covered_once(self):
-        covered = {}
-        for el in registry.all_elements():
-            for item in el.guide:
-                covered.setdefault(item, []).append(el.id)
-        guide = [item for _, item in all_items()]
-        self.assertEqual([i for i in guide if i not in covered], [], "guide items with no element")
-        self.assertEqual({k: v for k, v in covered.items() if len(v) > 1}, {}, "guide items claimed twice")
-        self.assertEqual([k for k in covered if k not in guide], [], "element.guide entries not in the guide")
+    def test_every_guide_item_of_each_released_level_is_covered_once(self):
+        for level in registry.RELEASED_LEVELS:
+            with self.subTest(level=level):
+                covered = {}
+                for el in registry.all_elements(level):
+                    for item in el.guide:
+                        covered.setdefault(item, []).append(el.id)
+                guide = [item for _, item in all_items(level)]
+                self.assertEqual([i for i in guide if i not in covered], [], "guide items with no element")
+                self.assertEqual({k: v for k, v in covered.items() if len(v) > 1}, {}, "guide items claimed twice")
+                self.assertEqual([k for k in covered if k not in guide], [], "element.guide entries not in the guide")
+
+    def test_components_say_what_they_are_built_from(self):
+        for el in registry.all_elements("component"):
+            self.assertTrue(el.uses, f"{el.id}: a component lists the elements it is built from")
 
 
 class CatalogueTests(SimpleTestCase):
@@ -45,7 +51,7 @@ class CatalogueTests(SimpleTestCase):
                 self.assertGreater(len(el.why), 40)
                 self.assertTrue(el.when and el.how and el.examples)
                 self.assertTrue(el.laws, "every element names the principle it applies")
-                self.assertEqual(el.level, "primitive")
+                self.assertIn(el.level, registry.RELEASED_LEVELS)
 
     def test_principles_are_known(self):
         for el in registry.all_elements():
@@ -54,7 +60,7 @@ class CatalogueTests(SimpleTestCase):
 
     def test_related_ids_exist(self):
         for el in registry.all_elements():
-            for rid in el.related:
+            for rid in el.related + el.uses:
                 self.assertIsNotNone(registry.get(rid), f"{el.id}: related {rid} missing")
 
     def test_documented_classes_and_tokens_exist(self):
@@ -81,7 +87,7 @@ class CatalogueTests(SimpleTestCase):
 
     def test_css_uses_only_defined_tokens(self):
         used = set(re.findall(r"var\(--orca-([a-z0-9-]+)", CSS))
-        local = {"ratio", "value", "swatch", "zone", "event"}  # per-element custom properties set inline
+        local = {"ratio", "value", "swatch", "zone", "event", "days", "cols", "start", "span", "progress"}  # set inline per element
         self.assertEqual(sorted(used - CSS_TOKENS - local), [])
 
 
@@ -202,7 +208,7 @@ class TemplateTagTests(SimpleTestCase):
 
 class DocsSiteTests(SimpleTestCase):
     def test_pages(self):
-        for name in ("home", "index", "tokens", "icons", "catalogue-json"):
+        for name in ("home", "index", "components", "tokens", "icons", "catalogue-json"):
             with self.subTest(name=name):
                 self.assertEqual(self.client.get(reverse(f"orca:{name}")).status_code, 200)
 
@@ -254,6 +260,100 @@ class DocsSiteTests(SimpleTestCase):
     @override_settings(ORCA={"DOCS_ENABLED": False})
     def test_disabled(self):
         self.assertEqual(self.client.get(reverse("orca:index")).status_code, 404)
+
+
+class ComponentTagTests(SimpleTestCase):
+    def render(self, src, **ctx):
+        return Template("{% load orca %}" + src).render(Context(ctx))
+
+    def form(self, data=None):
+        from django import forms
+
+        class F(forms.Form):
+            name = forms.CharField(help_text="Shown on dashboards.")
+            note = forms.CharField(required=False, widget=forms.Textarea)
+            kind = forms.ChoiceField(choices=[("a", "Door"), ("b", "Gate")], widget=forms.RadioSelect)
+            on = forms.BooleanField(required=False)
+            day = forms.DateField()
+
+        f = F(data)
+        if data is not None:
+            f.is_valid()
+        return f
+
+    def test_field_wires_label_help_and_error(self):
+        f = self.form({"name": "", "kind": "a", "day": "2026-11-06"})
+        out = self.render("{% orca_field f.name %}", f=f)
+        self.assertIn('for="id_name"', out)
+        self.assertIn('aria-describedby="id_name-error id_name-help"', out)
+        self.assertIn('aria-invalid="true"', out)
+        self.assertIn('class="orca-input"', out)
+        self.assertLess(out.index("orca-help"), out.index("orca-error"))
+        self.assertLess(out.index("orca-error"), out.index("<input"))
+
+    def test_field_kinds(self):
+        f = self.form()
+        self.assertIn("(optional)", self.render("{% orca_field f.note %}", f=f))
+        self.assertIn("orca-textarea", self.render("{% orca_field f.note %}", f=f))
+        radios = self.render("{% orca_field f.kind %}", f=f)
+        self.assertIn("<fieldset", radios)
+        self.assertIn("orca-radio__dot", radios)
+        self.assertIn('role="switch"', self.render("{% orca_field f.on switch=True %}", f=f))
+        self.assertIn('type="date"', self.render("{% orca_field f.day %}", f=f))
+
+    def test_form_errors_summary(self):
+        f = self.form({"kind": "z"})
+        out = self.render("{% orca_form_errors f %}", f=f)
+        self.assertIn("fields need attention", out)
+        self.assertIn('href="#id_name"', out)
+
+    def test_page_window(self):
+        from orca.components import page_window
+
+        self.assertEqual(page_window(7, 16), [1, None, 6, 7, 8, None, 16])
+        self.assertEqual(page_window(1, 5), [1, 2, 3, 4, 5])
+        self.assertEqual(page_window(2, 9), [1, 2, 3, 4, None, 9])
+        self.assertEqual(page_window(3, 7), [1, 2, 3, 4, 5, 6, 7])
+
+    def test_pagination_keeps_query(self):
+        from django.core.paginator import Paginator
+        from django.test import RequestFactory
+
+        request = RequestFactory().get("/cameras/", {"site": "north", "page": "3"})
+        page = Paginator(list(range(100)), 10).page(3)
+        out = self.render('{% orca_pagination page noun="cameras" %}', page=page, request=request)
+        self.assertIn("site=north&amp;page=4", out)
+        self.assertIn('aria-current="page"', out)
+        self.assertIn("Showing 21–30 of 100 cameras", out)
+
+    def test_mini_calendar(self):
+        from django.utils import translation
+
+        src = '{% orca_mini_calendar "2026-11-01" selected="2026-11-12" today="2026-11-06" url="/d/{date}" events="2026-11-04" %}'
+        out = self.render(src)
+        self.assertIn('href="/d/2026-11-12"', out)
+        self.assertIn('aria-current="date"', out)
+        self.assertIn("has events", out)
+        # Weeks start on the locale's first day: Sunday in English, Monday in French.
+        self.assertEqual(re.search(r'href="/d/([\d-]+)"', out).group(1), "2026-11-01")
+        with translation.override("fr"):
+            self.assertEqual(re.search(r'href="/d/([\d-]+)"', self.render(src)).group(1), "2026-10-26")
+
+    def test_messages(self):
+        from django.contrib.messages.storage.base import Message
+        from django.contrib.messages import constants
+
+        out = self.render("{% orca_messages %}", messages=[Message(constants.SUCCESS, "Saved"), Message(constants.ERROR, "Failed")])
+        self.assertIn("orca-alert--positive", out)
+        self.assertIn('role="alert"', out)
+
+    def test_charts(self):
+        self.assertIn("orca-sparkline__line", self.render('{% orca_sparkline "1,3,2,5" %}'))
+        self.assertEqual(self.render('{% orca_sparkline "4" %}'), "")
+        donut = self.render('{% orca_donut "A:3, B:1" total_label="Visitors" %}')
+        self.assertIn("A 75%, B 25%", donut)
+        self.assertIn(">4<", donut)
+        self.assertIn("1,200", self.render('{% orca_donut "A:1200, B:300" %}'))
 
 
 class LintTests(SimpleTestCase):

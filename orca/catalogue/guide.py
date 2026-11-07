@@ -1,4 +1,4 @@
-"""The Primitives section of the ORCA Design System Guide, item by item.
+"""The ORCA Design System Guide, level by level and item by item.
 
 Used by the test suite to prove that every primitive the guide lists is covered by an element
 of the catalogue (see ``Element.guide``). Text copied verbatim from the guide's headings and bullets.
@@ -69,5 +69,27 @@ PRIMITIVES = {
 }
 
 
-def all_items() -> list[tuple[str, str]]:
-    return [(section, item) for section, items in PRIMITIVES.items() for item in items]
+
+
+COMPONENTS = {
+    'Forms': ['Form field (text)', 'Form field (select)', 'Form field (checkbox)', 'Form field (switch)', 'Form field (radio group)', 'Form field (checkbox group)', 'Search form', 'Table toolbar', 'Multi-picker', 'Language switcher', 'Input group (addon + input)', 'Search field (icon + input + clear)', 'Search bar', 'Filter button', 'Dropdown select (picker)', 'Combobox (input + suggestions)', 'Autocomplete input', 'Auto-suggest input', 'OTP input', 'Rating input', 'Split date input (day, month, year)', 'File input field', 'Form alert (non-field errors)', 'Form actions'],
+    'Navigation': ['Primary navigation', 'Utility navigation', 'Sidebar link', 'Breadcrumbs', 'Pagination', 'Table pager', 'Tab bar', 'Bottom navigation bar', 'Nav tree (collapsible sections)', 'Tree leaf', 'Child tabs (with counts)', 'Back link', 'Pagination summary', 'Pagination link', 'View toggle (cards, table)', 'Settings toggle', 'Create button (floating on phones)'],
+    'Feedback': ['Alert', 'Empty state', 'Status light', 'Confirm dialog', 'Progress bar with counts', 'Callout (info, success, warning, danger)', 'Toast', 'Toast stack', 'Flash message', 'Tooltip', 'No-data state', 'Dialog'],
+    'Actions': ['Button group', 'Dropdown menu', 'Dropdown item', 'Copy button (copied confirmation)', 'Record actions (one button + overflow menu)', 'Row actions'],
+    'Data display': ['Stat card', 'Key/value list', 'List', 'List item', 'Timeline item', 'Sortable column header', 'Legend item', 'Zone row', 'Line-count item', 'Media object', 'Card', 'Accordion', 'Steps', 'Tree', 'Avatar group', 'Card (outlined, elevated, filled)', 'Table card', 'Card footer', 'Linked card', 'Property row (key, value, remove)', 'Activity entry (badge, actor, time, before and after)', 'Carousel', 'Scroller (scroll-snap region)', 'Sparkline', 'Donut chart', 'Chart frame'],
+    'Content blocks': ['Product item', 'Person block', 'Block post (thumbnail + headline + excerpt)', 'Hero', 'Photo-actions bar', 'Camera card'],
+    'Identity and controls': ['User chip', 'Panel header', 'Pin control', 'Theme toggle', 'Email button (with fallback link)'],
+    'Date and time pickers': ['Date picker', 'Time picker', 'Date-time picker', 'Date-range picker', 'Time-range input (start and end)', 'Duration picker', 'Timezone selector', 'Month and year switcher', 'Mini calendar'],
+    'Planning selectors': ['Weekday selector', 'Recurrence selector', 'Reminder selector', 'Period selector', 'Granularity selector', 'Calendar view switcher (day, week, month, agenda)', 'Preset buttons (Today, Weekdays, This week, Next 7 days)', 'Calendar navigation (previous, today, next)'],
+    'Calendar parts': ['Day cell', 'Week header', 'Weekday header', 'Week row', 'Hour row', 'Time slot', 'All-day row', 'Event chip', 'Event card', 'Agenda item', 'Date badge', 'Holiday label', 'More-events link ("+3 more")', 'Calendar header (month label + navigation)'],
+    'Schedule parts': ['Schedule row (day, start, end)', 'Add-row button', 'Remove-row button', 'Availability legend', 'Exception entry (date override)', 'Time-off entry', 'Booking slot', 'Conflict warning', 'Overlap warning', 'Working-hours label'],
+    'Plan items': ['Task item', 'Subtask item', 'Milestone item', 'Deadline item', 'Reminder item', 'Assignee chip', 'Due-date chip', 'Status chip (planned, in progress, done, overdue)', 'Priority chip', 'Progress chip', 'Gantt bar', 'Plan card', 'Board card', 'Resource row'],
+    'Documentation site': ['Live example (preview and code tabs)', 'Code block', 'Docs navigation tree'],
+}
+
+
+LEVELS = {"primitive": PRIMITIVES, "component": COMPONENTS}
+
+
+def all_items(level: str = "primitive") -> list[tuple[str, str]]:
+    return [(section, item) for section, items in LEVELS[level].items() for item in items]

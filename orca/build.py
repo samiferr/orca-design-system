@@ -67,12 +67,15 @@ def catalogue_markdown() -> dict[Path, str]:
     from .catalogue import registry
     from .catalogue.render import element_markdown, index_markdown
 
-    files = {DOCS_DIR / "primitives" / "README.md": index_markdown()}
-    for category in registry.categories():
-        parts = [f"# {category.title}\n", category.intro + "\n"]
-        for el in registry.by_category(category.key):
-            parts.append(element_markdown(el))
-        files[DOCS_DIR / "primitives" / f"{category.key}.md"] = "\n".join(parts)
+    files = {}
+    for level in registry.RELEASED_LEVELS:
+        folder = DOCS_DIR / registry.LEVEL_TITLES[level].lower()
+        files[folder / "README.md"] = index_markdown(level)
+        for category in registry.categories(level):
+            parts = [f"# {category.title}\n", category.intro + "\n"]
+            for el in registry.by_category(category.key):
+                parts.append(element_markdown(el))
+            files[folder / f"{category.key}.md"] = "\n".join(parts)
     files[DOCS_DIR / "catalogue.json"] = json.dumps(registry.as_json(), indent=1, ensure_ascii=False) + "\n"
     return files
 

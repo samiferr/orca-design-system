@@ -2,12 +2,12 @@
 {% block title %}Overview{% endblock %}
 {% block content %}
 <section class="docs-hero" aria-labelledby="hero-title">
-  <p class="orca-card-kicker">Django design system · phase 1: primitives</p>
+  <p class="orca-card-kicker">Django design system · phase 2: components</p>
   <h1 class="docs-hero__title" id="hero-title">Every element says why, when and how.</h1>
   <p class="docs-hero__lead">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>
   <div class="orca-row orca-row--16">
     <a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a>
-    <a class="orca-button" href="{% url 'orca:index' %}">Browse primitives</a>
+    <a class="orca-button" href="{% url 'orca:components' %}">Browse components</a>
   </div>
   <div class="docs-hero__sample" aria-label="Live ORCA primitives">{{ hero }}</div>
 </section>
@@ -15,9 +15,9 @@
 <section class="docs-section" aria-labelledby="facts-h">
   <h2 class="orca-sr-only" id="facts-h">In numbers</h2>
   <dl class="docs-facts">
-    <div><dt class="orca-stat-label">Primitives</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.elements }}</dd></div>
+    <div><dt class="orca-stat-label">Primitives</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.primitives }}</dd></div>
+    <div><dt class="orca-stat-label">Components</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.components }}</dd></div>
     <div><dt class="orca-stat-label">Guide items covered</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.guide_items }} of {{ stats.guide_items }}</dd></div>
-    <div><dt class="orca-stat-label">Themes</dt><dd class="orca-stat-value orca-stat-value--lg">3</dd></div>
     <div><dt class="orca-stat-label">Brand keys</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.brand_keys }}</dd></div>
     <div><dt class="orca-stat-label">Icons</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.icons }}</dd></div>
   </dl>
@@ -63,15 +63,16 @@ ORCA = {"BRAND": {"name": "Acme", "color": "#0f95a1"}}</code></pre></div></li>
   <p class="orca-p"><a class="orca-link orca-link--plain" href="{% url 'orca:guide' 'installation' %}">Full installation guide</a></p>
 </section>
 
-<section class="docs-section" aria-labelledby="cats-h">
-  <h2 class="orca-section-title" id="cats-h">Primitives by category</h2>
+{% for lvl in levels %}<section class="docs-section" aria-labelledby="cats-{{ lvl.key }}">
+  <h2 class="orca-section-title" id="cats-{{ lvl.key }}">{{ lvl.title }} by category</h2>
   <ul class="docs-cards">
-    {% for cat, els in nav %}
+    {% for cat, els in lvl.nav %}
     <li class="docs-card">
-      <h3 class="orca-card-title"><a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:element' els.0.id %}">{{ cat.title }}</a></h3>
+      <h3 class="orca-card-title"><a class="orca-link orca-link--quiet orca-link--plain" href="{% url lvl.url %}#cat-{{ cat.key }}">{{ cat.title }}</a></h3>
       <p class="orca-card-meta">{{ els|length }} element{{ els|length|pluralize }} · {{ cat.intro|truncatewords:14 }}</p>
     </li>
     {% endfor %}
   </ul>
 </section>
+{% endfor %}
 {% endblock %}

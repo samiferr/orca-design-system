@@ -60,6 +60,10 @@ PRACTICAL_UI = {
     "T12": "Make text over photos readable", "W01": "Make every word useful", "W04": "Lead with the information people seek",
     "W05": "Order explanations as an inverted pyramid", "W08": "Structure information for scanning",
     "W09": "Avoid unnecessary pronouns in labels", "W12": "Keep punctuation restrained", "R22": "Live feedback only when it helps",
+    "B08": "Keep action order predictable", "B09": "Position multi-step navigation carefully",
+    "L12": "Give text a stable alignment anchor", "L14": "Reduce travel between related actions",
+    "R02": "Ask only for useful, necessary information", "R16": "Break long forms into sensible steps",
+    "S08": "Simplify decisions: remove, group, stage, recommend", "W10": "Use one term for one concept",
 }
 
 
@@ -90,6 +94,7 @@ class Element:
     related: list[str] = field(default_factory=list)
     source: str = "Tangerine"  # Tangerine (from wise_people_analyzer) or ORCA (new in this system)
     level: str = "primitive"
+    uses: list[str] = field(default_factory=list)  # lower-level elements this one is built from
 
     def law_names(self) -> list[str]:
         out = []
@@ -107,14 +112,21 @@ _CATEGORIES: list[Category] = []
 _ELEMENTS: dict[str, Element] = {}
 
 
+_CATEGORY_LEVEL: dict[str, str] = {}
+
+
 def category(key: str, title: str, intro: str, level: str = "primitive") -> str:
+    if key in _CATEGORY_LEVEL:
+        raise ValueError(f"Duplicate ORCA category key {key!r}")
     _CATEGORIES.append(Category(key, title, intro, level))
+    _CATEGORY_LEVEL[key] = level
     return key
 
 
 def add(el: Element) -> Element:
     if el.id in _ELEMENTS:
         raise ValueError(f"Duplicate ORCA element id {el.id!r}")
+    el.level = _CATEGORY_LEVEL.get(el.category, el.level)
     _ELEMENTS[el.id] = el
     return el
 
@@ -126,16 +138,25 @@ def _load() -> None:
         foundations, text, form_text, actions, inputs, icons, status, identity, imagery,
         structure, progress, charts, planning,
     )
+    from .components import (  # noqa: F401
+        forms, navigation, feedback, actions as component_actions, data_display, content, identity_controls,
+        pickers, planning_selectors, calendar_parts, schedule_parts, plan_items, docs_site,
+    )
 
 
-def categories() -> list[Category]:
+LEVEL_TITLES = {"primitive": "Primitives", "component": "Components", "pattern": "Patterns",
+                "template": "Templates", "page": "Pages"}
+RELEASED_LEVELS = ("primitive", "component")
+
+
+def categories(level: str | None = None) -> list[Category]:
     _load()
-    return list(_CATEGORIES)
+    return [c for c in _CATEGORIES if level is None or c.level == level]
 
 
-def all_elements() -> list[Element]:
+def all_elements(level: str | None = None) -> list[Element]:
     _load()
-    return list(_ELEMENTS.values())
+    return [e for e in _ELEMENTS.values() if level is None or e.level == level]
 
 
 def get(element_id: str) -> Element | None:
@@ -165,6 +186,7 @@ def as_json() -> dict:
         "appearance": "tangerine",
         "themes": ["light", "dark", "paper"],
         "levels": list(LEVELS),
+        "released_levels": list(RELEASED_LEVELS),
         "brand_tokens": [{"key": t.key, "css": t.css, "default": t.default, "usage": t.usage} for t in BRAND_TOKENS],
         "categories": [asdict(c) for c in categories()],
         "elements": [

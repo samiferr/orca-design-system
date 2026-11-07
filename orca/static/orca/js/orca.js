@@ -1,98 +1,577 @@
-/* ORCA primitives: progressive enhancement only. Every primitive works without this file.
-   Behaviours are opt-in through data attributes, so nothing runs on markup that did not ask for it:
-     data-orca-clear           search clear button empties its input and returns focus
-     data-orca-step="-1|1"     number stepper buttons
-     data-orca-otp             OTP digit boxes: advance, backspace, paste a whole code
-     data-orca-toggle          aria-pressed toggle buttons (pin, toggle, tag)
-     data-orca-theme-toggle    cycles light / dark / paper and remembers the choice
-     data-orca-countdown       live countdown to the ISO time in its datetime attribute
-     data-orca-copy            copies the text of the element named by its value (id) */
+/* ORCA: progressive enhancement only. Every element still works, or degrades to a plain form, without this file.
+   Behaviours are opt-in through data attributes, so nothing runs on markup that did not ask for it.
+
+   Primitives
+     data-orca-clear            search clear button empties its input and returns focus
+     data-orca-step="-1|1"      number stepper buttons
+     data-orca-otp              OTP digit boxes: advance, backspace, paste a whole code
+     data-orca-toggle           aria-pressed toggle buttons (pin, toggle, tag); data-orca-label-on / -off
+     data-orca-theme-toggle     cycles light / dark / paper and remembers the choice
+     data-orca-countdown        live countdown to the ISO time in its datetime attribute
+     data-orca-copy="id"        copies the text of the element with that id; says "Copied"
+   Components
+     data-orca-menu             button that opens the [role=menu] it controls (aria-controls)
+     data-orca-listbox          dropdown select: button + [role=listbox] + hidden input
+     data-orca-combobox         input[role=combobox] filtering the [role=listbox] it controls
+     data-orca-tabs             [role=tablist] container: arrow keys, Home/End, panel switching
+     data-orca-dialog-open="id" / data-orca-dialog-close   open and close a <dialog>
+     data-orca-confirm="text"   on a form or submit button: ask in a dialog first
+     data-orca-dismiss          closes the closest alert, toast or callout
+     data-orca-disclose         aria-expanded button that shows/hides the element it controls
+     data-orca-set-date="+n"    sets the date input named by aria-controls to today + n days
+     data-orca-range            fieldset with two date or time inputs: keeps end >= start, shows duration
+     data-orca-detect-tz        button that selects the browser's timezone in the select it controls
+     data-orca-add-row="tpl"    clones <template id=tpl> into the list it controls
+     data-orca-remove-row       removes its closest [data-orca-row]
+     data-orca-weekdays="mon,…" sets the weekday toggles in the fieldset it controls
+     data-orca-reveal="id" data-orca-reveal-value="custom"   select that shows an element for one value
+     data-orca-filter-list="id" input filtering the <li> of a list
+     data-orca-carousel         carousel: prev/next, dots, count
+     data-orca-file-list="id"   file input listing chosen files in a list
+     data-orca-autosubmit       select or input that submits its form on change
+     data-orca-theme-choice     radio group choosing auto / light / dark / paper
+   API
+     window.ORCA.toast("Report sent", {tone: "positive", action: {label: "Undo", onClick}})            */
 (function () {
   "use strict";
   var THEME_KEY = "orca-theme";
+  var doc = document;
 
   function closest(el, sel) { return el && el.closest ? el.closest(sel) : null; }
+  function byId(id) { return id ? doc.getElementById(id) : null; }
+  function controlled(el) { return byId(el.getAttribute("aria-controls")); }
+  function fire(el, type) { el.dispatchEvent(new Event(type, { bubbles: true })); }
+  function today(offset) {
+    var d = new Date(); d.setDate(d.getDate() + (offset || 0));
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  var liveRegion;
+  function announce(text) {
+    if (!liveRegion) {
+      liveRegion = doc.createElement("div");
+      liveRegion.className = "orca-sr-only"; liveRegion.setAttribute("role", "status");
+      doc.body.appendChild(liveRegion);
+    }
+    liveRegion.textContent = ""; setTimeout(function () { liveRegion.textContent = text; }, 50);
+  }
 
-  document.addEventListener("click", function (event) {
+  /* ---------------------------------------------------------------- popovers (menu, listbox) */
+  var openPopover = null;
+  function closePopover(focusTrigger) {
+    if (!openPopover) return;
+    openPopover.list.hidden = true;
+    openPopover.trigger.setAttribute("aria-expanded", "false");
+    if (focusTrigger) openPopover.trigger.focus();
+    openPopover = null;
+  }
+  function openList(trigger, list, focusFirst) {
+    closePopover(false);
+    list.hidden = false; trigger.setAttribute("aria-expanded", "true");
+    openPopover = { trigger: trigger, list: list };
+    var items = items_(list);
+    var target = list.querySelector('[aria-selected="true"]') || (focusFirst === "last" ? items[items.length - 1] : items[0]);
+    if (target) focusItem(list, target);
+  }
+  function items_(list) {
+    return Array.prototype.filter.call(list.querySelectorAll('[role=menuitem],[role=option],[role=menuitemradio],[role=menuitemcheckbox]'),
+      function (i) { return !i.hidden && i.getAttribute("aria-disabled") !== "true" && !i.disabled && !closest(i, "[hidden]"); });
+  }
+  function focusItem(list, item) { item.focus(); }
+  function moveIn(list, current, delta) {
+    var items = items_(list); if (!items.length) return null;
+    var i = items.indexOf(current);
+    var next = delta === "first" ? items[0] : delta === "last" ? items[items.length - 1] : items[(i + delta + items.length) % items.length];
+    focusItem(list, next); return next;
+  }
+  function activeOption(list) { return list.contains(doc.activeElement) ? doc.activeElement : null; }
+  function chooseOption(wrap, option) {
+    var button = wrap.querySelector("[data-orca-listbox]");
+    var list = controlled(button);
+    list.querySelectorAll("[role=option]").forEach(function (o) { o.setAttribute("aria-selected", o === option ? "true" : "false"); });
+    var value = button.querySelector(".orca-picker-btn__value");
+    if (value) { value.textContent = option.getAttribute("data-label") || option.textContent.trim(); value.classList.remove("orca-picker-btn__value--placeholder"); }
+    var input = wrap.querySelector("input[type=hidden]");
+    if (input) { input.value = option.getAttribute("data-value"); fire(input, "change"); }
+    closePopover(true);
+  }
+
+  /* ---------------------------------------------------------------- dialogs */
+  function openDialog(dialog, opener) {
+    if (!dialog || dialog.open) return;
+    dialog._orcaOpener = opener || doc.activeElement;
+    if (dialog.showModal) dialog.showModal(); else dialog.setAttribute("open", "");
+  }
+  doc.addEventListener("close", function (e) {
+    var d = e.target;
+    if (d && d._orcaOpener && d._orcaOpener.focus) d._orcaOpener.focus();
+  }, true);
+
+  var confirmDialog;
+  function confirmFirst(text, title, action, onYes) {
+    if (!confirmDialog) {
+      confirmDialog = doc.createElement("dialog");
+      confirmDialog.className = "orca-dialog";
+      confirmDialog.setAttribute("aria-labelledby", "orca-confirm-title");
+      confirmDialog.innerHTML = '<form method="dialog"><div class="orca-dialog__header"><h2 class="orca-dialog-title" id="orca-confirm-title"></h2></div>' +
+        '<div class="orca-dialog__body"><p class="orca-p" data-text></p></div><div class="orca-dialog__footer">' +
+        '<button class="orca-button orca-button--danger" type="submit" value="yes" data-action></button>' +
+        '<button class="orca-button" type="submit" value="no" autofocus>Cancel</button></div></form>';
+      doc.body.appendChild(confirmDialog);
+    }
+    confirmDialog.querySelector("#orca-confirm-title").textContent = title || "Are you sure?";
+    confirmDialog.querySelector("[data-text]").textContent = text;
+    confirmDialog.querySelector("[data-action]").textContent = action || "Continue";
+    confirmDialog.returnValue = "";
+    confirmDialog.onclose = function () { if (confirmDialog.returnValue === "yes") onYes(); };
+    openDialog(confirmDialog);
+  }
+  doc.addEventListener("submit", function (e) {
+    var form = e.target;
+    var submitter = e.submitter;
+    var source = (submitter && submitter.hasAttribute("data-orca-confirm")) ? submitter : (form.hasAttribute("data-orca-confirm") ? form : null);
+    if (!source || form._orcaConfirmed) return;
+    e.preventDefault();
+    confirmFirst(source.getAttribute("data-orca-confirm"), source.getAttribute("data-orca-confirm-title"),
+      source.getAttribute("data-orca-confirm-action") || (submitter && submitter.textContent.trim()), function () {
+        form._orcaConfirmed = true;
+        if (form.requestSubmit) form.requestSubmit(submitter || undefined); else form.submit();
+        form._orcaConfirmed = false;
+      });
+  }, true);
+
+  /* ---------------------------------------------------------------- toasts */
+  function toastStack() {
+    var stack = doc.querySelector(".orca-toast-stack:not(.orca-toast-stack--static)");
+    if (!stack) {
+      stack = doc.createElement("ol");
+      stack.className = "orca-toast-stack"; stack.setAttribute("aria-live", "polite"); stack.setAttribute("aria-label", "Notifications");
+      doc.body.appendChild(stack);
+    }
+    return stack;
+  }
+  var ICONS = { positive: "success", negative: "error", caution: "warning", info: "info" };
+  function toast(text, opts) {
+    opts = opts || {};
+    var tone = opts.tone || "info";
+    var li = doc.createElement("li");
+    li.className = "orca-toast orca-toast--" + tone;
+    var iconTpl = doc.querySelector('template[data-orca-icon="' + (ICONS[tone] || "info") + '"]');
+    if (iconTpl) li.appendChild(iconTpl.content.cloneNode(true)); else li.appendChild(doc.createElement("span"));
+    var p = doc.createElement("p"); p.className = "orca-toast__text"; p.textContent = text; li.appendChild(p);
+    var actions = doc.createElement("div"); actions.className = "orca-toast__actions";
+    if (opts.action) {
+      var b = doc.createElement("button"); b.type = "button"; b.className = "orca-button orca-button--link"; b.textContent = opts.action.label;
+      b.addEventListener("click", function () { opts.action.onClick && opts.action.onClick(); dismiss(li); });
+      actions.appendChild(b);
+    }
+    var close = doc.createElement("button"); close.type = "button"; close.className = "orca-icon-button"; close.setAttribute("aria-label", "Dismiss");
+    close.innerHTML = '<span aria-hidden="true">×</span>'; close.addEventListener("click", function () { dismiss(li); });
+    actions.appendChild(close); li.appendChild(actions);
+    toastStack().appendChild(li);
+    var timeout = opts.timeout === undefined ? (tone === "negative" ? 0 : 6000) : opts.timeout;
+    if (timeout) {
+      var timer = setTimeout(function () { dismiss(li); }, timeout);
+      li.addEventListener("mouseenter", function () { clearTimeout(timer); });
+      li.addEventListener("focusin", function () { clearTimeout(timer); });
+    }
+    return li;
+  }
+  function dismiss(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
+  window.ORCA = window.ORCA || {};
+  window.ORCA.toast = toast;
+  window.ORCA.confirm = confirmFirst;
+
+  /* ---------------------------------------------------------------- click */
+  doc.addEventListener("click", function (event) {
     var t = event.target;
-    var clear = closest(t, "[data-orca-clear]");
-    if (clear) {
-      var input = clear.parentElement.querySelector("input");
-      if (input) { input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true })); input.focus(); }
+    if (openPopover && !closest(t, ".orca-anchor") && !openPopover.list.contains(t)) closePopover(false);
+
+    var el;
+    if ((el = closest(t, "[data-orca-clear]"))) {
+      var input = el.parentElement.querySelector("input");
+      if (input) { input.value = ""; fire(input, "input"); input.focus(); }
       return;
     }
-    var step = closest(t, "[data-orca-step]");
-    if (step) {
-      var field = step.parentElement.querySelector("input[type=number], input[inputmode=numeric]");
+    if ((el = closest(t, "[data-orca-step]"))) {
+      var field = el.parentElement.querySelector("input[type=number], input[inputmode=numeric]");
       if (field) {
-        var by = parseFloat(step.getAttribute("data-orca-step")) * (parseFloat(field.step) || 1);
+        var by = parseFloat(el.getAttribute("data-orca-step")) * (parseFloat(field.step) || 1);
         var next = (parseFloat(field.value) || 0) + by;
         if (field.min !== "" && next < parseFloat(field.min)) next = parseFloat(field.min);
         if (field.max !== "" && next > parseFloat(field.max)) next = parseFloat(field.max);
-        field.value = next;
-        field.dispatchEvent(new Event("change", { bubbles: true }));
+        field.value = next; fire(field, "change");
       }
       return;
     }
-    var toggle = closest(t, "[data-orca-toggle]");
-    if (toggle) {
-      var on = toggle.getAttribute("aria-pressed") !== "true";
-      toggle.setAttribute("aria-pressed", on ? "true" : "false");
-      var label = toggle.getAttribute(on ? "data-orca-label-on" : "data-orca-label-off");
+    if ((el = closest(t, "[data-orca-toggle]"))) {
+      var on = el.getAttribute("aria-pressed") !== "true";
+      el.setAttribute("aria-pressed", on ? "true" : "false");
+      var label = el.getAttribute(on ? "data-orca-label-on" : "data-orca-label-off");
       if (label) {
-        if (toggle.hasAttribute("aria-label")) toggle.setAttribute("aria-label", label);
-        else { var text = toggle.querySelector("[data-orca-toggle-text]"); if (text) text.textContent = label; }
+        if (el.hasAttribute("aria-label")) el.setAttribute("aria-label", label);
+        var txt = el.querySelector("[data-orca-toggle-text]") || (el.id && doc.querySelector('[data-orca-state-for="' + el.id + '"]'));
+        if (txt) txt.textContent = el.getAttribute(on ? "data-orca-state-on" : "data-orca-state-off") || label;
+        if (el.hasAttribute("data-orca-announce")) announce(label);
+      }
+      var state = el.id && doc.querySelector('[data-orca-state-for="' + el.id + '"]');
+      if (state && el.hasAttribute("data-orca-state-on")) { state.textContent = el.getAttribute(on ? "data-orca-state-on" : "data-orca-state-off"); announce(state.textContent); }
+      return;
+    }
+    if ((el = closest(t, "[data-orca-theme-toggle]"))) {
+      var order = ["light", "dark", "paper"];
+      var current = doc.documentElement.getAttribute("data-theme") ||
+        (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      setTheme(order[(order.indexOf(current) + 1) % order.length]);
+      el.setAttribute("aria-label", "Theme: " + doc.documentElement.getAttribute("data-theme") + ". Change theme");
+      return;
+    }
+    if ((el = closest(t, "[data-orca-copy]"))) {
+      var source = byId(el.getAttribute("data-orca-copy"));
+      if (!source) return;
+      var text = (source.value !== undefined && source.tagName !== "DIV" ? source.value : source.textContent).trim();
+      var done = function () {
+        var label = el.querySelector("[data-orca-copy-label]") || el;
+        var old = label.textContent; label.textContent = "Copied"; announce("Copied to clipboard");
+        setTimeout(function () { label.textContent = old; }, 1500);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () { selectText(source); });
+      else selectText(source);
+      return;
+    }
+    if ((el = closest(t, "[data-orca-menu]"))) {
+      var menu = controlled(el);
+      if (!menu) return;
+      if (el.getAttribute("aria-expanded") === "true") closePopover(false); else openList(el, menu);
+      return;
+    }
+    if ((el = closest(t, "[data-orca-listbox]"))) {
+      var lb = controlled(el);
+      if (el.getAttribute("aria-expanded") === "true") closePopover(false); else openList(el, lb);
+      return;
+    }
+    if ((el = closest(t, '[role=option]')) && closest(el, "[data-orca-listbox-wrap]")) {
+      chooseOption(closest(el, "[data-orca-listbox-wrap]"), el); return;
+    }
+    if ((el = closest(t, '[role=option]')) && closest(el, "[data-orca-combobox-wrap]")) {
+      pickCombo(closest(el, "[data-orca-combobox-wrap]"), el); return;
+    }
+    if ((el = closest(t, "[role=menuitem]")) && openPopover && openPopover.list.contains(el)) {
+      if (el.tagName !== "A") closePopover(true);
+      return;
+    }
+    if ((el = closest(t, "[role=tab]")) && closest(el, "[data-orca-tabs]")) { selectTab(el, true); return; }
+    if ((el = closest(t, "[data-orca-dialog-open]"))) { openDialog(byId(el.getAttribute("data-orca-dialog-open")), el); return; }
+    if ((el = closest(t, "[data-orca-dialog-close]"))) { var dlg = closest(el, "dialog"); if (dlg) dlg.close(el.value || ""); return; }
+    if ((el = closest(t, "[data-orca-toast]"))) {
+      toast(el.getAttribute("data-orca-toast"), { tone: el.getAttribute("data-orca-toast-tone") || "positive" }); return;
+    }
+    if ((el = closest(t, "[data-orca-dismiss]"))) { dismiss(closest(el, ".orca-alert, .orca-toast, .orca-callout")); return; }
+    if ((el = closest(t, "[data-orca-disclose]"))) {
+      var target = controlled(el); if (!target) return;
+      var open = el.getAttribute("aria-expanded") !== "true";
+      el.setAttribute("aria-expanded", open ? "true" : "false"); target.hidden = !open;
+      if (open) { var first = target.querySelector("input, select, textarea, button, a[href]"); if (first) first.focus(); }
+      return;
+    }
+    if ((el = closest(t, "[data-orca-set-date]"))) {
+      var dateInput = controlled(el);
+      if (dateInput) {
+        dateInput.value = today(parseInt(el.getAttribute("data-orca-set-date"), 10) || 0); fire(dateInput, "change");
+        var group = closest(el, ".orca-shortcuts");
+        if (group) group.querySelectorAll("[data-orca-set-date]").forEach(function (b) { b.setAttribute("aria-pressed", b === el ? "true" : "false"); });
       }
       return;
     }
-    var theme = closest(t, "[data-orca-theme-toggle]");
-    if (theme) {
-      var order = ["light", "dark", "paper"];
-      var current = document.documentElement.getAttribute("data-theme") ||
-        (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      var nextTheme = order[(order.indexOf(current) + 1) % order.length];
-      document.documentElement.setAttribute("data-theme", nextTheme);
-      try { localStorage.setItem(THEME_KEY, nextTheme); } catch (e) { /* storage blocked: keep for this page */ }
-      theme.setAttribute("aria-label", "Theme: " + nextTheme + ". Change theme");
+    if ((el = closest(t, "[data-orca-detect-tz]"))) {
+      var sel = controlled(el); var zone = "";
+      try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { /* unavailable */ }
+      if (sel && zone && sel.querySelector('option[value="' + zone + '"]')) { sel.value = zone; fire(sel, "change"); announce("Timezone set to " + zone); }
       return;
     }
-    var copy = closest(t, "[data-orca-copy]");
-    if (copy && navigator.clipboard) {
-      var source = document.getElementById(copy.getAttribute("data-orca-copy"));
-      if (source) navigator.clipboard.writeText(source.textContent.trim()).then(function () {
-        var old = copy.textContent; copy.textContent = "Copied";
-        setTimeout(function () { copy.textContent = old; }, 1500);
-      });
+    if ((el = closest(t, "[data-orca-add-row]"))) {
+      var tpl = byId(el.getAttribute("data-orca-add-row")); var list = controlled(el);
+      if (tpl && list) {
+        var count = list.querySelectorAll("[data-orca-row]").length;
+        var html = tpl.innerHTML.replace(/__prefix__/g, String(count));
+        list.insertAdjacentHTML("beforeend", html);
+        var rows = list.querySelectorAll("[data-orca-row]"); var row = rows[rows.length - 1];
+        var f = row && row.querySelector("input, select"); if (f) f.focus();
+        var total = byId(el.getAttribute("data-orca-total")); if (total) total.value = rows.length;
+      }
+      return;
+    }
+    if ((el = closest(t, "[data-orca-remove-row]"))) {
+      var r = closest(el, "[data-orca-row]"); if (!r) return;
+      var container = r.parentElement; var label2 = el.getAttribute("aria-label") || "Row";
+      var del = r.querySelector('input[name$="-DELETE"]');
+      if (del) { del.checked = true; r.hidden = true; } else r.parentNode.removeChild(r);
+      announce(label2.replace(/^Remove /, "") + " removed");
+      var focusNext = container && container.querySelector("[data-orca-row]:not([hidden]) input, [data-orca-row]:not([hidden]) select");
+      if (focusNext) focusNext.focus();
+      return;
+    }
+    if ((el = closest(t, "[data-orca-weekdays]"))) {
+      var set = el.getAttribute("data-orca-weekdays").split(",");
+      var fs = controlled(el);
+      if (fs) fs.querySelectorAll('input[type=checkbox]').forEach(function (c) { c.checked = set.indexOf(c.value) !== -1; fire(c, "change"); });
+      var presetGroup = closest(el, ".orca-presets");
+      if (presetGroup) presetGroup.querySelectorAll("[data-orca-weekdays]").forEach(function (b) { b.setAttribute("aria-pressed", b === el ? "true" : "false"); });
+      return;
+    }
+    if ((el = closest(t, "[data-orca-carousel] [data-orca-prev], [data-orca-carousel] [data-orca-next], [data-orca-carousel] [data-orca-slide]"))) {
+      var car = closest(el, "[data-orca-carousel]");
+      var index = el.hasAttribute("data-orca-slide") ? parseInt(el.getAttribute("data-orca-slide"), 10) : carouselIndex(car) + (el.hasAttribute("data-orca-next") ? 1 : -1);
+      goSlide(car, index); return;
     }
   });
 
-  /* OTP: one digit per box, auto-advance, backspace goes back, paste fills every box */
-  document.addEventListener("input", function (event) {
-    var box = event.target;
-    if (!box.matches || !box.matches("[data-orca-otp] input")) return;
-    box.value = box.value.replace(/\D/g, "").slice(-1);
-    if (box.value) { var next = box.nextElementSibling; while (next && next.tagName !== "INPUT") next = next.nextElementSibling; if (next) next.focus(); }
+  function selectText(el) {
+    if (el.select) { el.select(); return; }
+    var range = doc.createRange(); range.selectNodeContents(el);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(range);
+  }
+  function setTheme(theme) {
+    if (theme === "auto") doc.documentElement.removeAttribute("data-theme");
+    else doc.documentElement.setAttribute("data-theme", theme);
+    try { if (theme === "auto") localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, theme); } catch (e) { /* storage blocked */ }
+  }
+
+  /* ---------------------------------------------------------------- keyboard */
+  doc.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (e.key === "Escape") {
+      if (openPopover) { closePopover(true); e.preventDefault(); return; }
+      var tip = closest(t, ".orca-tooltip-wrap"); if (tip) tip.classList.add("is-dismissed");
+    }
+    // Menus and listboxes
+    if (openPopover && (openPopover.list.contains(t) || t === openPopover.trigger)) {
+      var list = openPopover.list; var cur = activeOption(list);
+      if (e.key === "ArrowDown") { moveIn(list, cur, 1); e.preventDefault(); }
+      else if (e.key === "ArrowUp") { moveIn(list, cur, -1); e.preventDefault(); }
+      else if (e.key === "Home") { moveIn(list, cur, "first"); e.preventDefault(); }
+      else if (e.key === "End") { moveIn(list, cur, "last"); e.preventDefault(); }
+      else if (e.key === "Tab") { closePopover(false); }
+      else if ((e.key === "Enter" || e.key === " ") && cur && cur.getAttribute("role") === "option") {
+        var w = closest(cur, "[data-orca-listbox-wrap]"); if (w) { chooseOption(w, cur); e.preventDefault(); }
+      }
+      return;
+    }
+    var trig = closest(t, "[data-orca-menu], [data-orca-listbox]");
+    if (trig && (e.key === "ArrowDown" || e.key === "ArrowUp")) { openList(trig, controlled(trig), e.key === "ArrowUp" ? "last" : "first"); e.preventDefault(); return; }
+    // Combobox
+    var combo = closest(t, "[data-orca-combobox]");
+    if (combo) { comboKey(combo, e); return; }
+    // Tabs
+    var tab = closest(t, "[role=tab]");
+    if (tab && closest(tab, "[data-orca-tabs]")) {
+      var tabs = Array.prototype.slice.call(closest(tab, "[role=tablist]").querySelectorAll("[role=tab]"));
+      var i = tabs.indexOf(tab), n = null;
+      var rtl = getComputedStyle(tab).direction === "rtl";
+      if (e.key === (rtl ? "ArrowLeft" : "ArrowRight")) n = tabs[(i + 1) % tabs.length];
+      if (e.key === (rtl ? "ArrowRight" : "ArrowLeft")) n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === "Home") n = tabs[0];
+      if (e.key === "End") n = tabs[tabs.length - 1];
+      if (n) { selectTab(n, true); e.preventDefault(); }
+      return;
+    }
+    // OTP backspace
+    if (e.key === "Backspace" && t.matches && t.matches("[data-orca-otp] input") && !t.value) {
+      var prev = t.previousElementSibling; while (prev && prev.tagName !== "INPUT") prev = prev.previousElementSibling;
+      if (prev) { prev.focus(); prev.value = ""; e.preventDefault(); }
+    }
   });
-  document.addEventListener("keydown", function (event) {
-    var box = event.target;
-    if (event.key !== "Backspace" || !box.matches || !box.matches("[data-orca-otp] input") || box.value) return;
-    var prev = box.previousElementSibling; while (prev && prev.tagName !== "INPUT") prev = prev.previousElementSibling;
-    if (prev) { prev.focus(); prev.value = ""; event.preventDefault(); }
+  doc.addEventListener("focusout", function (e) {
+    var tip = closest(e.target, ".orca-tooltip-wrap"); if (tip) tip.classList.remove("is-dismissed");
   });
-  document.addEventListener("paste", function (event) {
-    var box = event.target;
+
+  /* ---------------------------------------------------------------- tabs */
+  function selectTab(tab, focus) {
+    var list = closest(tab, "[role=tablist]");
+    list.querySelectorAll("[role=tab]").forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      var panel = controlled(t); if (panel) panel.hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+
+  /* ---------------------------------------------------------------- combobox */
+  function comboList(input) { return controlled(input); }
+  function comboFilter(input) {
+    var list = comboList(input); if (!list) return;
+    var q = input.value.trim().toLowerCase(); var shown = 0;
+    list.querySelectorAll("[role=option]").forEach(function (o) {
+      var label = (o.getAttribute("data-label") || o.textContent).trim();
+      var hit = !q || label.toLowerCase().indexOf(q) !== -1;
+      o.hidden = !hit || shown >= 10;
+      if (hit && shown < 10) {
+        shown++;
+        var i = label.toLowerCase().indexOf(q);
+        if (q && i !== -1 && !o.querySelector(".orca-option__desc")) {
+          o.innerHTML = ""; o.append(label.slice(0, i));
+          var m = doc.createElement("mark"); m.textContent = label.slice(i, i + q.length); o.append(m, label.slice(i + q.length));
+        } else if (!o.querySelector(".orca-option__desc")) { o.textContent = label; }
+      }
+      o.classList.remove("is-active");
+    });
+    var empty = list.querySelector(".orca-popover__empty"); if (empty) empty.hidden = shown > 0;
+    list.hidden = false; input.setAttribute("aria-expanded", "true");
+    var status = byId(input.getAttribute("data-orca-status"));
+    if (status) status.textContent = shown ? shown + " suggestion" + (shown === 1 ? "" : "s") : "No matches";
+  }
+  function comboMove(input, delta) {
+    var list = comboList(input); if (!list) return;
+    var opts = Array.prototype.filter.call(list.querySelectorAll("[role=option]"), function (o) { return !o.hidden; });
+    if (!opts.length) return;
+    var cur = list.querySelector(".is-active"); var i = opts.indexOf(cur);
+    var next = opts[(i + delta + opts.length) % opts.length];
+    if (cur) cur.classList.remove("is-active");
+    next.classList.add("is-active"); input.setAttribute("aria-activedescendant", next.id);
+    if (next.scrollIntoView) next.scrollIntoView({ block: "nearest" });
+  }
+  function pickCombo(wrap, option) {
+    var input = wrap.querySelector("[data-orca-combobox]");
+    input.value = option.getAttribute("data-label") || option.textContent.trim();
+    var hidden = wrap.querySelector("input[type=hidden]"); if (hidden) { hidden.value = option.getAttribute("data-value") || input.value; fire(hidden, "change"); }
+    var list = comboList(input); list.hidden = true; input.setAttribute("aria-expanded", "false"); input.removeAttribute("aria-activedescendant");
+    input.focus();
+  }
+  function comboKey(input, e) {
+    var list = comboList(input); if (!list) return;
+    if (e.key === "ArrowDown") { if (list.hidden) comboFilter(input); comboMove(input, 1); e.preventDefault(); }
+    else if (e.key === "ArrowUp") { comboMove(input, -1); e.preventDefault(); }
+    else if (e.key === "Enter" && !list.hidden) { var a = list.querySelector(".is-active"); if (a) { pickCombo(closest(input, "[data-orca-combobox-wrap]"), a); e.preventDefault(); } }
+    else if (e.key === "Escape") { if (!list.hidden) { list.hidden = true; input.setAttribute("aria-expanded", "false"); } else { input.value = ""; } e.preventDefault(); }
+  }
+  doc.addEventListener("focusout", function (e) {
+    var wrap = closest(e.target, "[data-orca-combobox-wrap]");
+    if (!wrap) return;
+    setTimeout(function () {
+      if (!wrap.contains(doc.activeElement)) {
+        var input = wrap.querySelector("[data-orca-combobox]"); var list = input && comboList(input);
+        if (list) { list.hidden = true; input.setAttribute("aria-expanded", "false"); }
+      }
+    }, 120);
+  });
+
+  /* ---------------------------------------------------------------- input and change */
+  doc.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t.matches && t.matches("[data-orca-otp] input")) {
+      t.value = t.value.replace(/\D/g, "").slice(-1);
+      if (t.value) { var n = t.nextElementSibling; while (n && n.tagName !== "INPUT") n = n.nextElementSibling; if (n) n.focus(); }
+      return;
+    }
+    if (t.hasAttribute && t.hasAttribute("data-orca-combobox")) { comboFilter(t); return; }
+    if (t.hasAttribute && t.hasAttribute("data-orca-filter-list")) {
+      var list = byId(t.getAttribute("data-orca-filter-list")); if (!list) return;
+      var q = t.value.trim().toLowerCase(); var shown = 0;
+      list.querySelectorAll("li").forEach(function (li) { var hit = !q || li.textContent.toLowerCase().indexOf(q) !== -1; li.hidden = !hit; if (hit) shown++; });
+      list.querySelectorAll("details").forEach(function (d) { var any = d.querySelector("li:not([hidden])"); d.hidden = !any; if (q && any) d.open = true; });
+      var status = byId(t.getAttribute("data-orca-status")); if (status) status.textContent = shown + " shown";
+    }
+  });
+  doc.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t.hasAttribute && t.hasAttribute("data-orca-autosubmit") && t.form) { if (t.form.requestSubmit) t.form.requestSubmit(); else t.form.submit(); return; }
+    if (t.hasAttribute && t.hasAttribute("data-orca-reveal")) {
+      var target = byId(t.getAttribute("data-orca-reveal"));
+      if (target) target.hidden = t.value !== t.getAttribute("data-orca-reveal-value");
+      return;
+    }
+    if (t.name && closest(t, "[data-orca-theme-choice]") && t.checked) { setTheme(t.value); return; }
+    var range = closest(t, "[data-orca-range]");
+    if (range) { checkRange(range); return; }
+    if (t.hasAttribute && t.hasAttribute("data-orca-file-list")) {
+      var out = byId(t.getAttribute("data-orca-file-list")); if (!out) return;
+      out.innerHTML = "";
+      Array.prototype.forEach.call(t.files || [], function (f) {
+        var li = doc.createElement("li");
+        li.textContent = f.name + " · " + (f.size > 1048576 ? (f.size / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(f.size / 1024)) + " KB");
+        out.appendChild(li);
+      });
+      announce((t.files ? t.files.length : 0) + " file(s) chosen");
+    }
+  });
+  doc.addEventListener("dragover", function (e) { var z = closest(e.target, ".orca-dropzone"); if (z) z.classList.add("is-over"); });
+  doc.addEventListener("dragleave", function (e) { var z = closest(e.target, ".orca-dropzone"); if (z) z.classList.remove("is-over"); });
+  doc.addEventListener("drop", function (e) { var z = closest(e.target, ".orca-dropzone"); if (z) z.classList.remove("is-over"); });
+
+  /* ---------------------------------------------------------------- ranges */
+  function minutes(v) { var p = (v || "").split(":"); return p.length < 2 ? null : parseInt(p[0], 10) * 60 + parseInt(p[1], 10); }
+  function checkRange(range) {
+    var inputs = range.querySelectorAll("input"); if (inputs.length < 2) return;
+    var start = inputs[0], end = inputs[1];
+    var out = range.querySelector("[data-orca-range-output]");
+    if (start.type === "date") {
+      if (start.value) end.min = start.value;
+      if (start.value && end.value && end.value < start.value) { end.value = start.value; }
+      if (out && start.value && end.value) {
+        var days = Math.round((Date.parse(end.value) - Date.parse(start.value)) / 86400000) + 1;
+        out.textContent = days + " day" + (days === 1 ? "" : "s");
+      }
+    } else if (start.type === "time") {
+      var a = minutes(start.value), b = minutes(end.value);
+      if (out && a !== null && b !== null) {
+        var d = b - a; var overnight = d <= 0; if (overnight) d += 1440;
+        var h = Math.floor(d / 60), m = d % 60;
+        out.textContent = (h ? h + " h" : "") + (h && m ? " " : "") + (m ? m + " min" : "") + (overnight ? ", ends the next day" : "");
+      }
+    }
+  }
+
+  /* ---------------------------------------------------------------- carousel */
+  function carouselIndex(car) {
+    var track = car.querySelector(".orca-carousel__track");
+    return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)) * (getComputedStyle(track).direction === "rtl" ? -1 : 1);
+  }
+  function goSlide(car, index) {
+    var track = car.querySelector(".orca-carousel__track"); var slides = track.children.length;
+    index = Math.max(0, Math.min(slides - 1, index));
+    var rtl = getComputedStyle(track).direction === "rtl";
+    track.scrollTo({ left: (rtl ? -1 : 1) * index * track.clientWidth });
+    updateCarousel(car, index);
+  }
+  function updateCarousel(car, index) {
+    var track = car.querySelector(".orca-carousel__track"); var slides = track.children.length;
+    car.querySelectorAll("[data-orca-slide]").forEach(function (d, i) { if (i === index) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    var count = car.querySelector(".orca-carousel__count"); if (count) count.textContent = (index + 1) + " of " + slides;
+    var prev = car.querySelector("[data-orca-prev]"), next = car.querySelector("[data-orca-next]");
+    if (prev) prev.disabled = index === 0; if (next) next.disabled = index === slides - 1;
+    Array.prototype.forEach.call(track.children, function (s, i) { s.setAttribute("aria-hidden", i === index ? "false" : "true"); });
+  }
+  doc.querySelectorAll("[data-orca-carousel]").forEach(function (car) {
+    var track = car.querySelector(".orca-carousel__track"); var t;
+    updateCarousel(car, 0);
+    track.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(function () { updateCarousel(car, Math.abs(carouselIndex(car))); }, 100); });
+  });
+
+  /* ---------------------------------------------------------------- paste into OTP */
+  doc.addEventListener("paste", function (e) {
+    var box = e.target;
     if (!box.matches || !box.matches("[data-orca-otp] input")) return;
-    var digits = (event.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "");
+    var digits = (e.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "");
     if (!digits) return;
-    event.preventDefault();
+    e.preventDefault();
     var boxes = box.closest("[data-orca-otp]").querySelectorAll("input");
     boxes.forEach(function (b, i) { b.value = digits[i] || ""; });
     boxes[Math.min(digits.length, boxes.length) - 1].focus();
   });
 
-  /* Countdowns: update once a second, announce politely only at whole minutes (role=timer is silent by default) */
+  /* ---------------------------------------------------------------- initial state */
+  doc.querySelectorAll("[data-orca-tabs]").forEach(function (list) {
+    var sel = list.querySelector('[role=tab][aria-selected="true"]') || list.querySelector("[role=tab]");
+    if (sel) selectTab(sel, false);
+  });
+  doc.querySelectorAll("[data-orca-theme-choice]").forEach(function (group) {
+    var cur = "auto"; try { cur = localStorage.getItem(THEME_KEY) || "auto"; } catch (e) { /* storage blocked */ }
+    var radio = group.querySelector('input[value="' + cur + '"]'); if (radio) radio.checked = true;
+  });
+  doc.querySelectorAll("[data-orca-range]").forEach(checkRange);
+
   function tick() {
-    document.querySelectorAll("[data-orca-countdown]").forEach(function (el) {
+    doc.querySelectorAll("[data-orca-countdown]").forEach(function (el) {
       var end = Date.parse(el.getAttribute("datetime"));
       if (isNaN(end)) return;
       var s = Math.max(0, Math.round((end - Date.now()) / 1000));
@@ -101,5 +580,5 @@
       el.classList.toggle("orca-countdown--urgent", s > 0 && s <= 60);
     });
   }
-  if (document.querySelector("[data-orca-countdown]")) { tick(); setInterval(tick, 1000); }
+  if (doc.querySelector("[data-orca-countdown]")) { tick(); setInterval(tick, 1000); }
 })();

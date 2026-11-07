@@ -3,7 +3,7 @@
    Read tokens only (--orca-*); never hard-code a colour, size or radius here.
    Cascade layers keep every rule easy to override from unlayered project CSS, but projects should
    change brand tokens only (see settings.ORCA["BRAND"]). */
-@layer orca.tokens, orca.base, orca.primitives, orca.utilities;
+@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.utilities;
 
 /* ===================================================================== Fonts */
 @font-face { font-family: "Ubuntu Sans"; font-style: normal; font-weight: 100 800; font-display: swap; src: url("../fonts/UbuntuSans-Variable.woff2") format("woff2"); }

@@ -6,7 +6,11 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 - `python -m orca search <words>` finds the element; `python -m orca show <id>` prints its **why, when, when not, how,
   accessibility notes, classes, tokens and a working example**. Copy the example, then adapt the content.
-- The same text is in `docs/primitives/<category>.md` and `docs/catalogue.json`.
+- The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md` and `docs/catalogue.json`.
+- **Prefer a component over assembling primitives yourself.** A component's "Built from" list names its primitives.
+- With Django forms, render every field with `{% orca_field form.x %}` (and `switch=True` for settings that apply at once);
+  put `{% orca_form_errors form %}` above the fields and `{% orca_messages %}` at the top of the page;
+  paginate with `{% orca_pagination page_obj noun="…" %}`.
 - Run `python manage.py orca_lint <templates dir>` before you finish. Fix every finding.
 
 ## 2. Hard rules
@@ -43,6 +47,16 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 | Waiting, known progress | `progress-bar` with text | spinner |
 | Region loading later | `skeleton` | spinner |
 | Date for people | `date-label` (`6 November 2026`) | `06/11/2026` |
+| A form field | `form-field` via `{% orca_field %}` | hand-written label + input |
+| Event result that stays | `alert` | toast |
+| Quick confirmation, maybe Undo | `toast` (`ORCA.toast(…)`) | alert |
+| Guidance that belongs to the page | `callout` | alert |
+| Irreversible action | `confirm-dialog` (`data-orca-confirm`) | a red first button |
+| Several secondary actions | `dropdown-menu` / `record-actions` | a row of equal buttons |
+| One of many known options, typed | `combobox` | long select |
+| Several items from a long list | `multi-picker` | listbox |
+| Views of one object | `tab-bar` | buttons |
+| Cards vs table, period, granularity | `view-toggle`, `period-selector`, `granularity-selector` (segmented) | tabs |
 
 ## 4. Page skeleton
 
@@ -59,5 +73,5 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 ## 5. Scope of this release
 
-Phase 1 ships **primitives** only. Components, patterns, templates and pages from the ORCA guide come next; until
-then, build them from primitives, following each primitive's "how" rules.
+Released: **primitives** and **components**. Patterns, templates and pages from the ORCA guide come next; until
+then, compose them from components and primitives, following each element's "how" rules.

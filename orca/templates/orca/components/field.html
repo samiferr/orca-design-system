@@ -1,0 +1,18 @@
+{% load orca %}{% if kind == "hidden" %}{{ control }}{% elif kind == "radios" or kind == "checkboxes" %}<fieldset class="orca-choice-group{% if horizontal %} orca-choice-group--horizontal{% endif %}"{% if errors %} aria-invalid="true"{% endif %}{% if described %} aria-describedby="{{ described }}"{% endif %}>
+  <legend class="orca-label{% if hide_label %} orca-sr-only{% endif %}">{{ label }}{% if not required %} <span class="orca-optional">(optional)</span>{% endif %}</legend>
+  {% if help_text %}<p class="orca-help" id="{{ help_id }}">{{ help_text }}</p>{% endif %}
+  {% if errors %}<p class="orca-error" id="{{ error_id }}">{% icon "error" %}<span>{{ errors.0 }}</span></p>{% endif %}
+  <div class="orca-choice-group__items">{% for o in options %}
+    <label class="{% if kind == 'radios' %}orca-radio{% else %}orca-check{% endif %}" for="{{ o.id }}">{{ o.tag }}<span class="{% if kind == 'radios' %}orca-radio__dot{% else %}orca-check__box{% endif %}"></span>{{ o.label }}</label>{% endfor %}
+  </div>
+</fieldset>{% elif kind == "checkbox" %}<div class="orca-field">
+  {% if errors %}<p class="orca-error" id="{{ error_id }}">{% icon "error" %}<span>{{ errors.0 }}</span></p>{% endif %}
+  {% if switch %}<label class="orca-switch" for="{{ id }}">{{ control }}<span class="orca-switch__track"></span><span>{{ label }}</span></label>
+  {% else %}<label class="orca-check" for="{{ id }}">{{ control }}<span class="orca-check__box"></span><span class="orca-check__text">{{ label }}{% if help_text %}<span class="orca-check__desc" id="{{ help_id }}">{{ help_text }}</span>{% endif %}</span></label>{% endif %}
+  {% if switch and help_text %}<p class="orca-help" id="{{ help_id }}">{{ help_text }}</p>{% endif %}
+</div>{% else %}<div class="orca-field">
+  <label class="orca-label{% if hide_label %} orca-sr-only{% endif %}" for="{{ id }}">{{ label }}{% if not required %} <span class="orca-optional">(optional)</span>{% endif %}</label>
+  {% if help_text %}<p class="orca-help" id="{{ help_id }}">{{ help_text }}</p>{% endif %}
+  {% if errors %}<p class="orca-error" id="{{ error_id }}">{% icon "error" %}<span>{{ errors.0 }}</span></p>{% endif %}
+  {{ control }}
+</div>{% endif %}

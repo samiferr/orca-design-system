@@ -9,8 +9,11 @@ it uses, the UX principles it applies, and a copy-ready template example.
 - **Rules:** *Practical UI* (Dannaway, 2024) and *Laws of UX* (Yablonski, 2024). Each element cites the rules it applies.
 - **Base:** the Tangerine system from `wise_people_analyzer` (Vanilla framework 4.59 values): square corners,
   1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance: Tangerine.
-- **Phase 1 (this release): Primitives.** 141 elements covering all 214 primitive items of the guide, including the
-  planning primitives (date, time, calendar marks) the guide marks as not built yet.
+- **Phase 1: Primitives.** 141 elements covering all 214 primitive items of the guide, including the planning
+  primitives (date, time, calendar marks) the guide marks as not built yet.
+- **Phase 2 (this release): Components.** 145 elements covering all 154 component items of the guide: form fields,
+  pickers, menus, tabs, dialogs, toasts, cards, calendar and schedule parts, plan items. Each lists the primitives it is
+  built from, and template tags render the fiddly ones straight from Django objects.
 
 ## Install
 
@@ -71,6 +74,25 @@ python demo/manage.py orca_site site/
 `.github/workflows/docs.yml` tests, exports and deploys it to GitHub Pages on every push to `main`
 (enable it once: repository Settings, Pages, Source: GitHub Actions).
 
+## Components from Django objects
+
+```django
+{% load orca %}
+{% orca_messages %}                                  {# django.contrib.messages as alerts #}
+<form method="post">{% csrf_token %}
+  {% orca_form_errors form %}                        {# non-field errors + linked summary #}
+  <div class="orca-fields">
+    {% orca_field form.name %}                       {# label, (optional), help, error, control, ARIA #}
+    {% orca_field form.port width="w8" %}
+    {% orca_field form.enabled switch=True %}
+  </div>
+  <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">Save camera</button></div>
+</form>
+{% orca_pagination page_obj noun="cameras" %}        {# keeps filters in the links #}
+{% orca_mini_calendar month selected=day url="/day/{date}/" nav_url="?month={month}" %}
+{% orca_sparkline values "Visitors per hour" %}  {% orca_donut segments total_label="Visitors" %}
+```
+
 ## Brand tokens only
 
 A project changes **brand tokens only**, through `settings.ORCA["BRAND"]`:
@@ -101,7 +123,7 @@ python manage.py orca_lint templates/   # check templates and CSS against ORCA's
 python manage.py orca_site site/        # export the documentation website
 ```
 
-The same content is in [`docs/primitives/`](docs/primitives/README.md) (Markdown, one file per category) and
+The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`docs/components/`](docs/components/README.md) (Markdown, one file per category) and
 [`docs/catalogue.json`](docs/catalogue.json) (machine-readable). AI agents: start with [`AGENTS.md`](AGENTS.md).
 
 ## What is in the package
@@ -110,7 +132,9 @@ The same content is in [`docs/primitives/`](docs/primitives/README.md) (Markdown
 |---|---|
 | `orca/tokens.py` | Single source of every token (generated into `static/orca/css/tokens.css`) |
 | `orca/static/orca/css/orca.css` | All primitives, in cascade layers `orca.base`, `orca.primitives`, `orca.utilities` |
-| `orca/static/orca/js/orca.js` | Optional progressive enhancement (clear search, steppers, OTP, toggles, theme, countdown) |
+| `orca/static/orca/css/components.css` | All components, in the `orca.components` layer |
+| `orca/static/orca/js/orca.js` | Optional progressive enhancement, opt-in by data attribute: menus, listbox, combobox, tabs, dialogs and confirm, toasts, date shortcuts and ranges, repeating rows, carousel, steppers, OTP, theme |
+| `orca/components.py` | Server side of the component tags (field wiring, page windows, month grids, charts) |
 | `orca/catalogue/` | The element catalogue: why, when, how, a11y, tokens, classes, principles, examples |
 | `orca/templatetags/orca.py` | `orca_head`, `orca_html_attrs`, `icon`, `status_icon`, `orca_logo`, `orca_illustration`, `orca_timezone_options`, filters `orca_duration`, `orca_initials` |
 | `orca/icons.py`, `orca/data/` | 106 Vanilla glyphs plus ORCA glyphs (home, edit, calendar, clock, …) |
@@ -130,8 +154,8 @@ documented classes and tokens exist, text and control contrast hold in all three
 
 ## Roadmap
 
-1. **Primitives** (this release).
-2. Components (form fields, pickers, calendar parts, plan items…).
+1. **Primitives** (released).
+2. **Components** (this release).
 3. Patterns, 4. Templates, 5. Pages: following the ORCA guide.
 
 ## Licences
