@@ -142,11 +142,15 @@ def _load() -> None:
         forms, navigation, feedback, actions as component_actions, data_display, content, identity_controls,
         pickers, planning_selectors, calendar_parts, schedule_parts, plan_items, docs_site,
     )
+    from .patterns import (  # noqa: F401
+        page_frame, grids, data_filtering, forms as pattern_forms, media, records, charts as pattern_charts,
+        marketing, process, editorial, email, calendar_views, scheduler, event_editing, planning_boards,
+    )
 
 
 LEVEL_TITLES = {"primitive": "Primitives", "component": "Components", "pattern": "Patterns",
                 "template": "Templates", "page": "Pages"}
-RELEASED_LEVELS = ("primitive", "component")
+RELEASED_LEVELS = ("primitive", "component", "pattern")
 
 
 def categories(level: str | None = None) -> list[Category]:

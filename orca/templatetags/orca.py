@@ -53,6 +53,7 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
         f'<link rel="stylesheet" href="{static("orca/css/tokens.css")}">',
         f'<link rel="stylesheet" href="{static("orca/css/orca.css")}">',
         f'<link rel="stylesheet" href="{static("orca/css/components.css")}">',
+        f'<link rel="stylesheet" href="{static("orca/css/patterns.css")}">',
         f"<style{nonce}>{brand_style(brand)}</style>",
         f'<meta name="theme-color" content="{brand.css["light"]["--orca-brand-strong"]}">',
     ]
@@ -249,3 +250,65 @@ def orca_sparkline(values, label=""):
 def orca_donut(segments, total_label="Total"):
     """Donut chart with legend from [(label, value), …] or [{"label", "value"}, …]."""
     return _c.donut_context(segments, total_label=total_label)
+
+
+# ============================================================================================== pattern tags
+from .. import calendar_views as _cv  # noqa: E402
+from .. import charts as _charts  # noqa: E402
+
+
+@register.inclusion_tag("orca/patterns/chart.html")
+def orca_chart(kind, data, title="", subtitle="", caption="", unit="", stacked=False, horizontal=False):
+    """A chart pattern: chart frame, SVG, legend and data table. kind: bar, line, area, pie, doughnut, scatter, bubble, radar, polar."""
+    return _charts.chart_context(kind, data, title=title, subtitle=subtitle, caption=caption, unit=unit,
+                                 stacked=stacked, horizontal=horizontal)
+
+
+@register.inclusion_tag("orca/patterns/month_calendar.html")
+def orca_month_calendar(events=(), month=None, today=None, selected=None, day_url="", holidays=None, max_per_day=3):
+    """Month view: weeks of day cells with up to max_per_day events each and '+N more'."""
+    return _cv.month_context(events, month=month, today=today, selected=selected, day_url=day_url,
+                             max_per_day=int(max_per_day), holidays=holidays)
+
+
+@register.inclusion_tag("orca/patterns/time_grid.html")
+def orca_week_view(events=(), start=None, days=7, start_hour=7, end_hour=19, today=None, now=None):
+    """Week (days=7), multi-day (days=3) or day (days=1) view with positioned events and an all-day row."""
+    return _cv.time_grid_context(events, start=start, days=int(days), start_hour=int(start_hour), end_hour=int(end_hour),
+                                 today=today, now=now)
+
+
+@register.inclusion_tag("orca/patterns/agenda.html")
+def orca_agenda(events=(), start=None, days=7, today=None):
+    """Agenda view: days that have events, each with its list."""
+    return _cv.agenda_context(events, start=start, days=int(days), today=today)
+
+
+@register.inclusion_tag("orca/patterns/year.html")
+def orca_year_view(year=None, events=(), today=None, url=""):
+    """Year view: twelve mini calendars with event days marked."""
+    return _cv.year_context(year=year, events=events, today=today, url=url)
+
+
+@register.simple_tag
+def orca_email_colors():
+    """Hex colours and font for HTML emails (email clients cannot read CSS variables)."""
+    from ..color import composite, to_hex
+
+    brand = compute_brand()
+    light = brand.css["light"]
+    return {
+        "name": brand.values["name"], "font": "-apple-system, 'Segoe UI', Roboto, Ubuntu, Arial, sans-serif",
+        "page": "#f7f7f7", "bg": "#ffffff", "text": "#1a1a1a", "muted": to_hex(composite("rgba(0,0,0,0.6)", "#ffffff")),
+        "border": to_hex(composite("rgba(0,0,0,0.2)", "#ffffff")), "brand": light["--orca-brand"],
+        "button": light["--orca-brand-strong"], "button_text": light["--orca-brand-on"], "link": light["--orca-accent"],
+    }
+
+
+@register.simple_tag
+def orca_email_preview(template="orca/email/base.html", title="", **context):
+    """Render an email template into a sandboxed iframe, for documentation and previews."""
+    from django.template.loader import render_to_string
+
+    html = render_to_string(template, dict(context, title=title))
+    return mark_safe(f'<iframe class="orca-email-preview" sandbox title="Email preview: {escape(title)}" srcdoc="{escape(html)}"></iframe>')

@@ -20,6 +20,7 @@
     <a href="{% url 'orca:guide' 'installation' %}" {% if page|slice:":6" == "guide-" %}aria-current="page"{% endif %}>Guide</a>
     <a href="{% url 'orca:index' %}" {% if page == "primitives" or el.level == "primitive" %}aria-current="page"{% endif %}>Primitives</a>
     <a href="{% url 'orca:components' %}" {% if page == "components" or el.level == "component" %}aria-current="page"{% endif %}>Components</a>
+    <a href="{% url 'orca:patterns' %}" {% if page == "patterns" or el.level == "pattern" %}aria-current="page"{% endif %}>Patterns</a>
     <a href="{% url 'orca:tokens' %}" {% if page == "tokens" %}aria-current="page"{% endif %}>Tokens</a>
     <a href="{% url 'orca:icons' %}" {% if page == "icons" %}aria-current="page"{% endif %}>Icons</a>
   </nav>

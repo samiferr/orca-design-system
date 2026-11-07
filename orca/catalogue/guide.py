@@ -88,7 +88,26 @@ COMPONENTS = {
 }
 
 
-LEVELS = {"primitive": PRIMITIVES, "component": COMPONENTS}
+PATTERNS = {
+    'Page frame': ['Header', 'Top bar', 'Sidebar', 'Footer', 'Page head', 'Messages region', 'Drawer', 'Top actions header (back link + actions)', 'Settings panel (appearance, theme, accent, rounding, card shadow)', 'Filter drawer', 'Filter panel'],
+    'Grids and collections': ['Product grid', 'Camera grid', 'KPI grid', 'Capacity heat map', 'Event timeline'],
+    'Data and filtering': ['Data table', 'Accuracy table', 'Filter bar', 'Panel', 'Tabbed panel set', 'Card list (record cards)', 'List header (search + filter + create)', 'Summary tiles', 'Autocomplete results table'],
+    'Forms': ['Form section', 'Schedule editor', 'Zone/line editor', 'Login card', 'Properties editor (key and value rows)', 'Rich text editor', 'Form stack (one column)', 'Form stack (compact, two columns)'],
+    'Media': ['Recording player', 'Live stream panel', 'Photo post (user info + photo + actions + caption)', 'Image gallery (stage, thumbnails, dots)'],
+    'Record management': ['Detail panel (header + actions + table)', 'Parent record with child tabs', 'Child list tab', 'Activity feed', 'Delete-blocked notice (protected delete)', 'Confirm action panel'],
+    'Charts': ['Bar chart', 'Bubble chart', 'Doughnut chart', 'Line chart', 'Pie chart', 'Polar area chart', 'Radar chart', 'Scatter chart'],
+    'Marketing and documentation site': ['Marketing hero', 'Feature grid', 'Live design-token panel', 'Code samples block', 'Docs page header (title + intro)', 'Docs sidebar tree'],
+    'Process and status': ['Capture run progress'],
+    'Editorial': ['Story feature', 'Factoid'],
+    'Email': ['Email frame'],
+    'Calendar views': ['Month calendar', 'Week view', 'Day view', 'Agenda (list) view', 'Year view', 'Multi-day view', 'Calendar toolbar', 'Mini-calendar sidebar', 'Calendar legend (calendars and colours)'],
+    'Scheduler': ['Weekly availability editor', 'Working-hours editor', 'Recurrence editor', 'Exception and holiday editor', 'Time-off editor', 'Resource scheduler (resources by time)', 'Shift planner (roster)', 'Booking slot picker', 'Appointment picker', 'Conflict resolver'],
+    'Event editing': ['Event editor', 'Event detail popover', 'Event detail panel', 'Quick-add event', 'Reminder manager', 'Attendee list', 'Invitation response bar'],
+    'Planning boards and timelines': ['Task list', 'Kanban board', 'Gantt chart', 'Roadmap', 'Milestone timeline', 'Sprint or period overview', 'Capacity planner (workload by resource)', 'Deadline list', 'Planning summary (planned vs done)', 'Plan filter bar (period, assignee, status)', 'Date-range filter bar'],
+}
+
+
+LEVELS = {"primitive": PRIMITIVES, "component": COMPONENTS, "pattern": PATTERNS}
 
 
 def all_items(level: str = "primitive") -> list[tuple[str, str]]:

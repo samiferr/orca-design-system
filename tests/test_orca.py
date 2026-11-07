@@ -18,7 +18,7 @@ from orca.conf import compute_brand
 from orca.views import render_snippet
 
 ROOT = Path(__file__).resolve().parent.parent
-CSS = (ROOT / "orca/static/orca/css/orca.css").read_text() + (ROOT / "orca/static/orca/css/components.css").read_text()
+CSS = (ROOT / "orca/static/orca/css/orca.css").read_text() + (ROOT / "orca/static/orca/css/components.css").read_text() + (ROOT / "orca/static/orca/css/patterns.css").read_text()
 TOKENS_CSS = (ROOT / "orca/static/orca/css/tokens.css").read_text()
 CSS_CLASSES = set(m[1:] for m in re.findall(r"\.orca-[a-z0-9_-]+", CSS))
 CSS_TOKENS = set(re.findall(r"--orca-([a-z0-9-]+)\s*:", TOKENS_CSS))
@@ -87,7 +87,8 @@ class CatalogueTests(SimpleTestCase):
 
     def test_css_uses_only_defined_tokens(self):
         used = set(re.findall(r"var\(--orca-([a-z0-9-]+)", CSS))
-        local = {"ratio", "value", "swatch", "zone", "event", "days", "cols", "start", "span", "progress"}  # set inline per element
+        local = {"ratio", "value", "swatch", "zone", "event", "days", "cols", "start", "span", "progress",
+                 "rows", "at", "planned", "done", "table-max"}  # set inline per element
         self.assertEqual(sorted(used - CSS_TOKENS - local), [])
 
 
@@ -208,7 +209,7 @@ class TemplateTagTests(SimpleTestCase):
 
 class DocsSiteTests(SimpleTestCase):
     def test_pages(self):
-        for name in ("home", "index", "components", "tokens", "icons", "catalogue-json"):
+        for name in ("home", "index", "components", "patterns", "tokens", "icons", "catalogue-json"):
             with self.subTest(name=name):
                 self.assertEqual(self.client.get(reverse(f"orca:{name}")).status_code, 200)
 
@@ -354,6 +355,67 @@ class ComponentTagTests(SimpleTestCase):
         self.assertIn("A 75%, B 25%", donut)
         self.assertIn(">4<", donut)
         self.assertIn("1,200", self.render('{% orca_donut "A:1200, B:300" %}'))
+
+
+class PatternTagTests(SimpleTestCase):
+    def render(self, src, **ctx):
+        return Template("{% load orca %}" + src).render(Context(ctx))
+
+    def test_chart_kinds_render_svg_legend_and_data_table(self):
+        from orca.samples import SAMPLE
+
+        data = {"bar": "visitors_week", "line": "visitors_hours", "area": "visitors_hours", "pie": "by_entrance",
+                "doughnut": "by_entrance", "scatter": "dwell_vs_visits", "bubble": "sites_bubble",
+                "radar": "site_scores", "polar": "alerts_by_type"}
+        for kind, key in data.items():
+            with self.subTest(kind=kind):
+                html = self.render(f'{{% orca_chart "{kind}" d title="T" %}}', d=SAMPLE[key])
+                self.assertIn(f"orca-chart-frame--{kind}", html)
+                self.assertIn("<svg", html)
+                self.assertIn('role="img"', html)
+                self.assertIn("<table", html)
+                self.assertNotIn("nan", html.lower().replace("nant", ""))
+
+    def test_chart_accepts_string_data_and_stacking(self):
+        html = self.render('{% orca_chart "bar" "labels=Mon,Tue | A=1,2 | B=3,4" stacked=True %}')
+        self.assertIn("Mon", html)
+        self.assertEqual(html.count('class="orca-chart__bar"'), 4)
+
+    def test_month_calendar_places_events_and_holidays(self):
+        from orca.samples import SAMPLE
+
+        html = self.render('{% orca_month_calendar e month="2026-11" today="2026-11-06" holidays=h %}', e=SAMPLE["events"], h=SAMPLE["holidays"])
+        self.assertIn("Weekly review", html)
+        self.assertIn("Armistice Day", html)
+        self.assertIn("orca-month-view", html)
+
+    def test_week_view_positions_overlaps_side_by_side(self):
+        events = [{"title": "A", "start": "2026-11-06T10:00", "end": "2026-11-06T11:30"},
+                  {"title": "B", "start": "2026-11-06T10:30", "end": "2026-11-06T11:00"}]
+        html = self.render('{% orca_week_view e start="2026-11-06" days=1 today="2026-11-06" now="2026-11-06T10:40" start_hour=8 end_hour=18 %}', e=events)
+        widths = re.findall(r"width: ([0-9.]+)%", html)
+        self.assertTrue(widths and all(abs(float(w) - 50) < 0.01 for w in widths), widths)
+        self.assertIn("orca-timegrid__now", html)
+
+    def test_agenda_and_year_views(self):
+        from orca.samples import SAMPLE
+
+        agenda = self.render('{% orca_agenda e start="2026-11-02" days=7 today="2026-11-06" %}', e=SAMPLE["events"])
+        self.assertIn("Delivery window", agenda)
+        self.assertNotIn("Go-live rehearsal", agenda)  # outside the 7 days
+        year = self.render('{% orca_year_view year=2026 events=e today="2026-11-06" %}', e=SAMPLE["events"])
+        self.assertEqual(year.count("orca-mini-calendar\""), 12)
+
+    def test_email_frame_inlines_hex_colours(self):
+        from django.template.loader import render_to_string
+
+        html = render_to_string("orca/email/base.html", {"title": "Hello", "paragraphs": ["One."], "action_url": "https://x.test/", "action_label": "Open"})
+        self.assertNotIn("var(--", html)
+        self.assertRegex(html, r"background:#[0-9a-f]{6}")
+        self.assertIn("https://x.test/", html)
+        preview = self.render('{% orca_email_preview title="Hi" %}')
+        self.assertIn("<iframe", preview)
+        self.assertIn("sandbox", preview)
 
 
 class LintTests(SimpleTestCase):

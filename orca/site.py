@@ -31,6 +31,7 @@ def pages() -> dict[str, str]:
         reverse("orca:home"): "index.html",
         reverse("orca:index"): "primitives.html",
         reverse("orca:components"): "components.html",
+        reverse("orca:patterns"): "patterns.html",
         reverse("orca:tokens"): "tokens.html",
         reverse("orca:icons"): "icons.html",
         reverse("orca:catalogue-json"): "catalogue.json",

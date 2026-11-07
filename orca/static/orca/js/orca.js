@@ -30,6 +30,15 @@
      data-orca-file-list="id"   file input listing chosen files in a list
      data-orca-autosubmit       select or input that submits its form on change
      data-orca-theme-choice     radio group choosing auto / light / dark / paper
+   Patterns
+     data-orca-sidebar-toggle   collapses/expands the sidebar it controls and remembers it
+     data-orca-light-dismiss    on a <dialog>: a click on the backdrop closes it (drawers)
+     data-orca-richtext         rich text editor: toolbar commands, pressed states, syncs to a hidden field
+     data-orca-zone-editor      draw a polygon on an image; points saved as JSON in a hidden field
+     data-orca-seek="s"         jumps the video it controls to s seconds
+     data-orca-gallery          thumbnails swap the stage image
+     data-orca-token="--name"   input that sets a CSS custom property on the element it controls (live token preview)
+     data-orca-board            drag cards between [data-orca-column] lists; fires "orca:moved"
    API
      window.ORCA.toast("Report sent", {tone: "positive", action: {label: "Undo", onClick}})            */
 (function () {
@@ -546,6 +555,134 @@
     updateCarousel(car, 0);
     track.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(function () { updateCarousel(car, Math.abs(carouselIndex(car))); }, 100); });
   });
+
+  /* ---------------------------------------------------------------- patterns */
+  doc.addEventListener("click", function (e) {
+    var t = e.target, el;
+    if (t.tagName === "DIALOG" && t.hasAttribute("data-orca-light-dismiss")) {
+      var r = t.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) t.close("dismiss");
+      return;
+    }
+    if ((el = closest(t, "[data-orca-sidebar-toggle]"))) {
+      var bar = controlled(el); if (!bar) return;
+      var collapsed = bar.getAttribute("data-collapsed") !== "true";
+      bar.setAttribute("data-collapsed", collapsed ? "true" : "false");
+      el.setAttribute("aria-expanded", collapsed ? "false" : "true");
+      el.setAttribute("aria-label", collapsed ? "Expand navigation" : "Collapse navigation");
+      try { localStorage.setItem("orca-sidebar", collapsed ? "collapsed" : "expanded"); } catch (x) { /* storage blocked */ }
+      return;
+    }
+    if ((el = closest(t, "[data-orca-rt]"))) {
+      var cmd = el.getAttribute("data-orca-rt");
+      var area = closest(el, "[data-orca-richtext]").querySelector("[contenteditable]");
+      area.focus();
+      if (cmd === "createLink") { var url = window.prompt ? window.prompt("Link address") : ""; if (url) doc.execCommand("createLink", false, url); }
+      else doc.execCommand(cmd, false, null);
+      syncRichtext(closest(el, "[data-orca-richtext]"));
+      return;
+    }
+    if ((el = closest(t, "[data-orca-seek]"))) {
+      var video = controlled(el); if (!video) return;
+      video.currentTime = parseFloat(el.getAttribute("data-orca-seek")) || 0;
+      if (video.play) { var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      announce("Jumped to " + (el.getAttribute("aria-label") || el.textContent.trim()));
+      return;
+    }
+    if ((el = closest(t, "[data-orca-gallery] [data-orca-gallery-src]"))) {
+      var gal = closest(el, "[data-orca-gallery]"); var stage = gal.querySelector("[data-orca-gallery-stage]");
+      stage.src = el.getAttribute("data-orca-gallery-src"); stage.alt = el.getAttribute("data-orca-gallery-alt") || "";
+      gal.querySelectorAll("[data-orca-gallery-src]").forEach(function (b) { if (b === el) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
+      var cnt = gal.querySelector("[data-orca-gallery-count]"); var all = gal.querySelectorAll("[data-orca-gallery-src]");
+      if (cnt) cnt.textContent = (Array.prototype.indexOf.call(all, el) + 1) + " of " + all.length;
+      return;
+    }
+    if ((el = closest(t, "[data-orca-zone-editor] [data-orca-zone-action]"))) {
+      var ed = closest(el, "[data-orca-zone-editor]"); var act = el.getAttribute("data-orca-zone-action");
+      var st = zoneState(ed);
+      if (act === "undo") st.points.pop();
+      if (act === "clear") st.points = [];
+      if (act === "close" && st.points.length >= 3) st.closed = true;
+      if (act !== "close") st.closed = false;
+      drawZone(ed); return;
+    }
+    if ((el = closest(t, "[data-orca-zone-editor] .orca-zone-editor__stage"))) {
+      var ed2 = closest(el, "[data-orca-zone-editor]"); var s2 = zoneState(ed2);
+      if (s2.closed) return;
+      var rect = el.getBoundingClientRect();
+      s2.points.push([Math.round((e.clientX - rect.left) / rect.width * 1000) / 10, Math.round((e.clientY - rect.top) / rect.height * 1000) / 10]);
+      drawZone(ed2); return;
+    }
+  });
+  function syncRichtext(wrap) {
+    var area = wrap.querySelector("[contenteditable]"); var field = wrap.querySelector("textarea, input[type=hidden]");
+    if (field) field.value = area.innerHTML;
+    wrap.querySelectorAll("[data-orca-rt]").forEach(function (b) {
+      var c = b.getAttribute("data-orca-rt");
+      if (c === "createLink" || c === "removeFormat") return;
+      try { b.setAttribute("aria-pressed", doc.queryCommandState(c) ? "true" : "false"); } catch (x) { /* unsupported */ }
+    });
+  }
+  doc.addEventListener("input", function (e) {
+    var wrap = closest(e.target, "[data-orca-richtext]"); if (wrap) syncRichtext(wrap);
+    var tok = closest(e.target, "[data-orca-token]");
+    if (tok) { var target = controlled(tok); if (target) target.style.setProperty(tok.getAttribute("data-orca-token"), tok.value); }
+  });
+  doc.addEventListener("selectionchange", function () {
+    var a = doc.activeElement; var wrap = a && closest(a, "[data-orca-richtext]"); if (wrap) syncRichtext(wrap);
+  });
+  function zoneState(ed) {
+    if (!ed._zone) {
+      var field = ed.querySelector("input[type=hidden]"); var pts = [];
+      try { pts = JSON.parse(field && field.value || "[]"); } catch (x) { pts = []; }
+      ed._zone = { points: pts, closed: pts.length >= 3 };
+    }
+    return ed._zone;
+  }
+  function drawZone(ed) {
+    var st = zoneState(ed); var svg = ed.querySelector("svg");
+    var pts = st.points.map(function (p) { return p[0] + "," + p[1]; }).join(" ");
+    var shape = st.closed ? '<polygon points="' + pts + '"/>' : '<polyline points="' + pts + '"/>';
+    svg.innerHTML = shape + st.points.map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="0.9"/>'; }).join("");
+    var field = ed.querySelector("input[type=hidden]"); if (field) field.value = st.closed ? JSON.stringify(st.points) : "";
+    var status = ed.querySelector("[data-orca-zone-status]");
+    if (status) status.textContent = st.closed ? "Zone closed with " + st.points.length + " points." : st.points.length + " point" + (st.points.length === 1 ? "" : "s") + ". " + (st.points.length >= 3 ? "Close the shape when done." : "Add at least 3.");
+  }
+  doc.querySelectorAll("[data-orca-zone-editor]").forEach(drawZone);
+  doc.querySelectorAll("[data-orca-sidebar-toggle]").forEach(function (b) {
+    var pref = null; try { pref = localStorage.getItem("orca-sidebar"); } catch (x) { /* storage blocked */ }
+    var bar = controlled(b);
+    if (bar && pref) { bar.setAttribute("data-collapsed", pref === "collapsed" ? "true" : "false"); b.setAttribute("aria-expanded", pref === "collapsed" ? "false" : "true"); }
+  });
+
+  /* Kanban drag and drop (the "Move to" menu on each card is the keyboard and touch alternative) */
+  var dragged = null;
+  doc.addEventListener("dragstart", function (e) {
+    var card = closest(e.target, "[data-orca-board] [draggable=true]"); if (!card) return;
+    dragged = card; card.classList.add("orca-is-dragging");
+    if (e.dataTransfer) { e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", card.id || ""); }
+  });
+  doc.addEventListener("dragend", function () {
+    if (dragged) dragged.classList.remove("orca-is-dragging"); dragged = null;
+    doc.querySelectorAll(".orca-board__cards.is-target").forEach(function (l) { l.classList.remove("is-target"); });
+  });
+  doc.addEventListener("dragover", function (e) {
+    var list = closest(e.target, "[data-orca-column]"); if (!list || !dragged) return;
+    e.preventDefault(); list.classList.add("is-target");
+  });
+  doc.addEventListener("drop", function (e) {
+    var list = closest(e.target, "[data-orca-column]"); if (!list || !dragged) return;
+    e.preventDefault(); list.classList.remove("is-target");
+    var from = closest(dragged, "[data-orca-column]"); list.appendChild(dragged);
+    var col = closest(list, ".orca-board__col"); var name = col && col.querySelector(".orca-board__head") ? col.querySelector(".orca-board__head").firstChild.textContent.trim() : list.getAttribute("data-orca-column");
+    announce("Moved to " + name);
+    list.dispatchEvent(new CustomEvent("orca:moved", { bubbles: true, detail: { id: dragged.id, from: from && from.getAttribute("data-orca-column"), to: list.getAttribute("data-orca-column") } }));
+    [from, list].forEach(updateCount);
+  });
+  function updateCount(list) {
+    if (!list) return; var col = closest(list, ".orca-board__col"); if (!col) return;
+    var c = col.querySelector("[data-orca-count]"); if (c) c.textContent = list.children.length;
+  }
 
   /* ---------------------------------------------------------------- paste into OTP */
   doc.addEventListener("paste", function (e) {

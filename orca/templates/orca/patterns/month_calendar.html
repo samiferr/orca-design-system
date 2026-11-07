@@ -1,0 +1,13 @@
+<div class="orca-table-wrap"><table class="orca-cal-month orca-month-view" aria-label="{{ title }}">
+  <thead class="orca-cal-weekdays"><tr>{% for d in weekdays %}<th scope="col"{% if d.weekend %} class="is-weekend"{% endif %}><abbr title="{{ d.long }}">{{ d.short }}</abbr></th>{% endfor %}</tr></thead>
+  <tbody>{% for w in weeks %}<tr class="orca-cal-week">{% for d in w.days %}
+    <td class="orca-cal-cell{% if d.outside %} orca-cal-cell--outside{% endif %}{% if d.weekend %} orca-cal-cell--weekend{% endif %}{% if d.holiday %} orca-cal-cell--holiday{% endif %}{% if d.today %} orca-cal-cell--today{% endif %}{% if d.selected %} orca-cal-cell--selected{% endif %}">
+      <div class="orca-cal-cell__inner">
+        {% if d.href %}<a class="orca-cal-cell__day" href="{{ d.href }}" aria-label="{{ d.label }}"{% if d.today %} aria-current="date"{% endif %}>{{ d.day }}</a>{% else %}<span class="orca-cal-cell__day" aria-label="{{ d.label }}"{% if d.today %} aria-current="date"{% endif %}>{{ d.day }}</span>{% endif %}
+        {% if d.holiday %}<span class="orca-holiday-label">{{ d.holiday }}</span>{% endif %}
+        {% for e in d.events %}{% if e.all_day %}<a class="orca-allday-bar" href="{{ e.url|default:'#' }}" style="--orca-event: {{ e.color }}" aria-label="{{ e.label }}">{{ e.title }}</a>{% else %}<a class="orca-event-chip{% if e.status == 'cancelled' %} orca-event-chip--cancelled{% endif %}" href="{{ e.url|default:'#' }}" aria-label="{{ e.label }}"><span class="orca-event-dot" style="--orca-event: {{ e.color }}"></span><span class="orca-event-chip__time">{{ e.start_time }}</span><span class="orca-event-chip__title">{{ e.title }}</span></a>{% endif %}{% endfor %}
+        {% if d.more %}<a class="orca-more-link" href="{{ d.href|default:'#' }}" aria-label="{{ d.more }} more on {{ d.label }}">+{{ d.more }} more</a>{% endif %}
+        {% if d.count %}<span class="orca-cal-cell__count" aria-hidden="true">{{ d.count }}</span>{% endif %}
+      </div>
+    </td>{% endfor %}</tr>{% endfor %}</tbody>
+</table></div>

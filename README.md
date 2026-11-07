@@ -11,9 +11,13 @@ it uses, the UX principles it applies, and a copy-ready template example.
   1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance: Tangerine.
 - **Phase 1: Primitives.** 141 elements covering all 214 primitive items of the guide, including the planning
   primitives (date, time, calendar marks) the guide marks as not built yet.
-- **Phase 2 (this release): Components.** 145 elements covering all 154 component items of the guide: form fields,
+- **Phase 2: Components.** 145 elements covering all 154 component items of the guide: form fields,
   pickers, menus, tabs, dialogs, toasts, cards, calendar and schedule parts, plan items. Each lists the primitives it is
   built from, and template tags render the fiddly ones straight from Django objects.
+- **Phase 3 (this release): Patterns.** 97 elements covering all 98 pattern items of the guide: page frame (header,
+  sidebar, drawer, settings panel), data tables and filtering, forms and editors, media, record management, eight
+  chart types, marketing and docs sections, email frame, calendar views, scheduler, event editing and planning boards.
+  Charts and calendars render on the server as SVG and HTML from plain Python data: no JavaScript library.
 
 ## Install
 
@@ -93,6 +97,19 @@ python demo/manage.py orca_site site/
 {% orca_sparkline values "Visitors per hour" %}  {% orca_donut segments total_label="Visitors" %}
 ```
 
+## Patterns from your data
+
+```django
+{% orca_chart "bar" data title="Visitors per day" subtitle="This week" %}    {# data: {"labels": [...], "series": [{"name", "values"}]} #}
+{% orca_month_calendar events month="2026-11" today=today day_url="?day={date}" %}
+{% orca_week_view events start=monday days=7 today=today now=now %}          {# days=1 day view, days=3 multi-day #}
+{% orca_agenda events start=today days=7 %}  {% orca_year_view year=2026 events=events %}
+{% extends "orca/email/base.html" %}                                         {# brand-coloured transactional email #}
+```
+
+Events are dicts with `title`, `start`, `end`, `all_day`, `color` (1–8 or any CSS colour), `url`, `location` and
+`status`. `orca.samples.SAMPLE` holds the realistic data every documentation example uses.
+
 ## Brand tokens only
 
 A project changes **brand tokens only**, through `settings.ORCA["BRAND"]`:
@@ -123,7 +140,7 @@ python manage.py orca_lint templates/   # check templates and CSS against ORCA's
 python manage.py orca_site site/        # export the documentation website
 ```
 
-The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`docs/components/`](docs/components/README.md) (Markdown, one file per category) and
+The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`docs/components/`](docs/components/README.md) and [`docs/patterns/`](docs/patterns/README.md) (Markdown, one file per category) and
 [`docs/catalogue.json`](docs/catalogue.json) (machine-readable). AI agents: start with [`AGENTS.md`](AGENTS.md).
 
 ## What is in the package
@@ -133,6 +150,9 @@ The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`doc
 | `orca/tokens.py` | Single source of every token (generated into `static/orca/css/tokens.css`) |
 | `orca/static/orca/css/orca.css` | All primitives, in cascade layers `orca.base`, `orca.primitives`, `orca.utilities` |
 | `orca/static/orca/css/components.css` | All components, in the `orca.components` layer |
+| `orca/static/orca/css/patterns.css` | All patterns, in the `orca.patterns` layer |
+| `orca/charts.py`, `orca/calendar_views.py` | Server side of the chart and calendar pattern tags |
+| `orca/samples.py` | Sample data used by the documentation examples |
 | `orca/static/orca/js/orca.js` | Optional progressive enhancement, opt-in by data attribute: menus, listbox, combobox, tabs, dialogs and confirm, toasts, date shortcuts and ranges, repeating rows, carousel, steppers, OTP, theme |
 | `orca/components.py` | Server side of the component tags (field wiring, page windows, month grids, charts) |
 | `orca/catalogue/` | The element catalogue: why, when, how, a11y, tokens, classes, principles, examples |
@@ -155,8 +175,9 @@ documented classes and tokens exist, text and control contrast hold in all three
 ## Roadmap
 
 1. **Primitives** (released).
-2. **Components** (this release).
-3. Patterns, 4. Templates, 5. Pages: following the ORCA guide.
+2. **Components** (released).
+3. **Patterns** (this release).
+4. Templates, 5. Pages: following the ORCA guide.
 
 ## Licences
 

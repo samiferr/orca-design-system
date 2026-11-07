@@ -16,6 +16,7 @@ from . import __version__, icons, tokens
 from .catalogue import registry
 from .catalogue.guide import LEVELS
 from .conf import compute_brand, docs_enabled
+from .samples import SAMPLE
 
 PRELUDE = "{% load orca static %}"
 
@@ -37,7 +38,7 @@ GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
 def render_snippet(html: str) -> str:
     """Render an example snippet with ORCA's template tags available."""
     try:
-        return Template(PRELUDE + html).render(Context({}))
+        return Template(PRELUDE + html).render(Context({"sample": SAMPLE}))
     except TemplateSyntaxError as exc:  # surfaced by the test suite
         return f'<p class="orca-error">Example failed to render: {exc}</p>'
 
@@ -47,7 +48,7 @@ def _guard():
         raise Http404("The ORCA documentation is disabled (ORCA['DOCS_ENABLED'] = False).")
 
 
-LEVEL_URLS = {"primitive": "orca:index", "component": "orca:components"}
+LEVEL_URLS = {"primitive": "orca:index", "component": "orca:components", "pattern": "orca:patterns"}
 
 
 def _levels() -> list[dict]:
@@ -69,6 +70,7 @@ def _stats() -> dict:
         "elements": len(els),
         "primitives": len(registry.all_elements("primitive")),
         "components": len(registry.all_elements("component")),
+        "patterns": len(registry.all_elements("pattern")),
         "guide_items": sum(len(v) for lvl in LEVELS.values() for v in lvl.values()),
         "categories": len(registry.categories()),
         "icons": len(icons.names()),
@@ -91,6 +93,7 @@ def home(request):
 LEVEL_INTROS = {
     "primitive": "The smallest building blocks and the base styles every other level uses. Each one cannot be broken down further without ceasing to be useful.",
     "component": "Simple groups of primitives that work together as one unit and do one job. Each is reusable on its own and sits inside many patterns.",
+    "pattern": "Components combined into larger, recurring sections of an interface: page frames, data tables, forms, charts, calendars, schedulers and planning boards. Complex ones render on the server from your data with one template tag.",
 }
 
 
@@ -109,6 +112,10 @@ def primitives(request):
 
 def components(request):
     return level_index(request, "component")
+
+
+def patterns(request):
+    return level_index(request, "pattern")
 
 
 def _principles() -> list[dict]:

@@ -6,8 +6,12 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 - `python -m orca search <words>` finds the element; `python -m orca show <id>` prints its **why, when, when not, how,
   accessibility notes, classes, tokens and a working example**. Copy the example, then adapt the content.
-- The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md` and `docs/catalogue.json`.
-- **Prefer a component over assembling primitives yourself.** A component's "Built from" list names its primitives.
+- The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md`, `docs/patterns/<category>.md` and `docs/catalogue.json`.
+- **Prefer a pattern over assembling components, and a component over assembling primitives.** Each element's
+  "Built from" list names what it is made of.
+- Charts, calendars and emails come from tags, never hand-drawn SVG or a chart library: `{% orca_chart kind data %}`,
+  `{% orca_month_calendar events %}`, `{% orca_week_view events days=7|3|1 %}`, `{% orca_agenda events %}`,
+  `{% orca_year_view year events=events %}`, and emails extend `orca/email/base.html`.
 - With Django forms, render every field with `{% orca_field form.x %}` (and `switch=True` for settings that apply at once);
   put `{% orca_form_errors form %}` above the fields and `{% orca_messages %}` at the top of the page;
   paginate with `{% orca_pagination page_obj noun="…" %}`.
@@ -73,5 +77,5 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 ## 5. Scope of this release
 
-Released: **primitives** and **components**. Patterns, templates and pages from the ORCA guide come next; until
-then, compose them from components and primitives, following each element's "how" rules.
+Released: **primitives**, **components** and **patterns**. Templates and pages from the ORCA guide come next; until
+then, compose page layouts from patterns, following each element's "how" rules.

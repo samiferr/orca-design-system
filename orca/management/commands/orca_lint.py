@@ -33,7 +33,7 @@ ORCA_CLASS = re.compile(r"\borca-[a-z0-9_-]+")
 
 
 def known_classes() -> set[str]:
-    css = "".join((PACKAGE / "static" / "orca" / "css" / name).read_text(encoding="utf-8") for name in ("orca.css", "components.css"))
+    css = "".join((PACKAGE / "static" / "orca" / "css" / name).read_text(encoding="utf-8") for name in ("orca.css", "components.css", "patterns.css"))
     return set(m.group(0)[1:] for m in re.finditer(r"\.orca-[a-z0-9_-]+", css))
 
 

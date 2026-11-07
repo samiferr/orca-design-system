@@ -1,6 +1,6 @@
 /* ORCA components (level 2 of the ORCA guide): small groups of primitives that do one job.
    Tokens only. Builds on orca.css; loaded after it by {% orca_head %}. */
-@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.utilities;
+@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.patterns, orca.utilities;
 
 @layer orca.components {
 

@@ -8,6 +8,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("primitives/", views.primitives, name="index"),
     path("components/", views.components, name="components"),
+    path("patterns/", views.patterns, name="patterns"),
     path("guide/<slug:slug>/", views.guide, name="guide"),
     path("tokens/", views.token_list, name="tokens"),
     path("icons/", views.icon_list, name="icons"),

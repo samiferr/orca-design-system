@@ -168,7 +168,10 @@ def _to_date(value) -> dt.date | None:
         return timezone.localtime(value).date() if timezone.is_aware(value) else value.date()
     if isinstance(value, dt.date):
         return value
-    return dt.date.fromisoformat(str(value)[:10])
+    text = str(value)
+    if len(text) == 7:  # "YYYY-MM" means the first of the month (as in ?month=2026-11)
+        text += "-01"
+    return dt.date.fromisoformat(text[:10])
 
 
 def mini_calendar_context(month=None, selected=None, today=None, url: str = "", nav_url: str = "",
