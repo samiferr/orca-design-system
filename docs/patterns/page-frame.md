@@ -112,8 +112,9 @@ Products with many sections need a persistent, scannable list; groups chunk it (
 
 - `<div class="orca-app">` holds `<nav class="orca-sidebar" id=… aria-label="Sections">` and `<main class="orca-app__main">`.
 - Sections: `.orca-sidebar__section` with an optional `.orca-sidebar__label` and side links; `.orca-sidebar__foot` holds the collapse toggle (`data-orca-sidebar-toggle aria-controls=…`).
-- Collapsed (`data-collapsed="true"`): labels become visually hidden but stay readable by screen readers; the rail keeps icons.
-- Below 620px the sidebar hides; put the same links in a drawer opened from the top bar.
+- Collapsed (`data-collapsed="true"`): labels become visually hidden but stay readable by screen readers; the rail keeps icons. Give each link a `title` so the rail has tooltips.
+- The state is remembered per sidebar in `localStorage` under `orca-sidebar:<id>`, so give the sidebar an `id`.
+- Long lists (like this documentation's navigation) nest a nav tree inside a section; hide the tree when collapsed.Below 620px the sidebar hides; put the same links in a drawer opened from the top bar.
 
 #### Example: Sidebar with collapse
 

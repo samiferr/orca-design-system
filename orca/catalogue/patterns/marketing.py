@@ -95,7 +95,7 @@ add(Pattern(
     "docs-sidebar", "Docs sidebar tree", C,
     "The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open and visible.",
     why="Large documentation needs both browsing and finding (Miller's law, Hick's law); a filter finds a page by name while the tree teaches the structure.",
-    when=["Documentation sites (this site uses it)."],
+    when=["Documentation sites. This site puts the same filter and tree inside the sidebar pattern so it can collapse to a rail."],
     how=["`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with a dense search input (`data-orca-filter-list`) and the docs navigation tree; on narrow screens it moves into a left drawer."],
     classes=[".orca-docs-sidebar"],
     laws=["miller", "hick"],

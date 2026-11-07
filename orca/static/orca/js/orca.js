@@ -570,7 +570,7 @@
       bar.setAttribute("data-collapsed", collapsed ? "true" : "false");
       el.setAttribute("aria-expanded", collapsed ? "false" : "true");
       el.setAttribute("aria-label", collapsed ? "Expand navigation" : "Collapse navigation");
-      try { localStorage.setItem("orca-sidebar", collapsed ? "collapsed" : "expanded"); } catch (x) { /* storage blocked */ }
+      try { localStorage.setItem(sidebarKey(bar), collapsed ? "collapsed" : "expanded"); } catch (x) { /* storage blocked */ }
       return;
     }
     if ((el = closest(t, "[data-orca-rt]"))) {
@@ -649,10 +649,16 @@
     if (status) status.textContent = st.closed ? "Zone closed with " + st.points.length + " points." : st.points.length + " point" + (st.points.length === 1 ? "" : "s") + ". " + (st.points.length >= 3 ? "Close the shape when done." : "Add at least 3.");
   }
   doc.querySelectorAll("[data-orca-zone-editor]").forEach(drawZone);
+  /* Each sidebar remembers its own state (key "orca-sidebar:<id>"), so a demo never collapses the real navigation */
+  function sidebarKey(bar) { return "orca-sidebar" + (bar.id ? ":" + bar.id : ""); }
   doc.querySelectorAll("[data-orca-sidebar-toggle]").forEach(function (b) {
-    var pref = null; try { pref = localStorage.getItem("orca-sidebar"); } catch (x) { /* storage blocked */ }
-    var bar = controlled(b);
-    if (bar && pref) { bar.setAttribute("data-collapsed", pref === "collapsed" ? "true" : "false"); b.setAttribute("aria-expanded", pref === "collapsed" ? "false" : "true"); }
+    var bar = controlled(b); if (!bar) return;
+    var pref = null; try { pref = localStorage.getItem(sidebarKey(bar)); } catch (x) { /* storage blocked */ }
+    if (!pref) return;
+    var collapsed = pref === "collapsed";
+    bar.setAttribute("data-collapsed", collapsed ? "true" : "false");
+    b.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    b.setAttribute("aria-label", collapsed ? "Expand navigation" : "Collapse navigation");
   });
 
   /* Kanban drag and drop (the "Move to" menu on each card is the keyboard and touch alternative) */

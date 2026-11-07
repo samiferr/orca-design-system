@@ -205,7 +205,7 @@ Large documentation needs both browsing and finding (Miller's law, Hick's law); 
 
 ### When to use
 
-- Documentation sites (this site uses it).
+- Documentation sites. This site puts the same filter and tree inside the sidebar pattern so it can collapse to a rail.
 
 ### How to use
 

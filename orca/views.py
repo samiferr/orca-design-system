@@ -33,6 +33,10 @@ GUIDE = [
     ("roadmap", "Levels and roadmap", "The five ORCA levels and what each release delivers."),
 ]
 GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
+# Icons of the documentation sidebar (shown alone when it is collapsed to a rail).
+GUIDE_ICONS = {"installation": "repository", "usage": "code", "brand-and-themes": "sun", "ai-agents": "generative-ai",
+               "principles": "book", "accessibility": "show", "localization": "website", "tooling": "devtools", "roadmap": "map"}
+LEVEL_ICONS = {"primitive": "grid", "component": "cluster-host", "pattern": "blueprint"}
 
 
 def render_snippet(html: str) -> str:
@@ -52,15 +56,15 @@ LEVEL_URLS = {"primitive": "orca:index", "component": "orca:components", "patter
 
 
 def _levels() -> list[dict]:
-    return [{"key": lvl, "title": registry.LEVEL_TITLES[lvl], "url": LEVEL_URLS[lvl],
-             "nav": [(c, registry.by_category(c.key)) for c in registry.categories(lvl)]}
+    return [{"key": lvl, "title": registry.LEVEL_TITLES[lvl], "url": LEVEL_URLS[lvl], "icon": LEVEL_ICONS[lvl],
+             "count": len(registry.all_elements(lvl)), "nav": [(c, registry.by_category(c.key)) for c in registry.categories(lvl)]}
             for lvl in registry.RELEASED_LEVELS]
 
 
 def _ctx(page: str, **extra) -> dict:
     return {
         "levels": _levels(), "nav": [(c, registry.by_category(c.key)) for c in registry.categories()],
-        "guide": GUIDE, "page": page, "version": __version__, **extra,
+        "guide": GUIDE, "guide_nav": [(s, t, GUIDE_ICONS.get(s, "book")) for s, t, _ in GUIDE], "page": page, "version": __version__, **extra,
     }
 
 
