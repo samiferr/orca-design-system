@@ -1,6 +1,6 @@
 /* ORCA patterns (level 3 of the ORCA guide): distinct sections of a screen made of components and primitives.
    Tokens only. Loaded after components.css by {% orca_head %}. */
-@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.patterns, orca.utilities;
+@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.patterns, orca.templates, orca.utilities;
 
 @layer orca.patterns {
 
@@ -9,6 +9,7 @@
 .orca-site-header__nav { display: flex; flex-wrap: wrap; gap: var(--orca-space-4) var(--orca-space-16); margin: 0 auto 0 var(--orca-space-16); padding: 0; list-style: none; }
 .orca-site-header__nav a { color: var(--orca-text); text-decoration: none; }
 .orca-site-header__nav a:hover, .orca-site-header__nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.4em; }
+.orca-site-header > nav { margin-inline-end: auto; }
 .orca-site-header__actions { display: flex; gap: var(--orca-space-8); }
 @media (max-width: 619px) { .orca-site-header__nav { order: 3; width: 100%; margin: 0; } }
 

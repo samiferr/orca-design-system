@@ -239,7 +239,7 @@ Relative due dates ('Tomorrow') are faster to act on; the shift in border, weigh
 
 ### How to use
 
-- `<span class="orca-chip">{% templatetag openblock %} icon "calendar" {% templatetag closeblock %}<time datetime=…>Fri 13 Nov</time></span>`; `--soon` within 2 days; `--overdue` with 'Overdue, 4 Nov'.
+- `<span class="orca-chip">{% icon "calendar" %}<time datetime=…>Fri 13 Nov</time></span>`; `--soon` within 2 days; `--overdue` with 'Overdue, 4 Nov'.
 
 #### Example: Due dates
 

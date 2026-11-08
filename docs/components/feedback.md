@@ -26,7 +26,7 @@ Something happened that needs attention; a distinct shape, a status glyph and a 
 
 ### How to use
 
-- `<div class="orca-alert orca-alert--negative" role="alert">` with `{% templatetag openblock %} status_icon "negative" {% templatetag closeblock %}`, `.orca-alert__title`, `.orca-alert__body`, optional `.orca-alert__actions` and a dismiss button `.orca-alert__close` with `data-orca-dismiss`.
+- `<div class="orca-alert orca-alert--negative" role="alert">` with `{% status_icon "negative" %}`, `.orca-alert__title`, `.orca-alert__body`, optional `.orca-alert__actions` and a dismiss button `.orca-alert__close` with `data-orca-dismiss`.
 - Tones: info (default), positive, caution, negative, neutral. Use `role="alert"` for errors only; `role="status"` otherwise.
 - Title states the fact; body says what to do. No 'Error:' prefix.
 
@@ -74,7 +74,7 @@ Persistent information that changes how people act (a limit, a consequence) must
 
 ### How to use
 
-- `<div class="orca-callout orca-callout--caution">{% templatetag openblock %} icon "warning" {% templatetag closeblock %}<p class="orca-callout__title">…</p><div class="orca-callout__body">…</div></div>`.
+- `<div class="orca-callout orca-callout--caution">{% icon "warning" %}<p class="orca-callout__title">…</p><div class="orca-callout__body">…</div></div>`.
 - Tones: info (default), positive (success), caution (warning), negative (danger). Danger only for irreversible consequences.
 
 #### Example: Four tones
@@ -118,7 +118,7 @@ An empty screen is either a beginning or the end of a search; explaining it and 
 
 ### How to use
 
-- `<div class="orca-empty">{% templatetag openblock %} orca_illustration "empty" {% templatetag closeblock %}<h2 class="orca-empty-title">…</h2><p class="orca-empty-text">…</p><div class="orca-empty__actions">…</div></div>`.
+- `<div class="orca-empty">{% orca_illustration "empty" %}<h2 class="orca-empty-title">…</h2><p class="orca-empty-text">…</p><div class="orca-empty__actions">…</div></div>`.
 - First use: the create action. Filtered: 'Clear filters'. Search: the 'search' illustration and the query in the title.
 
 #### Example: First use and no results
@@ -425,7 +425,7 @@ After a redirect, the result of the action must be the first thing seen on the n
 
 ### How to use
 
-- Put `{% templatetag openblock %} orca_messages {% templatetag closeblock %}` at the top of the main content in the base template.
+- Put `{% orca_messages %}` at the top of the main content in the base template.
 - In views: `messages.success(request, "Camera saved")`, `messages.error(…)`, `messages.warning(…)`, `messages.info(…)`.
 - Errors render with `role="alert"`, others with `role="status"`.
 

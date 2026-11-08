@@ -24,7 +24,7 @@ A KPI is read in a second when the number dominates and its label and comparison
 
 ### How to use
 
-- `<div class="orca-stat-card">` with `orca-stat-label`, `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% templatetag openblock %} orca_sparkline values {% templatetag closeblock %}`.
+- `<div class="orca-stat-card">` with `orca-stat-label`, `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
 - Make the whole card a link (`<a class="orca-stat-card">`) when it leads to the detail.
 
 #### Example: Stat cards
@@ -222,7 +222,7 @@ Sorting turns a table into an answer ('which camera counted most?') (Tesler's la
 
 ### How to use
 
-- `<th scope="col" aria-sort="descending"><a class="orca-sort" href="?sort=-count">Count{% templatetag openblock %} icon "arrow-up" {% templatetag closeblock %}</a></th>`; columns not sorted have no aria-sort.
+- `<th scope="col" aria-sort="descending"><a class="orca-sort" href="?sort=-count">Count{% icon "arrow-up" %}</a></th>`; columns not sorted have no aria-sort.
 - Server-side: keep the other query parameters in the link; first click sorts the most useful way (descending for numbers and dates).
 
 #### Example: Header row
@@ -904,7 +904,7 @@ The shape of a trend is understood pre-attentively; a sparkline adds that contex
 
 ### How to use
 
-- `{% templatetag openblock %} orca_sparkline values "Visitors per hour today, rising" {% templatetag closeblock %}` from a list or a comma-separated string.
+- `{% orca_sparkline values "Visitors per hour today, rising" %}` from a list or a comma-separated string.
 - Always pair it with the number it summarises; the label is read by screen readers.
 
 #### Example: Sparklines
@@ -943,7 +943,7 @@ A part-of-whole split is grasped quickly when there are few parts; the legend gi
 
 ### How to use
 
-- `{% templatetag openblock %} orca_donut segments total_label="Visitors" {% templatetag closeblock %}` with `[("Entrance A", 4812), …]`, dicts, or a string `"Entrance A:4812, Gate 1:2140"`.
+- `{% orca_donut segments total_label="Visitors" %}` with `[("Entrance A", 4812), …]`, dicts, or a string `"Entrance A:4812, Gate 1:2140"`.
 - Series use `--orca-chart-1…8` in order; the SVG's label lists every share in words.
 
 #### Example: Visitors by entrance

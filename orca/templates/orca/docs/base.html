@@ -21,6 +21,7 @@
     <a href="{% url 'orca:index' %}" {% if page == "primitives" or el.level == "primitive" %}aria-current="page"{% endif %}>Primitives</a>
     <a href="{% url 'orca:components' %}" {% if page == "components" or el.level == "component" %}aria-current="page"{% endif %}>Components</a>
     <a href="{% url 'orca:patterns' %}" {% if page == "patterns" or el.level == "pattern" %}aria-current="page"{% endif %}>Patterns</a>
+    <a href="{% url 'orca:templates' %}" {% if page == "templates" or el.level == "template" %}aria-current="page"{% endif %}>Templates</a>
     <a href="{% url 'orca:tokens' %}" {% if page == "tokens" %}aria-current="page"{% endif %}>Tokens</a>
     <a href="{% url 'orca:icons' %}" {% if page == "icons" %}aria-current="page"{% endif %}>Icons</a>
   </nav>
@@ -40,20 +41,22 @@
         {% for slug, title, icon_name in guide_nav %}<li><a class="orca-side-link" href="{% url 'orca:guide' slug %}" title="{{ title }}" {% if page == "guide-"|add:slug %}aria-current="page"{% endif %}>{% icon icon_name %}<span class="orca-side-link__label">{{ title }}</span></a></li>{% endfor %}
       </ul>
     </div>
-    {% for lvl in levels %}<div class="orca-sidebar__section docs-nav__section">
-      <p class="orca-sidebar__label">{{ lvl.title }}</p>
-      <ul class="orca-side-nav">
-        <li><a class="orca-side-link" href="{% url lvl.url %}" title="All {{ lvl.title|lower }}" {% if page == lvl.title|lower %}aria-current="page"{% endif %}>{% icon lvl.icon %}<span class="orca-side-link__label">All {{ lvl.title|lower }}</span><span class="orca-count orca-count--neutral">{{ lvl.count }}</span></a></li>
-      </ul>
-      <div class="orca-nav-tree docs-nav__tree">
-        {% for cat, els in lvl.nav %}<details {% if el.category == cat.key %}open{% endif %}>
-          <summary><span class="orca-chevron">{% icon "chevron-down" %}</span><span class="docs-nav__heading-text">{{ cat.title }}</span><span class="orca-count orca-count--neutral">{{ els|length }}</span></summary>
-          <ul>{% for e in els %}<li><a href="{% url 'orca:element' e.id %}" {% if page == e.id %}aria-current="page"{% endif %}>{{ e.name }}</a></li>{% endfor %}</ul>
-        </details>
-        {% endfor %}
-      </div>
+    <div class="orca-sidebar__section docs-nav__section">
+      <p class="orca-sidebar__label">Elements</p>
+      {# Icon rail (collapsed sidebar only): one link per level #}
+      <ul class="orca-side-nav docs-nav__rail">{% for lvl in levels %}<li><a class="orca-side-link" href="{% url lvl.url %}" title="{{ lvl.title }}" {% if page == lvl.title|lower %}aria-current="page"{% elif el.level == lvl.key %}aria-current="true"{% endif %}>{% icon lvl.icon %}<span class="orca-side-link__label">{{ lvl.title }}</span></a></li>{% endfor %}</ul>
+      {# The tree: level, then category, then element #}
+      <ul class="orca-nav-tree docs-nav__tree">{% for lvl in levels %}<li><details{% if el.level == lvl.key or page == lvl.title|lower %} open{% endif %}>
+        <summary><span class="orca-chevron">{% icon "chevron-down" %}</span>{% icon lvl.icon %}<span class="docs-nav__heading-text">{{ lvl.title }}</span><span class="orca-count orca-count--neutral">{{ lvl.count }}</span></summary>
+        <ul>
+          <li><a href="{% url lvl.url %}" {% if page == lvl.title|lower %}aria-current="page"{% endif %}>All {{ lvl.title|lower }}</a></li>
+          {% for cat, els in lvl.nav %}<li><details{% if el.category == cat.key %} open{% endif %}>
+            <summary><span class="orca-chevron">{% icon "chevron-down" %}</span><span class="docs-nav__heading-text">{{ cat.title }}</span><span class="orca-count orca-count--neutral">{{ els|length }}</span></summary>
+            <ul>{% for e in els %}<li><a href="{% url 'orca:element' e.id %}" {% if page == e.id %}aria-current="page"{% endif %}>{{ e.name }}</a></li>{% endfor %}</ul>
+          </details></li>{% endfor %}
+        </ul>
+      </details></li>{% endfor %}</ul>
     </div>
-    {% endfor %}
     <div class="orca-sidebar__section docs-nav__section">
       <p class="orca-sidebar__label">Reference</p>
       <ul class="orca-side-nav">

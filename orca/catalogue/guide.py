@@ -107,7 +107,15 @@ PATTERNS = {
 }
 
 
-LEVELS = {"primitive": PRIMITIVES, "component": COMPONENTS, "pattern": PATTERNS}
+TEMPLATES = {
+    'Layouts': ['App shell', 'Auth layout', 'Email layout', 'Error layouts (403, 404, 500)', 'Homepage template', 'Feed skeleton', 'Person-block grid', 'Generic list template', 'Generic detail template', 'Generic form template', 'Generic confirm (delete) template', 'Generic confirm-action template', 'Parent base template', 'Parent detail template (tabbed)', 'Parent-child list template', 'Parent-child detail template', 'Parent-child form template', 'Parent-child confirm template', 'Marketing page layout', 'Docs page layout'],
+    'Page-type skeletons': ['List page', 'Detail page', 'Form page', 'Dashboard', 'Calendar page (toolbar + view + side panel)', 'Scheduler page (resources by time)', 'Planning board page', 'Timeline page', 'Booking flow', 'Event editor page', 'Simple data page (title bar, search, filter drawer, summary tiles, table)', 'Confirm page', 'Parent detail page (overview + child tabs)', 'Parent-child pages (list, detail, form, confirm)', 'Docs page', 'Marketing landing page'],
+    'Structural layouts': ['Vertical stack', 'Stat grid', 'Card grid', 'Two-column grid', 'Split (main + aside)', 'Camera split', 'Form grid', 'Narrow form'],
+    'Template slots': ['Title', 'Page title', 'Page subtitle', 'Page actions', 'Breadcrumbs', 'Content', 'Scripts', 'Head', 'Body class', 'Sidebar', 'Top bar', 'Brand', 'Sidebar extra', 'Sidebar navigation', 'Filter panel', 'Body', 'Modal', 'Footer', 'Extra head', 'Extra scripts', 'Theme bootstrap', 'List actions', 'Detail actions'],
+}
+
+
+LEVELS = {"primitive": PRIMITIVES, "component": COMPONENTS, "pattern": PATTERNS, "template": TEMPLATES}
 
 
 def all_items(level: str = "primitive") -> list[tuple[str, str]]:

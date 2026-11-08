@@ -1,0 +1,18 @@
+{% load orca %}<!doctype html>
+<html {% block html_attrs %}{% orca_html_attrs lang|default:"en" %}{% endblock %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}{{ title }}{% endblock %}{% block title_suffix %} · {% orca_brand "name" %}{% endblock %}</title>
+  {% block head %}{% orca_head theme_restore=False %}{% endblock %}
+  {% block theme_bootstrap %}{% orca_theme_bootstrap %}{% endblock %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  {% block skip_link %}<a class="orca-skip-link" href="#main">Skip to main content</a>{% endblock %}
+  {% block body %}<main id="main" tabindex="-1">{% block content %}{% endblock %}</main>{% endblock %}
+  {% block modal %}{% endblock %}
+  {% block scripts %}{% endblock %}
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -10,6 +10,8 @@ from __future__ import annotations
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.template import Context, Template, TemplateSyntaxError
+from django.urls import reverse
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
 from . import __version__, icons, tokens
@@ -36,7 +38,7 @@ GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
 # Icons of the documentation sidebar (shown alone when it is collapsed to a rail).
 GUIDE_ICONS = {"installation": "repository", "usage": "code", "brand-and-themes": "sun", "ai-agents": "generative-ai",
                "principles": "book", "accessibility": "show", "localization": "website", "tooling": "devtools", "roadmap": "map"}
-LEVEL_ICONS = {"primitive": "grid", "component": "cluster-host", "pattern": "blueprint"}
+LEVEL_ICONS = {"primitive": "grid", "component": "cluster-host", "pattern": "blueprint", "template": "folder"}
 
 
 def render_snippet(html: str) -> str:
@@ -52,7 +54,7 @@ def _guard():
         raise Http404("The ORCA documentation is disabled (ORCA['DOCS_ENABLED'] = False).")
 
 
-LEVEL_URLS = {"primitive": "orca:index", "component": "orca:components", "pattern": "orca:patterns"}
+LEVEL_URLS = {"primitive": "orca:index", "component": "orca:components", "pattern": "orca:patterns", "template": "orca:templates"}
 
 
 def _levels() -> list[dict]:
@@ -75,6 +77,7 @@ def _stats() -> dict:
         "primitives": len(registry.all_elements("primitive")),
         "components": len(registry.all_elements("component")),
         "patterns": len(registry.all_elements("pattern")),
+        "templates": len(registry.all_elements("template")),
         "guide_items": sum(len(v) for lvl in LEVELS.values() for v in lvl.values()),
         "categories": len(registry.categories()),
         "icons": len(icons.names()),
@@ -98,6 +101,7 @@ LEVEL_INTROS = {
     "primitive": "The smallest building blocks and the base styles every other level uses. Each one cannot be broken down further without ceasing to be useful.",
     "component": "Simple groups of primitives that work together as one unit and do one job. Each is reusable on its own and sits inside many patterns.",
     "pattern": "Components combined into larger, recurring sections of an interface: page frames, data tables, forms, charts, calendars, schedulers and planning boards. Complex ones render on the server from your data with one template tag.",
+    "template": "Whole-page Django templates you extend: layouts, generic CRUD and parent-child templates for class-based views, page-type skeletons, the structural layouts they are built with, and the named blocks (slots) you fill. Each one has a live preview with placeholder content.",
 }
 
 
@@ -120,6 +124,21 @@ def components(request):
 
 def patterns(request):
     return level_index(request, "pattern")
+
+
+def templates(request):
+    return level_index(request, "template")
+
+
+def template_preview(request, element_id):
+    """A template-level element rendered as a whole page with placeholder content (shown in an iframe)."""
+    _guard()
+    el = registry.get(element_id)
+    if el is None or not el.preview:
+        raise Http404(f"No ORCA template preview {element_id!r}")
+    from .previews import context
+
+    return render(request, el.preview_template(), context(el.id))
 
 
 def _principles() -> list[dict]:
@@ -158,7 +177,13 @@ def element(request, element_id):
     el = registry.get(element_id)
     if el is None:
         raise Http404(f"No ORCA element {element_id!r}")
-    examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
+    if el.preview:
+        src = reverse("orca:preview", args=[el.id])
+        frame = (f'<iframe class="orca-template-preview" src="{src}" title="Preview: {escape(el.name)}" loading="lazy" '
+                 f'data-docs-frame></iframe>')
+        examples = [{"title": "Live preview", "html": el.example_list()[0][1], "rendered": mark_safe(frame), "preview_url": src}]
+    else:
+        examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
     related = [registry.get(r) for r in el.related if registry.get(r)]
     uses = [registry.get(u) for u in el.uses if registry.get(u)]
     used_by = [e for e in registry.all_elements() if el.id in e.uses]

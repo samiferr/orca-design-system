@@ -2,12 +2,12 @@
 {% block title %}Overview{% endblock %}
 {% block content %}
 <section class="docs-hero" aria-labelledby="hero-title">
-  <p class="orca-card-kicker">Django design system · phase 3: patterns</p>
+  <p class="orca-card-kicker">Django design system · phase 4: templates</p>
   <h1 class="docs-hero__title" id="hero-title">Every element says why, when and how.</h1>
   <p class="docs-hero__lead">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>
   <div class="orca-row orca-row--16">
     <a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a>
-    <a class="orca-button" href="{% url 'orca:patterns' %}">Browse patterns</a>
+    <a class="orca-button" href="{% url 'orca:templates' %}">Browse templates</a>
   </div>
   <div class="docs-hero__sample" aria-label="Live ORCA primitives">{{ hero }}</div>
 </section>
@@ -18,6 +18,7 @@
     <div><dt class="orca-stat-label">Primitives</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.primitives }}</dd></div>
     <div><dt class="orca-stat-label">Components</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.components }}</dd></div>
     <div><dt class="orca-stat-label">Patterns</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.patterns }}</dd></div>
+    <div><dt class="orca-stat-label">Templates</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.templates }}</dd></div>
     <div><dt class="orca-stat-label">Guide items covered</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.guide_items }} of {{ stats.guide_items }}</dd></div>
     <div><dt class="orca-stat-label">Brand keys</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.brand_keys }}</dd></div>
     <div><dt class="orca-stat-label">Icons</dt><dd class="orca-stat-value orca-stat-value--lg">{{ stats.icons }}</dd></div>

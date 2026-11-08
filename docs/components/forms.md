@@ -393,7 +393,7 @@ People look for their language by its own name (Jakob's law), and a plain form w
 
 ### How to use
 
-- `<form action="{% templatetag openblock %} url 'set_language' {% templatetag closeblock %}" method="post">` with csrf, a `next` hidden input and a select of `LANGUAGES` showing `language.name_local`.
+- `<form action="{% url 'set_language' %}" method="post">` with csrf, a `next` hidden input and a select of `LANGUAGES` showing `language.name_local`.
 - Add `data-orca-autosubmit` to the select and keep a visible Change button inside `<noscript>`.
 - Add `lang` on each option so screen readers pronounce the names correctly.
 
@@ -473,7 +473,7 @@ Hiding advanced filters until needed keeps the screen simple (Practical UI S04, 
 
 ### How to use
 
-- `<button class="orca-button" type="button" aria-expanded="false" aria-controls="filters" data-orca-disclose>{% templatetag openblock %} icon "filter" {% templatetag closeblock %}Filters<span class="orca-count orca-count--accent">2</span></button>`.
+- `<button class="orca-button" type="button" aria-expanded="false" aria-controls="filters" data-orca-disclose>{% icon "filter" %}Filters<span class="orca-count orca-count--accent">2</span></button>`.
 - Give the count a hidden explanation: `<span class="orca-sr-only">, 2 active</span>`.
 - When filters are active, also show them as removable tags with a Clear all link.
 

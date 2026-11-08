@@ -1,0 +1,10 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block title %}{% if title %}{{ title }}{% elif object %}Edit {{ object }}{% else %}Add {{ model_name }}{% endif %}{% endblock %}
+{% block page_title %}{% if title %}{{ title }}{% elif object %}Edit {{ object }}{% else %}Add {{ model_name }}{% endif %}{% endblock %}
+{% block content %}<div class="orca-narrow-form">
+  <form class="orca-form-stack" method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
+    {% orca_form_errors form %}
+    {% block form_fields %}{% for field in form.hidden_fields %}{{ field }}{% endfor %}{% for field in form.visible_fields %}{% orca_field field %}{% endfor %}{% endblock %}
+    {% block form_actions %}<div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">{{ submit_label|default:"Save" }}</button>{% if cancel_url %}<a class="orca-button" href="{{ cancel_url }}">Cancel</a>{% endif %}</div>{% endblock %}
+  </form>
+</div>{% endblock %}

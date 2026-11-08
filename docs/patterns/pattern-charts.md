@@ -27,7 +27,7 @@ Lengths from a common baseline are the most accurately compared visual encoding,
 
 - `stacked=True` stacks series; `horizontal=True` for long category names or many categories.
 - Start the value axis at zero; sort categories by value unless they have a natural order (days, hours).
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -74,7 +74,7 @@ A line shows trend and change over time better than bars, and comparing with a r
 
 - Use `"area"` as the kind for one series where the volume matters.
 - The second series is dashed so it differs without colour; label the reference ('Last Friday').
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -119,7 +119,7 @@ Part-to-whole is understood at a glance when there are few parts; the legend giv
 ### How to use
 
 - Order slices from largest, clockwise from 12 o'clock; group small ones into 'Other'.
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -164,7 +164,7 @@ The hole leaves room for the total, so one figure answers both 'how many' and 'h
 ### How to use
 
 - Same rules as the pie chart; the centre shows the total.
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -209,7 +209,7 @@ Plotting two measures against each other reveals correlation and outliers no tab
 ### How to use
 
 - Each series gets its own marker shape; name both axes in the subtitle with their units.
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -254,7 +254,7 @@ Size adds a third dimension (for example site size) without a second chart; the 
 ### How to use
 
 - Values are `x:y:size`; size scales by area, not radius.
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -299,7 +299,7 @@ A shape shows the profile of an item across many criteria at once and makes weak
 ### How to use
 
 - All axes must share the same scale (for example 0–100).
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 
@@ -344,7 +344,7 @@ Equal angles avoid the pie's angle-reading problem while keeping a compact round
 ### How to use
 
 - Order segments meaningfully (by time or by size).
-- Every chart: `{% templatetag openblock %} orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" {% templatetag closeblock %}`.
+- Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
 - The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
 

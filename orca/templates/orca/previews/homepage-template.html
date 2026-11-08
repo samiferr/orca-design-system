@@ -1,0 +1,4 @@
+{% extends "orca/layouts/home.html" %}
+{% block page_subtitle %}<p class="orca-page-subtitle">Here is what changed since yesterday.</p>{% endblock %}
+{% block home_main %}<section class="orca-panel" aria-labelledby="h-recent"><h2 class="orca-panel-title" id="h-recent">Recent activity</h2>
+  <div class="orca-vstack orca-vstack--tight">{% for i in "123" %}<div class="orca-activity"><span class="orca-avatar orca-avatar--s" aria-hidden="true">PN</span><div class="orca-activity__head"><strong>Person name</strong> changed Record name {{ i }}<time class="orca-activity__time">{{ i }} h ago</time></div></div>{% endfor %}</div></section>{% endblock %}

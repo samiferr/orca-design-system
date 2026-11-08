@@ -1,0 +1,7 @@
+{% extends "orca/generic/parent_base.html" %}{% load orca %}
+{% block child_content %}<div class="orca-vstack">
+  <div class="orca-list-header"><h2 class="orca-list-header__title">{{ model_name_plural|capfirst }} <span class="orca-list-header__count">{% if paginator %}{{ paginator.count }}{% else %}{{ object_list|length }}{% endif %}</span></h2>
+    <div class="orca-list-header__tools">{% block list_actions %}{% if create_url %}<a class="orca-button orca-button--primary orca-button--dense" href="{{ create_url }}">{% icon "plus" %}Add {{ model_name }} to {{ parent }}</a>{% endif %}{% endblock %}</div></div>
+  {% block list %}{% if object_list %}{% include "orca/generic/_table.html" %}{% if page_obj and page_obj.paginator.num_pages > 1 %}{% orca_pagination page_obj noun=model_name_plural %}{% endif %}
+  {% else %}<div class="orca-empty">{% orca_illustration "empty" %}<h3 class="orca-empty-title">No {{ model_name_plural }} for {{ parent }}</h3>{% if empty_text %}<p class="orca-empty-text">{{ empty_text }}</p>{% endif %}</div>{% endif %}{% endblock %}
+</div>{% endblock %}

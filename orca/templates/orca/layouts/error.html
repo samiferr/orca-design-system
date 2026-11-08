@@ -1,0 +1,14 @@
+{% extends "orca/layouts/base.html" %}{% load orca %}
+{% block body_class %}orca-error-page{% endblock %}
+{% block body %}
+<main id="main" class="orca-error-layout" tabindex="-1">
+  {% block brand %}{% orca_logo href="/" %}{% endblock %}
+  <div class="orca-error-layout__body">
+    {% block illustration %}{% orca_illustration "error" %}{% endblock %}
+    <p class="orca-error-layout__code">{% block error_code %}{% endblock %}</p>
+    <h1 class="orca-page-title">{% block page_title %}{{ title }}{% endblock %}</h1>
+    <p class="orca-p">{% block error_text %}{% endblock %}</p>
+    <div class="orca-row orca-row--16">{% block error_actions %}<a class="orca-button orca-button--primary" href="/">Go to the home page</a>{% endblock %}</div>
+  </div>
+</main>
+{% endblock %}

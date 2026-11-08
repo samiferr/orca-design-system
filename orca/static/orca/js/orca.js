@@ -32,6 +32,7 @@
      data-orca-theme-choice     radio group choosing auto / light / dark / paper
    Patterns
      data-orca-sidebar-toggle   collapses/expands the sidebar it controls and remembers it
+     data-orca-sidebar-open     on phones, shows/hides the sidebar it controls over the page (Escape closes)
      data-orca-light-dismiss    on a <dialog>: a click on the backdrop closes it (drawers)
      data-orca-richtext         rich text editor: toolbar commands, pressed states, syncs to a hidden field
      data-orca-zone-editor      draw a polygon on an image; points saved as JSON in a hidden field
@@ -351,6 +352,12 @@
     if (e.key === "Escape") {
       if (openPopover) { closePopover(true); e.preventDefault(); return; }
       var tip = closest(t, ".orca-tooltip-wrap"); if (tip) tip.classList.add("is-dismissed");
+      var openSide = doc.querySelector('.orca-sidebar[data-open="true"]');
+      if (openSide) {
+        openSide.setAttribute("data-open", "false");
+        var opener = doc.querySelector('[data-orca-sidebar-open][aria-controls="' + openSide.id + '"]');
+        if (opener) { opener.setAttribute("aria-expanded", "false"); opener.setAttribute("aria-label", "Show navigation"); opener.focus(); }
+      }
     }
     // Menus and listboxes
     if (openPopover && (openPopover.list.contains(t) || t === openPopover.trigger)) {
@@ -562,6 +569,15 @@
     if (t.tagName === "DIALOG" && t.hasAttribute("data-orca-light-dismiss")) {
       var r = t.getBoundingClientRect();
       if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) t.close("dismiss");
+      return;
+    }
+    if ((el = closest(t, "[data-orca-sidebar-open]"))) {
+      var side = controlled(el); if (!side) return;
+      var open = side.getAttribute("data-open") !== "true";
+      side.setAttribute("data-open", open ? "true" : "false");
+      el.setAttribute("aria-expanded", open ? "true" : "false");
+      el.setAttribute("aria-label", open ? "Hide navigation" : "Show navigation");
+      if (open) { var first = side.querySelector("a, button, input"); if (first) first.focus(); }
       return;
     }
     if ((el = closest(t, "[data-orca-sidebar-toggle]"))) {

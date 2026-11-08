@@ -1,0 +1,9 @@
+{% extends "orca/generic/parent_base.html" %}{% load orca %}
+{% block child_content %}<div class="orca-narrow-form">
+  <h2 class="orca-section-title">{% if object %}Edit {{ object }}{% else %}Add {{ model_name }} to {{ parent }}{% endif %}</h2>
+  <form class="orca-form-stack" method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
+    {% orca_form_errors form %}
+    {% block form_fields %}{% for field in form.hidden_fields %}{{ field }}{% endfor %}{% for field in form.visible_fields %}{% orca_field field %}{% endfor %}{% endblock %}
+    <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">{{ submit_label|default:"Save" }}</button>{% if cancel_url %}<a class="orca-button" href="{{ cancel_url }}">Cancel</a>{% endif %}</div>
+  </form>
+</div>{% endblock %}

@@ -60,7 +60,7 @@ Letting people add rows only when needed keeps the default form short (Practical
 
 ### How to use
 
-- `<button class="orca-button orca-button--ghost" type="button" data-orca-add-row="template-id" aria-controls="list-id">{% templatetag openblock %} icon "plus" {% templatetag closeblock %}Add hours</button>` below the rows.
+- `<button class="orca-button orca-button--ghost" type="button" data-orca-add-row="template-id" aria-controls="list-id">{% icon "plus" %}Add hours</button>` below the rows.
 - Name what is added ('Add hours', 'Add reminder'); hide it at the maximum number of rows and say the limit.
 
 #### Example: Add row
@@ -97,7 +97,7 @@ Removing a row is low risk and easy to redo, so it needs no confirmation (Dohert
 
 ### How to use
 
-- `<button class="orca-icon-button" type="button" aria-label="Remove Monday 08:00 to 12:00" data-orca-remove-row>{% templatetag openblock %} icon "delete" {% templatetag closeblock %}</button>`.
+- `<button class="orca-icon-button" type="button" aria-label="Remove Monday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button>`.
 - With Django formsets, a `-DELETE` checkbox in the row is ticked and the row hidden instead of removed.
 - Focus moves to the next row; the removal is announced.
 

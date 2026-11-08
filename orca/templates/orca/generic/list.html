@@ -1,0 +1,16 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block title %}{{ title|default:model_name_plural|capfirst }}{% endblock %}
+{% block page_title %}{{ title|default:model_name_plural|capfirst }}{% endblock %}
+{% block page_actions %}{% block list_actions %}{% if create_url %}<a class="orca-button orca-button--primary orca-create" href="{{ create_url }}">{% icon "plus" %}Add {{ model_name }}</a>{% endif %}{% endblock %}{% endblock %}
+{% block content %}<div class="orca-list-layout">
+  {% block filter_panel %}{% if filter_form %}<form class="orca-filter-panel" method="get" aria-label="Filters">
+    <div class="orca-filter-panel__head"><span class="orca-panel-title">Filters</span><a class="orca-button orca-button--link" href="?">Clear all</a></div>
+    {% for field in filter_form %}{% orca_field field optional_mark=False %}{% endfor %}
+    <button class="orca-button" type="submit">Apply filters</button>
+  </form>{% endif %}{% endblock %}
+  <div class="orca-vstack">
+    {% block list_header %}<div class="orca-list-header"><p class="orca-list-header__count" role="status">{% if paginator %}{{ paginator.count }}{% else %}{{ object_list|length }}{% endif %} {{ model_name_plural }}</p>
+      <form class="orca-list-header__tools" method="get" role="search"><div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" name="q" value="{{ request.GET.q }}" placeholder=" " aria-label="Search {{ model_name_plural }}"></div></form></div>{% endblock %}
+    {% block list %}{% if object_list %}{% include "orca/generic/_table.html" %}{% if page_obj and page_obj.paginator.num_pages > 1 %}{% orca_pagination page_obj noun=model_name_plural %}{% endif %}{% else %}{% include "orca/generic/_empty.html" %}{% endif %}{% endblock %}
+  </div>
+</div>{% endblock %}

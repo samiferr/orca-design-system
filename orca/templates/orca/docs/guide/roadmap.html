@@ -16,16 +16,16 @@
     </li>
     <li class="docs-level docs-level--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
       <div><p class="orca-panel-title">Patterns <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span></p><p class="orca-small orca-muted">Organisms. Recognisable sections: header, sidebar, data table, filter bar, charts, schedule editor, month calendar, kanban board.</p></div></li>
+    <li class="docs-level docs-level--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
+      <div><p class="orca-panel-title">Templates <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span></p><p class="orca-small orca-muted">Django templates you extend: app shell, auth, error and email layouts, generic CRUD and parent-child templates, dashboard, calendar, scheduler, board and timeline pages, structural layouts and slots.</p></div></li>
     <li class="docs-level docs-level--current"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Templates <span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Next</span></p><p class="orca-small orca-muted">Page layouts with placeholder content: app shell, list, detail, form, confirm, calendar page.</p></div></li>
-    <li class="docs-level"><span class="orca-step-marker" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Pages</p><p class="orca-small orca-muted">Templates filled with real content, including the variations that test them: empty, overdue, right-to-left, dark.</p></div></li>
+      <div><p class="orca-panel-title">Pages <span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Next</span></p><p class="orca-small orca-muted">Templates filled with real content, including the variations that test them: empty, overdue, right-to-left, dark.</p></div></li>
   </ol>
 </section>
 
 <section class="docs-block-flow">
   <h2 class="orca-section-title">Coverage</h2>
-  <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components and {{ stats.patterns }} patterns cover all {{ stats.guide_items }} primitive, component and pattern items of the ORCA guide, including the planning items the guide lists as not built yet. Several guide items share one element where they are variants of the same thing. The test suite fails if any item loses its element.</p>
+  <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components, {{ stats.patterns }} patterns and {{ stats.templates }} templates cover all {{ stats.guide_items }} primitive, component, pattern and template items of the ORCA guide, including the planning items the guide lists as not built yet. Several guide items share one element where they are variants of the same thing. The test suite fails if any item loses its element.</p>
   {% for title, sections in coverage %}
   <div class="docs-table-wrap"><table class="docs-table">
     <caption class="orca-panel-title" style="text-align: start; padding-bottom: var(--orca-space-8)">{{ title }}</caption>

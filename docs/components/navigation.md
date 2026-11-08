@@ -103,7 +103,7 @@ A consistent row (icon, label, count) is scanned quickly and its full width is t
 
 ### How to use
 
-- `<a class="orca-side-link" href=…>{% templatetag openblock %} icon … {% templatetag closeblock %}<span class="orca-side-link__label">Cameras</span><span class="orca-count orca-count--neutral">12</span></a>` inside `<ul class="orca-side-nav">`.
+- `<a class="orca-side-link" href=…>{% icon … %}<span class="orca-side-link__label">Cameras</span><span class="orca-count orca-count--neutral">12</span></a>` inside `<ul class="orca-side-nav">`.
 - `aria-current="page"` on the current link; `--l2` for a nested link.
 - Labels never wrap; a long one is cut with an ellipsis and has a `title`.
 
@@ -485,7 +485,7 @@ A visible way back near the top keeps people oriented, especially on phones wher
 
 ### How to use
 
-- `<a class="orca-back-link" href=…>{% templatetag openblock %} icon "chevron-left" {% templatetag closeblock %}Back to cameras</a>` above the title.
+- `<a class="orca-back-link" href=…>{% icon "chevron-left" %}Back to cameras</a>` above the title.
 - Name the destination ('Back to cameras'), never just 'Back'. Link to the real parent, not `history.back()`, so it works from a shared link.
 
 #### Example: Back link
@@ -559,7 +559,7 @@ Display preferences are needed rarely, so they sit behind one familiar icon (Hic
 
 ### How to use
 
-- `<button class="orca-icon-button" type="button" aria-label="Display settings" aria-expanded="false" aria-controls="panel-id" data-orca-disclose>{% templatetag openblock %} icon "sliders" {% templatetag closeblock %}</button>`.
+- `<button class="orca-icon-button" type="button" aria-label="Display settings" aria-expanded="false" aria-controls="panel-id" data-orca-disclose>{% icon "sliders" %}</button>`.
 - The panel itself is a pattern (settings panel); it can contain the theme toggle.
 
 #### Example: Settings toggle
@@ -601,7 +601,7 @@ On desktop the create action belongs beside the title; on phones it must stay in
 
 ### How to use
 
-- `<a class="orca-button orca-button--primary orca-create" href=…>{% templatetag openblock %} icon "plus" {% templatetag closeblock %}Add camera</a>` in the page head.
+- `<a class="orca-button orca-button--primary orca-create" href=…>{% icon "plus" %}Add camera</a>` in the page head.
 - Below 620px it floats at the bottom right (respecting safe areas); add 5rem of bottom padding to the page so it never covers the last row.
 
 #### Example: Create button

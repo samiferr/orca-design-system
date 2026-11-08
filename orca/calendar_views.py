@@ -195,3 +195,56 @@ def year_context(year=None, events=(), today=None, url="") -> dict:
     event_days = sorted({e["start"].date() for e in evs})
     months = [mini_calendar_context(month=dt.date(year, m, 1), today=today, url=url, events=event_days) for m in range(1, 13)]
     return {"year": year, "months": months}
+
+
+def scheduler_context(resources=(), start_hour=8, end_hour=18) -> dict:
+    """Resource scheduler: one lane per resource, bookings placed by time within the day.
+
+    ``resources``: dicts with ``name`` (and optional ``initials``, ``url``) and ``bookings``: events as above.
+    """
+    span = (end_hour - start_hour) * 60
+    rows = []
+    for r in resources or []:
+        items = []
+        for e in normalize(_get(r, "bookings", [])):
+            if e["all_day"]:
+                s, en = 0, span
+            else:
+                s = max((e["start"].hour - start_hour) * 60 + e["start"].minute, 0)
+                en = min((e["end"].hour - start_hour) * 60 + e["end"].minute, span) if e["end"].date() == e["start"].date() else span
+            if en <= 0 or s >= span:
+                continue
+            items.append(dict(e, left=round(s / span * 100, 3), width=round(max(en - s, 15) / span * 100, 3)))
+        name = str(_get(r, "name", ""))
+        rows.append({"name": name, "initials": _get(r, "initials", "") or "".join(p[0] for p in name.split()[:2]).upper(),
+                     "url": _get(r, "url", "") or "", "bookings": items})
+    hours = [formats.time_format(dt.time(h, 0), "H") for h in range(start_hour, end_hour)]
+    return {"rows": rows, "hours": hours, "cols": len(hours)}
+
+
+def gantt_context(rows=(), start=None, days=7, today=None) -> dict:
+    """Gantt chart: task bars on a day scale with a today line.
+
+    ``rows``: dicts with ``label``, ``start``, ``end`` (dates, end included), optional ``progress`` (0–100),
+    ``state`` ("done", "late" or ""), ``url`` and ``milestone`` (a date shown as a diamond on the row).
+    """
+    today = _to_date(today) or timezone.localdate()
+    start = _to_date(start) or today - dt.timedelta(days=today.weekday())
+    days = int(days)
+    dates = [start + dt.timedelta(days=i) for i in range(days)]
+
+    def pos(d):
+        return round(((_to_date(d) - start).days) / days * 100, 3)
+
+    out = []
+    for r in rows or []:
+        s, e = _to_date(_get(r, "start")), _to_date(_get(r, "end")) or _to_date(_get(r, "start"))
+        left, right = max(pos(s), 0), min(pos(e + dt.timedelta(days=1)), 100)
+        ms = _get(r, "milestone")
+        out.append({"label": _get(r, "label", ""), "url": _get(r, "url", "") or "#", "state": _get(r, "state", "") or "",
+                    "progress": _get(r, "progress", None), "left": left, "width": max(right - left, 0),
+                    "milestone": (min(max(pos(ms) + 50 / days, 0), 97) if ms else None)})
+    scale = [{"label": formats.date_format(d, "D j"), "today": d == today} for d in dates]
+    at = (today - start).days / days + 0.5 / days if start <= today < start + dt.timedelta(days=days) else None
+    return {"rows": out, "scale": scale, "cols": days, "today_at": round(at, 4) if at is not None else None,
+            "title": f"{formats.date_format(dates[0], 'j M')} – {formats.date_format(dates[-1], 'j M Y')}"}

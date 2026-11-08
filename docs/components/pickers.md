@@ -26,7 +26,7 @@ The native picker is familiar and accessible on every device (Jakob's law); one-
 
 - `.orca-field` with label, help and `<input class="orca-input" type="date">`, then `.orca-shortcuts` of tags `<button class="orca-tag" type="button" aria-pressed="false" data-orca-set-date="0" aria-controls="input-id">Today</button>` (+1 Tomorrow, +7 In a week).
 - Set `min`/`max` and say the allowed range in the help text.
-- Django: `{% templatetag openblock %} orca_field form.due {% templatetag closeblock %}` renders a DateField as a native date input.
+- Django: `{% orca_field form.due %}` renders a DateField as a native date input.
 
 #### Example: Due date
 
@@ -259,7 +259,7 @@ Detecting the zone moves the complexity to the system (Tesler's law); keeping th
 
 ### How to use
 
-- `.orca-field` with label, help showing the current local time, a `.orca-row` with `<select class="orca-select">{% templatetag openblock %} orca_timezone_options current {% templatetag closeblock %}</select>` and a ghost button `data-orca-detect-tz aria-controls="select-id"`.
+- `.orca-field` with label, help showing the current local time, a `.orca-row` with `<select class="orca-select">{% orca_timezone_options current %}</select>` and a ghost button `data-orca-detect-tz aria-controls="select-id"`.
 - Store the IANA name.
 
 #### Example: Site timezone
@@ -339,7 +339,7 @@ A month grid shows a date in context (weekday, week, neighbours) in the layout e
 
 ### How to use
 
-- `{% templatetag openblock %} orca_mini_calendar month selected=day url="/events/?day={date}" nav_url="?month={month}" events=event_days holidays=holiday_map week_numbers=True {% templatetag closeblock %}`.
+- `{% orca_mini_calendar month selected=day url="/events/?day={date}" nav_url="?month={month}" events=event_days holidays=holiday_map week_numbers=True %}`.
 - Without `url`, days render as buttons with `data-date` for your own script.
 - Each day's accessible name is the full date plus today, holiday and 'has events' notes.
 

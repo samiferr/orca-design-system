@@ -18,7 +18,7 @@ from orca.conf import compute_brand
 from orca.views import render_snippet
 
 ROOT = Path(__file__).resolve().parent.parent
-CSS = (ROOT / "orca/static/orca/css/orca.css").read_text() + (ROOT / "orca/static/orca/css/components.css").read_text() + (ROOT / "orca/static/orca/css/patterns.css").read_text()
+CSS = (ROOT / "orca/static/orca/css/orca.css").read_text() + (ROOT / "orca/static/orca/css/components.css").read_text() + (ROOT / "orca/static/orca/css/patterns.css").read_text() + (ROOT / "orca/static/orca/css/templates.css").read_text()
 TOKENS_CSS = (ROOT / "orca/static/orca/css/tokens.css").read_text()
 CSS_CLASSES = set(m[1:] for m in re.findall(r"\.orca-[a-z0-9_-]+", CSS))
 CSS_TOKENS = set(re.findall(r"--orca-([a-z0-9-]+)\s*:", TOKENS_CSS))
@@ -49,7 +49,7 @@ class CatalogueTests(SimpleTestCase):
                 self.assertTrue(re.fullmatch(r"[a-z0-9-]+", el.id))
                 self.assertGreater(len(el.summary), 10)
                 self.assertGreater(len(el.why), 40)
-                self.assertTrue(el.when and el.how and el.examples)
+                self.assertTrue(el.when and el.how and (el.examples or el.preview))
                 self.assertTrue(el.laws, "every element names the principle it applies")
                 self.assertIn(el.level, registry.RELEASED_LEVELS)
 
@@ -225,7 +225,7 @@ class TemplateTagTests(SimpleTestCase):
 
 class DocsSiteTests(SimpleTestCase):
     def test_pages(self):
-        for name in ("home", "index", "components", "patterns", "tokens", "icons", "catalogue-json"):
+        for name in ("home", "index", "components", "patterns", "templates", "tokens", "icons", "catalogue-json"):
             with self.subTest(name=name):
                 self.assertEqual(self.client.get(reverse(f"orca:{name}")).status_code, 200)
 
@@ -432,6 +432,119 @@ class PatternTagTests(SimpleTestCase):
         preview = self.render('{% orca_email_preview title="Hi" %}')
         self.assertIn("<iframe", preview)
         self.assertIn("sandbox", preview)
+
+
+class TemplateLevelTests(SimpleTestCase):
+    """Level 4: layouts, generic and page-type templates, structural layouts and slots."""
+
+    def blocks_of(self, name, seen=None):
+        """Every block name a template offers, following its extends chain."""
+        from django.template.loader import get_template
+
+        src = get_template(name).template.source
+        found = set(re.findall(r"{%\s*block\s+([a-z_]+)", src))
+        parent = re.search(r'{%\s*extends\s+"([^"]+)"', src)
+        return found | (self.blocks_of(parent.group(1)) if parent else set())
+
+    def test_every_preview_renders_a_whole_page_with_real_classes(self):
+        for el in registry.all_elements("template"):
+            if not el.preview:
+                continue
+            with self.subTest(el=el.id):
+                res = self.client.get(reverse("orca:preview", args=[el.id]))
+                self.assertEqual(res.status_code, 200)
+                html = res.content.decode()
+                self.assertIn("<!doctype html>", html.lower())
+                for cls in re.findall(r'class="([^"]*)"', html):
+                    for name in re.findall(r"\borca-[a-z0-9_-]+", cls):
+                        self.assertTrue(name in CSS_CLASSES, f"{el.id}: preview uses unknown class {name}")
+                for btn in re.findall(r"<button\b[^>]*>", html):
+                    self.assertIn("type=", btn, f"{el.id}: button without type")
+                for img in re.findall(r"<img\b[^>]*>", html):
+                    self.assertIn("alt=", img, f"{el.id}: img without alt")
+                self.assertEqual(html.count('id="main"'), 1 if el.id != "email-layout" else 0, f"{el.id}: one main landmark")
+
+    def test_documented_blocks_exist_in_the_template(self):
+        for el in registry.all_elements("template"):
+            if el.template:
+                with self.subTest(el=el.id):
+                    missing = set(el.blocks) - self.blocks_of(el.template)
+                    self.assertEqual(missing, set(), f"{el.id}: blocks not in {el.template}")
+
+    def test_every_slot_exists_in_the_layouts(self):
+        offered = set()
+        for name in ("orca/layouts/app.html", "orca/layouts/marketing.html", "orca/layouts/docs.html", "orca/generic/list.html",
+                     "orca/generic/detail.html", "orca/layouts/simple_data.html"):
+            offered |= self.blocks_of(name)
+        for el in registry.all_elements("template"):
+            if el.category == "template-slots":
+                self.assertIn(el.blocks[0], offered, f"{el.id}: no layout offers block {el.blocks[0]}")
+
+    def test_error_500_renders_without_a_request(self):
+        from django.template.loader import render_to_string
+
+        html = render_to_string("orca/errors/500.html")
+        self.assertIn("Something went wrong", html)
+        self.assertIn("orca-error-layout", html)
+
+    def test_orca_value_filter(self):
+        from orca.templatetags.orca import orca_object_url, orca_value
+
+        class Obj:
+            name = "Gate 1"
+            active = False
+            note = None
+
+            def get_status_display(self):
+                return "Online"
+
+        self.assertEqual(orca_value(Obj(), "name"), "Gate 1")
+        self.assertEqual(orca_value(Obj(), "status"), "Online")
+        self.assertEqual(orca_value(Obj(), "active"), "No")
+        self.assertEqual(orca_value(Obj(), "note"), "\u2014")
+        self.assertEqual(orca_value({"a": True}, "a"), "Yes")
+        self.assertEqual(orca_object_url({"pk": 1}, "#"), "#")
+        self.assertEqual(orca_object_url({"pk": 1}, "no-such-url"), "")
+
+    def test_scheduler_and_gantt_positions(self):
+        from orca import calendar_views as cv
+
+        sched = cv.scheduler_context([{"name": "Ada Lovelace", "bookings": [{"title": "A", "start": "2026-11-06T10:00", "end": "2026-11-06T11:00"}]}], 8, 18)
+        b = sched["rows"][0]["bookings"][0]
+        self.assertEqual((b["left"], b["width"]), (20.0, 10.0))
+        self.assertEqual(sched["rows"][0]["initials"], "AL")
+        g = cv.gantt_context([{"label": "T", "start": "2026-11-02", "end": "2026-11-03"}], start="2026-11-02", days=7, today="2026-11-06")
+        self.assertAlmostEqual(g["rows"][0]["width"], 2 / 7 * 100, places=2)
+        self.assertIsNotNone(g["today_at"])
+
+    def test_mixin_fills_generic_context(self):
+        from types import SimpleNamespace
+
+        from django.views.generic.base import ContextMixin
+
+        from orca.mixins import OrcaPageMixin
+
+        class Field:
+            verbose_name = "camera name"
+            choices = None
+
+        class Meta:
+            verbose_name, verbose_name_plural = "camera", "cameras"
+
+            def get_field(self, name):
+                if name == "name":
+                    return Field()
+                raise LookupError(name)
+
+        class V(OrcaPageMixin, ContextMixin):
+            model = SimpleNamespace(_meta=Meta())
+            list_columns = ["name", ("Counted today", "today"), "last_seen"]
+            create_url_name = "orca:home"
+
+        ctx = V().get_context_data()
+        self.assertEqual(ctx["model_name_plural"], "cameras")
+        self.assertEqual([c["label"] for c in ctx["columns"]], ["Camera name", "Counted today", "Last seen"])
+        self.assertEqual(ctx["create_url"], reverse("orca:home"))
 
 
 class LintTests(SimpleTestCase):

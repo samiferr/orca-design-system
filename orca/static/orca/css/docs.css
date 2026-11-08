@@ -24,11 +24,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .docs-nav .orca-side-link { font: var(--orca-type-detail); }
 .docs-nav .orca-side-link > .orca-count { margin-inline-start: auto; }
 .docs-nav__tree summary { font: var(--orca-type-detail); }
+.docs-nav__tree > li > details > summary { font: var(--orca-type-body-strong); }
+.docs-nav__tree summary > .orca-icon { flex: none; }
+.docs-nav__tree details details summary { padding-inline-start: var(--orca-space-40); }
+.docs-nav__tree details details > ul > li > a { padding-inline-start: 4rem; }
+.docs-nav__tree details > ul > li > a { padding-inline-start: var(--orca-space-40); }
+.docs-nav__rail { display: none; }
 .docs-nav__heading-text { flex: 1; min-width: 0; }
 .docs-nav__foot { position: sticky; bottom: 0; background: var(--orca-bg-alt); box-shadow: inset 0 var(--orca-hairline) 0 var(--orca-border-weak); }
 /* Collapsed to the icon rail (wide screens only): the filter and the element tree hide, the section links keep their icons */
 @media (min-width: 1036px) {
   .docs-nav[data-collapsed="true"] .docs-nav__filter, .docs-nav[data-collapsed="true"] .docs-nav__empty, .docs-nav[data-collapsed="true"] .docs-nav__tree { display: none; }
+  .docs-nav[data-collapsed="true"] .docs-nav__rail { display: flex; }
   .docs-nav[data-collapsed="true"] .docs-nav__foot { display: flex; justify-content: center; }
 }
 
@@ -81,6 +88,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .docs-block-flow .docs-example { margin: 0; }
 .docs-example > .orca-panel-title { padding: var(--orca-space-12) var(--orca-space-16) 0; }
 .docs-example__preview { padding: var(--orca-space-24) var(--orca-space-16); overflow-x: auto; }
+.docs-example__preview--page { padding: var(--orca-space-16); background: var(--orca-bg-alt); }
+.docs-example__bar { justify-content: space-between; padding: var(--orca-space-8) var(--orca-space-16) 0; }
 .docs-example__code { border-top: var(--orca-hairline) solid var(--orca-border); }
 .docs-example__code > summary { display: flex; align-items: center; gap: var(--orca-space-8); padding: var(--orca-space-8) var(--orca-space-16); cursor: pointer; list-style: none; font: var(--orca-type-detail); }
 .docs-example__code > summary:hover { background: var(--orca-bg-hover); }

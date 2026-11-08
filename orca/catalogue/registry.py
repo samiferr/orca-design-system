@@ -95,6 +95,24 @@ class Element:
     source: str = "Tangerine"  # Tangerine (from wise_people_analyzer) or ORCA (new in this system)
     level: str = "primitive"
     uses: list[str] = field(default_factory=list)  # lower-level elements this one is built from
+    # Templates level: the Django template a project extends, the child template shown as its live preview
+    # (orca/templates/orca/previews/<preview>.html), the blocks it offers and the context variables it reads.
+    template: str = ""
+    preview: str = ""
+    blocks: list[str] = field(default_factory=list)
+    context: list[str] = field(default_factory=list)
+
+    def preview_template(self) -> str:
+        return f"orca/previews/{self.preview}.html" if self.preview else ""
+
+    def example_list(self) -> list[tuple[str, str]]:
+        """Examples to show and export. A template's example is the child template of its preview."""
+        if self.examples or not self.preview:
+            return self.examples
+        from pathlib import Path
+
+        path = Path(__file__).resolve().parent.parent / "templates" / self.preview_template()
+        return [("Child template", path.read_text(encoding="utf-8").strip())]
 
     def law_names(self) -> list[str]:
         out = []
@@ -123,7 +141,21 @@ def category(key: str, title: str, intro: str, level: str = "primitive") -> str:
     return key
 
 
+_TEMPLATETAG = {"{% templatetag openblock %}": "{%", "{% templatetag closeblock %}": "%}",
+                "{% templatetag openvariable %}": "{{", "{% templatetag closevariable %}": "}}"}
+
+
+def _plain(text: str) -> str:
+    """Catalogue prose may spell template syntax with templatetag (needed inside examples); prose shows it plainly."""
+    for tag, out in _TEMPLATETAG.items():
+        text = text.replace(tag, out)
+    return text
+
+
 def add(el: Element) -> Element:
+    el.summary, el.why = _plain(el.summary), _plain(el.why)
+    for name in ("when", "how", "avoid", "a11y", "context"):
+        setattr(el, name, [_plain(t) for t in getattr(el, name)])
     if el.id in _ELEMENTS:
         raise ValueError(f"Duplicate ORCA element id {el.id!r}")
     el.level = _CATEGORY_LEVEL.get(el.category, el.level)
@@ -146,11 +178,12 @@ def _load() -> None:
         page_frame, grids, data_filtering, forms as pattern_forms, media, records, charts as pattern_charts,
         marketing, process, editorial, email, calendar_views, scheduler, event_editing, planning_boards,
     )
+    from .templates import layouts, generic, page_types, structure as template_structure, slots  # noqa: F401
 
 
 LEVEL_TITLES = {"primitive": "Primitives", "component": "Components", "pattern": "Patterns",
                 "template": "Templates", "page": "Pages"}
-RELEASED_LEVELS = ("primitive", "component", "pattern")
+RELEASED_LEVELS = ("primitive", "component", "pattern", "template")
 
 
 def categories(level: str | None = None) -> list[Category]:
@@ -194,7 +227,7 @@ def as_json() -> dict:
         "brand_tokens": [{"key": t.key, "css": t.css, "default": t.default, "usage": t.usage} for t in BRAND_TOKENS],
         "categories": [asdict(c) for c in categories()],
         "elements": [
-            dict(asdict(el), examples=[{"title": t, "html": h} for t, h in el.examples], law_names=el.law_names())
+            dict(asdict(el), examples=[{"title": t, "html": h} for t, h in el.example_list()], law_names=el.law_names())
             for el in all_elements()
         ],
     }

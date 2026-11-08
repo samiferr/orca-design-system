@@ -158,7 +158,7 @@ Copying exact values (keys, addresses) by hand causes errors; one click with vis
 
 ### How to use
 
-- `<div class="orca-copy"><code class="orca-copy__value" id="v1">…</code><button class="orca-button" type="button" data-orca-copy="v1">{% templatetag openblock %} icon "copy" {% templatetag closeblock %}<span data-orca-copy-label>Copy</span></button></div>`.
+- `<div class="orca-copy"><code class="orca-copy__value" id="v1">…</code><button class="orca-button" type="button" data-orca-copy="v1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>`.
 - The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead.
 
 #### Example: Copy a stream address

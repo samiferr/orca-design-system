@@ -24,7 +24,7 @@ A month shows how busy each day is and where the gaps are, which is what people 
 
 ### How to use
 
-- `{% templatetag openblock %} orca_month_calendar events month="2026-11" today=today selected=day day_url="?day={date}" holidays=holidays max_per_day=3 {% templatetag closeblock %}`.
+- `{% orca_month_calendar events month="2026-11" today=today selected=day day_url="?day={date}" holidays=holidays max_per_day=3 %}`.
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
 - Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date.
 - Navigation is plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap only the grid.
@@ -66,7 +66,7 @@ Seeing time as height makes durations, gaps and overlaps obvious (Practical UI L
 
 ### How to use
 
-- `{% templatetag openblock %} orca_week_view events start=monday today=today now=now start_hour=7 end_hour=19 {% templatetag closeblock %}` (start defaults to today's week start).
+- `{% orca_week_view events start=monday today=today now=now start_hour=7 end_hour=19 %}` (start defaults to today's week start).
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
 - Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date.
 - Navigation is plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap only the grid.
@@ -108,7 +108,7 @@ One column leaves room for each event's title, time and place, so there is no tr
 
 ### How to use
 
-- `{% templatetag openblock %} orca_week_view events start=day days=1 today=today now=now {% templatetag closeblock %}`.
+- `{% orca_week_view events start=day days=1 today=today now=now %}`.
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
 - Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date.
 - Pair with a mini calendar or a date strip to change day.
@@ -145,7 +145,7 @@ A list is read top to bottom without decoding a grid (Jakob's law: like a to-do 
 
 ### How to use
 
-- `{% templatetag openblock %} orca_agenda events start=today days=7 today=today {% templatetag closeblock %}`.
+- `{% orca_agenda events start=today days=7 today=today %}`.
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
 - Show an empty state when nothing is planned ('Nothing planned this week').
 
@@ -181,7 +181,7 @@ Long-range planning (holidays, seasons, launches) needs the whole year at once (
 
 ### How to use
 
-- `{% templatetag openblock %} orca_year_view year=2026 events=events today=today url="?day={date}" {% templatetag closeblock %}`.
+- `{% orca_year_view year=2026 events=events today=today url="?day={date}" %}`.
 - Days with events carry a dot; the URL template gets the ISO date.
 
 #### Example: 2026
@@ -216,7 +216,7 @@ Three days fit a tablet or a narrow panel while still showing what comes next (M
 
 ### How to use
 
-- `{% templatetag openblock %} orca_week_view events start=today days=3 today=today now=now {% templatetag closeblock %}`.
+- `{% orca_week_view events start=today days=3 today=today now=now %}`.
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
 
 #### Example: Next three days

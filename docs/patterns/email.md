@@ -24,8 +24,8 @@ Email clients ignore CSS variables and most stylesheets, so ORCA computes the co
 
 ### How to use
 
-- Write emails as `{% templatetag openblock %} extends "orca/email/base.html" {% templatetag closeblock %}` and fill the blocks `title`, `preheader`, `heading`, `content`, `action` (or set `action_url` and `action_label`), `footer`.
-- `{% templatetag openblock %} orca_email_colors as c {% templatetag closeblock %}` gives the hex colours for any extra inline styles.
+- Write emails as `{% extends "orca/email/base.html" %}` and fill the blocks `title`, `preheader`, `heading`, `content`, `action` (or set `action_url` and `action_label`), `footer`.
+- `{% orca_email_colors as c %}` gives the hex colours for any extra inline styles.
 - Always send a plain-text alternative. Keep the width at 560px; the subject states the event ('Loading dock is offline').
 
 #### Example: Alert email (preview)

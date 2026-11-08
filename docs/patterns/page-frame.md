@@ -239,7 +239,7 @@ Results always in the same place are found at once (Jakob's law); a live region 
 
 ### How to use
 
-- `<div class="orca-messages-region" aria-live="polite">{% templatetag openblock %} orca_messages {% templatetag closeblock %}</div>`; errors inside use `role="alert"`.
+- `<div class="orca-messages-region" aria-live="polite">{% orca_messages %}</div>`; errors inside use `role="alert"`.
 - Toasts float elsewhere; this region holds messages that must stay until read.
 
 #### Example: Region

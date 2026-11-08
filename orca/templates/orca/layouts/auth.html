@@ -1,0 +1,14 @@
+{% extends "orca/layouts/base.html" %}{% load orca %}
+{% block body_class %}orca-auth-page{% endblock %}
+{% block body %}
+<main id="main" class="orca-auth" tabindex="-1">
+  {% block content %}<form class="orca-login" method="post" action="{{ form_action|default:'' }}">{% csrf_token %}
+    <div class="orca-login__head">{% block brand %}{% orca_logo href="" %}{% endblock %}<h1 class="orca-login__title">{% block page_title %}{{ title|default:"Sign in" }}{% endblock %}</h1>{% block page_subtitle %}{% if subtitle %}<p class="orca-page-subtitle">{{ subtitle }}</p>{% endif %}{% endblock %}</div>
+    {% block messages %}{% orca_messages %}{% endblock %}
+    {% if form %}{% orca_form_errors form %}{% for field in form.hidden_fields %}{{ field }}{% endfor %}{% for field in form.visible_fields %}{% orca_field field %}{% endfor %}{% endif %}
+    {% block form_extra %}{% endblock %}
+    <button class="orca-button orca-button--primary orca-button--block" type="submit">{% block submit_label %}{{ submit_label|default:"Sign in" }}{% endblock %}</button>
+    {% block footer %}{% endblock %}
+  </form>{% endblock %}
+</main>
+{% endblock %}

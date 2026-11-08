@@ -20,7 +20,13 @@ def element_markdown(el: registry.Element) -> str:
     out += ["### How to use", "", _bullets(el.how), ""]
     if el.a11y:
         out += ["### Accessibility", "", _bullets(el.a11y), ""]
-    for title, html in el.examples:
+    if el.template:
+        out += [f"Extend: `{{% extends \"{el.template}\" %}}`", ""]
+    if el.blocks:
+        out += ["Blocks: " + ", ".join(f"`{b}`" for b in el.blocks), ""]
+    if el.context:
+        out += ["### Context it reads", "", _bullets(el.context), ""]
+    for title, html in el.example_list():
         out += [f"#### Example: {title}", "", "```django", html.strip(), "```", ""]
     meta = []
     if el.classes:

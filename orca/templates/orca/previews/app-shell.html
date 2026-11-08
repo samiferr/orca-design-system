@@ -1,0 +1,6 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_actions %}<button class="orca-button" type="button">Secondary action</button><a class="orca-button orca-button--primary orca-create" href="#">{% icon "plus" %}Main action</a>{% endblock %}
+{% block content %}<div class="orca-vstack">
+  <section class="orca-panel" aria-label="Section"><div class="orca-skeleton orca-skeleton--title" style="max-width: 16rem"></div><div class="orca-skeleton orca-skeleton--text"></div><div class="orca-skeleton orca-skeleton--text" style="max-width: 70%"></div></section>
+  <div class="orca-two-col"><section class="orca-panel" aria-label="Section"><div class="orca-skeleton orca-aspect-16x9"></div></section><section class="orca-panel" aria-label="Section"><div class="orca-skeleton orca-aspect-16x9"></div></section></div>
+</div>{% endblock %}

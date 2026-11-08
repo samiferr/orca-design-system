@@ -1,0 +1,6 @@
+{% extends "orca/layouts/error.html" %}{% load orca %}
+{% block title %}Page not found{% endblock %}
+{% block illustration %}{% orca_illustration "search" %}{% endblock %}
+{% block error_code %}Error 404{% endblock %}
+{% block page_title %}We cannot find this page{% endblock %}
+{% block error_text %}The address may be mistyped, or the page was moved or deleted.{% endblock %}

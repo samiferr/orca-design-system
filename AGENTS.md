@@ -6,7 +6,7 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 - `python -m orca search <words>` finds the element; `python -m orca show <id>` prints its **why, when, when not, how,
   accessibility notes, classes, tokens and a working example**. Copy the example, then adapt the content.
-- The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md`, `docs/patterns/<category>.md` and `docs/catalogue.json`.
+- The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md`, `docs/patterns/<category>.md`, `docs/templates/<category>.md` and `docs/catalogue.json`.
 - **Prefer a pattern over assembling components, and a component over assembling primitives.** Each element's
   "Built from" list names what it is made of.
 - Charts, calendars and emails come from tags, never hand-drawn SVG or a chart library: `{% orca_chart kind data %}`,
@@ -66,18 +66,21 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 ## 4. Page skeleton
 
+Do not write the document skeleton yourself: extend a layout.
+
 ```django
-{% load orca %}<!doctype html>
-<html {% orca_html_attrs %}>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">{% orca_head %}</head>
-<body>
-  <a class="orca-skip-link" href="#main">Skip to main content</a>
-  <main id="main" tabindex="-1">…</main>
-</body>
-</html>
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_actions %}<a class="orca-button orca-button--primary" href="{% url 'camera-create' %}">Add camera</a>{% endblock %}
+{% block content %}<div class="orca-vstack">…patterns…</div>{% endblock %}
 ```
+
+Context: `title`, `subtitle`, `breadcrumbs` [(label, url)], `nav` (sidebar sections). Other layouts: `auth`, `error`,
+`marketing`, `docs`, `dashboard`, `calendar`, `scheduler`, `board`, `timeline`, `booking`, `event_editor`,
+`simple_data`; CRUD: `orca/generic/list|detail|form|confirm_delete|confirm_action.html` and the parent-child set.
+`python -m orca show app-shell` lists every block and context variable.
 
 ## 5. Scope of this release
 
-Released: **primitives**, **components** and **patterns**. Templates and pages from the ORCA guide come next; until
-then, compose page layouts from patterns, following each element's "how" rules.
+Released: **primitives**, **components**, **patterns** and **templates**. Pages from the ORCA guide come next.
+Start every page from a template: extend `orca/layouts/app.html` (or a page-type layout) and fill its blocks;
+for CRUD use `orca/generic/*.html` with `orca.mixins.OrcaPageMixin`. Never copy a layout's markup into a page.

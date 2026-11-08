@@ -1,0 +1,11 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_title %}{% if title %}{{ title }}{% elif object %}Edit {{ object }}{% else %}New event{% endif %}{% endblock %}
+{% block content %}<div class="orca-split">
+  <form class="orca-form-stack" method="post" novalidate>{% csrf_token %}
+    {% orca_form_errors form %}
+    {% block form_fields %}{% for field in form.hidden_fields %}{{ field }}{% endfor %}{% for field in form.visible_fields %}{% orca_field field %}{% endfor %}{% endblock %}
+    <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">{{ submit_label|default:"Save event" }}</button>{% if cancel_url %}<a class="orca-button" href="{{ cancel_url }}">Cancel</a>{% endif %}</div>
+    {% if delete_url %}<p><a class="orca-button orca-button--outline-danger" href="{{ delete_url }}">{% icon "delete" %}Delete this event</a></p>{% endif %}
+  </form>
+  <aside class="orca-vstack" aria-label="Event context">{% block event_aside %}{% for c in conflicts %}<div class="orca-callout orca-callout--caution" role="status">{% icon "warning" %}<p class="orca-callout__title">{{ c }}</p></div>{% endfor %}{% endblock %}</aside>
+</div>{% endblock %}

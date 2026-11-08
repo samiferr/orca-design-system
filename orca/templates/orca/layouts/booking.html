@@ -1,0 +1,8 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block content %}<div class="orca-vstack">
+  {% block booking_steps %}{% if steps %}<ol class="orca-steps">{% for s in steps %}<li class="orca-steps__item{% if forloop.counter < step %} orca-steps__item--done{% endif %}"{% if forloop.counter == step %} aria-current="step"{% endif %}><span class="orca-step-marker{% if forloop.counter < step %} orca-step-marker--done{% elif forloop.counter == step %} orca-step-marker--current{% endif %}" aria-hidden="true"></span><span class="orca-steps__title">{{ s }}</span></li>{% endfor %}</ol>{% endif %}{% endblock %}
+  <div class="orca-split">
+    <div class="orca-booking">{% block booking_step %}{% endblock %}</div>
+    <aside class="orca-panel" aria-label="Your booking">{% block booking_summary %}<h2 class="orca-panel-title">Your booking</h2><dl class="orca-kv orca-kv--stacked">{% for label, value in summary %}<div><dt>{{ label }}</dt><dd>{{ value }}</dd></div>{% empty %}<div><dt>Nothing chosen yet</dt><dd>Your choices appear here.</dd></div>{% endfor %}</dl>{% endblock %}</aside>
+  </div>
+</div>{% endblock %}

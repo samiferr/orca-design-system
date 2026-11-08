@@ -54,6 +54,7 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
         f'<link rel="stylesheet" href="{static("orca/css/orca.css")}">',
         f'<link rel="stylesheet" href="{static("orca/css/components.css")}">',
         f'<link rel="stylesheet" href="{static("orca/css/patterns.css")}">',
+        f'<link rel="stylesheet" href="{static("orca/css/templates.css")}">',
         f"<style{nonce}>{brand_style(brand)}</style>",
         f'<meta name="theme-color" content="{brand.css["light"]["--orca-brand-strong"]}">',
     ]
@@ -69,6 +70,17 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
         for glyph in ("success", "error", "warning", "info"):
             parts.append(f'<template data-orca-icon="{glyph}">{icons.svg(glyph)}</template>')
     return mark_safe("\n".join(parts))
+
+
+@register.simple_tag(takes_context=True)
+def orca_theme_bootstrap(context):
+    """The inline script that restores the reader's theme before first paint (only when THEME is "auto").
+
+    orca_head already includes it; use this when you call ``orca_head theme_restore=False`` and place it yourself.
+    """
+    if theme() != "auto":
+        return ""
+    return mark_safe(f"<script{_nonce(context)}>{_THEME_RESTORE}</script>")
 
 
 @register.simple_tag
@@ -211,13 +223,15 @@ from .. import components as _c  # noqa: E402
 
 
 @register.inclusion_tag("orca/components/field.html")
-def orca_field(bound_field, switch=False, width="", label=None, help_text=None, hide_label=False, horizontal=False):
+def orca_field(bound_field, switch=False, width="", label=None, help_text=None, hide_label=False, horizontal=False,
+               optional_mark=True):
     """One form field, the ORCA way: label, optional marker, help, error and control, all wired with ARIA.
 
     {% orca_field form.name %}  {% orca_field form.enabled switch=True %}  {% orca_field form.port width="w8" %}
+    ``optional_mark=False`` drops "(optional)" where every field is optional (filters).
     """
-    return _c.field_context(bound_field, switch=switch, width=width, label=label, help_text=help_text,
-                            hide_label=hide_label, horizontal=horizontal)
+    return dict(_c.field_context(bound_field, switch=switch, width=width, label=label, help_text=help_text,
+                                 hide_label=hide_label, horizontal=horizontal), optional_mark=optional_mark)
 
 
 @register.inclusion_tag("orca/components/form_errors.html")
@@ -296,6 +310,18 @@ def orca_year_view(year=None, events=(), today=None, url=""):
     return _cv.year_context(year=year, events=events, today=today, url=url)
 
 
+@register.inclusion_tag("orca/patterns/scheduler.html")
+def orca_scheduler(resources=(), start_hour=8, end_hour=18):
+    """Resource scheduler: resources as rows, bookings as cards placed by time (see calendar_views.scheduler_context)."""
+    return _cv.scheduler_context(resources, start_hour=int(start_hour), end_hour=int(end_hour))
+
+
+@register.inclusion_tag("orca/patterns/gantt.html")
+def orca_gantt(rows=(), start=None, days=7, today=None, label=""):
+    """Gantt chart with a day scale and a today line (see calendar_views.gantt_context)."""
+    return dict(_cv.gantt_context(rows, start=start, days=days, today=today), label=label)
+
+
 @register.simple_tag
 def orca_email_colors():
     """Hex colours and font for HTML emails (email clients cannot read CSS variables)."""
@@ -318,3 +344,48 @@ def orca_email_preview(template="orca/email/base.html", title="", **context):
 
     html = render_to_string(template, dict(context, title=title))
     return mark_safe(f'<iframe class="orca-email-preview" sandbox title="Email preview: {escape(title)}" srcdoc="{escape(html)}"></iframe>')
+
+
+# ----------------------------------------------------------------- template level (generic templates)
+
+@register.filter
+def orca_value(obj, name):
+    """The display value of ``obj.<name>`` for generic tables and detail lists.
+
+    Works on model instances and dicts; uses ``get_<name>_display`` for choices, calls methods, shows booleans as
+    Yes/No and empty values as an em dash.
+    """
+    if obj is None or not name:
+        return ""
+    if isinstance(obj, dict):
+        value = obj.get(name)
+    else:
+        display = getattr(obj, f"get_{name}_display", None)
+        value = display() if callable(display) else getattr(obj, name, None)
+        if callable(value) and not hasattr(value, "all"):
+            value = value()
+        elif hasattr(value, "all") and callable(value.all):  # many-to-many manager
+            value = ", ".join(str(v) for v in value.all())
+    if value is True:
+        return "Yes"
+    if value is False:
+        return "No"
+    if value in (None, ""):
+        return "\u2014"
+    return value
+
+
+@register.filter
+def orca_object_url(obj, url_name):
+    """``reverse(url_name, args=[obj.pk])``, or "" when it cannot be reversed. "#" passes through (previews)."""
+    from django.urls import NoReverseMatch, reverse
+
+    if not url_name:
+        return ""
+    if url_name == "#":
+        return "#"
+    pk = obj.get("pk") if isinstance(obj, dict) else getattr(obj, "pk", None)
+    try:
+        return reverse(url_name, args=[pk])
+    except NoReverseMatch:
+        return ""

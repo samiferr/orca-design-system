@@ -14,10 +14,14 @@ it uses, the UX principles it applies, and a copy-ready template example.
 - **Phase 2: Components.** 145 elements covering all 154 component items of the guide: form fields,
   pickers, menus, tabs, dialogs, toasts, cards, calendar and schedule parts, plan items. Each lists the primitives it is
   built from, and template tags render the fiddly ones straight from Django objects.
-- **Phase 3 (this release): Patterns.** 97 elements covering all 98 pattern items of the guide: page frame (header,
+- **Phase 3: Patterns.** 97 elements covering all 98 pattern items of the guide: page frame (header,
   sidebar, drawer, settings panel), data tables and filtering, forms and editors, media, record management, eight
   chart types, marketing and docs sections, email frame, calendar views, scheduler, event editing and planning boards.
   Charts and calendars render on the server as SVG and HTML from plain Python data: no JavaScript library.
+- **Phase 4 (this release): Templates.** 60 elements covering all 67 template items of the guide: real Django templates
+  you extend (app shell, auth, error, email, marketing and docs layouts), generic list / detail / form / confirm and
+  parent-child templates that work with class-based views, page-type skeletons (dashboard, calendar, scheduler, board,
+  timeline, booking, event editor, simple data page), structural layouts and the named slots (blocks) you fill.
 
 ## Install
 
@@ -111,6 +115,30 @@ python demo/manage.py orca_site site/
 Events are dicts with `title`, `start`, `end`, `all_day`, `color` (1–8 or any CSS colour), `url`, `location` and
 `status`. `orca.samples.SAMPLE` holds the realistic data every documentation example uses.
 
+## Pages from templates
+
+```python
+from django.views.generic import ListView
+from orca.mixins import OrcaPageMixin
+
+class CameraList(OrcaPageMixin, ListView):
+    model = Camera
+    paginate_by = 25
+    template_name = "orca/generic/list.html"          # title, Add button, search, table → cards on phones, pager
+    list_columns = ["name", "site", "status", ("Counted today", "today")]
+    detail_url_name, create_url_name = "camera-detail", "camera-create"
+    update_url_name, delete_url_name = "camera-update", "camera-delete"
+```
+
+```django
+{% extends "orca/layouts/app.html" %}                   {# or dashboard, calendar, scheduler, board, timeline… #}
+{% block page_actions %}<a class="orca-button orca-button--primary" href="…">Add camera</a>{% endblock %}
+{% block content %}…{% endblock %}
+```
+
+Set `nav` (sidebar sections) in a context processor once. Error pages: create `templates/404.html` with
+`{% extends "orca/errors/404.html" %}` (same for 403 and 500).
+
 ## Brand tokens only
 
 A project changes **brand tokens only**, through `settings.ORCA["BRAND"]`:
@@ -141,7 +169,7 @@ python manage.py orca_lint templates/   # check templates and CSS against ORCA's
 python manage.py orca_site site/        # export the documentation website
 ```
 
-The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`docs/components/`](docs/components/README.md) and [`docs/patterns/`](docs/patterns/README.md) (Markdown, one file per category) and
+The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`docs/components/`](docs/components/README.md) and [`docs/patterns/`](docs/patterns/README.md) and [`docs/templates/`](docs/templates/README.md) (Markdown, one file per category) and
 [`docs/catalogue.json`](docs/catalogue.json) (machine-readable). AI agents: start with [`AGENTS.md`](AGENTS.md).
 
 ## What is in the package
@@ -152,6 +180,9 @@ The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`doc
 | `orca/static/orca/css/orca.css` | All primitives, in cascade layers `orca.base`, `orca.primitives`, `orca.utilities` |
 | `orca/static/orca/css/components.css` | All components, in the `orca.components` layer |
 | `orca/static/orca/css/patterns.css` | All patterns, in the `orca.patterns` layer |
+| `orca/static/orca/css/templates.css` | Structural layouts and page frames, in the `orca.templates` layer |
+| `orca/templates/orca/layouts/`, `orca/generic/`, `orca/errors/` | The Django templates you extend |
+| `orca/mixins.py` | `OrcaPageMixin` for class-based views |
 | `orca/charts.py`, `orca/calendar_views.py` | Server side of the chart and calendar pattern tags |
 | `orca/samples.py` | Sample data used by the documentation examples |
 | `orca/static/orca/js/orca.js` | Optional progressive enhancement, opt-in by data attribute: menus, listbox, combobox, tabs, dialogs and confirm, toasts, date shortcuts and ranges, repeating rows, carousel, steppers, OTP, theme |
@@ -177,8 +208,9 @@ documented classes and tokens exist, text and control contrast hold in all three
 
 1. **Primitives** (released).
 2. **Components** (released).
-3. **Patterns** (this release).
-4. Templates, 5. Pages: following the ORCA guide.
+3. **Patterns** (released).
+4. **Templates** (this release).
+5. Pages: following the ORCA guide.
 
 ## Licences
 

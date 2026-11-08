@@ -1,0 +1,5 @@
+<div class="orca-table-wrap"><div class="orca-scheduler" style="--orca-cols: {{ cols }}">
+  <div class="orca-scheduler__corner"></div><div class="orca-scheduler__scale">{% for h in hours %}<span>{{ h }}</span>{% endfor %}</div>
+  {% for r in rows %}<div class="orca-scheduler__who"><span class="orca-avatar orca-avatar--s" aria-hidden="true">{{ r.initials }}</span>{% if r.url %}<a href="{{ r.url }}">{{ r.name }}</a>{% else %}{{ r.name }}{% endif %}</div>
+  <div class="orca-scheduler__lane" role="list" aria-label="{{ r.name }}">{% for b in r.bookings %}<{% if b.url %}a href="{{ b.url }}"{% else %}span{% endif %} role="listitem" class="orca-event-card{% if b.status == 'tentative' %} orca-event-card--tentative{% endif %}" style="--orca-event: {{ b.color }}; --orca-start: {{ b.left }}%; --orca-span: {{ b.width }}%" title="{{ b.label }}"><span class="orca-event-card__title">{{ b.title }}</span><span class="orca-event-card__meta">{{ b.time_text }}</span></{% if b.url %}a{% else %}span{% endif %}>{% empty %}<span class="orca-sr-only" role="listitem">Free all day</span>{% endfor %}</div>{% endfor %}
+</div></div>

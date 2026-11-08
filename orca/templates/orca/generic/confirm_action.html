@@ -1,0 +1,10 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_head %}{% endblock %}
+{% block content %}<div class="orca-narrow-form">
+  <form class="orca-confirm-panel{% if not danger %} orca-confirm-panel--neutral{% endif %}" method="post">{% csrf_token %}
+    <h1 class="orca-confirm-panel__title">{% block page_title %}{{ title }}{% endblock %}</h1>
+    {% block consequences %}{% if text %}<p class="orca-p">{{ text }}</p>{% endif %}{% if items %}<ul>{% for i in items %}<li>{{ i }}</li>{% endfor %}</ul>{% endif %}{% endblock %}
+    {% if form %}{% orca_form_errors form %}{% for field in form.visible_fields %}{% orca_field field %}{% endfor %}{% endif %}
+    <div class="orca-form-actions"><button class="orca-button {% if danger %}orca-button--danger{% else %}orca-button--primary{% endif %}" type="submit">{{ submit_label|default:"Confirm" }}</button>{% if cancel_url %}<a class="orca-button" href="{{ cancel_url }}">Cancel</a>{% endif %}</div>
+  </form>
+</div>{% endblock %}
