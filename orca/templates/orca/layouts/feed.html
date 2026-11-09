@@ -1,0 +1,10 @@
+{% extends "orca/layouts/app.html" %}{% load orca static %}
+{% block content %}<div class="orca-feed">
+  {% block feed_compose %}{% endblock %}
+  {% block feed %}{% for post in posts %}<article class="orca-photo-post">
+    <div class="orca-photo-post__head"><div class="orca-person"><span class="orca-avatar orca-avatar--s" aria-hidden="true">{{ post.author|orca_initials }}</span><span class="orca-person__text"><span class="orca-person__name">{{ post.author }}</span><span class="orca-person__role">{{ post.when }}</span></span></div></div>
+    {% if post.image %}<div class="orca-ratio orca-ratio--4x3"><img src="{{ post.image }}" alt="{{ post.alt }}"></div>{% endif %}
+    <div class="orca-photo-post__foot"><p class="orca-photo-post__caption"><strong>{{ post.author }}</strong> {{ post.text }}</p></div>
+  </article>{% empty %}{% if not loading %}<div class="orca-empty">{% orca_illustration "empty" %}<h2 class="orca-empty-title">{{ empty_title|default:"Nothing posted yet" }}</h2><p class="orca-empty-text">{{ empty_text|default:"New posts appear here." }}</p></div>{% endif %}{% endfor %}{% endblock %}
+  {% block feed_loading %}{% if loading or has_more %}<div class="orca-feed__skeleton" aria-busy="true" aria-label="Loading more posts">{% for i in "12" %}<div class="orca-photo-post" aria-hidden="true"><div class="orca-photo-post__head"><div class="orca-person"><span class="orca-skeleton orca-skeleton--circle"></span><span class="orca-skeleton orca-skeleton--text" style="width: 8rem"></span></div></div><div class="orca-skeleton orca-aspect-4x3"></div><div class="orca-photo-post__foot"><div class="orca-skeleton orca-skeleton--text"></div><div class="orca-skeleton orca-skeleton--text" style="max-width: 60%"></div></div></div>{% endfor %}</div>{% endif %}{% endblock %}
+</div>{% endblock %}

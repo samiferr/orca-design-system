@@ -1,0 +1,7 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block content %}<div class="orca-vstack">
+  {% block scheduler_toolbar %}<div class="orca-cal-header"><div class="orca-cal-nav"><a class="orca-icon-button orca-icon-button--outlined" href="{{ prev_url }}" aria-label="Previous day">{% icon "chevron-left" %}</a><a class="orca-button" href="{{ today_url }}">Today</a><a class="orca-icon-button orca-icon-button--outlined" href="{{ next_url }}" aria-label="Next day">{% icon "chevron-right" %}</a></div>
+    <h2 class="orca-cal-header__title" aria-live="polite">{{ period_title }}</h2></div>{% endblock %}
+  {% block scheduler %}{% orca_scheduler resources start_hour=start_hour|default:8 end_hour=end_hour|default:18 %}{% endblock %}
+  {% block scheduler_legend %}<ul class="orca-legend"><li><span class="orca-avail orca-avail--busy">Booked</span></li><li><span class="orca-avail orca-avail--tentative">Tentative</span></li><li><span class="orca-avail orca-avail--free">Free</span></li></ul>{% endblock %}
+</div>{% endblock %}

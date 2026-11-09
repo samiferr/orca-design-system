@@ -1,0 +1,6 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block content %}<div class="orca-vstack">
+  {% block timeline_toolbar %}<div class="orca-cal-header"><div class="orca-cal-nav"><a class="orca-icon-button orca-icon-button--outlined" href="{{ prev_url }}" aria-label="Earlier">{% icon "chevron-left" %}</a><a class="orca-button" href="{{ today_url }}">Today</a><a class="orca-icon-button orca-icon-button--outlined" href="{{ next_url }}" aria-label="Later">{% icon "chevron-right" %}</a></div><h2 class="orca-cal-header__title" aria-live="polite">{{ period_title }}</h2></div>{% endblock %}
+  {% block timeline %}{% orca_gantt rows start=start days=days|default:14 today=today label=title %}{% endblock %}
+  {% block timeline_extra %}{% endblock %}
+</div>{% endblock %}

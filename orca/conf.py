@@ -10,6 +10,7 @@ Configure ORCA in ``settings.py``::
             "logo": "brand/logo.svg",
         },
         "THEME": "auto",        # "auto" (follows the OS), "light", "dark" or "paper"
+        "DENSITY": "comfortable",  # or "dense": tighter type, controls and spacing for data-heavy screens
         "DOCS_ENABLED": True,   # serve the element catalogue at the URL you include
     }
 
@@ -23,7 +24,7 @@ import re
 from dataclasses import dataclass, field
 
 from . import color
-from .tokens import BRAND_KEYS, BRAND_TOKENS
+from .tokens import BRAND_KEYS, BRAND_TOKENS, DENSITIES
 
 THEMES = ("auto", "light", "dark", "paper")
 _FONT_STACK = re.compile(r'^[\w\s",\-.]+$')
@@ -58,6 +59,11 @@ def user_settings() -> dict:
 def theme() -> str:
     value = str(user_settings().get("THEME", "auto")).lower()
     return value if value in THEMES else "auto"
+
+
+def density() -> str:
+    value = str(user_settings().get("DENSITY", "comfortable")).lower()
+    return value if value in DENSITIES else "comfortable"
 
 
 def docs_enabled() -> bool:

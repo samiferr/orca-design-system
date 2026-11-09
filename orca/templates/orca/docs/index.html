@@ -1,21 +1,21 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block title %}Primitives{% endblock %}
+{% block title %}{{ level_title }}{% endblock %}
 {% block content %}
 <header class="docs-head">
-<h1 class="orca-page-title">Primitives</h1>
-<p class="orca-page-subtitle">{{ elements|length }} elements, each with why, when and how to use it, the tokens it reads and a live example. Phase 1 covers the Primitives level of the ORCA guide.</p>
+<h1 class="orca-page-title">{{ level_title }}</h1>
+<p class="orca-page-subtitle">{{ level_intro }} {{ elements|length }} elements, each with why, when and how to use it and a live example.</p>
 </header>
 
-<section class="docs-section" aria-labelledby="brand-h">
+{% if level == "primitive" %}<section class="docs-section" aria-labelledby="brand-h">
   <h2 class="orca-section-title" id="brand-h">What a project may change</h2>
   <p class="orca-p">Only brand tokens, through <code class="orca-code">settings.ORCA["BRAND"]</code>. Everything else is fixed so that contrast, spacing and behaviour stay tested.</p>
   <div class="docs-table-wrap"><table class="docs-table">
     <thead><tr><th scope="col">Key</th><th scope="col">CSS</th><th scope="col">Use</th></tr></thead>
     <tbody>{% for t in brand_tokens %}<tr><td><code class="orca-code">{{ t.key }}</code></td><td>{% for c in t.css %}<code class="orca-code">{{ c }}</code> {% empty %}<span class="orca-muted">template only</span>{% endfor %}</td><td class="orca-small">{{ t.usage }}</td></tr>{% endfor %}</tbody>
   </table></div>
-</section>
+</section>{% endif %}
 
-{% for cat, els in nav %}
+{% for cat, els in level_nav %}
 <section class="docs-section" aria-labelledby="cat-{{ cat.key }}">
   <h2 class="orca-section-title" id="cat-{{ cat.key }}">{{ cat.title }}</h2>
   <p class="orca-p orca-muted">{{ cat.intro }}</p>

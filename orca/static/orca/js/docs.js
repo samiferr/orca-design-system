@@ -41,6 +41,16 @@
     });
   }
 
+  // Template previews: show the page at desktop, tablet or phone width.
+  document.querySelectorAll("[data-docs-viewport]").forEach(function (group) {
+    var frame = group.closest(".docs-example").querySelector("[data-docs-frame]");
+    group.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-width]"); if (!b || !frame) return;
+      group.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      frame.style.maxWidth = b.getAttribute("data-width") || "";
+    });
+  });
+
   document.querySelectorAll("pre.docs-code").forEach(function (pre) {
     var button = document.createElement("button");
     button.type = "button";

@@ -1,0 +1,9 @@
+{% extends "orca/generic/parent_base.html" %}{% load orca %}
+{% block child_content %}<div class="orca-narrow-form">
+  {% if blocked_by %}<div class="orca-callout orca-callout--negative" role="alert">{% icon "error" %}<p class="orca-callout__title">{{ object }} cannot be deleted yet</p><div class="orca-callout__body"><p class="orca-p">These still use it. Remove or move them first.</p><ul class="orca-blocked-list">{% for item in blocked_by %}<li>{{ item }}</li>{% endfor %}</ul></div></div>
+  {% else %}<form class="orca-confirm-panel" method="post">{% csrf_token %}
+    <h2 class="orca-confirm-panel__title">Remove {{ object }} from {{ parent }}?</h2>
+    {% block consequences %}{% if deleted %}<div><p class="orca-p"><strong>Deleted:</strong></p><ul>{% for d in deleted %}<li>{{ d }}</li>{% endfor %}</ul></div>{% else %}<p class="orca-p">This cannot be undone.</p>{% endif %}{% endblock %}
+    <div class="orca-form-actions"><button class="orca-button orca-button--danger" type="submit">{{ submit_label|default:"Delete" }}</button>{% if cancel_url %}<a class="orca-button" href="{{ cancel_url }}">Cancel</a>{% endif %}</div>
+  </form>{% endif %}
+</div>{% endblock %}

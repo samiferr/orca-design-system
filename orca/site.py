@@ -30,6 +30,9 @@ def pages() -> dict[str, str]:
     out = {
         reverse("orca:home"): "index.html",
         reverse("orca:index"): "primitives.html",
+        reverse("orca:components"): "components.html",
+        reverse("orca:patterns"): "patterns.html",
+        reverse("orca:templates"): "templates.html",
         reverse("orca:tokens"): "tokens.html",
         reverse("orca:icons"): "icons.html",
         reverse("orca:catalogue-json"): "catalogue.json",
@@ -42,6 +45,8 @@ def pages() -> dict[str, str]:
         if name in taken:
             raise ValueError(f"Element id {el.id!r} collides with a site page; rename it.")
         out[reverse("orca:element", args=[el.id])] = name
+        if el.preview:
+            out[reverse("orca:preview", args=[el.id])] = f"preview-{el.id}.html"
     return out
 
 

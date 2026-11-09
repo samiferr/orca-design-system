@@ -1,0 +1,3 @@
+{% load orca %}{% if non_field %}<div class="orca-callout orca-callout--negative" role="alert">{% icon "error" %}<p class="orca-callout__title">{% if non_field|length == 1 %}{{ non_field.0 }}{% else %}This form could not be saved{% endif %}</p>{% if non_field|length > 1 %}<div class="orca-callout__body"><ul>{% for e in non_field %}<li>{{ e }}</li>{% endfor %}</ul></div>{% endif %}</div>
+{% endif %}{% if count > 1 %}<div class="orca-error-list" role="alert" tabindex="-1" id="orca-error-summary">{% icon "error" %}<p class="orca-error-list__title">{{ count }} fields need attention</p><ul>{% for fid, label, err in field_errors %}<li><a href="#{{ fid }}">{{ label }}: {{ err }}</a></li>{% endfor %}</ul></div>
+{% endif %}

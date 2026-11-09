@@ -1,0 +1,9 @@
+{% extends "orca/layouts/marketing.html" %}{% load orca static %}
+{% block header_actions %}<a class="orca-button orca-button--ghost" href="#">Sign in</a><a class="orca-button orca-button--brand" href="#">Main action</a>{% endblock %}
+{% block content %}
+<section class="orca-marketing-hero"><div class="orca-hero">
+  <div class="orca-hero__text"><p class="orca-card-kicker">Kicker</p><h1 class="orca-hero__title">Headline: the benefit in under ten words.</h1><p class="orca-hero__lead">Lead: one or two sentences that explain the headline.</p>
+    <div class="orca-row"><a class="orca-button orca-button--brand" href="#">Main action</a><a class="orca-button" href="#">Second action</a></div></div>
+  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="Product picture"></div></div></section>
+<div class="orca-container"><ul class="orca-feature-grid">{% for i in "123" %}<li class="orca-feature">{% icon "success" size="l" %}<h2 class="orca-feature__title">Feature title</h2><p class="orca-feature__text">One sentence about the feature and its benefit.</p></li>{% endfor %}</ul></div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "orca/generic/parent_base.html" %}{% load orca %}
+{% block child_content %}<div class="orca-vstack">
+  <div class="orca-top-actions">{% if list_url %}<a class="orca-back-link" href="{{ list_url }}">{% icon "chevron-left" size="xs" %}All {{ model_name_plural }}</a>{% endif %}
+    <div class="orca-top-actions__end">{% block detail_actions %}{% if update_url %}<a class="orca-button orca-button--dense" href="{{ update_url }}">{% icon "edit" %}Edit</a>{% endif %}{% if delete_url %}<a class="orca-button orca-button--dense orca-button--outline-danger" href="{{ delete_url }}">Delete</a>{% endif %}{% endblock %}</div></div>
+  <section class="orca-detail-panel" aria-labelledby="child-title"><div class="orca-detail-panel__head"><div class="orca-detail-panel__title"><h2 id="child-title">{{ object }}</h2></div></div>
+    {% block detail %}<dl class="orca-kv">{% for f in fields %}<div><dt>{{ f.label }}</dt><dd{% if f.numeric %} class="orca-num"{% endif %}>{{ object|orca_value:f.name }}</dd></div>{% endfor %}</dl>{% endblock %}</section>
+</div>{% endblock %}

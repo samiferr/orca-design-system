@@ -1,0 +1,6 @@
+<div class="orca-table-wrap"><div class="orca-gantt-chart" style="--orca-cols: {{ cols }}">
+  <div class="orca-gantt-chart__scale"><span></span>{% for d in scale %}<span{% if d.today %} class="is-today"{% endif %}>{{ d.label }}</span>{% endfor %}</div>
+  <div class="orca-gantt" style="--orca-cols: {{ cols }}" role="list" aria-label="{{ label|default:title }}">{% if today_at != None %}<span class="orca-gantt-chart__today" style="--orca-at: {{ today_at }}" aria-hidden="true"></span>{% endif %}
+    {% for r in rows %}<div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">{{ r.label }}</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar{% if r.state %} orca-gantt-bar--{{ r.state }}{% endif %}" href="{{ r.url }}" style="--orca-start: {{ r.left }}%; --orca-span: {{ r.width }}%{% if r.progress != None %}; --orca-progress: {{ r.progress }}%{% endif %}">{% if r.state == "done" %}Done{% elif r.state == "late" %}Late{% elif r.progress != None %}{{ r.progress }}%{% endif %}</a>{% if r.milestone != None %}<span class="orca-milestone" style="--orca-start: {{ r.milestone }}%" role="img" aria-label="Milestone"></span>{% endif %}</span></div>{% endfor %}
+  </div>
+</div></div>

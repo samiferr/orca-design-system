@@ -10,12 +10,15 @@ from __future__ import annotations
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.template import Context, Template, TemplateSyntaxError
+from django.urls import reverse
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
 from . import __version__, icons, tokens
 from .catalogue import registry
-from .catalogue.guide import PRIMITIVES
+from .catalogue.guide import LEVELS
 from .conf import compute_brand, docs_enabled
+from .samples import SAMPLE
 
 PRELUDE = "{% load orca static %}"
 
@@ -32,12 +35,16 @@ GUIDE = [
     ("roadmap", "Levels and roadmap", "The five ORCA levels and what each release delivers."),
 ]
 GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
+# Icons of the documentation sidebar (shown alone when it is collapsed to a rail).
+GUIDE_ICONS = {"installation": "repository", "usage": "code", "brand-and-themes": "sun", "ai-agents": "generative-ai",
+               "principles": "book", "accessibility": "show", "localization": "website", "tooling": "devtools", "roadmap": "map"}
+LEVEL_ICONS = {"primitive": "grid", "component": "cluster-host", "pattern": "blueprint", "template": "folder"}
 
 
 def render_snippet(html: str) -> str:
     """Render an example snippet with ORCA's template tags available."""
     try:
-        return Template(PRELUDE + html).render(Context({}))
+        return Template(PRELUDE + html).render(Context({"sample": SAMPLE}))
     except TemplateSyntaxError as exc:  # surfaced by the test suite
         return f'<p class="orca-error">Example failed to render: {exc}</p>'
 
@@ -47,10 +54,19 @@ def _guard():
         raise Http404("The ORCA documentation is disabled (ORCA['DOCS_ENABLED'] = False).")
 
 
+LEVEL_URLS = {"primitive": "orca:index", "component": "orca:components", "pattern": "orca:patterns", "template": "orca:templates"}
+
+
+def _levels() -> list[dict]:
+    return [{"key": lvl, "title": registry.LEVEL_TITLES[lvl], "url": LEVEL_URLS[lvl], "icon": LEVEL_ICONS[lvl],
+             "count": len(registry.all_elements(lvl)), "nav": [(c, registry.by_category(c.key)) for c in registry.categories(lvl)]}
+            for lvl in registry.RELEASED_LEVELS]
+
+
 def _ctx(page: str, **extra) -> dict:
     return {
-        "nav": [(c, registry.by_category(c.key)) for c in registry.categories()],
-        "guide": GUIDE, "page": page, "version": __version__, **extra,
+        "levels": _levels(), "nav": [(c, registry.by_category(c.key)) for c in registry.categories()],
+        "guide": GUIDE, "guide_nav": [(s, t, GUIDE_ICONS.get(s, "book")) for s, t, _ in GUIDE], "page": page, "version": __version__, **extra,
     }
 
 
@@ -58,7 +74,11 @@ def _stats() -> dict:
     els = registry.all_elements()
     return {
         "elements": len(els),
-        "guide_items": sum(len(v) for v in PRIMITIVES.values()),
+        "primitives": len(registry.all_elements("primitive")),
+        "components": len(registry.all_elements("component")),
+        "patterns": len(registry.all_elements("pattern")),
+        "templates": len(registry.all_elements("template")),
+        "guide_items": sum(len(v) for lvl in LEVELS.values() for v in lvl.values()),
         "categories": len(registry.categories()),
         "icons": len(icons.names()),
         "tokens": len(tokens.semantic_tokens()) + len(tokens.ALL_SCALES),
@@ -74,14 +94,51 @@ def home(request):
   <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
   <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
 </div>"""))
-    return render(request, "orca/docs/home.html", _ctx("home", stats=_stats(), hero=hero, categories=registry.categories()))
+    return render(request, "orca/docs/home.html", _ctx("home", stats=_stats(), hero=hero))
+
+
+LEVEL_INTROS = {
+    "primitive": "The smallest building blocks and the base styles every other level uses. Each one cannot be broken down further without ceasing to be useful.",
+    "component": "Simple groups of primitives that work together as one unit and do one job. Each is reusable on its own and sits inside many patterns.",
+    "pattern": "Components combined into larger, recurring sections of an interface: page frames, data tables, forms, charts, calendars, schedulers and planning boards. Complex ones render on the server from your data with one template tag.",
+    "template": "Whole-page Django templates you extend: layouts, generic CRUD and parent-child templates for class-based views, page-type skeletons, the structural layouts they are built with, and the named blocks (slots) you fill. Each one has a live preview with placeholder content.",
+}
+
+
+def level_index(request, level="primitive"):
+    _guard()
+    return render(request, "orca/docs/index.html", _ctx(
+        registry.LEVEL_TITLES[level].lower(), level=level, level_title=registry.LEVEL_TITLES[level],
+        level_intro=LEVEL_INTROS[level], elements=registry.all_elements(level), brand_tokens=tokens.BRAND_TOKENS,
+        level_nav=[(c, registry.by_category(c.key)) for c in registry.categories(level)],
+    ))
 
 
 def primitives(request):
+    return level_index(request, "primitive")
+
+
+def components(request):
+    return level_index(request, "component")
+
+
+def patterns(request):
+    return level_index(request, "pattern")
+
+
+def templates(request):
+    return level_index(request, "template")
+
+
+def template_preview(request, element_id):
+    """A template-level element rendered as a whole page with placeholder content (shown in an iframe)."""
     _guard()
-    return render(request, "orca/docs/index.html", _ctx(
-        "primitives", elements=registry.all_elements(), brand_tokens=tokens.BRAND_TOKENS,
-    ))
+    el = registry.get(element_id)
+    if el is None or not el.preview:
+        raise Http404(f"No ORCA template preview {element_id!r}")
+    from .previews import context
+
+    return render(request, el.preview_template(), context(el.id))
 
 
 def _principles() -> list[dict]:
@@ -105,7 +162,8 @@ def guide(request, slug):
     if slug == "principles":
         extra.update(principles=_principles())
     if slug == "roadmap":
-        extra.update(stats=_stats(), sections=[(s, len(items)) for s, items in PRIMITIVES.items()])
+        extra.update(stats=_stats(), coverage=[(registry.LEVEL_TITLES[lvl], [(s, len(items)) for s, items in LEVELS[lvl].items()])
+                                             for lvl in registry.RELEASED_LEVELS])
     if slug == "tooling":
         extra.update(stats=_stats())
     index = [s for s, _, _ in GUIDE].index(slug)
@@ -119,10 +177,19 @@ def element(request, element_id):
     el = registry.get(element_id)
     if el is None:
         raise Http404(f"No ORCA element {element_id!r}")
-    examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
+    if el.preview:
+        src = reverse("orca:preview", args=[el.id])
+        frame = (f'<iframe class="orca-template-preview" src="{src}" title="Preview: {escape(el.name)}" loading="lazy" '
+                 f'data-docs-frame></iframe>')
+        examples = [{"title": "Live preview", "html": el.example_list()[0][1], "rendered": mark_safe(frame), "preview_url": src}]
+    else:
+        examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
     related = [registry.get(r) for r in el.related if registry.get(r)]
+    uses = [registry.get(u) for u in el.uses if registry.get(u)]
+    used_by = [e for e in registry.all_elements() if el.id in e.uses]
     return render(request, "orca/docs/element.html", _ctx(
-        el.id, el=el, examples=examples, related=related,
+        el.id, el=el, examples=examples, related=related, uses=uses, used_by=used_by,
+        level_url=LEVEL_URLS.get(el.level, "orca:index"), level_title=registry.LEVEL_TITLES[el.level],
         category=next(c for c in registry.categories() if c.key == el.category),
     ))
 

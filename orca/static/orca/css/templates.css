@@ -1,0 +1,88 @@
+/* ORCA templates (level 4 of the ORCA guide): page layouts and the structural layouts they are built with.
+   Tokens only. Loaded after patterns.css by {% orca_head %}. */
+@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.patterns, orca.templates, orca.utilities;
+
+@layer orca.templates {
+
+/* ===================================================================== Structural layouts */
+/* Vertical stack: page sections one under another, separated by one spacing step. */
+.orca-vstack { display: flex; flex-direction: column; gap: var(--orca-space-24); min-width: 0; }
+.orca-vstack--tight { gap: var(--orca-space-12); }
+.orca-vstack--loose { gap: var(--orca-space-40); }
+
+/* Stat grid: equal stat cards that wrap, never narrower than a readable number. */
+.orca-stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: var(--orca-space-16); }
+
+/* Two-column grid: two equal columns from 1036px, one column below. */
+.orca-two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--orca-space-24); align-items: start; }
+@media (max-width: 1035px) { .orca-two-col { grid-template-columns: minmax(0, 1fr); } }
+
+/* Split: a main column and a fixed-width aside (end by default); the aside drops below on narrow screens. */
+.orca-split { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: var(--orca-space-32); align-items: start; }
+.orca-split--aside-start { grid-template-columns: 20rem minmax(0, 1fr); }
+.orca-split--wide-aside { grid-template-columns: minmax(0, 1fr) 26rem; }
+@media (max-width: 1035px) { .orca-split, .orca-split--aside-start, .orca-split--wide-aside { grid-template-columns: minmax(0, 1fr); } }
+
+/* Camera split: the live picture takes two thirds, details one third; stacked on narrow screens. */
+.orca-camera-split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: var(--orca-space-24); align-items: start; }
+.orca-camera-split__media { position: sticky; top: calc(var(--orca-nav-height) + var(--orca-space-16)); min-width: 0; }
+.orca-camera-split__side { display: flex; flex-direction: column; gap: var(--orca-space-16); min-width: 0; }
+@media (max-width: 1035px) { .orca-camera-split { grid-template-columns: minmax(0, 1fr); } .orca-camera-split__media { position: static; } }
+
+/* Form grid: fields flow into as many columns as fit (min 16rem); full-width rows span all. */
+.orca-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--orca-space-24) var(--orca-space-24); max-width: 60rem; }
+.orca-form-grid__full { grid-column: 1 / -1; }
+
+/* Container: page content at the maximum width with the page margins (marketing and docs pages). */
+.orca-container { width: 100%; max-width: var(--orca-grid-max-width); margin-inline: auto; padding-inline: max(var(--orca-grid-margin-small), env(safe-area-inset-left, 0px)) max(var(--orca-grid-margin-small), env(safe-area-inset-right, 0px)); }
+@media (min-width: 620px) { .orca-container { padding-inline: var(--orca-grid-margin); } }
+
+/* Narrow form: one column at a comfortable reading and filling width. */
+.orca-narrow-form { width: 100%; max-width: 36rem; }
+
+/* ===================================================================== Shell */
+.orca-shell__menu { display: none; }
+@media (max-width: 619px) {
+  .orca-shell__menu { display: inline-grid; }
+  .orca-app > .orca-sidebar[data-open="true"] { display: flex; position: fixed; z-index: var(--orca-layer-drawer); top: var(--orca-nav-height); bottom: 0; left: 0; width: min(18rem, 85vw); min-height: 0; overflow-y: auto; box-shadow: var(--orca-shadow-dragged); }
+  .orca-app > .orca-sidebar[data-open="true"] .orca-sidebar__foot { display: none; }
+  .orca-app > .orca-sidebar[data-open="true"][data-collapsed="true"] .orca-side-link__label,
+  .orca-app > .orca-sidebar[data-open="true"][data-collapsed="true"] .orca-sidebar__label { position: static; width: auto; height: auto; overflow: hidden; clip: auto; }
+  .orca-app > .orca-sidebar[data-open="true"][data-collapsed="true"] .orca-side-link { justify-content: flex-start; padding-inline: var(--orca-space-16); }
+}
+/* In a page shell (body.orca-shell or .orca-docs-page) the sidebar stays in view and scrolls on its own. */
+:is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar { position: sticky; top: var(--orca-nav-height); height: calc(100vh - var(--orca-nav-height)); min-height: 0; overflow-y: auto; overflow-x: hidden; }
+:is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar > * { flex-shrink: 0; }
+:is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar > .orca-sidebar__foot { position: sticky; bottom: 0; background: var(--orca-bg-alt); }
+
+/* ===================================================================== Layout pieces */
+.orca-list-layout { display: block; }
+.orca-list-layout:has(> .orca-filter-panel) { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--orca-space-32); align-items: start; }
+@media (max-width: 1035px) { .orca-list-layout:has(> .orca-filter-panel) { grid-template-columns: minmax(0, 1fr); } }
+.orca-cal-main { min-width: 0; }
+.orca-parent__panel { padding-top: var(--orca-space-24); }
+.orca-feed { display: flex; flex-direction: column; gap: var(--orca-space-24); max-width: 36rem; margin-inline: auto; }
+.orca-feed__skeleton { display: flex; flex-direction: column; gap: var(--orca-space-24); }
+.orca-person-grid > .orca-card { min-width: 0; }
+
+/* Auth: one centred card on the alternate ground. */
+.orca-auth-page { background: var(--orca-bg-alt); }
+.orca-auth { display: grid; place-items: center; min-height: 100vh; padding: var(--orca-space-24) var(--orca-space-16); }
+
+/* Error pages: logo, illustration, code, what happened, what to do. */
+.orca-error-page { background: var(--orca-bg); }
+.orca-error-layout { display: flex; flex-direction: column; gap: var(--orca-space-48); min-height: 100vh; padding: var(--orca-space-24) max(var(--orca-space-24), env(safe-area-inset-left, 0px)); }
+.orca-error-layout__body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--orca-space-16); max-width: 36rem; margin: auto; }
+.orca-error-layout__code { margin: 0; font: var(--orca-type-label); text-transform: uppercase; letter-spacing: 0.06em; color: var(--orca-text-muted); }
+
+/* Marketing and docs pages */
+.orca-marketing-page { background: var(--orca-bg); }
+.orca-marketing-main { display: flex; flex-direction: column; gap: var(--orca-space-64); padding-bottom: var(--orca-space-64); }
+.orca-docs-page { background: var(--orca-bg); }
+.orca-docs-main { max-width: 64rem; }
+.orca-docs-article { display: flex; flex-direction: column; gap: var(--orca-space-24); max-width: var(--orca-measure); }
+
+/* Documentation previews of whole templates */
+.orca-template-preview { display: block; width: 100%; height: 40rem; margin-inline: auto; border: var(--orca-border-width) solid var(--orca-border); background: var(--orca-bg); transition: max-width var(--orca-duration-fast) var(--orca-ease-out); }
+
+} /* end orca.templates */

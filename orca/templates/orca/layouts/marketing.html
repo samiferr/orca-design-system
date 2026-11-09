@@ -1,0 +1,14 @@
+{% extends "orca/layouts/base.html" %}{% load orca %}
+{% block body_class %}orca-marketing-page{% endblock %}
+{% block body %}
+{% block top_bar %}<header class="orca-site-header">
+  {% block brand %}{% orca_logo %}{% endblock %}
+  <nav aria-label="Main"><ul class="orca-site-header__nav">{% for item in site_nav %}<li><a href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.label }}</a></li>{% endfor %}</ul></nav>
+  <div class="orca-site-header__actions">{% block header_actions %}{% endblock %}</div>
+</header>{% endblock %}
+<main id="main" class="orca-marketing-main" tabindex="-1">{% block content %}{% endblock %}</main>
+{% block footer %}<footer class="orca-footer">{% orca_logo href="" %}
+  {% if footer_cols %}<div class="orca-footer__cols">{% for col in footer_cols %}<ul class="orca-footer__col"><li class="orca-footer__col-title">{{ col.title }}</li>{% for l in col.links %}<li><a href="{{ l.url }}">{{ l.label }}</a></li>{% endfor %}</ul>{% endfor %}</div>{% endif %}
+  <p class="orca-footer__legal">{% block legal %}© {% now "Y" %} {% orca_brand "name" %}{% endblock %}</p>
+</footer>{% endblock %}
+{% endblock %}

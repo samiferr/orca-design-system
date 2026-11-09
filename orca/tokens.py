@@ -357,6 +357,32 @@ TYPE = [
 
 ALL_SCALES = SPACE + RADII + BORDERS + SHADOWS + LAYERS + SIZES + MOTION + TYPE
 
+# Density. "comfortable" is the default scale above. "dense" (data-density="dense" on <html> or on any region)
+# tightens type, control heights and the larger spacing steps for data-heavy screens: dashboards, admin tools,
+# documentation. Body text stays at 14px or more, labels at 12px, and every control still grows to the 44px touch
+# minimum (control-lg) on coarse pointers, so density never costs accessibility.
+DENSITIES = ("comfortable", "dense")
+DENSE = {
+    "space-16": "0.75rem", "space-24": "1rem", "space-32": "1.5rem", "space-40": "2rem", "space-48": "2rem",
+    "space-64": "3rem", "space-96": "4rem",
+    "control-sm": "1.25rem", "control-dense": "1.625rem", "control-md": "2rem", "tab-height": "2.5rem",
+    "nav-height": "3rem", "grid-gutter": "1.5rem", "grid-gutter-small": "1rem", "grid-margin": "1rem",
+    "type-display": "100 3.5rem/4rem var(--orca-font-sans)",
+    "type-h1": "550 2rem/2.5rem var(--orca-font-sans)",
+    "type-h2": "180 2rem/2.5rem var(--orca-font-sans)",
+    "type-h3": "550 1.25rem/1.75rem var(--orca-font-sans)",
+    "type-h4": "275 1.25rem/1.75rem var(--orca-font-sans)",
+    "type-h5": "550 0.875rem/1.25rem var(--orca-font-sans)",
+    "type-h6": "italic 400 0.875rem/1.25rem var(--orca-font-sans)",
+    "type-page-title": "700 1.5rem/2rem var(--orca-font-sans)",
+    "type-title": "550 1rem/1.5rem var(--orca-font-sans)",
+    "type-body": "400 0.875rem/1.25rem var(--orca-font-sans)",
+    "type-body-strong": "550 0.875rem/1.25rem var(--orca-font-sans)",
+    "type-detail": "400 0.8125rem/1.125rem var(--orca-font-sans)",
+    "type-stat": "550 1.125rem/1.5rem var(--orca-font-sans)",
+    "type-code": "400 0.8125rem/1.25rem var(--orca-font-mono)",
+}
+
 BREAKPOINTS = [("x-small", 460), ("small", 620), ("large", 1036), ("x-large", 1681)]
 
 

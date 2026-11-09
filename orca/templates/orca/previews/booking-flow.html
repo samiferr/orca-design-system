@@ -1,0 +1,5 @@
+{% extends "orca/layouts/booking.html" %}
+{% block booking_step %}<p class="orca-small orca-muted">30 minutes · Paris time</p>
+<ul class="orca-date-strip" aria-label="Day"><li><button type="button" aria-pressed="false">Mon<strong>9</strong></button></li><li><button type="button" aria-pressed="true">Tue<strong>10</strong></button></li><li><button type="button" disabled>Wed<strong>11</strong>Full</button></li><li><button type="button" aria-pressed="false">Thu<strong>12</strong></button></li></ul>
+<div><h3 class="orca-booking__group">Morning</h3><ul class="orca-booking-slots"><li><button class="orca-booking-slot" type="button" aria-pressed="false">09:00</button></li><li><button class="orca-booking-slot" type="button" aria-pressed="true">09:30</button></li><li><button class="orca-booking-slot" type="button" disabled>10:00<span class="orca-booking-slot__note">Booked</span></button></li></ul></div>
+<div class="orca-row"><a class="orca-button" href="#">Back</a><button class="orca-button orca-button--primary" type="button">Continue</button></div>{% endblock %}

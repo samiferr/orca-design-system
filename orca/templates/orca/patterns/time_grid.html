@@ -1,0 +1,11 @@
+<div class="orca-table-wrap"><div class="orca-timegrid{% if days == 1 %} orca-timegrid--day{% endif %}" style="--orca-days: {{ days }}; --orca-rows: {{ rows }}" role="group" aria-label="{{ title }}">
+  <div class="orca-timegrid__head" aria-hidden="true"><span></span>{% for c in columns %}<span class="orca-timegrid__dayhead{% if c.today %} is-today{% endif %}{% if c.weekend %} is-weekend{% endif %}"><span class="orca-weekday-name">{{ c.weekday }}</span><span class="orca-timegrid__daynum">{{ c.day }}</span></span>{% endfor %}</div>
+  {% if allday %}<div class="orca-timegrid__allday"><span class="orca-allday-row__label">All day</span><div class="orca-timegrid__allday-lane">{% for e in allday %}<a class="orca-allday-bar{% if e.before %} orca-allday-bar--continues-before{% endif %}{% if e.after %} orca-allday-bar--continues-after{% endif %}" href="{{ e.url|default:'#' }}" style="--orca-event: {{ e.color }}; grid-column: {{ e.col }} / span {{ e.span }}" aria-label="{{ e.label }}">{{ e.title }}</a>{% endfor %}</div></div>{% endif %}
+  <div class="orca-timegrid__body">
+    <div class="orca-timegrid__hours" aria-hidden="true">{% for h in hours %}<span>{{ h.label }}</span>{% endfor %}</div>
+    <div class="orca-timegrid__cols">{% for c in columns %}<section class="orca-timegrid__col{% if c.weekend %} is-weekend{% endif %}{% if c.today %} is-today{% endif %}" aria-label="{{ c.label }}">
+      {% for e in c.events %}<a class="orca-event-card orca-timegrid__event{% if e.status == 'tentative' %} orca-event-card--tentative{% endif %}{% if e.status == 'cancelled' %} is-cancelled{% endif %}{% if e.short %} is-short{% endif %}" href="{{ e.url|default:'#' }}" style="--orca-event: {{ e.color }}; top: {{ e.top }}%; height: {{ e.height }}%; left: {{ e.left }}%; width: {{ e.width }}%" aria-label="{{ e.label }}"><span class="orca-event-card__title">{{ e.title }}</span><span class="orca-event-card__meta">{{ e.time_text }}</span></a>{% endfor %}
+      {% if now and now.col == forloop.counter0 %}<span class="orca-now-line orca-timegrid__now" style="top: {{ now.top }}%" aria-hidden="true"></span>{% endif %}
+    </section>{% endfor %}</div>
+  </div>
+</div></div>

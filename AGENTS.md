@@ -6,7 +6,15 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 
 - `python -m orca search <words>` finds the element; `python -m orca show <id>` prints its **why, when, when not, how,
   accessibility notes, classes, tokens and a working example**. Copy the example, then adapt the content.
-- The same text is in `docs/primitives/<category>.md` and `docs/catalogue.json`.
+- The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md`, `docs/patterns/<category>.md`, `docs/templates/<category>.md` and `docs/catalogue.json`.
+- **Prefer a pattern over assembling components, and a component over assembling primitives.** Each element's
+  "Built from" list names what it is made of.
+- Charts, calendars and emails come from tags, never hand-drawn SVG or a chart library: `{% orca_chart kind data %}`,
+  `{% orca_month_calendar events %}`, `{% orca_week_view events days=7|3|1 %}`, `{% orca_agenda events %}`,
+  `{% orca_year_view year events=events %}`, and emails extend `orca/email/base.html`.
+- With Django forms, render every field with `{% orca_field form.x %}` (and `switch=True` for settings that apply at once);
+  put `{% orca_form_errors form %}` above the fields and `{% orca_messages %}` at the top of the page;
+  paginate with `{% orca_pagination page_obj noun="…" %}`.
 - Run `python manage.py orca_lint <templates dir>` before you finish. Fix every finding.
 
 ## 2. Hard rules
@@ -14,6 +22,8 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 1. **Tokens only.** Never hard-code a colour, size, radius, shadow, z-index or duration. Use `var(--orca-*)`.
 2. **Brand tokens only can change**, and only in `settings.ORCA["BRAND"]` (name, logo, favicon, color, on_color,
    accent, accent_dark, font_sans, font_mono). Never redefine another `--orca-*` token.
+   For a tighter interface use the density mode (`ORCA["DENSITY"] = "dense"`, or `data-density="dense"` on a region),
+   never smaller sizes of your own.
 3. **Only classes that exist.** If `python -m orca search` has no element for what you need, compose existing
    primitives with the utilities `.orca-stack` and `.orca-row`; do not invent `orca-*` class names.
 4. **One primary action per screen** (`orca-button--primary`). Secondary actions use the default button; rare ones
@@ -43,21 +53,34 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 | Waiting, known progress | `progress-bar` with text | spinner |
 | Region loading later | `skeleton` | spinner |
 | Date for people | `date-label` (`6 November 2026`) | `06/11/2026` |
+| A form field | `form-field` via `{% orca_field %}` | hand-written label + input |
+| Event result that stays | `alert` | toast |
+| Quick confirmation, maybe Undo | `toast` (`ORCA.toast(…)`) | alert |
+| Guidance that belongs to the page | `callout` | alert |
+| Irreversible action | `confirm-dialog` (`data-orca-confirm`) | a red first button |
+| Several secondary actions | `dropdown-menu` / `record-actions` | a row of equal buttons |
+| One of many known options, typed | `combobox` | long select |
+| Several items from a long list | `multi-picker` | listbox |
+| Views of one object | `tab-bar` | buttons |
+| Cards vs table, period, granularity | `view-toggle`, `period-selector`, `granularity-selector` (segmented) | tabs |
 
 ## 4. Page skeleton
 
+Do not write the document skeleton yourself: extend a layout.
+
 ```django
-{% load orca %}<!doctype html>
-<html {% orca_html_attrs %}>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">{% orca_head %}</head>
-<body>
-  <a class="orca-skip-link" href="#main">Skip to main content</a>
-  <main id="main" tabindex="-1">…</main>
-</body>
-</html>
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_actions %}<a class="orca-button orca-button--primary" href="{% url 'camera-create' %}">Add camera</a>{% endblock %}
+{% block content %}<div class="orca-vstack">…patterns…</div>{% endblock %}
 ```
+
+Context: `title`, `subtitle`, `breadcrumbs` [(label, url)], `nav` (sidebar sections). Other layouts: `auth`, `error`,
+`marketing`, `docs`, `dashboard`, `calendar`, `scheduler`, `board`, `timeline`, `booking`, `event_editor`,
+`simple_data`; CRUD: `orca/generic/list|detail|form|confirm_delete|confirm_action.html` and the parent-child set.
+`python -m orca show app-shell` lists every block and context variable.
 
 ## 5. Scope of this release
 
-Phase 1 ships **primitives** only. Components, patterns, templates and pages from the ORCA guide come next; until
-then, build them from primitives, following each primitive's "how" rules.
+Released: **primitives**, **components**, **patterns** and **templates**. Pages from the ORCA guide come next.
+Start every page from a template: extend `orca/layouts/app.html` (or a page-type layout) and fill its blocks;
+for CRUD use `orca/generic/*.html` with `orca.mixins.OrcaPageMixin`. Never copy a layout's markup into a page.

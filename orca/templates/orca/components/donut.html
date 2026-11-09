@@ -1,0 +1,7 @@
+<figure class="orca-donut" style="margin: 0">
+  <div class="orca-donut__chart">
+    <svg viewBox="0 0 36 36" role="img" aria-label="{{ summary }}">{% for i in items %}<circle cx="18" cy="18" r="{{ r }}" pathLength="100" stroke="{{ i.color }}" stroke-dasharray="{{ i.dash }}" stroke-dashoffset="{{ i.offset }}"/>{% endfor %}</svg>
+    <div class="orca-donut__total" aria-hidden="true"><strong>{{ total }}</strong><span>{{ total_label }}</span></div>
+  </div>
+  <ul class="orca-legend orca-legend--column">{% for i in items %}<li class="orca-legend__item"><span class="orca-swatch" style="--orca-swatch: {{ i.color }}"></span>{{ i.label }}<span class="orca-legend__value">{{ i.display }} · {{ i.pct }}%</span></li>{% endfor %}</ul>
+</figure>
