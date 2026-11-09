@@ -254,7 +254,7 @@ Writing components once against shared names means a theme can never break a com
 
 `id: typography` · level: primitive · source: Tangerine
 
-Ubuntu Sans (variable) for everything, Ubuntu Sans Mono for code, on a fixed type scale.
+Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type scale.
 
 ### Why
 
@@ -275,8 +275,9 @@ One legible sans serif with two working weights keeps the interface calm and rea
 - Heading: `--orca-type-h1`…`h6`, `--orca-type-page-title`, `--orca-type-display`.
 - Title: `--orca-type-title` (panel and card titles, 18/24 550).
 - Body: `--orca-type-body` (16/24) and `--orca-type-body-strong` (550). Bold is 550, not 700.
-- Detail: `--orca-type-detail` (14/20) for help, meta and timestamps; `--orca-type-label` (12/16 550) for table headers, badges, kickers.
-- Code: `--orca-type-code` with `--orca-font-mono`.
+- Detail: `--orca-type-detail` (14/20) for help, meta and timestamps; `--orca-type-label` (12/16 550) for table headers, badges, kickers and stat card labels.
+- Figure: `--orca-type-figure` (28/36 550) for the number of a stat card.
+- Code: `--orca-type-code` with `--orca-font-mono` (JetBrains Mono, self-hosted; it tells 0/O and 1/l/I apart). Code blocks are coloured with the `--orca-code-*` tokens.
 - Numbers in tables and stats get `font-variant-numeric: tabular-nums` (`.orca-num`).
 - Use as `font: var(--orca-type-body)`. Brand tokens `font_sans` / `font_mono` swap the families.
 
@@ -294,7 +295,7 @@ One legible sans serif with two working weights keeps the interface calm and rea
   <p class="orca-p">Body · 16/24 400</p>
   <p class="orca-small orca-muted">Detail · 14/20 400</p>
   <p class="orca-card-kicker">Label · 12/16 550</p>
-  <code class="orca-code">Code · Ubuntu Sans Mono</code>
+  <code class="orca-code">Code · JetBrains Mono</code>
 </div>
 ```
 

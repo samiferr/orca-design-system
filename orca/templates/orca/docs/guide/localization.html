@@ -4,7 +4,7 @@
 <section class="docs-block-flow">
   <h2 class="orca-section-title">Translation</h2>
   <p class="orca-p">Primitives contain no fixed words: labels, button text and messages are yours, so translate them with Django as usual. Set the page language with <code class="orca-code">{% templatetag openblock %} orca_html_attrs LANGUAGE_CODE {% templatetag closeblock %}</code>.</p>
-  <pre class="docs-code"><code>{% verbatim %}{% load i18n orca %}
+  <pre class="docs-code"><code data-orca-highlight>{% verbatim %}{% load i18n orca %}
 {% get_current_language as LANGUAGE_CODE %}
 <html {% orca_html_attrs LANGUAGE_CODE %}>
 ...

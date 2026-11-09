@@ -294,9 +294,11 @@
 
 /* ===================================================================== Data display */
 .orca-stat-card { display: flex; flex-direction: column; gap: var(--orca-space-4); min-width: 0; padding: var(--orca-space-16); background: var(--orca-bg-stat); border: var(--orca-border-width) solid var(--orca-border-stat); }
-.orca-stat-card__head { display: flex; align-items: center; gap: var(--orca-space-8); }
+.orca-stat-card__head { display: flex; align-items: center; gap: var(--orca-space-4); }
 .orca-stat-card__icon { flex: none; display: inline-flex; color: var(--orca-text-muted); background: transparent; }
-.orca-stat-card__icon > .orca-icon { width: var(--orca-icon-m); height: var(--orca-icon-m); }
+.orca-stat-card__icon > .orca-icon { width: var(--orca-icon-s); height: var(--orca-icon-s); }
+.orca-stat-card .orca-stat-label { font: var(--orca-type-label); }
+.orca-stat-card .orca-stat-value { font: var(--orca-type-figure); }
 .orca-stat-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-4) var(--orca-space-8); font: var(--orca-type-detail); color: var(--orca-text-muted); }
 .orca-stat-card > .orca-sparkline { margin-top: var(--orca-space-8); }
 a.orca-stat-card { color: inherit; text-decoration: none; }
@@ -681,6 +683,22 @@ button.orca-event-card { width: 100%; border-top: 0; border-right: 0; border-bot
 .orca-live-example .orca-tabs__panel--code { padding: 0; }
 .orca-code-block { position: relative; margin: 0; background: var(--orca-bg-alt); border: var(--orca-hairline) solid var(--orca-border); min-width: 0; }
 .orca-code-block__head { display: flex; align-items: center; justify-content: space-between; gap: var(--orca-space-8); padding: var(--orca-space-4) var(--orca-space-4) var(--orca-space-4) var(--orca-space-16); border-bottom: var(--orca-hairline) solid var(--orca-border); font: var(--orca-type-label); text-transform: uppercase; letter-spacing: 0.04em; color: var(--orca-text-muted); }
+/* Syntax colours: orca.js colours code blocks with the vendored highlight.js (class prefix orca-hl-). */
+.orca-hl-keyword, .orca-hl-literal, .orca-hl-built_in, .orca-hl-type, .orca-hl-selector-tag, .orca-hl-doctag { color: var(--orca-code-keyword); }
+.orca-hl-tag, .orca-hl-name, .orca-hl-selector-id, .orca-hl-selector-class { color: var(--orca-code-tag); }
+.orca-hl-attr, .orca-hl-attribute, .orca-hl-property, .orca-hl-variable, .orca-hl-params { color: var(--orca-code-attr); }
+.orca-hl-string, .orca-hl-regexp, .orca-hl-symbol, .orca-hl-addition { color: var(--orca-code-string); }
+.orca-hl-number, .orca-hl-bullet, .orca-hl-link { color: var(--orca-code-number); }
+.orca-hl-template-tag, .orca-hl-template-variable, .orca-hl-meta, .orca-hl-subst { color: var(--orca-code-template); }
+.orca-hl-title, .orca-hl-section { color: var(--orca-code-title); }
+.orca-hl-comment, .orca-hl-quote, .orca-hl-deletion { color: var(--orca-code-comment); font-style: italic; }
+.orca-hl-tag > .orca-hl-name { color: var(--orca-code-tag); }
+.orca-hl-strong { font-weight: 550; }
+.orca-hl-emphasis { font-style: italic; }
+/* Copy buttons: the copy icon, swapped for a check while the button says Copied. */
+.orca-icon--copied { display: none; }
+[data-copied] > .orca-icon--copy { display: none; }
+[data-copied] > .orca-icon--copied { display: inline-block; color: var(--orca-positive); }
 .orca-code-block pre { margin: 0; padding: var(--orca-space-16); overflow-x: auto; font: 400 0.8125rem/1.25rem var(--orca-font-mono); tab-size: 4; }
 
 /* ===================================================================== Touch: 44px targets */

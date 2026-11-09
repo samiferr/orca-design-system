@@ -115,6 +115,13 @@ class ContrastTests(SimpleTestCase):
                     with self.subTest(theme=theme, fg=fg, bg=bg):
                         self.assertGreaterEqual(color.contrast(self.value(fg, theme), self.value(bg, theme)), 3.0)
 
+    def test_code_colours_read_on_every_code_ground(self):
+        for theme in tokens.THEMES:
+            for tok in [t.name for t in tokens.semantic_tokens() if t.name.startswith("code-")]:
+                for bg in ("bg", "bg-alt", "bg-panel", "bg-input"):
+                    with self.subTest(theme=theme, fg=tok, bg=bg):
+                        self.assertGreaterEqual(color.contrast(self.value(tok, theme), self.value(bg, theme)), 4.5)
+
     def test_status_text_reads_on_page(self):
         for theme in tokens.THEMES:
             for fg in ("info", "negative", "today"):
@@ -482,6 +489,15 @@ class PatternTagTests(SimpleTestCase):
         spec = json.loads(html_lib.unescape(re.search(r'data-orca-chart="([^"]+)"', html).group(1)))
         self.assertTrue(spec["stacked"])
         self.assertEqual([s_["values"] for s_ in spec["series"]], [[1, 2], [3, 4]])
+
+    def test_code_font_and_highlighter_are_vendored(self):
+        self.assertTrue((ROOT / "orca/static/orca/fonts/JetBrainsMono-Latin-Variable.woff2").exists())
+        self.assertIn('font-family: "JetBrains Mono"', CSS)
+        self.assertTrue(compute_brand({}).css["light"]["--orca-font-mono"].startswith('"JetBrains Mono"'))
+        hl = (ROOT / "orca/static/orca/vendor/highlight.min.js").read_text()
+        self.assertIn("Highlight.js v11", hl)
+        self.assertIn('registerLanguage("django"', hl)
+        self.assertIn("vendor/highlight.min.js", (ROOT / "orca/static/orca/js/orca.js").read_text())
 
     def test_chartjs_is_vendored_and_loaded_on_demand(self):
         self.assertTrue((ROOT / "orca/static/orca/vendor/chart.umd.js").read_text().startswith("/*!\n * Chart.js v4"))

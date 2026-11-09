@@ -98,8 +98,9 @@ BRAND_TOKENS = [
     ),
     BrandToken(
         "font_mono", ["--orca-font-mono"],
-        '"Ubuntu Sans Mono", ui-monospace, Consolas, Menlo, monospace',
-        "Font stack for code, keyboard keys and tabular identifiers.",
+        '"JetBrains Mono", ui-monospace, Consolas, Menlo, monospace',
+        "Font stack for code, keyboard keys and tabular identifiers. ORCA self-hosts JetBrains Mono (variable, 100–800, Latin "
+        "and Latin Extended); \"Ubuntu Sans Mono\" is also bundled if you prefer it.",
     ),
 ]
 
@@ -173,6 +174,15 @@ SEMANTIC = [
       usage="ORCA: floating surfaces (menus, dialogs, drawers, toasts). Dark lifts one step so elevation shows without a shadow (Practical UI C12)."),
     T("bg-code", "rgba(0,0,0,0.03)", "rgba(255,255,255,0.15)", group="Grounds", usage="Inline code and keyboard keys."),
     T("bg-overlay", "rgba(17,17,17,0.85)", group="Grounds", usage="The scrim behind dialogs and drawers."),
+    # Code: syntax colours for code blocks. Each reads at 4.5:1 or more on every ground code sits on, in every theme.
+    T("code-keyword", "#70449c", "#c297f2", group="Code", usage="ORCA: keywords and literals in code (purple)."),
+    T("code-tag", "#195daa", "#74b1fe", group="Code", usage="ORCA: HTML tag names and selectors (blue)."),
+    T("code-attr", "#934302", "#f1935b", group="Code", usage="ORCA: attribute and property names (orange)."),
+    T("code-string", "#157123", "#73c477", group="Code", usage="ORCA: strings (green)."),
+    T("code-number", "#026d64", "#0bc8b9", group="Code", usage="ORCA: numbers (teal)."),
+    T("code-template", "#943569", "#ed88ba", group="Code", usage="ORCA: Django template tags, variables and filters (pink)."),
+    T("code-title", "#4d51aa", "#9ba5fe", group="Code", usage="ORCA: function and class names (indigo)."),
+    T("code-comment", "#666666", "#999999", group="Code", usage="ORCA: comments, in italics (grey)."),
     # Lines
     T("border", "rgba(0,0,0,0.2)", "rgba(255,255,255,0.2)", group="Lines",
       usage="Decorative outlines: cards, panels, rules, tab base line. Not for controls."),
@@ -361,6 +371,7 @@ TYPE = [
     S("type-detail", "400 0.875rem/1.25rem var(--orca-font-sans)", "Help text, validation messages, meta, timestamps.", "Type"),
     S("type-label", "550 0.75rem/1rem var(--orca-font-sans)", "Table headers, badges, kickers, stat labels (uppercase allowed).", "Type"),
     S("type-stat", "550 1.25rem/1.75rem var(--orca-font-sans)", "Stat values.", "Type"),
+    S("type-figure", "550 1.75rem/2.25rem var(--orca-font-sans)", "ORCA: the number of a stat card, larger than its label so it is read first.", "Type"),
     S("type-code", "400 0.9375rem/1.5rem var(--orca-font-mono)", "Code and keyboard keys.", "Type"),
     S("weight-regular", "400", "Body text.", "Type"),
     S("weight-strong", "550", "Bold text and headings.", "Type"),
@@ -391,6 +402,7 @@ DENSE = {
     "type-body-strong": "550 0.875rem/1.25rem var(--orca-font-sans)",
     "type-detail": "400 0.8125rem/1.125rem var(--orca-font-sans)",
     "type-stat": "550 1.125rem/1.5rem var(--orca-font-sans)",
+    "type-figure": "550 1.5rem/2rem var(--orca-font-sans)",
     "type-code": "400 0.8125rem/1.25rem var(--orca-font-mono)",
 }
 

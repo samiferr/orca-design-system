@@ -53,12 +53,12 @@
   <h2 class="orca-section-title" id="start-h">Start in three steps</h2>
   <ol class="docs-steps">
     <li><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div><p class="orca-panel-title">Install</p>
-      <pre class="docs-code"><code>pip install git+https://github.com/samiferr/orca-design-system.git</code></pre></div></li>
+      <pre class="docs-code"><code data-orca-highlight>pip install git+https://github.com/samiferr/orca-design-system.git</code></pre></div></li>
     <li><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div><p class="orca-panel-title">Add the app and your brand</p>
-      <pre class="docs-code"><code>INSTALLED_APPS += ["orca"]
+      <pre class="docs-code"><code data-orca-highlight>INSTALLED_APPS += ["orca"]
 ORCA = {"BRAND": {"name": "Acme", "color": "#0f95a1"}}</code></pre></div></li>
     <li><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div><p class="orca-panel-title">Load it in your base template</p>
-      <pre class="docs-code"><code>{% verbatim %}{% load orca %}
+      <pre class="docs-code"><code data-orca-highlight>{% verbatim %}{% load orca %}
 <html {% orca_html_attrs %}>
 <head>{% orca_head %}</head>{% endverbatim %}</code></pre></div></li>
   </ol>

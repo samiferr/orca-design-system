@@ -25,7 +25,7 @@
     <div class="docs-example__preview{% if ex.preview_url %} docs-example__preview--page{% endif %}">{{ ex.rendered }}</div>
   </div>
   <div class="orca-tabs__panel docs-example__panel" role="tabpanel" id="ex-{{ forloop.counter }}-pc" aria-labelledby="ex-{{ forloop.counter }}-tc" tabindex="0" hidden>
-    <pre class="docs-code docs-example__code orca-scroll"><code>{{ ex.html }}</code></pre>
+    <pre class="docs-code docs-example__code orca-scroll"><code data-orca-highlight="django">{{ ex.html }}</code></pre>
   </div>
 </section>
 {% endfor %}

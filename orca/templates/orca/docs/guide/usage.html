@@ -54,7 +54,7 @@
     <input class="orca-input" id="u-video" name="video_url" value="media.example.com/v/4821" aria-invalid="true" aria-describedby="u-video-error u-video-help">
     <div class="orca-row" style="margin-top: var(--orca-space-24)"><button class="orca-button orca-button--primary" type="submit">Save video</button><button class="orca-button" type="button">Cancel</button></div>
   </div></div>
-  <pre class="docs-code"><code>{% verbatim %}<label class="orca-label" for="video-url">Video address</label>
+  <pre class="docs-code"><code data-orca-highlight>{% verbatim %}<label class="orca-label" for="video-url">Video address</label>
 <p class="orca-help" id="video-url-help">Starts with https://. Copy it from the video's Share menu.</p>
 {% if form.video_url.errors %}
 <p class="orca-error" id="video-url-error">{% icon "error" %}<span>{{ form.video_url.errors.0 }}</span></p>
@@ -81,7 +81,8 @@
       <tr><td><code class="orca-code">data-orca-toggle</code></td><td>Flips <code class="orca-code">aria-pressed</code>; optional <code class="orca-code">data-orca-label-on</code> / <code class="orca-code">-off</code>.</td></tr>
       <tr><td><code class="orca-code">data-orca-theme-toggle</code></td><td>Cycles light, dark and paper and remembers the choice.</td></tr>
       <tr><td><code class="orca-code">data-orca-countdown</code></td><td>Live countdown to the time in its <code class="orca-code">datetime</code> attribute.</td></tr>
-      <tr><td><code class="orca-code">data-orca-copy="id"</code></td><td>Copies the text of the element with that id and says “Copied”.</td></tr>
+      <tr><td><code class="orca-code">data-orca-copy="id"</code></td><td>Copies the text of the element with that id, says “Copied” and turns its copy icon into a check mark.</td></tr>
+      <tr><td><code class="orca-code">data-orca-highlight="lang"</code></td><td>Colours the code with highlight.js (loaded on demand) in the theme’s code colours; leave the value empty to detect the language.</td></tr>
       <tr><td><code class="orca-code">data-orca-menu</code>, <code class="orca-code">data-orca-listbox</code>, <code class="orca-code">data-orca-combobox</code></td><td>Menus, dropdown selects and comboboxes: opening, arrow keys, Escape, focus return.</td></tr>
       <tr><td><code class="orca-code">data-orca-tabs</code></td><td>Tab lists: arrow keys, Home, End, panel switching.</td></tr>
       <tr><td><code class="orca-code">data-orca-dialog-open="id"</code>, <code class="orca-code">data-orca-confirm="…"</code></td><td>Open native dialogs; ask before submitting a form.</td></tr>

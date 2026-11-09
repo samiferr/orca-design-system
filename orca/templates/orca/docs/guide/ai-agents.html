@@ -19,7 +19,7 @@
 
 <section class="docs-block-flow">
   <h2 class="orca-section-title">Add ORCA to your agent instructions</h2>
-  <pre class="docs-code"><code># UI rules (CLAUDE.md, AGENTS.md or your agent's equivalent)
+  <pre class="docs-code"><code data-orca-highlight># UI rules (CLAUDE.md, AGENTS.md or your agent's equivalent)
 This project's interface uses the ORCA design system.
 - Before writing any UI, run `python -m orca search <what you need>` and `python -m orca show <id>`.
 - Copy the element's example and keep its classes and attributes; change only the content.
@@ -67,7 +67,7 @@ This project's interface uses the ORCA design system.
 
 <section class="docs-block-flow">
   <h2 class="orca-section-title">What the lint catches</h2>
-  <pre class="docs-code"><code>$ python manage.py orca_lint templates/
+  <pre class="docs-code"><code data-orca-highlight>$ python manage.py orca_lint templates/
 templates/images/list.html:12: hard-coded colour; use a --orca-* token.
 templates/images/list.html:18: icon-only button without aria-label.
 templates/images/list.html:22: unknown ORCA class 'orca-buton'. Run `python -m orca search` to find the right one.

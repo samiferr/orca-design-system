@@ -127,10 +127,17 @@
     var button = document.createElement("button");
     button.type = "button";
     button.className = "orca-button orca-button--sm docs-code__copy";
-    button.textContent = "Copy";
+    var icons = document.getElementById("docs-copy-icons");
+    if (icons) button.appendChild(icons.content.cloneNode(true));
+    var label = document.createElement("span");
+    label.textContent = "Copy";
+    button.appendChild(label);
     button.addEventListener("click", function () {
       var text = pre.querySelector("code").textContent;
-      var done = function () { button.textContent = "Copied"; setTimeout(function () { button.textContent = "Copy"; }, 1500); };
+      var done = function () {
+        label.textContent = "Copied"; button.setAttribute("data-copied", "");
+        setTimeout(function () { label.textContent = "Copy"; button.removeAttribute("data-copied"); }, 1500);
+      };
       if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(done, function () { select(pre); });
       } else { select(pre); }
