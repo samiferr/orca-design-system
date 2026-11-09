@@ -17,7 +17,7 @@ add(Component(
          "Make the whole card a link (`<a class=\"orca-stat-card\">`) when it leads to the detail."],
     classes=[".orca-stat-card", ".orca-stat-card__foot"],
     laws=["restorff", "miller", "W11"],
-    uses=["stat-label", "stat-value", "delta", "sparkline"],
+    uses=["stat-label", "delta", "sparkline"],
     examples=[("Stat cards", """<div class="orca-card-grid" style="grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))">
   <div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div>{% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}</div>
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Inside now</p><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
@@ -30,15 +30,15 @@ add(Component(
     "key-value-list", "Key/value list", C,
     "Properties of a record as label and value pairs.",
     why="Aligned labels and values are scanned down one edge and compared quickly (Practical UI L12, Miller's law).",
-    when=["Detail pages and side panels: a camera's address, model, location."],
+    when=["Detail pages and side panels: a video's address, model, location."],
     how=["`<dl class=\"orca-kv\">` with `<div><dt>Label</dt><dd>Value</dd></div>` pairs; `--stacked` puts labels above values (narrow panels). Below 620px it stacks automatically.",
          "Empty values: write 'Not set' in muted text; never leave a blank."],
     classes=[".orca-kv", ".orca-kv--stacked"],
     laws=["L12", "miller", "L15"],
     uses=["muted-text"],
-    examples=[("Camera properties", """<dl class="orca-kv" style="max-width: 30rem">
-  <div><dt>Model</dt><dd>Hikvision DS-2CD2143G2</dd></div>
-  <div><dt>Address</dt><dd><code class="orca-code">192.168.1.40:554</code></dd></div>
+    examples=[("Video properties", """<dl class="orca-kv" style="max-width: 30rem">
+  <div><dt>Format</dt><dd>MP4, 1080p</dd></div>
+  <div><dt>Address</dt><dd><code class="orca-code">media.example.com/v/4821</code></dd></div>
   <div><dt>Site</dt><dd>North building</dd></div>
   <div><dt>Notes</dt><dd class="orca-muted">Not set</dd></div>
 </dl>""")],
@@ -101,7 +101,7 @@ add(Component(
 add(Component(
     "sortable-header", "Sortable column header", C,
     "A table header that sorts the column, showing the direction with an arrow and aria-sort.",
-    why="Sorting turns a table into an answer ('which camera counted most?') (Tesler's law); the arrow and aria-sort show the order to everyone (C03).",
+    why="Sorting turns a table into an answer ('which video counted most?') (Tesler's law); the arrow and aria-sort show the order to everyone (C03).",
     when=["Columns people compare: names, counts, dates, status."],
     how=["`<th scope=\"col\" aria-sort=\"descending\"><a class=\"orca-sort\" href=\"?sort=-count\">Count{% templatetag openblock %} icon \"arrow-up\" {% templatetag closeblock %}</a></th>`; columns not sorted have no aria-sort.",
          "Server-side: keep the other query parameters in the link; first click sorts the most useful way (descending for numbers and dates)."],
@@ -109,7 +109,7 @@ add(Component(
     laws=["tesler", "C03"],
     uses=["icon"],
     examples=[("Header row", """<table class="orca-table" style="max-width: 32rem"><thead><tr>
-  <th scope="col" aria-sort="ascending"><a class="orca-sort" href="#">Camera{% icon "arrow-up" %}</a></th>
+  <th scope="col" aria-sort="ascending"><a class="orca-sort" href="#">Video{% icon "arrow-up" %}</a></th>
   <th scope="col" class="is-num" aria-sort="none"><a class="orca-sort" href="#">Count{% icon "arrow-up" %}</a></th>
   <th scope="col"><a class="orca-sort" href="#">Last seen{% icon "arrow-up" %}</a></th>
 </tr></thead><tbody><tr><td>Entrance A</td><td class="is-num">1,204</td><td>2 min ago</td></tr><tr><td>Entrance B</td><td class="is-num">980</td><td>5 min ago</td></tr></tbody></table>""")],
@@ -138,7 +138,7 @@ add(Component(
     "zone-row", "Zone row", C,
     "A counting zone in a list: its swatch, name, type, count and actions.",
     why="The same swatch as on the video lets people match a zone to its row instantly (Miller's law); the type is a word, not only a pattern (C03).",
-    when=["Zone lists beside the zone editor and on camera pages."],
+    when=["Zone lists beside the zone editor and on video pages."],
     how=["`<div class=\"orca-zone-row\">` with a zone swatch, `.orca-zone-row__name` (name + type badge), `.orca-zone-row__count` and row actions."],
     classes=[".orca-zone-row", ".orca-zone-row__name", ".orca-zone-row__count"],
     laws=["miller", "C03"],
@@ -154,7 +154,7 @@ add(Component(
     "line-count-item", "Line-count item", C,
     "A counting line with people in and out, each with a direction arrow.",
     why="In and out are the two numbers people compare; arrows and words make the direction clear without colour (C03), and tabular digits keep them aligned.",
-    when=["Line-crossing counts on camera and run pages."],
+    when=["Line-crossing counts on video and run pages."],
     how=["`<div class=\"orca-line-count\">` with a swatch, `.orca-line-count__name`, and two `.orca-line-count__dir` spans ('↓ 612 in', '↑ 598 out') using arrow icons and hidden words."],
     classes=[".orca-line-count", ".orca-line-count__name", ".orca-line-count__dir"],
     laws=["C03", "W11"],
@@ -184,7 +184,7 @@ add(Component(
     "card", "Card", C,
     "A container for one object: optional media, body and footer. Outlined (default), elevated or filled.",
     why="A card groups everything about one object in a common region (Practical UI L01) so grids of objects can be scanned and compared.",
-    when=["Collections of objects people browse: cameras, sites, reports.", "Outlined in content; elevated over maps or media; filled inside panels."],
+    when=["Collections of objects people browse: videos, sites, reports.", "Outlined in content; elevated over maps or media; filled inside panels."],
     avoid=["Wrapping every section of a page in a card: use spacing and section titles."],
     how=["`<article class=\"orca-card\">` with `.orca-card__media` (image in a reserved 16:9 box), `.orca-card__body` (kicker, title, meta, text) and `.orca-card__footer`.",
          "Variants: `--elevated`, `--filled`. Lay cards out in `.orca-card-grid`."],
@@ -192,9 +192,9 @@ add(Component(
     laws=["L01", "C12"],
     uses=["card-kicker", "card-title", "card-meta"],
     examples=[("Three variants", """<ul class="orca-card-grid">
-  <li><article class="orca-card"><div class="orca-card__body"><p class="orca-card-kicker">Outlined</p><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 cameras · 5 zones</p></div></article></li>
-  <li><article class="orca-card orca-card--elevated"><div class="orca-card__body"><p class="orca-card-kicker">Elevated</p><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 cameras · 2 zones</p></div></article></li>
-  <li><article class="orca-card orca-card--filled"><div class="orca-card__body"><p class="orca-card-kicker">Filled</p><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 cameras</p></div></article></li>
+  <li><article class="orca-card"><div class="orca-card__body"><p class="orca-card-kicker">Outlined</p><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 videos · 5 zones</p></div></article></li>
+  <li><article class="orca-card orca-card--elevated"><div class="orca-card__body"><p class="orca-card-kicker">Elevated</p><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 videos · 2 zones</p></div></article></li>
+  <li><article class="orca-card orca-card--filled"><div class="orca-card__body"><p class="orca-card-kicker">Filled</p><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 videos</p></div></article></li>
 </ul>""")],
     guide=["Card", "Card (outlined, elevated, filled)"], source="Tangerine",
     related=["card-footer", "linked-card"],
@@ -261,8 +261,8 @@ add(Component(
     laws=["peak-end", "hick", "R16"],
     uses=["step-marker"],
     examples=[("Setup steps", """<ol class="orca-steps">
-  <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><span class="orca-steps__title"><a href="#">Connect recorder</a><span class="orca-sr-only">, done</span></span></li>
-  <li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Choose cameras</span><span class="orca-steps__desc">Pick the doors to count</span></li>
+  <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><span class="orca-steps__title"><a href="#">Connect media server</a><span class="orca-sr-only">, done</span></span></li>
+  <li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Choose videos</span><span class="orca-steps__desc">Pick the doors to count</span></li>
   <li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Draw zones</span></li>
 </ol>""")],
     guide=["Steps"], source="Tangerine",
@@ -270,7 +270,7 @@ add(Component(
 
 add(Component(
     "tree", "Tree", C,
-    "A hierarchy of items that expand and collapse: sites, buildings, cameras.",
+    "A hierarchy of items that expand and collapse: sites, buildings, videos.",
     why="Nested disclosure shows structure and hides depth until needed (Practical UI S04); indentation and a guide line show who belongs to whom (Gestalt).",
     when=["Browsing a hierarchy of objects, such as locations or folders."],
     avoid=["Navigation between pages: use the nav tree."],
@@ -396,9 +396,9 @@ add(Component(
     laws=["S06", "fitts"],
     uses=["card"],
     examples=[("Scroller", """<ul class="orca-scroller" tabindex="0" aria-label="Sites" style="max-width: 30rem; padding-inline: 0">
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 cameras</p></div></li>
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 cameras</p></div></li>
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 cameras</p></div></li>
+  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 videos</p></div></li>
+  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 videos</p></div></li>
+  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 videos</p></div></li>
 </ul>""")],
     guide=["Scroller (scroll-snap region)"],
 ))
@@ -428,7 +428,7 @@ add(Component(
          "Series use `--orca-chart-1…8` in order; the SVG's label lists every share in words."],
     classes=[".orca-donut", ".orca-donut__chart", ".orca-donut__total"],
     laws=["C03", "miller"],
-    uses=["legend-item", "swatch"],
+    uses=["legend-item"],
     examples=[("Visitors by entrance", """{% orca_donut "Entrance A:4812, Gate 1:2140, Entrance B:1980, Car park:640" total_label="Visitors" %}""")],
     guide=["Donut chart"],
 ))

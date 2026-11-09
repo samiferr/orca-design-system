@@ -24,17 +24,17 @@ add(Element(
 
 add(Element(
     "zone-swatch", "Zone swatch", C,
-    "A mark matching how a counting zone is drawn on video: coloured outline with a light fill, hatched when excluded.",
-    why="Using the same mark in lists as on the video lets people match a zone to its row without reading (Miller's law); "
+    "A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.",
+    why="Using the same mark in lists as on the image or video lets people match a zone to its row without reading (Miller's law); "
         "hatching distinguishes excluded zones without relying on hue (C03).",
-    when=["Zone lists, zone editors, legends over camera images."],
+    when=["Region lists, region editors, legends over images and videos."],
     how=["`<span class=\"orca-zone-swatch\" style=\"--orca-zone: var(--orca-teal-500)\"></span>` + zone name.",
          "Excluded zone: add `.orca-zone-swatch--exclude`."],
     classes=[".orca-zone-swatch", ".orca-zone-swatch--exclude"], tokens=["chart-1"],
     laws=["miller", "C03"],
     examples=[("Zones", """<div class="orca-stack">
-  <span class="orca-with-icon"><span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-500)"></span>Door line</span>
-  <span class="orca-with-icon"><span class="orca-zone-swatch orca-zone-swatch--exclude" style="--orca-zone: var(--orca-orange-500)"></span>Staff area (excluded)</span>
+  <span class="orca-with-icon"><span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-500)"></span>Subject</span>
+  <span class="orca-with-icon"><span class="orca-zone-swatch orca-zone-swatch--exclude" style="--orca-zone: var(--orca-orange-500)"></span>Watermark area (excluded)</span>
 </div>""")],
     guide=["Zone swatch"], source="ORCA",
 ))

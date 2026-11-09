@@ -120,7 +120,7 @@ add(Component(
     "timezone-selector", "Timezone selector", C,
     "A timezone select with a 'Use my timezone' button and the current offset.",
     why="Detecting the zone moves the complexity to the system (Tesler's law); keeping the full list lets people choose a site's zone that differs from theirs (Postel's law).",
-    when=["Site, camera and profile settings."],
+    when=["Site, video and profile settings."],
     how=["`.orca-field` with label, help showing the current local time, a `.orca-row` with `<select class=\"orca-select\">{% templatetag openblock %} orca_timezone_options current {% templatetag closeblock %}</select>` and a ghost button `data-orca-detect-tz aria-controls=\"select-id\"`.",
          "Store the IANA name."],
     classes=[".orca-field"],

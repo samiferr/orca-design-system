@@ -16,10 +16,10 @@ add(Pattern(
     classes=[".orca-detail-panel", ".orca-detail-panel__head", ".orca-detail-panel__title"],
     laws=["L03", "miller", "B03"],
     uses=["record-actions", "key-value-list", "status-light"],
-    examples=[("Camera", """<section class="orca-detail-panel" aria-labelledby="dp-t" style="max-width: 36rem">
+    examples=[("Video", """<section class="orca-detail-panel" aria-labelledby="dp-t" style="max-width: 36rem">
   <div class="orca-detail-panel__head"><div class="orca-detail-panel__title"><h2 id="dp-t">Entrance A</h2><span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online <span class="orca-status__meta">for 12 days</span></span></div>
-    <div class="orca-record-actions"><a class="orca-button orca-button--dense" href="#">{% icon "edit" %}Edit camera</a><button class="orca-icon-button orca-icon-button--dense orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></div></div>
-  <dl class="orca-kv"><div><dt>Site</dt><dd>North building</dd></div><div><dt>Model</dt><dd>Hikvision DS-2CD2143G2</dd></div><div><dt>Address</dt><dd><code class="orca-code">192.168.1.40:554</code></dd></div><div><dt>Counted today</dt><dd class="orca-num">4,812</dd></div></dl>
+    <div class="orca-record-actions"><a class="orca-button orca-button--dense" href="#">{% icon "edit" %}Edit video</a><button class="orca-icon-button orca-icon-button--dense orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></div></div>
+  <dl class="orca-kv"><div><dt>Site</dt><dd>North building</dd></div><div><dt>Format</dt><dd>MP4, 1080p</dd></div><div><dt>Address</dt><dd><code class="orca-code">media.example.com/v/4821</code></dd></div><div><dt>Views today</dt><dd class="orca-num">4,812</dd></div></dl>
 </section>""")],
     guide=["Detail panel (header + actions + table)"], source="Tangerine",
 ))
@@ -28,7 +28,7 @@ add(Pattern(
     "parent-child-tabs", "Parent record with child tabs", C,
     "A parent record's summary followed by tabs, one per kind of child, each with its count.",
     why="Keeping the parent visible while browsing its children preserves context (Miller's law); counts on tabs say where the content is before clicking (Practical UI S06).",
-    when=["Records that own lists of other records: a site's cameras, zones and users."],
+    when=["Records that own lists of other records: a site's videos, zones and users."],
     how=["`<div class=\"orca-parent\">` with the page head, `.orca-parent__summary` (stat cards or key facts) and child tabs as page links; the active tab's panel holds the child list tab.",
          "Each tab is its own URL so it can be shared and survives a reload."],
     classes=[".orca-parent", ".orca-parent__summary"],
@@ -36,8 +36,8 @@ add(Pattern(
     uses=["page-head", "child-tabs", "stat-card"],
     examples=[("Site", """<div class="orca-parent">
   <div class="orca-page-head" style="margin: 0"><div class="orca-page-head__text"><h1 class="orca-page-title">North building</h1><p class="orca-page-subtitle">12 Rue de la Gare, Lille</p></div><div class="orca-page-head__actions"><a class="orca-button" href="#">{% icon "edit" %}Edit site</a></div></div>
-  <div class="orca-parent__summary"><div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><p class="orca-stat-label">Cameras online</p><p class="orca-stat-value">11 of 12</p></div></div>
-  <nav class="orca-tabs__list" aria-label="North building"><a class="orca-tab" href="#">Overview</a><a class="orca-tab" href="#" aria-current="page">Cameras <span class="orca-count orca-count--neutral">12</span></a><a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a><a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">3</span></a></nav>
+  <div class="orca-parent__summary"><div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p></div></div>
+  <nav class="orca-tabs__list" aria-label="North building"><a class="orca-tab" href="#">Overview</a><a class="orca-tab" href="#" aria-current="page">Videos <span class="orca-count orca-count--neutral">12</span></a><a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a><a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">3</span></a></nav>
 </div>""")],
     guide=["Parent record with child tabs"],
 ))
@@ -47,7 +47,7 @@ add(Pattern(
     "The content of one child tab: a list header scoped to the parent, the children's table and an empty state.",
     why="The same list tools as a top-level list make child lists familiar (Jakob's law); creating a child from here pre-fills the parent (Tesler's law).",
     when=["Inside parent-with-child-tabs pages."],
-    how=["A list header ('Cameras 12', search, 'Add camera' that links to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action."],
+    how=["A list header ('Videos 12', search, 'Add video' that links to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action."],
     classes=[".orca-list-header", ".orca-data-table"],
     laws=["jakob", "tesler"],
     uses=["list-header", "data-table", "empty-state"],
@@ -85,7 +85,7 @@ add(Pattern(
     uses=["callout", "text-link", "button"],
     examples=[("Blocked", """<div class="orca-callout orca-callout--negative" role="alert" style="max-width: 36rem">{% icon "error" %}<p class="orca-callout__title">Entrance A cannot be deleted yet</p>
   <div class="orca-callout__body"><p class="orca-p">These still use it. Remove or move them first.</p><ul class="orca-blocked-list"><li><a class="orca-link" href="#">2 zones</a> (Door line, Staff area)</li><li><a class="orca-link" href="#">1 alert rule</a> (Over capacity)</li></ul>
-    <div class="orca-row"><button class="orca-button orca-button--dense" type="button">Disable camera instead</button></div></div></div>""")],
+    <div class="orca-row"><button class="orca-button orca-button--dense" type="button">Disable video instead</button></div></div></div>""")],
     guide=["Delete-blocked notice (protected delete)"], source="Tangerine",
 ))
 
@@ -98,9 +98,9 @@ add(Pattern(
          "`--neutral` for non-destructive confirmations."],
     classes=[".orca-confirm-panel", ".orca-confirm-panel__title", ".orca-confirm-panel--neutral"],
     laws=["B13", "doherty", "peak-end"],
-    uses=["confirm-dialog", "checkbox", "form-actions"],
+    uses=["confirm-dialog", "form-actions"],
     examples=[("Delete site", """<form class="orca-confirm-panel" method="post" onsubmit="return false"><h1 class="orca-confirm-panel__title">Delete North building?</h1>
-  <div><p class="orca-p"><strong>Deleted:</strong></p><ul><li>12 cameras and their zones</li><li>5 alert rules</li></ul></div>
+  <div><p class="orca-p"><strong>Deleted:</strong></p><ul><li>12 videos and their zones</li><li>5 alert rules</li></ul></div>
   <div><p class="orca-p"><strong>Kept:</strong> counts in past reports.</p></div>
   <label class="orca-check"><input type="checkbox" required><span class="orca-check__box"></span>I understand this cannot be undone</label>
   <div class="orca-form-actions"><button class="orca-button orca-button--danger" type="submit">Delete site</button><a class="orca-button" href="#">Cancel</a></div></form>""")],

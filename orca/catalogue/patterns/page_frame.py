@@ -32,22 +32,19 @@ add(Pattern(
     why="A persistent bar in the expected place anchors every page of an application (Jakob's law); dense controls keep it to 56px so content stays in view (Practical UI F03).",
     when=["Every authenticated page of an application."],
     how=["`<header class=\"orca-topbar\">` with `.orca-topbar__start` (menu or sidebar toggle, logo, primary navigation) and `.orca-topbar__end` (search, utility navigation).",
-         "`--brand` paints it in the brand colour darkened by 30% with white text (the wise_people_analyzer bar); check the brand colour reads at 4.5:1 there.",
+         "It is the wise_people_analyzer bar: `--orca-brand-bar` (the brand colour mixed with 30% black, darkened further if white text would fall below 4.5:1) with `--orca-brand-bar-on` text.",
          "Below 1036px the navigation and search move into the drawer; the menu button opens it."],
-    classes=[".orca-topbar", ".orca-topbar__start", ".orca-topbar__end", ".orca-topbar--brand"],
+    classes=[".orca-topbar", ".orca-topbar__start", ".orca-topbar__end"],
+    tokens=["brand-bar", "brand-bar-on", "brand-bar-hover"],
     laws=["jakob", "F03", "fitts"],
-    uses=["logo", "primary-navigation", "utility-navigation", "search-input", "icon-button"],
-    examples=[("Default and brand", """<div class="orca-stack" style="gap: var(--orca-space-16)">
+    uses=["logo", "primary-navigation", "utility-navigation", "search-input"],
+    examples=[("Top bar", """<div class="orca-stack" style="gap: var(--orca-space-16)">
 <header class="orca-topbar" style="position: static">
   <div class="orca-topbar__start"><button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Open menu">{% icon "menu" %}</button>{% orca_logo href="#" %}
-    <nav aria-label="Main"><ul class="orca-topnav"><li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Cameras</a></li><li><a href="#">Reports</a></li></ul></nav></div>
+    <nav aria-label="Main"><ul class="orca-topnav"><li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Videos</a></li><li><a href="#">Reports</a></li></ul></nav></div>
   <div class="orca-topbar__end"><div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Search" aria-label="Search"></div>
     <a class="orca-icon-button orca-has-count" href="#" aria-label="Notifications, 3 unread">{% icon "notifications" %}<span class="orca-count" aria-hidden="true">3</span></a>
     <button class="orca-user-chip" type="button"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span><span class="orca-user-chip__text"><span class="orca-user-chip__name">Ada Lovelace</span></span></button></div>
-</header>
-<header class="orca-topbar orca-topbar--brand" style="position: static">
-  <div class="orca-topbar__start"><button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Open menu">{% icon "menu" %}</button>{% orca_logo href="#" %}</div>
-  <div class="orca-topbar__end"><a class="orca-icon-button" href="#" aria-label="Help">{% icon "help" %}</a><button class="orca-user-chip" type="button"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span><span class="orca-user-chip__text"><span class="orca-user-chip__name">Ada Lovelace</span><span class="orca-user-chip__role">Administrator</span></span></button></div>
 </header></div>""")],
     guide=["Top bar"], source="Tangerine",
 ))
@@ -70,7 +67,7 @@ add(Pattern(
   <nav class="orca-sidebar" id="sb-demo" aria-label="Sections" data-collapsed="false">
     <div class="orca-sidebar__section"><ul class="orca-side-nav">
       <li><a class="orca-side-link" href="#" aria-current="page">{% icon "home" %}<span class="orca-side-link__label">Dashboard</span></a></li>
-      <li><a class="orca-side-link" href="#">{% icon "snapshot" %}<span class="orca-side-link__label">Cameras</span><span class="orca-count orca-count--neutral">12</span></a></li>
+      <li><a class="orca-side-link" href="#">{% icon "snapshot" %}<span class="orca-side-link__label">Videos</span><span class="orca-count orca-count--neutral">12</span></a></li>
       <li><a class="orca-side-link" href="#">{% icon "statistics" %}<span class="orca-side-link__label">Reports</span></a></li></ul></div>
     <div class="orca-sidebar__section"><p class="orca-sidebar__label">Admin</p><ul class="orca-side-nav"><li><a class="orca-side-link" href="#">{% icon "user" %}<span class="orca-side-link__label">Users</span></a></li><li><a class="orca-side-link" href="#">{% icon "settings" %}<span class="orca-side-link__label">Settings</span></a></li></ul></div>
     <div class="orca-sidebar__foot"><button class="orca-icon-button orca-sidebar__toggle" type="button" aria-controls="sb-demo" aria-expanded="true" aria-label="Collapse navigation" data-orca-sidebar-toggle>{% icon "chevron-left" %}</button></div>
@@ -109,12 +106,12 @@ add(Pattern(
          "Actions: secondary buttons first, the primary (or the create button) last; on phones they stretch full width."],
     classes=[".orca-page-head", ".orca-page-head__text", ".orca-page-head__meta", ".orca-page-head__actions"],
     laws=["jakob", "B03", "L03"],
-    uses=["page-title", "page-subtitle", "breadcrumbs", "button", "create-button"],
+    uses=["page-title", "page-subtitle", "breadcrumbs", "create-button"],
     examples=[("Page head", """<div class="orca-page-head">
   <div class="orca-page-head__text"><nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Sites</a></li><li><span aria-current="page">North building</span></li></ol></nav>
-    <h1 class="orca-page-title">Cameras</h1><p class="orca-page-subtitle">Every camera counting at North building.</p>
+    <h1 class="orca-page-title">Videos</h1><p class="orca-page-subtitle">Every video from North building.</p>
     <p class="orca-page-head__meta"><span class="orca-status"><span class="orca-dot orca-dot--positive"></span>11 online</span><span class="orca-status"><span class="orca-dot orca-dot--negative"></span>1 offline</span></p></div>
-  <div class="orca-page-head__actions"><button class="orca-button" type="button">{% icon "upload" %}Export</button><a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add camera</a></div>
+  <div class="orca-page-head__actions"><button class="orca-button" type="button">{% icon "upload" %}Export</button><a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add video</a></div>
 </div>""")],
     guide=["Page head"], source="Tangerine",
 ))
@@ -128,9 +125,9 @@ add(Pattern(
          "Toasts float elsewhere; this region holds messages that must stay until read."],
     classes=[".orca-messages-region", ".orca-messages"],
     laws=["jakob", "postel", "peak-end"],
-    uses=["flash-message", "alert"],
+    uses=["flash-message"],
     examples=[("Region", """<div class="orca-messages-region" aria-live="polite"><div class="orca-messages">
-  <div class="orca-alert orca-alert--positive" role="status">{% status_icon "positive" %}<p class="orca-alert__body">Camera “Gate 1” added. Draw its zones next.</p><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss message" data-orca-dismiss>{% icon "close" %}</button></div>
+  <div class="orca-alert orca-alert--positive" role="status">{% status_icon "positive" %}<p class="orca-alert__body">Video “Gate 1” added. Draw its zones next.</p><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss message" data-orca-dismiss>{% icon "close" %}</button></div>
 </div></div>""")],
     guide=["Messages region"], source="Tangerine",
 ))
@@ -146,11 +143,11 @@ add(Pattern(
     classes=[".orca-drawer", ".orca-drawer--left", ".orca-drawer__header", ".orca-drawer__body", ".orca-drawer__footer"],
     laws=["L14", "postel", "fitts"],
     uses=["drawer-backdrop", "dialog-title", "icon-button", "button"],
-    examples=[("Details drawer", """<button class="orca-button" type="button" data-orca-dialog-open="dr-demo">Show camera details</button>
+    examples=[("Details drawer", """<button class="orca-button" type="button" data-orca-dialog-open="dr-demo">Show video details</button>
 <dialog class="orca-drawer" id="dr-demo" aria-labelledby="dr-demo-t" data-orca-light-dismiss>
   <div class="orca-drawer__header"><h2 class="orca-dialog-title" id="dr-demo-t">Entrance A</h2><button class="orca-icon-button" type="button" aria-label="Close" data-orca-dialog-close>{% icon "close" %}</button></div>
   <div class="orca-drawer__body"><dl class="orca-kv orca-kv--stacked"><div><dt>Status</dt><dd>Online</dd></div><div><dt>Today</dt><dd>4,812 visitors</dd></div></dl></div>
-  <div class="orca-drawer__footer"><a class="orca-button orca-button--primary" href="#">Open camera</a><button class="orca-button" type="button" data-orca-dialog-close>Close</button></div>
+  <div class="orca-drawer__footer"><a class="orca-button orca-button--primary" href="#">Open video</a><button class="orca-button" type="button" data-orca-dialog-close>Close</button></div>
 </dialog>""")],
     guide=["Drawer"], source="Tangerine",
 ))
@@ -164,7 +161,7 @@ add(Pattern(
     classes=[".orca-top-actions", ".orca-top-actions__end"],
     laws=["fitts", "B09"],
     uses=["back-link", "record-actions"],
-    examples=[("Top actions", """<div class="orca-top-actions"><a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to cameras</a><div class="orca-top-actions__end"><a class="orca-button orca-button--dense" href="#">{% icon "edit" %}Edit</a><button class="orca-icon-button orca-icon-button--dense orca-icon-button--outlined" type="button" aria-label="More actions">{% icon "more" %}</button></div></div>""")],
+    examples=[("Top actions", """<div class="orca-top-actions"><a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to videos</a><div class="orca-top-actions__end"><a class="orca-button orca-button--dense" href="#">{% icon "edit" %}Edit</a><button class="orca-icon-button orca-icon-button--dense orca-icon-button--outlined" type="button" aria-label="More actions">{% icon "more" %}</button></div></div>""")],
     guide=["Top actions header (back link + actions)"], source="Tangerine",
 ))
 
@@ -188,15 +185,16 @@ add(Pattern(
 
 add(Pattern(
     "filter-panel", "Filter panel", C,
-    "Filters in labelled groups beside a list, with the number of results and Clear all.",
+    "Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.",
     why="Seeing all filters and the result count at once lets people narrow a list confidently (Miller's law, Doherty threshold); grouping keeps a long set of filters scannable.",
-    when=["Lists and catalogues on wide screens with several filter dimensions."],
-    how=["`<div class=\"orca-with-filters\">` holding `<form class=\"orca-filter-panel\" method=\"get\" aria-label=\"Filters\">` and the list.",
-         "Head: 'Filters' and a Clear all link; then `<fieldset class=\"orca-filter-panel__group\">` per dimension with checkbox lists; apply on change (htmx or `data-orca-autosubmit`) and announce the count.",
-         "Below 1036px the panel hides; the same form goes in the filter drawer."],
-    classes=[".orca-with-filters", ".orca-filter-panel", ".orca-filter-panel__head", ".orca-filter-panel__group"],
+    when=["Inside the filter drawer of every page with filters."],
+    avoid=["A side column of filters beside the list: page filters always open in the right drawer."],
+    how=["`<div class=\"orca-drawer__body orca-filter-panel\">` inside the filter drawer's form (`method=\"get\"`).",
+         "One `<fieldset class=\"orca-filter-panel__group\">` per dimension with checkbox lists; a search field that narrows the list goes first.",
+         "Announce the number of results; the drawer footer's primary button repeats it ('Show 11 videos')."],
+    classes=[".orca-filter-panel", ".orca-filter-panel__head", ".orca-filter-panel__group"],
     laws=["miller", "doherty", "S04"],
-    uses=["choice-group", "checkbox", "link-action", "search-field"],
+    uses=["choice-group", "link-action", "search-field"],
     examples=[("Panel", """<form class="orca-filter-panel" method="get" aria-label="Filters" style="max-width: 15rem" onsubmit="return false">
   <div class="orca-filter-panel__head"><span class="orca-panel-title">Filters</span><button class="orca-button orca-button--link" type="reset">Clear all</button></div>
   <fieldset class="orca-filter-panel__group"><legend>Status</legend><div class="orca-choice-group__items">
@@ -204,26 +202,34 @@ add(Pattern(
     <label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Offline <span class="orca-muted">1</span></label></div></fieldset>
   <fieldset class="orca-filter-panel__group"><legend>Site</legend><div class="orca-choice-group__items">
     <label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>North building</label><label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Warehouse</label></div></fieldset>
-  <p class="orca-small orca-muted" role="status">11 cameras match</p>
+  <p class="orca-small orca-muted" role="status">11 videos match</p>
 </form>""")],
     guide=["Filter panel"], source="Tangerine",
 ))
 
 add(Pattern(
     "filter-drawer", "Filter drawer", C,
-    "The filter panel in a drawer, with Apply and Clear, for phones and narrow screens.",
-    why="On small screens filters must not push the results away; a drawer shows them on demand (Practical UI S04) and an explicit Apply avoids reloading on every tap (Doherty threshold).",
-    when=["Below 1036px, or whenever filters do not fit beside the list."],
-    how=["A filter button (with the active count) opens a `<dialog class=\"orca-drawer\">` containing the filter panel form.",
-         "Footer: 'Show 11 cameras' (primary, the count updates live) and 'Clear all'."],
+    "Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.",
+    why="Filters change what a page shows without taking people away from it: a right drawer keeps the results behind the scrim, keeps the page head "
+        "to one Filters button (Hick's law, Practical UI S04: reveal secondary controls when needed), and opens from the same place on every page and "
+        "every screen width, so people know where to look (Jakob's law). An explicit Show results avoids reloading on every tap (Doherty threshold).",
+    when=["Every page with filters, at every screen width: lists, tables, galleries, boards and reports."],
+    avoid=["A row of filter fields above the results or a side column of filters: both move here.",
+           "The Filters button in the list header or toolbar: it belongs to the page actions."],
+    how=["The Filters button (filter icon, number of applied filters) is in the page actions: `{% block page_actions %}`, `.orca-page-head__actions`. "
+         "It has `data-orca-dialog-open=\"filters\"`; put it before the primary action.",
+         "`<dialog class=\"orca-drawer\" id=\"filters\" data-orca-light-dismiss>` (right side) holding a GET form: header with title and Close, "
+         "`.orca-drawer__body.orca-filter-panel`, footer with 'Show 11 videos' (primary, the count updates live) and 'Clear all'.",
+         "Above the results, the `filter-bar` lists the applied filters as removable tags."],
     classes=[".orca-drawer", ".orca-filter-panel"],
-    laws=["S04", "doherty", "fitts"],
-    uses=["filter-button", "drawer-backdrop", "button"],
-    examples=[("Drawer", """<button class="orca-button" type="button" data-orca-dialog-open="fd-demo">{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true">1</span><span class="orca-sr-only">, 1 active</span></button>
+    laws=["S04", "hick", "jakob", "doherty"],
+    uses=["filter-button", "dialog"],
+    examples=[("Filters from the page actions", """<div class="orca-page-head"><div class="orca-page-head__text"><h1 class="orca-page-title">Videos</h1><p class="orca-page-subtitle">128 videos in the library.</p></div>
+  <div class="orca-page-head__actions"><button class="orca-button" type="button" data-orca-dialog-open="fd-demo">{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true">1</span><span class="orca-sr-only">, 1 active</span></button><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}Add video</a></div></div>
 <dialog class="orca-drawer" id="fd-demo" aria-labelledby="fd-demo-t" data-orca-light-dismiss><form method="dialog" style="display: contents">
   <div class="orca-drawer__header"><h2 class="orca-dialog-title" id="fd-demo-t">Filters</h2><button class="orca-icon-button" type="button" aria-label="Close" data-orca-dialog-close>{% icon "close" %}</button></div>
-  <div class="orca-drawer__body orca-filter-panel"><fieldset class="orca-filter-panel__group"><legend>Status</legend><div class="orca-choice-group__items"><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Online</label><label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Offline</label></div></fieldset></div>
-  <div class="orca-drawer__footer"><button class="orca-button orca-button--primary" type="submit" value="apply">Show 11 cameras</button><button class="orca-button orca-button--ghost" type="reset">Clear all</button></div>
+  <div class="orca-drawer__body orca-filter-panel"><fieldset class="orca-filter-panel__group"><legend>Status</legend><div class="orca-choice-group__items"><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Published</label><label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Draft</label></div></fieldset></div>
+  <div class="orca-drawer__footer"><button class="orca-button orca-button--primary" type="submit" value="apply">Show 11 videos</button><button class="orca-button orca-button--ghost" type="reset">Clear all</button></div>
 </form></dialog>""")],
     guide=["Filter drawer"], source="Tangerine",
 ))

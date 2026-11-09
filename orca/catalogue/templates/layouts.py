@@ -63,7 +63,7 @@ layout("app-shell", "App shell", "orca/layouts/app.html",
        ["Fill `content`; set `title` and `nav` in the context (or override `sidebar_nav`).",
         "Put the page's main button in `page_actions` (one primary, Practical UI B03).",
         "On phones the sidebar opens over the page from the menu button (`data-orca-sidebar-open`); Escape closes it."],
-       ["jakob", "L03", "B03", "tesler"], ["top-bar", "sidebar", "page-head", "messages-region", "breadcrumbs"],
+       ["jakob", "L03", "B03", "tesler"], ["top-bar", "sidebar", "page-head", "messages-region"],
        ["App shell"], context=APP_CONTEXT, classes=[".orca-shell__menu"],
        a11y=["One `main` landmark with id `main` for the skip link; the sidebar is a `nav` labelled “Sections”."])
 
@@ -73,7 +73,7 @@ layout("auth-layout", "Auth layout", "orca/layouts/auth.html",
        ["Sign in, sign out, password reset and change, locked-out and invitation pages."],
        ["With Django's `LoginView`, `template_name=\"orca/layouts/auth.html\"` works as is: it renders `form` with `orca_field`.",
         "Override `form_extra` for 'Keep me signed in' and the reset link, `footer` for help text, `submit_label` for the button."],
-       ["hick", "C08", "R01"], ["login-card", "form-field"], ["Auth layout"],
+       ["hick", "C08", "R01"], ["login-card"], ["Auth layout"],
        blocks=BASE_BLOCKS + ["content", "brand", "page_title", "page_subtitle", "messages", "form_extra", "submit_label", "footer"],
        context=["`form`: any Django form (fields are rendered in order).", "`title`, `subtitle`, `submit_label`, `form_action`."],
        classes=[".orca-auth", ".orca-auth-page"])
@@ -95,7 +95,7 @@ layout("error-layouts", "Error layouts", "orca/layouts/error.html",
        ["Create `templates/404.html` containing `{% templatetag openblock %} extends \"orca/errors/404.html\" {% templatetag closeblock %}`; the same for 403 and 500.",
         "The 500 page renders without a request context: it uses no template tags that need one.",
         "Override `error_text` and `error_actions` to point to your support or status page."],
-       ["peak-end", "W15", "W01"], ["empty-state", "button"], ["Error layouts (403, 404, 500)"],
+       ["peak-end", "W15", "W01"], ["empty-state"], ["Error layouts (403, 404, 500)"],
        blocks=BASE_BLOCKS + ["brand", "illustration", "error_code", "page_title", "error_text", "error_actions"],
        classes=[".orca-error-layout", ".orca-error-layout__body", ".orca-error-layout__code", ".orca-error-page"])
 

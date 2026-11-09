@@ -23,11 +23,11 @@
 .orca-split--wide-aside { grid-template-columns: minmax(0, 1fr) 26rem; }
 @media (max-width: 1035px) { .orca-split, .orca-split--aside-start, .orca-split--wide-aside { grid-template-columns: minmax(0, 1fr); } }
 
-/* Camera split: the live picture takes two thirds, details one third; stacked on narrow screens. */
-.orca-camera-split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: var(--orca-space-24); align-items: start; }
-.orca-camera-split__media { position: sticky; top: calc(var(--orca-nav-height) + var(--orca-space-16)); min-width: 0; }
-.orca-camera-split__side { display: flex; flex-direction: column; gap: var(--orca-space-16); min-width: 0; }
-@media (max-width: 1035px) { .orca-camera-split { grid-template-columns: minmax(0, 1fr); } .orca-camera-split__media { position: static; } }
+/* Media split: the live picture takes two thirds, details one third; stacked on narrow screens. */
+.orca-media-split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); gap: var(--orca-space-24); align-items: start; }
+.orca-media-split__media { position: sticky; top: calc(var(--orca-nav-height) + var(--orca-space-16)); min-width: 0; }
+.orca-media-split__side { display: flex; flex-direction: column; gap: var(--orca-space-16); min-width: 0; }
+@media (max-width: 1035px) { .orca-media-split { grid-template-columns: minmax(0, 1fr); } .orca-media-split__media { position: static; } }
 
 /* Form grid: fields flow into as many columns as fit (min 16rem); full-width rows span all. */
 .orca-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--orca-space-24) var(--orca-space-24); max-width: 60rem; }
@@ -53,12 +53,10 @@
 /* In a page shell (body.orca-shell or .orca-docs-page) the sidebar stays in view and scrolls on its own. */
 :is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar { position: sticky; top: var(--orca-nav-height); height: calc(100vh - var(--orca-nav-height)); min-height: 0; overflow-y: auto; overflow-x: hidden; }
 :is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar > * { flex-shrink: 0; }
-:is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar > .orca-sidebar__foot { position: sticky; bottom: 0; background: var(--orca-bg-alt); }
+:is(.orca-shell, .orca-docs-page) > .orca-app > .orca-sidebar > .orca-sidebar__foot { position: sticky; bottom: 0; background: var(--orca-bg-panel); }
 
 /* ===================================================================== Layout pieces */
 .orca-list-layout { display: block; }
-.orca-list-layout:has(> .orca-filter-panel) { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--orca-space-32); align-items: start; }
-@media (max-width: 1035px) { .orca-list-layout:has(> .orca-filter-panel) { grid-template-columns: minmax(0, 1fr); } }
 .orca-cal-main { min-width: 0; }
 .orca-parent__panel { padding-top: var(--orca-space-24); }
 .orca-feed { display: flex; flex-direction: column; gap: var(--orca-space-24); max-width: 36rem; margin-inline: auto; }
@@ -66,11 +64,11 @@
 .orca-person-grid > .orca-card { min-width: 0; }
 
 /* Auth: one centred card on the alternate ground. */
-.orca-auth-page { background: var(--orca-bg-alt); }
+.orca-auth-page { background: var(--orca-bg-page); }
 .orca-auth { display: grid; place-items: center; min-height: 100vh; padding: var(--orca-space-24) var(--orca-space-16); }
 
 /* Error pages: logo, illustration, code, what happened, what to do. */
-.orca-error-page { background: var(--orca-bg); }
+.orca-error-page { background: var(--orca-bg-page); }
 .orca-error-layout { display: flex; flex-direction: column; gap: var(--orca-space-48); min-height: 100vh; padding: var(--orca-space-24) max(var(--orca-space-24), env(safe-area-inset-left, 0px)); }
 .orca-error-layout__body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--orca-space-16); max-width: 36rem; margin: auto; }
 .orca-error-layout__code { margin: 0; font: var(--orca-type-label); text-transform: uppercase; letter-spacing: 0.06em; color: var(--orca-text-muted); }
@@ -78,7 +76,7 @@
 /* Marketing and docs pages */
 .orca-marketing-page { background: var(--orca-bg); }
 .orca-marketing-main { display: flex; flex-direction: column; gap: var(--orca-space-64); padding-bottom: var(--orca-space-64); }
-.orca-docs-page { background: var(--orca-bg); }
+.orca-docs-page { background: var(--orca-bg-page); }
 .orca-docs-main { max-width: 64rem; }
 .orca-docs-article { display: flex; flex-direction: column; gap: var(--orca-space-24); max-width: var(--orca-measure); }
 

@@ -33,12 +33,12 @@ add(Element(
     "chevron-separator", "Chevron separator", C,
     "A small muted chevron between breadcrumb items or path segments.",
     why="The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in right-to-left languages (Postel's law).",
-    when=["Breadcrumbs, path displays (Site › Building › Camera)."],
+    when=["Breadcrumbs, path displays (Library › Album › Image)."],
     how=["`<span class=\"orca-sep\" aria-hidden=\"true\">{% icon \"chevron-right\" %}</span>` between items.",
          "In breadcrumbs the list structure carries the meaning; the separator is hidden from screen readers."],
     classes=[".orca-sep"], tokens=["text-muted"],
     laws=["jakob", "postel"],
-    examples=[("Path", """<nav aria-label="Breadcrumb" class="orca-small"><a class="orca-link orca-link--plain" href="#">Sites</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><a class="orca-link orca-link--plain" href="#">North building</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span aria-current="page">Entrance A</span></nav>""")],
+    examples=[("Path", """<nav aria-label="Breadcrumb" class="orca-small"><a class="orca-link orca-link--plain" href="#">Library</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><a class="orca-link orca-link--plain" href="#">Summer 2026</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span aria-current="page">Harbour at dusk</span></nav>""")],
     guide=["Chevron separator"],
 ))
 
@@ -123,10 +123,10 @@ add(Element(
     tokens=["accent", "border-strong", "negative"],
     laws=["hick", "peak-end"],
     examples=[("Markers", """<ol class="orca-stack" style="list-style: none; padding: 0; margin: 0">
-  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--done"></span>Connect recorder<span class="orca-sr-only">, done</span></li>
-  <li class="orca-with-icon" aria-current="step"><span class="orca-step-marker orca-step-marker--current"></span><strong>Choose cameras</strong><span class="orca-sr-only">, current step</span></li>
-  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--error"></span>Test streams<span class="orca-sr-only">, has errors</span></li>
-  <li class="orca-with-icon"><span class="orca-step-marker"></span>Draw zones</li>
+  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--done"></span>Upload video<span class="orca-sr-only">, done</span></li>
+  <li class="orca-with-icon" aria-current="step"><span class="orca-step-marker orca-step-marker--current"></span><strong>Choose a thumbnail</strong><span class="orca-sr-only">, current step</span></li>
+  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--error"></span>Add captions<span class="orca-sr-only">, has errors</span></li>
+  <li class="orca-with-icon"><span class="orca-step-marker"></span>Publish</li>
 </ol>""")],
     guide=["Step marker"],
 ))
@@ -178,9 +178,9 @@ add(Element(
     examples=[("Dialog", """<button class="orca-button" type="button" onclick="this.nextElementSibling.showModal()">Open dialog</button>
 <dialog class="orca-dialog" aria-labelledby="dlg-demo-title">
   <form method="dialog" style="padding: var(--orca-space-24)" class="orca-stack">
-    <h2 class="orca-dialog-title" id="dlg-demo-title">Delete Entrance A?</h2>
-    <p class="orca-p">Its counts are kept. Its zones and alert rules are deleted.</p>
-    <div class="orca-row"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete camera</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div>
+    <h2 class="orca-dialog-title" id="dlg-demo-title">Delete Harbour at dusk?</h2>
+    <p class="orca-p">It is removed from every album and its share links stop working.</p>
+    <div class="orca-row"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete image</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div>
   </form>
 </dialog>""")],
     guide=["Dialog backdrop"],
@@ -190,8 +190,9 @@ add(Element(
     "drawer-backdrop", "Drawer backdrop", C,
     "The scrim behind a side drawer; pressing it closes the drawer.",
     why="The scrim shows the drawer sits above the page and offers a large, familiar target to dismiss it (Fitts's law, Jakob's law).",
-    when=["Behind navigation drawers on phones and filter drawers."],
-    how=["`<div class=\"orca-scrim\" data-close></div>` before the drawer; `--contained` keeps it inside a positioned parent.",
+    when=["Behind the filter drawer (page filters always open in a right drawer) and behind navigation drawers on phones."],
+    how=["With the `drawer` pattern (`<dialog class=\"orca-drawer\" data-orca-light-dismiss>`), the native `::backdrop` is this scrim: write nothing more.",
+         "Non-native overlays: `<div class=\"orca-scrim\" data-close></div>` before the drawer; `--contained` keeps it inside a positioned parent.",
          "Clicking the scrim must do the same as the drawer's Close button; Escape too."],
     classes=[".orca-scrim", ".orca-scrim--contained"], tokens=["bg-overlay", "layer-drawer"],
     laws=["fitts", "jakob"],

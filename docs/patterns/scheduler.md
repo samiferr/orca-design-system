@@ -8,7 +8,7 @@ Editing when things and people are available, and booking time against that avai
 
 Each day of the week with an open switch and one or more time spans, to set when something is open or someone is available.
 
-Built from: `schedule-row`, `add-row-button`, `remove-row-button`, `switch`, `overlap-warning`
+Built from: `add-row-button`, `switch`, `overlap-warning`
 
 ### Why
 
@@ -16,7 +16,7 @@ Availability is naturally weekly with breaks (lunch, split shifts); a row per da
 
 ### When to use
 
-- Opening hours of a site, a person's availability, camera recording schedules.
+- Opening hours of a site, a person's availability, video recording schedules.
 
 ### When not to use
 
@@ -171,7 +171,7 @@ Regular hours plus exceptions is how people think about schedules (Tesler's law)
 
 A request form for time off (type, dates, half days, note) beside the person's balance and their existing requests.
 
-Built from: `date-range-picker`, `time-off-entry`, `status-chip`, `form-stack`
+Built from: `date-range-picker`, `time-off-entry`, `form-stack`
 
 ### Why
 
@@ -209,7 +209,7 @@ Showing the balance and the working days the request costs before submitting pre
 
 `id: resource-scheduler` · level: pattern · source: ORCA
 
-Resources (people, rooms, cameras) as rows against a time scale, with bookings as bars on each row.
+Resources (people, rooms, videos) as rows against a time scale, with bookings as bars on each row.
 
 Built from: `event-card`, `avatar`, `availability-legend`
 
@@ -352,7 +352,7 @@ Each choice narrows the next (the person changes the free times), so steps keep 
 ```django
 <div class="orca-booking"><ol class="orca-steps"><li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Service</span></li><li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Time</span></li><li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Confirm</span></li></ol>
   <fieldset class="orca-choice-group"><legend class="orca-label">What do you need?</legend><div class="orca-choice-group__items">
-    <label class="orca-radio"><input type="radio" name="ap-s" checked><span class="orca-radio__dot"></span>Camera calibration, 30 min</label>
+    <label class="orca-radio"><input type="radio" name="ap-s" checked><span class="orca-radio__dot"></span>Video calibration, 30 min</label>
     <label class="orca-radio"><input type="radio" name="ap-s"><span class="orca-radio__dot"></span>New site survey, 1 h</label></div></fieldset>
   <div class="orca-field"><label class="orca-label" for="ap-p">With</label><select class="orca-select" id="ap-p"><option>Anyone available</option><option>Ada Lovelace</option><option>Alan Turing</option></select></div>
   <div class="orca-row"><button class="orca-button orca-button--primary" type="button">Choose a time</button></div></div>

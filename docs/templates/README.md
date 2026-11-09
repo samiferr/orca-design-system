@@ -54,7 +54,7 @@ Layout classes that arrange sections inside a page: stacks, grids and splits. Th
 - `card-grid-layout` **Card grid**: Cards in as many equal columns as fit, at least 15rem wide.
 - `two-column-grid` **Two-column grid**: Two equal columns from 1036px, one column below.
 - `split-layout` **Split (main + aside)**: A main column and a 20rem aside (end by default, start or wider as variants); the aside drops below on narrow screens.
-- `camera-split` **Camera split**: The live picture in two thirds, details and actions in one third; the picture stays in view while the details scroll.
+- `media-split` **Media split**: The live picture in two thirds, details and actions in one third; the picture stays in view while the details scroll.
 - `form-grid` **Form grid**: Short fields side by side in as many 16rem columns as fit; long fields span the full width.
 - `narrow-form` **Narrow form**: One column of fields at most 36rem wide.
 
@@ -76,7 +76,7 @@ The named blocks of ORCA's layouts. A page fills slots instead of rewriting layo
 - `slot-brand` **Brand**: The logo or wordmark, from `settings.ORCA['BRAND']`.
 - `slot-sidebar-extra` **Sidebar extra**: Content under the navigation in the sidebar: a site switcher, a plan meter, a help link.
 - `slot-sidebar-nav` **Sidebar navigation**: The navigation sections of the sidebar.
-- `slot-filter-panel` **Filter panel**: Where filters go: a side panel on the generic list, a bar on the board, a drawer on the simple data page.
+- `slot-filter-panel` **Filter panel**: Where filters go: a right drawer, opened by the Filters button the template puts in the page actions.
 - `slot-body` **Body**: Everything inside the body element except the skip link, modal and scripts.
 - `slot-modal` **Modal**: Dialogs and drawers, placed after the page so they open above everything.
 - `slot-footer` **Footer**: The end of the page: legal and help links on public pages, a version line in applications.

@@ -38,7 +38,7 @@ add(Template(
     "card-grid-layout", "Card grid", C,
     "Cards in as many equal columns as fit, at least 15rem wide.",
     why="A regular grid lets people scan many similar items by position (Practical UI L11); auto-fill adapts from one column on phones to four on wide screens without breakpoints.",
-    when=["Collections browsed by picture or title: cameras, products, people, plans."],
+    when=["Collections browsed by picture or title: videos, products, people, plans."],
     avoid=["Items compared on several attributes: use a table."],
     how=["`<ul class=\"orca-card-grid\">` of `<li class=\"orca-card\">`; override the minimum with `grid-template-columns` only for a different card type."],
     laws=["L11", "jakob"], uses=["card"], classes=[".orca-card-grid"],
@@ -69,14 +69,14 @@ add(Template(
 ))
 
 add(Template(
-    "camera-split", "Camera split", C,
+    "media-split", "Media split", C,
     "The live picture in two thirds, details and actions in one third; the picture stays in view while the details scroll.",
     why="When watching and adjusting at the same time (zones, settings), the picture must stay visible next to the controls (Practical UI L14: less travel between related things).",
-    when=["Camera, zone and recording pages; any media with its settings."],
-    how=["`<div class=\"orca-camera-split\">` with `.orca-camera-split__media` (the player or snapshot) and `.orca-camera-split__side` (panels)."],
-    laws=["L14", "L01"], uses=["recording-player", "panel"], classes=[".orca-camera-split", ".orca-camera-split__media", ".orca-camera-split__side"], source="Tangerine",
-    examples=[("Camera split", '<div class="orca-camera-split"><div class="orca-camera-split__media"><div class="orca-skeleton orca-aspect-16x9"></div></div><div class="orca-camera-split__side">' + PANEL.format("Status") + PANEL.format("Settings") + "</div></div>")],
-    guide=["Camera split"],
+    when=["Video, zone and recording pages; any media with its settings."],
+    how=["`<div class=\"orca-media-split\">` with `.orca-media-split__media` (the player or snapshot) and `.orca-media-split__side` (panels)."],
+    laws=["L14", "L01"], uses=["recording-player", "panel"], classes=[".orca-media-split", ".orca-media-split__media", ".orca-media-split__side"], source="Tangerine",
+    examples=[("Media split", '<div class="orca-media-split"><div class="orca-media-split__media"><div class="orca-skeleton orca-aspect-16x9"></div></div><div class="orca-media-split__side">' + PANEL.format("Status") + PANEL.format("Settings") + "</div></div>")],
+    guide=["Media split"],
 ))
 
 add(Template(

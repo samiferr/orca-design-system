@@ -44,7 +44,7 @@ page("scheduler-page", "Scheduler page", "orca/layouts/scheduler.html",
      "Rows per resource answer 'who is free when' in one look (Practical UI L01); placing bookings by time makes gaps and double bookings visible.",
      ["Dispatching installers, booking rooms, planning vehicles."],
      ["Pass `resources`: `[{\"name\", \"bookings\": [events]}]`, `start_hour` and `end_hour`; `{% templatetag openblock %} orca_scheduler {% templatetag closeblock %}` places the cards."],
-     ["L01", "L09"], ["resource-scheduler", "calendar-navigation", "availability-legend"],
+     ["L01", "L09"], ["resource-scheduler", "calendar-navigation"],
      ["Scheduler page (resources by time)"], ["scheduler_toolbar", "scheduler", "scheduler_legend"],
      ["`resources`, `start_hour`, `end_hour`, `period_title`, `prev_url`, `next_url`, `today_url`."])
 
@@ -54,7 +54,7 @@ page("planning-board-page", "Planning board page", "orca/layouts/board.html",
      ["Team workflows with a few stages."],
      ["Pass `board_columns`: `[{\"key\", \"name\", \"limit\", \"cards\": [{\"id\", \"title\", \"tags\", \"due\", \"due_state\", \"assignee\", \"url\"}]}]` and a GET `filter_form`.",
       "Listen for the `orca:moved` event to save a move."],
-     ["L01", "restorff", "jakob"], ["kanban-board", "plan-filter-bar", "board-card"],
+     ["L01", "restorff", "jakob"], ["kanban-board", "plan-filter-bar"],
      ["Planning board page"], ["filter_panel", "board"], ["`board_columns`, `filter_form`, `create_url`."])
 
 page("timeline-page", "Timeline page", "orca/layouts/timeline.html",
@@ -71,7 +71,7 @@ page("booking-flow", "Booking flow", "orca/layouts/booking.html",
      ["Appointment and slot booking, any short purchase-like flow."],
      ["Pass `steps` (names) and `step` (1-based); fill `booking_step` with the current choices (service radio cards, slot picker, contact form).",
       "Put Back and Continue at the end of each step; `summary` is a list of `(label, value)`."],
-     ["R16", "hick", "peak-end"], ["steps", "booking-slot-picker", "appointment-picker", "split-layout"],
+     ["R16", "hick", "peak-end"], ["booking-slot-picker", "appointment-picker", "split-layout"],
      ["Booking flow"], ["booking_steps", "booking_step", "booking_summary"], ["`steps`, `step`, `summary`."])
 
 page("event-editor-page", "Event editor page", "orca/layouts/event_editor.html",
@@ -79,13 +79,13 @@ page("event-editor-page", "Event editor page", "orca/layouts/event_editor.html",
      "Context beside the form (clashes, who is invited) lets people fix problems before saving (Practical UI W15, L14); Delete sits away from Save so it is never hit by mistake (B13).",
      ["Creating and editing events, shifts, bookings in full."],
      ["Pass an event `form`; `conflicts` (sentences) appear as caution callouts in `event_aside`; `delete_url` shows Delete."],
-     ["W15", "L14", "B13"], ["event-editor", "conflict-warning", "attendee-list", "split-layout"],
+     ["W15", "L14", "B13"], ["event-editor", "attendee-list", "split-layout"],
      ["Event editor page"], ["form_fields", "event_aside"], ["`form`, `object`, `conflicts`, `delete_url`, `cancel_url`, `submit_label`."])
 
 page("simple-data-page", "Simple data page", "orca/layouts/simple_data.html",
      "A data page with everything in one place: title bar, summary tiles that filter, search, a filter drawer and the table.",
      "Summary tiles answer 'how many of each' and double as the most used filters (Hick's law); the rest of the filters wait in a drawer so the table keeps the space (Practical UI S04).",
-     ["Operational lists where counts by status matter: cameras, alerts, tickets."],
+     ["Operational lists where counts by status matter: videos, alerts, tickets."],
      ["Use OrcaPageMixin with a ListView; pass `tiles` (label, value, url, tone, current), a GET `filter_form` and `active_filters` (count)."],
      ["hick", "S04", "miller"], ["summary-tiles", "list-header", "filter-drawer", "data-table", "pagination"],
      ["Simple data page (title bar, search, filter drawer, summary tiles, table)"], ["list_actions", "summary", "list_header", "list", "filter_panel"],

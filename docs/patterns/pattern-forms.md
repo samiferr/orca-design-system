@@ -27,7 +27,7 @@ Grouping long forms under descriptive headings makes them feel shorter and easie
 
 ```django
 <section class="orca-form-section" aria-labelledby="fs-t">
-  <div class="orca-form-section__intro"><h2 class="orca-section-title" id="fs-t">Counting</h2><p>How often the camera counts and how long counts are kept.</p></div>
+  <div class="orca-form-section__intro"><h2 class="orca-section-title" id="fs-t">Counting</h2><p>How often thumbnails are taken and how long videos are kept.</p></div>
   <div class="orca-form-section__fields">
     <div class="orca-field"><label class="orca-label" for="fs-int">Snapshot interval</label><div class="orca-input-group" style="max-width: 12rem"><input class="orca-input" id="fs-int" type="number" value="5" aria-describedby="fs-int-u"><span class="orca-addon" id="fs-int-u">minutes</span></div></div>
     <div class="orca-field"><label class="orca-label" for="fs-ret">Keep counts for</label><select class="orca-select" id="fs-ret" style="max-width: 16rem"><option>1 year</option><option selected>2 years</option></select></div>
@@ -69,7 +69,7 @@ One column gives one reading path and no zigzag (Practical UI R01); two columns 
 
 ```django
 <div class="orca-stack" style="gap: var(--orca-space-32)">
-  <div class="orca-form-stack"><div class="orca-field"><label class="orca-label" for="fst-1">Camera name</label><input class="orca-input" id="fst-1"></div><div class="orca-field"><label class="orca-label" for="fst-2">Stream address</label><input class="orca-input" id="fst-2"></div></div>
+  <div class="orca-form-stack"><div class="orca-field"><label class="orca-label" for="fst-1">Video name</label><input class="orca-input" id="fst-1"></div><div class="orca-field"><label class="orca-label" for="fst-2">Stream address</label><input class="orca-input" id="fst-2"></div></div>
   <div class="orca-form-stack orca-form-stack--two"><div class="orca-field"><label class="orca-label" for="fst-3">Host</label><input class="orca-input" id="fst-3"></div><div class="orca-field"><label class="orca-label" for="fst-4">Port</label><input class="orca-input orca-input--w8" id="fst-4" inputmode="numeric"></div>
     <div class="orca-field orca-span-2"><label class="orca-label" for="fst-5">Notes <span class="orca-optional">(optional)</span></label><textarea class="orca-textarea" id="fst-5" rows="2"></textarea></div></div>
 </div>
@@ -89,7 +89,7 @@ One column gives one reading path and no zigzag (Practical UI R01); two columns 
 
 A weekly schedule made of rows (day, start, end), with presets, add and remove, and overlap checks.
 
-Built from: `schedule-row`, `add-row-button`, `overlap-warning`, `preset-buttons`
+Built from: `add-row-button`, `overlap-warning`, `preset-buttons`
 
 ### Why
 
@@ -130,9 +130,9 @@ Schedules vary day by day; rows handle every shape without special fields (Tesle
 
 `id: zone-editor` · level: pattern · source: Tangerine
 
-Draw a counting zone on the camera image by clicking its corners, with a list of zones beside it.
+Draw a counting zone on the video image by clicking its corners, with a list of zones beside it.
 
-Built from: `zone-row`, `zone-swatch`, `button`, `media-frame`
+Built from: `zone-row`, `media-frame`
 
 ### Why
 
@@ -140,7 +140,7 @@ Zones are spatial, so they are drawn where they apply (Practical UI F03: direct 
 
 ### When to use
 
-- Defining counting zones, lines and excluded areas on a camera view.
+- Defining counting zones, lines and excluded areas on a video view.
 
 ### How to use
 
@@ -155,7 +155,7 @@ Zones are spatial, so they are drawn where they apply (Practical UI F03: direct 
 
 ```django
 <div class="orca-zone-editor" data-orca-zone-editor>
-  <div><div class="orca-zone-editor__stage" style="--orca-zone: var(--orca-teal-400)"><img src="{% static "orca/img/sample-street.svg" %}" alt="Entrance A camera view"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+  <div><div class="orca-zone-editor__stage" style="--orca-zone: var(--orca-teal-400)"><img src="{% static "orca/img/sample-street.svg" %}" alt="Entrance A video view"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg></div>
     <input type="hidden" name="points" value="[[30,62],[62,60],[66,92],[26,94]]">
     <div class="orca-zone-editor__toolbar"><button class="orca-button orca-button--dense" type="button" data-orca-zone-action="close">Close shape</button><button class="orca-button orca-button--dense" type="button" data-orca-zone-action="undo">{% icon "rotate-left" %}Undo point</button><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-zone-action="clear">Clear</button></div>
     <p class="orca-zone-editor__hint" data-orca-zone-status aria-live="polite"></p></div>
@@ -290,7 +290,7 @@ A few familiar formatting buttons cover most needs (Hick's law, Jakob's law); ke
 <div class="orca-field" style="max-width: 36rem"><span class="orca-label" id="rt-label">Note</span>
 <div class="orca-richtext" data-orca-richtext>
   <div class="orca-richtext__toolbar" role="toolbar" aria-label="Formatting"><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="bold" aria-pressed="false" aria-label="Bold"><b>B</b></button><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="italic" aria-pressed="false" aria-label="Italic"><i>I</i></button><span class="orca-divider orca-divider--vertical" role="separator"></span><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="insertUnorderedList" aria-pressed="false" aria-label="Bulleted list">{% icon "list" %}</button><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="createLink" aria-label="Add link">{% icon "get-link" %}</button></div>
-  <div class="orca-richtext__area" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="rt-label" data-placeholder="Write a note"><p>Camera moved <strong>30 cm left</strong> on 3 March.</p></div>
+  <div class="orca-richtext__area" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="rt-label" data-placeholder="Write a note"><p>Video moved <strong>30 cm left</strong> on 3 March.</p></div>
   <textarea name="note" hidden></textarea>
 </div></div>
 ```

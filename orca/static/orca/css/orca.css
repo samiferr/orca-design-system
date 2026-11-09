@@ -16,7 +16,7 @@
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   @media (min-width: 1681px) { html { font-size: 112.5%; } }
   body {
-    margin: 0; background: var(--orca-bg); color: var(--orca-text);
+    margin: 0; background: var(--orca-bg-page); color: var(--orca-text);
     font: var(--orca-type-body); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
   a, button, input, select, textarea, summary, label { touch-action: manipulation; }

@@ -76,8 +76,9 @@ People confirm they are in the right place from the title first (Jakob's law); o
 ### How to use
 
 - `<h1 class="orca-page-title">` (28/36, weight 700).
-- Name the object, not the action: 'Cameras', 'Entrance A', 'New capture run'.
-- Long names wrap; they are never cut, so an operator can always read the full name (L15).
+- Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.
+- Long names wrap; they are never cut, so people can always read the full name (L15).
+- On application pages it sits in the `page-head` pattern, with the page actions beside it.
 
 ### Accessibility
 
@@ -87,8 +88,8 @@ People confirm they are in the right place from the title first (Jakob's law); o
 
 ```django
 <div>
-  <h1 class="orca-page-title">Entrance A</h1>
-  <p class="orca-page-subtitle">Counting people at the north door since 3 March 2026.</p>
+  <h1 class="orca-page-title">Harbour at dusk</h1>
+  <p class="orca-page-subtitle">Added to the library on 3 March 2026.</p>
 </div>
 ```
 
@@ -132,7 +133,7 @@ A short orientation sentence answers 'what can I do here' without a manual (Tesl
 
 ```django
 <h1 class="orca-page-title">Alert rules</h1>
-<p class="orca-page-subtitle">Rules decide who gets an email when a camera or a KPI crosses a limit.</p>
+<p class="orca-page-subtitle">Rules decide who gets an email when a video upload fails or a KPI crosses a limit.</p>
 ```
 
 **Classes:** `.orca-page-subtitle`
@@ -241,13 +242,13 @@ People read the first words and decide; a bold, specific title is enough on its 
 ### How to use
 
 - `<p class="orca-alert-title">` (16/24, 550).
-- State the fact: 'Camera offline', 'Report sent'. No 'Error:' prefix, no exclamation marks.
+- State the fact: 'Video unavailable', 'Report sent'. No 'Error:' prefix, no exclamation marks.
 
 #### Example: Alert title
 
 ```django
-<p class="orca-alert-title">Recorder unreachable</p>
-<p class="orca-p">Check that the NVR is on and connected, then test the connection again.</p>
+<p class="orca-alert-title">Video unavailable</p>
+<p class="orca-p">The file could not be loaded. Check your connection, then try playing it again.</p>
 ```
 
 **Classes:** `.orca-alert-title`
@@ -286,7 +287,7 @@ Comfortable line length and line height make reading effortless (Practical UI T0
 #### Example: Paragraphs
 
 ```django
-<p class="orca-p orca-p--lead">Capture runs take one snapshot per camera at a fixed interval.</p>
+<p class="orca-p orca-p--lead">Thumbnails are taken from each video at a fixed interval.</p>
 <p class="orca-p">Use them to check framing before you draw zones. Shots are kept for 30 days.</p>
 ```
 
@@ -375,7 +376,7 @@ Lowering the weight of secondary information lets the primary information lead (
 #### Example: Muted
 
 ```django
-<p class="orca-p">Entrance A <span class="orca-muted">· 3 cameras</span></p>
+<p class="orca-p">Summer 2026 <span class="orca-muted">· 3 videos</span></p>
 ```
 
 **Classes:** `.orca-muted`
@@ -650,7 +651,7 @@ A monospaced face distinguishes literal values from prose and makes characters l
 #### Example: Inline code
 
 ```django
-<p class="orca-p">The recorder answered at <code class="orca-code">192.168.1.40:554</code>.</p>
+<p class="orca-p">The video server answered at <code class="orca-code">media.example.com:443</code>.</p>
 ```
 
 **Classes:** `.orca-code`
@@ -675,7 +676,7 @@ A kicker places the card in a category before the title is read, aiding scanning
 
 ### When to use
 
-- Cards in a list that mixes types (camera, recorder, zone).
+- Cards in a list that mixes types (image, video, album).
 
 ### When not to use
 
@@ -690,9 +691,9 @@ A kicker places the card in a category before the title is read, aiding scanning
 
 ```django
 <div class="orca-stack" style="gap: var(--orca-space-4); max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
-  <p class="orca-card-kicker">Camera</p>
+  <p class="orca-card-kicker">Video</p>
   <h3 class="orca-card-title">Entrance A, north door</h3>
-  <p class="orca-card-meta">Hikvision · 192.168.1.40 · added 3 March</p>
+  <p class="orca-card-meta">MP4 · 1080p · added 3 March</p>
 </div>
 ```
 
@@ -767,7 +768,7 @@ Grouping the secondary facts on one muted line keeps them available without comp
 #### Example: Meta line
 
 ```django
-<p class="orca-card-meta">3 cameras · updated 2 minutes ago</p>
+<p class="orca-card-meta">3 videos · updated 2 minutes ago</p>
 ```
 
 **Classes:** `.orca-card-meta`
@@ -797,7 +798,7 @@ A dialog interrupts; its title must say why in a few words so the decision is qu
 ### How to use
 
 - `<h2 class="orca-dialog-title">` (24/32, light 275).
-- Confirmations ask the question with the object: 'Delete Entrance A?'. The action button repeats the verb: 'Delete camera'.
+- Confirmations ask the question with the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'.
 
 ### Accessibility
 
@@ -838,16 +839,16 @@ An empty screen is an ending or a beginning; a clear, calm title turns it into a
 
 ### How to use
 
-- `<h2 class="orca-empty-title">` (24/32, light). State the fact: 'No cameras yet', 'No events match these filters'.
+- `<h2 class="orca-empty-title">` (24/32, light). State the fact: 'No images yet', 'No videos match these filters'.
 
 #### Example: Empty state text
 
 ```django
 <div class="orca-stack" style="align-items: center; text-align: center">
   {% orca_illustration "empty" %}
-  <h2 class="orca-empty-title">No cameras yet</h2>
-  <p class="orca-empty-text">Add a camera to start counting people at an entrance.</p>
-  <button class="orca-button orca-button--primary" type="button">Add camera</button>
+  <h2 class="orca-empty-title">No images yet</h2>
+  <p class="orca-empty-text">Add an image to start your library.</p>
+  <button class="orca-button orca-button--primary" type="button">Add image</button>
 </div>
 ```
 
@@ -889,7 +890,7 @@ Saying what to do next prevents a negative peak (Peak–end rule) and moves the 
 #### Example: Filtered empty
 
 ```django
-<p class="orca-empty-text">No events match “Entrance B” this week. Clear the filters to see all events.</p>
+<p class="orca-empty-text">No videos match “harbour” this week. Clear the filters to see all videos.</p>
 ```
 
 **Classes:** `.orca-empty-text`

@@ -255,7 +255,7 @@ Detecting the zone moves the complexity to the system (Tesler's law); keeping th
 
 ### When to use
 
-- Site, camera and profile settings.
+- Site, video and profile settings.
 
 ### How to use
 

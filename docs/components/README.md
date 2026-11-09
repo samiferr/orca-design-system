@@ -39,7 +39,7 @@ How people move between places and pages. The current location is always marked 
 - `sidebar-link` **Sidebar link**: One destination in the side navigation: icon, label and an optional count.
 - `breadcrumbs` **Breadcrumbs**: The path from the top of the hierarchy to the current page.
 - `pagination` **Pagination**: Previous, page numbers with gaps, next, and a summary of what is shown.
-- `pagination-summary` **Pagination summary**: 'Showing 121–140 of 312 cameras': what part of the list is on screen.
+- `pagination-summary` **Pagination summary**: 'Showing 121–140 of 312 videos': what part of the list is on screen.
 - `table-pager` **Table pager**: A compact pager under a table: rows per page, the range shown, previous and next.
 - `tab-bar` **Tab bar**: Tabs that switch between views of the same object, in place or by page.
 - `child-tabs` **Child tabs (with counts)**: Page tabs on a parent record, one per kind of child, each showing how many there are.
@@ -96,7 +96,7 @@ Ways to present records and numbers: stat cards, lists, key/value lists, cards, 
 - `linked-card` **Linked card**: A card whose whole area opens the object, built with one real link on the title.
 - `accordion` **Accordion**: A stack of sections that open and close, built on details and summary.
 - `steps` **Steps**: The steps of a process with done, current and upcoming markers.
-- `tree` **Tree**: A hierarchy of items that expand and collapse: sites, buildings, cameras.
+- `tree` **Tree**: A hierarchy of items that expand and collapse: sites, buildings, videos.
 - `avatar-group` **Avatar group**: Overlapping avatars of the people involved, with '+N' for the rest.
 - `table-card` **Table card**: A panel holding a titled table and its pager.
 - `property-row` **Property row**: One editable key and value pair with a remove button, repeated to edit free-form properties.
@@ -116,7 +116,7 @@ Reusable blocks for products, people, posts, heroes and media.
 - `post-block` **Block post**: An article teaser: kicker, headline, excerpt, meta and a thumbnail.
 - `hero` **Hero**: The opening block of a marketing or landing page: kicker, headline, lead, actions and an image.
 - `photo-actions-bar` **Photo-actions bar**: The row under a photo: like, comment and share with counts, and save at the end.
-- `camera-card` **Camera card**: A camera's latest snapshot with its status, name, place and actions.
+- `video-card` **Video card**: A video's latest snapshot with its status, name, place and actions.
 
 ## [Identity and controls](identity-controls.md) (5)
 

@@ -8,7 +8,7 @@ Whole calendars rendered on the server from a list of events: month, week, day, 
 
 Weeks of day cells showing each day's events, with '+N more' when a day overflows and a count dot on phones.
 
-Built from: `calendar-header`, `weekday-header`, `week-row`, `day-cell`, `event-chip`, `more-events-link`, `holiday-label`
+Built from: `calendar-header`, `weekday-header`, `week-row`
 
 ### Why
 
@@ -54,7 +54,7 @@ A month shows how busy each day is and where the gaps are, which is what people 
 
 Seven day columns on an hour grid with events positioned by time, an all-day row and a line at the current time.
 
-Built from: `week-header`, `all-day-row`, `hour-row`, `time-slot`, `event-card`, `calendar-header`
+Built from: `week-header`, `all-day-row`, `hour-row`, `event-card`, `calendar-header`
 
 ### Why
 
@@ -96,7 +96,7 @@ Seeing time as height makes durations, gaps and overlaps obvious (Practical UI L
 
 One day on the hour grid: the full detail of a single day, and the phone default.
 
-Built from: `hour-row`, `time-slot`, `event-card`, `calendar-navigation`
+Built from: `hour-row`, `event-card`, `calendar-navigation`
 
 ### Why
 
@@ -133,7 +133,7 @@ One column leaves room for each event's title, time and place, so there is no tr
 
 Upcoming events listed by day, with times, colours and places: the most readable calendar on any screen.
 
-Built from: `agenda-item`, `date-badge`, `empty-state`
+Built from: `agenda-item`, `empty-state`
 
 ### Why
 
@@ -239,7 +239,7 @@ Three days fit a tablet or a narrow panel while still showing what comes next (M
 
 The bar above any calendar view: previous, Today, next, the period title, the view switcher and a create button.
 
-Built from: `calendar-header`, `calendar-navigation`, `calendar-view-switcher`, `create-button`
+Built from: `calendar-header`, `create-button`
 
 ### Why
 

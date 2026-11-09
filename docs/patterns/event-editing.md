@@ -8,7 +8,7 @@ Creating, viewing and answering events: full editor, popover, panel, quick add, 
 
 The full form for an event: title, date and time (or all day), repeat, place, people, reminders, calendar and notes.
 
-Built from: `form-stack`, `datetime-picker`, `recurrence-selector`, `reminder-selector`, `multi-picker`, `conflict-warning`, `form-actions`
+Built from: `form-stack`, `datetime-picker`, `recurrence-selector`, `reminder-selector`, `multi-picker`, `conflict-warning`
 
 ### Why
 

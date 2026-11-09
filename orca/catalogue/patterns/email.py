@@ -19,6 +19,6 @@ add(Pattern(
     classes=[".orca-email-preview"],
     laws=["postel", "peak-end", "W15"],
     uses=["logo", "button", "brand-color"],
-    examples=[("Alert email (preview)", """{% orca_email_preview title="Loading dock is offline" preheader="No stream since 08:14" paragraphs=sample.email_paragraphs action_url="https://example.com/cameras/12/" action_label="Open the camera" footer="You get this email because you are on the alert list for Warehouse." %}""")],
+    examples=[("Alert email (preview)", """{% orca_email_preview title="Loading dock is offline" preheader="No stream since 08:14" paragraphs=sample.email_paragraphs action_url="https://example.com/videos/12/" action_label="Open the video" footer="You get this email because you are on the alert list for Warehouse." %}""")],
     guide=["Email frame"],
 ))

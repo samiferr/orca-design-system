@@ -77,7 +77,7 @@ COMPONENTS = {
     'Feedback': ['Alert', 'Empty state', 'Status light', 'Confirm dialog', 'Progress bar with counts', 'Callout (info, success, warning, danger)', 'Toast', 'Toast stack', 'Flash message', 'Tooltip', 'No-data state', 'Dialog'],
     'Actions': ['Button group', 'Dropdown menu', 'Dropdown item', 'Copy button (copied confirmation)', 'Record actions (one button + overflow menu)', 'Row actions'],
     'Data display': ['Stat card', 'Key/value list', 'List', 'List item', 'Timeline item', 'Sortable column header', 'Legend item', 'Zone row', 'Line-count item', 'Media object', 'Card', 'Accordion', 'Steps', 'Tree', 'Avatar group', 'Card (outlined, elevated, filled)', 'Table card', 'Card footer', 'Linked card', 'Property row (key, value, remove)', 'Activity entry (badge, actor, time, before and after)', 'Carousel', 'Scroller (scroll-snap region)', 'Sparkline', 'Donut chart', 'Chart frame'],
-    'Content blocks': ['Product item', 'Person block', 'Block post (thumbnail + headline + excerpt)', 'Hero', 'Photo-actions bar', 'Camera card'],
+    'Content blocks': ['Product item', 'Person block', 'Block post (thumbnail + headline + excerpt)', 'Hero', 'Photo-actions bar', 'Video card'],
     'Identity and controls': ['User chip', 'Panel header', 'Pin control', 'Theme toggle', 'Email button (with fallback link)'],
     'Date and time pickers': ['Date picker', 'Time picker', 'Date-time picker', 'Date-range picker', 'Time-range input (start and end)', 'Duration picker', 'Timezone selector', 'Month and year switcher', 'Mini calendar'],
     'Planning selectors': ['Weekday selector', 'Recurrence selector', 'Reminder selector', 'Period selector', 'Granularity selector', 'Calendar view switcher (day, week, month, agenda)', 'Preset buttons (Today, Weekdays, This week, Next 7 days)', 'Calendar navigation (previous, today, next)'],
@@ -90,14 +90,14 @@ COMPONENTS = {
 
 PATTERNS = {
     'Page frame': ['Header', 'Top bar', 'Sidebar', 'Footer', 'Page head', 'Messages region', 'Drawer', 'Top actions header (back link + actions)', 'Settings panel (appearance, theme, accent, rounding, card shadow)', 'Filter drawer', 'Filter panel'],
-    'Grids and collections': ['Product grid', 'Camera grid', 'KPI grid', 'Capacity heat map', 'Event timeline'],
+    'Grids and collections': ['Product grid', 'Video grid', 'KPI grid', 'Capacity heat map', 'Event timeline'],
     'Data and filtering': ['Data table', 'Accuracy table', 'Filter bar', 'Panel', 'Tabbed panel set', 'Card list (record cards)', 'List header (search + filter + create)', 'Summary tiles', 'Autocomplete results table'],
     'Forms': ['Form section', 'Schedule editor', 'Zone/line editor', 'Login card', 'Properties editor (key and value rows)', 'Rich text editor', 'Form stack (one column)', 'Form stack (compact, two columns)'],
     'Media': ['Recording player', 'Live stream panel', 'Photo post (user info + photo + actions + caption)', 'Image gallery (stage, thumbnails, dots)'],
     'Record management': ['Detail panel (header + actions + table)', 'Parent record with child tabs', 'Child list tab', 'Activity feed', 'Delete-blocked notice (protected delete)', 'Confirm action panel'],
     'Charts': ['Bar chart', 'Bubble chart', 'Doughnut chart', 'Line chart', 'Pie chart', 'Polar area chart', 'Radar chart', 'Scatter chart'],
     'Marketing and documentation site': ['Marketing hero', 'Feature grid', 'Live design-token panel', 'Code samples block', 'Docs page header (title + intro)', 'Docs sidebar tree'],
-    'Process and status': ['Capture run progress'],
+    'Process and status': ['Video export progress'],
     'Editorial': ['Story feature', 'Factoid'],
     'Email': ['Email frame'],
     'Calendar views': ['Month calendar', 'Week view', 'Day view', 'Agenda (list) view', 'Year view', 'Multi-day view', 'Calendar toolbar', 'Mini-calendar sidebar', 'Calendar legend (calendars and colours)'],
@@ -110,7 +110,7 @@ PATTERNS = {
 TEMPLATES = {
     'Layouts': ['App shell', 'Auth layout', 'Email layout', 'Error layouts (403, 404, 500)', 'Homepage template', 'Feed skeleton', 'Person-block grid', 'Generic list template', 'Generic detail template', 'Generic form template', 'Generic confirm (delete) template', 'Generic confirm-action template', 'Parent base template', 'Parent detail template (tabbed)', 'Parent-child list template', 'Parent-child detail template', 'Parent-child form template', 'Parent-child confirm template', 'Marketing page layout', 'Docs page layout'],
     'Page-type skeletons': ['List page', 'Detail page', 'Form page', 'Dashboard', 'Calendar page (toolbar + view + side panel)', 'Scheduler page (resources by time)', 'Planning board page', 'Timeline page', 'Booking flow', 'Event editor page', 'Simple data page (title bar, search, filter drawer, summary tiles, table)', 'Confirm page', 'Parent detail page (overview + child tabs)', 'Parent-child pages (list, detail, form, confirm)', 'Docs page', 'Marketing landing page'],
-    'Structural layouts': ['Vertical stack', 'Stat grid', 'Card grid', 'Two-column grid', 'Split (main + aside)', 'Camera split', 'Form grid', 'Narrow form'],
+    'Structural layouts': ['Vertical stack', 'Stat grid', 'Card grid', 'Two-column grid', 'Split (main + aside)', 'Media split', 'Form grid', 'Narrow form'],
     'Template slots': ['Title', 'Page title', 'Page subtitle', 'Page actions', 'Breadcrumbs', 'Content', 'Scripts', 'Head', 'Body class', 'Sidebar', 'Top bar', 'Brand', 'Sidebar extra', 'Sidebar navigation', 'Filter panel', 'Body', 'Modal', 'Footer', 'Extra head', 'Extra scripts', 'Theme bootstrap', 'List actions', 'Detail actions'],
 }
 

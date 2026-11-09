@@ -37,14 +37,14 @@ add(Pattern(
     "weekly-availability-editor", "Weekly availability editor", C,
     "Each day of the week with an open switch and one or more time spans, to set when something is open or someone is available.",
     why="Availability is naturally weekly with breaks (lunch, split shifts); a row per day with add and remove spans fits that model exactly (Tesler's law). Overlaps and reversed times are flagged on the row, not at the top (Practical UI R21).",
-    when=["Opening hours of a site, a person's availability, camera recording schedules."],
+    when=["Opening hours of a site, a person's availability, video recording schedules."],
     avoid=["One-off dates: use the exception and holiday editor."],
     how=["`<div class=\"orca-week-editor\">` with one `.orca-week-editor__day` per weekday: a switch and name, then `.orca-week-editor__spans` holding schedule rows and an 'Add hours' button.",
          "Offer 'Copy Monday to weekdays' when most days are the same; validate on the server (end after start, no overlaps) and show the overlap warning on the row.",
          "Store spans as `(weekday, start, end)` in the site's timezone and show that timezone."],
     classes=[".orca-week-editor", ".orca-week-editor__day", ".orca-week-editor__name", ".orca-week-editor__spans", ".orca-week-editor__closed"],
     laws=["tesler", "R21", "L09"],
-    uses=["schedule-row", "add-row-button", "remove-row-button", "switch", "overlap-warning"],
+    uses=["add-row-button", "switch", "overlap-warning"],
     examples=[("Opening hours", f'<div class="orca-week-editor" style="max-width: 40rem">{WEEK}</div>{TPL}')],
     guide=["Weekly availability editor"],
 ))
@@ -115,7 +115,7 @@ add(Pattern(
          "Below, time-off entries with status chips; managers get Approve and Decline on each."],
     classes=[".orca-time-off"],
     laws=["R22", "peak-end"],
-    uses=["date-range-picker", "time-off-entry", "status-chip", "form-stack"],
+    uses=["date-range-picker", "time-off-entry", "form-stack"],
     examples=[("Request time off", """<div class="orca-stack" style="max-width: 32rem"><form class="orca-form-stack" onsubmit="return false">
   <div class="orca-field"><label class="orca-label" for="to-type">Type</label><select class="orca-select" id="to-type"><option>Holiday</option><option>Sick leave</option><option>Training</option></select></div>
   <fieldset class="orca-inline-fields" data-orca-range><legend class="orca-label">Dates</legend><div class="orca-field"><label class="orca-label" for="to-a">From</label><input class="orca-input" type="date" id="to-a" value="2026-11-16"></div><span class="orca-inline-fields__sep" aria-hidden="true">–</span><div class="orca-field"><label class="orca-label" for="to-b">To</label><input class="orca-input" type="date" id="to-b" value="2026-11-18"></div><p class="orca-inline-fields__note" data-orca-range-output aria-live="polite">3 days</p></fieldset>
@@ -127,7 +127,7 @@ add(Pattern(
 
 add(Pattern(
     "resource-scheduler", "Resource scheduler", C,
-    "Resources (people, rooms, cameras) as rows against a time scale, with bookings as bars on each row.",
+    "Resources (people, rooms, videos) as rows against a time scale, with bookings as bars on each row.",
     why="Rows per resource answer 'who is free when' directly (Practical UI L01, grouping), which a calendar per person cannot. Bars are positioned by time so gaps and double bookings are visible.",
     when=["Assigning installers, rooms or vehicles; seeing a team's day."],
     how=["`<div class=\"orca-scheduler\" style=\"--orca-cols: 10\">`: a corner and `.orca-scheduler__scale` of hours, then per resource `.orca-scheduler__who` and `.orca-scheduler__lane` containing event cards placed with `--orca-start` and `--orca-span` (percentages of the day).",
@@ -192,7 +192,7 @@ add(Pattern(
     uses=["steps", "booking-slot", "key-value-list"],
     examples=[("Step 1 of 3", """<div class="orca-booking"><ol class="orca-steps"><li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Service</span></li><li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Time</span></li><li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Confirm</span></li></ol>
   <fieldset class="orca-choice-group"><legend class="orca-label">What do you need?</legend><div class="orca-choice-group__items">
-    <label class="orca-radio"><input type="radio" name="ap-s" checked><span class="orca-radio__dot"></span>Camera calibration, 30 min</label>
+    <label class="orca-radio"><input type="radio" name="ap-s" checked><span class="orca-radio__dot"></span>Video calibration, 30 min</label>
     <label class="orca-radio"><input type="radio" name="ap-s"><span class="orca-radio__dot"></span>New site survey, 1 h</label></div></fieldset>
   <div class="orca-field"><label class="orca-label" for="ap-p">With</label><select class="orca-select" id="ap-p"><option>Anyone available</option><option>Ada Lovelace</option><option>Alan Turing</option></select></div>
   <div class="orca-row"><button class="orca-button orca-button--primary" type="button">Choose a time</button></div></div>""")],

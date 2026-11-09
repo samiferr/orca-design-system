@@ -27,7 +27,7 @@ Blocks: `title`
 #### Example: {% block title %}
 
 ```django
-<div class="orca-code-block"><pre><code>{% templatetag openblock %} block title {% templatetag closeblock %}Entrance A · Cameras{% templatetag openblock %} endblock {% templatetag closeblock %}</code></pre></div>
+<div class="orca-code-block"><pre><code>{% templatetag openblock %} block title {% templatetag closeblock %}Entrance A · Videos{% templatetag openblock %} endblock {% templatetag closeblock %}</code></pre></div>
 ```
 
 **Principles applied:** Practical UI W04: Lead with the information people seek
@@ -60,7 +60,7 @@ Blocks: `page_title`
 #### Example: {% block page_title %}
 
 ```django
-{% block page_title %}Cameras{% endblock %}
+{% block page_title %}Videos{% endblock %}
 ```
 
 **Principles applied:** Practical UI W04: Lead with the information people seek; Practical UI F01: Design for a diverse audience
@@ -93,7 +93,7 @@ Blocks: `page_subtitle`
 #### Example: {% block page_subtitle %}
 
 ```django
-{% block page_subtitle %}<p class="orca-page-subtitle">Every camera counting at North building.</p>{% endblock %}
+{% block page_subtitle %}<p class="orca-page-subtitle">Every video from North building.</p>{% endblock %}
 ```
 
 **Principles applied:** Practical UI W05: Order explanations as an inverted pyramid
@@ -126,7 +126,7 @@ Blocks: `page_actions`
 #### Example: {% block page_actions %}
 
 ```django
-{% block page_actions %}<div class="orca-row"><button class="orca-button" type="button">Export</button><a class="orca-button orca-button--primary" href="#">Add camera</a></div>{% endblock %}
+{% block page_actions %}<div class="orca-row"><button class="orca-button" type="button">Export</button><a class="orca-button orca-button--primary" href="#">Add video</a></div>{% endblock %}
 ```
 
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI B03: One primary action
@@ -159,7 +159,7 @@ Blocks: `breadcrumbs`
 #### Example: {% block breadcrumbs %}
 
 ```django
-{% block breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Cameras</a></li><li><span aria-current="page">Entrance A</span></li></ol></nav>{% endblock %}
+{% block breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Videos</a></li><li><span aria-current="page">Entrance A</span></li></ol></nav>{% endblock %}
 ```
 
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI L05: Use depth to support navigation and priority
@@ -469,11 +469,11 @@ Blocks: `sidebar_nav`
 
 `id: slot-filter-panel` · level: template · source: ORCA
 
-Where filters go: a side panel on the generic list, a bar on the board, a drawer on the simple data page.
+Where filters go: a right drawer, opened by the Filters button the template puts in the page actions.
 
 ### Why
 
-Filters next to what they filter make cause and effect visible (Practical UI L14); each template puts them where its layout has room.
+Every page opens its filters from the same place, a Filters button in the page actions, so people never hunt for them (Jakob's law, Practical UI S04).
 
 ### When to use
 
@@ -720,7 +720,7 @@ Blocks: `list_actions`
 #### Example: {% block list_actions %}
 
 ```django
-{% block list_actions %}<a class="orca-button orca-button--primary orca-create" href="#">{% icon "plus" %}Add camera</a>{% endblock %}
+{% block list_actions %}<a class="orca-button orca-button--primary orca-create" href="#">{% icon "plus" %}Add video</a>{% endblock %}
 ```
 
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI B03: One primary action

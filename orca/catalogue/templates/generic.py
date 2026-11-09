@@ -40,7 +40,7 @@ generic("generic-detail", "Generic detail template", "orca/generic/detail.html",
         "Details read top to bottom as label and value pairs (Practical UI L01); Edit and Delete in the same place on every record make them findable without searching (Jakob's law).",
         ["Any DetailView: one record with its properties."],
         [MIXIN, "Set `detail_fields`; add related lists or history in `detail_extra`, change the buttons in `detail_actions`."],
-        ["L01", "jakob", "B08"], ["app-shell", "detail-panel", "key-value-list", "record-actions"],
+        ["L01", "jakob", "B08"], ["app-shell", "detail-panel"],
         ["Generic detail template", "Detail page"], APP_BLOCKS + ["detail_actions", "detail", "detail_extra"],
         APP_CONTEXT + ["`object`, `fields`, `update_url`, `delete_url`."])
 
@@ -50,7 +50,7 @@ generic("generic-form", "Generic form template", "orca/generic/form.html",
         "make every form recover the same way (W15).",
         ["Any CreateView or UpdateView; any page whose main job is one form."],
         [MIXIN, "Add help text on the model or form field: it is shown under the label. Use `form_fields` to group fields in form sections."],
-        ["R01", "W15", "R09"], ["app-shell", "form-stack", "form-field", "form-actions", "narrow-form"],
+        ["R01", "W15", "R09"], ["app-shell", "narrow-form"],
         ["Generic form template", "Form page"], APP_BLOCKS + ["form_fields", "form_actions"],
         APP_CONTEXT + ["`form`, `object` (when editing), `submit_label`, `cancel_url`."])
 
@@ -79,10 +79,10 @@ generic("generic-confirm-action", "Generic confirm-action template", "orca/gener
 generic("parent-base", "Parent base template", "orca/generic/parent_base.html",
         "The frame shared by every page of a parent record: its title and actions, optional summary stats, and tabs for the overview and each child list.",
         "Keeping the parent's header and tabs fixed while the tab content changes tells people where they are and what else the record holds (Practical UI L05, Jakob's law).",
-        ["Records that own other records: a site and its cameras, a project and its tasks."],
+        ["Records that own other records: a site and its videos, a project and its tasks."],
         ["Extend it for each tab and fill `child_content`; mark the current tab in `parent_tabs`.",
          "Each tab is its own URL (and view), so tabs can be linked, bookmarked and refreshed."],
-        ["L05", "jakob", "miller"], ["parent-child-tabs", "page-head", "stat-card"],
+        ["L05", "jakob", "miller"], ["parent-child-tabs"],
         ["Parent base template"], PARENT_BLOCKS, PARENT_CONTEXT, classes=[".orca-parent__panel"])
 
 generic("parent-detail", "Parent detail template", "orca/generic/parent_detail.html",
@@ -96,10 +96,10 @@ generic("parent-detail", "Parent detail template", "orca/generic/parent_detail.h
 
 generic("parent-child-list", "Parent-child list template", "orca/generic/child_list.html",
         "A child list inside a parent tab: header with count and 'Add … to parent', the table, pagination and an empty state naming the parent.",
-        "Naming the parent in the add button and the empty state ('No cameras for North building') removes any doubt about where a new record goes (Practical UI W04, B10).",
+        "Naming the parent in the add button and the empty state ('No videos for North building') removes any doubt about where a new record goes (Practical UI W04, B10).",
         ["Each child tab of a parent record. The four parent-child templates (list, detail, form, confirm) make up its pages."],
         [MIXIN, "Filter the queryset by the parent from the URL; pass `parent` and `parent_tabs` with this tab current."],
-        ["W04", "B10", "jakob"], ["parent-base", "child-list-tab", "data-table", "empty-state"],
+        ["W04", "B10", "jakob"], ["parent-base", "child-list-tab"],
         ["Parent-child list template", "Parent-child pages (list, detail, form, confirm)"], PARENT_BLOCKS + ["list_actions", "list"],
         PARENT_CONTEXT + ["`object_list`, `page_obj`, `columns`.", URLS])
 
@@ -113,10 +113,10 @@ generic("parent-child-detail", "Parent-child detail template", "orca/generic/chi
 
 generic("parent-child-form", "Parent-child form template", "orca/generic/child_form.html",
         "Create or edit a child inside its parent's tab, with a heading that names the parent.",
-        "A form that says 'Add camera to North building' cannot be misread (Practical UI W04), and the parent's tabs stay one click away.",
+        "A form that says 'Add video to North building' cannot be misread (Practical UI W04), and the parent's tabs stay one click away.",
         ["Adding and editing child records."],
         [MIXIN, "Set the parent on the new object in `form_valid` (do not show the parent as a field)."],
-        ["W04", "R01", "R02"], ["parent-base", "form-stack", "form-field"],
+        ["W04", "R01", "R02"], ["parent-base", "form-stack"],
         ["Parent-child form template"], PARENT_BLOCKS + ["form_fields"], PARENT_CONTEXT + ["`form`, `object`, `model_name`, `cancel_url`."])
 
 generic("parent-child-confirm", "Parent-child confirm template", "orca/generic/child_confirm.html",

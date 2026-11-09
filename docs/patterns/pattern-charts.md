@@ -8,7 +8,7 @@ Server-rendered SVG charts in a chart frame, in token colours, each with a text 
 
 Bars comparing values across categories; grouped, stacked or horizontal.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -55,7 +55,7 @@ Lengths from a common baseline are the most accurately compared visual encoding,
 
 Lines showing how one or more values change over time.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -102,7 +102,7 @@ A line shows trend and change over time better than bars, and comparing with a r
 
 A circle split into the shares of one total, with a legend giving each value and percentage.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -147,7 +147,7 @@ Part-to-whole is understood at a glance when there are few parts; the legend giv
 
 A pie with the total in the middle.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -192,7 +192,7 @@ The hole leaves room for the total, so one figure answers both 'how many' and 'h
 
 Points placed by two values to show a relationship.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -237,7 +237,7 @@ Plotting two measures against each other reveals correlation and outliers no tab
 
 A scatter chart whose point size shows a third value.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -245,7 +245,7 @@ Size adds a third dimension (for example site size) without a second chart; the 
 
 ### When to use
 
-- Three measures per item, where the third is secondary: sites by dwell, visits and number of cameras.
+- Three measures per item, where the third is secondary: sites by dwell, visits and number of videos.
 
 ### When not to use
 
@@ -265,7 +265,7 @@ Size adds a third dimension (for example site size) without a second chart; the 
 #### Example: Bubble chart
 
 ```django
-{% orca_chart "bubble" sample.sites_bubble title="Sites" subtitle="x: average dwell (min), y: visits per hour, size: cameras" %}
+{% orca_chart "bubble" sample.sites_bubble title="Sites" subtitle="x: average dwell (min), y: visits per hour, size: videos" %}
 ```
 
 **Classes:** `.orca-chart`, `.orca-chart-frame`
@@ -282,7 +282,7 @@ Size adds a third dimension (for example site size) without a second chart; the 
 
 Scores on several axes drawn as a polygon, comparing one or two items.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 
@@ -327,7 +327,7 @@ A shape shows the profile of an item across many criteria at once and makes weak
 
 Equal-angle segments whose radius shows each value.
 
-Built from: `chart-frame`, `legend-item`, `swatch`
+Built from: `chart-frame`
 
 ### Why
 

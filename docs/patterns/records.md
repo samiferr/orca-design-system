@@ -22,13 +22,13 @@ A record page answers 'what is it, what state is it in, what can I do' in that o
 
 - `<section class="orca-detail-panel">` with `.orca-detail-panel__head` (`__title`: name + status light; record actions) and a key/value list or table card below.
 
-#### Example: Camera
+#### Example: Video
 
 ```django
 <section class="orca-detail-panel" aria-labelledby="dp-t" style="max-width: 36rem">
   <div class="orca-detail-panel__head"><div class="orca-detail-panel__title"><h2 id="dp-t">Entrance A</h2><span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online <span class="orca-status__meta">for 12 days</span></span></div>
-    <div class="orca-record-actions"><a class="orca-button orca-button--dense" href="#">{% icon "edit" %}Edit camera</a><button class="orca-icon-button orca-icon-button--dense orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></div></div>
-  <dl class="orca-kv"><div><dt>Site</dt><dd>North building</dd></div><div><dt>Model</dt><dd>Hikvision DS-2CD2143G2</dd></div><div><dt>Address</dt><dd><code class="orca-code">192.168.1.40:554</code></dd></div><div><dt>Counted today</dt><dd class="orca-num">4,812</dd></div></dl>
+    <div class="orca-record-actions"><a class="orca-button orca-button--dense" href="#">{% icon "edit" %}Edit video</a><button class="orca-icon-button orca-icon-button--dense orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></div></div>
+  <dl class="orca-kv"><div><dt>Site</dt><dd>North building</dd></div><div><dt>Format</dt><dd>MP4, 1080p</dd></div><div><dt>Address</dt><dd><code class="orca-code">media.example.com/v/4821</code></dd></div><div><dt>Views today</dt><dd class="orca-num">4,812</dd></div></dl>
 </section>
 ```
 
@@ -54,7 +54,7 @@ Keeping the parent visible while browsing its children preserves context (Miller
 
 ### When to use
 
-- Records that own lists of other records: a site's cameras, zones and users.
+- Records that own lists of other records: a site's videos, zones and users.
 
 ### How to use
 
@@ -66,8 +66,8 @@ Keeping the parent visible while browsing its children preserves context (Miller
 ```django
 <div class="orca-parent">
   <div class="orca-page-head" style="margin: 0"><div class="orca-page-head__text"><h1 class="orca-page-title">North building</h1><p class="orca-page-subtitle">12 Rue de la Gare, Lille</p></div><div class="orca-page-head__actions"><a class="orca-button" href="#">{% icon "edit" %}Edit site</a></div></div>
-  <div class="orca-parent__summary"><div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><p class="orca-stat-label">Cameras online</p><p class="orca-stat-value">11 of 12</p></div></div>
-  <nav class="orca-tabs__list" aria-label="North building"><a class="orca-tab" href="#">Overview</a><a class="orca-tab" href="#" aria-current="page">Cameras <span class="orca-count orca-count--neutral">12</span></a><a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a><a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">3</span></a></nav>
+  <div class="orca-parent__summary"><div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p></div></div>
+  <nav class="orca-tabs__list" aria-label="North building"><a class="orca-tab" href="#">Overview</a><a class="orca-tab" href="#" aria-current="page">Videos <span class="orca-count orca-count--neutral">12</span></a><a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a><a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">3</span></a></nav>
 </div>
 ```
 
@@ -97,7 +97,7 @@ The same list tools as a top-level list make child lists familiar (Jakob's law);
 
 ### How to use
 
-- A list header ('Cameras 12', search, 'Add camera' that links to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action.
+- A list header ('Videos 12', search, 'Add video' that links to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action.
 
 #### Example: Empty child list
 
@@ -178,7 +178,7 @@ A refusal without a reason is a dead end (Peak–end rule); listing the blockers
 ```django
 <div class="orca-callout orca-callout--negative" role="alert" style="max-width: 36rem">{% icon "error" %}<p class="orca-callout__title">Entrance A cannot be deleted yet</p>
   <div class="orca-callout__body"><p class="orca-p">These still use it. Remove or move them first.</p><ul class="orca-blocked-list"><li><a class="orca-link" href="#">2 zones</a> (Door line, Staff area)</li><li><a class="orca-link" href="#">1 alert rule</a> (Over capacity)</li></ul>
-    <div class="orca-row"><button class="orca-button orca-button--dense" type="button">Disable camera instead</button></div></div></div>
+    <div class="orca-row"><button class="orca-button orca-button--dense" type="button">Disable video instead</button></div></div></div>
 ```
 
 **Classes:** `.orca-blocked-list`
@@ -195,7 +195,7 @@ A refusal without a reason is a dead end (Peak–end rule); listing the blockers
 
 A full-page confirmation for consequential actions: what will happen, what is kept, and the named action.
 
-Built from: `confirm-dialog`, `checkbox`, `form-actions`
+Built from: `confirm-dialog`, `form-actions`
 
 ### Why
 
@@ -214,7 +214,7 @@ For actions too important for a small dialog, a page gives room to list conseque
 
 ```django
 <form class="orca-confirm-panel" method="post" onsubmit="return false"><h1 class="orca-confirm-panel__title">Delete North building?</h1>
-  <div><p class="orca-p"><strong>Deleted:</strong></p><ul><li>12 cameras and their zones</li><li>5 alert rules</li></ul></div>
+  <div><p class="orca-p"><strong>Deleted:</strong></p><ul><li>12 videos and their zones</li><li>5 alert rules</li></ul></div>
   <div><p class="orca-p"><strong>Kept:</strong> counts in past reports.</p></div>
   <label class="orca-check"><input type="checkbox" required><span class="orca-check__box"></span>I understand this cannot be undone</label>
   <div class="orca-form-actions"><button class="orca-button orca-button--danger" type="submit">Delete site</button><a class="orca-button" href="#">Cancel</a></div></form>

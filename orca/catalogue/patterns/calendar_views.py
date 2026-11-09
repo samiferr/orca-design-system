@@ -24,7 +24,7 @@ add(Pattern(
     a11y=["Each day is a link or cell labelled with its full date and event count; the table has weekday column headers."],
     classes=[".orca-month-view", ".orca-cal-cell__count"],
     laws=["miller", "fitts", "jakob"],
-    uses=["calendar-header", "weekday-header", "week-row", "day-cell", "event-chip", "more-events-link", "holiday-label"],
+    uses=["calendar-header", "weekday-header", "week-row"],
     examples=[("November 2026", '{% orca_month_calendar sample.events month="2026-11" today=sample.today holidays=sample.holidays day_url="#{date}" %}')],
     guide=["Month calendar"],
 ))
@@ -40,7 +40,7 @@ add(Pattern(
     a11y=["Every event is a link or button whose text gives title, day and times; the now-line is decorative."],
     classes=[".orca-timegrid", ".orca-timegrid__head", ".orca-timegrid__allday", ".orca-timegrid__body", ".orca-timegrid__col", ".orca-timegrid__event", ".orca-timegrid__now"],
     laws=["L01", "jakob", "miller"],
-    uses=["week-header", "all-day-row", "hour-row", "time-slot", "event-card", "calendar-header"],
+    uses=["week-header", "all-day-row", "hour-row", "event-card", "calendar-header"],
     examples=[("This week", '{% orca_week_view sample.events start="2026-11-02" today=sample.today now=sample.now start_hour=8 end_hour=19 %}')],
     guide=["Week view"],
 ))
@@ -54,7 +54,7 @@ add(Pattern(
          "Pair with a mini calendar or a date strip to change day."],
     classes=[".orca-timegrid--day"],
     laws=["fitts", "jakob"],
-    uses=["hour-row", "time-slot", "event-card", "calendar-navigation"],
+    uses=["hour-row", "event-card", "calendar-navigation"],
     examples=[("Friday 6 November", '{% orca_week_view sample.events start=sample.today days=1 today=sample.today now=sample.now start_hour=9 end_hour=18 %}')],
     guide=["Day view"],
 ))
@@ -68,7 +68,7 @@ add(Pattern(
          "Show an empty state when nothing is planned ('Nothing planned this week')."],
     classes=[".orca-agenda-view", ".orca-agenda-view__day"],
     laws=["jakob", "L03"],
-    uses=["agenda-item", "date-badge", "empty-state"],
+    uses=["agenda-item", "empty-state"],
     examples=[("This week", '{% orca_agenda sample.events start="2026-11-02" days=7 today=sample.today %}')],
     guide=["Agenda (list) view"],
 ))
@@ -109,7 +109,7 @@ add(Pattern(
          NAV_HOW, "The title announces the period politely when it changes (`aria-live`)."],
     classes=[".orca-cal-header", ".orca-cal-header__title", ".orca-cal-header__end"],
     laws=["jakob", "fitts"],
-    uses=["calendar-header", "calendar-navigation", "calendar-view-switcher", "create-button"],
+    uses=["calendar-header", "create-button"],
     examples=[("Toolbar", """<div class="orca-cal-header"><div class="orca-cal-nav"><a class="orca-icon-button orca-icon-button--outlined" href="#" aria-label="Previous week">{% icon "chevron-left" %}</a><a class="orca-button" href="#">Today</a><a class="orca-icon-button orca-icon-button--outlined" href="#" aria-label="Next week">{% icon "chevron-right" %}</a></div>
   <h2 class="orca-cal-header__title" aria-live="polite">2–8 November 2026</h2>
   <div class="orca-row orca-cal-header__end"><nav class="orca-segmented orca-segmented--dense" aria-label="Calendar view"><a class="orca-segmented__item" href="#">Day</a><a class="orca-segmented__item" href="#" aria-current="page">Week</a><a class="orca-segmented__item" href="#">Month</a><a class="orca-segmented__item" href="#">Agenda</a></nav><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}New event</a></div></div>""")],

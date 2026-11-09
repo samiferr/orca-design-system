@@ -8,7 +8,7 @@ Seeing and steering work over time: task lists, boards, Gantt charts, roadmaps, 
 
 Tasks grouped by status or due date, each with a checkbox, assignee, due chip and status, plus an inline add row.
 
-Built from: `task-item`, `assignee-chip`, `due-date-chip`, `status-chip`
+Built from: `task-item`, `status-chip`
 
 ### Why
 
@@ -16,7 +16,7 @@ A checklist is the most familiar planning tool (Jakob's law); ticking a task off
 
 ### When to use
 
-- Personal and team to-dos, per-record tasks (a camera's maintenance tasks).
+- Personal and team to-dos, per-record tasks (a video's maintenance tasks).
 
 ### How to use
 
@@ -72,7 +72,7 @@ Columns make the flow of work visible and bottlenecks obvious (Practical UI L01,
 #### Example: Board
 
 ```django
-<div class="orca-board" data-orca-board aria-label="Installation board"><section class="orca-board__col" aria-label="Planned"><h3 class="orca-board__head">Planned <span class="orca-badge orca-badge--grey" data-orca-count>1</span></h3><ul class="orca-board__cards" data-orca-column="planned"><li class="orca-board-card" id="kb-1" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Draw zones for Gate 1">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Draw zones for Gate 1</a></h4></div><div class="orca-row"><span class="orca-tag">Zones</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}Fri 13 Nov</span><span class="orca-avatar orca-avatar--xs" title="GH">GH</span></div></li></ul></section><section class="orca-board__col" aria-label="In progress"><h3 class="orca-board__head">In progress <span class="orca-badge orca-badge--grey" data-orca-count>2</span><span class="orca-board__limit">limit 2</span></h3><ul class="orca-board__cards" data-orca-column="progress"><li class="orca-board-card" id="kb-2" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Recalibrate Entrance A">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Recalibrate Entrance A</a></h4></div><div class="orca-row"><span class="orca-tag">Camera</span></div><div class="orca-board-card__foot"><span class="orca-chip orca-chip--soon">{% icon "calendar" %}Tomorrow</span><span class="orca-avatar orca-avatar--xs" title="AL">AL</span></div></li><li class="orca-board-card" id="kb-3" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Connect Gate 1 recorder">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Connect Gate 1 recorder</a></h4></div><div class="orca-row"><span class="orca-tag">Network</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}Mon 9 Nov</span><span class="orca-avatar orca-avatar--xs" title="AT">AT</span></div></li></ul></section><section class="orca-board__col" aria-label="Done"><h3 class="orca-board__head">Done <span class="orca-badge orca-badge--grey" data-orca-count>1</span></h3><ul class="orca-board__cards" data-orca-column="done"><li class="orca-board-card" id="kb-4" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Mount Gate 1 bracket">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Mount Gate 1 bracket</a></h4></div><div class="orca-row"><span class="orca-tag">Install</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}2 Nov</span><span class="orca-avatar orca-avatar--xs" title="AT">AT</span></div></li></ul></section></div>
+<div class="orca-board" data-orca-board aria-label="Installation board"><section class="orca-board__col" aria-label="Planned"><h3 class="orca-board__head">Planned <span class="orca-badge orca-badge--grey" data-orca-count>1</span></h3><ul class="orca-board__cards" data-orca-column="planned"><li class="orca-board-card" id="kb-1" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Draw zones for Gate 1">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Draw zones for Gate 1</a></h4></div><div class="orca-row"><span class="orca-tag">Zones</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}Fri 13 Nov</span><span class="orca-avatar orca-avatar--xs" title="GH">GH</span></div></li></ul></section><section class="orca-board__col" aria-label="In progress"><h3 class="orca-board__head">In progress <span class="orca-badge orca-badge--grey" data-orca-count>2</span><span class="orca-board__limit">limit 2</span></h3><ul class="orca-board__cards" data-orca-column="progress"><li class="orca-board-card" id="kb-2" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Trim Entrance A video">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Trim Entrance A video</a></h4></div><div class="orca-row"><span class="orca-tag">Video</span></div><div class="orca-board-card__foot"><span class="orca-chip orca-chip--soon">{% icon "calendar" %}Tomorrow</span><span class="orca-avatar orca-avatar--xs" title="AL">AL</span></div></li><li class="orca-board-card" id="kb-3" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Connect Gate 1 media server">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Connect Gate 1 media server</a></h4></div><div class="orca-row"><span class="orca-tag">Network</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}Mon 9 Nov</span><span class="orca-avatar orca-avatar--xs" title="AT">AT</span></div></li></ul></section><section class="orca-board__col" aria-label="Done"><h3 class="orca-board__head">Done <span class="orca-badge orca-badge--grey" data-orca-count>1</span></h3><ul class="orca-board__cards" data-orca-column="done"><li class="orca-board-card" id="kb-4" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Mount Gate 1 bracket">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Mount Gate 1 bracket</a></h4></div><div class="orca-row"><span class="orca-tag">Install</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}2 Nov</span><span class="orca-avatar orca-avatar--xs" title="AT">AT</span></div></li></ul></section></div>
 ```
 
 **Classes:** `.orca-board`, `.orca-board__col`, `.orca-board__head`, `.orca-board__limit`, `.orca-board__cards`
@@ -113,8 +113,8 @@ Bars on a shared time scale show sequence, overlap and slippage at once (Practic
 ```django
 <div class="orca-table-wrap"><div class="orca-gantt-chart" style="--orca-cols: 7"><div class="orca-gantt-chart__scale"><span></span><span>Mon 2</span><span>Tue 3</span><span>Wed 4</span><span>Thu 5</span><span class="is-today">Fri 6</span><span>Sat 7</span><span>Sun 8</span></div>
   <div class="orca-gantt" style="--orca-cols: 7" role="list" aria-label="Installation plan, week 45"><span class="orca-gantt-chart__today" style="--orca-at: 0.64" aria-hidden="true"></span>
-    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Mount cameras</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--done" href="#" style="--orca-start: 0%; --orca-span: 28%; --orca-progress: 100%">Done</a></span></div>
-    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Connect recorders</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar" href="#" style="--orca-start: 28%; --orca-span: 43%; --orca-progress: 60%">60%</a></span></div>
+    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Upload videos</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--done" href="#" style="--orca-start: 0%; --orca-span: 28%; --orca-progress: 100%">Done</a></span></div>
+    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Connect media servers</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar" href="#" style="--orca-start: 28%; --orca-span: 43%; --orca-progress: 60%">60%</a></span></div>
     <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Draw zones</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--late" href="#" style="--orca-start: 43%; --orca-span: 28%">Late</a><span class="orca-milestone" style="--orca-start: 92%" role="img" aria-label="Go live milestone, Sunday 8"></span></span></div></div></div></div>
 ```
 
@@ -229,7 +229,7 @@ One page answering 'how is this sprint going' (progress and days left side by si
 
 ```django
 <div class="orca-period-overview" style="max-width: 44rem"><div class="orca-row" style="justify-content: space-between"><div><h2 class="orca-h3" style="margin: 0">Sprint 45</h2><p class="orca-small orca-muted">2–13 November · 5 working days left</p></div><nav class="orca-segmented orca-segmented--dense" aria-label="Sprint"><a class="orca-segmented__item" href="#">44</a><a class="orca-segmented__item" href="#" aria-current="page">45</a><a class="orca-segmented__item" href="#">46</a></nav></div>
-  <div class="orca-callout">{% icon "flag" %}<p class="orca-callout__title">Goal: Warehouse cameras counting by Friday 13</p></div>
+  <div class="orca-callout">{% icon "flag" %}<p class="orca-callout__title">Goal: Warehouse videos published by Friday 13</p></div>
   <dl class="orca-summary-tiles"><div class="orca-summary-tile"><dt>Done</dt><dd>12</dd></div><div class="orca-summary-tile"><dt>Open</dt><dd>6</dd></div><div class="orca-summary-tile"><dt>Late</dt><dd>2</dd></div></dl>
   <progress class="orca-progress" value="12" max="20" aria-label="12 of 20 tasks done"></progress></div>
 ```
@@ -286,7 +286,7 @@ Assigning work without seeing load leads to burnout and slippage; per-day cells 
 
 Upcoming deadlines grouped into Overdue, This week and Later, each with its date and time left.
 
-Built from: `deadline-item`, `due-date-chip`
+Built from: `deadline-item`
 
 ### Why
 
@@ -360,13 +360,13 @@ Comparing what was planned with what was done shows whether plans are realistic 
 
 `id: plan-filter-bar` · level: pattern · source: ORCA
 
-Filters above a plan: period, assignee and status, with active filters as removable chips and a count of results.
+Above a plan: the period shown, the applied assignee and status filters as removable chips, and the number of results.
 
-Built from: `filter-bar`, `period-selector`, `tag`
+Built from: `filter-bar`, `period-selector`
 
 ### Why
 
-Plans get long; the three questions people ask (when, who, what state) as visible filters cover most needs (Hick's law, Practical UI S08) and chips show what is hidden.
+Plans get long; the three questions people ask (when, who, what state) must stay answerable at a glance (Hick's law, Practical UI S08). The period is a view control, so it stays visible; assignee and status are page filters, so they live in the filter drawer and show here as chips.
 
 ### When to use
 
@@ -374,18 +374,17 @@ Plans get long; the three questions people ask (when, who, what state) as visibl
 
 ### How to use
 
-- A filter bar (GET form) with the period selector, an assignee select and a status select; then filter chips and 'Clear all'; results count announced politely.
+- A row with the period selector, then the applied filters as removable chips with 'Clear all', and the results count announced politely.
+- Assignee and status are chosen in the `filter-drawer`, opened by the Filters button in the page actions.
 
-#### Example: Filters
+#### Example: Plan filters
 
 ```django
-<form class="orca-filter-bar" method="get" onsubmit="return false"><nav class="orca-segmented orca-segmented--dense" aria-label="Period"><a class="orca-segmented__item" href="#" aria-current="page">This week</a><a class="orca-segmented__item" href="#">Next week</a><a class="orca-segmented__item" href="#">This month</a></nav>
-  <div class="orca-field"><label class="orca-label orca-sr-only" for="pf-a">Assignee</label><select class="orca-select orca-select--dense" id="pf-a"><option>Everyone</option><option selected>Alan Turing</option></select></div>
-  <div class="orca-field"><label class="orca-label orca-sr-only" for="pf-s">Status</label><select class="orca-select orca-select--dense" id="pf-s"><option>Any status</option><option>Open</option><option>Blocked</option></select></div>
-  <span class="orca-small orca-muted" aria-live="polite">2 tasks</span></form>
+<div class="orca-filter-bar"><nav class="orca-segmented orca-segmented--dense" aria-label="Period"><a class="orca-segmented__item" href="#" aria-current="page">This week</a><a class="orca-segmented__item" href="#">Next week</a><a class="orca-segmented__item" href="#">This month</a></nav>
+  <div class="orca-filter-bar__applied"><span class="orca-small orca-muted">Filtered by</span><span class="orca-tag"><span class="orca-tag__text">Assignee: Alan Turing</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Assignee: Alan Turing">{% icon "close" %}</button></span><button class="orca-button orca-button--link" type="button">Clear all</button><span class="orca-small orca-muted" aria-live="polite">2 tasks</span></div></div>
 ```
 
-**Classes:** `.orca-filter-bar`
+**Classes:** `.orca-filter-bar`, `.orca-filter-bar__applied`
 
 **Principles applied:** Hick's law: fewer, clearer choices mean faster decisions; Practical UI S08: Simplify decisions: remove, group, stage, recommend
 
@@ -399,7 +398,7 @@ Plans get long; the three questions people ask (when, who, what state) as visibl
 
 A period filter for reports and plans: quick presets plus a custom from–to range, showing the chosen dates.
 
-Built from: `preset-buttons`, `date-range-picker`, `filter-bar`
+Built from: `date-range-picker`, `filter-bar`
 
 ### Why
 
@@ -412,6 +411,7 @@ Most people want 'this week' or 'last 30 days' (Practical UI S08, Hick's law), s
 ### How to use
 
 - A filter bar with preset buttons (`aria-pressed`), a date range picker revealed by 'Custom', and the resolved dates; submit as `?from=…&to=…`.
+- The period is a view control and stays visible; any other filter of the page goes in the filter drawer.
 
 #### Example: Period
 

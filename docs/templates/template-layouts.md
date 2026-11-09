@@ -51,7 +51,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 The application frame: top bar with brand, sidebar navigation that collapses to a rail (a drawer on phones), and a main column with breadcrumbs, page title, subtitle, actions, messages and content.
 
-Built from: `top-bar`, `sidebar`, `page-head`, `messages-region`, `breadcrumbs`
+Built from: `top-bar`, `sidebar`, `page-head`, `messages-region`
 
 ### Why
 
@@ -110,7 +110,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A centred card on the alternate ground for sign-in, password reset and other pages before an account is open.
 
-Built from: `login-card`, `form-field`
+Built from: `login-card`
 
 ### Why
 
@@ -200,7 +200,7 @@ Blocks: `title`, `preheader`, `brand`, `heading`, `content`, `action`, `footer`
 
 403, 404 and 500 pages: logo, illustration, error code, what happened in plain words and what to do next.
 
-Built from: `empty-state`, `button`
+Built from: `empty-state`
 
 ### Why
 
@@ -548,7 +548,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A record page from a DetailView: title, Edit and Delete actions, and the record's fields as a key–value list.
 
-Built from: `app-shell`, `detail-panel`, `key-value-list`, `record-actions`
+Built from: `app-shell`, `detail-panel`
 
 ### Why
 
@@ -597,7 +597,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A create or edit page from a CreateView or UpdateView: one column of ORCA fields with the error summary and Save and Cancel.
 
-Built from: `app-shell`, `form-stack`, `form-field`, `form-actions`, `narrow-form`
+Built from: `app-shell`, `narrow-form`
 
 ### Why
 
@@ -741,7 +741,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 The frame shared by every page of a parent record: its title and actions, optional summary stats, and tabs for the overview and each child list.
 
-Built from: `parent-child-tabs`, `page-head`, `stat-card`
+Built from: `parent-child-tabs`
 
 ### Why
 
@@ -749,7 +749,7 @@ Keeping the parent's header and tabs fixed while the tab content changes tells p
 
 ### When to use
 
-- Records that own other records: a site and its cameras, a project and its tasks.
+- Records that own other records: a site and its videos, a project and its tasks.
 
 ### How to use
 
@@ -844,11 +844,11 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A child list inside a parent tab: header with count and 'Add … to parent', the table, pagination and an empty state naming the parent.
 
-Built from: `parent-base`, `child-list-tab`, `data-table`, `empty-state`
+Built from: `parent-base`, `child-list-tab`
 
 ### Why
 
-Naming the parent in the add button and the empty state ('No cameras for North building') removes any doubt about where a new record goes (Practical UI W04, B10).
+Naming the parent in the add button and the empty state ('No videos for North building') removes any doubt about where a new record goes (Practical UI W04, B10).
 
 ### When to use
 
@@ -947,11 +947,11 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 Create or edit a child inside its parent's tab, with a heading that names the parent.
 
-Built from: `parent-base`, `form-stack`, `form-field`
+Built from: `parent-base`, `form-stack`
 
 ### Why
 
-A form that says 'Add camera to North building' cannot be misread (Practical UI W04), and the parent's tabs stay one click away.
+A form that says 'Add video to North building' cannot be misread (Practical UI W04), and the parent's tabs stay one click away.
 
 ### When to use
 

@@ -28,8 +28,8 @@ Seeing the result and the code side by side lets people copy exactly what they s
 ```django
 <div class="orca-live-example">
   <div class="orca-tabs__list" role="tablist" aria-label="Example" data-orca-tabs><button class="orca-tab" role="tab" type="button" id="le-t1" aria-controls="le-p1" aria-selected="true">Preview</button><button class="orca-tab" role="tab" type="button" id="le-t2" aria-controls="le-p2" aria-selected="false">Code</button></div>
-  <div class="orca-tabs__panel" role="tabpanel" id="le-p1" aria-labelledby="le-t1"><button class="orca-button orca-button--primary" type="button">Save camera</button></div>
-  <div class="orca-tabs__panel orca-tabs__panel--code" role="tabpanel" id="le-p2" aria-labelledby="le-t2" hidden><div class="orca-code-block"><pre><code>&lt;button class="orca-button orca-button--primary" type="button"&gt;Save camera&lt;/button&gt;</code></pre></div></div>
+  <div class="orca-tabs__panel" role="tabpanel" id="le-p1" aria-labelledby="le-t1"><button class="orca-button orca-button--primary" type="button">Save video</button></div>
+  <div class="orca-tabs__panel orca-tabs__panel--code" role="tabpanel" id="le-p2" aria-labelledby="le-t2" hidden><div class="orca-code-block"><pre><code>&lt;button class="orca-button orca-button--primary" type="button"&gt;Save video&lt;/button&gt;</code></pre></div></div>
 </div>
 ```
 
@@ -47,7 +47,7 @@ Seeing the result and the code side by side lets people copy exactly what they s
 
 Multi-line code with its language and a Copy button.
 
-Built from: `code-text`, `copy-button`
+Built from: `copy-button`
 
 ### Why
 

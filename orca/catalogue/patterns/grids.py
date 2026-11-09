@@ -3,7 +3,7 @@ from . import Pattern
 
 C = category(
     "grids", "Grids and collections",
-    "Repeating one component in a responsive grid or sequence: products, cameras, KPIs, a heat map, an event timeline.",
+    "Repeating one component in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.",
     level="pattern",
 )
 
@@ -17,23 +17,23 @@ add(Pattern(
     classes=[".orca-product-grid"],
     laws=["miller", "postel"],
     uses=["product-item", "list-header", "pagination"],
-    examples=[("Grid", """<ul class="orca-product-grid">{% for n in "1234" %}<li><article class="orca-product"><div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div><h3 class="orca-product__name"><a href="#">Dome camera {{ n }}, 4 MP</a></h3><p class="orca-product__price" style="margin: 0">€1{{ n }}9</p></article></li>{% endfor %}</ul>""")],
+    examples=[("Grid", """<ul class="orca-product-grid">{% for n in "1234" %}<li><article class="orca-product"><div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div><h3 class="orca-product__name"><a href="#">Dome video {{ n }}, 4 MP</a></h3><p class="orca-product__price" style="margin: 0">€1{{ n }}9</p></article></li>{% endfor %}</ul>""")],
     guide=["Product grid"],
 ))
 
 add(Pattern(
-    "camera-grid", "Camera grid", C,
-    "Camera cards in a grid, pinned cameras first, offline cameras clearly marked.",
-    why="Operators scan cameras by their live view (Miller's law); keeping pinned cameras first saves the daily search (Fitts's law) and offline ones stand out by badge and word (Von Restorff, C03).",
-    when=["Dashboards and camera lists in card view."],
-    how=["`<ul class=\"orca-camera-grid\">` of camera cards; order pinned first, then by name. Each image sits in a reserved 16:9 frame so the grid never jumps.",
+    "video-grid", "Video grid", C,
+    "Video cards in a grid, pinned videos first, offline videos clearly marked.",
+    why="Operators scan videos by their live view (Miller's law); keeping pinned videos first saves the daily search (Fitts's law) and offline ones stand out by badge and word (Von Restorff, C03).",
+    when=["Dashboards and video lists in card view."],
+    how=["`<ul class=\"orca-video-grid\">` of video cards; order pinned first, then by name. Each image sits in a reserved 16:9 frame so the grid never jumps.",
          "Pair with the view toggle (cards or table) and a skeleton while snapshots load."],
-    classes=[".orca-camera-grid"],
+    classes=[".orca-video-grid"],
     laws=["miller", "fitts", "restorff"],
-    uses=["camera-card", "view-toggle", "skeleton"],
-    examples=[("Grid", """<ul class="orca-camera-grid">{% for c in sample.cameras|slice:":3" %}<li><article class="orca-card orca-card--link orca-camera-card">{% if c.status == "negative" %}<div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since {{ c.last }}</div><span class="orca-badge orca-badge--negative orca-camera-card__flag">Offline</span>{% else %}<div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>{% endif %}
+    uses=["video-card", "view-toggle", "skeleton"],
+    examples=[("Grid", """<ul class="orca-video-grid">{% for c in sample.videos|slice:":3" %}<li><article class="orca-card orca-card--link orca-video-card">{% if c.status == "negative" %}<div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since {{ c.last }}</div><span class="orca-badge orca-badge--negative orca-video-card__flag">Offline</span>{% else %}<div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>{% endif %}
   <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">{{ c.name }}</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--{{ c.status }}"></span>{{ c.status_text }} · {{ c.site }}</span></div></article></li>{% endfor %}</ul>""")],
-    guide=["Camera grid"], source="Tangerine",
+    guide=["Video grid"], source="Tangerine",
 ))
 
 add(Pattern(
@@ -45,11 +45,11 @@ add(Pattern(
     how=["`<div class=\"orca-kpi-grid\">` of stat cards (as links when they lead somewhere), each with its comparison and, where useful, a sparkline."],
     classes=[".orca-kpi-grid"],
     laws=["miller", "restorff"],
-    uses=["stat-card", "sparkline", "delta"],
+    uses=["stat-card"],
     examples=[("KPIs", """<div class="orca-kpi-grid">
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div></a>
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Inside now</p><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Cameras online</p><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
+  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Count accuracy</p><p class="orca-stat-value">96.4%</p><div class="orca-stat-card__foot">last 7 days</div></a>
 </div>""")],
     guide=["KPI grid"], source="Tangerine",
@@ -80,7 +80,7 @@ add(Pattern(
     "event-timeline", "Event timeline", C,
     "Alerts and events grouped by day, newest first, each with its status, time and snapshot.",
     why="Grouping by day chunks a long log (Miller's law); the timeline line and status dots show sequence and severity at a glance.",
-    when=["Alert lists, audit and incident views, a camera's history."],
+    when=["Alert lists, audit and incident views, a video's history."],
     how=["`<div class=\"orca-event-timeline\">` of day groups: `<h3 class=\"orca-event-timeline__day\">Today</h3>` then a timeline of items.",
          "Each item: status dot, title, time, description and an optional thumbnail; link to the event detail."],
     classes=[".orca-event-timeline", ".orca-event-timeline__day"],

@@ -107,7 +107,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 Resources by time for one day: a date toolbar, a row per person, room or vehicle with bookings placed by time, and the legend.
 
-Built from: `resource-scheduler`, `calendar-navigation`, `availability-legend`
+Built from: `resource-scheduler`, `calendar-navigation`
 
 ### Why
 
@@ -154,7 +154,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A kanban board page: filters on top and columns of cards that move by drag and drop.
 
-Built from: `kanban-board`, `plan-filter-bar`, `board-card`
+Built from: `kanban-board`, `plan-filter-bar`
 
 ### Why
 
@@ -249,7 +249,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A step-by-step booking page: steps on top, the current step's choices, and a summary of the booking so far beside it.
 
-Built from: `steps`, `booking-slot-picker`, `appointment-picker`, `split-layout`
+Built from: `booking-slot-picker`, `appointment-picker`, `split-layout`
 
 ### Why
 
@@ -301,7 +301,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 Create or edit an event on its own page: the form on the left, conflicts and attendees on the right, Delete apart from Save.
 
-Built from: `event-editor`, `conflict-warning`, `attendee-list`, `split-layout`
+Built from: `event-editor`, `attendee-list`, `split-layout`
 
 ### Why
 
@@ -356,7 +356,7 @@ Summary tiles answer 'how many of each' and double as the most used filters (Hic
 
 ### When to use
 
-- Operational lists where counts by status matter: cameras, alerts, tickets.
+- Operational lists where counts by status matter: videos, alerts, tickets.
 
 ### How to use
 

@@ -35,8 +35,8 @@ Labels above inputs give one straight downward reading path (Practical UI R01) a
 #### Example: Label and input
 
 ```django
-<label class="orca-label" for="cam-name">Camera name</label>
-<input class="orca-input orca-input--w30" id="cam-name" name="name" autocomplete="off">
+<label class="orca-label" for="image-name">Image name</label>
+<input class="orca-input orca-input--w30" id="image-name" name="name" autocomplete="off">
 ```
 
 **Classes:** `.orca-label`
@@ -82,8 +82,8 @@ People cannot guess which fields they may skip; marking status at the field is t
 #### Example: Optional field
 
 ```django
-<label class="orca-label" for="cam-note">Note <span class="orca-optional">(optional)</span></label>
-<input class="orca-input" id="cam-note" name="note">
+<label class="orca-label" for="image-note">Note <span class="orca-optional">(optional)</span></label>
+<input class="orca-input" id="image-note" name="note">
 ```
 
 **Classes:** `.orca-required`, `.orca-optional`
@@ -108,7 +108,7 @@ Guidance placed before the input is read before answering and is never covered b
 
 ### When to use
 
-- Format expectations ('Use the address printed on the recorder'), consequences, or where to find a value.
+- Format expectations ('Use the address from the video's Share menu'), consequences, or where to find a value.
 
 ### When not to use
 
@@ -128,9 +128,9 @@ Guidance placed before the input is read before answering and is never covered b
 #### Example: Hint before the field
 
 ```django
-<label class="orca-label" for="rtsp">Stream address</label>
-<p class="orca-help" id="rtsp-help">Starts with rtsp://. Find it in the camera's network settings.</p>
-<input class="orca-input" id="rtsp" name="rtsp" inputmode="url" aria-describedby="rtsp-help">
+<label class="orca-label" for="video-url">Video address</label>
+<p class="orca-help" id="video-url-help">Starts with https://. Copy it from the video's Share menu.</p>
+<input class="orca-input" id="video-url" name="video_url" inputmode="url" aria-describedby="video-url-help">
 ```
 
 **Classes:** `.orca-help`
@@ -164,7 +164,7 @@ Errors stated next to the field, with an icon and in words, are found and fixed 
 
 ### How to use
 
-- `<p class="orca-error" id="x-error">{% icon "error" %}<span>Enter a stream address that starts with rtsp://</span></p>` above the input, after the help text.
+- `<p class="orca-error" id="x-error">{% icon "error" %}<span>Enter a video address that starts with https://</span></p>` above the input, after the help text.
 - Mark the field `aria-invalid="true"` and add the error id to `aria-describedby` (first).
 - Pattern: what is wrong + how to fix, in one sentence.
 
@@ -176,9 +176,9 @@ Errors stated next to the field, with an icon and in words, are found and fixed 
 #### Example: Invalid field
 
 ```django
-<label class="orca-label" for="rtsp2">Stream address</label>
-<p class="orca-error" id="rtsp2-error">{% icon "error" %}<span>Enter an address that starts with rtsp://, for example rtsp://192.168.1.40/stream1.</span></p>
-<input class="orca-input" id="rtsp2" name="rtsp" value="192.168.1.40" aria-invalid="true" aria-describedby="rtsp2-error">
+<label class="orca-label" for="video-url2">Video address</label>
+<p class="orca-error" id="video-url2-error">{% icon "error" %}<span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span></p>
+<input class="orca-input" id="video-url2" name="video_url" value="media.example.com/v/4821" aria-invalid="true" aria-describedby="video-url2-error">
 ```
 
 **Classes:** `.orca-error`
@@ -272,8 +272,8 @@ With several errors, a counted list of links lets people fix them in order witho
   {% icon "error" %}
   <p class="orca-error-list__title">2 fields need attention</p>
   <ul>
-    <li><a href="#rtsp2">Enter an address that starts with rtsp://</a></li>
-    <li><a href="#cam-name">Enter a camera name</a></li>
+    <li><a href="#video-url2">Enter a video address that starts with https://</a></li>
+    <li><a href="#image-name">Enter an image name</a></li>
   </ul>
 </div>
 ```

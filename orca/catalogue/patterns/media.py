@@ -27,10 +27,10 @@ add(Pattern(
 
 add(Pattern(
     "live-stream-panel", "Live stream panel", C,
-    "A live camera view with its state, a live flag and the live counts beside it.",
+    "A live video view with its state, a live flag and the live counts beside it.",
     why="Operators watch a stream to confirm what the numbers say; showing the live state in words and the counts next to the picture keeps both in one glance (Miller's law, C03).",
-    when=["Camera detail pages and monitoring walls."],
-    how=["A panel with a panel header (camera name, status light, Pause/Full-screen actions), a 16:9 frame with the stream and a `.orca-frame__flag` ('Live'), and `.orca-live-panel__stats` (stat label/value pairs).",
+    when=["Video detail pages and monitoring walls."],
+    how=["A panel with a panel header (video name, status light, Pause/Full-screen actions), a 16:9 frame with the stream and a `.orca-frame__flag` ('Live'), and `.orca-live-panel__stats` (stat label/value pairs).",
          "When the stream drops, replace it with the removed frame and a message, never a frozen image without notice."],
     classes=[".orca-live-panel", ".orca-live-panel__stats"],
     laws=["miller", "C03", "peak-end"],
@@ -54,9 +54,9 @@ add(Pattern(
     uses=["person-block", "media-frame", "photo-actions-bar", "relative-time"],
     examples=[("Post", """<article class="orca-photo-post">
   <div class="orca-photo-post__head"><div class="orca-person"><span class="orca-avatar orca-avatar--s" aria-hidden="true">GH</span><span class="orca-person__text"><span class="orca-person__name">Grace Hopper</span><time class="orca-person__role" datetime="2026-11-06T08:30">2 hours ago</time></span></div></div>
-  <div class="orca-ratio orca-ratio--4x3"><img src="{% static "orca/img/sample-street.svg" %}" alt="New camera mounted above the warehouse gate"></div>
+  <div class="orca-ratio orca-ratio--4x3"><img src="{% static "orca/img/sample-street.svg" %}" alt="Still from the new warehouse gate video"></div>
   <div class="orca-photo-post__foot"><div class="orca-photo-actions"><button class="orca-icon-button" type="button" aria-pressed="false" aria-label="Like" data-orca-toggle>{% icon "star" %}</button><span class="orca-photo-actions__count">8</span><button class="orca-icon-button" type="button" aria-label="Comment">{% icon "chat" %}</button><span class="orca-photo-actions__count">2</span></div>
-    <p class="orca-photo-post__caption"><strong>Grace Hopper</strong> Gate 1 camera is up. Counting starts tomorrow.</p></div>
+    <p class="orca-photo-post__caption"><strong>Grace Hopper</strong> Gate 1 video is up. It goes live tomorrow.</p></div>
 </article>""")],
     guide=["Photo post (user info + photo + actions + caption)"],
 ))

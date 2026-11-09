@@ -16,7 +16,7 @@ Something happened that needs attention; a distinct shape, a status glyph and a 
 
 ### When to use
 
-- Results of an action that stay on the page: a failed test, a camera offline, a saved setting with a warning.
+- Results of an action that stay on the page: a failed test, a video offline, a saved setting with a warning.
 - Server messages after a redirect (see flash message).
 
 ### When not to use
@@ -34,7 +34,7 @@ Something happened that needs attention; a distinct shape, a status glyph and a 
 
 ```django
 <div class="orca-stack" style="gap: var(--orca-space-12)">
-  <div class="orca-alert orca-alert--negative" role="alert">{% status_icon "negative" %}<p class="orca-alert__title">Recorder unreachable</p><p class="orca-alert__body">Check that the NVR is on and connected, then test again.</p><div class="orca-alert__actions"><button class="orca-button orca-button--dense" type="button">Test again</button></div><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss" data-orca-dismiss>{% icon "close" %}</button></div>
+  <div class="orca-alert orca-alert--negative" role="alert">{% status_icon "negative" %}<p class="orca-alert__title">Media server unreachable</p><p class="orca-alert__body">Check that the media server is on and connected, then test again.</p><div class="orca-alert__actions"><button class="orca-button orca-button--dense" type="button">Test again</button></div><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss" data-orca-dismiss>{% icon "close" %}</button></div>
   <div class="orca-alert orca-alert--positive" role="status">{% status_icon "positive" %}<p class="orca-alert__title">Connection works</p><p class="orca-alert__body">The stream answered in 120 ms.</p></div>
   <div class="orca-alert orca-alert--caution" role="status">{% status_icon "caution" %}<p class="orca-alert__title">Disk 90% full</p><p class="orca-alert__body">Recordings older than 20 days will be deleted tonight.</p></div>
 </div>
@@ -64,7 +64,7 @@ Persistent information that changes how people act (a limit, a consequence) must
 
 ### When to use
 
-- Explaining a consequence before people act ('Deleting a site deletes its cameras').
+- Explaining a consequence before people act ('Deleting a site deletes its videos').
 - Tips and limits on settings pages.
 
 ### When not to use
@@ -82,9 +82,9 @@ Persistent information that changes how people act (a limit, a consequence) must
 ```django
 <div class="orca-stack" style="gap: var(--orca-space-12)">
   <div class="orca-callout">{% icon "info" %}<p class="orca-callout__title">Counts update every minute</p><p class="orca-callout__body">Older data is grouped by hour after 30 days.</p></div>
-  <div class="orca-callout orca-callout--positive">{% icon "success" %}<p class="orca-callout__title">All cameras are online</p></div>
+  <div class="orca-callout orca-callout--positive">{% icon "success" %}<p class="orca-callout__title">All videos are online</p></div>
   <div class="orca-callout orca-callout--caution">{% icon "warning" %}<p class="orca-callout__title">This changes past reports</p><p class="orca-callout__body">Moving a zone recalculates the last 7 days.</p></div>
-  <div class="orca-callout orca-callout--negative">{% icon "error" %}<p class="orca-callout__title">Deleting a site deletes its cameras</p><p class="orca-callout__body">Their counts are kept in reports.</p></div>
+  <div class="orca-callout orca-callout--negative">{% icon "error" %}<p class="orca-callout__title">Deleting a site deletes its videos</p><p class="orca-callout__body">Their counts are kept in reports.</p></div>
 </div>
 ```
 
@@ -125,7 +125,7 @@ An empty screen is either a beginning or the end of a search; explaining it and 
 
 ```django
 <div class="orca-row" style="align-items: flex-start; gap: var(--orca-space-32)">
-  <div class="orca-empty">{% orca_illustration "empty" %}<h2 class="orca-empty-title">No cameras yet</h2><p class="orca-empty-text">Add a camera to start counting people at an entrance.</p><div class="orca-empty__actions"><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}Add camera</a></div></div>
+  <div class="orca-empty">{% orca_illustration "empty" %}<h2 class="orca-empty-title">No videos yet</h2><p class="orca-empty-text">Add a video to start counting people at an entrance.</p><div class="orca-empty__actions"><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}Add video</a></div></div>
   <div class="orca-empty">{% orca_illustration "search" %}<h2 class="orca-empty-title">No events match “dock”</h2><p class="orca-empty-text">Check the spelling or clear the filters.</p><div class="orca-empty__actions"><button class="orca-button" type="button">Clear filters</button></div></div>
 </div>
 ```
@@ -245,10 +245,10 @@ A short task that must finish before going back is clearest in focus (Von Restor
 #### Example: Rename dialog
 
 ```django
-<button class="orca-button" type="button" data-orca-dialog-open="dl-rename">Rename camera</button>
+<button class="orca-button" type="button" data-orca-dialog-open="dl-rename">Rename video</button>
 <dialog class="orca-dialog" id="dl-rename" aria-labelledby="dl-rename-t">
   <form method="dialog">
-    <div class="orca-dialog__header"><h2 class="orca-dialog-title" id="dl-rename-t">Rename camera</h2><button class="orca-icon-button" type="button" aria-label="Close" data-orca-dialog-close>{% icon "close" %}</button></div>
+    <div class="orca-dialog__header"><h2 class="orca-dialog-title" id="dl-rename-t">Rename video</h2><button class="orca-icon-button" type="button" aria-label="Close" data-orca-dialog-close>{% icon "close" %}</button></div>
     <div class="orca-dialog__body"><div class="orca-field"><label class="orca-label" for="dl-name">Name</label><input class="orca-input" id="dl-name" value="Entrance A"></div></div>
     <div class="orca-dialog__footer"><button class="orca-button orca-button--primary" type="submit" value="save">Save name</button><button class="orca-button" type="submit" value="cancel">Cancel</button></div>
   </form>
@@ -275,7 +275,7 @@ Built from: `dialog-title`, `button`, `checkbox`
 
 ### Why
 
-A deliberate pause before an irreversible action is useful friction (Doherty threshold: friction; Practical UI B13); naming the action on the button ('Delete camera') prevents a reflex 'OK'.
+A deliberate pause before an irreversible action is useful friction (Doherty threshold: friction; Practical UI B13); naming the action on the button ('Delete video') prevents a reflex 'OK'.
 
 ### When to use
 
@@ -288,7 +288,7 @@ A deliberate pause before an irreversible action is useful friction (Doherty thr
 ### How to use
 
 - Markup: a dialog with a question title ('Delete Entrance A?'), one sentence of consequence, a `--danger` button repeating the verb and object, and Cancel (focused first).
-- Shortcut: add `data-orca-confirm="Its zones and alert rules are deleted." data-orca-confirm-title="Delete Entrance A?" data-orca-confirm-action="Delete camera"` to the form or submit button.
+- Shortcut: add `data-orca-confirm="Its zones and alert rules are deleted." data-orca-confirm-title="Delete Entrance A?" data-orca-confirm-action="Delete video"` to the form or submit button.
 - Very serious consequences: add a required acknowledgement checkbox in `.orca-dialog__ack`.
 
 #### Example: Shortcut attribute
@@ -305,7 +305,7 @@ A deliberate pause before an irreversible action is useful friction (Doherty thr
 <button class="orca-button orca-button--outline-danger" type="button" data-orca-dialog-open="cd-site">Delete site</button>
 <dialog class="orca-dialog" id="cd-site" aria-labelledby="cd-site-t"><form method="dialog">
   <div class="orca-dialog__header"><h2 class="orca-dialog-title" id="cd-site-t">Delete North building?</h2></div>
-  <div class="orca-dialog__body"><p class="orca-p">Its 12 cameras, 5 zones and alert rules are deleted. Reports keep their counts.</p>
+  <div class="orca-dialog__body"><p class="orca-p">Its 12 videos, 5 zones and alert rules are deleted. Reports keep their counts.</p>
     <label class="orca-check orca-dialog__ack"><input type="checkbox" required><span class="orca-check__box"></span>I understand this cannot be undone</label></div>
   <div class="orca-dialog__footer"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete site</button><button class="orca-button" type="submit" value="cancel" formnovalidate autofocus>Cancel</button></div>
 </form></dialog>
@@ -333,18 +333,18 @@ For waits longer than a few seconds, saying how much is done and how much remain
 
 ### When to use
 
-- Capture runs, imports, uploads, batch operations.
+- Video exports, imports, uploads, batch operations.
 
 ### How to use
 
 - `<div class="orca-progress-counts">` with `__head` (label and `__value` '64%'), a `<progress class="orca-progress">`, and `__meta` ('77 of 120 shots · about 4 minutes left · 2 failed').
 - Update at most once a second; announce completion with a toast or alert.
 
-#### Example: Capture run
+#### Example: Video export
 
 ```django
 <div class="orca-progress-counts">
-  <div class="orca-progress-counts__head"><span id="pc-l">Morning capture run</span><span class="orca-progress-counts__value">64%</span></div>
+  <div class="orca-progress-counts__head"><span id="pc-l">Morning video export</span><span class="orca-progress-counts__value">64%</span></div>
   <progress class="orca-progress orca-progress--lg" value="77" max="120" aria-labelledby="pc-l">77 of 120</progress>
   <div class="orca-progress-counts__meta"><span>77 of 120 shots</span><span>About 4 minutes left</span><span class="orca-with-icon">{% status_icon "negative" size="xs" %}2 failed</span></div>
 </div>
@@ -372,7 +372,7 @@ Confirming an action within moments, without moving the page, closes the loop (D
 
 ### When to use
 
-- Confirmations of completed, low-risk actions: 'Report sent', 'Camera disabled. Undo'.
+- Confirmations of completed, low-risk actions: 'Report sent', 'Video disabled. Undo'.
 
 ### When not to use
 
@@ -393,7 +393,7 @@ Confirming an action within moments, without moving the page, closes the loop (D
 
 ```django
 <ol class="orca-toast-stack orca-toast-stack--static" aria-label="Notifications">
-  <li class="orca-toast orca-toast--positive">{% icon "success" %}<p class="orca-toast__text">Camera disabled</p><div class="orca-toast__actions"><button class="orca-button orca-button--link" type="button">Undo</button><button class="orca-icon-button" type="button" aria-label="Dismiss" data-orca-dismiss>{% icon "close" %}</button></div></li>
+  <li class="orca-toast orca-toast--positive">{% icon "success" %}<p class="orca-toast__text">Video disabled</p><div class="orca-toast__actions"><button class="orca-button orca-button--link" type="button">Undo</button><button class="orca-icon-button" type="button" aria-label="Dismiss" data-orca-dismiss>{% icon "close" %}</button></div></li>
   <li class="orca-toast orca-toast--info">{% icon "info" %}<p class="orca-toast__text">Report scheduled for 07:00</p><div class="orca-toast__actions"><button class="orca-icon-button" type="button" aria-label="Dismiss" data-orca-dismiss>{% icon "close" %}</button></div></li>
 </ol>
 <button class="orca-button" type="button" data-orca-toast="Report sent" data-orca-toast-tone="positive" style="margin-top: var(--orca-space-16)">Show a toast</button>
@@ -426,14 +426,14 @@ After a redirect, the result of the action must be the first thing seen on the n
 ### How to use
 
 - Put `{% orca_messages %}` at the top of the main content in the base template.
-- In views: `messages.success(request, "Camera saved")`, `messages.error(…)`, `messages.warning(…)`, `messages.info(…)`.
+- In views: `messages.success(request, "Video saved")`, `messages.error(…)`, `messages.warning(…)`, `messages.info(…)`.
 - Errors render with `role="alert"`, others with `role="status"`.
 
 #### Example: Rendered messages
 
 ```django
 <div class="orca-messages">
-  <div class="orca-alert orca-alert--positive" role="status">{% status_icon "positive" %}<p class="orca-alert__body">Camera “Entrance A” saved.</p><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss message" data-orca-dismiss>{% icon "close" %}</button></div>
+  <div class="orca-alert orca-alert--positive" role="status">{% status_icon "positive" %}<p class="orca-alert__body">Video “Entrance A” saved.</p><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss message" data-orca-dismiss>{% icon "close" %}</button></div>
 </div>
 ```
 

@@ -40,7 +40,7 @@ Most form errors come from fields people misread. A fixed order (label, hint, er
 ```django
 <div class="orca-fields" style="max-width: 24rem">
   <div class="orca-field">
-    <label class="orca-label" for="ff-name">Camera name</label>
+    <label class="orca-label" for="ff-name">Video name</label>
     <p class="orca-help" id="ff-name-help">Shown on dashboards and in alert emails.</p>
     <input class="orca-input" id="ff-name" name="name" value="Entrance A" aria-describedby="ff-name-help">
   </div>
@@ -56,7 +56,7 @@ Most form errors come from fields people misread. A fixed order (label, hint, er
 ```django
 <div class="orca-field" style="max-width: 24rem">
   <label class="orca-label" for="ff-port">Port</label>
-  <p class="orca-help" id="ff-port-help">Usually 554 for RTSP.</p>
+  <p class="orca-help" id="ff-port-help">Usually 554 for HTTPS.</p>
   <p class="orca-error" id="ff-port-error">{% icon "error" %}<span>Enter a port between 1 and 65535.</span></p>
   <input class="orca-input orca-input--w8" id="ff-port" name="port" value="70000" inputmode="numeric" aria-invalid="true" aria-describedby="ff-port-error ff-port-help">
 </div>
@@ -94,7 +94,7 @@ A single on/off question is clearest as one tick or switch whose label states th
 ### When to use
 
 - Checkbox: an option saved with the form ('Email me a daily report').
-- Switch: a setting that applies the moment it changes ('Camera enabled').
+- Switch: a setting that applies the moment it changes ('Video enabled').
 
 ### When not to use
 
@@ -112,7 +112,7 @@ A single on/off question is clearest as one tick or switch whose label states th
 ```django
 <div class="orca-fields">
   <div class="orca-field"><label class="orca-check"><input type="checkbox" name="daily" checked><span class="orca-check__box"></span><span class="orca-check__text">Email me a daily report<span class="orca-check__desc">Sent at 07:00 with yesterday's counts.</span></span></label></div>
-  <div class="orca-field"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-describedby="tf-help"><span class="orca-switch__track"></span><span>Camera enabled</span></label><p class="orca-help" id="tf-help">Turning it off stops counting immediately.</p></div>
+  <div class="orca-field"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-describedby="tf-help"><span class="orca-switch__track"></span><span>Video enabled</span></label><p class="orca-help" id="tf-help">Turning it off stops counting immediately.</p></div>
 </div>
 ```
 
@@ -218,7 +218,7 @@ Filtering in place is faster than navigating (Doherty threshold); announcing the
 
 ```django
 <div class="orca-search-field" style="max-width: 20rem">
-  <div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" placeholder=" " aria-label="Filter cameras" data-orca-filter-list="sf-list" data-orca-status="sf-count"><button class="orca-search__clear" type="button" aria-label="Clear filter" data-orca-clear>{% icon "close" %}</button></div>
+  <div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" placeholder=" " aria-label="Filter videos" data-orca-filter-list="sf-list" data-orca-status="sf-count"><button class="orca-search__clear" type="button" aria-label="Clear filter" data-orca-clear>{% icon "close" %}</button></div>
   <p class="orca-search-field__count" id="sf-count" role="status">4 shown</p>
 </div>
 <ul id="sf-list" class="orca-list" style="max-width: 20rem"><li><span class="orca-list-item">Entrance A</span></li><li><span class="orca-list-item">Entrance B</span></li><li><span class="orca-list-item">Loading dock</span></li><li><span class="orca-list-item">Car park</span></li></ul>
@@ -259,7 +259,7 @@ An explicit form with a button works for every input method and lets people sear
 
 ```django
 <form class="orca-search-bar" role="search" method="get" style="max-width: 40rem" onsubmit="return false">
-  <select class="orca-select" name="scope" aria-label="Search in"><option>All</option><option>Cameras</option><option>Events</option></select>
+  <select class="orca-select" name="scope" aria-label="Search in"><option>All</option><option>Videos</option><option>Events</option></select>
   <div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" name="q" placeholder="Search" aria-label="Search" value="entrance"><button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>{% icon "close" %}</button></div>
   <button class="orca-button" type="submit">Search</button>
 </form>
@@ -291,7 +291,7 @@ Grouping everything that changes the table in one row keeps it near what it affe
 
 ### How to use
 
-- `<div class="orca-toolbar" role="toolbar" aria-label="Cameras">`: search field, filter button, `.orca-toolbar__spacer`, then actions.
+- `<div class="orca-toolbar" role="toolbar" aria-label="Videos">`: search field, filter button, `.orca-toolbar__spacer`, then actions.
 - When rows are selected, show `.orca-toolbar__selection` with the count and the bulk actions; hide the normal actions.
 - Use dense controls (`--dense`) on desktop; they grow to 44px on touch.
 
@@ -299,12 +299,12 @@ Grouping everything that changes the table in one row keeps it near what it affe
 
 ```django
 <div class="orca-stack" style="gap: var(--orca-space-8)">
-  <div class="orca-toolbar" role="toolbar" aria-label="Cameras">
-    <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter cameras" aria-label="Filter cameras"></div>
+  <div class="orca-toolbar" role="toolbar" aria-label="Videos">
+    <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter videos" aria-label="Filter videos"></div>
     <button class="orca-button orca-button--dense" type="button" aria-expanded="false">{% icon "filter" %}Filters<span class="orca-count orca-count--accent">2</span></button>
     <span class="orca-toolbar__spacer"></span>
     <button class="orca-button orca-button--dense" type="button">{% icon "upload" %}Export</button>
-    <a class="orca-button orca-button--primary orca-button--dense" href="#">{% icon "plus" %}Add camera</a>
+    <a class="orca-button orca-button--primary orca-button--dense" href="#">{% icon "plus" %}Add video</a>
   </div>
   <div class="orca-toolbar__selection" role="region" aria-label="Selection"><strong>3 selected</strong><button class="orca-button orca-button--dense" type="button">Disable</button><button class="orca-button orca-button--dense" type="button">Move to site</button><button class="orca-button orca-button--link" type="button">Clear selection</button></div>
 </div>
@@ -334,7 +334,7 @@ Picking several items from a long list needs search and visible choices (Practic
 
 ### When to use
 
-- Choosing several known items from 10 to a few hundred: cameras, sites, people.
+- Choosing several known items from 10 to a few hundred: videos, sites, people.
 
 ### When not to use
 
@@ -344,17 +344,17 @@ Picking several items from a long list needs search and visible choices (Practic
 
 - `<details class="orca-multipicker">` with `<summary class="orca-picker-btn">` (value text + chevron) and a panel `.orca-popover.orca-multipicker__panel`.
 - Inside the panel: a filter input with `data-orca-filter-list`, a `.orca-multipicker__list` of checkboxes, and `.orca-multipicker__foot` with Clear and Done.
-- Below: `.orca-multipicker__tags` with removable tags for the chosen values. Summary text: '3 cameras' rather than a long list.
+- Below: `.orca-multipicker__tags` with removable tags for the chosen values. Summary text: '3 videos' rather than a long list.
 
 #### Example: Multi-picker
 
 ```django
 <div style="max-width: 20rem">
-  <p class="orca-label" id="mp-label">Cameras</p>
+  <p class="orca-label" id="mp-label">Videos</p>
   <details class="orca-multipicker" open>
-    <summary class="orca-picker-btn" aria-labelledby="mp-label mp-value"><span class="orca-picker-btn__value" id="mp-value">2 cameras</span>{% icon "chevron-down" %}</summary>
+    <summary class="orca-picker-btn" aria-labelledby="mp-label mp-value"><span class="orca-picker-btn__value" id="mp-value">2 videos</span>{% icon "chevron-down" %}</summary>
     <div class="orca-popover orca-multipicker__panel" style="position: static; box-shadow: var(--orca-shadow-elevated)">
-      <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter" aria-label="Filter cameras" data-orca-filter-list="mp-list"></div>
+      <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter" aria-label="Filter videos" data-orca-filter-list="mp-list"></div>
       <ul class="orca-multipicker__list" id="mp-list">
         <li><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Entrance A</label></li>
         <li><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Entrance B</label></li>
@@ -443,7 +443,7 @@ Showing the unit and the action next to the value removes guessing and travel (P
 ```django
 <div class="orca-fields" style="max-width: 28rem">
   <div class="orca-field"><label class="orca-label" for="ig-a">Retention</label><div class="orca-input-group" style="max-width: 12rem"><input class="orca-input" id="ig-a" type="number" value="30" aria-describedby="ig-a-u"><span class="orca-addon" id="ig-a-u">days</span></div></div>
-  <div class="orca-field"><label class="orca-label" for="ig-b">Stream address</label><div class="orca-input-group"><span class="orca-addon">rtsp://</span><input class="orca-input" id="ig-b" value="192.168.1.40/stream1"><button class="orca-button" type="button">Test</button></div></div>
+  <div class="orca-field"><label class="orca-label" for="ig-b">Video address</label><div class="orca-input-group"><span class="orca-addon">https://</span><input class="orca-input" id="ig-b" value="media.example.com/v/4821"><button class="orca-button" type="button">Test</button></div></div>
 </div>
 ```
 
@@ -536,7 +536,7 @@ When options need a second line (a plan's limits, a role's permissions) a native
   <input type="hidden" name="role" value="viewer">
   <ul class="orca-popover" id="dd-list" role="listbox" aria-labelledby="dd-label" hidden>
     <li class="orca-option" role="option" tabindex="-1" data-value="viewer" data-label="Viewer" aria-selected="true"><span class="orca-option__text">Viewer<span class="orca-option__desc">Sees dashboards and reports.</span></span></li>
-    <li class="orca-option" role="option" tabindex="-1" data-value="operator" data-label="Operator" aria-selected="false"><span class="orca-option__text">Operator<span class="orca-option__desc">Also manages cameras and runs.</span></span></li>
+    <li class="orca-option" role="option" tabindex="-1" data-value="operator" data-label="Operator" aria-selected="false"><span class="orca-option__text">Operator<span class="orca-option__desc">Also manages videos and runs.</span></span></li>
     <li class="orca-option" role="option" tabindex="-1" data-value="admin" data-label="Administrator" aria-selected="false"><span class="orca-option__text">Administrator<span class="orca-option__desc">Also manages users and settings.</span></span></li>
   </ul>
 </div>
@@ -564,7 +564,7 @@ When people know the name of what they want, typing a few letters beats scrollin
 
 ### When to use
 
-- Choosing one item from a long known list: a country, a camera, a person, a product.
+- Choosing one item from a long known list: a country, a video, a person, a product.
 
 ### When not to use
 
@@ -881,11 +881,11 @@ Placing the submit action right after the last field shortens travel (Fitts's la
 
 ```django
 <div class="orca-form-actions">
-  <button class="orca-button orca-button--primary" type="submit">Save camera</button>
+  <button class="orca-button orca-button--primary" type="submit">Save video</button>
   <a class="orca-button" href="#">Cancel</a>
-  <span class="orca-form-actions__end"><button class="orca-button orca-button--outline-danger" type="button" data-orca-dialog-open="fa-confirm">Delete camera</button></span>
+  <span class="orca-form-actions__end"><button class="orca-button orca-button--outline-danger" type="button" data-orca-dialog-open="fa-confirm">Delete video</button></span>
 </div>
-<dialog class="orca-dialog" id="fa-confirm" aria-labelledby="fa-confirm-t"><form method="dialog"><div class="orca-dialog__header"><h2 class="orca-dialog-title" id="fa-confirm-t">Delete Entrance A?</h2></div><div class="orca-dialog__body"><p class="orca-p">Its counts are kept. Its zones and alert rules are deleted.</p></div><div class="orca-dialog__footer"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete camera</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div></form></dialog>
+<dialog class="orca-dialog" id="fa-confirm" aria-labelledby="fa-confirm-t"><form method="dialog"><div class="orca-dialog__header"><h2 class="orca-dialog-title" id="fa-confirm-t">Delete Entrance A?</h2></div><div class="orca-dialog__body"><p class="orca-p">Its counts are kept. Its zones and alert rules are deleted.</p></div><div class="orca-dialog__footer"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete video</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div></form></dialog>
 ```
 
 **Classes:** `.orca-form-actions`, `.orca-form-actions__end`, `.orca-form-actions--sticky`

@@ -2,7 +2,7 @@
 
 Every pattern example on the documentation site renders with ``sample`` in its context, so an example shows
 both the markup and how to pass data to the template tags. The data describes a people-counting product:
-sites, entrances, cameras, events, staff and plans, in the week of 2 November 2026 ("today" is Friday 6 November).
+sites, entrances, videos, events, staff and plans, in the week of 2 November 2026 ("today" is Friday 6 November).
 """
 
 TODAY = "2026-11-06"
@@ -13,7 +13,7 @@ EVENTS = [
     {"title": "Inventory day", "start": "2026-11-02", "all_day": True, "color": 7},
     {"title": "Delivery window", "start": "2026-11-02T09:00", "end": "2026-11-02T10:30", "color": 1, "location": "Loading dock"},
     {"title": "Weekly review", "start": "2026-11-03T14:00", "end": "2026-11-03T15:00", "color": 3, "location": "Room 2"},
-    {"title": "Camera install, Gate 1", "start": "2026-11-04T08:00", "end": "2026-11-04T12:00", "color": 2, "location": "Warehouse"},
+    {"title": "Video upload, Gate 1", "start": "2026-11-04T08:00", "end": "2026-11-04T12:00", "color": 2, "location": "Warehouse"},
     {"title": "Delivery window", "start": "2026-11-05T09:00", "end": "2026-11-05T10:30", "color": 1, "location": "Loading dock"},
     {"title": "Audit", "start": "2026-11-06T10:00", "end": "2026-11-06T11:30", "color": 2, "location": "North building", "status": "tentative"},
     {"title": "Supplier call", "start": "2026-11-06T10:30", "end": "2026-11-06T11:00", "color": 3},
@@ -41,7 +41,7 @@ SITE_SCORES = {"labels": ["Accuracy", "Uptime", "Coverage", "Freshness", "Calibr
                "series": [{"name": "North building", "values": [96, 99, 84, 92, 88]}, {"name": "Warehouse", "values": [88, 94, 70, 97, 76]}]}
 ALERTS_BY_TYPE = {"labels": ["Offline", "Over capacity", "Low accuracy", "Disk", "Tamper"], "series": [{"name": "Alerts", "values": [12, 7, 5, 3, 1]}]}
 
-CAMERAS = [
+VIDEOS = [
     {"name": "Entrance A", "site": "North building", "status": "positive", "status_text": "Online", "today": 4812, "accuracy": 97.8, "last": "2 min ago"},
     {"name": "Entrance B", "site": "North building", "status": "positive", "status_text": "Online", "today": 1980, "accuracy": 95.1, "last": "5 min ago"},
     {"name": "Gate 1", "site": "Warehouse", "status": "caution", "status_text": "Degraded", "today": 2140, "accuracy": 91.4, "last": "1 min ago"},
@@ -56,20 +56,20 @@ PEOPLE = [
 ]
 
 TASKS = [
-    {"title": "Recalibrate Entrance A camera", "assignee": "AL", "due": "Tomorrow", "due_state": "soon", "priority": "high", "status": "progress"},
+    {"title": "Trim Entrance A video", "assignee": "AL", "due": "Tomorrow", "due_state": "soon", "priority": "high", "status": "progress"},
     {"title": "Draw zones for Gate 1", "assignee": "GH", "due": "Fri 13 Nov", "due_state": "", "priority": "medium", "status": "planned"},
-    {"title": "Replace Loading dock camera", "assignee": "AT", "due": "Overdue, 4 Nov", "due_state": "overdue", "priority": "urgent", "status": "blocked"},
+    {"title": "Replace Loading dock video", "assignee": "AT", "due": "Overdue, 4 Nov", "due_state": "overdue", "priority": "urgent", "status": "blocked"},
     {"title": "Mount Gate 1 bracket", "assignee": "AT", "due": "2 Nov", "due_state": "", "priority": "low", "status": "done"},
 ]
 
 EMAIL_PARAGRAPHS = [
-    "The Loading dock camera at Warehouse has sent no video since 08:14 today, so visitors there are not being counted.",
-    "Check that the camera has power and a network connection. Counting restarts on its own when the stream is back.",
+    "The Loading dock video at Warehouse has sent no video since 08:14 today, so visitors there are not being counted.",
+    "Check your network connection. Playback restarts on its own when the stream is back.",
 ]
 
 SAMPLE = {
     "today": TODAY, "now": NOW, "events": EVENTS, "holidays": HOLIDAYS, "visitors_week": VISITORS_WEEK,
     "visitors_hours": VISITORS_HOURS, "by_entrance": BY_ENTRANCE, "dwell_vs_visits": DWELL_VS_VISITS,
     "sites_bubble": SITES_BUBBLE, "site_scores": SITE_SCORES, "alerts_by_type": ALERTS_BY_TYPE,
-    "cameras": CAMERAS, "people": PEOPLE, "tasks": TASKS, "email_paragraphs": EMAIL_PARAGRAPHS,
+    "videos": VIDEOS, "people": PEOPLE, "tasks": TASKS, "email_paragraphs": EMAIL_PARAGRAPHS,
 }

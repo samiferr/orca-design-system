@@ -28,7 +28,7 @@ Image, name and price grouped by proximity let people compare products at a glan
 ```django
 <article class="orca-product" style="max-width: 14rem">
   <div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>
-  <h3 class="orca-product__name"><a href="#">Dome camera, 4 MP, outdoor</a></h3>
+  <h3 class="orca-product__name"><a href="#">Dome video, 4 MP, outdoor</a></h3>
   <p class="orca-product__price" style="margin: 0">€189<s><span class="orca-sr-only">was </span>€229</s></p>
   <button class="orca-button orca-button--dense" type="button">Add to quote</button>
 </article>
@@ -145,9 +145,9 @@ The first screen must state what the product does and offer one clear next step 
 
 ```django
 <section class="orca-hero">
-  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Count visitors with the cameras you already have.</p>
+  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Publish the videos you already have.</p>
     <div class="orca-row"><a class="orca-button orca-button--brand" href="#">Start free trial</a><a class="orca-button" href="#">See a demo</a></div></div>
-  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from a ceiling camera"></div>
+  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from above"></div>
 </section>
 ```
 
@@ -198,44 +198,44 @@ A familiar row of icon actions under media (Jakob's law) with counts and pressed
 
 ---
 
-## Camera card
+## Video card
 
-`id: camera-card` · level: component · source: Tangerine
+`id: video-card` · level: component · source: Tangerine
 
-A camera's latest snapshot with its status, name, place and actions.
+A video's latest snapshot with its status, name, place and actions.
 
 Built from: `linked-card`, `snapshot-image`, `status-light`, `pin-button`
 
 ### Why
 
-Operators recognise a camera by its view first (Miller's law); a status flag on the image and a status word below make offline cameras impossible to miss (Von Restorff, C03).
+Operators recognise a video by its view first (Miller's law); a status flag on the image and a status word below make offline videos impossible to miss (Von Restorff, C03).
 
 ### When to use
 
-- Camera grids on dashboards and camera lists.
+- Video grids on dashboards and video lists.
 
 ### How to use
 
-- A linked card with `.orca-camera-card`: `.orca-ratio--16x9` snapshot (or a removed frame when offline), a badge in `.orca-camera-card__flag`, body with title link and status light, footer with pin and more actions.
+- A linked card with `.orca-video-card`: `.orca-ratio--16x9` snapshot (or a removed frame when offline), a badge in `.orca-video-card__flag`, body with title link and status light, footer with pin and more actions.
 - Show the snapshot time; a stale image is labelled as such.
 
-#### Example: Camera cards
+#### Example: Video cards
 
 ```django
 <ul class="orca-card-grid">
-  <li><article class="orca-card orca-card--link orca-camera-card"><div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""><span class="orca-frame__caption"><span>Snapshot</span><time datetime="2026-11-06T09:14">09:14</time></span></div>
+  <li><article class="orca-card orca-card--link orca-video-card"><div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""><span class="orca-frame__caption"><span>Snapshot</span><time datetime="2026-11-06T09:14">09:14</time></span></div>
     <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">Entrance A</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online · North building</span></div>
     <div class="orca-card__footer"><span class="orca-small orca-muted orca-num">1,204 today</span><span class="orca-card__footer-end"><button class="orca-icon-button orca-icon-button--sm orca-pin" type="button" aria-pressed="true" aria-label="Unpin Entrance A" data-orca-toggle data-orca-label-on="Unpin Entrance A" data-orca-label-off="Pin Entrance A">{% icon "pin" %}</button></span></div></article></li>
-  <li><article class="orca-card orca-card--link orca-camera-card"><div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since 08:14</div><span class="orca-badge orca-badge--negative orca-camera-card__flag">Offline</span>
+  <li><article class="orca-card orca-card--link orca-video-card"><div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since 08:14</div><span class="orca-badge orca-badge--negative orca-video-card__flag">Offline</span>
     <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">Loading dock</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--negative"></span>Offline since 08:14</span></div>
     <div class="orca-card__footer"><span class="orca-small orca-muted">Last count 08:14</span><span class="orca-card__footer-end"><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Loading dock">{% icon "more" %}</button></span></div></article></li>
 </ul>
 ```
 
-**Classes:** `.orca-camera-card`, `.orca-camera-card__flag`
+**Classes:** `.orca-video-card`, `.orca-video-card__flag`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Practical UI C03: Communicate meaning beyond colour
 
-**ORCA guide items covered:** Camera card
+**ORCA guide items covered:** Video card
 
 ---

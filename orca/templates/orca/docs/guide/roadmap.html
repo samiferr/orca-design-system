@@ -1,26 +1,19 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
-{% block lead %}<p class="orca-page-subtitle">ORCA follows Atomic Design with its own names. Each level is built from the one before it, and each release completes one level.</p>{% endblock %}
+{% block lead %}<p class="orca-page-subtitle">ORCA has five levels. Each level is a group of the level before it, and only of that level. Each release completes one level.</p>{% endblock %}
 {% block article %}
 <section class="docs-block-flow">
   <h2 class="orca-section-title">The five levels</h2>
   <ol class="docs-levels">
-    <li class="docs-level docs-level--done">
-      <span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Primitives <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span></p>
-      <p class="orca-small orca-muted">Atoms. The smallest working pieces and the base styles: buttons, inputs, icons, text styles, marks, tokens.</p></div>
+    {% for item in level_defs %}{% with lv=item.level %}
+    <li class="docs-level{% if item.released %} docs-level--done{% elif item.next %} docs-level--current{% endif %}">
+      <span class="orca-step-marker{% if item.released %} orca-step-marker--done{% elif item.next %} orca-step-marker--current{% endif %}" aria-hidden="true"></span>
+      <div><p class="orca-panel-title">{{ lv.title }}{% if item.released %} <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span>{% elif item.next %} <span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Next</span>{% endif %}</p>
+      <p class="orca-small">{{ lv.definition }}</p>
+      <p class="orca-small orca-muted">For example: {{ lv.examples }}</p></div>
     </li>
-    <li class="docs-level docs-level--done">
-      <span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Components <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span></p>
-      <p class="orca-small orca-muted">Molecules. Small groups with one job: form fields, search bar, date picker, pagination, stat card, toast, calendar parts.</p></div>
-    </li>
-    <li class="docs-level docs-level--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Patterns <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span></p><p class="orca-small orca-muted">Organisms. Recognisable sections: header, sidebar, data table, filter bar, charts, schedule editor, month calendar, kanban board.</p></div></li>
-    <li class="docs-level docs-level--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Templates <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span></p><p class="orca-small orca-muted">Django templates you extend: app shell, auth, error and email layouts, generic CRUD and parent-child templates, dashboard, calendar, scheduler, board and timeline pages, structural layouts and slots.</p></div></li>
-    <li class="docs-level docs-level--current"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">Pages <span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Next</span></p><p class="orca-small orca-muted">Templates filled with real content, including the variations that test them: empty, overdue, right-to-left, dark.</p></div></li>
+    {% endwith %}{% endfor %}
   </ol>
+  <p class="orca-p">Each component, pattern and template lists what it is built from. A part is listed once: when a listed element already contains it, it is not listed again.</p>
 </section>
 
 <section class="docs-block-flow">

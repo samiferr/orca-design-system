@@ -14,13 +14,13 @@ add(Component(
     when=["Products with 2 to about 6 top-level sections, in the top bar."],
     avoid=["More sections: use the sidebar."],
     how=["`<nav aria-label=\"Main\"><ul class=\"orca-topnav\">` with links; the current section's link gets `aria-current=\"page\"` (or `\"true\"` for a section).",
-         "Labels are nouns people use: 'Cameras', 'Reports'. Icons optional, never alone.",
+         "Labels are nouns people use: 'Videos', 'Reports'. Icons optional, never alone.",
          "Below 1036px move the links into the sidebar drawer (pattern level)."],
     classes=[".orca-topnav"],
     laws=["jakob", "C03", "hick"],
     uses=["text-link"],
     examples=[("Top-bar links", """<nav aria-label="Main"><ul class="orca-topnav" style="min-height: var(--orca-nav-height)">
-  <li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Cameras</a></li><li><a href="#">Reports</a></li><li><a href="#">Alerts</a></li>
+  <li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Videos</a></li><li><a href="#">Reports</a></li><li><a href="#">Alerts</a></li>
 </ul></nav>""")],
     guide=["Primary navigation"],
 ))
@@ -49,7 +49,7 @@ add(Component(
     "One destination in the side navigation: icon, label and an optional count.",
     why="A consistent row (icon, label, count) is scanned quickly and its full width is the target (Fitts's law); the current page gets a fill and a 3px bar.",
     when=["Every item of the sidebar."],
-    how=["`<a class=\"orca-side-link\" href=…>{% templatetag openblock %} icon … {% templatetag closeblock %}<span class=\"orca-side-link__label\">Cameras</span><span class=\"orca-count orca-count--neutral\">12</span></a>` inside `<ul class=\"orca-side-nav\">`.",
+    how=["`<a class=\"orca-side-link\" href=…>{% templatetag openblock %} icon … {% templatetag closeblock %}<span class=\"orca-side-link__label\">Videos</span><span class=\"orca-count orca-count--neutral\">12</span></a>` inside `<ul class=\"orca-side-nav\">`.",
          "`aria-current=\"page\"` on the current link; `--l2` for a nested link.",
          "Labels never wrap; a long one is cut with an ellipsis and has a `title`."],
     classes=[".orca-side-nav", ".orca-side-link", ".orca-side-link__label", ".orca-side-link--l2"],
@@ -57,8 +57,8 @@ add(Component(
     uses=["icon", "count-badge"],
     examples=[("Side links", """<nav aria-label="Sections" style="max-width: 15rem; background: var(--orca-bg-alt)"><ul class="orca-side-nav">
   <li><a class="orca-side-link" href="#">{% icon "home" %}<span class="orca-side-link__label">Dashboard</span></a></li>
-  <li><a class="orca-side-link" href="#" aria-current="page">{% icon "snapshot" %}<span class="orca-side-link__label">Cameras</span><span class="orca-count orca-count--neutral">12</span></a></li>
-  <li><a class="orca-side-link orca-side-link--l2" href="#"><span class="orca-side-link__label">Recorders</span></a></li>
+  <li><a class="orca-side-link" href="#" aria-current="page">{% icon "snapshot" %}<span class="orca-side-link__label">Videos</span><span class="orca-count orca-count--neutral">12</span></a></li>
+  <li><a class="orca-side-link orca-side-link--l2" href="#"><span class="orca-side-link__label">Media servers</span></a></li>
   <li><a class="orca-side-link" href="#">{% icon "notifications" %}<span class="orca-side-link__label">Alerts</span><span class="orca-count">3</span></a></li>
 </ul></nav>""")],
     guide=["Sidebar link"], source="Tangerine",
@@ -68,7 +68,7 @@ add(Component(
     "breadcrumbs", "Breadcrumbs", C,
     "The path from the top of the hierarchy to the current page.",
     why="Breadcrumbs show where a page sits and offer one-click routes upward (Jakob's law); the list structure is announced as 'list, 3 items'.",
-    when=["Pages two or more levels deep in a hierarchy (Site › Building › Camera)."],
+    when=["Pages two or more levels deep in a hierarchy (Site › Building › Video)."],
     avoid=["Flat products, or as a substitute for a back link on a linear flow."],
     how=["`<nav class=\"orca-breadcrumbs\" aria-label=\"Breadcrumb\"><ol>` with links, the last item a `<span aria-current=\"page\">`.",
          "Separators come from CSS and mirror in right-to-left languages.",
@@ -88,7 +88,7 @@ add(Component(
     why="Numbered pages tell people how much there is and let them jump (Miller's law); gaps keep the control short (Hick's law); big targets avoid mis-taps (Fitts's law).",
     when=["Lists and tables with more than one page of results."],
     avoid=["Feeds people read continuously: use 'Load more'."],
-    how=["Django: `{% orca_pagination page_obj noun=\"cameras\" %}` keeps the other query parameters (filters, sort).",
+    how=["Django: `{% orca_pagination page_obj noun=\"videos\" %}` keeps the other query parameters (filters, sort).",
          "Markup: `<nav class=\"orca-pagination\" aria-label=\"Pages\"><ul>` of `.orca-page-link` links; current with `aria-current=\"page\"`; disabled ends with `aria-disabled=\"true\"`; gaps are `.orca-page-gap`.",
          "Each link is a page-link: number links carry `aria-label=\"Page 7\"`."],
     classes=[".orca-pagination", ".orca-page-link"],
@@ -107,15 +107,15 @@ add(Component(
 
 add(Component(
     "pagination-summary", "Pagination summary", C,
-    "'Showing 121–140 of 312 cameras': what part of the list is on screen.",
+    "'Showing 121–140 of 312 videos': what part of the list is on screen.",
     why="A count anchors people in a long list and confirms filters worked (Miller's law, Peak–end rule).",
     when=["Under or above any paginated list, and alone when there is a single page."],
-    how=["`<p class=\"orca-pagination-summary\">Showing 121–140 of 312 cameras</p>`, with an en dash and grouping separators.",
-         "Zero results: 'No cameras match these filters' and an empty state below."],
+    how=["`<p class=\"orca-pagination-summary\">Showing 121–140 of 312 videos</p>`, with an en dash and grouping separators.",
+         "Zero results: 'No videos match these filters' and an empty state below."],
     classes=[".orca-pagination-summary"],
     laws=["miller", "W11"],
     uses=["tabular-number"],
-    examples=[("Summary", """<p class="orca-pagination-summary">Showing 121–140 of 312 cameras</p>""")],
+    examples=[("Summary", """<p class="orca-pagination-summary">Showing 121–140 of 312 videos</p>""")],
     guide=["Pagination summary"],
 ))
 
@@ -150,7 +150,7 @@ add(Component(
     laws=["miller", "jakob"],
     uses=["focus-ring", "count-badge", "text-link"],
     examples=[("In-page tabs", """<div class="orca-tabs">
-  <div class="orca-tabs__list" role="tablist" aria-label="Camera" data-orca-tabs>
+  <div class="orca-tabs__list" role="tablist" aria-label="Video" data-orca-tabs>
     <button class="orca-tab" role="tab" type="button" id="tb-1" aria-controls="tp-1" aria-selected="true">Overview</button>
     <button class="orca-tab" role="tab" type="button" id="tb-2" aria-controls="tp-2" aria-selected="false">Zones</button>
     <button class="orca-tab" role="tab" type="button" id="tb-3" aria-controls="tp-3" aria-selected="false">Recordings</button>
@@ -167,8 +167,8 @@ add(Component(
     "child-tabs", "Child tabs (with counts)", C,
     "Page tabs on a parent record, one per kind of child, each showing how many there are.",
     why="Counts tell people where the content is before they click (Practical UI S06) and turn empty tabs into information instead of a surprise.",
-    when=["A parent record's detail page with lists of children (a site's cameras, zones, users)."],
-    how=["`<nav class=\"orca-tabs__list\" aria-label=…>` of `<a class=\"orca-tab\">Cameras <span class=\"orca-count orca-count--neutral\">12</span></a>`; current tab `aria-current=\"page\"`.",
+    when=["A parent record's detail page with lists of children (a site's videos, zones, users)."],
+    how=["`<nav class=\"orca-tabs__list\" aria-label=…>` of `<a class=\"orca-tab\">Videos <span class=\"orca-count orca-count--neutral\">12</span></a>`; current tab `aria-current=\"page\"`.",
          "Keep the parent summary above the tabs so context stays visible."],
     classes=[".orca-tabs__list", ".orca-tab"],
     laws=["S06", "miller"],
@@ -176,7 +176,7 @@ add(Component(
     related=["tab-bar"],
     examples=[("Child tabs", """<nav class="orca-tabs__list" aria-label="North building">
   <a class="orca-tab" href="#">Overview</a>
-  <a class="orca-tab" href="#" aria-current="page">Cameras <span class="orca-count orca-count--neutral">12</span></a>
+  <a class="orca-tab" href="#" aria-current="page">Videos <span class="orca-count orca-count--neutral">12</span></a>
   <a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a>
   <a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">0</span></a>
 </nav>""")],
@@ -196,7 +196,7 @@ add(Component(
     laws=["fitts", "jakob", "hick"],
     uses=["icon", "count-badge"],
     examples=[("Bottom bar (shown in place)", """<nav class="orca-bottom-nav orca-bottom-nav--static" aria-label="Main" style="max-width: 24rem">
-  <a href="#" aria-current="page">{% icon "home" %}Home</a><a href="#">{% icon "snapshot" %}Cameras</a><a href="#">{% icon "notifications" %}Alerts<span class="orca-count" aria-label="3 new">3</span></a><a href="#">{% icon "user" %}Profile</a>
+  <a href="#" aria-current="page">{% icon "home" %}Home</a><a href="#">{% icon "snapshot" %}Videos</a><a href="#">{% icon "notifications" %}Alerts<span class="orca-count" aria-label="3 new">3</span></a><a href="#">{% icon "user" %}Profile</a>
 </nav>""")],
     guide=["Bottom navigation bar"],
 ))
@@ -216,7 +216,7 @@ add(Component(
   <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Organisation<span class="orca-count orca-count--neutral">3</span></summary>
     <ul><li><a href="#">Profile</a></li><li><a href="#" aria-current="page">Users</a></li><li><a href="#">Billing</a></li></ul></details></li>
   <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Devices<span class="orca-count orca-count--neutral">2</span></summary>
-    <ul><li><a href="#">Cameras</a></li><li><a href="#">Recorders</a></li></ul></details></li>
+    <ul><li><a href="#">Videos</a></li><li><a href="#">Media servers</a></li></ul></details></li>
 </ul></nav>""")],
     guide=["Nav tree (collapsible sections)", "Tree leaf"],
 ))
@@ -226,12 +226,12 @@ add(Component(
     "A link to the previous level, above the page title.",
     why="A visible way back near the top keeps people oriented, especially on phones where breadcrumbs do not fit (Jakob's law, Practical UI B09).",
     when=["Detail and form pages reached from a list; steps of a flow."],
-    how=["`<a class=\"orca-back-link\" href=…>{% templatetag openblock %} icon \"chevron-left\" {% templatetag closeblock %}Back to cameras</a>` above the title.",
-         "Name the destination ('Back to cameras'), never just 'Back'. Link to the real parent, not `history.back()`, so it works from a shared link."],
+    how=["`<a class=\"orca-back-link\" href=…>{% templatetag openblock %} icon \"chevron-left\" {% templatetag closeblock %}Back to videos</a>` above the title.",
+         "Name the destination ('Back to videos'), never just 'Back'. Link to the real parent, not `history.back()`, so it works from a shared link."],
     classes=[".orca-back-link"],
     laws=["jakob", "B09", "W14"],
     uses=["text-link", "icon"],
-    examples=[("Back link", """<a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to cameras</a>""")],
+    examples=[("Back link", """<a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to videos</a>""")],
     guide=["Back link"],
 ))
 
@@ -277,12 +277,12 @@ add(Component(
     "create-button", "Create button (floating on phones)", C,
     "The page's create action: a primary button in the page head that becomes a floating button on phones.",
     why="On desktop the create action belongs beside the title; on phones it must stay in thumb reach while scrolling (Fitts's law). One element serves both so the action is never duplicated.",
-    when=["List pages with one create action (Add camera, New report)."],
-    how=["`<a class=\"orca-button orca-button--primary orca-create\" href=…>{% templatetag openblock %} icon \"plus\" {% templatetag closeblock %}Add camera</a>` in the page head.",
+    when=["List pages with one create action (Add video, New report)."],
+    how=["`<a class=\"orca-button orca-button--primary orca-create\" href=…>{% templatetag openblock %} icon \"plus\" {% templatetag closeblock %}Add video</a>` in the page head.",
          "Below 620px it floats at the bottom right (respecting safe areas); add 5rem of bottom padding to the page so it never covers the last row."],
     classes=[".orca-create"],
     laws=["fitts", "restorff", "B03"],
     uses=["button", "fab"],
-    examples=[("Create button", """<a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add camera</a>""")],
+    examples=[("Create button", """<a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add video</a>""")],
     guide=["Create button (floating on phones)"],
 ))

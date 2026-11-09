@@ -10,7 +10,7 @@ add(Element(
     "A content image (the primary image of a record), plain or bordered.",
     why="Images are recognised faster than text but must not jump the layout when they load (Doherty threshold: perceived "
         "performance) and must be described for people who cannot see them (Postel's law).",
-    when=["The primary image of a record (product, floor plan, camera view)."],
+    when=["The primary image of a record (product, floor plan, cover image)."],
     how=["`<img class=\"orca-img\" src=… alt=… width=… height=… loading=\"lazy\">`. Always set width and height or put it in an `orca-ratio` frame.",
          "`.orca-img--bordered` when the image's edge could merge with the page (white photos, screenshots).",
          "`alt` describes what matters in the image for the task; decorative images get `alt=\"\"`."],
@@ -55,30 +55,30 @@ add(Element(
     "media-frame", "Aspect-ratio frame", C,
     "A box with a fixed aspect ratio that holds an image, video, map or chart and reserves its space.",
     why="Reserved space prevents layout shift while media loads, so nothing moves under the pointer (Doherty threshold, Fitts's law).",
-    when=["Any media whose dimensions are not known in the HTML; grids of snapshots or cards with images."],
+    when=["Any media whose dimensions are not known in the HTML; image galleries and cards with images or video stills."],
     how=["`<div class=\"orca-ratio orca-ratio--16x9\"><img src=… alt=…></div>`. Ratios: 1x1, 4x3, 3x2, 16x9, 21x9, 3x4, or `style=\"--orca-ratio: 5 / 4\"`.",
          "Media fills and crops by default; `.orca-ratio--contain` letterboxes instead (floor plans, documents)."],
     classes=[".orca-ratio", ".orca-ratio--16x9", ".orca-ratio--contain"], tokens=["bg-alt"],
     laws=["doherty", "fitts"],
-    examples=[("4:3 frame", """<div class="orca-ratio orca-ratio--4x3" style="max-width: 16rem"><img src="{% static "orca/img/sample-street.svg" %}" alt="Street outside entrance A"></div>""")],
+    examples=[("4:3 frame", """<div class="orca-ratio orca-ratio--4x3" style="max-width: 16rem"><img src="{% static "orca/img/sample-street.svg" %}" alt="City street at night"></div>""")],
     guide=["Aspect-ratio frame"],
     related=["aspect-ratio", "snapshot-image"],
 ))
 
 add(Element(
     "snapshot-image", "Snapshot image", C,
-    "A camera snapshot in a 16:9 frame with its camera and capture time on a solid caption bar.",
-    why="A snapshot is evidence; its source and time must always be visible and readable over any picture (Practical UI T12: solid backing).",
-    when=["Alert details, capture runs, camera cards."],
-    how=["`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\"><span>Entrance A</span><time datetime=…>08:14:03</time></figcaption></figure>`.",
+    "A still image taken from a video, in a 16:9 frame with its source and capture time on a solid caption bar.",
+    why="A snapshot is a record of a moment; where it comes from and when it was taken must always be visible and readable over any picture (Practical UI T12: solid backing).",
+    when=["Video stills, thumbnails of video moments, image galleries that show when each image was taken."],
+    how=["`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\"><span>Harbour timelapse</span><time datetime=…>08:14:03</time></figcaption></figure>`.",
          "Removed or expired image: replace the img with `<div class=\"orca-ratio orca-ratio--16x9 orca-frame--removed\">Image removed after 30 days</div>`."],
     a11y=["Alt text says what was captured and when; the caption repeats it visibly."],
     classes=[".orca-frame__caption", ".orca-frame--removed"],
     laws=["T12", "postel"],
     examples=[("Snapshot and removed snapshot", """<div class="orca-row orca-row--16" style="align-items: flex-start">
   <figure class="orca-ratio orca-ratio--16x9" style="max-width: 18rem; margin: 0">
-    <img src="{% static "orca/img/sample-street.svg" %}" alt="Entrance A at 08:14, two people at the door">
-    <figcaption class="orca-frame__caption"><span>Entrance A</span><time datetime="2026-11-06T08:14:03">08:14:03</time></figcaption>
+    <img src="{% static "orca/img/sample-street.svg" %}" alt="Still from the harbour timelapse at 08:14: boats leaving the quay">
+    <figcaption class="orca-frame__caption"><span>Harbour timelapse</span><time datetime="2026-11-06T08:14:03">08:14:03</time></figcaption>
   </figure>
   <div class="orca-ratio orca-ratio--16x9 orca-frame--removed" style="max-width: 18rem">Image removed after 30 days</div>
 </div>""")],
@@ -96,7 +96,7 @@ add(Element(
     classes=[".orca-frame--recording", ".orca-frame__flag"], tokens=["negative"],
     laws=["restorff", "C03"],
     examples=[("Recording", """<div class="orca-ratio orca-ratio--16x9 orca-frame--recording" style="max-width: 20rem">
-  <img src="{% static "orca/img/sample-street.svg" %}" alt="Live view of entrance A">
+  <img src="{% static "orca/img/sample-street.svg" %}" alt="Live video of the harbour">
   <span class="orca-frame__flag"><span class="orca-dot orca-dot--sm orca-dot--pulse"></span>Recording</span>
 </div>""")],
     guide=["Recording frame"], source="ORCA",
@@ -112,7 +112,7 @@ add(Element(
     a11y=["Provide captions for speech; describe essential visual content."],
     classes=[".orca-video"],
     laws=["jakob", "postel", "doherty"],
-    examples=[("Video", """<div class="orca-ratio orca-ratio--16x9" style="max-width: 20rem"><video class="orca-video" controls preload="none" poster="{% static "orca/img/sample-street.svg" %}" aria-label="Clip from entrance A, 08:14"></video></div>""")],
+    examples=[("Video", """<div class="orca-ratio orca-ratio--16x9" style="max-width: 20rem"><video class="orca-video" controls preload="none" poster="{% static "orca/img/sample-street.svg" %}" aria-label="Clip from the harbour timelapse, 08:14"></video></div>""")],
     guide=["Video frame"],
 ))
 

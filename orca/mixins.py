@@ -2,13 +2,13 @@
 
     from orca.mixins import OrcaPageMixin
 
-    class CameraList(OrcaPageMixin, ListView):
-        model = Camera
+    class VideoList(OrcaPageMixin, ListView):
+        model = Video
         paginate_by = 25
         template_name = "orca/generic/list.html"
         list_columns = ["name", "site", "status", ("Counted today", "today")]
-        detail_url_name, create_url_name = "camera-detail", "camera-create"
-        update_url_name, delete_url_name = "camera-update", "camera-delete"
+        detail_url_name, create_url_name = "video-detail", "video-create"
+        update_url_name, delete_url_name = "video-update", "video-delete"
 
 The same mixin works with DetailView (``detail_fields``), CreateView/UpdateView and DeleteView (which also gets
 ``blocked_by``: the protected or restricted objects that stop the delete, so the template can explain them).

@@ -74,7 +74,8 @@ BRAND_TOKENS = [
         "color", ["--orca-brand"], "#0f95a1",
         "The brand colour. Decorative brand marks and the 3px brand bars use it as given. "
         "ORCA derives --orca-brand-strong (fills that carry text, darkened until --orca-brand-on reads at 4.5:1), "
-        "--orca-brand-strong-hover and --orca-brand-strong-active from it.",
+        "--orca-brand-strong-hover and --orca-brand-strong-active from it, and the top bar ground --orca-brand-bar "
+        "(the colour mixed with 30% black, as in wise_people_analyzer) with --orca-brand-bar-on, -hover and -active.",
     ),
     BrandToken(
         "on_color", ["--orca-brand-on"], "",
@@ -105,6 +106,7 @@ BRAND_TOKENS = [
 BRAND_KEYS = {t.key for t in BRAND_TOKENS}
 BRAND_CSS_NAMES = {
     "--orca-brand", "--orca-brand-strong", "--orca-brand-strong-hover", "--orca-brand-strong-active",
+    "--orca-brand-bar", "--orca-brand-bar-hover", "--orca-brand-bar-active", "--orca-brand-bar-on",
     "--orca-brand-on", "--orca-accent", "--orca-accent-hover", "--orca-font-sans", "--orca-font-mono",
 }
 
@@ -154,7 +156,15 @@ SEMANTIC = [
     T("icon", "#000000", "#ffffff", group="Text", usage="Icons that are not status marks."),
     T("link-visited", "#7d42b8", "#a679d2", group="Text", usage="Visited links in running text only."),
     # Grounds
-    T("bg", "#ffffff", "#262626", "#f3f3f3", group="Grounds", usage="The page and every panel on it."),
+    T("bg", "#ffffff", "#262626", "#f3f3f3", group="Grounds",
+      usage="The default fill of controls and surfaces that have no ground of their own: buttons, tags, tooltips, swatch wells."),
+    T("bg-page", "#f7f7f7", "#202020", "#f3f3f3", group="Grounds",
+      usage="ORCA: the page ground behind the panels, as in wise_people_analyzer (surface-page). The <body> uses it."),
+    T("bg-panel", "#ffffff", "#262626", "#ffffff", group="Grounds",
+      usage="ORCA: panels, cards, side navigation and drawers' content set on the page ground (wise_people_analyzer surface-panel). "
+            "White in light and paper, the raised grey in dark."),
+    T("bg-stat", "#fff8d6", "#3a3318", group="Grounds",
+      usage="ORCA: the pale yellow of stat cards (wise_people_analyzer surface-stat); a muted amber tint in dark. Pair with --orca-border-stat."),
     T("bg-alt", "#f7f7f7", "#202020", "#ebebeb", group="Grounds", usage="A region set apart from the page: a side panel, a card preview, an image well."),
     T("bg-input", "#f5f5f5", "#2f2f2f", "#eaeaea", group="Grounds", usage="Fill of text fields, selects and dropdown buttons."),
     T("bg-hover", "#f2f2f2", "#313131", "#e7e7e7", group="Grounds", usage="Hover fill of anything interactive that has no fill of its own."),
@@ -169,6 +179,7 @@ SEMANTIC = [
     T("border-strong", "#707070", "#939393", group="Lines",
       usage="Control boundaries that must be seen: button outlines, the field bottom border, tick boxes. 3:1 or more on every ground."),
     T("border-weak", "rgba(0,0,0,0.1)", "rgba(255,255,255,0.1)", group="Lines", usage="Row separators in tables and lists."),
+    T("border-stat", "#ecd97a", "#6b5d22", group="Lines", usage="ORCA: the outline of a stat card on --orca-bg-stat."),
     # Interaction
     T("focus", "#0f6dcc", "#99ccff", group="Interaction",
       usage="ORCA: the 3px keyboard focus outline. Light and paper use #0f6dcc instead of Vanilla's #2e96ff so the ring holds 3:1 on every ground."),

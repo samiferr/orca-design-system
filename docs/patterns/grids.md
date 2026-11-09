@@ -1,6 +1,6 @@
 # Grids and collections
 
-Repeating one component in a responsive grid or sequence: products, cameras, KPIs, a heat map, an event timeline.
+Repeating one component in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.
 
 ## Product grid
 
@@ -26,7 +26,7 @@ A grid of equal tiles lets people compare many products by sight (Miller's law: 
 #### Example: Grid
 
 ```django
-<ul class="orca-product-grid">{% for n in "1234" %}<li><article class="orca-product"><div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div><h3 class="orca-product__name"><a href="#">Dome camera {{ n }}, 4 MP</a></h3><p class="orca-product__price" style="margin: 0">€1{{ n }}9</p></article></li>{% endfor %}</ul>
+<ul class="orca-product-grid">{% for n in "1234" %}<li><article class="orca-product"><div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div><h3 class="orca-product__name"><a href="#">Dome video {{ n }}, 4 MP</a></h3><p class="orca-product__price" style="margin: 0">€1{{ n }}9</p></article></li>{% endfor %}</ul>
 ```
 
 **Classes:** `.orca-product-grid`
@@ -37,39 +37,39 @@ A grid of equal tiles lets people compare many products by sight (Miller's law: 
 
 ---
 
-## Camera grid
+## Video grid
 
-`id: camera-grid` · level: pattern · source: Tangerine
+`id: video-grid` · level: pattern · source: Tangerine
 
-Camera cards in a grid, pinned cameras first, offline cameras clearly marked.
+Video cards in a grid, pinned videos first, offline videos clearly marked.
 
-Built from: `camera-card`, `view-toggle`, `skeleton`
+Built from: `video-card`, `view-toggle`, `skeleton`
 
 ### Why
 
-Operators scan cameras by their live view (Miller's law); keeping pinned cameras first saves the daily search (Fitts's law) and offline ones stand out by badge and word (Von Restorff, C03).
+Operators scan videos by their live view (Miller's law); keeping pinned videos first saves the daily search (Fitts's law) and offline ones stand out by badge and word (Von Restorff, C03).
 
 ### When to use
 
-- Dashboards and camera lists in card view.
+- Dashboards and video lists in card view.
 
 ### How to use
 
-- `<ul class="orca-camera-grid">` of camera cards; order pinned first, then by name. Each image sits in a reserved 16:9 frame so the grid never jumps.
+- `<ul class="orca-video-grid">` of video cards; order pinned first, then by name. Each image sits in a reserved 16:9 frame so the grid never jumps.
 - Pair with the view toggle (cards or table) and a skeleton while snapshots load.
 
 #### Example: Grid
 
 ```django
-<ul class="orca-camera-grid">{% for c in sample.cameras|slice:":3" %}<li><article class="orca-card orca-card--link orca-camera-card">{% if c.status == "negative" %}<div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since {{ c.last }}</div><span class="orca-badge orca-badge--negative orca-camera-card__flag">Offline</span>{% else %}<div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>{% endif %}
+<ul class="orca-video-grid">{% for c in sample.videos|slice:":3" %}<li><article class="orca-card orca-card--link orca-video-card">{% if c.status == "negative" %}<div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since {{ c.last }}</div><span class="orca-badge orca-badge--negative orca-video-card__flag">Offline</span>{% else %}<div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>{% endif %}
   <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">{{ c.name }}</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--{{ c.status }}"></span>{{ c.status_text }} · {{ c.site }}</span></div></article></li>{% endfor %}</ul>
 ```
 
-**Classes:** `.orca-camera-grid`
+**Classes:** `.orca-video-grid`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Fitts's law: big, close, well-spaced targets are faster and safer; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly
 
-**ORCA guide items covered:** Camera grid
+**ORCA guide items covered:** Video grid
 
 ---
 
@@ -79,7 +79,7 @@ Operators scan cameras by their live view (Miller's law); keeping pinned cameras
 
 A row of stat cards summarising the state of things, linking to the detail behind each.
 
-Built from: `stat-card`, `sparkline`, `delta`
+Built from: `stat-card`
 
 ### Why
 
@@ -103,7 +103,7 @@ A few key numbers at the top answer 'is everything fine?' at a glance (Miller's 
 <div class="orca-kpi-grid">
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div></a>
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Inside now</p><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Cameras online</p><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
+  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
   <a class="orca-stat-card" href="#"><p class="orca-stat-label">Count accuracy</p><p class="orca-stat-value">96.4%</p><div class="orca-stat-card__foot">last 7 days</div></a>
 </div>
 ```
@@ -172,7 +172,7 @@ Grouping by day chunks a long log (Miller's law); the timeline line and status d
 
 ### When to use
 
-- Alert lists, audit and incident views, a camera's history.
+- Alert lists, audit and incident views, a video's history.
 
 ### How to use
 

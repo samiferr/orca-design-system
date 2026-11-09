@@ -78,7 +78,7 @@ add(Element(
     laws=["jakob", "C03"],
     examples=[("Leading an alert", """<div class="orca-row" style="align-items: flex-start; gap: var(--orca-space-16); max-width: 30rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border); border-inline-start: var(--orca-bar) solid var(--orca-caution)">
   <span class="orca-alert-icon">{% status_icon "caution" %}</span>
-  <div><p class="orca-alert-title">Disk almost full</p><p class="orca-p">Recordings older than 20 days will be deleted tonight.</p></div>
+  <div><p class="orca-alert-title">Disk almost full</p><p class="orca-p">Videos older than 20 days will be deleted tonight.</p></div>
 </div>""")],
     guide=["Alert icon"],
     related=["status-icon"],
@@ -99,7 +99,7 @@ add(Element(
     laws=["peak-end", "restorff"],
     examples=[("Count on a button", """<div class="orca-row orca-row--16">
   <button class="orca-icon-button orca-has-count" type="button" aria-label="Notifications, 3 unread">{% icon "notifications" %}<span class="orca-count" aria-hidden="true">3</span></button>
-  <span>Cameras <span class="orca-count orca-count--neutral">12</span></span>
+  <span>Videos <span class="orca-count orca-count--neutral">12</span></span>
 </div>""")],
     guide=["Count badge"], source="ORCA",
 ))

@@ -34,28 +34,28 @@ slot("slot-title", "Title", "title", ALL,
      "The text of the browser tab, before ` · Brand`.",
      "The tab title is how people find a page among open tabs and in history, so it leads with what is specific to the page (Practical UI W04).",
      ["Defaults to `title` from the context; override for detail pages: the record's name first.", "`title_suffix` changes or removes ` · Brand`."],
-     "Entrance A · Cameras", ["W04"], ["Title"], live=False)
+     "Entrance A · Videos", ["W04"], ["Title"], live=False)
 slot("slot-page-title", "Page title", "page_title", APP + ", auth and error layouts",
      "The page's one h1, in the page head.",
      "One h1 per page names it for everyone, including screen-reader users jumping by heading (Practical UI W04, F01).",
      ["Defaults to `title`. Keep it short: the record's name or the list's noun."],
-     "Cameras", ["W04", "F01"], ["Page title"])
+     "Videos", ["W04", "F01"], ["Page title"])
 slot("slot-page-subtitle", "Page subtitle", "page_subtitle", APP,
      "One sentence under the title saying what the page is for or its scope.",
      "A one-line subtitle answers 'am I in the right place?' before people read further (Practical UI W05).",
      ["Defaults to `subtitle` from the context; leave it out when the title says it all."],
-     '<p class="orca-page-subtitle">Every camera counting at North building.</p>', ["W05"], ["Page subtitle"])
+     '<p class="orca-page-subtitle">Every video from North building.</p>', ["W05"], ["Page subtitle"])
 slot("slot-page-actions", "Page actions", "page_actions", APP,
      "The page's buttons, at the end of the page head: one primary action and few others.",
      "Actions in the same place on every page are found without looking (Jakob's law); one primary keeps the main task obvious (Practical UI B03).",
      ["List and detail templates fill it from `list_actions` and `detail_actions`; override those instead when you can."],
-     '<div class="orca-row"><button class="orca-button" type="button">Export</button><a class="orca-button orca-button--primary" href="#">Add camera</a></div>',
+     '<div class="orca-row"><button class="orca-button" type="button">Export</button><a class="orca-button orca-button--primary" href="#">Add video</a></div>',
      ["jakob", "B03"], ["Page actions"])
 slot("slot-breadcrumbs", "Breadcrumbs", "breadcrumbs", APP + " and the docs layout",
      "The trail of parent pages above the title.",
      "Breadcrumbs show where a page sits and give one-click ways up (Jakob's law), most useful on detail pages two or more levels deep.",
      ["Defaults to the `breadcrumbs` context list of `(label, url)`; OrcaPageMixin builds it for detail pages."],
-     '<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Cameras</a></li><li><span aria-current="page">Entrance A</span></li></ol></nav>',
+     '<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Videos</a></li><li><span aria-current="page">Entrance A</span></li></ol></nav>',
      ["jakob", "L05"], ["Breadcrumbs"])
 slot("slot-content", "Content", "content", ALL,
      "The page's own content, inside the main landmark.",
@@ -104,8 +104,8 @@ slot("slot-sidebar-nav", "Sidebar navigation", "sidebar_nav", APP + " and the do
      '<div class="orca-sidebar__section"><ul class="orca-side-nav"><li><a class="orca-side-link" href="#" aria-current="page">{% icon "home" %}<span class="orca-side-link__label">Dashboard</span></a></li></ul></div>',
      ["miller", "jakob"], ["Sidebar navigation"])
 slot("slot-filter-panel", "Filter panel", "filter_panel", "the generic list, planning board and simple data page templates",
-     "Where filters go: a side panel on the generic list, a bar on the board, a drawer on the simple data page.",
-     "Filters next to what they filter make cause and effect visible (Practical UI L14); each template puts them where its layout has room.",
+     "Where filters go: a right drawer, opened by the Filters button the template puts in the page actions.",
+     "Every page opens its filters from the same place, a Filters button in the page actions, so people never hunt for them (Jakob's law, Practical UI S04).",
      ["Pass a GET `filter_form` and the template renders it; override the block for custom filters."],
      '<form class="orca-filter-panel" method="get" aria-label="Filters" onsubmit="return false"><div class="orca-filter-panel__head"><span class="orca-panel-title">Filters</span></div><fieldset class="orca-filter-panel__group"><legend>Status</legend><label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Online</label></fieldset></form>',
      ["L14", "S04"], ["Filter panel"])
@@ -144,7 +144,7 @@ slot("slot-list-actions", "List actions", "list_actions", "the generic list, par
      "The buttons of a list page: Add first, then exports or bulk tools.",
      "The create button in the same place on every list is found without looking (Jakob's law); one primary keeps it obvious (Practical UI B03).",
      ["Defaults to 'Add <model>' when `create_url` is set."],
-     '<a class="orca-button orca-button--primary orca-create" href="#">{% icon "plus" %}Add camera</a>', ["jakob", "B03"], ["List actions"])
+     '<a class="orca-button orca-button--primary orca-create" href="#">{% icon "plus" %}Add video</a>', ["jakob", "B03"], ["List actions"])
 slot("slot-detail-actions", "Detail actions", "detail_actions", "the generic detail, parent and parent-child detail templates",
      "The buttons of a record: Edit, then other actions, Delete last and quieter.",
      "Edit and Delete in the same place on every record (Jakob's law), Delete apart and outlined so it is not hit by mistake (Practical UI B13).",

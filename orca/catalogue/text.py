@@ -39,14 +39,15 @@ add(Element(
     avoid=["Repeating the product name or the breadcrumb's last item word for word with extra decoration.",
            "Long titles: front-load the distinguishing word (W04)."],
     how=["`<h1 class=\"orca-page-title\">` (28/36, weight 700).",
-         "Name the object, not the action: 'Cameras', 'Entrance A', 'New capture run'.",
-         "Long names wrap; they are never cut, so an operator can always read the full name (L15)."],
+         "Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.",
+         "Long names wrap; they are never cut, so people can always read the full name (L15).",
+         "On application pages it sits in the `page-head` pattern, with the page actions beside it."],
     a11y=["It is the page's `<h1>`; the document `<title>` should start with the same words."],
     classes=[".orca-page-title"], tokens=["type-page-title"],
     laws=["jakob", "restorff", "W04", "L15"],
     examples=[("Page title with subtitle", """<div>
-  <h1 class="orca-page-title">Entrance A</h1>
-  <p class="orca-page-subtitle">Counting people at the north door since 3 March 2026.</p>
+  <h1 class="orca-page-title">Harbour at dusk</h1>
+  <p class="orca-page-subtitle">Added to the library on 3 March 2026.</p>
 </div>""")],
     guide=["Page title"],
     related=["page-subtitle", "heading"],
@@ -64,7 +65,7 @@ add(Element(
     classes=[".orca-page-subtitle"], tokens=["text-muted", "measure"],
     laws=["tesler", "W01"],
     examples=[("Subtitle", """<h1 class="orca-page-title">Alert rules</h1>
-<p class="orca-page-subtitle">Rules decide who gets an email when a camera or a KPI crosses a limit.</p>""")],
+<p class="orca-page-subtitle">Rules decide who gets an email when a video upload fails or a KPI crosses a limit.</p>""")],
     guide=["Page subtitle"],
 ))
 
@@ -102,11 +103,11 @@ add(Element(
     "Bold first line of an alert, callout or notification that states what happened.",
     why="People read the first words and decide; a bold, specific title is enough on its own to act (Practical UI W15).",
     when=["Every alert or callout with more than one sentence."],
-    how=["`<p class=\"orca-alert-title\">` (16/24, 550).", "State the fact: 'Camera offline', 'Report sent'. No 'Error:' prefix, no exclamation marks."],
+    how=["`<p class=\"orca-alert-title\">` (16/24, 550).", "State the fact: 'Video unavailable', 'Report sent'. No 'Error:' prefix, no exclamation marks."],
     classes=[".orca-alert-title"], tokens=["type-body-strong"],
     laws=["W15", "peak-end"],
-    examples=[("Alert title", """<p class="orca-alert-title">Recorder unreachable</p>
-<p class="orca-p">Check that the NVR is on and connected, then test the connection again.</p>""")],
+    examples=[("Alert title", """<p class="orca-alert-title">Video unavailable</p>
+<p class="orca-p">The file could not be loaded. Check your connection, then try playing it again.</p>""")],
     guide=["Alert title"],
 ))
 
@@ -120,7 +121,7 @@ add(Element(
          "Front-load the point; one idea per paragraph; under 20 words per sentence where possible."],
     classes=[".orca-p", ".orca-p--lead"], tokens=["type-body", "measure"],
     laws=["T07", "T09", "W01", "W05"],
-    examples=[("Paragraphs", """<p class="orca-p orca-p--lead">Capture runs take one snapshot per camera at a fixed interval.</p>
+    examples=[("Paragraphs", """<p class="orca-p orca-p--lead">Thumbnails are taken from each video at a fixed interval.</p>
 <p class="orca-p">Use them to check framing before you draw zones. Shots are kept for 30 days.</p>""")],
     guide=["Paragraph"],
 ))
@@ -156,7 +157,7 @@ add(Element(
     how=["Add `.orca-muted` to any text element."],
     classes=[".orca-muted"], tokens=["text-muted"],
     laws=["L03", "T13"],
-    examples=[("Muted", """<p class="orca-p">Entrance A <span class="orca-muted">· 3 cameras</span></p>""")],
+    examples=[("Muted", """<p class="orca-p">Summer 2026 <span class="orca-muted">· 3 videos</span></p>""")],
     guide=["Muted text"],
 ))
 
@@ -264,7 +265,7 @@ add(Element(
     how=["`<code class=\"orca-code\">`. Long values wrap anywhere instead of overflowing.", "For multi-line code use the Code block component (phase 2)."],
     classes=[".orca-code"], tokens=["type-code", "font-mono", "bg-code"],
     laws=["T01", "L15"],
-    examples=[("Inline code", """<p class="orca-p">The recorder answered at <code class="orca-code">192.168.1.40:554</code>.</p>""")],
+    examples=[("Inline code", """<p class="orca-p">The video server answered at <code class="orca-code">media.example.com:443</code>.</p>""")],
     guide=["Code text"],
 ))
 
@@ -272,15 +273,15 @@ add(Element(
     "card-kicker", "Card kicker", C,
     "A short uppercase category label above a card title.",
     why="A kicker places the card in a category before the title is read, aiding scanning of mixed card lists (W07: uppercase only for short labels).",
-    when=["Cards in a list that mixes types (camera, recorder, zone)."],
+    when=["Cards in a list that mixes types (image, video, album)."],
     avoid=["More than three words.", "Status: use a badge."],
     how=["`<p class=\"orca-card-kicker\">` (12/16, 550, uppercase, letter-spaced, muted)."],
     classes=[".orca-card-kicker"], tokens=["type-label", "text-muted"],
     laws=["W07", "miller"],
     examples=[("Card text stack", """<div class="orca-stack" style="gap: var(--orca-space-4); max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
-  <p class="orca-card-kicker">Camera</p>
+  <p class="orca-card-kicker">Video</p>
   <h3 class="orca-card-title">Entrance A, north door</h3>
-  <p class="orca-card-meta">Hikvision · 192.168.1.40 · added 3 March</p>
+  <p class="orca-card-meta">MP4 · 1080p · added 3 March</p>
 </div>""")],
     guide=["Card kicker"],
     related=["card-title", "card-meta"],
@@ -308,7 +309,7 @@ add(Element(
     how=["`<p class=\"orca-card-meta\">` (14/20, muted). Separate facts with ' · '.", "Three facts at most; move the rest to the detail page."],
     classes=[".orca-card-meta"], tokens=["type-detail", "text-muted"],
     laws=["miller", "hick"],
-    examples=[("Meta line", """<p class="orca-card-meta">3 cameras · updated 2 minutes ago</p>""")],
+    examples=[("Meta line", """<p class="orca-card-meta">3 videos · updated 2 minutes ago</p>""")],
     guide=["Card meta"],
 ))
 
@@ -318,7 +319,7 @@ add(Element(
     why="A dialog interrupts; its title must say why in a few words so the decision is quick (Hick's law, Practical UI W01).",
     when=["Top of every dialog and drawer."],
     how=["`<h2 class=\"orca-dialog-title\">` (24/32, light 275).",
-         "Confirmations ask the question with the object: 'Delete Entrance A?'. The action button repeats the verb: 'Delete camera'."],
+         "Confirmations ask the question with the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'."],
     a11y=["Reference it with `aria-labelledby` on the `<dialog>`."],
     classes=[".orca-dialog-title"], tokens=["type-h4"],
     laws=["hick", "B13", "W01"],
@@ -333,14 +334,14 @@ add(Element(
     "What is missing, said plainly, in an empty region.",
     why="An empty screen is an ending or a beginning; a clear, calm title turns it into a next step instead of a dead end (Peak–end rule).",
     when=["A list, table, chart or search that has nothing to show."],
-    how=["`<h2 class=\"orca-empty-title\">` (24/32, light). State the fact: 'No cameras yet', 'No events match these filters'."],
+    how=["`<h2 class=\"orca-empty-title\">` (24/32, light). State the fact: 'No images yet', 'No videos match these filters'."],
     classes=[".orca-empty-title"], tokens=["type-h4"],
     laws=["peak-end", "W15"],
     examples=[("Empty state text", """<div class="orca-stack" style="align-items: center; text-align: center">
   {% orca_illustration "empty" %}
-  <h2 class="orca-empty-title">No cameras yet</h2>
-  <p class="orca-empty-text">Add a camera to start counting people at an entrance.</p>
-  <button class="orca-button orca-button--primary" type="button">Add camera</button>
+  <h2 class="orca-empty-title">No images yet</h2>
+  <p class="orca-empty-text">Add an image to start your library.</p>
+  <button class="orca-button orca-button--primary" type="button">Add image</button>
 </div>""")],
     guide=["Empty-state title"],
     related=["empty-text", "illustration"],
@@ -356,7 +357,7 @@ add(Element(
          "Filtered-empty: offer to clear filters. First-use empty: offer the create action."],
     classes=[".orca-empty-text"], tokens=["text-muted"],
     laws=["peak-end", "tesler", "W15"],
-    examples=[("Filtered empty", """<p class="orca-empty-text">No events match “Entrance B” this week. Clear the filters to see all events.</p>""")],
+    examples=[("Filtered empty", """<p class="orca-empty-text">No videos match “harbour” this week. Clear the filters to see all videos.</p>""")],
     guide=["Empty-state text"],
     related=["empty-title"],
 ))

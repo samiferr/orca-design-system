@@ -31,7 +31,7 @@ Email clients ignore CSS variables and most stylesheets, so ORCA computes the co
 #### Example: Alert email (preview)
 
 ```django
-{% orca_email_preview title="Loading dock is offline" preheader="No stream since 08:14" paragraphs=sample.email_paragraphs action_url="https://example.com/cameras/12/" action_label="Open the camera" footer="You get this email because you are on the alert list for Warehouse." %}
+{% orca_email_preview title="Loading dock is offline" preheader="No stream since 08:14" paragraphs=sample.email_paragraphs action_url="https://example.com/videos/12/" action_label="Open the video" footer="You get this email because you are on the alert list for Warehouse." %}
 ```
 
 **Classes:** `.orca-email-preview`

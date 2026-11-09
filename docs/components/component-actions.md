@@ -164,7 +164,7 @@ Copying exact values (keys, addresses) by hand causes errors; one click with vis
 #### Example: Copy a stream address
 
 ```django
-<div class="orca-copy"><code class="orca-copy__value" id="cp-1">rtsp://192.168.1.40:554/stream1</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>
+<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>
 ```
 
 **Classes:** `.orca-copy`, `.orca-copy__value`
@@ -181,7 +181,7 @@ Copying exact values (keys, addresses) by hand causes errors; one click with vis
 
 On a record's page: one visible main action and a 'More actions' menu for the rest.
 
-Built from: `button`, `icon-button`, `dropdown-menu`
+Built from: `icon-button`, `dropdown-menu`
 
 ### Why
 
@@ -200,13 +200,13 @@ One visible action keeps the decision simple (Hick's law, Practical UI B03); the
 
 ```django
 <div class="orca-record-actions orca-anchor">
-  <a class="orca-button" href="#">{% icon "edit" %}Edit camera</a>
+  <a class="orca-button" href="#">{% icon "edit" %}Edit video</a>
   <button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A" aria-haspopup="menu" aria-expanded="false" aria-controls="ra-menu" data-orca-menu>{% icon "more" %}</button>
   <ul class="orca-popover orca-popover--end" role="menu" id="ra-menu" hidden>
     <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "pin" %}Pin to dashboard</button></li>
     <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "restart" %}Restart stream</button></li>
     <li role="separator" class="orca-menu__separator"></li>
-    <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete camera</button></li>
+    <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete video</button></li>
   </ul>
 </div>
 ```
@@ -225,7 +225,7 @@ One visible action keeps the decision simple (Hick's law, Practical UI B03); the
 
 Small actions at the end of a table row: one or two ghost buttons and an overflow menu.
 
-Built from: `button`, `icon-button`, `dropdown-menu`
+Built from: `icon-button`, `dropdown-menu`
 
 ### Why
 

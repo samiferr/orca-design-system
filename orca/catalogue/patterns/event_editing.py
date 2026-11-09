@@ -16,7 +16,7 @@ add(Pattern(
          "Warn about conflicts inline (conflict warning) without blocking save; keep 'Save' and 'Cancel' at the bottom and 'Delete' apart from them."],
     classes=[".orca-form-stack"],
     laws=["F01", "F05", "tesler"],
-    uses=["form-stack", "datetime-picker", "recurrence-selector", "reminder-selector", "multi-picker", "conflict-warning", "form-actions"],
+    uses=["form-stack", "datetime-picker", "recurrence-selector", "reminder-selector", "multi-picker", "conflict-warning"],
     examples=[("New event", """<form class="orca-form-stack" style="max-width: 32rem" onsubmit="return false">
   <div class="orca-field"><label class="orca-label" for="ee-t">Title</label><input class="orca-input" id="ee-t" value="Audit"></div>
   <fieldset class="orca-inline-fields" data-orca-range><legend class="orca-label">When</legend><div class="orca-field"><label class="orca-label" for="ee-a">Starts</label><input class="orca-input" type="datetime-local" id="ee-a" value="2026-11-06T10:00"></div><span class="orca-inline-fields__sep" aria-hidden="true">–</span><div class="orca-field"><label class="orca-label" for="ee-b">Ends</label><input class="orca-input" type="datetime-local" id="ee-b" value="2026-11-06T11:30"></div><p class="orca-inline-fields__note" data-orca-range-output aria-live="polite">1 h 30 min</p></fieldset>

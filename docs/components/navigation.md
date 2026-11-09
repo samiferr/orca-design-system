@@ -25,14 +25,14 @@ A short, always-visible set of sections in the familiar top position lets people
 ### How to use
 
 - `<nav aria-label="Main"><ul class="orca-topnav">` with links; the current section's link gets `aria-current="page"` (or `"true"` for a section).
-- Labels are nouns people use: 'Cameras', 'Reports'. Icons optional, never alone.
+- Labels are nouns people use: 'Videos', 'Reports'. Icons optional, never alone.
 - Below 1036px move the links into the sidebar drawer (pattern level).
 
 #### Example: Top-bar links
 
 ```django
 <nav aria-label="Main"><ul class="orca-topnav" style="min-height: var(--orca-nav-height)">
-  <li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Cameras</a></li><li><a href="#">Reports</a></li><li><a href="#">Alerts</a></li>
+  <li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Videos</a></li><li><a href="#">Reports</a></li><li><a href="#">Alerts</a></li>
 </ul></nav>
 ```
 
@@ -103,7 +103,7 @@ A consistent row (icon, label, count) is scanned quickly and its full width is t
 
 ### How to use
 
-- `<a class="orca-side-link" href=…>{% icon … %}<span class="orca-side-link__label">Cameras</span><span class="orca-count orca-count--neutral">12</span></a>` inside `<ul class="orca-side-nav">`.
+- `<a class="orca-side-link" href=…>{% icon … %}<span class="orca-side-link__label">Videos</span><span class="orca-count orca-count--neutral">12</span></a>` inside `<ul class="orca-side-nav">`.
 - `aria-current="page"` on the current link; `--l2` for a nested link.
 - Labels never wrap; a long one is cut with an ellipsis and has a `title`.
 
@@ -112,8 +112,8 @@ A consistent row (icon, label, count) is scanned quickly and its full width is t
 ```django
 <nav aria-label="Sections" style="max-width: 15rem; background: var(--orca-bg-alt)"><ul class="orca-side-nav">
   <li><a class="orca-side-link" href="#">{% icon "home" %}<span class="orca-side-link__label">Dashboard</span></a></li>
-  <li><a class="orca-side-link" href="#" aria-current="page">{% icon "snapshot" %}<span class="orca-side-link__label">Cameras</span><span class="orca-count orca-count--neutral">12</span></a></li>
-  <li><a class="orca-side-link orca-side-link--l2" href="#"><span class="orca-side-link__label">Recorders</span></a></li>
+  <li><a class="orca-side-link" href="#" aria-current="page">{% icon "snapshot" %}<span class="orca-side-link__label">Videos</span><span class="orca-count orca-count--neutral">12</span></a></li>
+  <li><a class="orca-side-link orca-side-link--l2" href="#"><span class="orca-side-link__label">Media servers</span></a></li>
   <li><a class="orca-side-link" href="#">{% icon "notifications" %}<span class="orca-side-link__label">Alerts</span><span class="orca-count">3</span></a></li>
 </ul></nav>
 ```
@@ -140,7 +140,7 @@ Breadcrumbs show where a page sits and offer one-click routes upward (Jakob's la
 
 ### When to use
 
-- Pages two or more levels deep in a hierarchy (Site › Building › Camera).
+- Pages two or more levels deep in a hierarchy (Site › Building › Video).
 
 ### When not to use
 
@@ -190,7 +190,7 @@ Numbered pages tell people how much there is and let them jump (Miller's law); g
 
 ### How to use
 
-- Django: `{% orca_pagination page_obj noun="cameras" %}` keeps the other query parameters (filters, sort).
+- Django: `{% orca_pagination page_obj noun="videos" %}` keeps the other query parameters (filters, sort).
 - Markup: `<nav class="orca-pagination" aria-label="Pages"><ul>` of `.orca-page-link` links; current with `aria-current="page"`; disabled ends with `aria-disabled="true"`; gaps are `.orca-page-gap`.
 - Each link is a page-link: number links carry `aria-label="Page 7"`.
 
@@ -220,7 +220,7 @@ Numbered pages tell people how much there is and let them jump (Miller's law); g
 
 `id: pagination-summary` · level: component · source: ORCA
 
-'Showing 121–140 of 312 cameras': what part of the list is on screen.
+'Showing 121–140 of 312 videos': what part of the list is on screen.
 
 Built from: `tabular-number`
 
@@ -234,13 +234,13 @@ A count anchors people in a long list and confirms filters worked (Miller's law,
 
 ### How to use
 
-- `<p class="orca-pagination-summary">Showing 121–140 of 312 cameras</p>`, with an en dash and grouping separators.
-- Zero results: 'No cameras match these filters' and an empty state below.
+- `<p class="orca-pagination-summary">Showing 121–140 of 312 videos</p>`, with an en dash and grouping separators.
+- Zero results: 'No videos match these filters' and an empty state below.
 
 #### Example: Summary
 
 ```django
-<p class="orca-pagination-summary">Showing 121–140 of 312 cameras</p>
+<p class="orca-pagination-summary">Showing 121–140 of 312 videos</p>
 ```
 
 **Classes:** `.orca-pagination-summary`
@@ -321,7 +321,7 @@ Tabs split related content into chunks people can switch between without losing 
 
 ```django
 <div class="orca-tabs">
-  <div class="orca-tabs__list" role="tablist" aria-label="Camera" data-orca-tabs>
+  <div class="orca-tabs__list" role="tablist" aria-label="Video" data-orca-tabs>
     <button class="orca-tab" role="tab" type="button" id="tb-1" aria-controls="tp-1" aria-selected="true">Overview</button>
     <button class="orca-tab" role="tab" type="button" id="tb-2" aria-controls="tp-2" aria-selected="false">Zones</button>
     <button class="orca-tab" role="tab" type="button" id="tb-3" aria-controls="tp-3" aria-selected="false">Recordings</button>
@@ -356,11 +356,11 @@ Counts tell people where the content is before they click (Practical UI S06) and
 
 ### When to use
 
-- A parent record's detail page with lists of children (a site's cameras, zones, users).
+- A parent record's detail page with lists of children (a site's videos, zones, users).
 
 ### How to use
 
-- `<nav class="orca-tabs__list" aria-label=…>` of `<a class="orca-tab">Cameras <span class="orca-count orca-count--neutral">12</span></a>`; current tab `aria-current="page"`.
+- `<nav class="orca-tabs__list" aria-label=…>` of `<a class="orca-tab">Videos <span class="orca-count orca-count--neutral">12</span></a>`; current tab `aria-current="page"`.
 - Keep the parent summary above the tabs so context stays visible.
 
 #### Example: Child tabs
@@ -368,7 +368,7 @@ Counts tell people where the content is before they click (Practical UI S06) and
 ```django
 <nav class="orca-tabs__list" aria-label="North building">
   <a class="orca-tab" href="#">Overview</a>
-  <a class="orca-tab" href="#" aria-current="page">Cameras <span class="orca-count orca-count--neutral">12</span></a>
+  <a class="orca-tab" href="#" aria-current="page">Videos <span class="orca-count orca-count--neutral">12</span></a>
   <a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a>
   <a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">0</span></a>
 </nav>
@@ -414,7 +414,7 @@ The bottom of a phone is in thumb reach (Fitts's law) and the pattern is familia
 
 ```django
 <nav class="orca-bottom-nav orca-bottom-nav--static" aria-label="Main" style="max-width: 24rem">
-  <a href="#" aria-current="page">{% icon "home" %}Home</a><a href="#">{% icon "snapshot" %}Cameras</a><a href="#">{% icon "notifications" %}Alerts<span class="orca-count" aria-label="3 new">3</span></a><a href="#">{% icon "user" %}Profile</a>
+  <a href="#" aria-current="page">{% icon "home" %}Home</a><a href="#">{% icon "snapshot" %}Videos</a><a href="#">{% icon "notifications" %}Alerts<span class="orca-count" aria-label="3 new">3</span></a><a href="#">{% icon "user" %}Profile</a>
 </nav>
 ```
 
@@ -455,7 +455,7 @@ Grouping many destinations into named sections keeps a long navigation scannable
   <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Organisation<span class="orca-count orca-count--neutral">3</span></summary>
     <ul><li><a href="#">Profile</a></li><li><a href="#" aria-current="page">Users</a></li><li><a href="#">Billing</a></li></ul></details></li>
   <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Devices<span class="orca-count orca-count--neutral">2</span></summary>
-    <ul><li><a href="#">Cameras</a></li><li><a href="#">Recorders</a></li></ul></details></li>
+    <ul><li><a href="#">Videos</a></li><li><a href="#">Media servers</a></li></ul></details></li>
 </ul></nav>
 ```
 
@@ -485,13 +485,13 @@ A visible way back near the top keeps people oriented, especially on phones wher
 
 ### How to use
 
-- `<a class="orca-back-link" href=…>{% icon "chevron-left" %}Back to cameras</a>` above the title.
-- Name the destination ('Back to cameras'), never just 'Back'. Link to the real parent, not `history.back()`, so it works from a shared link.
+- `<a class="orca-back-link" href=…>{% icon "chevron-left" %}Back to videos</a>` above the title.
+- Name the destination ('Back to videos'), never just 'Back'. Link to the real parent, not `history.back()`, so it works from a shared link.
 
 #### Example: Back link
 
 ```django
-<a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to cameras</a>
+<a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to videos</a>
 ```
 
 **Classes:** `.orca-back-link`
@@ -597,17 +597,17 @@ On desktop the create action belongs beside the title; on phones it must stay in
 
 ### When to use
 
-- List pages with one create action (Add camera, New report).
+- List pages with one create action (Add video, New report).
 
 ### How to use
 
-- `<a class="orca-button orca-button--primary orca-create" href=…>{% icon "plus" %}Add camera</a>` in the page head.
+- `<a class="orca-button orca-button--primary orca-create" href=…>{% icon "plus" %}Add video</a>` in the page head.
 - Below 620px it floats at the bottom right (respecting safe areas); add 5rem of bottom padding to the page so it never covers the last row.
 
 #### Example: Create button
 
 ```django
-<a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add camera</a>
+<a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add video</a>
 ```
 
 **Classes:** `.orca-create`

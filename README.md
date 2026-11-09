@@ -4,11 +4,15 @@ ORCA is a Django design system built so that developers and AI coding agents can
 interfaces without guessing. **Every element documents its why, when (and when not), and how**, the tokens and classes
 it uses, the UX principles it applies, and a copy-ready template example.
 
-- **Structure:** the ORCA Design System Guide (Atomic Design with ORCA names):
-  Primitives → Components → Patterns → Templates → Pages.
+- **Structure:** five levels from the ORCA Design System Guide, each a group of the level before it:
+  **Primitives** → **Components** (groups of primitives) → **Patterns** (groups of components) →
+  **Templates** (groups of patterns) → **Pages** (templates with real content).
 - **Rules:** *Practical UI* (Dannaway, 2024) and *Laws of UX* (Yablonski, 2024). Each element cites the rules it applies.
 - **Base:** the Tangerine system from `wise_people_analyzer` (Vanilla framework 4.59 values): square corners,
   1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance: Tangerine.
+- **Grounds:** the same backgrounds as `wise_people_analyzer`: a grey page (`--orca-bg-page`), white panels and
+  sidebar (`--orca-bg-panel`), pale yellow stat cards (`--orca-bg-stat`) and a dark brand top bar (`--orca-brand-bar`).
+- **Page filters** always open in a right drawer from a Filters button in the page actions (the `filter-drawer` pattern).
 - **Phase 1: Primitives.** 141 elements covering all 214 primitive items of the guide, including the planning
   primitives (date, time, calendar marks) the guide marks as not built yet.
 - **Phase 2: Components.** 145 elements covering all 154 component items of the guide: form fields,
@@ -57,8 +61,8 @@ ORCA = {
 <body>
   <a class="orca-skip-link" href="#main">Skip to main content</a>
   <main id="main" tabindex="-1">
-    <h1 class="orca-page-title">Cameras</h1>
-    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add camera</button>
+    <h1 class="orca-page-title">Images</h1>
+    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add image</button>
   </main>
 </body>
 </html>
@@ -95,9 +99,9 @@ python demo/manage.py orca_site site/
     {% orca_field form.port width="w8" %}
     {% orca_field form.enabled switch=True %}
   </div>
-  <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">Save camera</button></div>
+  <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">Save video</button></div>
 </form>
-{% orca_pagination page_obj noun="cameras" %}        {# keeps filters in the links #}
+{% orca_pagination page_obj noun="videos" %}        {# keeps filters in the links #}
 {% orca_mini_calendar month selected=day url="/day/{date}/" nav_url="?month={month}" %}
 {% orca_sparkline values "Visitors per hour" %}  {% orca_donut segments total_label="Visitors" %}
 ```
@@ -121,18 +125,18 @@ Events are dicts with `title`, `start`, `end`, `all_day`, `color` (1–8 or any 
 from django.views.generic import ListView
 from orca.mixins import OrcaPageMixin
 
-class CameraList(OrcaPageMixin, ListView):
-    model = Camera
+class VideoList(OrcaPageMixin, ListView):
+    model = Video
     paginate_by = 25
     template_name = "orca/generic/list.html"          # title, Add button, search, table → cards on phones, pager
     list_columns = ["name", "site", "status", ("Counted today", "today")]
-    detail_url_name, create_url_name = "camera-detail", "camera-create"
-    update_url_name, delete_url_name = "camera-update", "camera-delete"
+    detail_url_name, create_url_name = "video-detail", "video-create"
+    update_url_name, delete_url_name = "video-update", "video-delete"
 ```
 
 ```django
 {% extends "orca/layouts/app.html" %}                   {# or dashboard, calendar, scheduler, board, timeline… #}
-{% block page_actions %}<a class="orca-button orca-button--primary" href="…">Add camera</a>{% endblock %}
+{% block page_actions %}<a class="orca-button orca-button--primary" href="…">Add video</a>{% endblock %}
 {% block content %}…{% endblock %}
 ```
 
@@ -147,7 +151,7 @@ A project changes **brand tokens only**, through `settings.ORCA["BRAND"]`:
 |---|---|---|
 | `name` | – | Product name: logo alt text and wordmark |
 | `logo`, `favicon` | – | Static paths of the logo and favicon |
-| `color` | `--orca-brand`, `--orca-brand-strong*`, | Brand colour; fills that carry text are derived to reach 4.5:1 |
+| `color` | `--orca-brand`, `--orca-brand-strong*`, `--orca-brand-bar*` | Brand colour; fills that carry text are derived to reach 4.5:1; the top bar is the colour mixed with 30% black |
 | `on_color` | `--orca-brand-on` | Text on brand fills (auto black/white when empty) |
 | `accent`, `accent_dark` | `--orca-accent` | Interactive colour per theme; adjusted to reach 4.5:1 |
 | `font_sans`, `font_mono` | `--orca-font-sans`, `--orca-font-mono` | Font stacks |
@@ -206,11 +210,11 @@ documented classes and tokens exist, text and control contrast hold in all three
 
 ## Roadmap
 
-1. **Primitives** (released).
-2. **Components** (released).
-3. **Patterns** (released).
-4. **Templates** (this release).
-5. Pages: following the ORCA guide.
+1. **Primitives** (released): the smallest pieces and the base styles.
+2. **Components** (released): groups of primitives (form field, search bar, date picker, pagination, stat card…).
+3. **Patterns** (released): groups of components (page head with page actions, filter drawer, sidebar, data table…).
+4. **Templates** (this release): groups of patterns (app shell, list page, detail page…).
+5. Pages: templates filled with real content.
 
 ## Licences
 

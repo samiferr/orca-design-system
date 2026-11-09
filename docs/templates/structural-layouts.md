@@ -85,7 +85,7 @@ A regular grid lets people scan many similar items by position (Practical UI L11
 
 ### When to use
 
-- Collections browsed by picture or title: cameras, products, people, plans.
+- Collections browsed by picture or title: videos, products, people, plans.
 
 ### When not to use
 
@@ -177,9 +177,9 @@ Primary content gets the width and secondary context sits beside it, not in the 
 
 ---
 
-## Camera split
+## Media split
 
-`id: camera-split` · level: template · source: Tangerine
+`id: media-split` · level: template · source: Tangerine
 
 The live picture in two thirds, details and actions in one third; the picture stays in view while the details scroll.
 
@@ -191,23 +191,23 @@ When watching and adjusting at the same time (zones, settings), the picture must
 
 ### When to use
 
-- Camera, zone and recording pages; any media with its settings.
+- Video, zone and recording pages; any media with its settings.
 
 ### How to use
 
-- `<div class="orca-camera-split">` with `.orca-camera-split__media` (the player or snapshot) and `.orca-camera-split__side` (panels).
+- `<div class="orca-media-split">` with `.orca-media-split__media` (the player or snapshot) and `.orca-media-split__side` (panels).
 
-#### Example: Camera split
+#### Example: Media split
 
 ```django
-<div class="orca-camera-split"><div class="orca-camera-split__media"><div class="orca-skeleton orca-aspect-16x9"></div></div><div class="orca-camera-split__side"><section class="orca-panel" aria-label="Status"><p class="orca-panel-title">Status</p><div class="orca-skeleton orca-skeleton--text"></div></section><section class="orca-panel" aria-label="Settings"><p class="orca-panel-title">Settings</p><div class="orca-skeleton orca-skeleton--text"></div></section></div></div>
+<div class="orca-media-split"><div class="orca-media-split__media"><div class="orca-skeleton orca-aspect-16x9"></div></div><div class="orca-media-split__side"><section class="orca-panel" aria-label="Status"><p class="orca-panel-title">Status</p><div class="orca-skeleton orca-skeleton--text"></div></section><section class="orca-panel" aria-label="Settings"><p class="orca-panel-title">Settings</p><div class="orca-skeleton orca-skeleton--text"></div></section></div></div>
 ```
 
-**Classes:** `.orca-camera-split`, `.orca-camera-split__media`, `.orca-camera-split__side`
+**Classes:** `.orca-media-split`, `.orca-media-split__media`, `.orca-media-split__side`
 
 **Principles applied:** Practical UI L14: Reduce travel between related actions; Practical UI L01: Group related information
 
-**ORCA guide items covered:** Camera split
+**ORCA guide items covered:** Media split
 
 ---
 

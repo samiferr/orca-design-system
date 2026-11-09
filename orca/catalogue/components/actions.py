@@ -81,7 +81,7 @@ add(Component(
     classes=[".orca-copy", ".orca-copy__value"],
     laws=["doherty", "tesler"],
     uses=["button", "code-text"],
-    examples=[("Copy a stream address", """<div class="orca-copy"><code class="orca-copy__value" id="cp-1">rtsp://192.168.1.40:554/stream1</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>""")],
+    examples=[("Copy a stream address", """<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>""")],
     guide=["Copy button (copied confirmation)"],
 ))
 
@@ -94,15 +94,15 @@ add(Component(
          "Destructive actions go last in the menu and ask for confirmation."],
     classes=[".orca-record-actions"],
     laws=["hick", "B03", "B13"],
-    uses=["button", "icon-button", "dropdown-menu"],
+    uses=["icon-button", "dropdown-menu"],
     examples=[("Record actions", """<div class="orca-record-actions orca-anchor">
-  <a class="orca-button" href="#">{% icon "edit" %}Edit camera</a>
+  <a class="orca-button" href="#">{% icon "edit" %}Edit video</a>
   <button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A" aria-haspopup="menu" aria-expanded="false" aria-controls="ra-menu" data-orca-menu>{% icon "more" %}</button>
   <ul class="orca-popover orca-popover--end" role="menu" id="ra-menu" hidden>
     <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "pin" %}Pin to dashboard</button></li>
     <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "restart" %}Restart stream</button></li>
     <li role="separator" class="orca-menu__separator"></li>
-    <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete camera</button></li>
+    <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete video</button></li>
   </ul>
 </div>""")],
     guide=["Record actions (one button + overflow menu)"], source="Tangerine",
@@ -117,7 +117,7 @@ add(Component(
          "At most two visible actions; the rest in a menu."],
     classes=[".orca-row-actions"],
     laws=["L14", "B05", "fitts"],
-    uses=["button", "icon-button", "dropdown-menu"],
+    uses=["icon-button", "dropdown-menu"],
     examples=[("In a row", """<table class="orca-table" style="max-width: 32rem"><tbody><tr><td>Entrance A</td><td><span class="orca-status"><span class="orca-dot orca-dot--positive"></span>Online</span></td>
   <td><div class="orca-row-actions"><a class="orca-button orca-button--ghost orca-button--sm" href="#">Edit</a><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></div></td></tr></tbody></table>""")],
     guide=["Row actions"],

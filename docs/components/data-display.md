@@ -8,7 +8,7 @@ Ways to present records and numbers: stat cards, lists, key/value lists, cards, 
 
 One measured value with its label, change and context, optionally with a sparkline.
 
-Built from: `stat-label`, `stat-value`, `delta`, `sparkline`
+Built from: `stat-label`, `delta`, `sparkline`
 
 ### Why
 
@@ -59,19 +59,19 @@ Aligned labels and values are scanned down one edge and compared quickly (Practi
 
 ### When to use
 
-- Detail pages and side panels: a camera's address, model, location.
+- Detail pages and side panels: a video's address, model, location.
 
 ### How to use
 
 - `<dl class="orca-kv">` with `<div><dt>Label</dt><dd>Value</dd></div>` pairs; `--stacked` puts labels above values (narrow panels). Below 620px it stacks automatically.
 - Empty values: write 'Not set' in muted text; never leave a blank.
 
-#### Example: Camera properties
+#### Example: Video properties
 
 ```django
 <dl class="orca-kv" style="max-width: 30rem">
-  <div><dt>Model</dt><dd>Hikvision DS-2CD2143G2</dd></div>
-  <div><dt>Address</dt><dd><code class="orca-code">192.168.1.40:554</code></dd></div>
+  <div><dt>Format</dt><dd>MP4, 1080p</dd></div>
+  <div><dt>Address</dt><dd><code class="orca-code">media.example.com/v/4821</code></dd></div>
   <div><dt>Site</dt><dd>North building</dd></div>
   <div><dt>Notes</dt><dd class="orca-muted">Not set</dd></div>
 </dl>
@@ -214,7 +214,7 @@ Built from: `icon`
 
 ### Why
 
-Sorting turns a table into an answer ('which camera counted most?') (Tesler's law); the arrow and aria-sort show the order to everyone (C03).
+Sorting turns a table into an answer ('which video counted most?') (Tesler's law); the arrow and aria-sort show the order to everyone (C03).
 
 ### When to use
 
@@ -229,7 +229,7 @@ Sorting turns a table into an answer ('which camera counted most?') (Tesler's la
 
 ```django
 <table class="orca-table" style="max-width: 32rem"><thead><tr>
-  <th scope="col" aria-sort="ascending"><a class="orca-sort" href="#">Camera{% icon "arrow-up" %}</a></th>
+  <th scope="col" aria-sort="ascending"><a class="orca-sort" href="#">Video{% icon "arrow-up" %}</a></th>
   <th scope="col" class="is-num" aria-sort="none"><a class="orca-sort" href="#">Count{% icon "arrow-up" %}</a></th>
   <th scope="col"><a class="orca-sort" href="#">Last seen{% icon "arrow-up" %}</a></th>
 </tr></thead><tbody><tr><td>Entrance A</td><td class="is-num">1,204</td><td>2 min ago</td></tr><tr><td>Entrance B</td><td class="is-num">980</td><td>5 min ago</td></tr></tbody></table>
@@ -296,7 +296,7 @@ The same swatch as on the video lets people match a zone to its row instantly (M
 
 ### When to use
 
-- Zone lists beside the zone editor and on camera pages.
+- Zone lists beside the zone editor and on video pages.
 
 ### How to use
 
@@ -333,7 +333,7 @@ In and out are the two numbers people compare; arrows and words make the directi
 
 ### When to use
 
-- Line-crossing counts on camera and run pages.
+- Line-crossing counts on video and run pages.
 
 ### How to use
 
@@ -405,7 +405,7 @@ A card groups everything about one object in a common region (Practical UI L01) 
 
 ### When to use
 
-- Collections of objects people browse: cameras, sites, reports.
+- Collections of objects people browse: videos, sites, reports.
 - Outlined in content; elevated over maps or media; filled inside panels.
 
 ### When not to use
@@ -421,9 +421,9 @@ A card groups everything about one object in a common region (Practical UI L01) 
 
 ```django
 <ul class="orca-card-grid">
-  <li><article class="orca-card"><div class="orca-card__body"><p class="orca-card-kicker">Outlined</p><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 cameras · 5 zones</p></div></article></li>
-  <li><article class="orca-card orca-card--elevated"><div class="orca-card__body"><p class="orca-card-kicker">Elevated</p><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 cameras · 2 zones</p></div></article></li>
-  <li><article class="orca-card orca-card--filled"><div class="orca-card__body"><p class="orca-card-kicker">Filled</p><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 cameras</p></div></article></li>
+  <li><article class="orca-card"><div class="orca-card__body"><p class="orca-card-kicker">Outlined</p><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 videos · 5 zones</p></div></article></li>
+  <li><article class="orca-card orca-card--elevated"><div class="orca-card__body"><p class="orca-card-kicker">Elevated</p><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 videos · 2 zones</p></div></article></li>
+  <li><article class="orca-card orca-card--filled"><div class="orca-card__body"><p class="orca-card-kicker">Filled</p><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 videos</p></div></article></li>
 </ul>
 ```
 
@@ -579,8 +579,8 @@ Showing progress through a multi-step task motivates finishing and sets expectat
 
 ```django
 <ol class="orca-steps">
-  <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><span class="orca-steps__title"><a href="#">Connect recorder</a><span class="orca-sr-only">, done</span></span></li>
-  <li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Choose cameras</span><span class="orca-steps__desc">Pick the doors to count</span></li>
+  <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><span class="orca-steps__title"><a href="#">Connect media server</a><span class="orca-sr-only">, done</span></span></li>
+  <li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Choose videos</span><span class="orca-steps__desc">Pick the doors to count</span></li>
   <li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Draw zones</span></li>
 </ol>
 ```
@@ -597,7 +597,7 @@ Showing progress through a multi-step task motivates finishing and sets expectat
 
 `id: tree` · level: component · source: Tangerine
 
-A hierarchy of items that expand and collapse: sites, buildings, cameras.
+A hierarchy of items that expand and collapse: sites, buildings, videos.
 
 Built from: `chevron`
 
@@ -868,9 +868,9 @@ A peeking next item is the clue that more exists (Practical UI S06); snapping st
 
 ```django
 <ul class="orca-scroller" tabindex="0" aria-label="Sites" style="max-width: 30rem; padding-inline: 0">
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 cameras</p></div></li>
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 cameras</p></div></li>
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 cameras</p></div></li>
+  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 videos</p></div></li>
+  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 videos</p></div></li>
+  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 videos</p></div></li>
 </ul>
 ```
 
@@ -927,7 +927,7 @@ The shape of a trend is understood pre-attentively; a sparkline adds that contex
 
 A ring of up to about five shares with the total in the middle and a legend with values.
 
-Built from: `legend-item`, `swatch`
+Built from: `legend-item`
 
 ### Why
 

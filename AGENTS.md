@@ -35,7 +35,14 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 7. **Icons**: `{% icon "name" %}` from the ORCA set only; icon-only buttons need `aria-label`. Never mix another set.
 8. **Every `<button>` has `type`**; every `<img>` has `alt` (`alt=""` if decorative).
 9. **Native controls first**: `<input type="date">`, `<select>`, `<dialog>`, `<details>`, `<progress>`.
-10. **Write like ORCA**: sentence case, verbs on buttons ("Save camera", never "OK"/"Submit"), no exclamation marks,
+10. **Page filters live in a right drawer.** A page's filters never sit in a row above the results or in a side
+    column: a `Filters` button (filter icon, count of applied filters) in the page actions (`{% block page_actions %}`,
+    `.orca-page-head__actions`) opens the `filter-drawer` pattern (`<dialog class="orca-drawer">`, right side).
+    Applied filters show above the results as removable tags with `Clear all` (`filter-bar`).
+11. **Grounds as in wise_people_analyzer**: the body is `--orca-bg-page` (set by ORCA); panels, cards and the
+    sidebar are `--orca-bg-panel`; stat cards are `--orca-bg-stat` with `--orca-border-stat`; the top bar is
+    `--orca-brand-bar` with `--orca-brand-bar-on` text. Patterns already apply them.
+12. **Write like ORCA**: sentence case, verbs on buttons ("Save image", never "OK"/"Submit"), no exclamation marks,
     numbers as digits with separators, errors say what happened and what to do.
 
 ## 3. Choosing between similar elements
@@ -70,7 +77,7 @@ Do not write the document skeleton yourself: extend a layout.
 
 ```django
 {% extends "orca/layouts/app.html" %}{% load orca %}
-{% block page_actions %}<a class="orca-button orca-button--primary" href="{% url 'camera-create' %}">Add camera</a>{% endblock %}
+{% block page_actions %}<a class="orca-button orca-button--primary" href="{% url 'image-create' %}">Add image</a>{% endblock %}
 {% block content %}<div class="orca-vstack">…patterns…</div>{% endblock %}
 ```
 
@@ -79,7 +86,17 @@ Context: `title`, `subtitle`, `breadcrumbs` [(label, url)], `nav` (sidebar secti
 `simple_data`; CRUD: `orca/generic/list|detail|form|confirm_delete|confirm_action.html` and the parent-child set.
 `python -m orca show app-shell` lists every block and context variable.
 
-## 5. Scope of this release
+## 5. Levels and scope of this release
+
+Each ORCA level is a group of the level before it:
+
+| Level | Is a group of | Examples |
+|---|---|---|
+| Primitive | – (smallest piece) | button, input, icon, text style, status mark |
+| Component | primitives | form field, search bar, date picker, stat card |
+| Pattern | components | page head with page actions, filter drawer, data table |
+| Template | patterns | app shell, list page, detail page |
+| Page | a template with real content | the empty, overdue, right-to-left and dark variations |
 
 Released: **primitives**, **components**, **patterns** and **templates**. Pages from the ORCA guide come next.
 Start every page from a template: extend `orca/layouts/app.html` (or a page-type layout) and fill its blocks;

@@ -18,7 +18,7 @@ add(Component(
     laws=["fitts", "miller", "doherty"],
     uses=["checkbox", "assignee-chip", "due-date-chip", "priority-chip"],
     examples=[("Tasks", """<div style="max-width: 36rem">
-  <div class="orca-task"><label class="orca-check"><input type="checkbox" aria-label="Recalibrate Entrance A camera"><span class="orca-check__box"></span></label><span class="orca-task__title">Recalibrate Entrance A camera</span>
+  <div class="orca-task"><label class="orca-check"><input type="checkbox" aria-label="Trim Entrance A video"><span class="orca-check__box"></span></label><span class="orca-task__title">Trim Entrance A video</span>
     <div class="orca-task__meta"><span class="orca-chip"><span class="orca-avatar orca-avatar--xs" aria-hidden="true">AL</span><span class="orca-chip__text">Ada Lovelace</span></span><span class="orca-chip orca-chip--soon">{% icon "calendar" %}Due tomorrow</span><span class="orca-chip"><span class="orca-priority orca-priority--high"><span class="orca-priority__bars" aria-hidden="true"><i></i><i></i><i></i></span>High</span></span></div></div>
   <div class="orca-task orca-task--done"><label class="orca-check"><input type="checkbox" checked aria-label="Draw zones for Gate 1"><span class="orca-check__box"></span></label><span class="orca-task__title">Draw zones for Gate 1</span><div class="orca-task__meta"><span class="orca-chip orca-chip--done">Done</span></div></div>
 </div>""")],
@@ -35,9 +35,9 @@ add(Component(
     laws=["L01", "miller"],
     uses=["task-item", "progress-chip"],
     examples=[("Subtasks", """<div style="max-width: 36rem">
-  <div class="orca-task"><label class="orca-check"><input type="checkbox" aria-label="Install Gate 1 camera"><span class="orca-check__box"></span></label><span class="orca-task__title">Install Gate 1 camera</span><div class="orca-task__meta"><span class="orca-chip"><span class="orca-chip__bar" style="--orca-value: 50%"><span></span></span>1/2</span></div></div>
+  <div class="orca-task"><label class="orca-check"><input type="checkbox" aria-label="Upload Gate 1 video"><span class="orca-check__box"></span></label><span class="orca-task__title">Upload Gate 1 video</span><div class="orca-task__meta"><span class="orca-chip"><span class="orca-chip__bar" style="--orca-value: 50%"><span></span></span>1/2</span></div></div>
   <div class="orca-task orca-task--sub orca-task--done"><label class="orca-check"><input type="checkbox" checked aria-label="Mount bracket"><span class="orca-check__box"></span></label><span class="orca-task__title">Mount bracket</span></div>
-  <div class="orca-task orca-task--sub"><label class="orca-check"><input type="checkbox" aria-label="Connect to recorder"><span class="orca-check__box"></span></label><span class="orca-task__title">Connect to recorder</span></div>
+  <div class="orca-task orca-task--sub"><label class="orca-check"><input type="checkbox" aria-label="Connect to media server"><span class="orca-check__box"></span></label><span class="orca-task__title">Connect to media server</span></div>
 </div>""")],
     guide=["Subtask item"],
 ))
@@ -163,8 +163,8 @@ add(Component(
     laws=["L03", "C03"],
     uses=["milestone-marker", "progress-bar"],
     examples=[("Timeline", """<div class="orca-table-wrap"><div class="orca-gantt" style="--orca-cols: 7" role="list" aria-label="Installation plan, week 45">
-  <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Mount cameras</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--done" href="#" style="--orca-start: 0%; --orca-span: 28%; --orca-progress: 100%">Done</a></span></div>
-  <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Connect recorders</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar" href="#" style="--orca-start: 28%; --orca-span: 43%; --orca-progress: 60%">60%</a></span></div>
+  <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Upload videos</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--done" href="#" style="--orca-start: 0%; --orca-span: 28%; --orca-progress: 100%">Done</a></span></div>
+  <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Connect media servers</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar" href="#" style="--orca-start: 28%; --orca-span: 43%; --orca-progress: 60%">60%</a></span></div>
   <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Draw zones</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--late" href="#" style="--orca-start: 57%; --orca-span: 28%">Late</a><span class="orca-milestone" style="--orca-start: 92%" role="img" aria-label="Go live milestone"></span></span></div>
 </div></div>""")],
     guide=["Gantt bar"],
@@ -195,8 +195,8 @@ add(Component(
     classes=[".orca-board-card", ".orca-board-card__head", ".orca-board-card__title", ".orca-board-card__foot"],
     laws=["miller", "postel", "fitts"],
     uses=["drag-handle", "tag", "due-date-chip", "avatar"],
-    examples=[("Card", """<article class="orca-board-card" style="max-width: 18rem"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Recalibrate Entrance A">{% icon "drag" %}</button><h3 class="orca-board-card__title"><a href="#">Recalibrate Entrance A</a></h3></div>
-  <div class="orca-row"><span class="orca-tag">Camera</span><span class="orca-tag">North building</span></div>
+    examples=[("Card", """<article class="orca-board-card" style="max-width: 18rem"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Trim Entrance A video">{% icon "drag" %}</button><h3 class="orca-board-card__title"><a href="#">Trim Entrance A video</a></h3></div>
+  <div class="orca-row"><span class="orca-tag">Video</span><span class="orca-tag">North building</span></div>
   <div class="orca-board-card__foot"><span class="orca-chip orca-chip--soon">{% icon "calendar" %}Tomorrow</span><span class="orca-avatar orca-avatar--xs" title="Ada Lovelace">AL</span></div></article>""")],
     guide=["Board card"],
 ))

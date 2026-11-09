@@ -32,7 +32,7 @@ GUIDE = [
     ("accessibility", "Accessibility", "Contrast, focus, touch targets, motion and markup commitments, and how they are tested."),
     ("localization", "Localization", "Translation, right-to-left layouts, text expansion, dates, times and numbers."),
     ("tooling", "Tooling", "Command line, lint, system checks, the build and the static documentation export."),
-    ("roadmap", "Levels and roadmap", "The five ORCA levels and what each release delivers."),
+    ("roadmap", "Levels and roadmap", "The five ORCA levels, each a group of the one before, and what each release delivers."),
 ]
 GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
 # Icons of the documentation sidebar (shown alone when it is collapsed to a rail).
@@ -89,7 +89,7 @@ def _stats() -> dict:
 def home(request):
     _guard()
     hero = mark_safe(render_snippet("""<div class="orca-row orca-row--16">
-  <button class="orca-button orca-button--primary" type="button">Save camera</button>
+  <button class="orca-button orca-button--primary" type="button">Save image</button>
   <button class="orca-button" type="button">Cancel</button>
   <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
   <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
@@ -162,8 +162,12 @@ def guide(request, slug):
     if slug == "principles":
         extra.update(principles=_principles())
     if slug == "roadmap":
-        extra.update(stats=_stats(), coverage=[(registry.LEVEL_TITLES[lvl], [(s, len(items)) for s, items in LEVELS[lvl].items()])
-                                             for lvl in registry.RELEASED_LEVELS])
+        level_defs = [{"level": lv, "released": lv.key in registry.RELEASED_LEVELS,
+                       "next": lv.key not in registry.RELEASED_LEVELS and (i == 0 or registry.LEVEL_DEFS[i - 1].key in registry.RELEASED_LEVELS)}
+                      for i, lv in enumerate(registry.LEVEL_DEFS)]
+        extra.update(stats=_stats(), level_defs=level_defs,
+                     coverage=[(registry.LEVEL_TITLES[lvl], [(s, len(items)) for s, items in LEVELS[lvl].items()])
+                               for lvl in registry.RELEASED_LEVELS])
     if slug == "tooling":
         extra.update(stats=_stats())
     index = [s for s, _, _ in GUIDE].index(slug)

@@ -26,8 +26,8 @@ def _col(key, name, cards, limit="", over=False):
 
 BOARD = ('<div class="orca-board" data-orca-board aria-label="Installation board">'
          + _col("planned", "Planned", [_card("kb-1", "Draw zones for Gate 1", "Zones", "Fri 13 Nov", "GH")])
-         + _col("progress", "In progress", [_card("kb-2", "Recalibrate Entrance A", "Camera", "Tomorrow", "AL", "soon"),
-                                            _card("kb-3", "Connect Gate 1 recorder", "Network", "Mon 9 Nov", "AT")], limit="2")
+         + _col("progress", "In progress", [_card("kb-2", "Trim Entrance A video", "Video", "Tomorrow", "AL", "soon"),
+                                            _card("kb-3", "Connect Gate 1 media server", "Network", "Mon 9 Nov", "AT")], limit="2")
          + _col("done", "Done", [_card("kb-4", "Mount Gate 1 bracket", "Install", "2 Nov", "AT")])
          + "</div>")
 
@@ -35,12 +35,12 @@ add(Pattern(
     "task-list", "Task list", C,
     "Tasks grouped by status or due date, each with a checkbox, assignee, due chip and status, plus an inline add row.",
     why="A checklist is the most familiar planning tool (Jakob's law); ticking a task off gives immediate progress (Peak–end rule). Groups keep the list scannable (Practical UI L09).",
-    when=["Personal and team to-dos, per-record tasks (a camera's maintenance tasks)."],
+    when=["Personal and team to-dos, per-record tasks (a video's maintenance tasks)."],
     how=["`<div class=\"orca-task-list\">` with `h3.orca-task-list__group` headings and task items; end with `.orca-task-list__add` (input + Add).",
          "Ticking posts immediately (htmx) and moves the task to Done with an undo toast; sort overdue first."],
     classes=[".orca-task-list", ".orca-task-list__group", ".orca-task-list__add"],
     laws=["jakob", "peak-end", "L09"],
-    uses=["task-item", "assignee-chip", "due-date-chip", "status-chip"],
+    uses=["task-item", "status-chip"],
     examples=[("Tasks", '<div class="orca-task-list" style="max-width: 40rem"><h3 class="orca-task-list__group">This week</h3>' + TASKS
               + '<form class="orca-task-list__add" onsubmit="return false"><input class="orca-input orca-input--dense" aria-label="New task" placeholder="Add a task"><button class="orca-button orca-button--dense" type="submit">Add</button></form></div>')],
     guide=["Task list"],
@@ -76,8 +76,8 @@ add(Pattern(
     uses=["gantt-bar", "milestone-item"],
     examples=[("Week 45", """<div class="orca-table-wrap"><div class="orca-gantt-chart" style="--orca-cols: 7"><div class="orca-gantt-chart__scale"><span></span><span>Mon 2</span><span>Tue 3</span><span>Wed 4</span><span>Thu 5</span><span class="is-today">Fri 6</span><span>Sat 7</span><span>Sun 8</span></div>
   <div class="orca-gantt" style="--orca-cols: 7" role="list" aria-label="Installation plan, week 45"><span class="orca-gantt-chart__today" style="--orca-at: 0.64" aria-hidden="true"></span>
-    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Mount cameras</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--done" href="#" style="--orca-start: 0%; --orca-span: 28%; --orca-progress: 100%">Done</a></span></div>
-    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Connect recorders</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar" href="#" style="--orca-start: 28%; --orca-span: 43%; --orca-progress: 60%">60%</a></span></div>
+    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Upload videos</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--done" href="#" style="--orca-start: 0%; --orca-span: 28%; --orca-progress: 100%">Done</a></span></div>
+    <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Connect media servers</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar" href="#" style="--orca-start: 28%; --orca-span: 43%; --orca-progress: 60%">60%</a></span></div>
     <div class="orca-gantt-row" role="listitem"><span class="orca-gantt-row__label">Draw zones</span><span class="orca-gantt-row__lane"><a class="orca-gantt-bar orca-gantt-bar--late" href="#" style="--orca-start: 43%; --orca-span: 28%">Late</a><span class="orca-milestone" style="--orca-start: 92%" role="img" aria-label="Go live milestone, Sunday 8"></span></span></div></div></div></div>""")],
     guide=["Gantt chart"],
 ))
@@ -126,7 +126,7 @@ add(Pattern(
     laws=["peak-end", "restorff"],
     uses=["summary-tiles", "planning-summary", "period-selector", "callout"],
     examples=[("Sprint 45", """<div class="orca-period-overview" style="max-width: 44rem"><div class="orca-row" style="justify-content: space-between"><div><h2 class="orca-h3" style="margin: 0">Sprint 45</h2><p class="orca-small orca-muted">2–13 November · 5 working days left</p></div><nav class="orca-segmented orca-segmented--dense" aria-label="Sprint"><a class="orca-segmented__item" href="#">44</a><a class="orca-segmented__item" href="#" aria-current="page">45</a><a class="orca-segmented__item" href="#">46</a></nav></div>
-  <div class="orca-callout">{% icon "flag" %}<p class="orca-callout__title">Goal: Warehouse cameras counting by Friday 13</p></div>
+  <div class="orca-callout">{% icon "flag" %}<p class="orca-callout__title">Goal: Warehouse videos published by Friday 13</p></div>
   <dl class="orca-summary-tiles"><div class="orca-summary-tile"><dt>Done</dt><dd>12</dd></div><div class="orca-summary-tile"><dt>Open</dt><dd>6</dd></div><div class="orca-summary-tile"><dt>Late</dt><dd>2</dd></div></dl>
   <progress class="orca-progress" value="12" max="20" aria-label="12 of 20 tasks done"></progress></div>""")],
     guide=["Sprint or period overview"],
@@ -157,7 +157,7 @@ add(Pattern(
     how=["`<div class=\"orca-deadline-list\">` with `h3.orca-deadline-list__group` (overdue modifier) and deadline items."],
     classes=[".orca-deadline-list", ".orca-deadline-list__group", ".orca-deadline-list__group--overdue"],
     laws=["L03", "restorff"],
-    uses=["deadline-item", "due-date-chip"],
+    uses=["deadline-item"],
     examples=[("Deadlines", """<div class="orca-deadline-list" style="max-width: 32rem"><h3 class="orca-deadline-list__group orca-deadline-list__group--overdue">Overdue</h3>
   <div class="orca-plan-row">{% icon "flag" %}<span class="orca-plan-row__body"><span>Quarterly report</span><span class="orca-plan-row__meta">Due 4 November 2026</span></span><span class="orca-overdue">{% icon "error" %}Overdue by 2 days</span></div>
   <h3 class="orca-deadline-list__group">This week</h3>
@@ -185,17 +185,17 @@ add(Pattern(
 
 add(Pattern(
     "plan-filter-bar", "Plan filter bar", C,
-    "Filters above a plan: period, assignee and status, with active filters as removable chips and a count of results.",
-    why="Plans get long; the three questions people ask (when, who, what state) as visible filters cover most needs (Hick's law, Practical UI S08) and chips show what is hidden.",
+    "Above a plan: the period shown, the applied assignee and status filters as removable chips, and the number of results.",
+    why="Plans get long; the three questions people ask (when, who, what state) must stay answerable at a glance (Hick's law, Practical UI S08). "
+        "The period is a view control, so it stays visible; assignee and status are page filters, so they live in the filter drawer and show here as chips.",
     when=["Above task lists, boards, Gantt charts and deadline lists."],
-    how=["A filter bar (GET form) with the period selector, an assignee select and a status select; then filter chips and 'Clear all'; results count announced politely."],
-    classes=[".orca-filter-bar"],
+    how=["A row with the period selector, then the applied filters as removable chips with 'Clear all', and the results count announced politely.",
+         "Assignee and status are chosen in the `filter-drawer`, opened by the Filters button in the page actions."],
+    classes=[".orca-filter-bar", ".orca-filter-bar__applied"],
     laws=["hick", "S08"],
-    uses=["filter-bar", "period-selector", "tag"],
-    examples=[("Filters", """<form class="orca-filter-bar" method="get" onsubmit="return false"><nav class="orca-segmented orca-segmented--dense" aria-label="Period"><a class="orca-segmented__item" href="#" aria-current="page">This week</a><a class="orca-segmented__item" href="#">Next week</a><a class="orca-segmented__item" href="#">This month</a></nav>
-  <div class="orca-field"><label class="orca-label orca-sr-only" for="pf-a">Assignee</label><select class="orca-select orca-select--dense" id="pf-a"><option>Everyone</option><option selected>Alan Turing</option></select></div>
-  <div class="orca-field"><label class="orca-label orca-sr-only" for="pf-s">Status</label><select class="orca-select orca-select--dense" id="pf-s"><option>Any status</option><option>Open</option><option>Blocked</option></select></div>
-  <span class="orca-small orca-muted" aria-live="polite">2 tasks</span></form>""")],
+    uses=["filter-bar", "period-selector"],
+    examples=[("Plan filters", """<div class="orca-filter-bar"><nav class="orca-segmented orca-segmented--dense" aria-label="Period"><a class="orca-segmented__item" href="#" aria-current="page">This week</a><a class="orca-segmented__item" href="#">Next week</a><a class="orca-segmented__item" href="#">This month</a></nav>
+  <div class="orca-filter-bar__applied"><span class="orca-small orca-muted">Filtered by</span><span class="orca-tag"><span class="orca-tag__text">Assignee: Alan Turing</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Assignee: Alan Turing">{% icon "close" %}</button></span><button class="orca-button orca-button--link" type="button">Clear all</button><span class="orca-small orca-muted" aria-live="polite">2 tasks</span></div></div>""")],
     guide=["Plan filter bar (period, assignee, status)"],
 ))
 
@@ -204,10 +204,11 @@ add(Pattern(
     "A period filter for reports and plans: quick presets plus a custom from–to range, showing the chosen dates.",
     why="Most people want 'this week' or 'last 30 days' (Practical UI S08, Hick's law), so presets come first; a custom range covers the rest, and the chosen dates are always printed so the period is never ambiguous.",
     when=["Above charts, reports, plan views and exports."],
-    how=["A filter bar with preset buttons (`aria-pressed`), a date range picker revealed by 'Custom', and the resolved dates; submit as `?from=…&to=…`."],
+    how=["A filter bar with preset buttons (`aria-pressed`), a date range picker revealed by 'Custom', and the resolved dates; submit as `?from=…&to=…`.",
+         "The period is a view control and stays visible; any other filter of the page goes in the filter drawer."],
     classes=[".orca-filter-bar", ".orca-presets"],
     laws=["S08", "hick"],
-    uses=["preset-buttons", "date-range-picker", "filter-bar"],
+    uses=["date-range-picker", "filter-bar"],
     examples=[("Period", """<form class="orca-filter-bar" method="get" onsubmit="return false"><div class="orca-presets" role="group" aria-label="Quick periods"><button class="orca-tag" type="button" aria-pressed="false">Today</button><button class="orca-tag" type="button" aria-pressed="true">This week</button><button class="orca-tag" type="button" aria-pressed="false">Last 30 days</button><button class="orca-tag" type="button" aria-pressed="false">Custom</button></div>
   <fieldset class="orca-inline-fields" data-orca-range><legend class="orca-sr-only">Custom period</legend><div class="orca-field"><label class="orca-label" for="drf-a">From</label><input class="orca-input orca-input--dense" type="date" id="drf-a" value="2026-11-02"></div><span class="orca-inline-fields__sep" aria-hidden="true">–</span><div class="orca-field"><label class="orca-label" for="drf-b">To</label><input class="orca-input orca-input--dense" type="date" id="drf-b" value="2026-11-08"></div><p class="orca-inline-fields__note" data-orca-range-output aria-live="polite">7 days</p></fieldset></form>""")],
     guide=["Date-range filter bar"],

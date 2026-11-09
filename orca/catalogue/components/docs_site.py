@@ -19,8 +19,8 @@ add(Component(
     uses=["tab-bar", "code-block"],
     examples=[("Example", """<div class="orca-live-example">
   <div class="orca-tabs__list" role="tablist" aria-label="Example" data-orca-tabs><button class="orca-tab" role="tab" type="button" id="le-t1" aria-controls="le-p1" aria-selected="true">Preview</button><button class="orca-tab" role="tab" type="button" id="le-t2" aria-controls="le-p2" aria-selected="false">Code</button></div>
-  <div class="orca-tabs__panel" role="tabpanel" id="le-p1" aria-labelledby="le-t1"><button class="orca-button orca-button--primary" type="button">Save camera</button></div>
-  <div class="orca-tabs__panel orca-tabs__panel--code" role="tabpanel" id="le-p2" aria-labelledby="le-t2" hidden><div class="orca-code-block"><pre><code>&lt;button class="orca-button orca-button--primary" type="button"&gt;Save camera&lt;/button&gt;</code></pre></div></div>
+  <div class="orca-tabs__panel" role="tabpanel" id="le-p1" aria-labelledby="le-t1"><button class="orca-button orca-button--primary" type="button">Save video</button></div>
+  <div class="orca-tabs__panel orca-tabs__panel--code" role="tabpanel" id="le-p2" aria-labelledby="le-t2" hidden><div class="orca-code-block"><pre><code>&lt;button class="orca-button orca-button--primary" type="button"&gt;Save video&lt;/button&gt;</code></pre></div></div>
 </div>""")],
     guide=["Live example (preview and code tabs)"],
 ))
@@ -34,7 +34,7 @@ add(Component(
          "Lines scroll sideways instead of wrapping; keep samples short and runnable."],
     classes=[".orca-code-block", ".orca-code-block__head"],
     laws=["doherty", "tesler", "T01"],
-    uses=["code-text", "copy-button"],
+    uses=["copy-button"],
     examples=[("Settings", """<div class="orca-code-block" style="max-width: 32rem"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="cbk-1"><span data-orca-copy-label>Copy</span></button></div><pre><code id="cbk-1">ORCA = {
     "BRAND": {"name": "Acme", "color": "#0f95a1"},
 }</code></pre></div>""")],

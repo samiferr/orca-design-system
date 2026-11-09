@@ -184,7 +184,7 @@ mailto links fail silently on many setups; showing the address with a Copy butto
 
 ```django
 <div class="orca-stack" style="align-items: flex-start">
-  <a class="orca-button" href="mailto:support@example.com?subject=Camera%20offline">{% icon "mail" %}Email support</a>
+  <a class="orca-button" href="mailto:support@example.com?subject=Video%20offline">{% icon "mail" %}Email support</a>
   <div class="orca-copy"><code class="orca-copy__value" id="ef-addr">support@example.com</code><button class="orca-button orca-button--dense" type="button" data-orca-copy="ef-addr"><span data-orca-copy-label>Copy address</span></button></div>
 </div>
 ```

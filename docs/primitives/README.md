@@ -129,7 +129,7 @@ Images, frames and graphics. Reserve their space, describe them, and keep text r
 - `thumbnail` **Thumbnail image**: A small square preview (48 or 96px) cropped to fill.
 - `hero-image` **Hero image**: A wide image (21:9, 4:3 on phones) heading a marketing or landing page.
 - `media-frame` **Aspect-ratio frame**: A box with a fixed aspect ratio that holds an image, video, map or chart and reserves its space.
-- `snapshot-image` **Snapshot image**: A camera snapshot in a 16:9 frame with its camera and capture time on a solid caption bar.
+- `snapshot-image` **Snapshot image**: A still image taken from a video, in a 16:9 frame with its source and capture time on a solid caption bar.
 - `recording-frame` **Recording frame**: A video or stream frame marked as recording or live with a red outline and a worded flag.
 - `video-frame` **Video frame**: A native `<video>` with controls inside an aspect-ratio frame.
 - `illustration` **Illustration (empty, search, error)**: Simple token-coloured line illustrations for empty, no-result and error states.
@@ -166,7 +166,7 @@ Feedback while something takes time. Respond within 400 ms; show progress for lo
 The small marks charts, legends, zones and heat maps are made of. Every colour mark has a text label nearby.
 
 - `swatch` **Swatch**: A small square of colour that keys a legend entry or shows a chosen colour.
-- `zone-swatch` **Zone swatch**: A mark matching how a counting zone is drawn on video: coloured outline with a light fill, hatched when excluded.
+- `zone-swatch` **Zone swatch**: A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.
 - `chart-dot` **Dot (chart marker)**: A data-point marker: round, square, diamond or ring, coloured by series.
 - `heat-cell` **Heat-map cell**: A cell shaded on a 6-step sequential scale, with its value printed in it.
 

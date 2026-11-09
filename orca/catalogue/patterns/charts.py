@@ -17,7 +17,7 @@ A11Y = ["Colour is never the only key: series have a legend; lines change dash; 
 
 def chart(eid, name, kind, summary, why, when, avoid, how, data, guide, extra="", laws=("C03", "W11")):
     add(Pattern(eid, name, C, summary, why=why, when=when, avoid=avoid, how=list(how) + COMMON, a11y=A11Y,
-                classes=[".orca-chart", ".orca-chart-frame"], laws=list(laws), uses=["chart-frame", "legend-item", "swatch"],
+                classes=[".orca-chart", ".orca-chart-frame"], laws=list(laws), uses=["chart-frame"],
                 examples=[(name, f'{{% orca_chart "{kind}" {data} {extra}%}}')], guide=[guide]))
 
 
@@ -61,9 +61,9 @@ chart("scatter-chart", "Scatter chart", "scatter",
 chart("bubble-chart", "Bubble chart", "bubble",
       "A scatter chart whose point size shows a third value.",
       "Size adds a third dimension (for example site size) without a second chart; the data table gives exact values because area is hard to compare.",
-      ["Three measures per item, where the third is secondary: sites by dwell, visits and number of cameras."], ["Exact comparison of the third value: use a table."],
+      ["Three measures per item, where the third is secondary: sites by dwell, visits and number of videos."], ["Exact comparison of the third value: use a table."],
       ["Values are `x:y:size`; size scales by area, not radius."],
-      'sample.sites_bubble title="Sites" subtitle="x: average dwell (min), y: visits per hour, size: cameras"', "Bubble chart")
+      'sample.sites_bubble title="Sites" subtitle="x: average dwell (min), y: visits per hour, size: videos"', "Bubble chart")
 
 chart("radar-chart", "Radar chart", "radar",
       "Scores on several axes drawn as a polygon, comparing one or two items.",

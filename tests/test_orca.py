@@ -93,7 +93,7 @@ class CatalogueTests(SimpleTestCase):
 
 
 class ContrastTests(SimpleTestCase):
-    GROUNDS = ("bg", "bg-alt", "bg-input")
+    GROUNDS = ("bg", "bg-alt", "bg-input", "bg-page", "bg-panel", "bg-stat")
 
     def value(self, name, theme):
         tok = next(t for t in tokens.semantic_tokens() if t.name == name)
@@ -135,6 +135,14 @@ class BrandTests(SimpleTestCase):
         css = b.css["light"]
         self.assertGreaterEqual(color.contrast(css["--orca-brand-on"], css["--orca-brand-strong"]), 4.5)
         self.assertGreaterEqual(color.contrast(b.css["dark"]["--orca-accent"], "#262626"), 4.5)
+
+    def test_brand_bar_matches_wise_people_analyzer_and_reads(self):
+        css = compute_brand({}).css["light"]
+        self.assertEqual(css["--orca-brand-bar"], color.mix("#0f95a1", "#000000", 0.30))
+        for name in ("--orca-brand-bar", "--orca-brand-bar-hover", "--orca-brand-bar-active"):
+            self.assertGreaterEqual(color.contrast("#ffffff", css[name]), 4.5, name)
+        pale = compute_brand({"color": "#ffd400"}).css["light"]["--orca-brand-bar"]
+        self.assertGreaterEqual(color.contrast("#ffffff", pale), 4.5)
 
     def test_liberal_input_is_normalised(self):
         b = compute_brand({"color": "7A1FA2", "accent": "#06C"})
@@ -279,6 +287,68 @@ class DocsSiteTests(SimpleTestCase):
         self.assertEqual(self.client.get(reverse("orca:index")).status_code, 404)
 
 
+class LevelTests(SimpleTestCase):
+    def test_each_level_groups_the_level_before_it(self):
+        keys = [lv.key for lv in registry.LEVEL_DEFS]
+        self.assertEqual(tuple(keys), registry.LEVELS)
+        self.assertEqual(registry.LEVEL_DEFS[0].built_from, "")
+        for before, level in zip(registry.LEVEL_DEFS, registry.LEVEL_DEFS[1:]):
+            self.assertEqual(level.built_from, before.key)
+
+    def test_built_from_lists_have_no_redundant_parts(self):
+        els = {e.id: e for e in registry.all_elements()}
+
+        def parts(eid, seen):
+            for u in els[eid].uses:
+                if u in els and u not in seen:
+                    seen.add(u)
+                    parts(u, seen)
+            return seen
+
+        redundant = [(e.id, u) for e in els.values() for u in e.uses
+                     if any(u in parts(o, set()) for o in e.uses if o != u)]
+        self.assertEqual(redundant, [], "a part already contained in another listed element is listed again")
+
+    def test_roadmap_has_no_atomic_design_aliases(self):
+        res = self.client.get(reverse("orca:guide", args=["roadmap"]))
+        for alias in ("Atoms", "Molecules", "Organisms"):
+            self.assertNotContains(res, alias)
+        self.assertContains(res, "A group of components that")
+
+
+class PageFilterTests(SimpleTestCase):
+    def test_level_pages_have_filters_in_a_right_drawer_opened_from_the_page_actions(self):
+        html = self.client.get(reverse("orca:index")).content.decode()
+        actions = html[html.index('class="orca-page-head__actions"'):]
+        self.assertIn('data-orca-dialog-open="docs-filters"', actions[:600])
+        self.assertIn('<dialog class="orca-drawer" id="docs-filters"', html)
+
+    def test_generic_templates_open_filters_from_the_page_actions(self):
+        from django import forms
+        from django.template.loader import render_to_string
+        from django.test import RequestFactory
+
+        class Filters(forms.Form):
+            kind = forms.ChoiceField(choices=[("image", "Image"), ("video", "Video")], required=False)
+
+        ctx = {"filter_form": Filters(), "active_filters": 1, "object_list": [], "model_name": "image",
+               "model_name_plural": "images", "request": RequestFactory().get("/")}
+        for name in ("orca/generic/list.html", "orca/layouts/simple_data.html", "orca/layouts/board.html"):
+            with self.subTest(template=name):
+                html = render_to_string(name, ctx)
+                actions = html[html.index('class="orca-page-head__actions"'):]
+                self.assertIn('data-orca-dialog-open="orca-filters"', actions[:400])
+                self.assertIn('<dialog class="orca-drawer" id="orca-filters"', html)
+                self.assertNotIn('class="orca-filter-bar" method', html)
+                self.assertNotIn('<form class="orca-filter-panel"', html)
+
+    def test_no_camera_terminology(self):
+        sources = [ROOT / "AGENTS.md", ROOT / "README.md", *(ROOT / "orca").rglob("*.py"), *(ROOT / "orca/templates").rglob("*.html"),
+                   *(ROOT / "orca/static/orca").rglob("*.css")]
+        hits = [str(p) for p in sources if re.search(r"camera|rtsp|recorder|\bnvr\b|capture run", p.read_text(), re.I)]
+        self.assertEqual(hits, [])
+
+
 class ComponentTagTests(SimpleTestCase):
     def render(self, src, **ctx):
         return Template("{% load orca %}" + src).render(Context(ctx))
@@ -336,12 +406,12 @@ class ComponentTagTests(SimpleTestCase):
         from django.core.paginator import Paginator
         from django.test import RequestFactory
 
-        request = RequestFactory().get("/cameras/", {"site": "north", "page": "3"})
+        request = RequestFactory().get("/videos/", {"site": "north", "page": "3"})
         page = Paginator(list(range(100)), 10).page(3)
-        out = self.render('{% orca_pagination page noun="cameras" %}', page=page, request=request)
+        out = self.render('{% orca_pagination page noun="videos" %}', page=page, request=request)
         self.assertIn("site=north&amp;page=4", out)
         self.assertIn('aria-current="page"', out)
-        self.assertIn("Showing 21–30 of 100 cameras", out)
+        self.assertIn("Showing 21–30 of 100 videos", out)
 
     def test_mini_calendar(self):
         from django.utils import translation
@@ -525,11 +595,11 @@ class TemplateLevelTests(SimpleTestCase):
         from orca.mixins import OrcaPageMixin
 
         class Field:
-            verbose_name = "camera name"
+            verbose_name = "video name"
             choices = None
 
         class Meta:
-            verbose_name, verbose_name_plural = "camera", "cameras"
+            verbose_name, verbose_name_plural = "video", "videos"
 
             def get_field(self, name):
                 if name == "name":
@@ -542,8 +612,8 @@ class TemplateLevelTests(SimpleTestCase):
             create_url_name = "orca:home"
 
         ctx = V().get_context_data()
-        self.assertEqual(ctx["model_name_plural"], "cameras")
-        self.assertEqual([c["label"] for c in ctx["columns"]], ["Camera name", "Counted today", "Last seen"])
+        self.assertEqual(ctx["model_name_plural"], "videos")
+        self.assertEqual([c["label"] for c in ctx["columns"]], ["Video name", "Counted today", "Last seen"])
         self.assertEqual(ctx["create_url"], reverse("orca:home"))
 
 
@@ -566,7 +636,7 @@ class LintTests(SimpleTestCase):
     def test_lint_passes_clean_file(self):
         with tempfile.TemporaryDirectory() as d:
             good = Path(d, "good.html")
-            good.write_text('<button class="orca-button orca-button--primary" type="submit">Save camera</button>\n')
+            good.write_text('<button class="orca-button orca-button--primary" type="submit">Save image</button>\n')
             out = io.StringIO()
             call_command("orca_lint", str(good), stdout=out)
             self.assertIn("No ORCA problems", out.getvalue())

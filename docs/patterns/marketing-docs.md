@@ -8,7 +8,7 @@ Sections for a product's public pages and its documentation: hero, features, liv
 
 The full-width opening band of a landing page: headline, lead, actions, proof points and an image, edged with the brand bar.
 
-Built from: `hero`, `button`
+Built from: `hero`
 
 ### Why
 
@@ -27,10 +27,10 @@ The first screen decides whether people stay; one headline stating the benefit a
 
 ```django
 <section class="orca-marketing-hero"><div class="orca-hero">
-  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Count visitors with the cameras you already have. No new hardware.</p>
+  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Publish the videos you already have. Nothing to install.</p>
     <div class="orca-row"><a class="orca-button orca-button--brand" href="#">Start free trial</a><a class="orca-button" href="#">See a demo</a></div>
-    <ul class="orca-marketing-hero__proof"><li>{% icon "success" size="xs" %} 97% average accuracy</li><li>{% icon "success" size="xs" %} Works with ONVIF cameras</li></ul></div>
-  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from a ceiling camera"></div></div></section>
+    <ul class="orca-marketing-hero__proof"><li>{% icon "success" size="xs" %} 97% average accuracy</li><li>{% icon "success" size="xs" %} Works with ONVIF videos</li></ul></div>
+  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from above"></div></div></section>
 ```
 
 **Classes:** `.orca-marketing-hero`, `.orca-marketing-hero__proof`
@@ -197,7 +197,7 @@ Readers decide in seconds whether a page answers their question; a front-loaded 
 
 The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open and visible.
 
-Built from: `docs-nav-tree`, `search-field`, `drawer`
+Built from: `docs-nav-tree`, `drawer`
 
 ### Why
 

@@ -19,15 +19,15 @@ The parts every page sits in: headers, top bar, sidebar, footer, page head, mess
 - `drawer` **Drawer**: A panel that slides over the page from one edge, built on the native dialog.
 - `top-actions-header` **Top actions header**: A thin row above a detail or form page: back link on one side, the page's actions on the other.
 - `settings-panel` **Settings panel**: Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.
-- `filter-panel` **Filter panel**: Filters in labelled groups beside a list, with the number of results and Clear all.
-- `filter-drawer` **Filter drawer**: The filter panel in a drawer, with Apply and Clear, for phones and narrow screens.
+- `filter-panel` **Filter panel**: Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.
+- `filter-drawer` **Filter drawer**: Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.
 
 ## [Grids and collections](grids.md) (5)
 
-Repeating one component in a responsive grid or sequence: products, cameras, KPIs, a heat map, an event timeline.
+Repeating one component in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.
 
 - `product-grid` **Product grid**: Product items in a responsive grid that adapts the number of columns to the screen.
-- `camera-grid` **Camera grid**: Camera cards in a grid, pinned cameras first, offline cameras clearly marked.
+- `video-grid` **Video grid**: Video cards in a grid, pinned videos first, offline videos clearly marked.
 - `kpi-grid` **KPI grid**: A row of stat cards summarising the state of things, linking to the detail behind each.
 - `capacity-heat-map` **Capacity heat map**: Occupancy by weekday and hour as shaded cells with the value printed, and a legend of the scale.
 - `event-timeline` **Event timeline**: Alerts and events grouped by day, newest first, each with its status, time and snapshot.
@@ -37,12 +37,12 @@ Repeating one component in a responsive grid or sequence: products, cameras, KPI
 Tables, panels and the controls that narrow them: filter bars, list headers, summary tiles and record cards.
 
 - `data-table` **Data table**: A table of records with a toolbar, selectable rows, sortable headers, row actions and a pager; rows become cards on phones.
-- `accuracy-table` **Accuracy table**: Counted versus reference values per camera, with the difference and an accuracy bar coloured by threshold.
-- `filter-bar` **Filter bar**: A row of filters above a list or report, with the applied filters as removable tags and Clear all.
+- `accuracy-table` **Accuracy table**: Counted versus reference values per video, with the difference and an accuracy bar coloured by threshold.
+- `filter-bar` **Filter bar**: The row above the results that shows the applied filters as removable tags, the result count and Clear all.
 - `panel` **Panel**: A bordered section of a page with a header, a body and optional footer actions.
 - `tabbed-panel-set` **Tabbed panel set**: One panel whose body switches between related views with tabs.
 - `card-list` **Card list**: Records as a vertical list of cards: name, key facts and actions; the phone-friendly alternative to a table.
-- `list-header` **List header**: Above a list: its title with the count, a search, the filter button, the view toggle and the create action.
+- `list-header` **List header**: Above a list: its title with the count, a search, the view toggle and, for a list panel inside a page, its create action.
 - `summary-tiles` **Summary tiles**: A row of small counts by status that also act as quick filters.
 - `autocomplete-results-table` **Autocomplete results table**: Search-as-you-type results shown as a compact table with the matched text highlighted.
 
@@ -53,7 +53,7 @@ Whole form sections and specialised editors: sections, stacks, sign-in, schedule
 - `form-section` **Form section**: A titled group of related fields with a short explanation beside them.
 - `form-stack` **Form stack**: Fields in one column (the default), or two columns for short, closely related fields.
 - `schedule-editor` **Schedule editor**: A weekly schedule made of rows (day, start, end), with presets, add and remove, and overlap checks.
-- `zone-editor` **Zone/line editor**: Draw a counting zone on the camera image by clicking its corners, with a list of zones beside it.
+- `zone-editor` **Zone/line editor**: Draw a counting zone on the video image by clicking its corners, with a list of zones beside it.
 - `login-card` **Login card**: The sign-in form: logo, title, email, password, remember me, the sign-in button and recovery link.
 - `properties-editor` **Properties editor**: A list of key and value rows with add and remove, for free-form metadata.
 - `rich-text-editor` **Rich text editor**: A text area with a small formatting toolbar (bold, italic, lists, link) that saves HTML to a field.
@@ -63,7 +63,7 @@ Whole form sections and specialised editors: sections, stacks, sign-in, schedule
 Video players, live streams, photo posts and image galleries.
 
 - `recording-player` **Recording player**: A recorded clip with the native player, a timeline of event marks and a list of events that jump to their moment.
-- `live-stream-panel` **Live stream panel**: A live camera view with its state, a live flag and the live counts beside it.
+- `live-stream-panel` **Live stream panel**: A live video view with its state, a live flag and the live counts beside it.
 - `photo-post` **Photo post**: A shared photo with who posted it and when, the photo, actions and caption.
 - `image-gallery` **Image gallery**: A large stage image with a row of thumbnails and a count; thumbnails swap the stage.
 
@@ -106,7 +106,7 @@ Sections for a product's public pages and its documentation: hero, features, liv
 
 Following a long-running job: what is done, what is happening, what failed and what to do.
 
-- `capture-run-progress` **Capture run progress**: A running job's progress: overall bar with counts and time left, the steps, and each camera's state.
+- `capture-run-progress` **Video export progress**: A running job's progress: overall bar with counts and time left, the steps, and each video's state.
 
 ## [Editorial](editorial.md) (2)
 
@@ -144,7 +144,7 @@ Editing when things and people are available, and booking time against that avai
 - `recurrence-editor` **Recurrence editor**: Repeat rules for an event or task: frequency, interval, days, end condition and a plain-language summary.
 - `exception-editor` **Exception and holiday editor**: The list of dates that differ from the regular hours (closed days, short days) with a form to add one.
 - `time-off-editor` **Time-off editor**: A request form for time off (type, dates, half days, note) beside the person's balance and their existing requests.
-- `resource-scheduler` **Resource scheduler**: Resources (people, rooms, cameras) as rows against a time scale, with bookings as bars on each row.
+- `resource-scheduler` **Resource scheduler**: Resources (people, rooms, videos) as rows against a time scale, with bookings as bars on each row.
 - `shift-planner` **Shift planner**: A roster table of people by days with shifts in each cell, weekly totals and over-hours highlighted.
 - `booking-slot-picker` **Booking slot picker**: A strip of dates and the free slots on the chosen date, grouped by part of day, for booking a fixed-length slot.
 - `appointment-picker` **Appointment picker**: Booking in steps: choose the service and person, then the date and time, then confirm, with a running summary.
@@ -175,5 +175,5 @@ Seeing and steering work over time: task lists, boards, Gantt charts, roadmaps, 
 - `capacity-planner` **Capacity planner**: People as rows with their booked hours per day against capacity, totals and over-allocation flagged.
 - `deadline-list` **Deadline list**: Upcoming deadlines grouped into Overdue, This week and Later, each with its date and time left.
 - `planning-summary` **Planning summary**: Planned against done for each team, person or category as paired bars with the numbers.
-- `plan-filter-bar` **Plan filter bar**: Filters above a plan: period, assignee and status, with active filters as removable chips and a count of results.
+- `plan-filter-bar` **Plan filter bar**: Above a plan: the period shown, the applied assignee and status filters as removable chips, and the number of results.
 - `date-range-filter-bar` **Date-range filter bar**: A period filter for reports and plans: quick presets plus a custom from–to range, showing the chosen dates.

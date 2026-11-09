@@ -16,12 +16,12 @@ add(Pattern(
          "Headline under 10 words; one brand or primary button and one secondary."],
     classes=[".orca-marketing-hero", ".orca-marketing-hero__proof"],
     laws=["restorff", "hick", "peak-end"],
-    uses=["hero", "button"],
+    uses=["hero"],
     examples=[("Landing hero", """<section class="orca-marketing-hero"><div class="orca-hero">
-  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Count visitors with the cameras you already have. No new hardware.</p>
+  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Publish the videos you already have. Nothing to install.</p>
     <div class="orca-row"><a class="orca-button orca-button--brand" href="#">Start free trial</a><a class="orca-button" href="#">See a demo</a></div>
-    <ul class="orca-marketing-hero__proof"><li>{% icon "success" size="xs" %} 97% average accuracy</li><li>{% icon "success" size="xs" %} Works with ONVIF cameras</li></ul></div>
-  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from a ceiling camera"></div></div></section>""")],
+    <ul class="orca-marketing-hero__proof"><li>{% icon "success" size="xs" %} 97% average accuracy</li><li>{% icon "success" size="xs" %} Works with ONVIF videos</li></ul></div>
+  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from above"></div></div></section>""")],
     guide=["Marketing hero"],
 ))
 
@@ -99,7 +99,7 @@ add(Pattern(
     how=["`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with a dense search input (`data-orca-filter-list`) and the docs navigation tree; on narrow screens it moves into a left drawer."],
     classes=[".orca-docs-sidebar"],
     laws=["miller", "hick"],
-    uses=["docs-nav-tree", "search-field", "drawer"],
+    uses=["docs-nav-tree", "drawer"],
     examples=[("Sidebar", """<nav class="orca-docs-sidebar" aria-label="Documentation"><div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dsb"></div>
   <ul class="orca-nav-tree" id="dsb"><li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Get started</summary><ul><li><a href="#">Installation</a></li><li><a href="#" aria-current="page">Usage</a></li></ul></details></li>
     <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Patterns</summary><ul><li><a href="#">Data table</a></li><li><a href="#">Month calendar</a></li></ul></details></li></ul></nav>""")],
