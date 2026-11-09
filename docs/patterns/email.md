@@ -8,7 +8,7 @@ The frame every transactional email is written in: brand bar, title, text, one a
 
 A table-based, inline-styled email layout in the brand's colours with one action and a copyable link.
 
-Built from: `logo`, `button`, `brand-color`
+Built from: `logo-link`, `call-to-action`, `fine-print`
 
 ### Why
 

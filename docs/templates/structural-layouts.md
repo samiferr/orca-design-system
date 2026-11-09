@@ -43,7 +43,7 @@ Equal gaps between sections show they are siblings, and larger gaps than inside 
 
 Stat cards in equal columns that wrap, each at least 12rem wide.
 
-Built from: `stat-card`
+Built from: `kpi-grid`
 
 ### Why
 
@@ -60,7 +60,7 @@ Equal tiles in a row are compared at a glance (Miller's law); a minimum width ke
 #### Example: Stats
 
 ```django
-<div class="orca-stat-grid"><div class="orca-stat-card"><p class="orca-stat-label">Metric 1</p><p class="orca-stat-value">1,234</p></div><div class="orca-stat-card"><p class="orca-stat-label">Metric 2</p><p class="orca-stat-value">56</p></div><div class="orca-stat-card"><p class="orca-stat-label">Metric 3</p><p class="orca-stat-value">98%</p></div></div>
+<div class="orca-stat-grid"><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span><p class="orca-stat-label">Metric 1</p></div><p class="orca-stat-value">1,234</p></div><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span><p class="orca-stat-label">Metric 2</p></div><p class="orca-stat-value">56</p></div><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span><p class="orca-stat-label">Metric 3</p></div><p class="orca-stat-value">98%</p></div></div>
 ```
 
 **Classes:** `.orca-stat-grid`
@@ -77,7 +77,7 @@ Equal tiles in a row are compared at a glance (Miller's law); a minimum width ke
 
 Cards in as many equal columns as fit, at least 15rem wide.
 
-Built from: `card`
+Built from: `card-grid`
 
 ### Why
 
@@ -217,7 +217,7 @@ When watching and adjusting at the same time (zones, settings), the picture must
 
 Short fields side by side in as many 16rem columns as fit; long fields span the full width.
 
-Built from: `form-field`
+Built from: `form-section`
 
 ### Why
 

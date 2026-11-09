@@ -3,14 +3,16 @@ from . import Pattern
 
 C = category(
     "pattern-charts", "Charts",
-    "Server-rendered SVG charts in a chart frame, in token colours, each with a text summary and its data as a table. No chart library.",
+    "Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.",
     level="pattern",
 )
 
 COMMON = [
     "Every chart: `{% templatetag openblock %} orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" {% templatetag closeblock %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.",
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.",
 ]
 A11Y = ["Colour is never the only key: series have a legend; lines change dash; scatter series change shape."]
 

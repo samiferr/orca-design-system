@@ -617,3 +617,84 @@ On desktop the create action belongs beside the title; on phones it must stay in
 **ORCA guide items covered:** Create button (floating on phones)
 
 ---
+
+## Skip navigation
+
+`id: skip-navigation` · level: component · source: ORCA
+
+The skip link and the focusable main landmark it jumps to.
+
+Built from: `skip-link`
+
+### Why
+
+Keyboard and screen-reader users skip the repeated navigation in one key press (WCAG 2.4.1, Fitts's law for the keyboard); the link only works with a target that can take focus, so the two belong together.
+
+### When to use
+
+- Every page: the base layout writes it.
+
+### How to use
+
+- First in `<body>`: `<a class="orca-skip-link" href="#main">Skip to main content</a>`; the target is `<main id="main" tabindex="-1">`.
+- Keep one main landmark per page.
+
+### Accessibility
+
+- The link is the first focusable element; it shows when focused.
+
+#### Example: Skip navigation (press Tab inside this example)
+
+```django
+<div style="position: relative; height: 3rem; overflow: hidden">
+  <a class="orca-skip-link" href="#sn-main">Skip to main content</a>
+  <div id="sn-main" tabindex="-1" class="orca-small orca-muted" style="padding: var(--orca-space-8)">Main content starts here.</div>
+</div>
+```
+
+**Classes:** `.orca-skip-link`
+
+**Principles applied:** Fitts's law: big, close, well-spaced targets are faster and safer; Practical UI F01: Design for a diverse audience
+
+**Related:** `base-layout`
+
+---
+
+## Link column
+
+`id: link-column` · level: component · source: ORCA
+
+A titled list of links, as in a footer or a site map.
+
+Built from: `text-link`
+
+### Why
+
+A short title over a few links lets people scan a footer by topic (Miller's law: chunking, Practical UI L01).
+
+### When to use
+
+- Footer columns, site maps, 'Related' lists at the end of documentation pages.
+
+### When not to use
+
+- More than about eight links in one column: split it by topic.
+
+### How to use
+
+- `<ul class="orca-footer__col"><li class="orca-footer__col-title">Product</li><li><a href=…>Features</a></li>…</ul>`.
+- Link text names the destination (W14).
+
+#### Example: Link column
+
+```django
+<ul class="orca-footer__col"><li class="orca-footer__col-title">Help</li><li><a href="#">Documentation</a></li><li><a href="#">Contact support</a></li></ul>
+```
+
+**Classes:** `.orca-footer__col`, `.orca-footer__col-title`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI L01: Group related information; Practical UI W14: Give links meaningful destination names
+
+**Related:** `footer`
+
+---

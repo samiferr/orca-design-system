@@ -36,7 +36,7 @@ add(Pattern(
     uses=["page-head", "child-tabs", "stat-card"],
     examples=[("Site", """<div class="orca-parent">
   <div class="orca-page-head" style="margin: 0"><div class="orca-page-head__text"><h1 class="orca-page-title">North building</h1><p class="orca-page-subtitle">12 Rue de la Gare, Lille</p></div><div class="orca-page-head__actions"><a class="orca-button" href="#">{% icon "edit" %}Edit site</a></div></div>
-  <div class="orca-parent__summary"><div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p></div></div>
+  <div class="orca-parent__summary"><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span><p class="orca-stat-label">Visitors today</p></div><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span><p class="orca-stat-label">Videos online</p></div><p class="orca-stat-value">11 of 12</p></div></div>
   <nav class="orca-tabs__list" aria-label="North building"><a class="orca-tab" href="#">Overview</a><a class="orca-tab" href="#" aria-current="page">Videos <span class="orca-count orca-count--neutral">12</span></a><a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a><a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">3</span></a></nav>
 </div>""")],
     guide=["Parent record with child tabs"],
@@ -64,7 +64,7 @@ add(Pattern(
     how=["`<div class=\"orca-activity-feed\">` with `<h3 class=\"orca-activity-feed__day\">` headings and activity entries; 'Load older' at the end (never infinite scroll in an audit log)."],
     classes=[".orca-activity-feed", ".orca-activity-feed__day"],
     laws=["peak-end", "miller"],
-    uses=["activity-entry", "button"],
+    uses=["activity-entry"],
     examples=[("Feed", """<div class="orca-activity-feed" style="max-width: 36rem"><h3 class="orca-activity-feed__day">Today</h3>
   <div class="orca-activity"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span><div class="orca-activity__head"><span class="orca-badge orca-badge--subtle orca-badge--info">Updated</span><strong>Ada Lovelace</strong> changed Entrance A<time class="orca-activity__time" datetime="2026-11-06T08:14">08:14</time></div><dl class="orca-activity__change"><dt>Interval</dt><dd><del>15 min</del> → <ins>5 min</ins></dd></dl></div>
   <h3 class="orca-activity-feed__day">Yesterday</h3>
@@ -82,7 +82,7 @@ add(Pattern(
          "Build it from `ProtectedError.protected_objects`, grouped by model."],
     classes=[".orca-blocked-list"],
     laws=["peak-end", "W15", "tesler"],
-    uses=["callout", "text-link", "button"],
+    uses=["callout", "list", "button-group"],
     examples=[("Blocked", """<div class="orca-callout orca-callout--negative" role="alert" style="max-width: 36rem">{% icon "error" %}<p class="orca-callout__title">Entrance A cannot be deleted yet</p>
   <div class="orca-callout__body"><p class="orca-p">These still use it. Remove or move them first.</p><ul class="orca-blocked-list"><li><a class="orca-link" href="#">2 zones</a> (Door line, Staff area)</li><li><a class="orca-link" href="#">1 alert rule</a> (Over capacity)</li></ul>
     <div class="orca-row"><button class="orca-button orca-button--dense" type="button">Disable video instead</button></div></div></div>""")],

@@ -82,7 +82,7 @@ class _Record(dict):
 def _parent(current: str, **extra) -> dict:
     tabs = [("Overview", None), ("Records", 24), ("People", 3), ("Activity", None)]
     return dict(parent=_Parent(PARENT), parent_update_url="#", subtitle="Short description of the parent record",
-                parent_stats=[{"label": "Records", "value": "24"}, {"label": "Last change", "value": "2 days ago"}],
+                parent_stats=[{"label": "Records", "value": "24", "icon": "list"}, {"label": "Last change", "value": "2 days ago", "icon": "history"}],
                 parent_tabs=[{"label": l, "url": "#", "count": c, "current": l == current} for l, c in tabs],
                 breadcrumbs=[("Parents", "#"), ("Parent record", "")], fields=FIELDS, **extra)
 
@@ -101,9 +101,9 @@ def context(element_id: str) -> dict:
                              footer="Why the reader gets this email, and how to stop it."),
         "error-layouts": {},
         "homepage-template": dict(title="Good morning, Person", nav=nav("Overview"),
-                                  stats=[{"label": "Metric one", "value": "1,234", "foot": "vs last week"},
-                                         {"label": "Metric two", "value": "56", "foot": "of 60"},
-                                         {"label": "Metric three", "value": "98%", "foot": "last 7 days"}],
+                                  stats=[{"label": "Metric one", "value": "1,234", "foot": "vs last week", "icon": "user"},
+                                         {"label": "Metric two", "value": "56", "foot": "of 60", "icon": "clock"},
+                                         {"label": "Metric three", "value": "98%", "foot": "last 7 days", "icon": "statistics"}],
                                   shortcuts=[{"label": "Add a record", "url": "#", "icon": "plus"}, {"label": "Open reports", "url": "#", "icon": "statistics"}]),
         "feed-skeleton": dict(title="Feed", nav=nav("Overview"), has_more=True,
                               posts=[{"author": "Person name", "when": "2 hours ago", "image": static("orca/img/sample-street.svg"),
@@ -133,9 +133,9 @@ def context(element_id: str) -> dict:
                                       {"label": "Reference", "items": [{"label": "Settings", "url": "#"}, {"label": "Template tags", "url": "#"}]}]),
         "dashboard": dict(title="Dashboard", nav=nav("Overview"),
                           periods=[{"label": "Today", "url": "#"}, {"label": "This week", "url": "#", "current": True}, {"label": "This month", "url": "#"}],
-                          stats=[{"label": "Metric one", "value": "12,480", "delta": "+8%", "trend": "up", "foot": " vs last week", "url": "#"},
-                                 {"label": "Metric two", "value": "1,204", "foot": "of 1,500"}, {"label": "Metric three", "value": "96.4%", "foot": "last 7 days"},
-                                 {"label": "Metric four", "value": "11 of 12"}],
+                          stats=[{"label": "Metric one", "value": "12,480", "delta": "+8%", "trend": "up", "foot": " vs last week", "url": "#", "icon": "user"},
+                                 {"label": "Metric two", "value": "1,204", "foot": "of 1,500", "icon": "home"}, {"label": "Metric three", "value": "96.4%", "foot": "last 7 days", "icon": "statistics"},
+                                 {"label": "Metric four", "value": "11 of 12", "icon": "play"}],
                           charts=[{"kind": "bar", "data": SAMPLE["visitors_week"], "title": "Chart title", "subtitle": "Unit and period"},
                                   {"kind": "line", "data": SAMPLE["visitors_hours"], "title": "Chart title", "subtitle": "Unit and period"}]),
         "calendar-page": dict(title="Calendar", nav=nav("Calendar"), create_url="#", view="month", month="2026-11", day="2026-11-06",

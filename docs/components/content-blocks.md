@@ -28,7 +28,7 @@ Image, name and price grouped by proximity let people compare products at a glan
 ```django
 <article class="orca-product" style="max-width: 14rem">
   <div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>
-  <h3 class="orca-product__name"><a href="#">Dome video, 4 MP, outdoor</a></h3>
+  <h3 class="orca-product__name"><a href="#">Ring light, 18 inch, dimmable</a></h3>
   <p class="orca-product__price" style="margin: 0">€189<s><span class="orca-sr-only">was </span>€229</s></p>
   <button class="orca-button orca-button--dense" type="button">Add to quote</button>
 </article>
@@ -237,5 +237,318 @@ Operators recognise a video by its view first (Miller's law); a status flag on t
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Practical UI C03: Communicate meaning beyond colour
 
 **ORCA guide items covered:** Video card
+
+---
+
+## Page heading
+
+`id: page-heading` · level: component · source: ORCA
+
+The page title, the one-sentence subtitle and an optional meta line with status badges.
+
+Built from: `page-title`, `page-subtitle`, `small-text`, `badge`
+
+### Why
+
+People confirm where they are from the title first and what the page is for from the subtitle (Jakob's law, Practical UI W04); keeping the three together keeps their spacing and order the same on every page.
+
+### When to use
+
+- Inside the page head of application pages and documentation pages.
+
+### How to use
+
+- `<div class="orca-page-head__text">` with `h1.orca-page-title`, `p.orca-page-subtitle` and `p.orca-page-head__meta` (facts in small text, status as badges with a word).
+
+### Accessibility
+
+- The title is the page's only `<h1>`.
+
+#### Example: Page heading
+
+```django
+<div class="orca-page-head__text">
+  <h1 class="orca-page-title">Videos</h1>
+  <p class="orca-page-subtitle">Every video from North building.</p>
+  <p class="orca-page-head__meta"><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Published</span><span>Updated 2 minutes ago</span></p>
+</div>
+```
+
+**Classes:** `.orca-page-head__text`, `.orca-page-head__meta`
+
+**Principles applied:** Jakob's law: work the way products people already know work; Practical UI W04: Lead with the information people seek; Practical UI L03: Establish an order of importance
+
+**Related:** `page-head`, `docs-page-header`
+
+---
+
+## Section heading
+
+`id: section-heading` · level: component · source: ORCA
+
+A section title with an optional one-paragraph introduction.
+
+Built from: `section-title`, `paragraph`
+
+### Why
+
+A title and one sentence of why let people decide whether a section concerns them before reading it (Practical UI W05: inverted pyramid, L01: grouping).
+
+### When to use
+
+- Form sections, settings groups, documentation sections.
+
+### How to use
+
+- `<h2 class="orca-section-title">` then `<p class="orca-p">` of one or two sentences.
+- Keep heading levels in order on the page.
+
+#### Example: Section heading
+
+```django
+<h2 class="orca-section-title">Thumbnails</h2>
+<p class="orca-p orca-muted">How often thumbnails are taken and how long videos are kept.</p>
+```
+
+**Classes:** `.orca-section-title`
+
+**Principles applied:** Practical UI W05: Order explanations as an inverted pyramid; Practical UI L01: Group related information
+
+**Related:** `form-section`
+
+---
+
+## Feature item
+
+`id: feature-item` · level: component · source: ORCA
+
+One feature: an icon, a short title and one sentence.
+
+Built from: `icon`, `heading`, `paragraph`
+
+### Why
+
+An icon and a title are recognised before the sentence is read (Miller's law); one sentence per feature keeps the list scannable (Practical UI W01).
+
+### When to use
+
+- Feature grids on marketing pages; 'What you can do' lists on empty dashboards.
+
+### How to use
+
+- `<li class="orca-feature">{% icon "statistics" size="l" %}<h3 class="orca-feature__title">…</h3><p class="orca-feature__text">…</p></li>`.
+- The title says the benefit in two to four words.
+
+### Accessibility
+
+- The icon is decorative; the title carries the meaning.
+
+#### Example: Feature item
+
+```django
+<ul style="list-style: none; margin: 0; padding: 0; max-width: 18rem"><li class="orca-feature">{% icon "notifications" size="l" %}<h3 class="orca-feature__title">Upload alerts</h3><p class="orca-feature__text">Get an email when a video fails to process.</p></li></ul>
+```
+
+**Classes:** `.orca-feature`, `.orca-feature__title`, `.orca-feature__text`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI W01: Make every word useful
+
+**Related:** `feature-grid`
+
+---
+
+## Captioned media
+
+`id: captioned-media` · level: component · source: ORCA
+
+An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.
+
+Built from: `media-frame`, `snapshot-image`
+
+### Why
+
+The frame reserves the space so nothing jumps while the media loads (Doherty threshold); a caption on a solid bar stays readable over any picture (Practical UI T12).
+
+### When to use
+
+- Photo posts, gallery stages, story images, editors that draw over an image.
+
+### How to use
+
+- `<figure class="orca-ratio orca-ratio--16x9"><img …><figcaption class="orca-frame__caption">…</figcaption></figure>`.
+- Without a caption, the frame alone: `<div class="orca-ratio orca-ratio--4x3"><img …></div>`.
+
+### Accessibility
+
+- Alt text says what matters in the image; the caption repeats source and time visibly.
+
+#### Example: Captioned image
+
+```django
+<figure class="orca-ratio orca-ratio--16x9" style="max-width: 20rem; margin: 0">
+  <img src="{% static "orca/img/sample-street.svg" %}" alt="City street at night">
+  <figcaption class="orca-frame__caption"><span>Harbour timelapse</span><time datetime="2026-11-06T08:14:03">08:14:03</time></figcaption>
+</figure>
+```
+
+**Classes:** `.orca-ratio`, `.orca-frame__caption`
+
+**Principles applied:** Doherty threshold: respond within 400 ms; show progress for anything slower; Practical UI T12: Make text over photos readable
+
+**Related:** `photo-post`, `image-gallery`, `story-feature`
+
+---
+
+## Thumbnail strip
+
+`id: thumbnail-strip` · level: component · source: ORCA
+
+A row of thumbnail buttons that choose the image shown, the current one marked.
+
+Built from: `thumbnail`
+
+### Why
+
+Thumbnails show what is there and let people jump straight to an image (Miller's law: recognition over recall); the current one changes shape, not only colour (C03).
+
+### When to use
+
+- Image galleries and media pickers with up to about twenty items.
+
+### How to use
+
+- `<ul class="orca-gallery__thumbs"><li><button class="orca-gallery__thumb" type="button" aria-current="true" aria-label="Image 1, 08:14"><img src=… alt=""></button></li>…</ul>`.
+
+### Accessibility
+
+- Each button is named after the image it shows; `aria-current` marks the one on stage.
+
+#### Example: Thumbnails
+
+```django
+<ul class="orca-gallery__thumbs"><li><button class="orca-gallery__thumb" type="button" aria-current="true" aria-label="Image 1, street"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></button></li><li><button class="orca-gallery__thumb" type="button" aria-label="Image 2, floor plan"><img src="{% static "orca/img/sample-floor.svg" %}" alt=""></button></li></ul>
+```
+
+**Classes:** `.orca-gallery__thumbs`, `.orca-gallery__thumb`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI C03: Communicate meaning beyond colour
+
+**Related:** `image-gallery`
+
+---
+
+## Video player
+
+`id: video-player` · level: component · source: ORCA
+
+A native video in its frame, with a live or recording flag and the current time.
+
+Built from: `video-frame`, `recording-frame`, `time-label`
+
+### Why
+
+Native controls are familiar and keyboard accessible (Jakob's law, Postel's law); a worded flag makes 'live' or 'recording' impossible to miss (Von Restorff, C03).
+
+### When to use
+
+- Recorded clips, live streams, tutorials.
+
+### How to use
+
+- `<div class="orca-ratio orca-ratio--16x9"><video class="orca-video" controls preload="metadata" poster=…></video></div>`.
+- Live or recording: add `.orca-frame--recording` and `<span class="orca-frame__flag">` with a pulsing dot and the word.
+- Never autoplay with sound.
+
+### Accessibility
+
+- Provide captions for speech; name the video with `aria-label` when no visible title is next to it.
+
+#### Example: Live video
+
+```django
+<div class="orca-ratio orca-ratio--16x9 orca-frame--recording" style="max-width: 20rem">
+  <video class="orca-video" controls preload="none" poster="{% static "orca/img/sample-street.svg" %}" aria-label="Harbour, live"></video>
+  <span class="orca-frame__flag"><span class="orca-dot orca-dot--sm orca-dot--pulse"></span>Live · <time datetime="2026-11-06T08:14">08:14</time></span>
+</div>
+```
+
+**Classes:** `.orca-video`, `.orca-frame--recording`, `.orca-frame__flag`
+
+**Principles applied:** Jakob's law: work the way products people already know work; Postel's law: accept varied input, output reliable and accessible UI; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Practical UI C03: Communicate meaning beyond colour
+
+**Related:** `recording-player`, `live-stream-panel`
+
+---
+
+## Call to action
+
+`id: call-to-action` · level: component · source: ORCA
+
+The one or two actions a section asks for: the primary button and an optional quieter alternative.
+
+Built from: `button`, `text-link`
+
+### Why
+
+One clear primary action per section (Practical UI B03, Hick's law) with the alternative visibly quieter (B05).
+
+### When to use
+
+- Site headers, heroes, email frames, empty pages.
+
+### When not to use
+
+- Three or more actions: keep one, move the rest to a menu or a link.
+
+### How to use
+
+- `<div class="orca-site-header__actions"><a class="orca-button orca-button--ghost" href=…>Sign in</a><a class="orca-button orca-button--brand" href=…>Start free trial</a></div>`.
+- In emails the button is a table-based link with the address written below it.
+
+#### Example: Call to action
+
+```django
+<div class="orca-site-header__actions"><a class="orca-button orca-button--ghost" href="#">Sign in</a><a class="orca-button orca-button--brand" href="#">Start free trial</a></div>
+```
+
+**Classes:** `.orca-site-header__actions`
+
+**Principles applied:** Practical UI B03: One primary action; Practical UI B05: Keep low-priority actions quieter; Hick's law: fewer, clearer choices mean faster decisions
+
+**Related:** `site-header`, `email-frame`, `hero`
+
+---
+
+## Fine print
+
+`id: fine-print` · level: component · source: ORCA
+
+Small legal and version text on one line, with its policy links.
+
+Built from: `small-text`, `text-link`
+
+### Why
+
+Legal text must be there but must not compete (Practical UI S02); small, muted and on one line it stays findable without taking attention (T13: quieter text stays legible).
+
+### When to use
+
+- Footers, email footers, sign-in pages.
+
+### How to use
+
+- `<p class="orca-footer__legal">© 2026 Acme · <a href=…>Privacy</a> · <a href=…>Terms</a> · Version 0.4.0</p>`.
+
+#### Example: Fine print
+
+```django
+<p class="orca-footer__legal">© 2026 Acme · <a href="#">Privacy</a> · <a href="#">Terms</a> · Version 0.4.0</p>
+```
+
+**Classes:** `.orca-footer__legal`
+
+**Principles applied:** Practical UI S02: Remove styles that compete without communicating; Practical UI T13: Keep quieter text legible
+
+**Related:** `footer`, `email-frame`
 
 ---

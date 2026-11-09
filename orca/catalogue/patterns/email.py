@@ -18,7 +18,7 @@ add(Pattern(
          "Always send a plain-text alternative. Keep the width at 560px; the subject states the event ('Loading dock is offline')."],
     classes=[".orca-email-preview"],
     laws=["postel", "peak-end", "W15"],
-    uses=["logo", "button", "brand-color"],
+    uses=["logo-link", "call-to-action", "fine-print"],
     examples=[("Alert email (preview)", """{% orca_email_preview title="Loading dock is offline" preheader="No stream since 08:14" paragraphs=sample.email_paragraphs action_url="https://example.com/videos/12/" action_label="Open the video" footer="You get this email because you are on the alert list for Warehouse." %}""")],
     guide=["Email frame"],
 ))

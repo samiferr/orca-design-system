@@ -8,7 +8,7 @@ Editing when things and people are available, and booking time against that avai
 
 Each day of the week with an open switch and one or more time spans, to set when something is open or someone is available.
 
-Built from: `add-row-button`, `switch`, `overlap-warning`
+Built from: `add-row-button`, `toggle-field`, `overlap-warning`
 
 ### Why
 
@@ -92,7 +92,7 @@ Most people work the same hours every working day; asking for days plus one time
 
 Repeat rules for an event or task: frequency, interval, days, end condition and a plain-language summary.
 
-Built from: `recurrence-selector`, `weekday-selector`, `choice-group`, `date-input`
+Built from: `recurrence-selector`, `weekday-selector`, `choice-group`, `date-picker`
 
 ### Why
 
@@ -133,7 +133,7 @@ Recurrence rules are complex; common presets cover most needs in one choice (Hic
 
 The list of dates that differ from the regular hours (closed days, short days) with a form to add one.
 
-Built from: `exception-entry`, `date-input`, `time-range-input`, `switch`, `panel`
+Built from: `exception-entry`, `date-picker`, `time-range-input`, `toggle-field`, `panel`
 
 ### Why
 
@@ -211,7 +211,7 @@ Showing the balance and the working days the request costs before submitting pre
 
 Resources (people, rooms, videos) as rows against a time scale, with bookings as bars on each row.
 
-Built from: `event-card`, `avatar`, `availability-legend`
+Built from: `event-card`, `resource-row`, `availability-legend`
 
 ### Why
 
@@ -251,7 +251,7 @@ Rows per resource answer 'who is free when' directly (Practical UI L01, grouping
 
 A roster table of people by days with shifts in each cell, weekly totals and over-hours highlighted.
 
-Built from: `avatar`, `badge`
+Built from: `resource-row`
 
 ### Why
 
@@ -289,7 +289,7 @@ Rosters are read both ways, 'who works Tuesday' and 'what does Grace work', whic
 
 A strip of dates and the free slots on the chosen date, grouped by part of day, for booking a fixed-length slot.
 
-Built from: `booking-slot`, `button`
+Built from: `booking-slot`, `button-group`
 
 ### Why
 
@@ -372,7 +372,7 @@ Each choice narrows the next (the person changes the free times), so steps keep 
 
 When two bookings clash: both side by side with what conflicts, and clear choices to resolve it.
 
-Built from: `conflict-warning`, `event-card`, `radio`
+Built from: `conflict-warning`, `event-card`, `choice-group`
 
 ### Why
 

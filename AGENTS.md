@@ -9,7 +9,7 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 - The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md`, `docs/patterns/<category>.md`, `docs/templates/<category>.md` and `docs/catalogue.json`.
 - **Prefer a pattern over assembling components, and a component over assembling primitives.** Each element's
   "Built from" list names what it is made of.
-- Charts, calendars and emails come from tags, never hand-drawn SVG or a chart library: `{% orca_chart kind data %}`,
+- Charts, calendars and emails come from tags; never hand-draw SVG or write a Chart.js configuration yourself (the tags draw charts with Chart.js in token colours): `{% orca_chart kind data %}`,
   `{% orca_month_calendar events %}`, `{% orca_week_view events days=7|3|1 %}`, `{% orca_agenda events %}`,
   `{% orca_year_view year events=events %}`, and emails extend `orca/email/base.html`.
 - With Django forms, render every field with `{% orca_field form.x %}` (and `switch=True` for settings that apply at once);
@@ -88,7 +88,7 @@ Context: `title`, `subtitle`, `breadcrumbs` [(label, url)], `nav` (sidebar secti
 
 ## 5. Levels and scope of this release
 
-Each ORCA level is a group of the level before it:
+Each ORCA level is a group of the level before it, never skipping one (a pattern uses components, not primitives):
 
 | Level | Is a group of | Examples |
 |---|---|---|

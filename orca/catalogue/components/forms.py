@@ -23,7 +23,7 @@ add(Component(
     a11y=["The error id comes first in `aria-describedby` so it is read before the hint."],
     classes=[".orca-field", ".orca-fields"],
     laws=["R08", "R09", "R10", "R20", "tesler", "postel"],
-    uses=["label", "required-marker", "help-text", "error-text", "text-input", "select"],
+    uses=["label", "required-marker", "help-text", "error-text", "text-input", "select", "textarea", "color-input"],
     examples=[
         ("Text and select fields", """<div class="orca-fields" style="max-width: 24rem">
   <div class="orca-field">

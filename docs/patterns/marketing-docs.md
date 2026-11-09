@@ -47,7 +47,7 @@ The first screen decides whether people stay; one headline stating the benefit a
 
 Three to six features, each an icon, a short title and one sentence.
 
-Built from: `icon`, `heading`, `paragraph`
+Built from: `feature-item`
 
 ### Why
 
@@ -86,7 +86,7 @@ Short, parallel blocks let people scan benefits quickly (Miller's law, Practical
 
 Controls for the brand tokens beside a live preview, to try a brand before setting it.
 
-Built from: `color-input`, `button`, `badge`, `brand-color`
+Built from: `form-field`, `live-example`
 
 ### Why
 
@@ -161,7 +161,7 @@ People copy the variant for their stack; tabs keep the others out of the way (Hi
 
 A documentation page's breadcrumb, title, one-paragraph introduction and meta (status, source, version).
 
-Built from: `breadcrumbs`, `page-title`, `paragraph`, `badge`
+Built from: `breadcrumbs`, `page-heading`
 
 ### Why
 

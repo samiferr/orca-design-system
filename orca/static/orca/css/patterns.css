@@ -254,27 +254,16 @@ a.orca-summary-tile:hover, button.orca-summary-tile:hover { border-color: var(--
 .orca-confirm-panel ul { margin: 0; padding-inline-start: var(--orca-space-16); }
 
 /* ===================================================================== Charts */
-.orca-chart { display: block; width: 100%; height: auto; max-height: 22rem; overflow: visible; font-family: var(--orca-font-sans); }
+/* Charts are drawn by Chart.js on a canvas that fills the plot; orca.js passes the token colours. */
+.orca-chart { display: block; }
 .orca-chart-wrap { display: block; min-width: 0; }
 .orca-chart-wrap--round { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-24); }
-.orca-chart-wrap--round .orca-chart { width: 12rem; max-width: 100%; }
+.orca-chart-wrap--round > .orca-chart-frame__plot { flex: none; width: 12rem; max-width: 100%; }
 .orca-chart-wrap--round .orca-legend { flex: 1 1 12rem; }
 .orca-chart-frame--bar, .orca-chart-frame--line, .orca-chart-frame--area, .orca-chart-frame--scatter, .orca-chart-frame--bubble { --orca-ratio: 2 / 1; }
 .orca-chart-frame--pie, .orca-chart-frame--doughnut, .orca-chart-frame--polar, .orca-chart-frame--radar { --orca-ratio: 1 / 1; }
-.orca-chart-frame--radar .orca-chart { max-width: 26rem; }
-.orca-chart__label { fill: var(--orca-text-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
-.orca-chart__total { fill: var(--orca-text); font-size: 22px; font-weight: 550; font-variant-numeric: tabular-nums; }
-.orca-chart__grid { stroke: var(--orca-gridline); stroke-width: 1; fill: none; }
-.orca-chart__axis { stroke: var(--orca-border-strong); stroke-width: 1; }
-.orca-chart__bar { fill: var(--c); }
-.orca-chart__bar:hover, .orca-chart__slice:hover { opacity: 0.8; }
-.orca-chart__line { fill: none; stroke: var(--c); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
-.orca-chart__area { fill: var(--c); opacity: 0.12; }
-.orca-chart__point { fill: var(--c); stroke: var(--orca-bg); stroke-width: 1.5; }
-.orca-chart__bubble { fill: var(--c); fill-opacity: 0.55; stroke: var(--c); stroke-width: 1.5; }
-.orca-chart__slice { fill: var(--c); stroke: var(--orca-bg); stroke-width: 2; }
-.orca-chart__slice--polar { fill-opacity: 0.85; }
-.orca-chart__radar { fill: var(--c); fill-opacity: 0.15; stroke: var(--c); stroke-width: 2; }
+.orca-chart-frame--radar .orca-chart-frame__plot { max-width: 26rem; }
+.orca-chart-frame__plot > canvas { font-family: var(--orca-font-sans); }
 
 /* ===================================================================== Marketing and documentation */
 .orca-marketing-hero { padding: var(--orca-space-64) max(var(--orca-space-24), env(safe-area-inset-right, 0px)) var(--orca-space-64) max(var(--orca-space-24), env(safe-area-inset-left, 0px)); background: var(--orca-bg-alt); border-bottom: var(--orca-bar) solid var(--orca-brand); }

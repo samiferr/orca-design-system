@@ -50,7 +50,7 @@ Events have many optional fields; putting the essentials first (title, when) and
 
 A small card that opens over the calendar when an event is clicked: title, time, place, people and quick actions.
 
-Built from: `event-chip`, `icon-button`, `button`
+Built from: `event-chip`, `panel-header`, `button-group`
 
 ### Why
 
@@ -129,7 +129,7 @@ When people need the whole event (notes, everyone's answers) a panel gives room 
 
 One text field that creates an event from a sentence ('Audit Friday 10:00 at North building'), showing what it understood before saving.
 
-Built from: `text-input`, `button`
+Built from: `input-group`
 
 ### Why
 
@@ -203,7 +203,7 @@ Reminders only help if acting on them is one tap (Fitts's law); grouping due-now
 
 People invited to an event with their answers, a summary count and controls to add or remove.
 
-Built from: `avatar`, `multi-picker`, `remove-row-button`
+Built from: `list-item`, `multi-picker`, `remove-row-button`
 
 ### Why
 
@@ -242,7 +242,7 @@ Organisers need to know who is coming at a glance; the summary ('3 yes, 1 waitin
 
 A bar on an invitation asking 'Going?' with Yes, Maybe and No, showing the current answer.
 
-Built from: `button-group`, `radio`
+Built from: `button-group`, `choice-group`
 
 ### Why
 

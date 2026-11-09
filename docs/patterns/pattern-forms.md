@@ -8,7 +8,7 @@ Whole form sections and specialised editors: sections, stacks, sign-in, schedule
 
 A titled group of related fields with a short explanation beside them.
 
-Built from: `form-field`, `section-title`
+Built from: `form-field`, `section-heading`
 
 ### Why
 
@@ -132,7 +132,7 @@ Schedules vary day by day; rows handle every shape without special fields (Tesle
 
 Draw a counting zone on the video image by clicking its corners, with a list of zones beside it.
 
-Built from: `zone-row`, `media-frame`
+Built from: `zone-row`, `captioned-media`
 
 ### Why
 
@@ -177,7 +177,7 @@ Zones are spatial, so they are drawn where they apply (Practical UI F03: direct 
 
 The sign-in form: logo, title, email, password, remember me, the sign-in button and recovery link.
 
-Built from: `logo`, `form-field`, `checkbox`, `button`, `form-alert`
+Built from: `logo-link`, `form-field`, `toggle-field`, `form-actions`, `form-alert`
 
 ### Why
 
@@ -261,7 +261,7 @@ Free-form data needs structure without a fixed schema (Tesler's law); one row pe
 
 A text area with a small formatting toolbar (bold, italic, lists, link) that saves HTML to a field.
 
-Built from: `icon-button`, `textarea`, `label`
+Built from: `form-field`, `formatting-toolbar`
 
 ### Why
 

@@ -21,7 +21,7 @@ A dashboard answers 'how are we doing?' at a glance: a few headline numbers firs
 ### How to use
 
 - Extend it: `{% extends "orca/layouts/dashboard.html" %}`, then fill only the blocks you need.
-- Pass `stats` (label, value, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.
+- Pass `stats` (label, value, icon, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.
 - Keep it to 4–6 stats and 2–4 charts; link each stat to the list behind it.
 
 Extend: `{% extends "orca/layouts/dashboard.html" %}`
@@ -107,7 +107,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 Resources by time for one day: a date toolbar, a row per person, room or vehicle with bookings placed by time, and the legend.
 
-Built from: `resource-scheduler`, `calendar-navigation`
+Built from: `resource-scheduler`, `calendar-toolbar`
 
 ### Why
 
@@ -348,7 +348,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A data page with everything in one place: title bar, summary tiles that filter, search, a filter drawer and the table.
 
-Built from: `summary-tiles`, `list-header`, `filter-drawer`, `data-table`, `pagination`
+Built from: `summary-tiles`, `list-header`, `filter-drawer`, `data-table`, `no-results`
 
 ### Why
 

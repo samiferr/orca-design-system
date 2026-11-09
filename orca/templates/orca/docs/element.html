@@ -12,11 +12,21 @@
 </div>
 
 {% for ex in examples %}
-<section class="docs-example" aria-label="Example: {{ ex.title }}">
-  <h2 class="orca-panel-title">{{ ex.title }}</h2>
-  {% if ex.preview_url %}<div class="orca-row docs-example__bar"><nav class="orca-segmented orca-segmented--dense" aria-label="Preview width" data-docs-viewport><button class="orca-segmented__item" type="button" aria-pressed="true" data-width="">Desktop</button><button class="orca-segmented__item" type="button" aria-pressed="false" data-width="48rem">Tablet</button><button class="orca-segmented__item" type="button" aria-pressed="false" data-width="24.375rem">Phone</button></nav><a class="orca-link orca-small" href="{{ ex.preview_url }}" target="_blank" rel="noopener">Open the page on its own{% icon "external-link" size="xs" %}</a></div>{% endif %}
-  <div class="docs-example__preview{% if ex.preview_url %} docs-example__preview--page{% endif %}">{{ ex.rendered }}</div>
-  <details class="docs-example__code"{% if ex.preview_url %} open{% endif %}><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>{% if ex.preview_url %}Child template of this preview{% else %}Template code{% endif %}</summary><pre class="orca-scroll"><code>{{ ex.html }}</code></pre></details>
+<section class="docs-example orca-tabs" aria-labelledby="ex-{{ forloop.counter }}-t">
+  <div class="docs-example__head">
+    <h2 class="orca-panel-title" id="ex-{{ forloop.counter }}-t">{{ ex.title }}</h2>
+    <div class="orca-tabs__list docs-example__tabs" role="tablist" aria-label="{{ ex.title }}" data-orca-tabs>
+      <button class="orca-tab" role="tab" type="button" id="ex-{{ forloop.counter }}-tp" aria-controls="ex-{{ forloop.counter }}-pp" aria-selected="true">Preview</button>
+      <button class="orca-tab" role="tab" type="button" id="ex-{{ forloop.counter }}-tc" aria-controls="ex-{{ forloop.counter }}-pc" aria-selected="false" tabindex="-1">{% if ex.preview_url %}Child template{% else %}Code{% endif %}</button>
+    </div>
+  </div>
+  <div class="orca-tabs__panel docs-example__panel" role="tabpanel" id="ex-{{ forloop.counter }}-pp" aria-labelledby="ex-{{ forloop.counter }}-tp" tabindex="0">
+    {% if ex.preview_url %}<div class="orca-row docs-example__bar"><nav class="orca-segmented orca-segmented--dense" aria-label="Preview width" data-docs-viewport><button class="orca-segmented__item" type="button" aria-pressed="true" data-width="">Desktop</button><button class="orca-segmented__item" type="button" aria-pressed="false" data-width="48rem">Tablet</button><button class="orca-segmented__item" type="button" aria-pressed="false" data-width="24.375rem">Phone</button></nav><a class="orca-link orca-small" href="{{ ex.preview_url }}" target="_blank" rel="noopener">Open the page on its own{% icon "external-link" size="xs" %}</a></div>{% endif %}
+    <div class="docs-example__preview{% if ex.preview_url %} docs-example__preview--page{% endif %}">{{ ex.rendered }}</div>
+  </div>
+  <div class="orca-tabs__panel docs-example__panel" role="tabpanel" id="ex-{{ forloop.counter }}-pc" aria-labelledby="ex-{{ forloop.counter }}-tc" tabindex="0" hidden>
+    <pre class="docs-code docs-example__code orca-scroll"><code>{{ ex.html }}</code></pre>
+  </div>
 </section>
 {% endfor %}
 

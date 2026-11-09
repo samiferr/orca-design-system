@@ -30,7 +30,7 @@ add(Pattern(
          "Pair with the view toggle (cards or table) and a skeleton while snapshots load."],
     classes=[".orca-video-grid"],
     laws=["miller", "fitts", "restorff"],
-    uses=["video-card", "view-toggle", "skeleton"],
+    uses=["video-card", "view-toggle", "card-skeleton"],
     examples=[("Grid", """<ul class="orca-video-grid">{% for c in sample.videos|slice:":3" %}<li><article class="orca-card orca-card--link orca-video-card">{% if c.status == "negative" %}<div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since {{ c.last }}</div><span class="orca-badge orca-badge--negative orca-video-card__flag">Offline</span>{% else %}<div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>{% endif %}
   <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">{{ c.name }}</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--{{ c.status }}"></span>{{ c.status_text }} · {{ c.site }}</span></div></article></li>{% endfor %}</ul>""")],
     guide=["Video grid"], source="Tangerine",
@@ -47,10 +47,10 @@ add(Pattern(
     laws=["miller", "restorff"],
     uses=["stat-card"],
     examples=[("KPIs", """<div class="orca-kpi-grid">
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Inside now</p><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Count accuracy</p><p class="orca-stat-value">96.4%</p><div class="orca-stat-card__foot">last 7 days</div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span><p class="orca-stat-label">Visitors today</p></div><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "home" %}</span><p class="orca-stat-label">Inside now</p></div><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "play" %}</span><p class="orca-stat-label">Videos online</p></div><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span><p class="orca-stat-label">Count accuracy</p></div><p class="orca-stat-value">96.4%</p><div class="orca-stat-card__foot">last 7 days</div></a>
 </div>""")],
     guide=["KPI grid"], source="Tangerine",
 ))
@@ -64,7 +64,7 @@ add(Pattern(
          "Put the scale under it in `.orca-heatmap-legend` with the range each level covers; wrap in `.orca-table-wrap` for phones."],
     classes=[".orca-heatmap", ".orca-heatmap-legend"],
     laws=["C03", "W11", "miller"],
-    uses=["heat-cell", "legend-item"],
+    uses=["heat-row", "legend-item"],
     examples=[("Heat map", """<div class="orca-table-wrap"><table class="orca-heatmap"><caption class="orca-panel-title" style="text-align: start; padding-bottom: var(--orca-space-8)">People inside, average by hour</caption>
   <thead><tr><td></td><th scope="col">09</th><th scope="col">11</th><th scope="col">13</th><th scope="col">15</th><th scope="col">17</th><th scope="col">19</th></tr></thead>
   <tbody>
@@ -85,7 +85,7 @@ add(Pattern(
          "Each item: status dot, title, time, description and an optional thumbnail; link to the event detail."],
     classes=[".orca-event-timeline", ".orca-event-timeline__day"],
     laws=["miller", "C03"],
-    uses=["timeline-item", "thumbnail", "relative-time"],
+    uses=["timeline-item", "media-object"],
     examples=[("Timeline", """<div class="orca-event-timeline" style="max-width: 32rem">
   <section><h3 class="orca-event-timeline__day">Today</h3><ol class="orca-timeline">
     <li class="orca-timeline__item"><span class="orca-dot orca-dot--negative"></span><div><div class="orca-timeline__head"><a class="orca-timeline__title orca-link orca-link--plain" href="#">Loading dock offline</a><time class="orca-timeline__time" datetime="2026-11-06T08:14">08:14</time></div><p class="orca-timeline__desc">No stream for 5 minutes. Email sent to 2 people.</p></div></li>

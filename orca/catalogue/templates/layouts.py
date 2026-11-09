@@ -47,7 +47,7 @@ add(Template(
     how=[extend("orca/layouts/base.html"),
          "Set `lang` in the context (or override `html_attrs`) for non-English pages.",
          "Put page-specific CSS in `extra_head` and scripts in `extra_scripts`; never replace `head` unless you also call `orca_head`."],
-    laws=["tesler", "jakob"], uses=["skip-link"], guide=[], template="orca/layouts/base.html", blocks=BASE_BLOCKS + ["html_attrs", "content"],
+    laws=["tesler", "jakob"], uses=["page-landmarks"], guide=[], template="orca/layouts/base.html", blocks=BASE_BLOCKS + ["html_attrs", "content"],
     context=["`title`", "`lang`: the page language (default \"en\")."],
     examples=[("Usage", """{% templatetag openblock %} extends "orca/layouts/base.html" {% templatetag closeblock %}
 {% templatetag openblock %} block title {% templatetag closeblock %}Print view{% templatetag openblock %} endblock {% templatetag closeblock %}
@@ -95,7 +95,7 @@ layout("error-layouts", "Error layouts", "orca/layouts/error.html",
        ["Create `templates/404.html` containing `{% templatetag openblock %} extends \"orca/errors/404.html\" {% templatetag closeblock %}`; the same for 403 and 500.",
         "The 500 page renders without a request context: it uses no template tags that need one.",
         "Override `error_text` and `error_actions` to point to your support or status page."],
-       ["peak-end", "W15", "W01"], ["empty-state"], ["Error layouts (403, 404, 500)"],
+       ["peak-end", "W15", "W01"], ["error-message"], ["Error layouts (403, 404, 500)"],
        blocks=BASE_BLOCKS + ["brand", "illustration", "error_code", "page_title", "error_text", "error_actions"],
        classes=[".orca-error-layout", ".orca-error-layout__body", ".orca-error-layout__code", ".orca-error-page"])
 
@@ -103,8 +103,8 @@ layout("homepage-template", "Homepage template", "orca/layouts/home.html",
        "The page people land on after signing in: a greeting, a stat grid, a main column for what changed and an aside with shortcuts.",
        "The first screen should answer 'is everything all right, and what needs me?' (Peak–end rule); stats first and shortcuts to frequent tasks shorten every visit (Fitts's law).",
        ["The start page of an application."],
-       ["Pass `stats` (label, value, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks."],
-       ["peak-end", "fitts", "L03"], ["app-shell", "stat-card", "activity-feed"], ["Homepage template"],
+       ["Pass `stats` (label, value, icon, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks."],
+       ["peak-end", "fitts", "L03"], ["app-shell", "kpi-grid", "activity-feed"], ["Homepage template"],
        blocks=APP_BLOCKS + ["home_stats", "home_main", "home_aside"], context=APP_CONTEXT + ["`stats`, `shortcuts`."])
 
 layout("feed-skeleton", "Feed skeleton", "orca/layouts/feed.html",
@@ -113,7 +113,7 @@ layout("feed-skeleton", "Feed skeleton", "orca/layouts/feed.html",
        ["Photo and update feeds, timelines of posts."],
        ["Pass `posts` (author, when, image, alt, text); set `loading` before the first page or `has_more` to show skeleton posts at the end.",
         "Load the next page with htmx on the skeleton (`hx-trigger=\"revealed\"`) and replace it."],
-       ["doherty", "T09", "aesthetic"], ["photo-post", "skeleton", "empty-state"], ["Feed skeleton"],
+       ["doherty", "T09", "aesthetic"], ["photo-post", "loading-placeholder", "no-results"], ["Feed skeleton"],
        blocks=APP_BLOCKS + ["feed_compose", "feed", "feed_loading"], context=APP_CONTEXT + ["`posts`, `loading`, `has_more`, `empty_title`, `empty_text`."],
        classes=[".orca-feed", ".orca-feed__skeleton"])
 
@@ -122,7 +122,7 @@ layout("person-block-grid", "Person-block grid", "orca/layouts/people.html",
        "Faces and names in a regular grid are found by recognition rather than reading (Practical UI L11); the same card for everyone keeps it scannable (Jakob's law).",
        ["Team pages, members of a site or project, directories."],
        ["Pass `people` (name, role, url, email). Use a table instead when people are compared on several attributes."],
-       ["L11", "jakob", "miller"], ["person-block", "card-grid-layout"], ["Person-block grid"],
+       ["L11", "jakob", "miller"], ["card-grid-layout"], ["Person-block grid"],
        blocks=APP_BLOCKS + ["people"], context=APP_CONTEXT + ["`people`, `empty_title`."], classes=[".orca-person-grid"])
 
 layout("marketing-layout", "Marketing page layout", "orca/layouts/marketing.html",

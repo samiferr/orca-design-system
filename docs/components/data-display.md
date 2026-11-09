@@ -6,13 +6,13 @@ Ways to present records and numbers: stat cards, lists, key/value lists, cards, 
 
 `id: stat-card` · level: component · source: Tangerine
 
-One measured value with its label, change and context, optionally with a sparkline.
+One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.
 
-Built from: `stat-label`, `delta`, `sparkline`
+Built from: `stat-label`, `delta`, `icon`, `sparkline`
 
 ### Why
 
-A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law).
+A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon left of the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.
 
 ### When to use
 
@@ -24,20 +24,21 @@ A KPI is read in a second when the number dominates and its label and comparison
 
 ### How to use
 
-- `<div class="orca-stat-card">` with `orca-stat-label`, `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
+- `<div class="orca-stat-card">` with `.orca-stat-card__head` (`<span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, on no background of its own), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
+- The icon describes what is measured (people, time, videos, accuracy), never its trend or status; it is decorative because the label says it. Use one icon per card and a different one for each card of a grid. In templates, pass `icon` with each stat.
 - Make the whole card a link (`<a class="orca-stat-card">`) when it leads to the detail.
 
 #### Example: Stat cards
 
 ```django
 <div class="orca-card-grid" style="grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))">
-  <div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div>{% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}</div>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Inside now</p><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <div class="orca-stat-card"><p class="orca-stat-label">Average visit</p><p class="orca-stat-value">23 min</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--flat">{% icon "minus" size="xs" %}0%</span>vs last week</div></div>
+  <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span><p class="orca-stat-label">Visitors today</p></div><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div>{% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}</div>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "home" %}</span><p class="orca-stat-label">Inside now</p></div><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
+  <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "clock" %}</span><p class="orca-stat-label">Average visit</p></div><p class="orca-stat-value">23 min</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--flat">{% icon "minus" size="xs" %}0%</span>vs last week</div></div>
 </div>
 ```
 
-**Classes:** `.orca-stat-card`, `.orca-stat-card__foot`
+**Classes:** `.orca-stat-card`, `.orca-stat-card__head`, `.orca-stat-card__icon`, `.orca-stat-card__foot`
 
 **Principles applied:** Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Miller's law: chunk information so working memory is not overloaded; Practical UI W11: Make numbers scannable
 
@@ -998,5 +999,151 @@ A chart is only useful with its title, units and source (Practical UI W04); rese
 **Principles applied:** Practical UI W04: Lead with the information people seek; Doherty threshold: respond within 400 ms; show progress for anything slower; Postel's law: accept varied input, output reliable and accessible UI; Practical UI C03: Communicate meaning beyond colour
 
 **ORCA guide items covered:** Chart frame
+
+---
+
+## Big number
+
+`id: big-number` · level: component · source: ORCA
+
+One large figure with the statement it supports and where it comes from.
+
+Built from: `stat-value`, `small-text`
+
+### Why
+
+A single striking number is remembered (Von Restorff, Peak–end rule); the statement and the source keep it honest.
+
+### When to use
+
+- Editorial factoids, live counts beside a video, report highlights.
+
+### When not to use
+
+- Several big numbers side by side: use stat cards in a KPI grid.
+
+### How to use
+
+- `<figure class="orca-factoid"><span class="orca-factoid__number">−34%</span><figcaption><p class="orca-factoid__text">…</p><p class="orca-factoid__source">…</p></figcaption></figure>`.
+- Numbers as digits with separators and the sign written (W11).
+
+#### Example: Big number
+
+```django
+<figure class="orca-factoid" style="margin: 0"><span class="orca-factoid__number">2,480</span><figcaption><p class="orca-factoid__text">videos published this year</p><p class="orca-factoid__source">Library, November 2026</p></figcaption></figure>
+```
+
+**Classes:** `.orca-factoid`, `.orca-factoid__number`, `.orca-factoid__text`, `.orca-factoid__source`
+
+**Principles applied:** Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Peak–end rule: people judge an experience by its peak and its end; Practical UI W11: Make numbers scannable
+
+**Related:** `factoid`
+
+---
+
+## Summary tile
+
+`id: summary-tile` · level: component · source: ORCA
+
+A count with its status word, as a link that filters the list to that status.
+
+Built from: `stat-value`, `status-dot`
+
+### Why
+
+Counts by status answer 'how many need me?' at a glance (Miller's law) and double as the quickest filter (Fitts's law: a large target); the dot is paired with a word (C03).
+
+### When to use
+
+- Above lists and tables whose records have a status.
+
+### How to use
+
+- `<a class="orca-summary-tile" href="?status=offline"><span class="orca-summary-tile__value">1</span><span class="orca-summary-tile__label"><span class="orca-dot orca-dot--negative"></span>Offline</span></a>`.
+- The tile for the current filter has `aria-current="true"`.
+
+#### Example: Summary tile
+
+```django
+<a class="orca-summary-tile" href="#" style="max-width: 10rem"><span class="orca-summary-tile__value">10</span><span class="orca-summary-tile__label"><span class="orca-dot orca-dot--positive"></span>Published</span></a>
+```
+
+**Classes:** `.orca-summary-tile`, `.orca-summary-tile__value`, `.orca-summary-tile__label`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Fitts's law: big, close, well-spaced targets are faster and safer; Practical UI C03: Communicate meaning beyond colour
+
+**Related:** `summary-tiles`
+
+---
+
+## Heat-map row
+
+`id: heat-row` · level: component · source: ORCA
+
+One labelled row of heat-map cells, each with its value printed.
+
+Built from: `heat-cell`
+
+### Why
+
+A row per weekday or resource lets people compare hours along a line (Miller's law); printing the value means the shade is never the only carrier of meaning (C03).
+
+### When to use
+
+- Capacity and occupancy heat maps, availability grids.
+
+### How to use
+
+- `<tr><th scope="row">Mon</th><td class="orca-heat orca-heat--3">142</td>…</tr>` inside `table.orca-heatmap`.
+
+### Accessibility
+
+- The row header names the row; the column headers name the hours.
+
+#### Example: Row
+
+```django
+<table class="orca-heatmap"><tbody><tr><th scope="row">Mon</th><td class="orca-heat orca-heat--1">12</td><td class="orca-heat orca-heat--3">142</td><td class="orca-heat orca-heat--5">310</td></tr></tbody></table>
+```
+
+**Classes:** `.orca-heatmap`, `.orca-heat`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI C03: Communicate meaning beyond colour
+
+**Related:** `capacity-heat-map`
+
+---
+
+## Column header
+
+`id: column-header` · level: component · source: ORCA
+
+A board column's title with its card count and, when set, its limit.
+
+Built from: `badge`
+
+### Why
+
+The count and the limit show at a glance where work piles up (Miller's law, Von Restorff when over the limit).
+
+### When to use
+
+- Kanban columns, grouped lists.
+
+### How to use
+
+- `<h3 class="orca-board__head">In progress <span class="orca-badge orca-badge--grey">3</span><span class="orca-board__limit">limit 4</span></h3>`; over the limit, the column gets `.is-over`.
+
+#### Example: Column header
+
+```django
+<h3 class="orca-board__head">In progress <span class="orca-badge orca-badge--grey">3</span><span class="orca-board__limit">limit 4</span></h3>
+```
+
+**Classes:** `.orca-board__head`, `.orca-board__limit`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly
+
+**Related:** `kanban-board`
 
 ---

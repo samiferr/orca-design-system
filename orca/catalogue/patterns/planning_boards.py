@@ -58,7 +58,7 @@ add(Pattern(
     a11y=["Drag and drop is never the only way: each card has a 'Move to' menu; moves are announced."],
     classes=[".orca-board", ".orca-board__col", ".orca-board__head", ".orca-board__limit", ".orca-board__cards"],
     laws=["L01", "restorff", "jakob"],
-    uses=["board-card", "badge", "dropdown-menu"],
+    uses=["board-card", "column-header", "dropdown-menu"],
     examples=[("Board", BOARD)],
     guide=["Kanban board"],
 ))
@@ -91,7 +91,7 @@ add(Pattern(
     how=["`<div class=\"orca-roadmap\" style=\"--orca-cols: 4\">`: a corner then `.orca-roadmap__head` per period (current one `is-now`), then per lane `.orca-roadmap__lane` and one `.orca-roadmap__cell` per period holding `.orca-roadmap__item` links (`--orca-event` for the theme colour)."],
     classes=[".orca-roadmap", ".orca-roadmap__head", ".orca-roadmap__lane", ".orca-roadmap__cell", ".orca-roadmap__item"],
     laws=["L01", "peak-end"],
-    uses=["badge"],
+    uses=["gantt-bar"],
     examples=[("2026–27", """<div class="orca-table-wrap"><div class="orca-roadmap" style="--orca-cols: 4"><span></span><span class="orca-roadmap__head">Q3 2026</span><span class="orca-roadmap__head is-now">Q4 2026</span><span class="orca-roadmap__head">Q1 2027</span><span class="orca-roadmap__head">Q2 2027</span>
   <span class="orca-roadmap__lane">Counting</span><div class="orca-roadmap__cell"><a class="orca-roadmap__item" href="#" style="--orca-event: var(--orca-chart-1)">Zone counts</a></div><div class="orca-roadmap__cell"><a class="orca-roadmap__item" href="#" style="--orca-event: var(--orca-chart-1)">Dwell time</a></div><div class="orca-roadmap__cell"><a class="orca-roadmap__item" href="#" style="--orca-event: var(--orca-chart-1)">Queue length</a></div><div class="orca-roadmap__cell"></div>
   <span class="orca-roadmap__lane">Sites</span><div class="orca-roadmap__cell"></div><div class="orca-roadmap__cell"><a class="orca-roadmap__item" href="#" style="--orca-event: var(--orca-chart-3)">Warehouse live</a><a class="orca-roadmap__item" href="#" style="--orca-event: var(--orca-chart-3)">Car park live</a></div><div class="orca-roadmap__cell"><a class="orca-roadmap__item" href="#" style="--orca-event: var(--orca-chart-3)">Second city</a></div><div class="orca-roadmap__cell"></div></div></div>""")],

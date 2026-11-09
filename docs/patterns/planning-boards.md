@@ -45,7 +45,7 @@ A checklist is the most familiar planning tool (Jakob's law); ticking a task off
 
 Columns of cards by status; cards move between columns by drag and drop or a 'Move to' menu, with work-in-progress limits.
 
-Built from: `board-card`, `badge`, `dropdown-menu`
+Built from: `board-card`, `column-header`, `dropdown-menu`
 
 ### Why
 
@@ -132,7 +132,7 @@ Bars on a shared time scale show sequence, overlap and slippage at once (Practic
 
 Themes or teams as lanes across quarters or months, with items placed in the period they are planned for.
 
-Built from: `badge`
+Built from: `gantt-bar`
 
 ### Why
 

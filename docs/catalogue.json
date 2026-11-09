@@ -331,7 +331,7 @@
   {
    "key": "pattern-charts",
    "title": "Charts",
-   "intro": "Server-rendered SVG charts in a chart frame, in token colours, each with a text summary and its data as a table. No chart library.",
+   "intro": "Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.",
    "level": "pattern"
   },
   {
@@ -8068,7 +8068,9 @@
     "help-text",
     "error-text",
     "text-input",
-    "select"
+    "select",
+    "textarea",
+    "color-input"
    ],
    "template": "",
    "preview": "",
@@ -10779,13 +10781,14 @@
    "id": "stat-card",
    "name": "Stat card",
    "category": "data-display",
-   "summary": "One measured value with its label, change and context, optionally with a sparkline.",
-   "why": "A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law).",
+   "summary": "One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.",
+   "why": "A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon left of the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.",
    "when": [
     "Dashboards and summary rows: counts, rates, durations."
    ],
    "how": [
-    "`<div class=\"orca-stat-card\">` with `orca-stat-label`, `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.",
+    "`<div class=\"orca-stat-card\">` with `.orca-stat-card__head` (`<span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, on no background of its own), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.",
+    "The icon describes what is measured (people, time, videos, accuracy), never its trend or status; it is decorative because the label says it. Use one icon per card and a different one for each card of a grid. In templates, pass `icon` with each stat.",
     "Make the whole card a link (`<a class=\"orca-stat-card\">`) when it leads to the detail."
    ],
    "avoid": [
@@ -10795,6 +10798,8 @@
    "tokens": [],
    "classes": [
     ".orca-stat-card",
+    ".orca-stat-card__head",
+    ".orca-stat-card__icon",
     ".orca-stat-card__foot"
    ],
    "laws": [
@@ -10805,7 +10810,7 @@
    "examples": [
     {
      "title": "Stat cards",
-     "html": "<div class=\"orca-card-grid\" style=\"grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))\">\n  <div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Visitors today</p><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div>{% orca_sparkline \"820,940,1200,1100,1480,1620,1540\" \"Visitors per hour today, rising\" %}</div>\n  <a class=\"orca-stat-card\" href=\"#\"><p class=\"orca-stat-label\">Inside now</p><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Average visit</p><p class=\"orca-stat-value\">23 min</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--flat\">{% icon \"minus\" size=\"xs\" %}0%</span>vs last week</div></div>\n</div>"
+     "html": "<div class=\"orca-card-grid\" style=\"grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))\">\n  <div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span><p class=\"orca-stat-label\">Visitors today</p></div><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div>{% orca_sparkline \"820,940,1200,1100,1480,1620,1540\" \"Visitors per hour today, rising\" %}</div>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"home\" %}</span><p class=\"orca-stat-label\">Inside now</p></div><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"clock\" %}</span><p class=\"orca-stat-label\">Average visit</p></div><p class=\"orca-stat-value\">23 min</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--flat\">{% icon \"minus\" size=\"xs\" %}0%</span>vs last week</div></div>\n</div>"
     }
    ],
    "guide": [
@@ -10817,6 +10822,7 @@
    "uses": [
     "stat-label",
     "delta",
+    "icon",
     "sparkline"
    ],
    "template": "",
@@ -12094,7 +12100,7 @@
    "examples": [
     {
      "title": "Product",
-     "html": "<article class=\"orca-product\" style=\"max-width: 14rem\">\n  <div class=\"orca-product__image\"><img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"\"></div>\n  <h3 class=\"orca-product__name\"><a href=\"#\">Dome video, 4 MP, outdoor</a></h3>\n  <p class=\"orca-product__price\" style=\"margin: 0\">€189<s><span class=\"orca-sr-only\">was </span>€229</s></p>\n  <button class=\"orca-button orca-button--dense\" type=\"button\">Add to quote</button>\n</article>"
+     "html": "<article class=\"orca-product\" style=\"max-width: 14rem\">\n  <div class=\"orca-product__image\"><img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"\"></div>\n  <h3 class=\"orca-product__name\"><a href=\"#\">Ring light, 18 inch, dimmable</a></h3>\n  <p class=\"orca-product__price\" style=\"margin: 0\">€189<s><span class=\"orca-sr-only\">was </span>€229</s></p>\n  <button class=\"orca-button orca-button--dense\" type=\"button\">Add to quote</button>\n</article>"
     }
    ],
    "guide": [
@@ -15542,6 +15548,1035 @@
    ]
   },
   {
+   "id": "logo-link",
+   "name": "Logo link",
+   "category": "identity-controls",
+   "summary": "The product logo as a link to the home page.",
+   "why": "People expect the logo to take them home (Jakob's law); one component makes it the same link with the same accessible name in the top bar, the site header, the footer, sign-in and emails.",
+   "when": [
+    "Top bar, site header, footer, sign-in card, error pages and emails."
+   ],
+   "how": [
+    "`{% orca_logo href=\"/\" %}`: the brand logo (or the name as a wordmark) inside a link named after the product.",
+    "Leave `href` empty where the page is already home, such as the sign-in page; the logo is then not a link."
+   ],
+   "avoid": [
+    "A second home link next to it with the same destination."
+   ],
+   "a11y": [
+    "The link's accessible name is the product name from `settings.ORCA[\"BRAND\"][\"name\"]`."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-logo"
+   ],
+   "laws": [
+    "jakob",
+    "fitts"
+   ],
+   "examples": [
+    {
+     "title": "Logo link",
+     "html": "{% orca_logo href=\"#\" %}"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "top-bar",
+    "site-header",
+    "footer"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "logo"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Jakob's law: work the way products people already know work",
+    "Fitts's law: big, close, well-spaced targets are faster and safer"
+   ]
+  },
+  {
+   "id": "collapse-toggle",
+   "name": "Collapse toggle",
+   "category": "identity-controls",
+   "summary": "An icon button that collapses or expands a region, says which it will do, and remembers the choice.",
+   "why": "A collapsible region gives space back without losing the way back (Practical UI S04); the button's name changes with the state so it never lies about what a press will do (Postel's law).",
+   "when": [
+    "The foot of a collapsible sidebar; side panels that can shrink to a rail."
+   ],
+   "how": [
+    "`<button class=\"orca-icon-button orca-sidebar__toggle\" type=\"button\" aria-controls=… aria-expanded=\"true\" aria-label=\"Collapse navigation\" data-orca-sidebar-toggle>{% icon \"chevron-left\" %}</button>`.",
+    "The script flips `aria-expanded`, the label and the chevron, and stores the state."
+   ],
+   "avoid": [],
+   "a11y": [
+    "`aria-expanded` and `aria-controls` tell assistive technology what the button changes."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-sidebar__toggle"
+   ],
+   "laws": [
+    "S04",
+    "postel"
+   ],
+   "examples": [
+    {
+     "title": "Collapse toggle",
+     "html": "<button class=\"orca-icon-button orca-sidebar__toggle\" type=\"button\" aria-controls=\"ct-demo\" aria-expanded=\"true\" aria-label=\"Collapse navigation\" data-orca-sidebar-toggle>{% icon \"chevron-left\" %}</button>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "sidebar"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "icon-button"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Practical UI S04: Reveal secondary information when needed",
+    "Postel's law: accept varied input, output reliable and accessible UI"
+   ]
+  },
+  {
+   "id": "skip-navigation",
+   "name": "Skip navigation",
+   "category": "navigation",
+   "summary": "The skip link and the focusable main landmark it jumps to.",
+   "why": "Keyboard and screen-reader users skip the repeated navigation in one key press (WCAG 2.4.1, Fitts's law for the keyboard); the link only works with a target that can take focus, so the two belong together.",
+   "when": [
+    "Every page: the base layout writes it."
+   ],
+   "how": [
+    "First in `<body>`: `<a class=\"orca-skip-link\" href=\"#main\">Skip to main content</a>`; the target is `<main id=\"main\" tabindex=\"-1\">`.",
+    "Keep one main landmark per page."
+   ],
+   "avoid": [],
+   "a11y": [
+    "The link is the first focusable element; it shows when focused."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-skip-link"
+   ],
+   "laws": [
+    "fitts",
+    "F01"
+   ],
+   "examples": [
+    {
+     "title": "Skip navigation (press Tab inside this example)",
+     "html": "<div style=\"position: relative; height: 3rem; overflow: hidden\">\n  <a class=\"orca-skip-link\" href=\"#sn-main\">Skip to main content</a>\n  <div id=\"sn-main\" tabindex=\"-1\" class=\"orca-small orca-muted\" style=\"padding: var(--orca-space-8)\">Main content starts here.</div>\n</div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "base-layout"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "skip-link"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Fitts's law: big, close, well-spaced targets are faster and safer",
+    "Practical UI F01: Design for a diverse audience"
+   ]
+  },
+  {
+   "id": "link-column",
+   "name": "Link column",
+   "category": "navigation",
+   "summary": "A titled list of links, as in a footer or a site map.",
+   "why": "A short title over a few links lets people scan a footer by topic (Miller's law: chunking, Practical UI L01).",
+   "when": [
+    "Footer columns, site maps, 'Related' lists at the end of documentation pages."
+   ],
+   "how": [
+    "`<ul class=\"orca-footer__col\"><li class=\"orca-footer__col-title\">Product</li><li><a href=…>Features</a></li>…</ul>`.",
+    "Link text names the destination (W14)."
+   ],
+   "avoid": [
+    "More than about eight links in one column: split it by topic."
+   ],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-footer__col",
+    ".orca-footer__col-title"
+   ],
+   "laws": [
+    "miller",
+    "L01",
+    "W14"
+   ],
+   "examples": [
+    {
+     "title": "Link column",
+     "html": "<ul class=\"orca-footer__col\"><li class=\"orca-footer__col-title\">Help</li><li><a href=\"#\">Documentation</a></li><li><a href=\"#\">Contact support</a></li></ul>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "footer"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "text-link"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Practical UI L01: Group related information",
+    "Practical UI W14: Give links meaningful destination names"
+   ]
+  },
+  {
+   "id": "page-heading",
+   "name": "Page heading",
+   "category": "content-blocks",
+   "summary": "The page title, the one-sentence subtitle and an optional meta line with status badges.",
+   "why": "People confirm where they are from the title first and what the page is for from the subtitle (Jakob's law, Practical UI W04); keeping the three together keeps their spacing and order the same on every page.",
+   "when": [
+    "Inside the page head of application pages and documentation pages."
+   ],
+   "how": [
+    "`<div class=\"orca-page-head__text\">` with `h1.orca-page-title`, `p.orca-page-subtitle` and `p.orca-page-head__meta` (facts in small text, status as badges with a word)."
+   ],
+   "avoid": [],
+   "a11y": [
+    "The title is the page's only `<h1>`."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-page-head__text",
+    ".orca-page-head__meta"
+   ],
+   "laws": [
+    "jakob",
+    "W04",
+    "L03"
+   ],
+   "examples": [
+    {
+     "title": "Page heading",
+     "html": "<div class=\"orca-page-head__text\">\n  <h1 class=\"orca-page-title\">Videos</h1>\n  <p class=\"orca-page-subtitle\">Every video from North building.</p>\n  <p class=\"orca-page-head__meta\"><span class=\"orca-badge orca-badge--subtle orca-badge--positive\">{% icon \"success\" %}Published</span><span>Updated 2 minutes ago</span></p>\n</div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "page-head",
+    "docs-page-header"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "page-title",
+    "page-subtitle",
+    "small-text",
+    "badge"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Jakob's law: work the way products people already know work",
+    "Practical UI W04: Lead with the information people seek",
+    "Practical UI L03: Establish an order of importance"
+   ]
+  },
+  {
+   "id": "section-heading",
+   "name": "Section heading",
+   "category": "content-blocks",
+   "summary": "A section title with an optional one-paragraph introduction.",
+   "why": "A title and one sentence of why let people decide whether a section concerns them before reading it (Practical UI W05: inverted pyramid, L01: grouping).",
+   "when": [
+    "Form sections, settings groups, documentation sections."
+   ],
+   "how": [
+    "`<h2 class=\"orca-section-title\">` then `<p class=\"orca-p\">` of one or two sentences.",
+    "Keep heading levels in order on the page."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-section-title"
+   ],
+   "laws": [
+    "W05",
+    "L01"
+   ],
+   "examples": [
+    {
+     "title": "Section heading",
+     "html": "<h2 class=\"orca-section-title\">Thumbnails</h2>\n<p class=\"orca-p orca-muted\">How often thumbnails are taken and how long videos are kept.</p>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "form-section"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "section-title",
+    "paragraph"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Practical UI W05: Order explanations as an inverted pyramid",
+    "Practical UI L01: Group related information"
+   ]
+  },
+  {
+   "id": "feature-item",
+   "name": "Feature item",
+   "category": "content-blocks",
+   "summary": "One feature: an icon, a short title and one sentence.",
+   "why": "An icon and a title are recognised before the sentence is read (Miller's law); one sentence per feature keeps the list scannable (Practical UI W01).",
+   "when": [
+    "Feature grids on marketing pages; 'What you can do' lists on empty dashboards."
+   ],
+   "how": [
+    "`<li class=\"orca-feature\">{% icon \"statistics\" size=\"l\" %}<h3 class=\"orca-feature__title\">…</h3><p class=\"orca-feature__text\">…</p></li>`.",
+    "The title says the benefit in two to four words."
+   ],
+   "avoid": [],
+   "a11y": [
+    "The icon is decorative; the title carries the meaning."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-feature",
+    ".orca-feature__title",
+    ".orca-feature__text"
+   ],
+   "laws": [
+    "miller",
+    "W01"
+   ],
+   "examples": [
+    {
+     "title": "Feature item",
+     "html": "<ul style=\"list-style: none; margin: 0; padding: 0; max-width: 18rem\"><li class=\"orca-feature\">{% icon \"notifications\" size=\"l\" %}<h3 class=\"orca-feature__title\">Upload alerts</h3><p class=\"orca-feature__text\">Get an email when a video fails to process.</p></li></ul>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "feature-grid"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "icon",
+    "heading",
+    "paragraph"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Practical UI W01: Make every word useful"
+   ]
+  },
+  {
+   "id": "captioned-media",
+   "name": "Captioned media",
+   "category": "content-blocks",
+   "summary": "An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.",
+   "why": "The frame reserves the space so nothing jumps while the media loads (Doherty threshold); a caption on a solid bar stays readable over any picture (Practical UI T12).",
+   "when": [
+    "Photo posts, gallery stages, story images, editors that draw over an image."
+   ],
+   "how": [
+    "`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\">…</figcaption></figure>`.",
+    "Without a caption, the frame alone: `<div class=\"orca-ratio orca-ratio--4x3\"><img …></div>`."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Alt text says what matters in the image; the caption repeats source and time visibly."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-ratio",
+    ".orca-frame__caption"
+   ],
+   "laws": [
+    "doherty",
+    "T12"
+   ],
+   "examples": [
+    {
+     "title": "Captioned image",
+     "html": "<figure class=\"orca-ratio orca-ratio--16x9\" style=\"max-width: 20rem; margin: 0\">\n  <img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"City street at night\">\n  <figcaption class=\"orca-frame__caption\"><span>Harbour timelapse</span><time datetime=\"2026-11-06T08:14:03\">08:14:03</time></figcaption>\n</figure>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "photo-post",
+    "image-gallery",
+    "story-feature"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "media-frame",
+    "snapshot-image"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Doherty threshold: respond within 400 ms; show progress for anything slower",
+    "Practical UI T12: Make text over photos readable"
+   ]
+  },
+  {
+   "id": "thumbnail-strip",
+   "name": "Thumbnail strip",
+   "category": "content-blocks",
+   "summary": "A row of thumbnail buttons that choose the image shown, the current one marked.",
+   "why": "Thumbnails show what is there and let people jump straight to an image (Miller's law: recognition over recall); the current one changes shape, not only colour (C03).",
+   "when": [
+    "Image galleries and media pickers with up to about twenty items."
+   ],
+   "how": [
+    "`<ul class=\"orca-gallery__thumbs\"><li><button class=\"orca-gallery__thumb\" type=\"button\" aria-current=\"true\" aria-label=\"Image 1, 08:14\"><img src=… alt=\"\"></button></li>…</ul>`."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Each button is named after the image it shows; `aria-current` marks the one on stage."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-gallery__thumbs",
+    ".orca-gallery__thumb"
+   ],
+   "laws": [
+    "miller",
+    "C03"
+   ],
+   "examples": [
+    {
+     "title": "Thumbnails",
+     "html": "<ul class=\"orca-gallery__thumbs\"><li><button class=\"orca-gallery__thumb\" type=\"button\" aria-current=\"true\" aria-label=\"Image 1, street\"><img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"\"></button></li><li><button class=\"orca-gallery__thumb\" type=\"button\" aria-label=\"Image 2, floor plan\"><img src=\"{% static \"orca/img/sample-floor.svg\" %}\" alt=\"\"></button></li></ul>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "image-gallery"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "thumbnail"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Practical UI C03: Communicate meaning beyond colour"
+   ]
+  },
+  {
+   "id": "video-player",
+   "name": "Video player",
+   "category": "content-blocks",
+   "summary": "A native video in its frame, with a live or recording flag and the current time.",
+   "why": "Native controls are familiar and keyboard accessible (Jakob's law, Postel's law); a worded flag makes 'live' or 'recording' impossible to miss (Von Restorff, C03).",
+   "when": [
+    "Recorded clips, live streams, tutorials."
+   ],
+   "how": [
+    "`<div class=\"orca-ratio orca-ratio--16x9\"><video class=\"orca-video\" controls preload=\"metadata\" poster=…></video></div>`.",
+    "Live or recording: add `.orca-frame--recording` and `<span class=\"orca-frame__flag\">` with a pulsing dot and the word.",
+    "Never autoplay with sound."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Provide captions for speech; name the video with `aria-label` when no visible title is next to it."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-video",
+    ".orca-frame--recording",
+    ".orca-frame__flag"
+   ],
+   "laws": [
+    "jakob",
+    "postel",
+    "restorff",
+    "C03"
+   ],
+   "examples": [
+    {
+     "title": "Live video",
+     "html": "<div class=\"orca-ratio orca-ratio--16x9 orca-frame--recording\" style=\"max-width: 20rem\">\n  <video class=\"orca-video\" controls preload=\"none\" poster=\"{% static \"orca/img/sample-street.svg\" %}\" aria-label=\"Harbour, live\"></video>\n  <span class=\"orca-frame__flag\"><span class=\"orca-dot orca-dot--sm orca-dot--pulse\"></span>Live · <time datetime=\"2026-11-06T08:14\">08:14</time></span>\n</div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "recording-player",
+    "live-stream-panel"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "video-frame",
+    "recording-frame",
+    "time-label"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Jakob's law: work the way products people already know work",
+    "Postel's law: accept varied input, output reliable and accessible UI",
+    "Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly",
+    "Practical UI C03: Communicate meaning beyond colour"
+   ]
+  },
+  {
+   "id": "call-to-action",
+   "name": "Call to action",
+   "category": "content-blocks",
+   "summary": "The one or two actions a section asks for: the primary button and an optional quieter alternative.",
+   "why": "One clear primary action per section (Practical UI B03, Hick's law) with the alternative visibly quieter (B05).",
+   "when": [
+    "Site headers, heroes, email frames, empty pages."
+   ],
+   "how": [
+    "`<div class=\"orca-site-header__actions\"><a class=\"orca-button orca-button--ghost\" href=…>Sign in</a><a class=\"orca-button orca-button--brand\" href=…>Start free trial</a></div>`.",
+    "In emails the button is a table-based link with the address written below it."
+   ],
+   "avoid": [
+    "Three or more actions: keep one, move the rest to a menu or a link."
+   ],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-site-header__actions"
+   ],
+   "laws": [
+    "B03",
+    "B05",
+    "hick"
+   ],
+   "examples": [
+    {
+     "title": "Call to action",
+     "html": "<div class=\"orca-site-header__actions\"><a class=\"orca-button orca-button--ghost\" href=\"#\">Sign in</a><a class=\"orca-button orca-button--brand\" href=\"#\">Start free trial</a></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "site-header",
+    "email-frame",
+    "hero"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "button",
+    "text-link"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Practical UI B03: One primary action",
+    "Practical UI B05: Keep low-priority actions quieter",
+    "Hick's law: fewer, clearer choices mean faster decisions"
+   ]
+  },
+  {
+   "id": "fine-print",
+   "name": "Fine print",
+   "category": "content-blocks",
+   "summary": "Small legal and version text on one line, with its policy links.",
+   "why": "Legal text must be there but must not compete (Practical UI S02); small, muted and on one line it stays findable without taking attention (T13: quieter text stays legible).",
+   "when": [
+    "Footers, email footers, sign-in pages."
+   ],
+   "how": [
+    "`<p class=\"orca-footer__legal\">© 2026 Acme · <a href=…>Privacy</a> · <a href=…>Terms</a> · Version 0.4.0</p>`."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-footer__legal"
+   ],
+   "laws": [
+    "S02",
+    "T13"
+   ],
+   "examples": [
+    {
+     "title": "Fine print",
+     "html": "<p class=\"orca-footer__legal\">© 2026 Acme · <a href=\"#\">Privacy</a> · <a href=\"#\">Terms</a> · Version 0.4.0</p>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "footer",
+    "email-frame"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "small-text",
+    "text-link"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Practical UI S02: Remove styles that compete without communicating",
+    "Practical UI T13: Keep quieter text legible"
+   ]
+  },
+  {
+   "id": "big-number",
+   "name": "Big number",
+   "category": "data-display",
+   "summary": "One large figure with the statement it supports and where it comes from.",
+   "why": "A single striking number is remembered (Von Restorff, Peak–end rule); the statement and the source keep it honest.",
+   "when": [
+    "Editorial factoids, live counts beside a video, report highlights."
+   ],
+   "how": [
+    "`<figure class=\"orca-factoid\"><span class=\"orca-factoid__number\">−34%</span><figcaption><p class=\"orca-factoid__text\">…</p><p class=\"orca-factoid__source\">…</p></figcaption></figure>`.",
+    "Numbers as digits with separators and the sign written (W11)."
+   ],
+   "avoid": [
+    "Several big numbers side by side: use stat cards in a KPI grid."
+   ],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-factoid",
+    ".orca-factoid__number",
+    ".orca-factoid__text",
+    ".orca-factoid__source"
+   ],
+   "laws": [
+    "restorff",
+    "peak-end",
+    "W11"
+   ],
+   "examples": [
+    {
+     "title": "Big number",
+     "html": "<figure class=\"orca-factoid\" style=\"margin: 0\"><span class=\"orca-factoid__number\">2,480</span><figcaption><p class=\"orca-factoid__text\">videos published this year</p><p class=\"orca-factoid__source\">Library, November 2026</p></figcaption></figure>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "factoid"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "stat-value",
+    "small-text"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly",
+    "Peak–end rule: people judge an experience by its peak and its end",
+    "Practical UI W11: Make numbers scannable"
+   ]
+  },
+  {
+   "id": "summary-tile",
+   "name": "Summary tile",
+   "category": "data-display",
+   "summary": "A count with its status word, as a link that filters the list to that status.",
+   "why": "Counts by status answer 'how many need me?' at a glance (Miller's law) and double as the quickest filter (Fitts's law: a large target); the dot is paired with a word (C03).",
+   "when": [
+    "Above lists and tables whose records have a status."
+   ],
+   "how": [
+    "`<a class=\"orca-summary-tile\" href=\"?status=offline\"><span class=\"orca-summary-tile__value\">1</span><span class=\"orca-summary-tile__label\"><span class=\"orca-dot orca-dot--negative\"></span>Offline</span></a>`.",
+    "The tile for the current filter has `aria-current=\"true\"`."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-summary-tile",
+    ".orca-summary-tile__value",
+    ".orca-summary-tile__label"
+   ],
+   "laws": [
+    "miller",
+    "fitts",
+    "C03"
+   ],
+   "examples": [
+    {
+     "title": "Summary tile",
+     "html": "<a class=\"orca-summary-tile\" href=\"#\" style=\"max-width: 10rem\"><span class=\"orca-summary-tile__value\">10</span><span class=\"orca-summary-tile__label\"><span class=\"orca-dot orca-dot--positive\"></span>Published</span></a>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "summary-tiles"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "stat-value",
+    "status-dot"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Fitts's law: big, close, well-spaced targets are faster and safer",
+    "Practical UI C03: Communicate meaning beyond colour"
+   ]
+  },
+  {
+   "id": "heat-row",
+   "name": "Heat-map row",
+   "category": "data-display",
+   "summary": "One labelled row of heat-map cells, each with its value printed.",
+   "why": "A row per weekday or resource lets people compare hours along a line (Miller's law); printing the value means the shade is never the only carrier of meaning (C03).",
+   "when": [
+    "Capacity and occupancy heat maps, availability grids."
+   ],
+   "how": [
+    "`<tr><th scope=\"row\">Mon</th><td class=\"orca-heat orca-heat--3\">142</td>…</tr>` inside `table.orca-heatmap`."
+   ],
+   "avoid": [],
+   "a11y": [
+    "The row header names the row; the column headers name the hours."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-heatmap",
+    ".orca-heat"
+   ],
+   "laws": [
+    "miller",
+    "C03"
+   ],
+   "examples": [
+    {
+     "title": "Row",
+     "html": "<table class=\"orca-heatmap\"><tbody><tr><th scope=\"row\">Mon</th><td class=\"orca-heat orca-heat--1\">12</td><td class=\"orca-heat orca-heat--3\">142</td><td class=\"orca-heat orca-heat--5\">310</td></tr></tbody></table>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "capacity-heat-map"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "heat-cell"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Practical UI C03: Communicate meaning beyond colour"
+   ]
+  },
+  {
+   "id": "column-header",
+   "name": "Column header",
+   "category": "data-display",
+   "summary": "A board column's title with its card count and, when set, its limit.",
+   "why": "The count and the limit show at a glance where work piles up (Miller's law, Von Restorff when over the limit).",
+   "when": [
+    "Kanban columns, grouped lists."
+   ],
+   "how": [
+    "`<h3 class=\"orca-board__head\">In progress <span class=\"orca-badge orca-badge--grey\">3</span><span class=\"orca-board__limit\">limit 4</span></h3>`; over the limit, the column gets `.is-over`."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-board__head",
+    ".orca-board__limit"
+   ],
+   "laws": [
+    "miller",
+    "restorff"
+   ],
+   "examples": [
+    {
+     "title": "Column header",
+     "html": "<h3 class=\"orca-board__head\">In progress <span class=\"orca-badge orca-badge--grey\">3</span><span class=\"orca-board__limit\">limit 4</span></h3>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "kanban-board"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "badge"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly"
+   ]
+  },
+  {
+   "id": "row-select",
+   "name": "Row selection",
+   "category": "forms",
+   "summary": "A checkbox per table row and a select-all checkbox in the header.",
+   "why": "Selecting rows before choosing an action lets people act on many records at once (Practical UI F03); checkboxes are the familiar control for it (Jakob's law, R14).",
+   "when": [
+    "Tables that offer bulk actions."
+   ],
+   "how": [
+    "Header: `<th scope=\"col\" class=\"orca-table__select\"><label class=\"orca-check\"><input type=\"checkbox\" aria-label=\"Select all videos\"><span class=\"orca-check__box\"></span></label></th>`; one per row named after the row.",
+    "When rows are selected, the table toolbar shows the count and the bulk actions."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Each checkbox is named after its row ('Select Entrance A')."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-table__select"
+   ],
+   "laws": [
+    "F03",
+    "jakob",
+    "R14"
+   ],
+   "examples": [
+    {
+     "title": "Select cells",
+     "html": "<table class=\"orca-table\"><thead><tr><th scope=\"col\" class=\"orca-table__select\"><label class=\"orca-check\"><input type=\"checkbox\" aria-label=\"Select all videos\"><span class=\"orca-check__box\"></span></label></th><th scope=\"col\">Video</th></tr></thead>\n<tbody><tr><td class=\"orca-table__select\"><label class=\"orca-check\"><input type=\"checkbox\" checked aria-label=\"Select Harbour at dusk\"><span class=\"orca-check__box\"></span></label></td><td>Harbour at dusk</td></tr></tbody></table>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "data-table",
+    "table-toolbar"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "checkbox"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Practical UI F03: Reduce the total effort of a task",
+    "Jakob's law: work the way products people already know work",
+    "Practical UI R14: Checkbox or switch according to timing"
+   ]
+  },
+  {
+   "id": "formatting-toolbar",
+   "name": "Formatting toolbar",
+   "category": "forms",
+   "summary": "A row of pressed-state icon buttons for bold, italic, lists and links over a text area.",
+   "why": "Formatting commands are recognised by their familiar glyphs (Jakob's law); pressed states show what applies to the selection (Practical UI F10).",
+   "when": [
+    "Above a rich text field."
+   ],
+   "how": [
+    "`<div class=\"orca-richtext__toolbar\" role=\"toolbar\" aria-label=\"Formatting\">` with dense icon buttons using `aria-pressed`, groups separated by a vertical divider."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Arrow keys move between the buttons of the toolbar; each has an accessible name."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-richtext__toolbar"
+   ],
+   "laws": [
+    "jakob",
+    "F10"
+   ],
+   "examples": [
+    {
+     "title": "Toolbar",
+     "html": "<div class=\"orca-richtext__toolbar\" role=\"toolbar\" aria-label=\"Formatting\" style=\"max-width: 20rem\"><button class=\"orca-icon-button orca-icon-button--dense\" type=\"button\" aria-pressed=\"true\" aria-label=\"Bold\"><b>B</b></button><button class=\"orca-icon-button orca-icon-button--dense\" type=\"button\" aria-pressed=\"false\" aria-label=\"Italic\"><i>I</i></button><span class=\"orca-divider orca-divider--vertical\" role=\"separator\"></span><button class=\"orca-icon-button orca-icon-button--dense\" type=\"button\" aria-pressed=\"false\" aria-label=\"Bulleted list\">{% icon \"list\" %}</button></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "rich-text-editor"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "icon-button",
+    "divider"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Jakob's law: work the way products people already know work",
+    "Practical UI F10: Specify every interaction state"
+   ]
+  },
+  {
+   "id": "applied-filters",
+   "name": "Applied filters",
+   "category": "forms",
+   "summary": "The filters in effect as removable tags, with Clear all and the number of results.",
+   "why": "Filters that are on must stay visible and reversible (Practical UI S06, Postel's law); the count confirms what they did (Doherty threshold).",
+   "when": [
+    "Above results while at least one filter is applied; inside a no-results state."
+   ],
+   "how": [
+    "`<div class=\"orca-filter-bar__applied\"><span class=\"orca-small orca-muted\">Filtered by</span>` then one removable tag per filter, a 'Clear all' link button and the count in `role=\"status\"`."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Each remove button names the filter it removes."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-filter-bar__applied"
+   ],
+   "laws": [
+    "S06",
+    "postel",
+    "doherty"
+   ],
+   "examples": [
+    {
+     "title": "Applied filters",
+     "html": "<div class=\"orca-filter-bar__applied\"><span class=\"orca-small orca-muted\">Filtered by</span><span class=\"orca-tag\"><span class=\"orca-tag__text\">Type: Video</span><button class=\"orca-tag__remove\" type=\"button\" aria-label=\"Remove filter Type: Video\">{% icon \"close\" %}</button></span><button class=\"orca-button orca-button--link\" type=\"button\">Clear all</button><span class=\"orca-small orca-muted\" role=\"status\">14 videos</span></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "filter-bar",
+    "no-results"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "tag",
+    "link-action"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Practical UI S06: Make essential content visible or discoverable",
+    "Postel's law: accept varied input, output reliable and accessible UI",
+    "Doherty threshold: respond within 400 ms; show progress for anything slower"
+   ]
+  },
+  {
+   "id": "card-skeleton",
+   "name": "Card skeleton",
+   "category": "feedback",
+   "summary": "The grey shape of a card (image, title, two lines) while the real card loads.",
+   "why": "A placeholder in the final shape shows that content is coming and where (Doherty threshold) and prevents the layout from jumping when it arrives.",
+   "when": [
+    "Grids and feeds that load cards after the page."
+   ],
+   "how": [
+    "`<div aria-hidden=\"true\"><div class=\"orca-skeleton orca-aspect-16x9\"></div><div class=\"orca-skeleton orca-skeleton--title\"></div><div class=\"orca-skeleton orca-skeleton--text\"></div></div>`; the region around the placeholders has `aria-busy=\"true\"` and a label."
+   ],
+   "avoid": [
+    "Content that arrives in under a second: show nothing."
+   ],
+   "a11y": [
+    "Placeholders are hidden from assistive technology; the region's label says what is loading."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-skeleton",
+    ".orca-skeleton--title",
+    ".orca-skeleton--text"
+   ],
+   "laws": [
+    "doherty"
+   ],
+   "examples": [
+    {
+     "title": "Card skeleton",
+     "html": "<div aria-busy=\"true\" aria-label=\"Loading video\" style=\"max-width: 16rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\"><div aria-hidden=\"true\"><div class=\"orca-skeleton orca-aspect-16x9\" style=\"margin-bottom: var(--orca-space-8)\"></div><div class=\"orca-skeleton orca-skeleton--title\"></div><div class=\"orca-skeleton orca-skeleton--text\" style=\"max-width: 70%\"></div></div></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "video-grid",
+    "loading-placeholder"
+   ],
+   "source": "ORCA",
+   "level": "component",
+   "uses": [
+    "skeleton"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Doherty threshold: respond within 400 ms; show progress for anything slower"
+   ]
+  },
+  {
    "id": "site-header",
    "name": "Header",
    "category": "page-frame",
@@ -15582,9 +16617,9 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "logo",
+    "logo-link",
     "primary-navigation",
-    "button"
+    "call-to-action"
    ],
    "template": "",
    "preview": "",
@@ -15640,10 +16675,10 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "logo",
+    "logo-link",
     "primary-navigation",
     "utility-navigation",
-    "search-input"
+    "search-field"
    ],
    "template": "",
    "preview": "",
@@ -15702,7 +16737,7 @@
    "uses": [
     "sidebar-link",
     "nav-tree",
-    "icon-button"
+    "collapse-toggle"
    ],
    "template": "",
    "preview": "",
@@ -15753,9 +16788,9 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "text-link",
-    "logo",
-    "small-text"
+    "logo-link",
+    "link-column",
+    "fine-print"
    ],
    "template": "",
    "preview": "",
@@ -15806,8 +16841,7 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "page-title",
-    "page-subtitle",
+    "page-heading",
     "breadcrumbs",
     "create-button"
    ],
@@ -15914,10 +16948,8 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "drawer-backdrop",
-    "dialog-title",
-    "icon-button",
-    "button"
+    "dialog",
+    "form-actions"
    ],
    "template": "",
    "preview": "",
@@ -16016,7 +17048,7 @@
    "level": "pattern",
    "uses": [
     "theme-toggle",
-    "switch",
+    "toggle-field",
     "settings-toggle"
    ],
    "template": "",
@@ -16072,7 +17104,7 @@
    "level": "pattern",
    "uses": [
     "choice-group",
-    "link-action",
+    "panel-header",
     "search-field"
    ],
    "template": "",
@@ -16129,7 +17161,8 @@
    "level": "pattern",
    "uses": [
     "filter-button",
-    "dialog"
+    "dialog",
+    "filter-panel"
    ],
    "template": "",
    "preview": "",
@@ -16230,7 +17263,7 @@
    "uses": [
     "video-card",
     "view-toggle",
-    "skeleton"
+    "card-skeleton"
    ],
    "template": "",
    "preview": "",
@@ -16269,7 +17302,7 @@
    "examples": [
     {
      "title": "KPIs",
-     "html": "<div class=\"orca-kpi-grid\">\n  <a class=\"orca-stat-card\" href=\"#\"><p class=\"orca-stat-label\">Visitors today</p><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><p class=\"orca-stat-label\">Inside now</p><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><p class=\"orca-stat-label\">Videos online</p><p class=\"orca-stat-value\">11 of 12</p><div class=\"orca-stat-card__foot\"><span class=\"orca-with-icon\">{% status_icon \"negative\" size=\"xs\" %}Loading dock offline</span></div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><p class=\"orca-stat-label\">Count accuracy</p><p class=\"orca-stat-value\">96.4%</p><div class=\"orca-stat-card__foot\">last 7 days</div></a>\n</div>"
+     "html": "<div class=\"orca-kpi-grid\">\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span><p class=\"orca-stat-label\">Visitors today</p></div><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"home\" %}</span><p class=\"orca-stat-label\">Inside now</p></div><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"play\" %}</span><p class=\"orca-stat-label\">Videos online</p></div><p class=\"orca-stat-value\">11 of 12</p><div class=\"orca-stat-card__foot\"><span class=\"orca-with-icon\">{% status_icon \"negative\" size=\"xs\" %}Loading dock offline</span></div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Count accuracy</p></div><p class=\"orca-stat-value\">96.4%</p><div class=\"orca-stat-card__foot\">last 7 days</div></a>\n</div>"
     }
    ],
    "guide": [
@@ -16328,7 +17361,7 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "heat-cell",
+    "heat-row",
     "legend-item"
    ],
    "template": "",
@@ -16379,8 +17412,7 @@
    "level": "pattern",
    "uses": [
     "timeline-item",
-    "thumbnail",
-    "relative-time"
+    "media-object"
    ],
    "template": "",
    "preview": "",
@@ -16441,7 +17473,7 @@
     "sortable-header",
     "row-actions",
     "table-pager",
-    "checkbox",
+    "row-select",
     "status-light"
    ],
    "template": "",
@@ -16498,7 +17530,7 @@
    "level": "pattern",
    "uses": [
     "table-card",
-    "progress-bar"
+    "progress-with-counts"
    ],
    "template": "",
    "preview": "",
@@ -16551,8 +17583,7 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "tag",
-    "link-action"
+    "applied-filters"
    ],
    "template": "",
    "preview": "",
@@ -16709,9 +17740,9 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "status-dot",
+    "status-light",
     "linked-card",
-    "icon-button"
+    "record-actions"
    ],
    "template": "",
    "preview": "",
@@ -16818,8 +17849,7 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "stat-value",
-    "status-dot"
+    "summary-tile"
    ],
    "template": "",
    "preview": "",
@@ -16921,7 +17951,7 @@
    "level": "pattern",
    "uses": [
     "form-field",
-    "section-title"
+    "section-heading"
    ],
    "template": "",
    "preview": "",
@@ -17081,7 +18111,7 @@
    "level": "pattern",
    "uses": [
     "zone-row",
-    "media-frame"
+    "captioned-media"
    ],
    "template": "",
    "preview": "",
@@ -17134,10 +18164,10 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "logo",
+    "logo-link",
     "form-field",
-    "checkbox",
-    "button",
+    "toggle-field",
+    "form-actions",
     "form-alert"
    ],
    "template": "",
@@ -17241,9 +18271,8 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "icon-button",
-    "textarea",
-    "label"
+    "form-field",
+    "formatting-toolbar"
    ],
    "template": "",
    "preview": "",
@@ -17295,9 +18324,7 @@
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
-    "video-frame",
-    "recording-frame",
-    "time-label"
+    "video-player"
    ],
    "template": "",
    "preview": "",
@@ -17348,9 +18375,9 @@
    "level": "pattern",
    "uses": [
     "panel",
-    "recording-frame",
+    "video-player",
     "status-light",
-    "stat-value"
+    "stat-card"
    ],
    "template": "",
    "preview": "",
@@ -17400,9 +18427,8 @@
    "level": "pattern",
    "uses": [
     "person-block",
-    "media-frame",
-    "photo-actions-bar",
-    "relative-time"
+    "captioned-media",
+    "photo-actions-bar"
    ],
    "template": "",
    "preview": "",
@@ -17450,9 +18476,8 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "media-frame",
-    "thumbnail",
-    "carousel-dot"
+    "captioned-media",
+    "thumbnail-strip"
    ],
    "template": "",
    "preview": "",
@@ -17543,7 +18568,7 @@
    "examples": [
     {
      "title": "Site",
-     "html": "<div class=\"orca-parent\">\n  <div class=\"orca-page-head\" style=\"margin: 0\"><div class=\"orca-page-head__text\"><h1 class=\"orca-page-title\">North building</h1><p class=\"orca-page-subtitle\">12 Rue de la Gare, Lille</p></div><div class=\"orca-page-head__actions\"><a class=\"orca-button\" href=\"#\">{% icon \"edit\" %}Edit site</a></div></div>\n  <div class=\"orca-parent__summary\"><div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Visitors today</p><p class=\"orca-stat-value\">9,530</p></div><div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Videos online</p><p class=\"orca-stat-value\">11 of 12</p></div></div>\n  <nav class=\"orca-tabs__list\" aria-label=\"North building\"><a class=\"orca-tab\" href=\"#\">Overview</a><a class=\"orca-tab\" href=\"#\" aria-current=\"page\">Videos <span class=\"orca-count orca-count--neutral\">12</span></a><a class=\"orca-tab\" href=\"#\">Zones <span class=\"orca-count orca-count--neutral\">5</span></a><a class=\"orca-tab\" href=\"#\">Users <span class=\"orca-count orca-count--neutral\">3</span></a></nav>\n</div>"
+     "html": "<div class=\"orca-parent\">\n  <div class=\"orca-page-head\" style=\"margin: 0\"><div class=\"orca-page-head__text\"><h1 class=\"orca-page-title\">North building</h1><p class=\"orca-page-subtitle\">12 Rue de la Gare, Lille</p></div><div class=\"orca-page-head__actions\"><a class=\"orca-button\" href=\"#\">{% icon \"edit\" %}Edit site</a></div></div>\n  <div class=\"orca-parent__summary\"><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span><p class=\"orca-stat-label\">Visitors today</p></div><p class=\"orca-stat-value\">9,530</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Videos online</p></div><p class=\"orca-stat-value\">11 of 12</p></div></div>\n  <nav class=\"orca-tabs__list\" aria-label=\"North building\"><a class=\"orca-tab\" href=\"#\">Overview</a><a class=\"orca-tab\" href=\"#\" aria-current=\"page\">Videos <span class=\"orca-count orca-count--neutral\">12</span></a><a class=\"orca-tab\" href=\"#\">Zones <span class=\"orca-count orca-count--neutral\">5</span></a><a class=\"orca-tab\" href=\"#\">Users <span class=\"orca-count orca-count--neutral\">3</span></a></nav>\n</div>"
     }
    ],
    "guide": [
@@ -17652,8 +18677,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "activity-entry",
-    "button"
+    "activity-entry"
    ],
    "template": "",
    "preview": "",
@@ -17702,8 +18726,8 @@
    "level": "pattern",
    "uses": [
     "callout",
-    "text-link",
-    "button"
+    "list",
+    "button-group"
    ],
    "template": "",
    "preview": "",
@@ -17781,7 +18805,9 @@
     "Start the value axis at zero; sort categories by value unless they have a natural order (days, hours).",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Many periods (more than about 15): use a line chart.",
@@ -17837,7 +18863,9 @@
     "The second series is dashed so it differs without colour; label the reference ('Last Friday').",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Few categories with no order: use bars.",
@@ -17892,7 +18920,9 @@
     "Order slices from largest, clockwise from 12 o'clock; group small ones into 'Other'.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "More than 5 parts or similar shares: use a horizontal bar chart."
@@ -17946,7 +18976,9 @@
     "Same rules as the pie chart; the centre shows the total.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "More than 5 parts: use bars."
@@ -18000,7 +19032,9 @@
     "Each series gets its own marker shape; name both axes in the subtitle with their units.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "One measure: use bars or a line."
@@ -18054,7 +19088,9 @@
     "Values are `x:y:size`; size scales by area, not radius.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Exact comparison of the third value: use a table."
@@ -18108,7 +19144,9 @@
     "All axes must share the same scale (for example 0–100).",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "More than two items, or different scales: use a table or bars."
@@ -18162,7 +19200,9 @@
     "Order segments meaningfully (by time or by size).",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Precise comparison: use bars."
@@ -18293,9 +19333,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "icon",
-    "heading",
-    "paragraph"
+    "feature-item"
    ],
    "template": "",
    "preview": "",
@@ -18346,10 +19384,8 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "color-input",
-    "button",
-    "badge",
-    "brand-color"
+    "form-field",
+    "live-example"
    ],
    "template": "",
    "preview": "",
@@ -18446,9 +19482,7 @@
    "level": "pattern",
    "uses": [
     "breadcrumbs",
-    "page-title",
-    "paragraph",
-    "badge"
+    "page-heading"
    ],
    "template": "",
    "preview": "",
@@ -18598,10 +19632,8 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "hero-image",
-    "card-kicker",
-    "card-meta",
-    "heading"
+    "captioned-media",
+    "post-block"
    ],
    "template": "",
    "preview": "",
@@ -18653,8 +19685,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "stat-value",
-    "small-text"
+    "big-number"
    ],
    "template": "",
    "preview": "",
@@ -18706,9 +19737,9 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "logo",
-    "button",
-    "brand-color"
+    "logo-link",
+    "call-to-action",
+    "fine-print"
    ],
    "template": "",
    "preview": "",
@@ -19176,7 +20207,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "checkbox",
+    "choice-group",
     "legend-item"
    ],
    "template": "",
@@ -19233,7 +20264,7 @@
    "level": "pattern",
    "uses": [
     "add-row-button",
-    "switch",
+    "toggle-field",
     "overlap-warning"
    ],
    "template": "",
@@ -19338,7 +20369,7 @@
     "recurrence-selector",
     "weekday-selector",
     "choice-group",
-    "date-input"
+    "date-picker"
    ],
    "template": "",
    "preview": "",
@@ -19387,9 +20418,9 @@
    "level": "pattern",
    "uses": [
     "exception-entry",
-    "date-input",
+    "date-picker",
     "time-range-input",
-    "switch",
+    "toggle-field",
     "panel"
    ],
    "template": "",
@@ -19491,7 +20522,7 @@
    "level": "pattern",
    "uses": [
     "event-card",
-    "avatar",
+    "resource-row",
     "availability-legend"
    ],
    "template": "",
@@ -19541,8 +20572,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "avatar",
-    "badge"
+    "resource-row"
    ],
    "template": "",
    "preview": "",
@@ -19593,7 +20623,7 @@
    "level": "pattern",
    "uses": [
     "booking-slot",
-    "button"
+    "button-group"
    ],
    "template": "",
    "preview": "",
@@ -19697,7 +20727,7 @@
    "uses": [
     "conflict-warning",
     "event-card",
-    "radio"
+    "choice-group"
    ],
    "template": "",
    "preview": "",
@@ -19807,8 +20837,8 @@
    "level": "pattern",
    "uses": [
     "event-chip",
-    "icon-button",
-    "button"
+    "panel-header",
+    "button-group"
    ],
    "template": "",
    "preview": "",
@@ -19907,8 +20937,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "text-input",
-    "button"
+    "input-group"
    ],
    "template": "",
    "preview": "",
@@ -20008,7 +21037,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "avatar",
+    "list-item",
     "multi-picker",
     "remove-row-button"
    ],
@@ -20059,7 +21088,7 @@
    "level": "pattern",
    "uses": [
     "button-group",
-    "radio"
+    "choice-group"
    ],
    "template": "",
    "preview": "",
@@ -20169,7 +21198,7 @@
    "level": "pattern",
    "uses": [
     "board-card",
-    "badge",
+    "column-header",
     "dropdown-menu"
    ],
    "template": "",
@@ -20275,7 +21304,7 @@
    "source": "ORCA",
    "level": "pattern",
    "uses": [
-    "badge"
+    "gantt-bar"
    ],
    "template": "",
    "preview": "",
@@ -20630,6 +21659,256 @@
    ]
   },
   {
+   "id": "page-landmarks",
+   "name": "Page landmarks",
+   "category": "page-frame",
+   "summary": "The regions every page has: skip navigation, the main landmark and the place dialogs open in.",
+   "why": "Landmarks let assistive technology jump straight to the content (WCAG 1.3.1, 2.4.1) and give dialogs one place outside the content flow, so focus and stacking work the same on every page (Jakob's law, Tesler's law).",
+   "when": [
+    "Every page: the base layout writes them, so pages never do."
+   ],
+   "how": [
+    "`<body>` starts with the skip navigation; `<main id=\"main\" tabindex=\"-1\">` holds the content; dialogs and drawers go in `{% block modal %}` after `</main>`."
+   ],
+   "avoid": [],
+   "a11y": [
+    "One `<main>` per page; dialogs outside it are opened with `showModal()` so the page behind is inert."
+   ],
+   "tokens": [],
+   "classes": [
+    ".orca-skip-link"
+   ],
+   "laws": [
+    "jakob",
+    "tesler",
+    "F01"
+   ],
+   "examples": [
+    {
+     "title": "Landmarks (press Tab inside this example)",
+     "html": "<div style=\"position: relative; overflow: hidden; border: var(--orca-border-width) solid var(--orca-border)\">\n  <a class=\"orca-skip-link\" href=\"#pl-main\">Skip to main content</a>\n  <div id=\"pl-main\" tabindex=\"-1\" style=\"padding: var(--orca-space-16)\"><p class=\"orca-p\">Main content.</p></div>\n</div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "base-layout"
+   ],
+   "source": "ORCA",
+   "level": "pattern",
+   "uses": [
+    "skip-navigation",
+    "dialog"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Jakob's law: work the way products people already know work",
+    "Tesler's law: move unavoidable complexity from the user to the system",
+    "Practical UI F01: Design for a diverse audience"
+   ]
+  },
+  {
+   "id": "error-message",
+   "name": "Error message",
+   "category": "page-frame",
+   "summary": "What an error page says: the code, what happened in plain words, what to do, and a way back.",
+   "why": "An error is a low point of the experience; saying what happened and offering the next step softens it (Peak–end rule, Practical UI W15), and the logo link is the familiar way out (Jakob's law).",
+   "when": [
+    "403, 404 and 500 pages; a section that cannot load at all."
+   ],
+   "how": [
+    "`<div class=\"orca-error-layout\">` with the logo link, an illustration, `.orca-error-layout__code`, the empty-state title and text, and one action (Go to the dashboard) plus a back link.",
+    "Never blame the person; never show a stack trace."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-error-layout",
+    ".orca-error-layout__body",
+    ".orca-error-layout__code"
+   ],
+   "laws": [
+    "peak-end",
+    "W15",
+    "jakob"
+   ],
+   "examples": [
+    {
+     "title": "Not found",
+     "html": "<div class=\"orca-error-layout\" style=\"min-height: 0\">{% orca_logo href=\"#\" %}<div class=\"orca-error-layout__body\">{% orca_illustration \"search\" %}<p class=\"orca-error-layout__code\">404</p><h1 class=\"orca-empty-title\">This page does not exist</h1><p class=\"orca-empty-text\">The link may be old, or the page was moved.</p><a class=\"orca-button orca-button--primary\" href=\"#\">Go to the dashboard</a></div></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "error-layouts"
+   ],
+   "source": "ORCA",
+   "level": "pattern",
+   "uses": [
+    "empty-state",
+    "logo-link",
+    "back-link"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Peak–end rule: people judge an experience by its peak and its end",
+    "Practical UI W15: Help people recover from errors",
+    "Jakob's law: work the way products people already know work"
+   ]
+  },
+  {
+   "id": "card-grid",
+   "name": "Card grid",
+   "category": "grids",
+   "summary": "Cards for records, products or people in as many equal columns as fit.",
+   "why": "Equal cards in a grid let people compare items by position and shape (Miller's law, Practical UI L11) and adapt to any width without a breakpoint.",
+   "when": [
+    "Collections people browse: records, products, people."
+   ],
+   "how": [
+    "`<ul class=\"orca-card-grid\">` with one card per `<li>`; a linked card when the whole card opens the record.",
+    "Keep every card's content in the same order so the grid reads as a table."
+   ],
+   "avoid": [
+    "Records people compare field by field: use a data table."
+   ],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-card-grid"
+   ],
+   "laws": [
+    "miller",
+    "L11"
+   ],
+   "examples": [
+    {
+     "title": "Cards",
+     "html": "<ul class=\"orca-card-grid\"><li class=\"orca-card\"><div class=\"orca-card__body\"><h3 class=\"orca-card-title\">Harbour at dusk</h3><p class=\"orca-card-meta\">Video · 4 min</p></div></li><li class=\"orca-card\"><div class=\"orca-card__body\"><h3 class=\"orca-card-title\">Summer 2026</h3><p class=\"orca-card-meta\">Album · 36 images</p></div></li><li class=\"orca-card\"><div class=\"orca-card__body\"><div class=\"orca-person\"><span class=\"orca-avatar\" aria-hidden=\"true\">AL</span><span class=\"orca-person__text\"><span class=\"orca-person__name\">Ada Lovelace</span><span class=\"orca-person__role\">Editor</span></span></div></div></li></ul>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "card-grid-layout",
+    "person-block-grid"
+   ],
+   "source": "ORCA",
+   "level": "pattern",
+   "uses": [
+    "linked-card",
+    "person-block"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Practical UI L11: Align the layout with a responsive grid"
+   ]
+  },
+  {
+   "id": "loading-placeholder",
+   "name": "Loading placeholder",
+   "category": "grids",
+   "summary": "Placeholder cards in the shape of the content while a grid or feed loads, announced to screen readers.",
+   "why": "Placeholders in the final shape make waiting feel shorter and keep the layout still (Doherty threshold); the busy region tells assistive technology that content is on its way.",
+   "when": [
+    "Grids and feeds that load after the page, or load more on scroll."
+   ],
+   "how": [
+    "A region with `aria-busy=\"true\"` and `aria-label=\"Loading videos\"` holding two or three card skeletons; replace the whole region when the content arrives."
+   ],
+   "avoid": [],
+   "a11y": [
+    "Remove `aria-busy` when the content is in; announce the result count politely."
+   ],
+   "tokens": [],
+   "classes": [],
+   "laws": [
+    "doherty"
+   ],
+   "examples": [
+    {
+     "title": "Loading",
+     "html": "<div class=\"orca-row orca-row--16\" aria-busy=\"true\" aria-label=\"Loading videos\" style=\"align-items: flex-start\"><div style=\"width: 12rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\"><div aria-hidden=\"true\"><div class=\"orca-skeleton orca-aspect-16x9\" style=\"margin-bottom: var(--orca-space-8)\"></div><div class=\"orca-skeleton orca-skeleton--title\"></div></div></div><div style=\"width: 12rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\"><div aria-hidden=\"true\"><div class=\"orca-skeleton orca-aspect-16x9\" style=\"margin-bottom: var(--orca-space-8)\"></div><div class=\"orca-skeleton orca-skeleton--title\"></div></div></div></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "feed-skeleton",
+    "video-grid"
+   ],
+   "source": "ORCA",
+   "level": "pattern",
+   "uses": [
+    "card-skeleton"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Doherty threshold: respond within 400 ms; show progress for anything slower"
+   ]
+  },
+  {
+   "id": "no-results",
+   "name": "No results",
+   "category": "data-filtering",
+   "summary": "What a list, table or feed shows when it has nothing: the empty state, and the applied filters when filters hide everything.",
+   "why": "An empty list is a dead end unless it says why and what to do (Peak–end rule, Practical UI W15). When filters caused it, showing them with Clear all is the fastest way back (Postel's law).",
+   "when": [
+    "Every list, table, grid and feed, for the empty and the filtered-empty cases."
+   ],
+   "how": [
+    "First use: the empty state with the create action ('Add your first video').",
+    "Filtered empty: the empty state ('No videos match these filters') above the applied filters with Clear all."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [],
+   "laws": [
+    "peak-end",
+    "W15",
+    "postel"
+   ],
+   "examples": [
+    {
+     "title": "Filtered empty",
+     "html": "<div class=\"orca-empty\">{% orca_illustration \"search\" %}<h2 class=\"orca-empty-title\">No videos match these filters</h2><p class=\"orca-empty-text\">Remove a filter, or clear them all to see every video.</p>\n<div class=\"orca-filter-bar__applied\" style=\"justify-content: center\"><span class=\"orca-tag\"><span class=\"orca-tag__text\">Album: Summer 2026</span><button class=\"orca-tag__remove\" type=\"button\" aria-label=\"Remove filter Album: Summer 2026\">{% icon \"close\" %}</button></span><button class=\"orca-button orca-button--link\" type=\"button\">Clear all</button></div></div>"
+    }
+   ],
+   "guide": [],
+   "related": [
+    "generic-list",
+    "simple-data-page",
+    "feed-skeleton"
+   ],
+   "source": "ORCA",
+   "level": "pattern",
+   "uses": [
+    "empty-state",
+    "applied-filters"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Peak–end rule: people judge an experience by its peak and its end",
+    "Practical UI W15: Help people recover from errors",
+    "Postel's law: accept varied input, output reliable and accessible UI"
+   ]
+  },
+  {
    "id": "base-layout",
    "name": "Base layout",
    "category": "template-layouts",
@@ -20662,7 +21941,7 @@
    "source": "ORCA",
    "level": "template",
    "uses": [
-    "skip-link"
+    "page-landmarks"
    ],
    "template": "orca/layouts/base.html",
    "preview": "",
@@ -20956,7 +22235,7 @@
    "source": "ORCA",
    "level": "template",
    "uses": [
-    "empty-state"
+    "error-message"
    ],
    "template": "orca/layouts/error.html",
    "preview": "error-layouts",
@@ -20997,7 +22276,7 @@
    ],
    "how": [
     "Extend it: `{% extends \"orca/layouts/home.html\" %}`, then fill only the blocks you need.",
-    "Pass `stats` (label, value, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks."
+    "Pass `stats` (label, value, icon, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks."
    ],
    "avoid": [],
    "a11y": [],
@@ -21022,7 +22301,7 @@
    "level": "template",
    "uses": [
     "app-shell",
-    "stat-card",
+    "kpi-grid",
     "activity-feed"
    ],
    "template": "orca/layouts/home.html",
@@ -21113,8 +22392,8 @@
    "level": "template",
    "uses": [
     "photo-post",
-    "skeleton",
-    "empty-state"
+    "loading-placeholder",
+    "no-results"
    ],
    "template": "orca/layouts/feed.html",
    "preview": "feed-skeleton",
@@ -21201,7 +22480,6 @@
    "source": "ORCA",
    "level": "template",
    "uses": [
-    "person-block",
     "card-grid-layout"
    ],
    "template": "orca/layouts/people.html",
@@ -21454,9 +22732,8 @@
     "app-shell",
     "list-header",
     "data-table",
-    "filter-panel",
-    "pagination",
-    "empty-state"
+    "filter-drawer",
+    "no-results"
    ],
    "template": "orca/generic/list.html",
    "preview": "generic-list",
@@ -22422,7 +23699,7 @@
    ],
    "how": [
     "Extend it: `{% extends \"orca/layouts/dashboard.html\" %}`, then fill only the blocks you need.",
-    "Pass `stats` (label, value, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.",
+    "Pass `stats` (label, value, icon, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.",
     "Keep it to 4–6 stats and 2–4 charts; link each stat to the list behind it."
    ],
    "avoid": [],
@@ -22631,7 +23908,7 @@
    "level": "template",
    "uses": [
     "resource-scheduler",
-    "calendar-navigation"
+    "calendar-toolbar"
    ],
    "template": "orca/layouts/scheduler.html",
    "preview": "scheduler-page",
@@ -23063,7 +24340,7 @@
     "list-header",
     "filter-drawer",
     "data-table",
-    "pagination"
+    "no-results"
    ],
    "template": "orca/layouts/simple_data.html",
    "preview": "simple-data-page",
@@ -23189,7 +24466,7 @@
    "examples": [
     {
      "title": "Stats",
-     "html": "<div class=\"orca-stat-grid\"><div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Metric 1</p><p class=\"orca-stat-value\">1,234</p></div><div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Metric 2</p><p class=\"orca-stat-value\">56</p></div><div class=\"orca-stat-card\"><p class=\"orca-stat-label\">Metric 3</p><p class=\"orca-stat-value\">98%</p></div></div>"
+     "html": "<div class=\"orca-stat-grid\"><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Metric 1</p></div><p class=\"orca-stat-value\">1,234</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Metric 2</p></div><p class=\"orca-stat-value\">56</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Metric 3</p></div><p class=\"orca-stat-value\">98%</p></div></div>"
     }
    ],
    "guide": [
@@ -23199,7 +24476,7 @@
    "source": "ORCA",
    "level": "template",
    "uses": [
-    "stat-card"
+    "kpi-grid"
    ],
    "template": "",
    "preview": "",
@@ -23247,7 +24524,7 @@
    "source": "ORCA",
    "level": "template",
    "uses": [
-    "card"
+    "card-grid"
    ],
    "template": "",
    "preview": "",
@@ -23440,7 +24717,7 @@
    "source": "ORCA",
    "level": "template",
    "uses": [
-    "form-field"
+    "form-section"
    ],
    "template": "",
    "preview": "",

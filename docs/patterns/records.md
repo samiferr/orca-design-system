@@ -66,7 +66,7 @@ Keeping the parent visible while browsing its children preserves context (Miller
 ```django
 <div class="orca-parent">
   <div class="orca-page-head" style="margin: 0"><div class="orca-page-head__text"><h1 class="orca-page-title">North building</h1><p class="orca-page-subtitle">12 Rue de la Gare, Lille</p></div><div class="orca-page-head__actions"><a class="orca-button" href="#">{% icon "edit" %}Edit site</a></div></div>
-  <div class="orca-parent__summary"><div class="orca-stat-card"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p></div></div>
+  <div class="orca-parent__summary"><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span><p class="orca-stat-label">Visitors today</p></div><p class="orca-stat-value">9,530</p></div><div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span><p class="orca-stat-label">Videos online</p></div><p class="orca-stat-value">11 of 12</p></div></div>
   <nav class="orca-tabs__list" aria-label="North building"><a class="orca-tab" href="#">Overview</a><a class="orca-tab" href="#" aria-current="page">Videos <span class="orca-count orca-count--neutral">12</span></a><a class="orca-tab" href="#">Zones <span class="orca-count orca-count--neutral">5</span></a><a class="orca-tab" href="#">Users <span class="orca-count orca-count--neutral">3</span></a></nav>
 </div>
 ```
@@ -120,7 +120,7 @@ The same list tools as a top-level list make child lists familiar (Jakob's law);
 
 Changes to a record or a site, grouped by day, each with who, what, when and the before and after values.
 
-Built from: `activity-entry`, `button`
+Built from: `activity-entry`
 
 ### Why
 
@@ -158,7 +158,7 @@ Seeing who changed what builds trust in shared data and answers 'why does this l
 
 Why a record cannot be deleted yet, which records depend on it, and how to proceed.
 
-Built from: `callout`, `text-link`, `button`
+Built from: `callout`, `list`, `button-group`
 
 ### Why
 

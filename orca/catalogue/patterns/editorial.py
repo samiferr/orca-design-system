@@ -15,7 +15,7 @@ add(Pattern(
     how=["`<article class=\"orca-story\">` with `.orca-story__media` (4:3 image with alt text) and the text (kicker, `h2.orca-story__title` linked, `.orca-story__lead`, card meta)."],
     classes=[".orca-story", ".orca-story__media", ".orca-story__title", ".orca-story__lead"],
     laws=["restorff", "W05"],
-    uses=["hero-image", "card-kicker", "card-meta", "heading"],
+    uses=["captioned-media", "post-block"],
     examples=[("Story", """<article class="orca-story"><div class="orca-story__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="Shoppers entering the north building"></div>
   <div><p class="orca-card-kicker">Case study</p><h2 class="orca-story__title"><a href="#">How North building cut queues by a third</a></h2><p class="orca-story__lead">Live counts showed the 13:00 peak; two more tills open at 12:45 now.</p><p class="orca-card-meta">6 November 2026 · 4 min read</p></div></article>""")],
     guide=["Story feature"],
@@ -30,7 +30,7 @@ add(Pattern(
     how=["`<figure class=\"orca-factoid\">` with `.orca-factoid__number`, `<figcaption>` holding `.orca-factoid__text` and `.orca-factoid__source`."],
     classes=[".orca-factoid", ".orca-factoid__number", ".orca-factoid__text", ".orca-factoid__source"],
     laws=["restorff", "peak-end", "W11"],
-    uses=["stat-value", "small-text"],
+    uses=["big-number"],
     examples=[("Factoid", """<figure class="orca-factoid" style="margin: 0"><span class="orca-factoid__number">−34%</span><figcaption><p class="orca-factoid__text">waiting time at the tills after opening two more at peak</p><p class="orca-factoid__source">North building, October 2026</p></figcaption></figure>""")],
     guide=["Factoid"],
 ))

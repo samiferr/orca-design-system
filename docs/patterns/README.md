@@ -6,7 +6,7 @@ Every element below has a **why**, **when**, **when not**, **how**, accessibilit
 classes it uses, the UX principles it applies, and a copy-ready Django template example.
 Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.
 
-## [Page frame](page-frame.md) (11)
+## [Page frame](page-frame.md) (13)
 
 The parts every page sits in: headers, top bar, sidebar, footer, page head, messages, drawers and filter panels.
 
@@ -21,8 +21,10 @@ The parts every page sits in: headers, top bar, sidebar, footer, page head, mess
 - `settings-panel` **Settings panel**: Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.
 - `filter-panel` **Filter panel**: Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.
 - `filter-drawer` **Filter drawer**: Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.
+- `page-landmarks` **Page landmarks**: The regions every page has: skip navigation, the main landmark and the place dialogs open in.
+- `error-message` **Error message**: What an error page says: the code, what happened in plain words, what to do, and a way back.
 
-## [Grids and collections](grids.md) (5)
+## [Grids and collections](grids.md) (7)
 
 Repeating one component in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.
 
@@ -31,8 +33,10 @@ Repeating one component in a responsive grid or sequence: products, videos, KPIs
 - `kpi-grid` **KPI grid**: A row of stat cards summarising the state of things, linking to the detail behind each.
 - `capacity-heat-map` **Capacity heat map**: Occupancy by weekday and hour as shaded cells with the value printed, and a legend of the scale.
 - `event-timeline` **Event timeline**: Alerts and events grouped by day, newest first, each with its status, time and snapshot.
+- `card-grid` **Card grid**: Cards for records, products or people in as many equal columns as fit.
+- `loading-placeholder` **Loading placeholder**: Placeholder cards in the shape of the content while a grid or feed loads, announced to screen readers.
 
-## [Data and filtering](data-filtering.md) (9)
+## [Data and filtering](data-filtering.md) (10)
 
 Tables, panels and the controls that narrow them: filter bars, list headers, summary tiles and record cards.
 
@@ -45,6 +49,7 @@ Tables, panels and the controls that narrow them: filter bars, list headers, sum
 - `list-header` **List header**: Above a list: its title with the count, a search, the view toggle and, for a list panel inside a page, its create action.
 - `summary-tiles` **Summary tiles**: A row of small counts by status that also act as quick filters.
 - `autocomplete-results-table` **Autocomplete results table**: Search-as-you-type results shown as a compact table with the matched text highlighted.
+- `no-results` **No results**: What a list, table or feed shows when it has nothing: the empty state, and the applied filters when filters hide everything.
 
 ## [Forms](pattern-forms.md) (7)
 
@@ -80,7 +85,7 @@ Showing and changing one record and its children: detail panels, child tabs, act
 
 ## [Charts](pattern-charts.md) (8)
 
-Server-rendered SVG charts in a chart frame, in token colours, each with a text summary and its data as a table. No chart library.
+Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.
 
 - `bar-chart` **Bar chart**: Bars comparing values across categories; grouped, stacked or horizontal.
 - `line-chart` **Line chart**: Lines showing how one or more values change over time.

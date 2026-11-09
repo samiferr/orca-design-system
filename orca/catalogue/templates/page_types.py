@@ -23,7 +23,7 @@ page("dashboard", "Dashboard", "orca/layouts/dashboard.html",
      "A dashboard answers 'how are we doing?' at a glance: a few headline numbers first (Miller's law), then the charts that explain them, "
      "all for one clearly stated period (Practical UI W11).",
      ["The home of an analytics or operations application; the overview of a site or team."],
-     ["Pass `stats` (label, value, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.",
+     ["Pass `stats` (label, value, icon, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.",
       "Keep it to 4–6 stats and 2–4 charts; link each stat to the list behind it."],
      ["miller", "W11", "L03"], ["app-shell", "kpi-grid", "bar-chart", "line-chart", "two-column-grid"], ["Dashboard"],
      ["dashboard_period", "dashboard_stats", "dashboard_main", "dashboard_extra"], ["`stats`, `charts`, `periods`."])
@@ -44,7 +44,7 @@ page("scheduler-page", "Scheduler page", "orca/layouts/scheduler.html",
      "Rows per resource answer 'who is free when' in one look (Practical UI L01); placing bookings by time makes gaps and double bookings visible.",
      ["Dispatching installers, booking rooms, planning vehicles."],
      ["Pass `resources`: `[{\"name\", \"bookings\": [events]}]`, `start_hour` and `end_hour`; `{% templatetag openblock %} orca_scheduler {% templatetag closeblock %}` places the cards."],
-     ["L01", "L09"], ["resource-scheduler", "calendar-navigation"],
+     ["L01", "L09"], ["resource-scheduler", "calendar-toolbar"],
      ["Scheduler page (resources by time)"], ["scheduler_toolbar", "scheduler", "scheduler_legend"],
      ["`resources`, `start_hour`, `end_hour`, `period_title`, `prev_url`, `next_url`, `today_url`."])
 
@@ -87,6 +87,6 @@ page("simple-data-page", "Simple data page", "orca/layouts/simple_data.html",
      "Summary tiles answer 'how many of each' and double as the most used filters (Hick's law); the rest of the filters wait in a drawer so the table keeps the space (Practical UI S04).",
      ["Operational lists where counts by status matter: videos, alerts, tickets."],
      ["Use OrcaPageMixin with a ListView; pass `tiles` (label, value, url, tone, current), a GET `filter_form` and `active_filters` (count)."],
-     ["hick", "S04", "miller"], ["summary-tiles", "list-header", "filter-drawer", "data-table", "pagination"],
+     ["hick", "S04", "miller"], ["summary-tiles", "list-header", "filter-drawer", "data-table", "no-results"],
      ["Simple data page (title bar, search, filter drawer, summary tiles, table)"], ["list_actions", "summary", "list_header", "list", "filter_panel"],
      ["`object_list`, `page_obj`, `columns`, `tiles`, `filter_form`, `active_filters`, URLs as in the generic list."])

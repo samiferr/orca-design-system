@@ -34,7 +34,7 @@ add(Pattern(
          "Keep texts to one sentence of similar length; link a feature title only when there is a page behind it."],
     classes=[".orca-feature-grid", ".orca-feature", ".orca-feature__title", ".orca-feature__text"],
     laws=["miller", "W08", "W04"],
-    uses=["icon", "heading", "paragraph"],
+    uses=["feature-item"],
     examples=[("Features", """<ul class="orca-feature-grid">
   <li class="orca-feature">{% icon "statistics" size="l" %}<h3 class="orca-feature__title">Live counts</h3><p class="orca-feature__text">See how many people are inside, updated every minute.</p></li>
   <li class="orca-feature">{% icon "notifications" size="l" %}<h3 class="orca-feature__title">Capacity alerts</h3><p class="orca-feature__text">Get an email before a room or a site is too full.</p></li>
@@ -52,7 +52,7 @@ add(Pattern(
          "The preview only shows the effect; ORCA's contrast adjustment happens when the value is saved in `settings.ORCA['BRAND']`. Show the resulting contrast next to the input."],
     classes=[".orca-token-panel", ".orca-token-panel__controls", ".orca-token-panel__preview"],
     laws=["C08", "C09", "doherty"],
-    uses=["color-input", "button", "badge", "brand-color"],
+    uses=["form-field", "live-example"],
     examples=[("Try a brand colour", """<div class="orca-token-panel">
   <div class="orca-token-panel__controls"><div class="orca-field"><label class="orca-label" for="tp-brand">Brand fill</label><div class="orca-color"><input type="color" id="tp-brand" value="#0f95a1" data-orca-token="--orca-brand-strong" aria-controls="tp-preview"></div></div>
     <div class="orca-field"><label class="orca-label" for="tp-accent">Accent</label><div class="orca-color"><input type="color" id="tp-accent" value="#0066cc" data-orca-token="--orca-accent" aria-controls="tp-preview"></div></div></div>
@@ -84,7 +84,7 @@ add(Pattern(
     how=["`<header class=\"orca-docs-head\">` with breadcrumbs, the page title, a lead paragraph (max 2 sentences) and `.orca-docs-head__meta` badges."],
     classes=[".orca-docs-head", ".orca-docs-head__meta"],
     laws=["W05", "W04"],
-    uses=["breadcrumbs", "page-title", "paragraph", "badge"],
+    uses=["breadcrumbs", "page-heading"],
     examples=[("Header", """<header class="orca-docs-head"><nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Components</a></li><li><span aria-current="page">Forms</span></li></ol></nav>
   <h1 class="orca-page-title">Form field</h1><p class="orca-p orca-p--lead">Label, hint, error and one control, wired together. Use it for every single-value field.</p>
   <div class="orca-docs-head__meta"><span class="orca-badge orca-badge--subtle orca-badge--positive">Released</span><span class="orca-badge orca-badge--grey">Since 0.2.0</span></div></header>""")],

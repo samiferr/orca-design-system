@@ -142,7 +142,7 @@ add(Pattern(
          "Submit changes as a GET filter (`?cal=deliveries&cal=meetings`) or toggle with htmx."],
     classes=[".orca-cal-legend"],
     laws=["C03", "hick"],
-    uses=["checkbox", "legend-item"],
+    uses=["choice-group", "legend-item"],
     examples=[("Calendars", """<fieldset class="orca-cal-legend"><legend>Calendars</legend>
   <label class="orca-check" style="--orca-event: var(--orca-chart-1)"><input type="checkbox" checked><span class="orca-check__box"></span>Deliveries</label>
   <label class="orca-check" style="--orca-event: var(--orca-chart-2)"><input type="checkbox" checked><span class="orca-check__box"></span>Installs and audits</label>

@@ -40,6 +40,7 @@
      data-orca-gallery          thumbnails swap the stage image
      data-orca-token="--name"   input that sets a CSS custom property on the element it controls (live token preview)
      data-orca-board            drag cards between [data-orca-column] lists; fires "orca:moved"
+     data-orca-chart='{spec}'   canvas drawn by Chart.js (loaded on demand) in token colours; redrawn on theme change
    API
      window.ORCA.toast("Report sent", {tone: "positive", action: {label: "Undo", onClick}})            */
 (function () {
@@ -49,6 +50,8 @@
 
   function closest(el, sel) { return el && el.closest ? el.closest(sel) : null; }
   function byId(id) { return id ? doc.getElementById(id) : null; }
+  /* Where this file was loaded from: the vendored Chart.js sits next to it (static/orca/vendor/). */
+  var SELF_SRC = (document.currentScript && document.currentScript.src) || "";
   function controlled(el) { return byId(el.getAttribute("aria-controls")); }
   function fire(el, type) { el.dispatchEvent(new Event(type, { bubbles: true })); }
   function today(offset) {
@@ -740,4 +743,117 @@
     });
   }
   if (doc.querySelector("[data-orca-countdown]")) { tick(); setInterval(tick, 1000); }
+
+  /* ---------------------------------------------------------------- charts (Chart.js) */
+  /* The server writes a spec {kind, labels, series:[{name, values}], unit, stacked, horizontal} on each canvas.
+     Chart.js is loaded once, only when a page has a chart. Colours, font and grid come from the ORCA tokens, so a
+     theme change redraws every chart. ORCA writes its own legend and data table; Chart.js draws the plot only. */
+  var charts = [];
+  function token(el, name) { return getComputedStyle(el).getPropertyValue(name).trim(); }
+  function alpha(color, a) {
+    var m = /^#([0-9a-f]{6})$/i.exec(color);
+    if (m) { var n = parseInt(m[1], 16); return "rgba(" + (n >> 16) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")"; }
+    m = /^rgba?\(([^)]+)\)$/.exec(color);
+    if (m) { var p = m[1].split(",").slice(0, 3).join(","); return "rgba(" + p + "," + a + ")"; }
+    return color;
+  }
+  function chartConfig(canvas, spec) {
+    var t = function (n) { return token(canvas, n); };
+    var palette = [1, 2, 3, 4, 5, 6, 7, 8].map(function (i) { return t("--orca-chart-" + i); });
+    var col = function (i) { return palette[i % palette.length]; };
+    var text = t("--orca-text-muted"), grid = t("--orca-gridline") || t("--orca-border-weak"), ground = t("--orca-bg-panel") || t("--orca-bg");
+    var font = { family: t("--orca-font-sans"), size: 11 };
+    var lang = doc.documentElement.lang || undefined;
+    var unit = spec.unit || "";
+    var num = function (v) { return Number(v).toLocaleString(lang) + unit; };
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var series = spec.series || [];
+    var opts = {
+      responsive: true, maintainAspectRatio: false, animation: reduce ? false : { duration: 300 },
+      plugins: { legend: { display: false }, tooltip: { titleFont: font, bodyFont: font, callbacks: {} } },
+      font: font, layout: { padding: 8 }
+    };
+    var axis = function (stacked) {
+      return { stacked: !!stacked, grid: { color: grid }, border: { color: t("--orca-border-strong") },
+               ticks: { color: text, font: font, callback: function (v) { return typeof v === "number" ? num(v) : this.getLabelForValue(v); } } };
+    };
+    var kind = spec.kind, type = kind, data = { labels: spec.labels || [] };
+    if (kind === "sparkline") {
+      var accent = t("--orca-accent");
+      var lo = Math.min.apply(null, spec.values), hi = Math.max.apply(null, spec.values), pad = (hi - lo || 1) * 0.1;
+      return { type: "line", data: { labels: spec.values.map(function (_, i) { return i; }),
+        datasets: [{ data: spec.values, borderColor: accent, backgroundColor: alpha(accent, 0.12), fill: "start", borderWidth: 1.5,
+                     tension: 0.3, pointRadius: spec.values.map(function (_, i) { return i === spec.values.length - 1 ? 2.5 : 0; }),
+                     pointBackgroundColor: accent }] },
+        options: { responsive: true, maintainAspectRatio: false, animation: false, events: [],
+                   plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                   scales: { x: { display: false }, y: { display: false, min: lo - pad, max: hi + pad } }, layout: { padding: 3 } } };
+    }
+    if (kind === "pie" || kind === "doughnut" || kind === "polar") {
+      type = kind === "polar" ? "polarArea" : kind;
+      data.datasets = [{ data: series.length ? series[0].values : [], label: series.length ? series[0].name : "",
+                         backgroundColor: data.labels.map(function (_, i) { return kind === "polar" ? alpha(col(i), 0.85) : col(i); }),
+                         borderColor: ground, borderWidth: 2 }];
+      if (kind === "doughnut") opts.cutout = spec.donut ? "72%" : "58%";
+      if (kind === "polar") opts.scales = { r: { grid: { color: grid }, ticks: { color: text, font: font, backdropColor: "transparent" } } };
+      opts.plugins.tooltip.callbacks.label = function (c) { return " " + c.label + ": " + num(c.raw); };
+    } else if (kind === "scatter" || kind === "bubble") {
+      data = { datasets: series.map(function (s, i) {
+        return { label: s.name, backgroundColor: alpha(col(i), kind === "bubble" ? 0.55 : 1), borderColor: col(i), borderWidth: 1.5,
+                 pointStyle: ["circle", "rect", "triangle", "rectRot", "star", "crossRot"][i % 6], pointRadius: 4,
+                 data: s.values.map(function (v) { return kind === "bubble" ? { x: v[0], y: v[1], r: v[2] || 4 } : { x: v[0], y: v[1] }; }) };
+      }) };
+      opts.scales = { x: axis(false), y: axis(false) };
+      opts.scales.x.grace = opts.scales.y.grace = "8%";
+      opts.scales.x.ticks.callback = opts.scales.y.ticks.callback = function (v) { return Number(v).toLocaleString(lang); };
+    } else if (kind === "radar") {
+      data.datasets = series.map(function (s, i) {
+        return { label: s.name, data: s.values, borderColor: col(i), backgroundColor: alpha(col(i), 0.15), pointBackgroundColor: col(i), borderWidth: 2 };
+      });
+      opts.scales = { r: { grid: { color: grid }, angleLines: { color: grid }, pointLabels: { color: text, font: font },
+                           ticks: { color: text, font: font, backdropColor: "transparent" } } };
+    } else {
+      type = kind === "area" ? "line" : kind;
+      data.datasets = series.map(function (s, i) {
+        var d = { label: s.name, data: s.values, borderColor: col(i), backgroundColor: kind === "bar" ? col(i) : alpha(col(i), 0.12) };
+        if (type === "line") { d.fill = kind === "area" ? "origin" : false; d.tension = 0.3; d.borderWidth = 2.5; d.pointRadius = 2.5; d.pointBackgroundColor = col(i);
+          if (i % 2) d.borderDash = [6, 4]; /* every other series is dashed: colour is never the only key */ }
+        return d;
+      });
+      opts.indexAxis = spec.horizontal ? "y" : "x";
+      opts.scales = { x: axis(spec.stacked), y: axis(spec.stacked) };
+      var catAxis = spec.horizontal ? "y" : "x";
+      opts.scales[catAxis].grid = { display: false };
+      opts.scales[catAxis].ticks.callback = function (v) { return this.getLabelForValue(v); };
+    }
+    if (!opts.plugins.tooltip.callbacks.label) {
+      opts.plugins.tooltip.callbacks.label = function (c) {
+        var v = c.raw && typeof c.raw === "object" ? "(" + [c.raw.x, c.raw.y].map(function (x) { return Number(x).toLocaleString(lang); }).join(", ") + ")" : num(c.raw);
+        return " " + (c.dataset.label ? c.dataset.label + ": " : "") + v;
+      };
+    }
+    return { type: type, data: data, options: opts };
+  }
+  function drawCharts() {
+    charts.forEach(function (c) { c.destroy(); }); charts = [];
+    doc.querySelectorAll("canvas[data-orca-chart]").forEach(function (canvas) {
+      var spec; try { spec = JSON.parse(canvas.getAttribute("data-orca-chart")); } catch (e) { return; }
+      charts.push(new window.Chart(canvas, chartConfig(canvas, spec)));
+    });
+  }
+  function loadChartJs(done) {
+    if (window.Chart) { done(); return; }
+    var src = doc.documentElement.getAttribute("data-orca-chartjs") || SELF_SRC.replace(/js\/orca\.js(\?.*)?$/, "vendor/chart.umd.js");
+    var s = doc.createElement("script"); s.src = src; s.onload = done;
+    var nonce = doc.querySelector("script[nonce]"); if (nonce) s.nonce = nonce.nonce || nonce.getAttribute("nonce");
+    doc.head.appendChild(s);
+  }
+  if (doc.querySelector("canvas[data-orca-chart]")) {
+    loadChartJs(function () {
+      drawCharts();
+      new MutationObserver(drawCharts).observe(doc.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawCharts);
+    });
+  }
+  window.ORCA.drawCharts = function () { loadChartJs(drawCharts); };
 })();

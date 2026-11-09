@@ -203,11 +203,11 @@ def _load() -> None:
     )
     from .components import (  # noqa: F401
         forms, navigation, feedback, actions as component_actions, data_display, content, identity_controls,
-        pickers, planning_selectors, calendar_parts, schedule_parts, plan_items, docs_site,
+        pickers, planning_selectors, calendar_parts, schedule_parts, plan_items, docs_site, building_blocks,
     )
     from .patterns import (  # noqa: F401
         page_frame, grids, data_filtering, forms as pattern_forms, media, records, charts as pattern_charts,
-        marketing, process, editorial, email, calendar_views, scheduler, event_editing, planning_boards,
+        marketing, process, editorial, email, calendar_views, scheduler, event_editing, planning_boards, composites,
     )
     from .templates import layouts, generic, page_types, structure as template_structure, slots  # noqa: F401
 
