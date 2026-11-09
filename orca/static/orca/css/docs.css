@@ -89,6 +89,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .docs-card { padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border); background: var(--orca-bg-panel); }
 .docs-card .orca-card-meta { margin-top: var(--orca-space-4); }
 
+/* Server code on element pages */
+.docs-server { margin: var(--orca-space-8) 0 var(--orca-space-32); display: grid; gap: var(--orca-space-16); }
+.docs-server > .orca-p { margin: 0; }
+.docs-server__item { display: grid; gap: var(--orca-space-8); min-width: 0; }
+.docs-server .docs-code { max-height: 36rem; }
+
 /* Code */
 .docs-code { position: relative; margin: 0; padding: var(--orca-space-16); padding-inline-end: 5rem; overflow-x: auto; background: var(--orca-bg-panel); border: var(--orca-hairline) solid var(--orca-border); font: 400 0.8125rem/1.25rem var(--orca-font-mono); white-space: pre; tab-size: 4; }
 .docs-code__copy { position: absolute; top: var(--orca-space-8); inset-inline-end: var(--orca-space-8); }

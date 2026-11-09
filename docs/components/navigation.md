@@ -206,6 +206,26 @@ Numbered pages tell people how much there is and let them jump (Miller's law); g
 </ul></nav>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+from django.views.generic import ListView
+
+from .models import Video
+
+
+class VideoList(ListView):
+    model = Video
+    paginate_by = 25          # gives the template page_obj
+    # Template: {% orca_pagination page_obj noun="videos" %} — the links keep the other query
+    # parameters (filters, sort) and the summary says "Showing 26–50 of 312 videos".
+```
+
 **Classes:** `.orca-pagination`, `.orca-page-link`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Hick's law: fewer, clearer choices mean faster decisions; Fitts's law: big, close, well-spaced targets are faster and safer

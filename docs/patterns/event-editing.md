@@ -36,6 +36,33 @@ Events have many optional fields; putting the essentials first (title, when) and
   <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">Save event</button><button class="orca-button" type="button">Cancel</button></div></form>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# events/forms.py
+from django import forms
+
+from .models import Event
+
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ["title", "starts_at", "ends_at", "all_day", "place", "calendar", "notes"]
+        widgets = {"starts_at": forms.DateTimeInput(attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"),
+                   "ends_at": forms.DateTimeInput(attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M")}
+
+    def clean(self):
+        data = super().clean()
+        if data.get("starts_at") and data.get("ends_at") and data["ends_at"] <= data["starts_at"]:
+            self.add_error("ends_at", "Choose an end after the start.")
+        return data
+```
+
 **Classes:** `.orca-form-stack`
 
 **Principles applied:** Practical UI F01: Design for a diverse audience; Practical UI F05: Build a design system with tokens and usage guidance; Tesler's law: move unavoidable complexity from the user to the system

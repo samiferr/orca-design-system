@@ -69,6 +69,45 @@ Most form errors come from fields people misread. A fixed order (label, hint, er
 {% templatetag openblock %} orca_field form.port width="w8" {% templatetag closeblock %}</pre>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form and view
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Video
+
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = ["title", "album", "published", "recorded_on"]
+        help_texts = {"title": "Shown under the player and in search."}
+
+
+# videos/views.py
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import VideoForm
+from .models import Video
+
+
+def edit_video(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    form = VideoForm(request.POST or None, instance=video)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, f"Video “{video}” saved.")
+        return redirect("video-detail", pk=video.pk)
+    # Template: {% orca_form_errors form %} then {% orca_field form.title %} for each field.
+    return render(request, "videos/edit.html", {"form": form, "video": video})
+```
+
 **Classes:** `.orca-field`, `.orca-fields`
 
 **Principles applied:** Practical UI R08: Put essential help before the input; Practical UI R09: Persistent labels, not placeholders; Practical UI R10: Keep labels close to their inputs; Practical UI R20: Submit-time validation with an error summary; Tesler's law: move unavoidable complexity from the user to the system; Postel's law: accept varied input, output reliable and accessible UI
@@ -114,6 +153,26 @@ A single on/off question is clearest as one tick or switch whose label states th
   <div class="orca-field"><label class="orca-check"><input type="checkbox" name="daily" checked><span class="orca-check__box"></span><span class="orca-check__text">Email me a daily report<span class="orca-check__desc">Sent at 07:00 with yesterday's counts.</span></span></label></div>
   <div class="orca-field"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-describedby="tf-help"><span class="orca-switch__track"></span><span>Video enabled</span></label><p class="orca-help" id="tf-help">Turning it off stops counting immediately.</p></div>
 </div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class NotificationForm(forms.Form):
+    # A checkbox saved with the form: {% orca_field form.weekly_report %}
+    weekly_report = forms.BooleanField(label="Send me the weekly report", required=False,
+                                       help_text="Every Monday at 07:00.")
+    # A setting applied at once: {% orca_field form.autoplay switch=True %} in a form with data-orca-autosubmit,
+    # whose view saves it and redirects back.
+    autoplay = forms.BooleanField(label="Play videos automatically", required=False)
 ```
 
 **Classes:** `.orca-field`
@@ -178,6 +237,26 @@ Visible options are compared without opening anything (Practical UI R11), and th
     </div>
   </fieldset>
 </div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class ExportForm(forms.Form):
+    # One answer: radios. {% orca_field form.format %} renders the fieldset, legend and options.
+    format = forms.ChoiceField(choices=[("mp4", "MP4"), ("webm", "WebM"), ("gif", "Animated GIF")],
+                               widget=forms.RadioSelect, initial="mp4")
+    # Several answers: checkboxes.
+    include = forms.MultipleChoiceField(choices=[("captions", "Captions"), ("chapters", "Chapters")],
+                                        widget=forms.CheckboxSelectMultiple, required=False)
 ```
 
 **Classes:** `.orca-choice-group`, `.orca-choice-group__items`, `.orca-choice-group--horizontal`
@@ -407,6 +486,29 @@ People look for their language by its own name (Jakob's law), and a plain form w
   </select>
   <noscript><button class="orca-button orca-button--dense" type="submit">Change</button></noscript>
 </form>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### URLs and settings
+
+```python
+# project/urls.py — Django's set_language view receives the switcher's form
+from django.urls import include, path
+
+urlpatterns = [
+    path("i18n/", include("django.conf.urls.i18n")),   # the form posts to {% url 'set_language' %}
+]
+
+# project/settings.py
+MIDDLEWARE = [
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",      # after sessions, before common
+    "django.middleware.common.CommonMiddleware",
+]
+LANGUAGES = [("en", "English"), ("fr", "Français"), ("de", "Deutsch")]
 ```
 
 **Classes:** `.orca-row`
@@ -812,6 +914,34 @@ A large target accepts both drag-and-drop and a click (Fitts's law); stating typ
 </div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form and view
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class UploadForm(forms.Form):
+    file = forms.FileField(label="Video file", help_text="MP4 or WebM, up to 2 GB.")
+
+
+# videos/views.py
+from django.shortcuts import redirect, render
+
+
+def upload(request):
+    # The form needs enctype="multipart/form-data" and the files come in request.FILES.
+    form = UploadForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        handle_upload(form.cleaned_data["file"])
+        return redirect("video-list")
+    return render(request, "videos/upload.html", {"form": form})
+```
+
 **Classes:** `.orca-dropzone`, `.orca-dropzone__title`, `.orca-dropzone__hint`, `.orca-file-list`
 
 **Principles applied:** Fitts's law: big, close, well-spaced targets are faster and safer; Peak–end rule: people judge an experience by its peak and its end; Practical UI R08: Put essential help before the input
@@ -845,6 +975,29 @@ Problems like 'These dates overlap an existing run' must be seen before the fiel
 
 ```django
 <div class="orca-callout orca-callout--negative" role="alert">{% icon "error" %}<p class="orca-callout__title">This run overlaps “Morning check”</p><p class="orca-callout__body">Choose a start after 10:00 or stop the other run first.</p></div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form-wide errors
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class ShareForm(forms.Form):
+    email = forms.EmailField()
+    expires_on = forms.DateField(required=False)
+
+    def clean(self):
+        data = super().clean()
+        if not data.get("email", "").endswith("@example.com"):
+            # Errors not tied to one field show in the alert: {% orca_form_errors form %}
+            raise forms.ValidationError("Videos can only be shared inside your organisation.")
+        return data
 ```
 
 **Classes:** `.orca-callout`, `.orca-callout--negative`

@@ -28,6 +28,10 @@ def element_markdown(el: registry.Element) -> str:
         out += ["### Context it reads", "", _bullets(el.context), ""]
     for title, html in el.example_list():
         out += [f"#### Example: {title}", "", "```django", html.strip(), "```", ""]
+    if el.server:
+        out += ["### Server code", "", "What your views, forms, URLs or settings provide for this element.", ""]
+        for title, code in el.server:
+            out += [f"#### {title}", "", "```python", code.strip(), "```", ""]
     meta = []
     if el.classes:
         meta.append("**Classes:** " + ", ".join(f"`{c}`" for c in el.classes))

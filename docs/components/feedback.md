@@ -311,6 +311,29 @@ A deliberate pause before an irreversible action is useful friction (Doherty thr
 </form></dialog>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py — the dialog only confirms; the delete is a POST the server checks
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.views.decorators.http import require_POST
+
+from .models import Video
+
+
+@require_POST
+def delete_video(request, pk):
+    video = get_object_or_404(Video, pk=pk, owner=request.user)
+    video.delete()
+    messages.success(request, f"Video “{video}” deleted.")
+    return redirect("video-list")
+```
+
 **Classes:** `.orca-dialog`, `.orca-dialog__ack`
 
 **Principles applied:** Doherty threshold: respond within 400 ms; show progress for anything slower; Practical UI B13: Scale friction to the consequence; Peak–end rule: people judge an experience by its peak and its end; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly
@@ -435,6 +458,26 @@ After a redirect, the result of the action must be the first thing seen on the n
 <div class="orca-messages">
   <div class="orca-alert orca-alert--positive" role="status">{% status_icon "positive" %}<p class="orca-alert__body">Video “Entrance A” saved.</p><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss message" data-orca-dismiss>{% icon "close" %}</button></div>
 </div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py — needs django.contrib.messages in INSTALLED_APPS and its middleware
+from django.contrib import messages
+from django.shortcuts import redirect
+
+
+def publish(request, pk):
+    video = publish_video(pk)
+    messages.success(request, f"Video “{video}” published.")      # positive
+    # messages.info / warning / error give the information, caution and negative tones.
+    return redirect("video-detail", pk=pk)
+    # The app shell shows messages under the page head; elsewhere use {% orca_messages %}.
 ```
 
 **Classes:** `.orca-messages`, `.orca-alert`

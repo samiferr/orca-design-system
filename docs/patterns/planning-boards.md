@@ -75,6 +75,61 @@ Columns make the flow of work visible and bottlenecks obvious (Practical UI L01,
 <div class="orca-board" data-orca-board aria-label="Installation board"><section class="orca-board__col" aria-label="Planned"><h3 class="orca-board__head">Planned <span class="orca-badge orca-badge--grey" data-orca-count>1</span></h3><ul class="orca-board__cards" data-orca-column="planned"><li class="orca-board-card" id="kb-1" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Draw zones for Gate 1">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Draw zones for Gate 1</a></h4></div><div class="orca-row"><span class="orca-tag">Zones</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}Fri 13 Nov</span><span class="orca-avatar orca-avatar--xs" title="GH">GH</span></div></li></ul></section><section class="orca-board__col" aria-label="In progress"><h3 class="orca-board__head">In progress <span class="orca-badge orca-badge--grey" data-orca-count>2</span><span class="orca-board__limit">limit 2</span></h3><ul class="orca-board__cards" data-orca-column="progress"><li class="orca-board-card" id="kb-2" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Trim Entrance A video">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Trim Entrance A video</a></h4></div><div class="orca-row"><span class="orca-tag">Video</span></div><div class="orca-board-card__foot"><span class="orca-chip orca-chip--soon">{% icon "calendar" %}Tomorrow</span><span class="orca-avatar orca-avatar--xs" title="AL">AL</span></div></li><li class="orca-board-card" id="kb-3" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Connect Gate 1 media server">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Connect Gate 1 media server</a></h4></div><div class="orca-row"><span class="orca-tag">Network</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}Mon 9 Nov</span><span class="orca-avatar orca-avatar--xs" title="AT">AT</span></div></li></ul></section><section class="orca-board__col" aria-label="Done"><h3 class="orca-board__head">Done <span class="orca-badge orca-badge--grey" data-orca-count>1</span></h3><ul class="orca-board__cards" data-orca-column="done"><li class="orca-board-card" id="kb-4" draggable="true"><div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move Mount Gate 1 bracket">{% icon "drag" %}</button><h4 class="orca-board-card__title"><a href="#">Mount Gate 1 bracket</a></h4></div><div class="orca-row"><span class="orca-tag">Install</span></div><div class="orca-board-card__foot"><span class="orca-chip">{% icon "calendar" %}2 Nov</span><span class="orca-avatar orca-avatar--xs" title="AT">AT</span></div></li></ul></section></div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Board view and move endpoint
+
+```python
+# tasks/views.py
+import json
+
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
+from django.views.generic import TemplateView
+
+from .models import Task
+
+
+class Board(TemplateView):
+    template_name = "orca/layouts/board.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        tasks = Task.objects.select_related("assignee")
+        ctx["board_columns"] = [
+            {"key": key, "name": name, "limit": 4 if key == "progress" else None,
+             "cards": [{"id": t.pk, "title": t.title, "url": t.get_absolute_url(), "tags": t.tag_names,
+                        "due": t.due.strftime("%a %-d %b") if t.due else "", "due_state": t.due_state,
+                        "assignee": t.assignee.get_full_name() if t.assignee else ""}
+                       for t in tasks if t.status == key]}
+            for key, name in Task.Status.choices
+        ]
+        ctx["title"] = "Board"
+        return ctx
+
+
+@login_required
+@require_POST
+def move_task(request):
+    """Called by the page script when a card is dropped in another column."""
+    data = json.loads(request.body)
+    task = get_object_or_404(Task, pk=data["id"].removeprefix("card-"))
+    task.status = data["to"]
+    task.save(update_fields=["status"])
+    return JsonResponse({"ok": True})
+
+
+# The page script (in {% block extra_scripts %}): send each move to the view.
+#   document.addEventListener("orca:moved", (e) => fetch("/tasks/move/", {
+#     method: "POST", headers: {"X-CSRFToken": csrftoken, "Content-Type": "application/json"},
+#     body: JSON.stringify(e.detail),   // {id: "card-12", from: "planned", to: "progress"}
+#   }));
+```
+
 **Classes:** `.orca-board`, `.orca-board__col`, `.orca-board__head`, `.orca-board__limit`, `.orca-board__cards`
 
 **Principles applied:** Practical UI L01: Group related information; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Jakob's law: work the way products people already know work
@@ -418,6 +473,43 @@ Most people want 'this week' or 'last 30 days' (Practical UI S08, Hick's law), s
 ```django
 <form class="orca-filter-bar" method="get" onsubmit="return false"><div class="orca-presets" role="group" aria-label="Quick periods"><button class="orca-tag" type="button" aria-pressed="false">Today</button><button class="orca-tag" type="button" aria-pressed="true">This week</button><button class="orca-tag" type="button" aria-pressed="false">Last 30 days</button><button class="orca-tag" type="button" aria-pressed="false">Custom</button></div>
   <fieldset class="orca-inline-fields" data-orca-range><legend class="orca-sr-only">Custom period</legend><div class="orca-field"><label class="orca-label" for="drf-a">From</label><input class="orca-input orca-input--dense" type="date" id="drf-a" value="2026-11-02"></div><span class="orca-inline-fields__sep" aria-hidden="true">–</span><div class="orca-field"><label class="orca-label" for="drf-b">To</label><input class="orca-input orca-input--dense" type="date" id="drf-b" value="2026-11-08"></div><p class="orca-inline-fields__note" data-orca-range-output aria-live="polite">7 days</p></fieldset></form>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form and view helper
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class PeriodForm(forms.Form):
+    start = forms.DateField(label="From")
+    end = forms.DateField(label="To")
+
+    def clean(self):
+        data = super().clean()
+        if data.get("start") and data.get("end") and data["end"] < data["start"]:
+            self.add_error("end", "Choose an end date on or after the start date.")
+        return data
+
+
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+
+
+def period(request):
+    """The chosen period from ?start=…&end=…, the last 7 days by default."""
+    form = PeriodForm(request.GET or None)
+    if form.is_valid():
+        return form.cleaned_data["start"], form.cleaned_data["end"]
+    today = timezone.localdate()
+    return today - dt.timedelta(days=6), today
 ```
 
 **Classes:** `.orca-filter-bar`, `.orca-presets`

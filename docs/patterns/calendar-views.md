@@ -40,6 +40,43 @@ A month shows how busy each day is and where the gaps are, which is what people 
 {% orca_month_calendar sample.events month="2026-11" today=sample.today holidays=sample.holidays day_url="#{date}" %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
+```
+
 **Classes:** `.orca-month-view`, `.orca-cal-cell__count`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Fitts's law: big, close, well-spaced targets are faster and safer; Jakob's law: work the way products people already know work
@@ -82,6 +119,43 @@ Seeing time as height makes durations, gaps and overlaps obvious (Practical UI L
 {% orca_week_view sample.events start="2026-11-02" today=sample.today now=sample.now start_hour=8 end_hour=19 %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
+```
+
 **Classes:** `.orca-timegrid`, `.orca-timegrid__head`, `.orca-timegrid__allday`, `.orca-timegrid__body`, `.orca-timegrid__col`, `.orca-timegrid__event`, `.orca-timegrid__now`
 
 **Principles applied:** Practical UI L01: Group related information; Jakob's law: work the way products people already know work; Miller's law: chunk information so working memory is not overloaded
@@ -117,6 +191,43 @@ One column leaves room for each event's title, time and place, so there is no tr
 
 ```django
 {% orca_week_view sample.events start=sample.today days=1 today=sample.today now=sample.now start_hour=9 end_hour=18 %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
 ```
 
 **Classes:** `.orca-timegrid--day`
@@ -155,6 +266,43 @@ A list is read top to bottom without decoding a grid (Jakob's law: like a to-do 
 {% orca_agenda sample.events start="2026-11-02" days=7 today=sample.today %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
+```
+
 **Classes:** `.orca-agenda-view`, `.orca-agenda-view__day`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI L03: Establish an order of importance
@@ -190,6 +338,43 @@ Long-range planning (holidays, seasons, launches) needs the whole year at once (
 {% orca_year_view year=2026 events=sample.events today=sample.today url="#{date}" %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
+```
+
 **Classes:** `.orca-year-view`
 
 **Principles applied:** Practical UI L09: Set spacing by relationship; Miller's law: chunk information so working memory is not overloaded
@@ -223,6 +408,43 @@ Three days fit a tablet or a narrow panel while still showing what comes next (M
 
 ```django
 {% orca_week_view sample.events start="2026-11-04" days=3 today=sample.today now=sample.now start_hour=8 end_hour=18 %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
 ```
 
 **Classes:** `.orca-timegrid`
@@ -299,6 +521,43 @@ Jumping weeks ahead with arrows is slow; a mini calendar gets there in one click
     {% orca_mini_calendar "2026-11-01" selected="2026-11-06" today="2026-11-06" url="#{date}" nav_url="#{month}" events="2026-11-02,2026-11-03,2026-11-04,2026-11-05,2026-11-06,2026-11-10" %}
     <fieldset class="orca-cal-legend"><legend>Calendars</legend><label class="orca-check" style="--orca-event: var(--orca-chart-1)"><input type="checkbox" checked><span class="orca-check__box"></span>Deliveries</label><label class="orca-check" style="--orca-event: var(--orca-chart-3)"><input type="checkbox" checked><span class="orca-check__box"></span>Meetings</label></fieldset></aside>
   {% orca_agenda sample.events start="2026-11-06" days=5 today=sample.today %}</div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Event
+
+
+class CalendarView(TemplateView):
+    template_name = "videos/calendar.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        month = dt.date.fromisoformat(self.request.GET.get("month", today.strftime("%Y-%m")) + "-01")
+        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a
+        # CSS colour), url, location and status ("tentative", "cancelled"). Aware datetimes are shown in the
+        # active time zone.
+        ctx["events"] = [
+            {"title": e.title, "start": e.starts_at, "end": e.ends_at, "all_day": e.all_day,
+             "color": e.calendar.color, "url": e.get_absolute_url(), "location": e.place}
+            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),
+                                          ends_at__date__gte=month - dt.timedelta(days=7))
+        ]
+        ctx["holidays"] = {"2026-11-11": "Armistice Day"}  # date → name
+        ctx.update(month=month, today=today, now=timezone.localtime())
+        return ctx
 ```
 
 **Classes:** `.orca-cal-layout`, `.orca-cal-sidebar`

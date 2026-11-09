@@ -123,6 +123,7 @@ class Element:
     examples: list[tuple[str, str]] = field(default_factory=list)
     guide: list[str] = field(default_factory=list)  # ORCA guide items this element covers
     related: list[str] = field(default_factory=list)
+    server: list[tuple[str, str]] = field(default_factory=list)  # Python the element needs: (title, code)
     source: str = "Tangerine"  # Tangerine (from wise_people_analyzer) or ORCA (new in this system)
     level: str = "primitive"
     uses: list[str] = field(default_factory=list)  # lower-level elements this one is built from
@@ -210,10 +211,20 @@ def _load() -> None:
         marketing, process, editorial, email, calendar_views, scheduler, event_editing, planning_boards, composites,
     )
     from .templates import layouts, generic, page_types, structure as template_structure, slots  # noqa: F401
+    from . import server_code
+
+    server_code.attach()
 
 
 LEVEL_TITLES = {level.key: level.title for level in LEVEL_DEFS}
 RELEASED_LEVELS = ("primitive", "component", "pattern", "template")
+
+
+def set_server(element_id: str, items: list[tuple[str, str]]) -> None:
+    """Attach the server code (views, forms, URLs) an element needs. Called while the catalogue loads."""
+    if element_id not in _ELEMENTS:
+        raise KeyError(f"Server code for unknown ORCA element {element_id!r}")
+    _ELEMENTS[element_id].server = list(items)
 
 
 def categories(level: str | None = None) -> list[Category]:
@@ -257,7 +268,8 @@ def as_json() -> dict:
         "brand_tokens": [{"key": t.key, "css": t.css, "default": t.default, "usage": t.usage} for t in BRAND_TOKENS],
         "categories": [asdict(c) for c in categories()],
         "elements": [
-            dict(asdict(el), examples=[{"title": t, "html": h} for t, h in el.example_list()], law_names=el.law_names())
+            dict(asdict(el), examples=[{"title": t, "html": h} for t, h in el.example_list()],
+                 server=[{"title": t, "python": c} for t, c in el.server], law_names=el.law_names())
             for el in all_elements()
         ],
     }

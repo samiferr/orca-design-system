@@ -47,6 +47,47 @@ Tables are the fastest way to compare records on several attributes (Miller's la
 </div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Sorting and bulk actions
+
+```python
+# videos/views.py
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.views.decorators.http import require_POST
+from django.views.generic import ListView
+
+from .models import Video
+
+SORTABLE = {"title", "-title", "recorded_on", "-recorded_on", "views_today", "-views_today"}
+
+
+class VideoList(ListView):
+    model = Video
+    paginate_by = 25
+
+    def get_ordering(self):
+        sort = self.request.GET.get("sort", "title")     # sortable headers link to ?sort=-recorded_on
+        return sort if sort in SORTABLE else "title"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["sort"] = self.get_ordering()                 # the header marks aria-sort from it
+        return ctx
+
+
+@require_POST
+def bulk_archive(request):
+    """The table is a form; each row checkbox is name="selected" value="{{ video.pk }}"."""
+    ids = request.POST.getlist("selected")
+    count = Video.objects.filter(pk__in=ids, owner=request.user).update(archived=True)
+    messages.success(request, f"{count} videos archived.")
+    return redirect("video-list")
+```
+
 **Classes:** `.orca-data-table`, `.orca-table--cards`, `.orca-table__select`, `.orca-table__name`, `.orca-table__empty`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI L14: Reduce travel between related actions; Practical UI W11: Make numbers scannable; Postel's law: accept varied input, output reliable and accessible UI
@@ -128,6 +169,64 @@ Filters that are on must stay visible and reversible without reopening anything 
 </div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Filter form and list view
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Album, Video
+
+
+class VideoFilterForm(forms.Form):
+    q = forms.CharField(label="Title contains", required=False)
+    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label="Any album")
+    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,
+                                       widget=forms.CheckboxSelectMultiple)
+
+
+# videos/views.py
+from django.views.generic import ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .forms import VideoFilterForm
+from .models import Video
+
+
+class VideoList(OrcaPageMixin, ListView):
+    model = Video
+    paginate_by = 25
+    template_name = "orca/generic/list.html"   # or "orca/layouts/simple_data.html"
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    detail_url_name, create_url_name = "video-detail", "video-create"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.filter_form = VideoFilterForm(self.request.GET or None)
+        if self.filter_form.is_valid():
+            data = self.filter_form.cleaned_data
+            if data["q"]:
+                qs = qs.filter(title__icontains=data["q"])
+            if data["album"]:
+                qs = qs.filter(album=data["album"])
+            if data["status"]:
+                qs = qs.filter(status__in=data["status"])
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        # The template puts the Filters button in the page actions and the form in the right drawer.
+        ctx["filter_form"] = self.filter_form
+        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}
+        ctx["active_filters"] = sum(1 for value in data.values() if value)
+        return ctx
+```
+
 **Classes:** `.orca-filter-bar`, `.orca-filter-bar__applied`
 
 **Principles applied:** Practical UI S06: Make essential content visible or discoverable; Hick's law: fewer, clearer choices mean faster decisions; Postel's law: accept varied input, output reliable and accessible UI
@@ -207,6 +306,36 @@ Related views of the same data share one frame instead of stacking (Miller's law
 </section>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View: the chart data
+
+```python
+# videos/views.py
+import datetime as dt
+
+from django.db.models import Count
+from django.db.models.functions import ExtractHour, TruncDate
+from django.utils import timezone
+from django.views.generic import TemplateView
+
+from .models import Visit
+
+
+class ReportView(TemplateView):
+    template_name = "videos/report.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        start = today - dt.timedelta(days=6)
+        # Each tab's chart: labels and one series per line.
+        ctx["by_day"] = {"labels": ["Mon", "Tue", "Wed"], "series": [{"name": "Views", "values": [120, 180, 150]}]}
+        return ctx
+```
+
 **Classes:** `.orca-panel`, `.orca-tabs`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI S06: Make essential content visible or discoverable; Doherty threshold: respond within 400 ms; show progress for anything slower
@@ -283,6 +412,30 @@ Everything that changes the list sits together above it in a predictable order (
     <a class="orca-button orca-button--primary orca-button--dense orca-create orca-create--static" href="#">{% icon "plus" %}Add video</a></div></div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Search in the list view
+
+```python
+# videos/views.py — the list header's search submits ?q=…
+from django.db.models import Q
+from django.views.generic import ListView
+
+
+class VideoList(ListView):
+    model = Video
+    paginate_by = 25
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get("q", "").strip()
+        if q:
+            qs = qs.filter(Q(title__icontains=q) | Q(album__title__icontains=q))
+        return qs
+```
+
 **Classes:** `.orca-list-header`, `.orca-list-header__title`, `.orca-list-header__count`, `.orca-list-header__tools`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI L14: Reduce travel between related actions; Doherty threshold: respond within 400 ms; show progress for anything slower
@@ -321,6 +474,38 @@ Counts by state answer 'how many need attention?' immediately (Miller's law) and
   <li><a class="orca-summary-tile" href="#"><span class="orca-summary-tile__value">1</span><span class="orca-summary-tile__label"><span class="orca-dot orca-dot--caution"></span>Degraded</span></a></li>
   <li><a class="orca-summary-tile" href="#"><span class="orca-summary-tile__value">1</span><span class="orca-summary-tile__label"><span class="orca-dot orca-dot--negative"></span>Offline</span></a></li>
 </ul>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Counts by status
+
+```python
+# videos/views.py (in the list view's get_context_data)
+from django.db.models import Count
+from django.http import QueryDict
+
+counts = dict(Video.objects.values_list("status").annotate(n=Count("id")))
+current = self.request.GET.get("status", "")
+
+
+def tile_url(status):
+    query = self.request.GET.copy()          # keep the other filters
+    query.pop("page", None)
+    if status:
+        query["status"] = status
+    else:
+        query.pop("status", None)
+    return "?" + query.urlencode()
+
+
+ctx["tiles"] = [{"label": "All videos", "value": sum(counts.values()), "url": tile_url(""), "current": not current}] + [
+    {"label": label, "value": counts.get(value, 0), "url": tile_url(value), "current": current == value,
+     "tone": {"published": "positive", "draft": "neutral", "failed": "negative"}.get(value, "")}
+    for value, label in Video.Status.choices
+]
 ```
 
 **Classes:** `.orca-summary-tiles`, `.orca-summary-tile`, `.orca-summary-tile__value`, `.orca-summary-tile__label`

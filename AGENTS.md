@@ -7,6 +7,8 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 - `python -m orca search <words>` finds the element; `python -m orca show <id>` prints its **why, when, when not, how,
   accessibility notes, classes, tokens and a working example**. Copy the example, then adapt the content.
 - The same text is in `docs/primitives/<category>.md`, `docs/components/<category>.md`, `docs/patterns/<category>.md`, `docs/templates/<category>.md` and `docs/catalogue.json`.
+- When an element needs Python (views, forms, mixins, URLs, settings), `python -m orca show <id>` ends with its
+  **Server code**: copy it too. Generic pages use `orca.mixins.OrcaPageMixin`; charts and calendars take plain data.
 - **Prefer a pattern over assembling components, and a component over assembling primitives.** Each element's
   "Built from" list names what it is made of.
 - Charts, calendars and emails come from tags; never hand-draw SVG or write a Chart.js configuration yourself (the tags draw charts with Chart.js in token colours): `{% orca_chart kind data %}`,

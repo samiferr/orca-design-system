@@ -30,6 +30,15 @@
 </section>
 {% endfor %}
 
+{% if el.server %}<section class="docs-section docs-server" aria-labelledby="server-h">
+  <h2 class="orca-section-title" id="server-h">Server code</h2>
+  <p class="orca-p orca-muted">What your views, forms, URLs or settings provide for this element. The examples above show the template side.</p>
+  {% for title, code in el.server %}<div class="docs-server__item">
+    <h3 class="orca-panel-title">{{ title }}</h3>
+    <pre class="docs-code orca-scroll"><code data-orca-highlight="python">{{ code }}</code></pre>
+  </div>{% endfor %}
+</section>{% endif %}
+
 <div class="docs-grid">
   <section class="docs-block"><h2 class="orca-panel-title">Why</h2><p class="orca-p">{{ el.why|orca_inline_code }}</p></section>
   <section class="docs-block"><h2 class="orca-panel-title">When to use</h2><ul class="docs-list">{% for i in el.when %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul>

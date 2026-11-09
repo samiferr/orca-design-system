@@ -38,6 +38,26 @@ A KPI is read in a second when the number dominates and its label and comparison
 </div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py (get_context_data of the page)
+from django.db.models import Count
+from django.db.models.functions import ExtractHour
+from django.utils import timezone
+
+today = timezone.localdate()
+views = Visit.objects.filter(at__date=today)
+per_hour = dict(views.annotate(h=ExtractHour("at")).values_list("h").annotate(n=Count("id")))
+ctx["views_today"] = views.count()
+# Template: {% orca_sparkline hourly "Views per hour today" %}
+ctx["hourly"] = [per_hour.get(h, 0) for h in range(8, 20)]
+```
+
 **Classes:** `.orca-stat-card`, `.orca-stat-card__head`, `.orca-stat-card__icon`, `.orca-stat-card__foot`
 
 **Principles applied:** Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Miller's law: chunk information so working memory is not overloaded; Practical UI W11: Make numbers scannable
@@ -747,6 +767,42 @@ Free-form metadata is inherently variable (Tesler's law); one row per pair with 
 <button class="orca-button orca-button--ghost" type="button" data-orca-add-row="pr-tpl" aria-controls="pr-list" style="margin-top: var(--orca-space-8)">{% icon "plus" %}Add property</button>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Formset
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Chapter, Video
+
+ChapterFormSet = forms.inlineformset_factory(
+    Video, Chapter, fields=["title", "starts_at"], extra=0, can_delete=True,
+)
+
+
+# videos/views.py
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import ChapterFormSet
+from .models import Video
+
+
+def edit_chapters(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    formset = ChapterFormSet(request.POST or None, instance=video, prefix="chapters")
+    if request.method == "POST" and formset.is_valid():
+        formset.save()
+        return redirect("video-detail", pk=video.pk)
+    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id="chapter-row">
+    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with
+    # data-orca-add-row="chapter-row" and data-orca-total="id_chapters-TOTAL_FORMS".
+    return render(request, "videos/chapters.html", {"video": video, "formset": formset})
+```
+
 **Classes:** `.orca-property-row`, `.orca-property-rows`
 
 **Principles applied:** Tesler's law: move unavoidable complexity from the user to the system; Postel's law: accept varied input, output reliable and accessible UI
@@ -914,6 +970,22 @@ The shape of a trend is understood pre-attentively; a sparkline adds that contex
 <div class="orca-stack" style="max-width: 12rem">{% orca_sparkline "5,8,6,9,12,10,14,13,16" %}{% orca_sparkline "20,18,19,15,12,13,9" "Errors per day, falling" %}</div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py — a list of numbers, oldest first (or a string "12,18,9")
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+
+daily = (Visit.objects.filter(at__date__gte=start).annotate(day=TruncDate("at"))
+         .values("day").annotate(n=Count("id")).order_by("day"))
+ctx["trend"] = [row["n"] for row in daily]   # {% orca_sparkline trend "Views per day, last 30 days" %}
+```
+
 **Classes:** `.orca-sparkline`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI C03: Communicate meaning beyond colour
@@ -951,6 +1023,20 @@ A part-of-whole split is grasped quickly when there are few parts; the legend gi
 
 ```django
 {% orca_donut "Entrance A:4812, Gate 1:2140, Entrance B:1980, Car park:640" total_label="Visitors" %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py — (label, value) pairs, dicts with label and value, or "A:3, B:1"
+from django.db.models import Count
+
+ctx["by_album"] = list(Video.objects.values_list("album__title").annotate(n=Count("id")).order_by("-n")[:5])
+# Template: {% orca_donut by_album total_label="Videos" %}
 ```
 
 **Classes:** `.orca-donut`, `.orca-donut__chart`, `.orca-donut__total`

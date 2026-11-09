@@ -34,6 +34,42 @@ Availability is naturally weekly with breaks (lunch, split shifts); a row per da
 <div class="orca-week-editor" style="max-width: 40rem"><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-label="Open on Monday"><span class="orca-switch__track"></span></label> Monday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-mon"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="08:00" aria-label="Monday span 1 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="12:00" aria-label="Monday span 1 closes"><button class="orca-icon-button" type="button" aria-label="Remove Monday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button></div><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="13:00" aria-label="Monday span 2 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="18:00" aria-label="Monday span 2 closes"><button class="orca-icon-button" type="button" aria-label="Remove Monday 13:00 to 18:00" data-orca-remove-row>{% icon "delete" %}</button></div></div><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-add-row="we-tpl" aria-controls="we-mon">{% icon "plus" %}Add hours</button></div></div><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-label="Open on Tuesday"><span class="orca-switch__track"></span></label> Tuesday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-tue"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="08:00" aria-label="Tuesday span 1 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="12:00" aria-label="Tuesday span 1 closes"><button class="orca-icon-button" type="button" aria-label="Remove Tuesday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button></div><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="13:00" aria-label="Tuesday span 2 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="18:00" aria-label="Tuesday span 2 closes"><button class="orca-icon-button" type="button" aria-label="Remove Tuesday 13:00 to 18:00" data-orca-remove-row>{% icon "delete" %}</button></div></div><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-add-row="we-tpl" aria-controls="we-tue">{% icon "plus" %}Add hours</button></div></div><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-label="Open on Wednesday"><span class="orca-switch__track"></span></label> Wednesday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-wed"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="08:00" aria-label="Wednesday span 1 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="12:00" aria-label="Wednesday span 1 closes"><button class="orca-icon-button" type="button" aria-label="Remove Wednesday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button></div><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="13:00" aria-label="Wednesday span 2 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="18:00" aria-label="Wednesday span 2 closes"><button class="orca-icon-button" type="button" aria-label="Remove Wednesday 13:00 to 18:00" data-orca-remove-row>{% icon "delete" %}</button></div></div><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-add-row="we-tpl" aria-controls="we-wed">{% icon "plus" %}Add hours</button></div></div><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-label="Open on Thursday"><span class="orca-switch__track"></span></label> Thursday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-thu"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="08:00" aria-label="Thursday span 1 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="12:00" aria-label="Thursday span 1 closes"><button class="orca-icon-button" type="button" aria-label="Remove Thursday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button></div><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="13:00" aria-label="Thursday span 2 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="18:00" aria-label="Thursday span 2 closes"><button class="orca-icon-button" type="button" aria-label="Remove Thursday 13:00 to 18:00" data-orca-remove-row>{% icon "delete" %}</button></div></div><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-add-row="we-tpl" aria-controls="we-thu">{% icon "plus" %}Add hours</button></div></div><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-label="Open on Friday"><span class="orca-switch__track"></span></label> Friday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-fri"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="08:00" aria-label="Friday span 1 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="12:00" aria-label="Friday span 1 closes"><button class="orca-icon-button" type="button" aria-label="Remove Friday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button></div><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="13:00" aria-label="Friday span 2 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="18:00" aria-label="Friday span 2 closes"><button class="orca-icon-button" type="button" aria-label="Remove Friday 13:00 to 18:00" data-orca-remove-row>{% icon "delete" %}</button></div></div><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-add-row="we-tpl" aria-controls="we-fri">{% icon "plus" %}Add hours</button></div></div><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-label="Open on Saturday"><span class="orca-switch__track"></span></label> Saturday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-sat"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" value="09:00" aria-label="Saturday span 1 opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" value="13:00" aria-label="Saturday span 1 closes"><button class="orca-icon-button" type="button" aria-label="Remove Saturday 09:00 to 13:00" data-orca-remove-row>{% icon "delete" %}</button></div></div><button class="orca-button orca-button--ghost orca-button--dense" type="button" data-orca-add-row="we-tpl" aria-controls="we-sat">{% icon "plus" %}Add hours</button></div></div><div class="orca-week-editor__day"><span class="orca-week-editor__name"><label class="orca-switch"><input type="checkbox" role="switch"  aria-label="Open on Sunday"><span class="orca-switch__track"></span></label> Sunday</span><div class="orca-week-editor__spans"><div class="orca-schedule" id="we-sun"><span class="orca-week-editor__closed">Closed</span></div></div></div></div><template id="we-tpl"><div class="orca-schedule-row" data-orca-row><input class="orca-input" type="time" aria-label="Opens"><span class="orca-schedule-row__sep" aria-hidden="true">–</span><input class="orca-input" type="time" aria-label="Closes"><button class="orca-icon-button" type="button" aria-label="Remove row" data-orca-remove-row>{% icon "delete" %}</button></div></template>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Formset
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Availability, Video
+
+AvailabilityFormSet = forms.inlineformset_factory(
+    Video, Availability, fields=["weekday", "starts", "ends"], extra=0, can_delete=True,
+)
+
+
+# videos/views.py
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import AvailabilityFormSet
+from .models import Video
+
+
+def edit_availabilitys(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    formset = AvailabilityFormSet(request.POST or None, instance=video, prefix="availabilitys")
+    if request.method == "POST" and formset.is_valid():
+        formset.save()
+        return redirect("video-detail", pk=video.pk)
+    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id="availability-row">
+    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with
+    # data-orca-add-row="availability-row" and data-orca-total="id_availabilitys-TOTAL_FORMS".
+    return render(request, "videos/availabilitys.html", {"video": video, "formset": formset})
+```
+
 **Classes:** `.orca-week-editor`, `.orca-week-editor__day`, `.orca-week-editor__name`, `.orca-week-editor__spans`, `.orca-week-editor__closed`
 
 **Principles applied:** Tesler's law: move unavoidable complexity from the user to the system; Practical UI R21: Validate after leaving a field when context matters; Practical UI L09: Set spacing by relationship
@@ -195,6 +231,43 @@ Showing the balance and the working days the request costs before submitting pre
   <p class="orca-small">3 working days. <strong>22 days left</strong> after this request.</p>
   <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">Send request</button></div></form>
   <div class="orca-time-off"><span class="orca-avatar orca-avatar--s" aria-hidden="true">GH</span><div class="orca-time-off__body"><span>Holiday</span><span class="orca-time-off__meta">2–6 October · 5 days</span></div><span class="orca-chip orca-chip--done">Approved</span></div></div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class PeriodForm(forms.Form):
+    start = forms.DateField(label="From")
+    end = forms.DateField(label="To")
+
+    def clean(self):
+        data = super().clean()
+        if data.get("start") and data.get("end") and data["end"] < data["start"]:
+            self.add_error("end", "Choose an end date on or after the start date.")
+        return data
+
+
+# videos/views.py
+import datetime as dt
+
+from django.utils import timezone
+
+
+def period(request):
+    """The chosen period from ?start=…&end=…, the last 7 days by default."""
+    form = PeriodForm(request.GET or None)
+    if form.is_valid():
+        return form.cleaned_data["start"], form.cleaned_data["end"]
+    today = timezone.localdate()
+    return today - dt.timedelta(days=6), today
 ```
 
 **Classes:** `.orca-time-off`

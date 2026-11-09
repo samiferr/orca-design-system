@@ -116,6 +116,42 @@ Standard offsets are fastest (Hick's law, Jakob's law); allowing several reminde
 <button class="orca-button orca-button--ghost" type="button" data-orca-add-row="rm-tpl" aria-controls="rm-list" style="margin-top: var(--orca-space-8)">{% icon "plus" %}Add reminder</button>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Formset
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Reminder, Video
+
+ReminderFormSet = forms.inlineformset_factory(
+    Video, Reminder, fields=["minutes_before", "method"], extra=0, can_delete=True,
+)
+
+
+# videos/views.py
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import ReminderFormSet
+from .models import Video
+
+
+def edit_reminders(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    formset = ReminderFormSet(request.POST or None, instance=video, prefix="reminders")
+    if request.method == "POST" and formset.is_valid():
+        formset.save()
+        return redirect("video-detail", pk=video.pk)
+    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id="reminder-row">
+    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with
+    # data-orca-add-row="reminder-row" and data-orca-total="id_reminders-TOTAL_FORMS".
+    return render(request, "videos/reminders.html", {"video": video, "formset": formset})
+```
+
 **Classes:** `.orca-reminders`
 
 **Principles applied:** Hick's law: fewer, clearer choices mean faster decisions; Jakob's law: work the way products people already know work; Tesler's law: move unavoidable complexity from the user to the system

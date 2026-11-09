@@ -59,7 +59,7 @@ TASKS = [
     {"title": "Trim Entrance A video", "assignee": "AL", "due": "Tomorrow", "due_state": "soon", "priority": "high", "status": "progress"},
     {"title": "Draw zones for Gate 1", "assignee": "GH", "due": "Fri 13 Nov", "due_state": "", "priority": "medium", "status": "planned"},
     {"title": "Replace Loading dock video", "assignee": "AT", "due": "Overdue, 4 Nov", "due_state": "overdue", "priority": "urgent", "status": "blocked"},
-    {"title": "Mount Gate 1 bracket", "assignee": "AT", "due": "2 Nov", "due_state": "", "priority": "low", "status": "done"},
+    {"title": "Export Gate 1 clip", "assignee": "AT", "due": "2 Nov", "due_state": "", "priority": "low", "status": "done"},
 ]
 
 EMAIL_PARAGRAPHS = [
