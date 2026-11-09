@@ -120,7 +120,7 @@ The same list tools as a top-level list make child lists familiar (Jakob's law);
 
 Changes to a record or a site, grouped by day, each with who, what, when and the before and after values.
 
-Built from: `activity-entry`, `button`
+Built from: `activity-entry`
 
 ### Why
 
@@ -158,7 +158,7 @@ Seeing who changed what builds trust in shared data and answers 'why does this l
 
 Why a record cannot be deleted yet, which records depend on it, and how to proceed.
 
-Built from: `callout`, `text-link`, `button`
+Built from: `callout`, `list`, `button-group`
 
 ### Why
 

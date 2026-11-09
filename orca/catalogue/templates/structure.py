@@ -29,7 +29,7 @@ add(Template(
     why="Equal tiles in a row are compared at a glance (Miller's law); a minimum width keeps every number readable on any screen (Practical UI L11).",
     when=["Headline numbers at the top of a dashboard or a parent record."],
     how=["`<div class=\"orca-stat-grid\">` of stat cards; keep to 3–6 cards."],
-    laws=["miller", "L11"], uses=["stat-card"], classes=[".orca-stat-grid"],
+    laws=["miller", "L11"], uses=["kpi-grid"], classes=[".orca-stat-grid"],
     examples=[("Stats", '<div class="orca-stat-grid">' + "".join(f'<div class="orca-stat-card"><p class="orca-stat-label">Metric {i}</p><p class="orca-stat-value">{v}</p></div>' for i, v in ((1, "1,234"), (2, "56"), (3, "98%"))) + "</div>")],
     guide=["Stat grid"],
 ))
@@ -41,7 +41,7 @@ add(Template(
     when=["Collections browsed by picture or title: videos, products, people, plans."],
     avoid=["Items compared on several attributes: use a table."],
     how=["`<ul class=\"orca-card-grid\">` of `<li class=\"orca-card\">`; override the minimum with `grid-template-columns` only for a different card type."],
-    laws=["L11", "jakob"], uses=["card"], classes=[".orca-card-grid"],
+    laws=["L11", "jakob"], uses=["card-grid"], classes=[".orca-card-grid"],
     examples=[("Cards", '<ul class="orca-card-grid">' + "".join(f'<li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Card {i}</h3><p class="orca-card-meta">Meta line</p></div></li>' for i in range(1, 5)) + "</ul>")],
     guide=["Card grid"],
 ))
@@ -86,7 +86,7 @@ add(Template(
     when=["Settings pages with many short fields; address and connection details."],
     avoid=["Ordinary forms: use one column (narrow form)."],
     how=["`<div class=\"orca-form-grid\">` of fields; add `.orca-form-grid__full` to textareas and anything long."],
-    laws=["L01", "R01", "R06"], uses=["form-field"], classes=[".orca-form-grid", ".orca-form-grid__full"],
+    laws=["L01", "R01", "R06"], uses=["form-section"], classes=[".orca-form-grid", ".orca-form-grid__full"],
     examples=[("Connection", '<div class="orca-form-grid"><div class="orca-field"><label class="orca-label" for="fg-h">Host</label><input class="orca-input" id="fg-h"></div><div class="orca-field"><label class="orca-label" for="fg-p">Port</label><input class="orca-input orca-input--w8" id="fg-p" inputmode="numeric"></div><div class="orca-field orca-form-grid__full"><label class="orca-label" for="fg-n">Notes <span class="orca-optional">(optional)</span></label><textarea class="orca-textarea" id="fg-n" rows="2"></textarea></div></div>')],
     guide=["Form grid"],
 ))

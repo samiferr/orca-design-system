@@ -8,7 +8,7 @@ Whole-page Django templates you extend. They place patterns in a fixed structure
 
 The root every ORCA page extends: the html element with language, theme and density, the head with ORCA's styles and theme bootstrap, the skip link, and slots for body, modal and scripts.
 
-Built from: `skip-link`
+Built from: `page-landmarks`
 
 ### Why
 
@@ -200,7 +200,7 @@ Blocks: `title`, `preheader`, `brand`, `heading`, `content`, `action`, `footer`
 
 403, 404 and 500 pages: logo, illustration, error code, what happened in plain words and what to do next.
 
-Built from: `empty-state`
+Built from: `error-message`
 
 ### Why
 
@@ -241,7 +241,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 The page people land on after signing in: a greeting, a stat grid, a main column for what changed and an aside with shortcuts.
 
-Built from: `app-shell`, `stat-card`, `activity-feed`
+Built from: `app-shell`, `kpi-grid`, `activity-feed`
 
 ### Why
 
@@ -291,7 +291,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A centred column of posts with skeleton posts while more load, and an empty state when there are none.
 
-Built from: `photo-post`, `skeleton`, `empty-state`
+Built from: `photo-post`, `loading-placeholder`, `no-results`
 
 ### Why
 
@@ -342,7 +342,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A grid of people cards: avatar, name, role and a contact action.
 
-Built from: `person-block`, `card-grid-layout`
+Built from: `card-grid-layout`
 
 ### Why
 
@@ -493,7 +493,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A list page from a ListView: title and Add button, optional filter panel, list header with count and search, a table that becomes cards on phones, pagination and the right empty state.
 
-Built from: `app-shell`, `list-header`, `data-table`, `filter-panel`, `pagination`, `empty-state`
+Built from: `app-shell`, `list-header`, `data-table`, `filter-drawer`, `no-results`
 
 ### Why
 

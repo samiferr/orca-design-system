@@ -295,6 +295,13 @@ class LevelTests(SimpleTestCase):
         for before, level in zip(registry.LEVEL_DEFS, registry.LEVEL_DEFS[1:]):
             self.assertEqual(level.built_from, before.key)
 
+    def test_each_element_is_built_from_the_level_below(self):
+        order = {k: i for i, k in enumerate(registry.LEVELS)}
+        els = {e.id: e for e in registry.all_elements()}
+        skips = [f"{e.id} ({e.level}) uses {u} ({els[u].level})" for e in els.values() for u in e.uses
+                 if not 0 <= order[e.level] - order[els[u].level] <= 1]
+        self.assertEqual(skips, [], "a component groups primitives, a pattern components, a template patterns")
+
     def test_built_from_lists_have_no_redundant_parts(self):
         els = {e.id: e for e in registry.all_elements()}
 

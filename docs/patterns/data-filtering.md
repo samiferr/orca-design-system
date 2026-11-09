@@ -8,7 +8,7 @@ Tables, panels and the controls that narrow them: filter bars, list headers, sum
 
 A table of records with a toolbar, selectable rows, sortable headers, row actions and a pager; rows become cards on phones.
 
-Built from: `table-toolbar`, `sortable-header`, `row-actions`, `table-pager`, `checkbox`, `status-light`
+Built from: `table-toolbar`, `sortable-header`, `row-actions`, `table-pager`, `row-select`, `status-light`
 
 ### Why
 
@@ -61,7 +61,7 @@ Tables are the fastest way to compare records on several attributes (Miller's la
 
 Counted versus reference values per video, with the difference and an accuracy bar coloured by threshold.
 
-Built from: `table-card`, `progress-bar`
+Built from: `table-card`, `progress-with-counts`
 
 ### Why
 
@@ -100,7 +100,7 @@ Comparing two numbers is easier with the difference computed (Tesler's law); a b
 
 The row above the results that shows the applied filters as removable tags, the result count and Clear all.
 
-Built from: `tag`, `link-action`
+Built from: `applied-filters`
 
 ### Why
 
@@ -221,7 +221,7 @@ Related views of the same data share one frame instead of stacking (Miller's law
 
 Records as a vertical list of cards: name, key facts and actions; the phone-friendly alternative to a table.
 
-Built from: `status-dot`, `linked-card`, `icon-button`
+Built from: `status-light`, `linked-card`, `record-actions`
 
 ### Why
 
@@ -297,7 +297,7 @@ Everything that changes the list sits together above it in a predictable order (
 
 A row of small counts by status that also act as quick filters.
 
-Built from: `stat-value`, `status-dot`
+Built from: `summary-tile`
 
 ### Why
 
@@ -365,5 +365,39 @@ When results have several attributes, a table under the search compares them at 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI R12: Autocomplete for long lists; Doherty threshold: respond within 400 ms; show progress for anything slower
 
 **ORCA guide items covered:** Autocomplete results table
+
+---
+
+## No results
+
+`id: no-results` · level: pattern · source: ORCA
+
+What a list, table or feed shows when it has nothing: the empty state, and the applied filters when filters hide everything.
+
+Built from: `empty-state`, `applied-filters`
+
+### Why
+
+An empty list is a dead end unless it says why and what to do (Peak–end rule, Practical UI W15). When filters caused it, showing them with Clear all is the fastest way back (Postel's law).
+
+### When to use
+
+- Every list, table, grid and feed, for the empty and the filtered-empty cases.
+
+### How to use
+
+- First use: the empty state with the create action ('Add your first video').
+- Filtered empty: the empty state ('No videos match these filters') above the applied filters with Clear all.
+
+#### Example: Filtered empty
+
+```django
+<div class="orca-empty">{% orca_illustration "search" %}<h2 class="orca-empty-title">No videos match these filters</h2><p class="orca-empty-text">Remove a filter, or clear them all to see every video.</p>
+<div class="orca-filter-bar__applied" style="justify-content: center"><span class="orca-tag"><span class="orca-tag__text">Album: Summer 2026</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Album: Summer 2026">{% icon "close" %}</button></span><button class="orca-button orca-button--link" type="button">Clear all</button></div></div>
+```
+
+**Principles applied:** Peak–end rule: people judge an experience by its peak and its end; Practical UI W15: Help people recover from errors; Postel's law: accept varied input, output reliable and accessible UI
+
+**Related:** `generic-list`, `simple-data-page`, `feed-skeleton`
 
 ---

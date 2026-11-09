@@ -8,7 +8,7 @@ The parts every page sits in: headers, top bar, sidebar, footer, page head, mess
 
 The public site header: logo, a few section links and one or two actions, sticky at the top.
 
-Built from: `logo`, `primary-navigation`, `button`
+Built from: `logo-link`, `primary-navigation`, `call-to-action`
 
 ### Why
 
@@ -51,7 +51,7 @@ People expect the logo top-left (home) and the main sections beside it on every 
 
 The application bar: menu button, logo, main sections, search and the user's tools.
 
-Built from: `logo`, `primary-navigation`, `utility-navigation`, `search-input`
+Built from: `logo-link`, `primary-navigation`, `utility-navigation`, `search-field`
 
 ### Why
 
@@ -96,7 +96,7 @@ A persistent bar in the expected place anchors every page of an application (Jak
 
 The application's side navigation: grouped section links, collapsible to an icon rail, remembered per person.
 
-Built from: `sidebar-link`, `nav-tree`, `icon-button`
+Built from: `sidebar-link`, `nav-tree`, `collapse-toggle`
 
 ### Why
 
@@ -144,7 +144,7 @@ Products with many sections need a persistent, scannable list; groups chunk it (
 
 The bottom of public pages: link columns, legal text and version.
 
-Built from: `text-link`, `logo`, `small-text`
+Built from: `logo-link`, `link-column`, `fine-print`
 
 ### Why
 
@@ -185,7 +185,7 @@ People look at the bottom for legal, contact and help links (Jakob's law); group
 
 The top of a page's content: breadcrumbs or back link, title, subtitle, meta and the page's actions.
 
-Built from: `page-title`, `page-subtitle`, `breadcrumbs`, `create-button`
+Built from: `page-heading`, `breadcrumbs`, `create-button`
 
 ### Why
 
@@ -262,7 +262,7 @@ Results always in the same place are found at once (Jakob's law); a live region 
 
 A panel that slides over the page from one edge, built on the native dialog.
 
-Built from: `drawer-backdrop`, `dialog-title`, `icon-button`, `button`
+Built from: `dialog`, `form-actions`
 
 ### Why
 
@@ -340,7 +340,7 @@ Putting the way back and the actions on the same line saves height and keeps the
 
 Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.
 
-Built from: `theme-toggle`, `switch`, `settings-toggle`
+Built from: `theme-toggle`, `toggle-field`, `settings-toggle`
 
 ### Why
 
@@ -379,7 +379,7 @@ People adapt the interface to their eyes and work (Tesler's law); grouping prefe
 
 Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.
 
-Built from: `choice-group`, `link-action`, `search-field`
+Built from: `choice-group`, `panel-header`, `search-field`
 
 ### Why
 
@@ -427,7 +427,7 @@ Seeing all filters and the result count at once lets people narrow a list confid
 
 Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.
 
-Built from: `filter-button`, `dialog`
+Built from: `filter-button`, `dialog`, `filter-panel`
 
 ### Why
 
@@ -465,5 +465,81 @@ Filters change what a page shows without taking people away from it: a right dra
 **Principles applied:** Practical UI S04: Reveal secondary information when needed; Hick's law: fewer, clearer choices mean faster decisions; Jakob's law: work the way products people already know work; Doherty threshold: respond within 400 ms; show progress for anything slower
 
 **ORCA guide items covered:** Filter drawer
+
+---
+
+## Page landmarks
+
+`id: page-landmarks` · level: pattern · source: ORCA
+
+The regions every page has: skip navigation, the main landmark and the place dialogs open in.
+
+Built from: `skip-navigation`, `dialog`
+
+### Why
+
+Landmarks let assistive technology jump straight to the content (WCAG 1.3.1, 2.4.1) and give dialogs one place outside the content flow, so focus and stacking work the same on every page (Jakob's law, Tesler's law).
+
+### When to use
+
+- Every page: the base layout writes them, so pages never do.
+
+### How to use
+
+- `<body>` starts with the skip navigation; `<main id="main" tabindex="-1">` holds the content; dialogs and drawers go in `{% block modal %}` after `</main>`.
+
+### Accessibility
+
+- One `<main>` per page; dialogs outside it are opened with `showModal()` so the page behind is inert.
+
+#### Example: Landmarks (press Tab inside this example)
+
+```django
+<div style="position: relative; overflow: hidden; border: var(--orca-border-width) solid var(--orca-border)">
+  <a class="orca-skip-link" href="#pl-main">Skip to main content</a>
+  <div id="pl-main" tabindex="-1" style="padding: var(--orca-space-16)"><p class="orca-p">Main content.</p></div>
+</div>
+```
+
+**Classes:** `.orca-skip-link`
+
+**Principles applied:** Jakob's law: work the way products people already know work; Tesler's law: move unavoidable complexity from the user to the system; Practical UI F01: Design for a diverse audience
+
+**Related:** `base-layout`
+
+---
+
+## Error message
+
+`id: error-message` · level: pattern · source: ORCA
+
+What an error page says: the code, what happened in plain words, what to do, and a way back.
+
+Built from: `empty-state`, `logo-link`, `back-link`
+
+### Why
+
+An error is a low point of the experience; saying what happened and offering the next step softens it (Peak–end rule, Practical UI W15), and the logo link is the familiar way out (Jakob's law).
+
+### When to use
+
+- 403, 404 and 500 pages; a section that cannot load at all.
+
+### How to use
+
+- `<div class="orca-error-layout">` with the logo link, an illustration, `.orca-error-layout__code`, the empty-state title and text, and one action (Go to the dashboard) plus a back link.
+- Never blame the person; never show a stack trace.
+
+#### Example: Not found
+
+```django
+<div class="orca-error-layout" style="min-height: 0">{% orca_logo href="#" %}<div class="orca-error-layout__body">{% orca_illustration "search" %}<p class="orca-error-layout__code">404</p><h1 class="orca-empty-title">This page does not exist</h1><p class="orca-empty-text">The link may be old, or the page was moved.</p><a class="orca-button orca-button--primary" href="#">Go to the dashboard</a></div></div>
+```
+
+**Classes:** `.orca-error-layout`, `.orca-error-layout__body`, `.orca-error-layout__code`
+
+**Principles applied:** Peak–end rule: people judge an experience by its peak and its end; Practical UI W15: Help people recover from errors; Jakob's law: work the way products people already know work
+
+**Related:** `error-layouts`
 
 ---

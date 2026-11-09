@@ -13,7 +13,7 @@
     </li>
     {% endwith %}{% endfor %}
   </ol>
-  <p class="orca-p">Each component, pattern and template lists what it is built from. A part is listed once: when a listed element already contains it, it is not listed again.</p>
+  <p class="orca-p">Each component, pattern and template lists what it is built from: elements of the level directly below, or of its own level when it nests one. A level is never skipped, and a part is listed once: when a listed element already contains it, it is not listed again. The test suite enforces both.</p>
 </section>
 
 <section class="docs-block-flow">

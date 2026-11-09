@@ -485,3 +485,45 @@ Icon-only controls save space but few icons are universal (Hick's law); a toolti
 **ORCA guide items covered:** Tooltip
 
 ---
+
+## Card skeleton
+
+`id: card-skeleton` · level: component · source: ORCA
+
+The grey shape of a card (image, title, two lines) while the real card loads.
+
+Built from: `skeleton`
+
+### Why
+
+A placeholder in the final shape shows that content is coming and where (Doherty threshold) and prevents the layout from jumping when it arrives.
+
+### When to use
+
+- Grids and feeds that load cards after the page.
+
+### When not to use
+
+- Content that arrives in under a second: show nothing.
+
+### How to use
+
+- `<div aria-hidden="true"><div class="orca-skeleton orca-aspect-16x9"></div><div class="orca-skeleton orca-skeleton--title"></div><div class="orca-skeleton orca-skeleton--text"></div></div>`; the region around the placeholders has `aria-busy="true"` and a label.
+
+### Accessibility
+
+- Placeholders are hidden from assistive technology; the region's label says what is loading.
+
+#### Example: Card skeleton
+
+```django
+<div aria-busy="true" aria-label="Loading video" style="max-width: 16rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)"><div aria-hidden="true"><div class="orca-skeleton orca-aspect-16x9" style="margin-bottom: var(--orca-space-8)"></div><div class="orca-skeleton orca-skeleton--title"></div><div class="orca-skeleton orca-skeleton--text" style="max-width: 70%"></div></div></div>
+```
+
+**Classes:** `.orca-skeleton`, `.orca-skeleton--title`, `.orca-skeleton--text`
+
+**Principles applied:** Doherty threshold: respond within 400 ms; show progress for anything slower
+
+**Related:** `video-grid`, `loading-placeholder`
+
+---

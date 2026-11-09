@@ -17,7 +17,7 @@ add(Pattern(
          "At most 5 links; the current one gets `aria-current=\"page\"`. On phones the links wrap under the logo."],
     classes=[".orca-site-header", ".orca-site-header__nav", ".orca-site-header__actions"],
     laws=["jakob", "hick", "B03"],
-    uses=["logo", "primary-navigation", "button"],
+    uses=["logo-link", "primary-navigation", "call-to-action"],
     examples=[("Header", """<header class="orca-site-header" style="position: static">
   {% orca_logo href="#" %}
   <nav aria-label="Main"><ul class="orca-site-header__nav"><li><a href="#" aria-current="page">Product</a></li><li><a href="#">Pricing</a></li><li><a href="#">Docs</a></li></ul></nav>
@@ -37,7 +37,7 @@ add(Pattern(
     classes=[".orca-topbar", ".orca-topbar__start", ".orca-topbar__end"],
     tokens=["brand-bar", "brand-bar-on", "brand-bar-hover"],
     laws=["jakob", "F03", "fitts"],
-    uses=["logo", "primary-navigation", "utility-navigation", "search-input"],
+    uses=["logo-link", "primary-navigation", "utility-navigation", "search-field"],
     examples=[("Top bar", """<div class="orca-stack" style="gap: var(--orca-space-16)">
 <header class="orca-topbar" style="position: static">
   <div class="orca-topbar__start"><button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Open menu">{% icon "menu" %}</button>{% orca_logo href="#" %}
@@ -62,7 +62,7 @@ add(Pattern(
          "Below 620px the sidebar hides; put the same links in a drawer opened from the top bar."],
     classes=[".orca-app", ".orca-app__main", ".orca-sidebar", ".orca-sidebar__section", ".orca-sidebar__label", ".orca-sidebar__foot"],
     laws=["miller", "tesler", "jakob"],
-    uses=["sidebar-link", "nav-tree", "icon-button"],
+    uses=["sidebar-link", "nav-tree", "collapse-toggle"],
     examples=[("Sidebar with collapse", """<div class="orca-app" style="min-height: 22rem; border: var(--orca-border-width) solid var(--orca-border)">
   <nav class="orca-sidebar" id="sb-demo" aria-label="Sections" data-collapsed="false">
     <div class="orca-sidebar__section"><ul class="orca-side-nav">
@@ -85,7 +85,7 @@ add(Pattern(
     how=["`<footer class=\"orca-footer\">` with `.orca-footer__cols` of `<ul class=\"orca-footer__col\">` (first item `.orca-footer__col-title`) and `.orca-footer__legal`."],
     classes=[".orca-footer", ".orca-footer__cols", ".orca-footer__col", ".orca-footer__col-title", ".orca-footer__legal"],
     laws=["jakob", "miller"],
-    uses=["text-link", "logo", "small-text"],
+    uses=["logo-link", "link-column", "fine-print"],
     examples=[("Footer", """<footer class="orca-footer">
   {% orca_logo href="" %}
   <div class="orca-footer__cols">
@@ -106,7 +106,7 @@ add(Pattern(
          "Actions: secondary buttons first, the primary (or the create button) last; on phones they stretch full width."],
     classes=[".orca-page-head", ".orca-page-head__text", ".orca-page-head__meta", ".orca-page-head__actions"],
     laws=["jakob", "B03", "L03"],
-    uses=["page-title", "page-subtitle", "breadcrumbs", "create-button"],
+    uses=["page-heading", "breadcrumbs", "create-button"],
     examples=[("Page head", """<div class="orca-page-head">
   <div class="orca-page-head__text"><nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="#">Sites</a></li><li><span aria-current="page">North building</span></li></ol></nav>
     <h1 class="orca-page-title">Videos</h1><p class="orca-page-subtitle">Every video from North building.</p>
@@ -142,7 +142,7 @@ add(Pattern(
          "Open with `data-orca-dialog-open=\"id\"`; `--left` for navigation. A click on the backdrop closes it."],
     classes=[".orca-drawer", ".orca-drawer--left", ".orca-drawer__header", ".orca-drawer__body", ".orca-drawer__footer"],
     laws=["L14", "postel", "fitts"],
-    uses=["drawer-backdrop", "dialog-title", "icon-button", "button"],
+    uses=["dialog", "form-actions"],
     examples=[("Details drawer", """<button class="orca-button" type="button" data-orca-dialog-open="dr-demo">Show video details</button>
 <dialog class="orca-drawer" id="dr-demo" aria-labelledby="dr-demo-t" data-orca-light-dismiss>
   <div class="orca-drawer__header"><h2 class="orca-dialog-title" id="dr-demo-t">Entrance A</h2><button class="orca-icon-button" type="button" aria-label="Close" data-orca-dialog-close>{% icon "close" %}</button></div>
@@ -174,7 +174,7 @@ add(Pattern(
          "Apply immediately and remember per person. Brand colour, accent and rounding are project settings (brand tokens), not personal ones: ORCA keeps one shape language."],
     classes=[".orca-settings-panel", ".orca-settings-panel__group"],
     laws=["tesler", "doherty", "R14"],
-    uses=["theme-toggle", "switch", "settings-toggle"],
+    uses=["theme-toggle", "toggle-field", "settings-toggle"],
     examples=[("Panel", """<div class="orca-settings-panel" style="max-width: 24rem">
   <fieldset class="orca-segmented orca-settings-panel__group" data-orca-theme-choice style="flex-direction: row"><legend>Theme</legend>
     <label class="orca-segmented__item"><input type="radio" name="sp-theme" value="auto" checked>Auto</label><label class="orca-segmented__item"><input type="radio" name="sp-theme" value="light">Light</label><label class="orca-segmented__item"><input type="radio" name="sp-theme" value="dark">Dark</label><label class="orca-segmented__item"><input type="radio" name="sp-theme" value="paper">Paper</label></fieldset>
@@ -194,7 +194,7 @@ add(Pattern(
          "Announce the number of results; the drawer footer's primary button repeats it ('Show 11 videos')."],
     classes=[".orca-filter-panel", ".orca-filter-panel__head", ".orca-filter-panel__group"],
     laws=["miller", "doherty", "S04"],
-    uses=["choice-group", "link-action", "search-field"],
+    uses=["choice-group", "panel-header", "search-field"],
     examples=[("Panel", """<form class="orca-filter-panel" method="get" aria-label="Filters" style="max-width: 15rem" onsubmit="return false">
   <div class="orca-filter-panel__head"><span class="orca-panel-title">Filters</span><button class="orca-button orca-button--link" type="reset">Clear all</button></div>
   <fieldset class="orca-filter-panel__group"><legend>Status</legend><div class="orca-choice-group__items">
@@ -223,7 +223,7 @@ add(Pattern(
          "Above the results, the `filter-bar` lists the applied filters as removable tags."],
     classes=[".orca-drawer", ".orca-filter-panel"],
     laws=["S04", "hick", "jakob", "doherty"],
-    uses=["filter-button", "dialog"],
+    uses=["filter-button", "dialog", "filter-panel"],
     examples=[("Filters from the page actions", """<div class="orca-page-head"><div class="orca-page-head__text"><h1 class="orca-page-title">Videos</h1><p class="orca-page-subtitle">128 videos in the library.</p></div>
   <div class="orca-page-head__actions"><button class="orca-button" type="button" data-orca-dialog-open="fd-demo">{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true">1</span><span class="orca-sr-only">, 1 active</span></button><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}Add video</a></div></div>
 <dialog class="orca-drawer" id="fd-demo" aria-labelledby="fd-demo-t" data-orca-light-dismiss><form method="dialog" style="display: contents">

@@ -38,7 +38,7 @@ add(Pattern(
          "Head with title and close button; body lines with icons (time, place, calendar); foot with Edit, Delete and 'Open'. Escape and outside click close it (built into popover)."],
     classes=[".orca-event-popover", ".orca-event-popover__head", ".orca-event-popover__title", ".orca-event-popover__body", ".orca-event-popover__foot"],
     laws=["doherty", "jakob", "L09"],
-    uses=["event-chip", "icon-button", "button"],
+    uses=["event-chip", "panel-header", "button-group"],
     examples=[("Popover", """<button class="orca-event-chip" type="button" popovertarget="ep-1" style="max-width: 12rem"><span class="orca-event-dot" style="--orca-event: var(--orca-chart-2)"></span><span class="orca-event-chip__time">10:00</span><span class="orca-event-chip__title">Audit</span></button>
 <div class="orca-event-popover" id="ep-1" popover style="--orca-event: var(--orca-chart-2)"><div class="orca-event-popover__head"><h3 class="orca-event-popover__title">Audit</h3><button class="orca-icon-button orca-icon-button--sm" type="button" popovertarget="ep-1" popovertargetaction="hide" aria-label="Close">{% icon "close" %}</button></div>
   <div class="orca-event-popover__body"><span>{% icon "clock" size="xs" %}Friday 6 November, 10:00–11:30</span><span>{% icon "location" size="xs" %}North building</span><span>{% icon "user" size="xs" %}Ada Lovelace, Grace Hopper</span></div>
@@ -71,7 +71,7 @@ add(Pattern(
          "Link to the full editor for anything more."],
     classes=[".orca-quick-add", ".orca-quick-add__row", ".orca-quick-add__preview"],
     laws=["tesler", "R22"],
-    uses=["text-input", "button"],
+    uses=["input-group"],
     examples=[("Quick add", """<form class="orca-quick-add" onsubmit="return false"><label class="orca-label" for="qa-i">Add an event</label><div class="orca-quick-add__row"><input class="orca-input" id="qa-i" value="Audit Friday 10:00 at North building" aria-describedby="qa-p"><button class="orca-button orca-button--primary" type="submit">Add</button></div>
   <p class="orca-quick-add__preview" id="qa-p" aria-live="polite">{% icon "calendar" size="xs" %}Audit · Friday 6 November, 10:00–11:00 · North building <a class="orca-link" href="#">More options</a></p></form>""")],
     guide=["Quick-add event"],
@@ -103,7 +103,7 @@ add(Pattern(
          "In the editor, add people with a multi picker and remove with an icon button per row."],
     classes=[".orca-attendees", ".orca-attendee", ".orca-attendee__resp", ".orca-attendees__summary"],
     laws=["W05", "C03"],
-    uses=["avatar", "multi-picker", "remove-row-button"],
+    uses=["list-item", "multi-picker", "remove-row-button"],
     examples=[("Attendees", """<div style="max-width: 26rem"><p class="orca-attendees__summary">2 going, 1 maybe, 1 waiting</p><ul class="orca-attendees">
   <li class="orca-attendee"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span><span>Ada Lovelace <span class="orca-small orca-muted">Organiser</span></span><span class="orca-attendee__resp orca-attendee__resp--yes">{% icon "success" size="xs" %}Going</span></li>
   <li class="orca-attendee"><span class="orca-avatar orca-avatar--s" aria-hidden="true">GH</span><span>Grace Hopper</span><span class="orca-attendee__resp orca-attendee__resp--yes">{% icon "success" size="xs" %}Going</span></li>
@@ -121,7 +121,7 @@ add(Pattern(
          "Offer 'Add a note' only after answering."],
     classes=[".orca-rsvp", ".orca-rsvp__question"],
     laws=["fitts", "B03"],
-    uses=["button-group", "radio"],
+    uses=["button-group", "choice-group"],
     examples=[("Going?", """<div class="orca-rsvp" style="max-width: 32rem"><span class="orca-rsvp__question">Going?</span><div class="orca-segmented orca-segmented--dense" role="group" aria-label="Your answer"><button class="orca-segmented__item" type="button" aria-pressed="true">Yes</button><button class="orca-segmented__item" type="button" aria-pressed="false">Maybe</button><button class="orca-segmented__item" type="button" aria-pressed="false">No</button></div></div>""")],
     guide=["Invitation response bar"],
 ))

@@ -16,7 +16,7 @@ add(Pattern(
          "The intro sits beside the fields from 1036px and above them below."],
     classes=[".orca-form-section", ".orca-form-section__intro", ".orca-form-section__fields"],
     laws=["R17", "miller", "tesler"],
-    uses=["form-field", "section-title"],
+    uses=["form-field", "section-heading"],
     examples=[("Section", """<section class="orca-form-section" aria-labelledby="fs-t">
   <div class="orca-form-section__intro"><h2 class="orca-section-title" id="fs-t">Counting</h2><p>How often thumbnails are taken and how long videos are kept.</p></div>
   <div class="orca-form-section__fields">
@@ -77,7 +77,7 @@ add(Pattern(
     a11y=["Drawing needs a pointer; provide numeric corner fields for keyboard and screen-reader users."],
     classes=[".orca-zone-editor", ".orca-zone-editor__stage", ".orca-zone-editor__toolbar", ".orca-zone-editor__hint"],
     laws=["F03", "postel", "peak-end"],
-    uses=["zone-row", "media-frame"],
+    uses=["zone-row", "captioned-media"],
     examples=[("Draw a zone", """<div class="orca-zone-editor" data-orca-zone-editor>
   <div><div class="orca-zone-editor__stage" style="--orca-zone: var(--orca-teal-400)"><img src="{% static "orca/img/sample-street.svg" %}" alt="Entrance A video view"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg></div>
     <input type="hidden" name="points" value="[[30,62],[62,60],[66,92],[26,94]]">
@@ -97,7 +97,7 @@ add(Pattern(
          "Error: 'Email or password is incorrect. Check both, or reset your password.'"],
     classes=[".orca-login", ".orca-login__head", ".orca-login__title", ".orca-login__row", ".orca-login__foot"],
     laws=["jakob", "postel", "W15"],
-    uses=["logo", "form-field", "checkbox", "button", "form-alert"],
+    uses=["logo-link", "form-field", "toggle-field", "form-actions", "form-alert"],
     examples=[("Sign in", """<form class="orca-login" method="post" action="#" onsubmit="return false">
   <div class="orca-login__head">{% orca_logo href="" %}<h1 class="orca-login__title">Sign in</h1></div>
   <div class="orca-callout orca-callout--negative" role="alert">{% icon "error" %}<p class="orca-callout__title">Email or password is incorrect</p><p class="orca-callout__body">Check both, or reset your password.</p></div>
@@ -141,7 +141,7 @@ add(Pattern(
     a11y=["The toolbar is a `role=\"toolbar\"` with a label; buttons have names and pressed states."],
     classes=[".orca-richtext", ".orca-richtext__toolbar", ".orca-richtext__area"],
     laws=["hick", "jakob", "postel"],
-    uses=["icon-button", "textarea", "label"],
+    uses=["form-field", "formatting-toolbar"],
     examples=[("Editor", """<div class="orca-field" style="max-width: 36rem"><span class="orca-label" id="rt-label">Note</span>
 <div class="orca-richtext" data-orca-richtext>
   <div class="orca-richtext__toolbar" role="toolbar" aria-label="Formatting"><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="bold" aria-pressed="false" aria-label="Bold"><b>B</b></button><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="italic" aria-pressed="false" aria-label="Italic"><i>I</i></button><span class="orca-divider orca-divider--vertical" role="separator"></span><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="insertUnorderedList" aria-pressed="false" aria-label="Bulleted list">{% icon "list" %}</button><button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-rt="createLink" aria-label="Add link">{% icon "get-link" %}</button></div>

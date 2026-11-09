@@ -43,7 +43,7 @@ Equal gaps between sections show they are siblings, and larger gaps than inside 
 
 Stat cards in equal columns that wrap, each at least 12rem wide.
 
-Built from: `stat-card`
+Built from: `kpi-grid`
 
 ### Why
 
@@ -77,7 +77,7 @@ Equal tiles in a row are compared at a glance (Miller's law); a minimum width ke
 
 Cards in as many equal columns as fit, at least 15rem wide.
 
-Built from: `card`
+Built from: `card-grid`
 
 ### Why
 
@@ -217,7 +217,7 @@ When watching and adjusting at the same time (zones, settings), the picture must
 
 Short fields side by side in as many 16rem columns as fit; long fields span the full width.
 
-Built from: `form-field`
+Built from: `form-section`
 
 ### Why
 

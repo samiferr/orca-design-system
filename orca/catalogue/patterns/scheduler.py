@@ -44,7 +44,7 @@ add(Pattern(
          "Store spans as `(weekday, start, end)` in the site's timezone and show that timezone."],
     classes=[".orca-week-editor", ".orca-week-editor__day", ".orca-week-editor__name", ".orca-week-editor__spans", ".orca-week-editor__closed"],
     laws=["tesler", "R21", "L09"],
-    uses=["add-row-button", "switch", "overlap-warning"],
+    uses=["add-row-button", "toggle-field", "overlap-warning"],
     examples=[("Opening hours", f'<div class="orca-week-editor" style="max-width: 40rem">{WEEK}</div>{TPL}')],
     guide=["Weekly availability editor"],
 ))
@@ -78,7 +78,7 @@ add(Pattern(
          "Store as an RFC 5545 RRULE; show the next three dates as a check."],
     classes=[".orca-recurrence__custom"],
     laws=["hick", "R22", "tesler"],
-    uses=["recurrence-selector", "weekday-selector", "choice-group", "date-input"],
+    uses=["recurrence-selector", "weekday-selector", "choice-group", "date-picker"],
     examples=[("Repeat", """<div class="orca-field" style="max-width: 30rem"><label class="orca-label" for="re-sel">Repeat</label>
   <select class="orca-select" id="re-sel" data-orca-reveal="re-custom" data-orca-reveal-value="custom"><option>Does not repeat</option><option>Daily</option><option>Weekly on Friday</option><option value="custom" selected>Custom…</option></select>
   <div class="orca-recurrence__custom" id="re-custom">
@@ -98,7 +98,7 @@ add(Pattern(
          "Offer 'Import public holidays' for the site's country."],
     classes=[".orca-exception"],
     laws=["tesler", "L09"],
-    uses=["exception-entry", "date-input", "time-range-input", "switch", "panel"],
+    uses=["exception-entry", "date-picker", "time-range-input", "toggle-field", "panel"],
     examples=[("Exceptions", """<section class="orca-panel" style="max-width: 32rem" aria-labelledby="ex-t"><div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="ex-t">Exceptions</h2></div><div class="orca-panel-header__actions"><button class="orca-button orca-button--dense" type="button">Import public holidays</button></div></div>
   <div class="orca-exception"><time class="orca-date-badge" datetime="2026-11-11"><span class="orca-date-badge__month">Nov</span><span class="orca-date-badge__day">11</span><span class="orca-date-badge__weekday">Wed</span></time><div class="orca-exception__body"><span><span class="orca-badge orca-badge--grey">Closed</span></span><span class="orca-exception__meta">Armistice Day</span></div><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="Edit 11 November">{% icon "edit" %}</button></div>
   <div class="orca-exception"><time class="orca-date-badge" datetime="2026-12-24"><span class="orca-date-badge__month">Dec</span><span class="orca-date-badge__day">24</span><span class="orca-date-badge__weekday">Thu</span></time><div class="orca-exception__body"><span class="orca-num">08:00–14:00</span><span class="orca-exception__meta">Christmas Eve, short day</span></div><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="Edit 24 December">{% icon "edit" %}</button></div>
@@ -134,7 +134,7 @@ add(Pattern(
          "Compute the percentages in the view: `(start - day_start) / (day_end - day_start)`; wrap in `.orca-table-wrap` to scroll on phones."],
     classes=[".orca-scheduler", ".orca-scheduler__corner", ".orca-scheduler__scale", ".orca-scheduler__who", ".orca-scheduler__lane"],
     laws=["L01", "L09"],
-    uses=["event-card", "avatar", "availability-legend"],
+    uses=["event-card", "resource-row", "availability-legend"],
     examples=[("Installers, Friday", """<div class="orca-table-wrap"><div class="orca-scheduler" style="--orca-cols: 10">
   <div class="orca-scheduler__corner"></div><div class="orca-scheduler__scale">{% for h in "89" %}<span>0{{ h }}</span>{% endfor %}{% for h in "01234567" %}<span>1{{ h }}</span>{% endfor %}</div>
   <div class="orca-scheduler__who"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span>Ada Lovelace</div><div class="orca-scheduler__lane"><a class="orca-event-card" href="#" style="--orca-event: var(--orca-chart-2); --orca-start: 20%; --orca-span: 15%"><span class="orca-event-card__title">Audit</span><span class="orca-event-card__meta">10:00–11:30</span></a><a class="orca-event-card" href="#" style="--orca-event: var(--orca-chart-1); --orca-start: 60%; --orca-span: 15%"><span class="orca-event-card__title">Training</span><span class="orca-event-card__meta">14:00–15:30</span></a></div>
@@ -153,7 +153,7 @@ add(Pattern(
          "Edit a cell in a drawer or popover; publish the roster as one action with a confirmation."],
     classes=[".orca-roster", ".orca-shift", ".orca-roster__total"],
     laws=["L01", "restorff"],
-    uses=["avatar", "badge"],
+    uses=["resource-row"],
     examples=[("Week 46", """<div class="orca-table-wrap"><table class="orca-roster"><caption class="orca-sr-only">Roster, week of 9 November</caption>
   <thead><tr><th scope="col">Person</th><th scope="col">Mon 9</th><th scope="col">Tue 10</th><th scope="col">Wed 11</th><th scope="col">Thu 12</th><th scope="col">Fri 13</th><th scope="col" class="is-weekend">Sat 14</th><th scope="col" class="orca-roster__total">Hours</th></tr></thead>
   <tbody><tr><th scope="row">Ada Lovelace</th><td><span class="orca-shift" style="--orca-event: var(--orca-chart-1)">08–16<span class="orca-small">Early</span></span></td><td><span class="orca-shift" style="--orca-event: var(--orca-chart-1)">08–16</span></td><td></td><td><span class="orca-shift" style="--orca-event: var(--orca-chart-3)">12–20</span></td><td><span class="orca-shift" style="--orca-event: var(--orca-chart-3)">12–20</span></td><td class="is-weekend"></td><td class="orca-roster__total">32 / 40</td></tr>
@@ -170,7 +170,7 @@ add(Pattern(
          "Show the duration and timezone above the slots; confirm the choice in a summary before booking."],
     classes=[".orca-booking", ".orca-date-strip", ".orca-booking__group"],
     laws=["R22", "L09", "hick"],
-    uses=["booking-slot", "button"],
+    uses=["booking-slot", "button-group"],
     examples=[("Book a 30-minute call", """<div class="orca-booking"><p class="orca-small orca-muted">30 minutes · Paris time</p>
   <ul class="orca-date-strip" aria-label="Day"><li><button type="button" aria-pressed="false">Mon<strong>9</strong></button></li><li><button type="button" aria-pressed="true">Tue<strong>10</strong></button></li><li><button type="button" disabled>Wed<strong>11</strong>Full</button></li><li><button type="button" aria-pressed="false">Thu<strong>12</strong></button></li><li><button type="button" aria-pressed="false">Fri<strong>13</strong></button></li></ul>
   <div><h3 class="orca-booking__group">Morning</h3><ul class="orca-booking-slots"><li><button class="orca-booking-slot" type="button" aria-pressed="false">09:00</button></li><li><button class="orca-booking-slot" type="button" aria-pressed="true">09:30</button></li><li><button class="orca-booking-slot" type="button" disabled>10:00<span class="orca-booking-slot__note">Booked</span></button></li></ul></div>
@@ -208,7 +208,7 @@ add(Pattern(
          "Suggest the nearest free time for the moved item."],
     classes=[".orca-conflict", ".orca-conflict__pair", ".orca-conflict__option"],
     laws=["L09", "hick", "peak-end"],
-    uses=["conflict-warning", "event-card", "radio"],
+    uses=["conflict-warning", "event-card", "choice-group"],
     examples=[("Clash", """<div class="orca-conflict" style="max-width: 40rem"><div class="orca-callout orca-callout--caution" role="status">{% icon "warning" %}<p class="orca-callout__title">Ada Lovelace has two things at 10:30 on Friday</p><div class="orca-callout__body"><p class="orca-p">Choose which to keep at that time. The other moves to 11:30, her next free slot.</p></div></div>
   <div class="orca-conflict__pair"><label class="orca-conflict__option"><span class="orca-radio"><input type="radio" name="cf" checked><span class="orca-radio__dot"></span>Keep the audit</span><span class="orca-event-card" style="--orca-event: var(--orca-chart-2)"><span class="orca-event-card__title">Audit</span><span class="orca-event-card__meta">10:00–11:30 · North building</span></span></label>
     <label class="orca-conflict__option"><span class="orca-radio"><input type="radio" name="cf"><span class="orca-radio__dot"></span>Keep the call</span><span class="orca-event-card" style="--orca-event: var(--orca-chart-3)"><span class="orca-event-card__title">Supplier call</span><span class="orca-event-card__meta">10:30–11:00</span></span></label></div>

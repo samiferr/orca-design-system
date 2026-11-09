@@ -8,7 +8,7 @@ Fields and the small groups around them. A form field is the unit people complet
 
 Label, optional marker, help, error and one control, wired together. Text inputs and selects.
 
-Built from: `label`, `required-marker`, `help-text`, `error-text`, `text-input`, `select`
+Built from: `label`, `required-marker`, `help-text`, `error-text`, `text-input`, `select`, `textarea`, `color-input`
 
 ### Why
 
@@ -893,5 +893,121 @@ Placing the submit action right after the last field shortens travel (Fitts's la
 **Principles applied:** Fitts's law: big, close, well-spaced targets are faster and safer; Practical UI B03: One primary action; Practical UI B08: Keep action order predictable; Practical UI B13: Scale friction to the consequence
 
 **ORCA guide items covered:** Form actions
+
+---
+
+## Row selection
+
+`id: row-select` · level: component · source: ORCA
+
+A checkbox per table row and a select-all checkbox in the header.
+
+Built from: `checkbox`
+
+### Why
+
+Selecting rows before choosing an action lets people act on many records at once (Practical UI F03); checkboxes are the familiar control for it (Jakob's law, R14).
+
+### When to use
+
+- Tables that offer bulk actions.
+
+### How to use
+
+- Header: `<th scope="col" class="orca-table__select"><label class="orca-check"><input type="checkbox" aria-label="Select all videos"><span class="orca-check__box"></span></label></th>`; one per row named after the row.
+- When rows are selected, the table toolbar shows the count and the bulk actions.
+
+### Accessibility
+
+- Each checkbox is named after its row ('Select Entrance A').
+
+#### Example: Select cells
+
+```django
+<table class="orca-table"><thead><tr><th scope="col" class="orca-table__select"><label class="orca-check"><input type="checkbox" aria-label="Select all videos"><span class="orca-check__box"></span></label></th><th scope="col">Video</th></tr></thead>
+<tbody><tr><td class="orca-table__select"><label class="orca-check"><input type="checkbox" checked aria-label="Select Harbour at dusk"><span class="orca-check__box"></span></label></td><td>Harbour at dusk</td></tr></tbody></table>
+```
+
+**Classes:** `.orca-table__select`
+
+**Principles applied:** Practical UI F03: Reduce the total effort of a task; Jakob's law: work the way products people already know work; Practical UI R14: Checkbox or switch according to timing
+
+**Related:** `data-table`, `table-toolbar`
+
+---
+
+## Formatting toolbar
+
+`id: formatting-toolbar` · level: component · source: ORCA
+
+A row of pressed-state icon buttons for bold, italic, lists and links over a text area.
+
+Built from: `icon-button`, `divider`
+
+### Why
+
+Formatting commands are recognised by their familiar glyphs (Jakob's law); pressed states show what applies to the selection (Practical UI F10).
+
+### When to use
+
+- Above a rich text field.
+
+### How to use
+
+- `<div class="orca-richtext__toolbar" role="toolbar" aria-label="Formatting">` with dense icon buttons using `aria-pressed`, groups separated by a vertical divider.
+
+### Accessibility
+
+- Arrow keys move between the buttons of the toolbar; each has an accessible name.
+
+#### Example: Toolbar
+
+```django
+<div class="orca-richtext__toolbar" role="toolbar" aria-label="Formatting" style="max-width: 20rem"><button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="true" aria-label="Bold"><b>B</b></button><button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="false" aria-label="Italic"><i>I</i></button><span class="orca-divider orca-divider--vertical" role="separator"></span><button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="false" aria-label="Bulleted list">{% icon "list" %}</button></div>
+```
+
+**Classes:** `.orca-richtext__toolbar`
+
+**Principles applied:** Jakob's law: work the way products people already know work; Practical UI F10: Specify every interaction state
+
+**Related:** `rich-text-editor`
+
+---
+
+## Applied filters
+
+`id: applied-filters` · level: component · source: ORCA
+
+The filters in effect as removable tags, with Clear all and the number of results.
+
+Built from: `tag`, `link-action`
+
+### Why
+
+Filters that are on must stay visible and reversible (Practical UI S06, Postel's law); the count confirms what they did (Doherty threshold).
+
+### When to use
+
+- Above results while at least one filter is applied; inside a no-results state.
+
+### How to use
+
+- `<div class="orca-filter-bar__applied"><span class="orca-small orca-muted">Filtered by</span>` then one removable tag per filter, a 'Clear all' link button and the count in `role="status"`.
+
+### Accessibility
+
+- Each remove button names the filter it removes.
+
+#### Example: Applied filters
+
+```django
+<div class="orca-filter-bar__applied"><span class="orca-small orca-muted">Filtered by</span><span class="orca-tag"><span class="orca-tag__text">Type: Video</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Type: Video">{% icon "close" %}</button></span><button class="orca-button orca-button--link" type="button">Clear all</button><span class="orca-small orca-muted" role="status">14 videos</span></div>
+```
+
+**Classes:** `.orca-filter-bar__applied`
+
+**Principles applied:** Practical UI S06: Make essential content visible or discoverable; Postel's law: accept varied input, output reliable and accessible UI; Doherty threshold: respond within 400 ms; show progress for anything slower
+
+**Related:** `filter-bar`, `no-results`
 
 ---

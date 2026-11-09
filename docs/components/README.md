@@ -6,7 +6,7 @@ Every element below has a **why**, **when**, **when not**, **how**, accessibilit
 classes it uses, the UX principles it applies, and a copy-ready Django template example.
 Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.
 
-## [Forms](forms.md) (19)
+## [Forms](forms.md) (22)
 
 Fields and the small groups around them. A form field is the unit people complete: label, hint, error and control in a fixed order.
 
@@ -29,8 +29,11 @@ Fields and the small groups around them. A form field is the unit people complet
 - `file-field` **File input field**: A labelled drop zone around a native file input, listing the chosen files.
 - `form-alert` **Form alert**: A message at the top of a form for errors that belong to no single field.
 - `form-actions` **Form actions**: The row of buttons that ends a form: the primary action first, then the alternatives.
+- `row-select` **Row selection**: A checkbox per table row and a select-all checkbox in the header.
+- `formatting-toolbar` **Formatting toolbar**: A row of pressed-state icon buttons for bold, italic, lists and links over a text area.
+- `applied-filters` **Applied filters**: The filters in effect as removable tags, with Clear all and the number of results.
 
-## [Navigation](navigation.md) (15)
+## [Navigation](navigation.md) (17)
 
 How people move between places and pages. The current location is always marked with aria-current and a shape, not only colour.
 
@@ -49,8 +52,10 @@ How people move between places and pages. The current location is always marked 
 - `view-toggle` **View toggle (cards, table)**: A segmented control switching a collection between cards and a table.
 - `settings-toggle` **Settings toggle**: An icon button that opens the display settings panel (theme, density).
 - `create-button` **Create button (floating on phones)**: The page's create action: a primary button in the page head that becomes a floating button on phones.
+- `skip-navigation` **Skip navigation**: The skip link and the focusable main landmark it jumps to.
+- `link-column` **Link column**: A titled list of links, as in a footer or a site map.
 
-## [Feedback](feedback.md) (11)
+## [Feedback](feedback.md) (12)
 
 How the system tells people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.
 
@@ -65,6 +70,7 @@ How the system tells people what happened and what to do next: alerts, callouts,
 - `toast` **Toast**: A short message that appears at the bottom corner after an action and goes away by itself; several stack.
 - `flash-message` **Flash message**: Django messages shown as dismissible alerts at the top of the next page.
 - `tooltip` **Tooltip**: A short label that appears on hover and keyboard focus, naming an icon-only control.
+- `card-skeleton` **Card skeleton**: The grey shape of a card (image, title, two lines) while the real card loads.
 
 ## [Actions](component-actions.md) (6)
 
@@ -77,7 +83,7 @@ Groups of actions: button groups, menus and the action sets that sit on records 
 - `record-actions` **Record actions**: On a record's page: one visible main action and a 'More actions' menu for the rest.
 - `row-actions` **Row actions**: Small actions at the end of a table row: one or two ghost buttons and an overflow menu.
 
-## [Data display](data-display.md) (25)
+## [Data display](data-display.md) (29)
 
 Ways to present records and numbers: stat cards, lists, key/value lists, cards, tables, timelines and small charts.
 
@@ -106,8 +112,12 @@ Ways to present records and numbers: stat cards, lists, key/value lists, cards, 
 - `sparkline` **Sparkline**: A tiny trend line without axes, ending with a dot on the latest value.
 - `donut-chart` **Donut chart**: A ring of up to about five shares with the total in the middle and a legend with values.
 - `chart-frame` **Chart frame**: The frame every chart sits in: title, subtitle, legend, a reserved plot area, a source line and the data as a table.
+- `big-number` **Big number**: One large figure with the statement it supports and where it comes from.
+- `summary-tile` **Summary tile**: A count with its status word, as a link that filters the list to that status.
+- `heat-row` **Heat-map row**: One labelled row of heat-map cells, each with its value printed.
+- `column-header` **Column header**: A board column's title with its card count and, when set, its limit.
 
-## [Content blocks](content-blocks.md) (6)
+## [Content blocks](content-blocks.md) (14)
 
 Reusable blocks for products, people, posts, heroes and media.
 
@@ -117,8 +127,16 @@ Reusable blocks for products, people, posts, heroes and media.
 - `hero` **Hero**: The opening block of a marketing or landing page: kicker, headline, lead, actions and an image.
 - `photo-actions-bar` **Photo-actions bar**: The row under a photo: like, comment and share with counts, and save at the end.
 - `video-card` **Video card**: A video's latest snapshot with its status, name, place and actions.
+- `page-heading` **Page heading**: The page title, the one-sentence subtitle and an optional meta line with status badges.
+- `section-heading` **Section heading**: A section title with an optional one-paragraph introduction.
+- `feature-item` **Feature item**: One feature: an icon, a short title and one sentence.
+- `captioned-media` **Captioned media**: An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.
+- `thumbnail-strip` **Thumbnail strip**: A row of thumbnail buttons that choose the image shown, the current one marked.
+- `video-player` **Video player**: A native video in its frame, with a live or recording flag and the current time.
+- `call-to-action` **Call to action**: The one or two actions a section asks for: the primary button and an optional quieter alternative.
+- `fine-print` **Fine print**: Small legal and version text on one line, with its policy links.
 
-## [Identity and controls](identity-controls.md) (5)
+## [Identity and controls](identity-controls.md) (7)
 
 Who is signed in, what a panel is, and the small controls that personalise the interface.
 
@@ -127,6 +145,8 @@ Who is signed in, what a panel is, and the small controls that personalise the i
 - `pin-control` **Pin control**: A pin toggle with a visible 'Pinned' state and an announcement when it changes.
 - `theme-toggle` **Theme toggle**: A segmented choice of Auto, Light, Dark and Paper themes, remembered per browser.
 - `email-fallback` **Email button (with fallback link)**: An email button with the address shown and a Copy button, for when no mail app opens.
+- `logo-link` **Logo link**: The product logo as a link to the home page.
+- `collapse-toggle` **Collapse toggle**: An icon button that collapses or expands a region, says which it will do, and remembers the choice.
 
 ## [Date and time pickers](pickers.md) (9)
 

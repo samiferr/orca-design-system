@@ -43,7 +43,7 @@ A grid of equal tiles lets people compare many products by sight (Miller's law: 
 
 Video cards in a grid, pinned videos first, offline videos clearly marked.
 
-Built from: `video-card`, `view-toggle`, `skeleton`
+Built from: `video-card`, `view-toggle`, `card-skeleton`
 
 ### Why
 
@@ -122,7 +122,7 @@ A few key numbers at the top answer 'is everything fine?' at a glance (Miller's 
 
 Occupancy by weekday and hour as shaded cells with the value printed, and a legend of the scale.
 
-Built from: `heat-cell`, `legend-item`
+Built from: `heat-row`, `legend-item`
 
 ### Why
 
@@ -164,7 +164,7 @@ The busiest hours jump out from lightness alone (pre-attentive processing) while
 
 Alerts and events grouped by day, newest first, each with its status, time and snapshot.
 
-Built from: `timeline-item`, `thumbnail`, `relative-time`
+Built from: `timeline-item`, `media-object`
 
 ### Why
 
@@ -195,5 +195,80 @@ Grouping by day chunks a long log (Miller's law); the timeline line and status d
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI C03: Communicate meaning beyond colour
 
 **ORCA guide items covered:** Event timeline
+
+---
+
+## Card grid
+
+`id: card-grid` · level: pattern · source: ORCA
+
+Cards for records, products or people in as many equal columns as fit.
+
+Built from: `linked-card`, `person-block`
+
+### Why
+
+Equal cards in a grid let people compare items by position and shape (Miller's law, Practical UI L11) and adapt to any width without a breakpoint.
+
+### When to use
+
+- Collections people browse: records, products, people.
+
+### When not to use
+
+- Records people compare field by field: use a data table.
+
+### How to use
+
+- `<ul class="orca-card-grid">` with one card per `<li>`; a linked card when the whole card opens the record.
+- Keep every card's content in the same order so the grid reads as a table.
+
+#### Example: Cards
+
+```django
+<ul class="orca-card-grid"><li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Harbour at dusk</h3><p class="orca-card-meta">Video · 4 min</p></div></li><li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Summer 2026</h3><p class="orca-card-meta">Album · 36 images</p></div></li><li class="orca-card"><div class="orca-card__body"><div class="orca-person"><span class="orca-avatar" aria-hidden="true">AL</span><span class="orca-person__text"><span class="orca-person__name">Ada Lovelace</span><span class="orca-person__role">Editor</span></span></div></div></li></ul>
+```
+
+**Classes:** `.orca-card-grid`
+
+**Principles applied:** Miller's law: chunk information so working memory is not overloaded; Practical UI L11: Align the layout with a responsive grid
+
+**Related:** `card-grid-layout`, `person-block-grid`
+
+---
+
+## Loading placeholder
+
+`id: loading-placeholder` · level: pattern · source: ORCA
+
+Placeholder cards in the shape of the content while a grid or feed loads, announced to screen readers.
+
+Built from: `card-skeleton`
+
+### Why
+
+Placeholders in the final shape make waiting feel shorter and keep the layout still (Doherty threshold); the busy region tells assistive technology that content is on its way.
+
+### When to use
+
+- Grids and feeds that load after the page, or load more on scroll.
+
+### How to use
+
+- A region with `aria-busy="true"` and `aria-label="Loading videos"` holding two or three card skeletons; replace the whole region when the content arrives.
+
+### Accessibility
+
+- Remove `aria-busy` when the content is in; announce the result count politely.
+
+#### Example: Loading
+
+```django
+<div class="orca-row orca-row--16" aria-busy="true" aria-label="Loading videos" style="align-items: flex-start"><div style="width: 12rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)"><div aria-hidden="true"><div class="orca-skeleton orca-aspect-16x9" style="margin-bottom: var(--orca-space-8)"></div><div class="orca-skeleton orca-skeleton--title"></div></div></div><div style="width: 12rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)"><div aria-hidden="true"><div class="orca-skeleton orca-aspect-16x9" style="margin-bottom: var(--orca-space-8)"></div><div class="orca-skeleton orca-skeleton--title"></div></div></div></div>
+```
+
+**Principles applied:** Doherty threshold: respond within 400 ms; show progress for anything slower
+
+**Related:** `feed-skeleton`, `video-grid`
 
 ---

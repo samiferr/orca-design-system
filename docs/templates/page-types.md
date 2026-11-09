@@ -107,7 +107,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 Resources by time for one day: a date toolbar, a row per person, room or vehicle with bookings placed by time, and the legend.
 
-Built from: `resource-scheduler`, `calendar-navigation`
+Built from: `resource-scheduler`, `calendar-toolbar`
 
 ### Why
 
@@ -348,7 +348,7 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 A data page with everything in one place: title bar, summary tiles that filter, search, a filter drawer and the table.
 
-Built from: `summary-tiles`, `list-header`, `filter-drawer`, `data-table`, `pagination`
+Built from: `summary-tiles`, `list-header`, `filter-drawer`, `data-table`, `no-results`
 
 ### Why
 

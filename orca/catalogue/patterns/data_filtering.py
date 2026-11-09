@@ -26,7 +26,7 @@ add(Pattern(
          "Long tables: set `--orca-table-max: 32rem` on the wrapper for a scrolling body with a sticky header."],
     classes=[".orca-data-table", ".orca-table--cards", ".orca-table__select", ".orca-table__name", ".orca-table__empty"],
     laws=["miller", "L14", "W11", "postel"],
-    uses=["table-toolbar", "sortable-header", "row-actions", "table-pager", "checkbox", "status-light"],
+    uses=["table-toolbar", "sortable-header", "row-actions", "table-pager", "row-select", "status-light"],
     examples=[("Videos", """<div class="orca-data-table">
   <div class="orca-toolbar__selection" role="region" aria-label="Selection"><strong>1 selected</strong><button class="orca-button orca-button--dense" type="button">Disable</button><button class="orca-button orca-button--link" type="button">Clear selection</button></div>
   <div class="orca-table-wrap"><table class="orca-table orca-table--cards"><caption class="orca-sr-only">Videos, sorted by name</caption>
@@ -47,7 +47,7 @@ add(Pattern(
          "Explain the thresholds in the caption or help text."],
     classes=[".orca-accuracy", ".orca-accuracy__bar", ".orca-accuracy--caution", ".orca-accuracy--negative", ".orca-diff--up", ".orca-diff--down"],
     laws=["tesler", "C03", "W11"],
-    uses=["table-card", "progress-bar"],
+    uses=["table-card", "progress-with-counts"],
     examples=[("Accuracy", """<div class="orca-table-wrap"><table class="orca-table"><caption class="orca-small orca-muted" style="text-align: start; padding-bottom: var(--orca-space-8)">Good from 95%, check below 95%, poor below 90%.</caption>
   <thead><tr><th scope="col">Video</th><th scope="col" class="is-num">Counted</th><th scope="col" class="is-num">Reference</th><th scope="col" class="is-num">Difference</th><th scope="col">Accuracy</th></tr></thead>
   <tbody><tr><td>Entrance A</td><td class="is-num">4,812</td><td class="is-num">4,920</td><td class="is-num orca-diff--down">−108</td><td><span class="orca-accuracy"><span class="orca-accuracy__bar" style="--orca-value: 97.8%"><span></span></span>97.8%</span></td></tr>
@@ -68,7 +68,7 @@ add(Pattern(
          "The controls are in the `filter-drawer`, opened by the Filters button in the page actions."],
     classes=[".orca-filter-bar", ".orca-filter-bar__applied"],
     laws=["S06", "hick", "postel"],
-    uses=["tag", "link-action"],
+    uses=["applied-filters"],
     examples=[("Applied filters", """<div class="orca-filter-bar">
   <div class="orca-filter-bar__applied"><span class="orca-small orca-muted">Filtered by</span><span class="orca-tag"><span class="orca-tag__text">Album: Summer 2026</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Album: Summer 2026">{% icon "close" %}</button></span><span class="orca-tag"><span class="orca-tag__text">Type: Video</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Type: Video">{% icon "close" %}</button></span><button class="orca-button orca-button--link" type="button">Clear all</button><span class="orca-small orca-muted" role="status">14 videos</span></div>
 </div>""")],
@@ -121,7 +121,7 @@ add(Pattern(
          "Offer it as the 'Cards' side of the view toggle, or use `orca-table--cards` to switch automatically."],
     classes=[".orca-card-list", ".orca-record-card", ".orca-record-card__title", ".orca-record-card__meta", ".orca-record-card__end"],
     laws=["fitts", "postel", "miller"],
-    uses=["status-dot", "linked-card", "icon-button"],
+    uses=["status-light", "linked-card", "record-actions"],
     examples=[("Record cards", """<ul class="orca-card-list" style="max-width: 32rem">{% for c in sample.videos|slice:":3" %}<li class="orca-record-card"><span class="orca-dot orca-dot--{{ c.status }}" aria-hidden="true"></span><h3 class="orca-record-card__title"><a href="#">{{ c.name }}</a></h3>
   <div class="orca-record-card__end"><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for {{ c.name }}">{% icon "more" %}</button></div>
   <p class="orca-record-card__meta"><span>{{ c.status_text }}</span><span>{{ c.site }}</span><span class="orca-num">{{ c.today }} today</span></p></li>{% endfor %}</ul>""")],
@@ -155,7 +155,7 @@ add(Pattern(
          "Include 'All' as the first tile."],
     classes=[".orca-summary-tiles", ".orca-summary-tile", ".orca-summary-tile__value", ".orca-summary-tile__label"],
     laws=["miller", "fitts", "tesler"],
-    uses=["stat-value", "status-dot"],
+    uses=["summary-tile"],
     examples=[("Tiles", """<ul class="orca-summary-tiles">
   <li><a class="orca-summary-tile" href="#" aria-current="true"><span class="orca-summary-tile__value">12</span><span class="orca-summary-tile__label">All videos</span></a></li>
   <li><a class="orca-summary-tile" href="#"><span class="orca-summary-tile__value">10</span><span class="orca-summary-tile__label"><span class="orca-dot orca-dot--positive"></span>Online</span></a></li>

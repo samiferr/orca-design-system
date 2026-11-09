@@ -196,3 +196,85 @@ mailto links fail silently on many setups; showing the address with a Copy butto
 **ORCA guide items covered:** Email button (with fallback link)
 
 ---
+
+## Logo link
+
+`id: logo-link` · level: component · source: ORCA
+
+The product logo as a link to the home page.
+
+Built from: `logo`
+
+### Why
+
+People expect the logo to take them home (Jakob's law); one component makes it the same link with the same accessible name in the top bar, the site header, the footer, sign-in and emails.
+
+### When to use
+
+- Top bar, site header, footer, sign-in card, error pages and emails.
+
+### When not to use
+
+- A second home link next to it with the same destination.
+
+### How to use
+
+- `{% orca_logo href="/" %}`: the brand logo (or the name as a wordmark) inside a link named after the product.
+- Leave `href` empty where the page is already home, such as the sign-in page; the logo is then not a link.
+
+### Accessibility
+
+- The link's accessible name is the product name from `settings.ORCA["BRAND"]["name"]`.
+
+#### Example: Logo link
+
+```django
+{% orca_logo href="#" %}
+```
+
+**Classes:** `.orca-logo`
+
+**Principles applied:** Jakob's law: work the way products people already know work; Fitts's law: big, close, well-spaced targets are faster and safer
+
+**Related:** `top-bar`, `site-header`, `footer`
+
+---
+
+## Collapse toggle
+
+`id: collapse-toggle` · level: component · source: ORCA
+
+An icon button that collapses or expands a region, says which it will do, and remembers the choice.
+
+Built from: `icon-button`
+
+### Why
+
+A collapsible region gives space back without losing the way back (Practical UI S04); the button's name changes with the state so it never lies about what a press will do (Postel's law).
+
+### When to use
+
+- The foot of a collapsible sidebar; side panels that can shrink to a rail.
+
+### How to use
+
+- `<button class="orca-icon-button orca-sidebar__toggle" type="button" aria-controls=… aria-expanded="true" aria-label="Collapse navigation" data-orca-sidebar-toggle>{% icon "chevron-left" %}</button>`.
+- The script flips `aria-expanded`, the label and the chevron, and stores the state.
+
+### Accessibility
+
+- `aria-expanded` and `aria-controls` tell assistive technology what the button changes.
+
+#### Example: Collapse toggle
+
+```django
+<button class="orca-icon-button orca-sidebar__toggle" type="button" aria-controls="ct-demo" aria-expanded="true" aria-label="Collapse navigation" data-orca-sidebar-toggle>{% icon "chevron-left" %}</button>
+```
+
+**Classes:** `.orca-sidebar__toggle`
+
+**Principles applied:** Practical UI S04: Reveal secondary information when needed; Postel's law: accept varied input, output reliable and accessible UI
+
+**Related:** `sidebar`
+
+---

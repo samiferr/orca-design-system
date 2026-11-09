@@ -8,7 +8,7 @@ Video players, live streams, photo posts and image galleries.
 
 A recorded clip with the native player, a timeline of event marks and a list of events that jump to their moment.
 
-Built from: `video-frame`, `recording-frame`, `time-label`
+Built from: `video-player`
 
 ### Why
 
@@ -47,7 +47,7 @@ People review recordings to find moments; marking events on the timeline and lis
 
 A live video view with its state, a live flag and the live counts beside it.
 
-Built from: `panel`, `recording-frame`, `status-light`, `stat-value`
+Built from: `panel`, `video-player`, `status-light`, `stat-card`
 
 ### Why
 
@@ -86,7 +86,7 @@ Operators watch a stream to confirm what the numbers say; showing the live state
 
 A shared photo with who posted it and when, the photo, actions and caption.
 
-Built from: `person-block`, `media-frame`, `photo-actions-bar`, `relative-time`
+Built from: `person-block`, `captioned-media`, `photo-actions-bar`
 
 ### Why
 
@@ -125,7 +125,7 @@ The familiar order (person, photo, actions, caption) needs no learning (Jakob's 
 
 A large stage image with a row of thumbnails and a count; thumbnails swap the stage.
 
-Built from: `media-frame`, `thumbnail`, `carousel-dot`
+Built from: `captioned-media`, `thumbnail-strip`
 
 ### Why
 

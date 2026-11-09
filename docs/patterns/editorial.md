@@ -8,7 +8,7 @@ Blocks for stories and highlighted facts on news, blog and report pages.
 
 A featured article: large image, kicker, headline, lead and meta, side by side on wide screens.
 
-Built from: `hero-image`, `card-kicker`, `card-meta`, `heading`
+Built from: `captioned-media`, `post-block`
 
 ### Why
 
@@ -43,7 +43,7 @@ One featured story with scale and an image breaks the grid and is noticed first 
 
 One striking number with a short statement and its source.
 
-Built from: `stat-value`, `small-text`
+Built from: `big-number`
 
 ### Why
 

@@ -315,7 +315,7 @@ Jumping weeks ahead with arrows is slow; a mini calendar gets there in one click
 
 The list of calendars, each a checkbox in its colour, to show or hide its events.
 
-Built from: `checkbox`, `legend-item`
+Built from: `choice-group`, `legend-item`
 
 ### Why
 

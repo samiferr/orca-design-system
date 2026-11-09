@@ -88,7 +88,7 @@ Context: `title`, `subtitle`, `breadcrumbs` [(label, url)], `nav` (sidebar secti
 
 ## 5. Levels and scope of this release
 
-Each ORCA level is a group of the level before it:
+Each ORCA level is a group of the level before it, never skipping one (a pattern uses components, not primitives):
 
 | Level | Is a group of | Examples |
 |---|---|---|
