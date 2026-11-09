@@ -85,7 +85,7 @@ Showing and changing one record and its children: detail panels, child tabs, act
 
 ## [Charts](pattern-charts.md) (8)
 
-Server-rendered SVG charts in a chart frame, in token colours, each with a text summary and its data as a table. No chart library.
+Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.
 
 - `bar-chart` **Bar chart**: Bars comparing values across categories; grouped, stacked or horizontal.
 - `line-chart` **Line chart**: Lines showing how one or more values change over time.

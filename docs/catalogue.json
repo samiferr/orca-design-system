@@ -331,7 +331,7 @@
   {
    "key": "pattern-charts",
    "title": "Charts",
-   "intro": "Server-rendered SVG charts in a chart frame, in token colours, each with a text summary and its data as a table. No chart library.",
+   "intro": "Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.",
    "level": "pattern"
   },
   {
@@ -10782,12 +10782,12 @@
    "name": "Stat card",
    "category": "data-display",
    "summary": "One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.",
-   "why": "A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon beside the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.",
+   "why": "A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon left of the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.",
    "when": [
     "Dashboards and summary rows: counts, rates, durations."
    ],
    "how": [
-    "`<div class=\"orca-stat-card\">` with `.orca-stat-card__head` (`orca-stat-label` and `<span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span>`), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.",
+    "`<div class=\"orca-stat-card\">` with `.orca-stat-card__head` (`<span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, on no background of its own), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.",
     "The icon describes what is measured (people, time, videos, accuracy), never its trend or status; it is decorative because the label says it. Use one icon per card and a different one for each card of a grid. In templates, pass `icon` with each stat.",
     "Make the whole card a link (`<a class=\"orca-stat-card\">`) when it leads to the detail."
    ],
@@ -10810,7 +10810,7 @@
    "examples": [
     {
      "title": "Stat cards",
-     "html": "<div class=\"orca-card-grid\" style=\"grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))\">\n  <div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Visitors today</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span></div><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div>{% orca_sparkline \"820,940,1200,1100,1480,1620,1540\" \"Visitors per hour today, rising\" %}</div>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Inside now</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"home\" %}</span></div><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Average visit</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"clock\" %}</span></div><p class=\"orca-stat-value\">23 min</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--flat\">{% icon \"minus\" size=\"xs\" %}0%</span>vs last week</div></div>\n</div>"
+     "html": "<div class=\"orca-card-grid\" style=\"grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))\">\n  <div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span><p class=\"orca-stat-label\">Visitors today</p></div><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div>{% orca_sparkline \"820,940,1200,1100,1480,1620,1540\" \"Visitors per hour today, rising\" %}</div>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"home\" %}</span><p class=\"orca-stat-label\">Inside now</p></div><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"clock\" %}</span><p class=\"orca-stat-label\">Average visit</p></div><p class=\"orca-stat-value\">23 min</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--flat\">{% icon \"minus\" size=\"xs\" %}0%</span>vs last week</div></div>\n</div>"
     }
    ],
    "guide": [
@@ -17302,7 +17302,7 @@
    "examples": [
     {
      "title": "KPIs",
-     "html": "<div class=\"orca-kpi-grid\">\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Visitors today</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span></div><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Inside now</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"home\" %}</span></div><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Videos online</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"play\" %}</span></div><p class=\"orca-stat-value\">11 of 12</p><div class=\"orca-stat-card__foot\"><span class=\"orca-with-icon\">{% status_icon \"negative\" size=\"xs\" %}Loading dock offline</span></div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Count accuracy</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span></div><p class=\"orca-stat-value\">96.4%</p><div class=\"orca-stat-card__foot\">last 7 days</div></a>\n</div>"
+     "html": "<div class=\"orca-kpi-grid\">\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span><p class=\"orca-stat-label\">Visitors today</p></div><p class=\"orca-stat-value\">12,480</p><div class=\"orca-stat-card__foot\"><span class=\"orca-delta orca-delta--up\">{% icon \"arrow-up\" size=\"xs\" %}+8%</span>vs last Friday</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"home\" %}</span><p class=\"orca-stat-label\">Inside now</p></div><p class=\"orca-stat-value\">1,204</p><div class=\"orca-stat-card__foot\">of 1,500 capacity</div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"play\" %}</span><p class=\"orca-stat-label\">Videos online</p></div><p class=\"orca-stat-value\">11 of 12</p><div class=\"orca-stat-card__foot\"><span class=\"orca-with-icon\">{% status_icon \"negative\" size=\"xs\" %}Loading dock offline</span></div></a>\n  <a class=\"orca-stat-card\" href=\"#\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Count accuracy</p></div><p class=\"orca-stat-value\">96.4%</p><div class=\"orca-stat-card__foot\">last 7 days</div></a>\n</div>"
     }
    ],
    "guide": [
@@ -18568,7 +18568,7 @@
    "examples": [
     {
      "title": "Site",
-     "html": "<div class=\"orca-parent\">\n  <div class=\"orca-page-head\" style=\"margin: 0\"><div class=\"orca-page-head__text\"><h1 class=\"orca-page-title\">North building</h1><p class=\"orca-page-subtitle\">12 Rue de la Gare, Lille</p></div><div class=\"orca-page-head__actions\"><a class=\"orca-button\" href=\"#\">{% icon \"edit\" %}Edit site</a></div></div>\n  <div class=\"orca-parent__summary\"><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Visitors today</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span></div><p class=\"orca-stat-value\">9,530</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Videos online</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span></div><p class=\"orca-stat-value\">11 of 12</p></div></div>\n  <nav class=\"orca-tabs__list\" aria-label=\"North building\"><a class=\"orca-tab\" href=\"#\">Overview</a><a class=\"orca-tab\" href=\"#\" aria-current=\"page\">Videos <span class=\"orca-count orca-count--neutral\">12</span></a><a class=\"orca-tab\" href=\"#\">Zones <span class=\"orca-count orca-count--neutral\">5</span></a><a class=\"orca-tab\" href=\"#\">Users <span class=\"orca-count orca-count--neutral\">3</span></a></nav>\n</div>"
+     "html": "<div class=\"orca-parent\">\n  <div class=\"orca-page-head\" style=\"margin: 0\"><div class=\"orca-page-head__text\"><h1 class=\"orca-page-title\">North building</h1><p class=\"orca-page-subtitle\">12 Rue de la Gare, Lille</p></div><div class=\"orca-page-head__actions\"><a class=\"orca-button\" href=\"#\">{% icon \"edit\" %}Edit site</a></div></div>\n  <div class=\"orca-parent__summary\"><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"user\" %}</span><p class=\"orca-stat-label\">Visitors today</p></div><p class=\"orca-stat-value\">9,530</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Videos online</p></div><p class=\"orca-stat-value\">11 of 12</p></div></div>\n  <nav class=\"orca-tabs__list\" aria-label=\"North building\"><a class=\"orca-tab\" href=\"#\">Overview</a><a class=\"orca-tab\" href=\"#\" aria-current=\"page\">Videos <span class=\"orca-count orca-count--neutral\">12</span></a><a class=\"orca-tab\" href=\"#\">Zones <span class=\"orca-count orca-count--neutral\">5</span></a><a class=\"orca-tab\" href=\"#\">Users <span class=\"orca-count orca-count--neutral\">3</span></a></nav>\n</div>"
     }
    ],
    "guide": [
@@ -18805,7 +18805,9 @@
     "Start the value axis at zero; sort categories by value unless they have a natural order (days, hours).",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Many periods (more than about 15): use a line chart.",
@@ -18861,7 +18863,9 @@
     "The second series is dashed so it differs without colour; label the reference ('Last Friday').",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Few categories with no order: use bars.",
@@ -18916,7 +18920,9 @@
     "Order slices from largest, clockwise from 12 o'clock; group small ones into 'Other'.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "More than 5 parts or similar shares: use a horizontal bar chart."
@@ -18970,7 +18976,9 @@
     "Same rules as the pie chart; the centre shows the total.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "More than 5 parts: use bars."
@@ -19024,7 +19032,9 @@
     "Each series gets its own marker shape; name both axes in the subtitle with their units.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "One measure: use bars or a line."
@@ -19078,7 +19088,9 @@
     "Values are `x:y:size`; size scales by area, not radius.",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Exact comparison of the third value: use a table."
@@ -19132,7 +19144,9 @@
     "All axes must share the same scale (for example 0–100).",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "More than two items, or different scales: use a table or bars."
@@ -19186,7 +19200,9 @@
     "Order segments meaningfully (by time or by size).",
     "Every chart: `{% orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table."
+    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
+    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
+    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same."
    ],
    "avoid": [
     "Precise comparison: use bars."
@@ -24450,7 +24466,7 @@
    "examples": [
     {
      "title": "Stats",
-     "html": "<div class=\"orca-stat-grid\"><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Metric 1</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span></div><p class=\"orca-stat-value\">1,234</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Metric 2</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span></div><p class=\"orca-stat-value\">56</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><p class=\"orca-stat-label\">Metric 3</p><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span></div><p class=\"orca-stat-value\">98%</p></div></div>"
+     "html": "<div class=\"orca-stat-grid\"><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Metric 1</p></div><p class=\"orca-stat-value\">1,234</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Metric 2</p></div><p class=\"orca-stat-value\">56</p></div><div class=\"orca-stat-card\"><div class=\"orca-stat-card__head\"><span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% icon \"statistics\" %}</span><p class=\"orca-stat-label\">Metric 3</p></div><p class=\"orca-stat-value\">98%</p></div></div>"
     }
    ],
    "guide": [

@@ -7,6 +7,9 @@ first weekday, and chart geometry.
 
 from __future__ import annotations
 
+import json
+from html import escape
+
 import calendar
 import copy
 import datetime as dt
@@ -229,21 +232,16 @@ def _numbers(values) -> list[float]:
     return [float(v) for v in values]
 
 
-def sparkline_svg(values, label: str = "", width: int = 120, height: int = 32) -> str:
+def sparkline_html(values, label: str = "") -> str:
+    """A small trend line drawn by Chart.js; the label is the accessible summary."""
     nums = _numbers(values)
     if len(nums) < 2:
         return ""
     lo, hi = min(nums), max(nums)
-    span = (hi - lo) or 1
-    step = width / (len(nums) - 1)
-    pts = [(round(i * step, 2), round(height - 2 - (v - lo) / span * (height - 4), 2)) for i, v in enumerate(nums)]
-    line = " ".join(f"{x},{y}" for x, y in pts)
-    area = f"0,{height} " + line + f" {width},{height}"
-    end_x, end_y = pts[-1]
     title = label or f"Trend from {nums[0]:g} to {nums[-1]:g}, low {lo:g}, high {hi:g}"
-    return (f'<svg class="orca-sparkline" viewBox="0 0 {width} {height}" preserveAspectRatio="none" role="img" aria-label="{title}">'
-            f'<polygon class="orca-sparkline__area" points="{area}"/><polyline class="orca-sparkline__line" points="{line}"/>'
-            f'<circle class="orca-sparkline__end" cx="{end_x}" cy="{end_y}" r="2.5"/></svg>')
+    spec = escape(json.dumps({"kind": "sparkline", "values": nums}))
+    return (f'<span class="orca-sparkline"><canvas role="img" aria-label="{escape(title)}" data-orca-chart="{spec}">'
+            f"{escape(title)}</canvas></span>")
 
 
 def donut_context(segments, total_label: str = "Total") -> dict:
@@ -270,6 +268,8 @@ def donut_context(segments, total_label: str = "Total") -> dict:
     for item in items:
         item["display"] = fmt(item["value"])
     shown_total = sum(i["value"] for i in items)
-    return {"items": items, "total": fmt(shown_total),
+    spec = {"kind": "doughnut", "donut": True, "labels": [i["label"] for i in items],
+            "series": [{"name": total_label, "values": [i["value"] for i in items]}]}
+    return {"items": items, "total": fmt(shown_total), "spec": json.dumps(spec, ensure_ascii=False),
             "total_label": total_label, "r": r,
             "summary": ", ".join(f"{i['label']} {i['pct']}%" for i in items)}

@@ -262,8 +262,8 @@ def orca_mini_calendar(month=None, selected=None, today=None, url="", nav_url=""
 
 @register.simple_tag
 def orca_sparkline(values, label=""):
-    """Inline trend line from a list or a comma-separated string of numbers."""
-    return mark_safe(_c.sparkline_svg(values, label=label))
+    """Inline trend line (Chart.js) from a list or a comma-separated string of numbers."""
+    return mark_safe(_c.sparkline_html(values, label=label))
 
 
 @register.inclusion_tag("orca/components/donut.html")
@@ -279,7 +279,7 @@ from .. import charts as _charts  # noqa: E402
 
 @register.inclusion_tag("orca/patterns/chart.html")
 def orca_chart(kind, data, title="", subtitle="", caption="", unit="", stacked=False, horizontal=False):
-    """A chart pattern: chart frame, SVG, legend and data table. kind: bar, line, area, pie, doughnut, scatter, bubble, radar, polar."""
+    """A chart pattern: chart frame, Chart.js canvas, legend and data table. kind: bar, line, area, pie, doughnut, scatter, bubble, radar, polar."""
     return _charts.chart_context(kind, data, title=title, subtitle=subtitle, caption=caption, unit=unit,
                                  stacked=stacked, horizontal=horizontal)
 

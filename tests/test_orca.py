@@ -1,4 +1,6 @@
+import html as html_lib
 import io
+import json
 import re
 import subprocess
 import sys
@@ -442,10 +444,13 @@ class ComponentTagTests(SimpleTestCase):
         self.assertIn('role="alert"', out)
 
     def test_charts(self):
-        self.assertIn("orca-sparkline__line", self.render('{% orca_sparkline "1,3,2,5" %}'))
+        spark = self.render('{% orca_sparkline "1,3,2,5" %}')
+        self.assertIn('role="img"', spark)
+        self.assertEqual(json.loads(html_lib.unescape(re.search(r'data-orca-chart="([^"]+)"', spark).group(1)))["values"], [1, 3, 2, 5])
         self.assertEqual(self.render('{% orca_sparkline "4" %}'), "")
         donut = self.render('{% orca_donut "A:3, B:1" total_label="Visitors" %}')
         self.assertIn("A 75%, B 25%", donut)
+        self.assertIn("data-orca-chart=", donut)
         self.assertIn(">4<", donut)
         self.assertIn("1,200", self.render('{% orca_donut "A:1200, B:300" %}'))
 
@@ -454,7 +459,7 @@ class PatternTagTests(SimpleTestCase):
     def render(self, src, **ctx):
         return Template("{% load orca %}" + src).render(Context(ctx))
 
-    def test_chart_kinds_render_svg_legend_and_data_table(self):
+    def test_chart_kinds_render_a_chartjs_canvas_legend_and_data_table(self):
         from orca.samples import SAMPLE
 
         data = {"bar": "visitors_week", "line": "visitors_hours", "area": "visitors_hours", "pie": "by_entrance",
@@ -464,15 +469,25 @@ class PatternTagTests(SimpleTestCase):
             with self.subTest(kind=kind):
                 html = self.render(f'{{% orca_chart "{kind}" d title="T" %}}', d=SAMPLE[key])
                 self.assertIn(f"orca-chart-frame--{kind}", html)
-                self.assertIn("<svg", html)
-                self.assertIn('role="img"', html)
+                spec = json.loads(html_lib.unescape(re.search(r'data-orca-chart="([^"]+)"', html).group(1)))
+                self.assertEqual(spec["kind"], kind)
+                self.assertTrue(spec["series"] and all(s_["values"] for s_ in spec["series"]))
+                self.assertIn('<canvas class="orca-chart" role="img" aria-label="T: ', html)
                 self.assertIn("<table", html)
                 self.assertNotIn("nan", html.lower().replace("nant", ""))
 
     def test_chart_accepts_string_data_and_stacking(self):
         html = self.render('{% orca_chart "bar" "labels=Mon,Tue | A=1,2 | B=3,4" stacked=True %}')
         self.assertIn("Mon", html)
-        self.assertEqual(html.count('class="orca-chart__bar"'), 4)
+        spec = json.loads(html_lib.unescape(re.search(r'data-orca-chart="([^"]+)"', html).group(1)))
+        self.assertTrue(spec["stacked"])
+        self.assertEqual([s_["values"] for s_ in spec["series"]], [[1, 2], [3, 4]])
+
+    def test_chartjs_is_vendored_and_loaded_on_demand(self):
+        self.assertTrue((ROOT / "orca/static/orca/vendor/chart.umd.js").read_text().startswith("/*!\n * Chart.js v4"))
+        js = (ROOT / "orca/static/orca/js/orca.js").read_text()
+        self.assertIn('vendor/chart.umd.js', js)
+        self.assertIn('canvas[data-orca-chart]', js)
 
     def test_month_calendar_places_events_and_holidays(self):
         from orca.samples import SAMPLE

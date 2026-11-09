@@ -21,7 +21,8 @@ it uses, the UX principles it applies, and a copy-ready template example.
 - **Phase 3: Patterns.** 97 elements covering all 98 pattern items of the guide: page frame (header,
   sidebar, drawer, settings panel), data tables and filtering, forms and editors, media, record management, eight
   chart types, marketing and docs sections, email frame, calendar views, scheduler, event editing and planning boards.
-  Charts and calendars render on the server as SVG and HTML from plain Python data: no JavaScript library.
+  Charts are drawn by Chart.js (vendored, loaded only on pages with charts) and calendars render on the server, both
+  from plain Python data through one template tag.
 - **Phase 4 (this release): Templates.** 60 elements covering all 67 template items of the guide: real Django templates
   you extend (app shell, auth, error, email, marketing and docs layouts), generic list / detail / form / confirm and
   parent-child templates that work with class-based views, page-type skeletons (dashboard, calendar, scheduler, board,
@@ -219,5 +220,5 @@ documented classes and tokens exist, text and control contrast hold in all three
 ## Licences
 
 ORCA's code is MIT. Token values, component measurements and 106 icon shapes come from Canonical's Vanilla framework
-4.59 (LGPL-3.0) through Tangerine; Ubuntu Sans fonts are under the Ubuntu Font Licence 1.0. ORCA is not affiliated with
+4.59 (LGPL-3.0) through Tangerine; Ubuntu Sans fonts are under the Ubuntu Font Licence 1.0; the vendored Chart.js 4.4.7 is MIT. ORCA is not affiliated with
 Canonical. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

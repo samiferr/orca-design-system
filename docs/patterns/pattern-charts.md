@@ -1,6 +1,6 @@
 # Charts
 
-Server-rendered SVG charts in a chart frame, in token colours, each with a text summary and its data as a table. No chart library.
+Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.
 
 ## Bar chart
 
@@ -29,7 +29,9 @@ Lengths from a common baseline are the most accurately compared visual encoding,
 - Start the value axis at zero; sort categories by value unless they have a natural order (days, hours).
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -76,7 +78,9 @@ A line shows trend and change over time better than bars, and comparing with a r
 - The second series is dashed so it differs without colour; label the reference ('Last Friday').
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -121,7 +125,9 @@ Part-to-whole is understood at a glance when there are few parts; the legend giv
 - Order slices from largest, clockwise from 12 o'clock; group small ones into 'Other'.
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -166,7 +172,9 @@ The hole leaves room for the total, so one figure answers both 'how many' and 'h
 - Same rules as the pie chart; the centre shows the total.
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -211,7 +219,9 @@ Plotting two measures against each other reveals correlation and outliers no tab
 - Each series gets its own marker shape; name both axes in the subtitle with their units.
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -256,7 +266,9 @@ Size adds a third dimension (for example site size) without a second chart; the 
 - Values are `x:y:size`; size scales by area, not radius.
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -301,7 +313,9 @@ A shape shows the profile of an item across many criteria at once and makes weak
 - All axes must share the same scale (for example 0–100).
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 
@@ -346,7 +360,9 @@ Equal angles avoid the pie's angle-reading problem while keeping a compact round
 - Order segments meaningfully (by time or by size).
 - Every chart: `{% orca_chart kind data title="…" subtitle="unit and period" caption="source" unit="%" %}`.
 - `data` is a dict `{"labels": […], "series": [{"name", "values"}]}` or a string `"labels=Mon,Tue | Entrance A=120,180"`.
-- The SVG carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table.
+- The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.
+- The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.
+- Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.
 
 ### Accessibility
 

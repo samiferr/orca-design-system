@@ -9,7 +9,7 @@
     </div>
     <div class="orca-page-head__actions">{% block page_actions %}{% block detail_actions %}{% if parent_update_url %}<a class="orca-button" href="{{ parent_update_url }}">{% icon "edit" %}Edit</a>{% endif %}{% endblock %}{% endblock %}</div>
   </header>
-  {% block parent_summary %}{% if parent_stats %}<div class="orca-parent__summary">{% for s in parent_stats %}<div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">{{ s.label }}</p>{% if s.icon %}<span class="orca-stat-card__icon" aria-hidden="true">{% icon s.icon %}</span>{% endif %}</div><p class="orca-stat-value">{{ s.value }}</p></div>{% endfor %}</div>{% endif %}{% endblock %}
+  {% block parent_summary %}{% if parent_stats %}<div class="orca-parent__summary">{% for s in parent_stats %}<div class="orca-stat-card"><div class="orca-stat-card__head">{% if s.icon %}<span class="orca-stat-card__icon" aria-hidden="true">{% icon s.icon %}</span>{% endif %}<p class="orca-stat-label">{{ s.label }}</p></div><p class="orca-stat-value">{{ s.value }}</p></div>{% endfor %}</div>{% endif %}{% endblock %}
   {% block parent_tabs %}<nav class="orca-tabs__list" aria-label="{{ parent }}">{% for tab in parent_tabs %}<a class="orca-tab" href="{{ tab.url }}"{% if tab.current %} aria-current="page"{% endif %}>{{ tab.label }}{% if tab.count != None and tab.count != "" %} <span class="orca-count orca-count--neutral">{{ tab.count }}</span>{% endif %}</a>{% endfor %}</nav>{% endblock %}
 </div>{% endblock %}
 {% block content %}<div class="orca-parent__panel">{% block child_content %}{% endblock %}</div>{% endblock %}

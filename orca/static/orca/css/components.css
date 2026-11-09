@@ -294,8 +294,8 @@
 
 /* ===================================================================== Data display */
 .orca-stat-card { display: flex; flex-direction: column; gap: var(--orca-space-4); min-width: 0; padding: var(--orca-space-16); background: var(--orca-bg-stat); border: var(--orca-border-width) solid var(--orca-border-stat); }
-.orca-stat-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--orca-space-8); }
-.orca-stat-card__icon { flex: none; display: inline-grid; place-items: center; width: var(--orca-control-md); height: var(--orca-control-md); margin-block: calc(-1 * var(--orca-space-4)); background: var(--orca-bg-panel); border: var(--orca-hairline) solid var(--orca-border-stat); color: var(--orca-text); }
+.orca-stat-card__head { display: flex; align-items: center; gap: var(--orca-space-8); }
+.orca-stat-card__icon { flex: none; display: inline-flex; color: var(--orca-text-muted); background: transparent; }
 .orca-stat-card__icon > .orca-icon { width: var(--orca-icon-m); height: var(--orca-icon-m); }
 .orca-stat-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-4) var(--orca-space-8); font: var(--orca-type-detail); color: var(--orca-text-muted); }
 .orca-stat-card > .orca-sparkline { margin-top: var(--orca-space-8); }
@@ -450,20 +450,17 @@ a.orca-tree__leaf { cursor: pointer; }
 .orca-carousel__count { font: var(--orca-type-detail); color: var(--orca-text-muted); font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: no-preference) { .orca-carousel__track, .orca-scroller { scroll-behavior: smooth; } }
 
-.orca-sparkline { display: block; width: 100%; max-width: 12rem; height: 2rem; overflow: visible; }
-.orca-sparkline__line { fill: none; stroke: var(--orca-accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.orca-sparkline__area { fill: var(--orca-accent); opacity: 0.12; }
-.orca-sparkline__end { fill: var(--orca-accent); }
+.orca-sparkline { position: relative; display: block; width: 100%; max-width: 12rem; height: 2rem; }
+.orca-sparkline > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .orca-donut { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-24); }
 .orca-donut__chart { position: relative; flex: none; width: 8rem; height: 8rem; }
-.orca-donut__chart > svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.orca-donut__chart circle { fill: none; stroke-width: 6; }
+.orca-donut__chart > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .orca-donut__total { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
 .orca-donut__total strong { font: var(--orca-type-stat); font-variant-numeric: tabular-nums; }
 .orca-donut__total span { font: var(--orca-type-detail); color: var(--orca-text-muted); }
 .orca-chart-frame { display: flex; flex-direction: column; gap: var(--orca-space-12); min-width: 0; margin: 0; padding: var(--orca-space-16); background: var(--orca-bg-panel); border: var(--orca-border-width) solid var(--orca-border); }
 .orca-chart-frame__head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--orca-space-8) var(--orca-space-16); }
-.orca-chart-frame__plot { position: relative; width: 100%; aspect-ratio: var(--orca-ratio, 2 / 1); min-height: 8rem; background: var(--orca-bg); }
+.orca-chart-frame__plot { position: relative; width: 100%; aspect-ratio: var(--orca-ratio, 2 / 1); min-height: 8rem; }
 .orca-chart-frame__plot > canvas, .orca-chart-frame__plot > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .orca-chart-frame__caption { font: var(--orca-type-detail); color: var(--orca-text-muted); }
 .orca-chart-frame details > summary { font: var(--orca-type-detail); color: var(--orca-accent); cursor: pointer; }

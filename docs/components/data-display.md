@@ -12,7 +12,7 @@ Built from: `stat-label`, `delta`, `icon`, `sparkline`
 
 ### Why
 
-A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon beside the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.
+A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon left of the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.
 
 ### When to use
 
@@ -24,7 +24,7 @@ A KPI is read in a second when the number dominates and its label and comparison
 
 ### How to use
 
-- `<div class="orca-stat-card">` with `.orca-stat-card__head` (`orca-stat-label` and `<span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span>`), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
+- `<div class="orca-stat-card">` with `.orca-stat-card__head` (`<span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, on no background of its own), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
 - The icon describes what is measured (people, time, videos, accuracy), never its trend or status; it is decorative because the label says it. Use one icon per card and a different one for each card of a grid. In templates, pass `icon` with each stat.
 - Make the whole card a link (`<a class="orca-stat-card">`) when it leads to the detail.
 
@@ -32,9 +32,9 @@ A KPI is read in a second when the number dominates and its label and comparison
 
 ```django
 <div class="orca-card-grid" style="grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))">
-  <div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">Visitors today</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span></div><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div>{% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}</div>
-  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><p class="orca-stat-label">Inside now</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "home" %}</span></div><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">Average visit</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "clock" %}</span></div><p class="orca-stat-value">23 min</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--flat">{% icon "minus" size="xs" %}0%</span>vs last week</div></div>
+  <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span><p class="orca-stat-label">Visitors today</p></div><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div>{% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}</div>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "home" %}</span><p class="orca-stat-label">Inside now</p></div><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
+  <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "clock" %}</span><p class="orca-stat-label">Average visit</p></div><p class="orca-stat-value">23 min</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--flat">{% icon "minus" size="xs" %}0%</span>vs last week</div></div>
 </div>
 ```
 
