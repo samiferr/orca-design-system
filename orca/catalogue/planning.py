@@ -90,7 +90,7 @@ add(Element(
     "A native select of IANA timezones, grouped by region, preselected from context.",
     why="Timezones are inherent complexity; ORCA moves it to the system by listing real zones and preselecting the "
         "site's or browser's zone so most people never touch it (Tesler's law).",
-    when=["Setting a site's, camera's or user's timezone."],
+    when=["Setting a site's, an album's or a user's timezone."],
     how=["`<select class=\"orca-select\">{% orca_timezone_options current_zone %}</select>`.",
          "Preselect from the object (site), then the user profile, then the browser (`Intl.DateTimeFormat().resolvedOptions().timeZone`).",
          "Store the IANA name ('Europe/Paris'), never an offset."],
@@ -123,7 +123,7 @@ add(Element(
     "A select of common repeat rules with a 'Custom…' option that reveals more fields.",
     why="Most repeats are a few common rules; listing them keeps the choice quick (Hick's law) and reveals the full "
         "rule editor only when needed (Practical UI S04, Tesler's law).",
-    when=["Repeating events, reports, capture runs."],
+    when=["Repeating events, reports, video exports."],
     how=["Options: Does not repeat · Daily · Every weekday (Mon–Fri) · Weekly on {day} · Monthly on day {n} · Yearly on {date} · Custom…",
          "Write options with the actual day from the chosen date ('Weekly on Thursday').",
          "Choosing Custom… reveals the weekday toggle and interval fields."],

@@ -25,7 +25,7 @@ add(Element(
     laws=["jakob", "postel", "tesler", "R06", "R07", "R18"],
     examples=[
         ("States: default, read-only, disabled", """<div class="orca-stack" style="max-width: 24rem; gap: var(--orca-space-24)">
-  <div><label class="orca-label" for="ti-1">Camera name</label>
+  <div><label class="orca-label" for="ti-1">Image name</label>
     <input class="orca-input" id="ti-1" value="Entrance A"></div>
   <div><label class="orca-label" for="ti-2">Serial number</label>
     <input class="orca-input orca-input--w20" id="ti-2" value="DS-2CD2143G2" readonly></div>
@@ -70,11 +70,11 @@ add(Element(
          "Group long lists with `<optgroup>`.", "Sort options in a meaningful order (frequency, alphabet, time)."],
     classes=[".orca-select", ".orca-select--dense"], tokens=["bg-input", "border-strong"],
     laws=["jakob", "postel", "R11", "R12"],
-    examples=[("Select", """<label class="orca-label" for="sel-1">Recorder</label>
+    examples=[("Select", """<label class="orca-label" for="sel-1">Album</label>
 <select class="orca-select" id="sel-1" style="max-width: 20rem">
-  <option value="">Choose a recorder</option>
-  <option>NVR north building</option>
-  <option>NVR warehouse</option>
+  <option value="">Choose an album</option>
+  <option>Summer 2026</option>
+  <option>Product shots</option>
 </select>""")],
     guide=["Select", "Native select"],
     related=["listbox", "timezone-select"],
@@ -90,7 +90,7 @@ add(Element(
          "Say in the help text how to pick several: 'Hold Ctrl (Cmd on Mac) to choose more than one.'"],
     classes=[".orca-listbox"], tokens=["bg-input", "bg-active"],
     laws=["miller", "postel"],
-    examples=[("Listbox", """<label class="orca-label" for="lb-1">Cameras</label>
+    examples=[("Listbox", """<label class="orca-label" for="lb-1">Albums</label>
 <p class="orca-help" id="lb-1-help">Hold Ctrl (Cmd on Mac) to choose more than one.</p>
 <select class="orca-select orca-listbox" id="lb-1" multiple size="4" aria-describedby="lb-1-help" style="max-width: 20rem">
   <option selected>Entrance A</option><option>Entrance B</option><option selected>Loading dock</option><option>Car park</option>
@@ -112,7 +112,7 @@ add(Element(
     laws=["jakob", "fitts", "R09"],
     examples=[("Search with clear", """<form role="search" class="orca-search" style="max-width: 22rem" onsubmit="return false">
   {% icon "search" %}
-  <input class="orca-input" type="search" name="q" placeholder="Search cameras" aria-label="Search cameras" value="Entrance">
+  <input class="orca-input" type="search" name="q" placeholder="Search images" aria-label="Search images" value="Entrance">
   <button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>{% icon "close" %}</button>
 </form>""")],
     guide=["Search input", "Search clear button"],
@@ -136,8 +136,8 @@ add(Element(
     examples=[("Checkboxes", """<fieldset style="border: 0; margin: 0; padding: 0" class="orca-stack">
   <legend class="orca-label">Daily report</legend>
   <label class="orca-check"><input type="checkbox" name="r" checked><span class="orca-check__box"></span>Email me a daily report</label>
-  <label class="orca-check"><input type="checkbox" name="r2"><span class="orca-check__box"></span><span class="orca-check__text">Include snapshots<span class="orca-check__desc">Adds one image per camera, about 2 MB.</span></span></label>
-  <label class="orca-check"><input type="checkbox" disabled><span class="orca-check__box"></span>Attach recordings</label>
+  <label class="orca-check"><input type="checkbox" name="r2"><span class="orca-check__box"></span><span class="orca-check__text">Include thumbnails<span class="orca-check__desc">Adds one image per video, about 2 MB.</span></span></label>
+  <label class="orca-check"><input type="checkbox" disabled><span class="orca-check__box"></span>Attach videos</label>
 </fieldset>""")],
     guide=["Checkbox"],
     related=["switch", "radio"],
@@ -156,7 +156,7 @@ add(Element(
     classes=[".orca-radio", ".orca-radio__dot"], tokens=["accent", "border-strong"],
     laws=["R11", "R07", "hick", "jakob"],
     examples=[("Radio group", """<fieldset style="border: 0; margin: 0; padding: 0" class="orca-stack">
-  <legend class="orca-label">Snapshot interval</legend>
+  <legend class="orca-label">Thumbnail interval</legend>
   <label class="orca-radio"><input type="radio" name="interval" value="1"><span class="orca-radio__dot"></span>Every minute</label>
   <label class="orca-radio"><input type="radio" name="interval" value="5" checked><span class="orca-radio__dot"></span>Every 5 minutes (recommended)</label>
   <label class="orca-radio"><input type="radio" name="interval" value="15"><span class="orca-radio__dot"></span>Every 15 minutes</label>
@@ -169,16 +169,16 @@ add(Element(
     "An on/off control that takes effect immediately.",
     why="A switch mirrors a physical switch: flipping it changes something now (Jakob's law, Practical UI R14). "
         "Immediate effect needs immediate feedback (Doherty threshold).",
-    when=["Settings saved at once: enable a camera, turn notifications on."],
+    when=["Settings saved at once: play videos automatically, turn notifications on."],
     avoid=["Inside forms that need a Save button: use a checkbox."],
-    how=["`<label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" checked><span class=\"orca-switch__track\"></span><span>Camera enabled</span></label>`.",
+    how=["`<label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" checked><span class=\"orca-switch__track\"></span><span>Autoplay videos</span></label>`.",
          "Save on change (htmx `hx-trigger=\"change\"`) and confirm with a status message; revert and explain on failure.",
          "Label states what is on, not the action ('Notifications', not 'Turn on notifications')."],
     a11y=["`role=\"switch\"` announces on/off."],
     classes=[".orca-switch", ".orca-switch__track"], tokens=["accent", "border-strong", "duration-brisk"],
     laws=["R14", "doherty", "jakob"],
     examples=[("Switches", """<div class="orca-stack">
-  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Camera enabled</span></label>
+  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Autoplay videos</span></label>
   <label class="orca-switch"><input type="checkbox" role="switch"><span class="orca-switch__track"></span><span>Email alerts</span></label>
   <label class="orca-switch"><input type="checkbox" role="switch" disabled><span class="orca-switch__track"></span><span>Record audio</span></label>
 </div>""")],
@@ -224,7 +224,7 @@ add(Element(
 add(Element(
     "file-input", "File input", C,
     "The native file picker with an ORCA-styled button.",
-    why="The native control works with drag-and-drop, the camera on phones and assistive technology (Postel's law).",
+    why="The native control works with drag-and-drop, taking a photo on phones and assistive technology (Postel's law).",
     when=["Uploading images, CSV files, licences."],
     how=["`<input class=\"orca-file\" type=\"file\" id=… accept=\"image/*\">`.",
          "State accepted types and the size limit in help text before the field; validate again on the server.",
@@ -263,14 +263,14 @@ add(Element(
     "A fixed unit, prefix or button joined to an input.",
     why="Showing the unit beside the value removes guessing ('minutes or seconds?') and stops people typing the unit "
         "(Postel's law, Practical UI F03).",
-    when=["Units (min, %, m²), protocols (rtsp://), currency, an attached action (Copy, Test)."],
-    how=["`<div class=\"orca-input-group\"><span class=\"orca-addon\">rtsp://</span><input class=\"orca-input\" …><span class=\"orca-addon\">:554</span></div>`.",
+    when=["Units (min, %, m²), protocols (https://), currency, an attached action (Copy, Test)."],
+    how=["`<div class=\"orca-input-group\"><span class=\"orca-addon\">https://</span><input class=\"orca-input\" …><span class=\"orca-addon\">.mp4</span></div>`.",
          "A button suffix uses `.orca-button` inside the group.", "Link the addon text to the input with `aria-describedby` if it changes the meaning."],
     classes=[".orca-input-group", ".orca-addon"], tokens=["bg-alt", "border-strong"],
     laws=["postel", "F03"],
-    examples=[("Prefix and suffix", """<label class="orca-label" for="ig1">Snapshot interval</label>
+    examples=[("Prefix and suffix", """<label class="orca-label" for="ig1">Thumbnail interval</label>
 <div class="orca-input-group" style="max-width: 14rem"><input class="orca-input" id="ig1" type="number" value="5" aria-describedby="ig1-unit"><span class="orca-addon" id="ig1-unit">minutes</span></div>
-<label class="orca-label" for="ig2" style="margin-top: var(--orca-space-16)">Recorder address</label>
-<div class="orca-input-group" style="max-width: 28rem"><span class="orca-addon">rtsp://</span><input class="orca-input" id="ig2" value="192.168.1.40"><button class="orca-button" type="button">Test</button></div>""")],
+<label class="orca-label" for="ig2" style="margin-top: var(--orca-space-16)">Video address</label>
+<div class="orca-input-group" style="max-width: 28rem"><span class="orca-addon">https://</span><input class="orca-input" id="ig2" value="media.example.com/v/4821"><button class="orca-button" type="button">Test</button></div>""")],
     guide=["Input addon (prefix, suffix)"],
 ))

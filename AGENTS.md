@@ -25,7 +25,14 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 7. **Icons**: `{% icon "name" %}` from the ORCA set only; icon-only buttons need `aria-label`. Never mix another set.
 8. **Every `<button>` has `type`**; every `<img>` has `alt` (`alt=""` if decorative).
 9. **Native controls first**: `<input type="date">`, `<select>`, `<dialog>`, `<details>`, `<progress>`.
-10. **Write like ORCA**: sentence case, verbs on buttons ("Save camera", never "OK"/"Submit"), no exclamation marks,
+10. **Page filters live in a right drawer.** A page's filters never sit in a row above the results: a `Filters`
+    button (filter icon, count of applied filters) in the page actions (`.orca-page-actions`) opens
+    `<dialog class="orca-drawer">`. Applied filters show above the results as removable tags with `Clear filters`.
+    See `python -m orca show drawer-backdrop` and `page-title` (page head).
+11. **Grounds as in wise_people_analyzer**: the body is `--orca-bg-page` (set by ORCA); panels, cards and the
+    sidebar are `--orca-bg-panel`; stat cards are `--orca-bg-stat` with `--orca-border-stat`; the top bar is
+    `--orca-brand-bar` with `--orca-brand-bar-on` text.
+12. **Write like ORCA**: sentence case, verbs on buttons ("Save image", never "OK"/"Submit"), no exclamation marks,
     numbers as digits with separators, errors say what happened and what to do.
 
 ## 3. Choosing between similar elements
@@ -57,7 +64,17 @@ You are building a Django UI with ORCA. Follow these rules exactly. When unsure,
 </html>
 ```
 
-## 5. Scope of this release
+## 5. Levels and scope of this release
 
-Phase 1 ships **primitives** only. Components, patterns, templates and pages from the ORCA guide come next; until
-then, build them from primitives, following each primitive's "how" rules.
+Each ORCA level is a group of the level before it, and only of that level:
+
+| Level | Is a group of | Examples |
+|---|---|---|
+| Primitive | – (smallest piece) | button, input, icon, text style, status mark |
+| Component | primitives | form field, search bar, date picker, stat card |
+| Pattern | components | page head with page actions, filter drawer, data table |
+| Template | patterns | app shell, list page, detail page |
+| Page | a template with real content | the empty, overdue, right-to-left and dark variations |
+
+Phase 1 ships **primitives** only. Until a level is released, build its pieces from the released level below,
+following each primitive's "how" rules.

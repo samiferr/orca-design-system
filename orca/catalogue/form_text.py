@@ -19,8 +19,8 @@ add(Element(
     a11y=["`for` must match the input `id`; the accessible name of the field is the label text."],
     classes=[".orca-label"], tokens=["type-body", "space-8"],
     laws=["R01", "R09", "R10", "fitts"],
-    examples=[("Label and input", """<label class="orca-label" for="cam-name">Camera name</label>
-<input class="orca-input orca-input--w30" id="cam-name" name="name" autocomplete="off">""")],
+    examples=[("Label and input", """<label class="orca-label" for="image-name">Image name</label>
+<input class="orca-input orca-input--w30" id="image-name" name="name" autocomplete="off">""")],
     guide=["Label"],
     related=["text-input", "required-marker", "help-text"],
 ))
@@ -37,8 +37,8 @@ add(Element(
     a11y=["`required` exposes the status to assistive technology; the word makes it visible."],
     classes=[".orca-required", ".orca-optional"], tokens=["text-muted"],
     laws=["R03", "R05", "postel"],
-    examples=[("Optional field", """<label class="orca-label" for="cam-note">Note <span class="orca-optional">(optional)</span></label>
-<input class="orca-input" id="cam-note" name="note">""")],
+    examples=[("Optional field", """<label class="orca-label" for="image-note">Note <span class="orca-optional">(optional)</span></label>
+<input class="orca-input" id="image-note" name="note">""")],
     guide=["Required marker"],
 ))
 
@@ -47,16 +47,16 @@ add(Element(
     "A hint between the label and the field that helps people answer correctly.",
     why="Guidance placed before the input is read before answering and is never covered by autofill or the "
         "on-screen keyboard (Practical UI R08). It prevents errors instead of reporting them (Peak–end rule).",
-    when=["Format expectations ('Use the address printed on the recorder'), consequences, or where to find a value."],
+    when=["Format expectations ('Use the address from the video's Share menu'), consequences, or where to find a value."],
     avoid=["Repeating the label.", "Essential information hidden in a tooltip.", "More than two short sentences."],
     how=["`<p class=\"orca-help\" id=\"x-help\">` after the label, before the field.",
          "Link it: `aria-describedby=\"x-help\"` on the input."],
     a11y=["`aria-describedby` makes screen readers read the hint after the label."],
     classes=[".orca-help"], tokens=["type-detail", "text-muted"],
     laws=["R08", "peak-end", "tesler"],
-    examples=[("Hint before the field", """<label class="orca-label" for="rtsp">Stream address</label>
-<p class="orca-help" id="rtsp-help">Starts with rtsp://. Find it in the camera's network settings.</p>
-<input class="orca-input" id="rtsp" name="rtsp" inputmode="url" aria-describedby="rtsp-help">""")],
+    examples=[("Hint before the field", """<label class="orca-label" for="video-url">Video address</label>
+<p class="orca-help" id="video-url-help">Starts with https://. Copy it from the video's Share menu.</p>
+<input class="orca-input" id="video-url" name="video_url" inputmode="url" aria-describedby="video-url-help">""")],
     guide=["Help text"],
 ))
 
@@ -67,15 +67,15 @@ add(Element(
         "missed (Practical UI R20, C03). Telling people how to fix it avoids blame (W15, Postel's law).",
     when=["After submit or after leaving a field with an invalid value."],
     avoid=["'Invalid input', 'Error', or technical codes.", "Showing errors while the person is still typing a first answer (R22)."],
-    how=["`<p class=\"orca-error\" id=\"x-error\">{% icon \"error\" %}<span>Enter a stream address that starts with rtsp://</span></p>` above the input, after the help text.",
+    how=["`<p class=\"orca-error\" id=\"x-error\">{% icon \"error\" %}<span>Enter a video address that starts with https://</span></p>` above the input, after the help text.",
          "Mark the field `aria-invalid=\"true\"` and add the error id to `aria-describedby` (first).",
          "Pattern: what is wrong + how to fix, in one sentence."],
     a11y=["The icon is decorative; the text carries the meaning.", "Move focus to the error summary or first invalid field after submit."],
     classes=[".orca-error"], tokens=["negative", "type-detail"],
     laws=["R20", "W15", "C03", "postel"],
-    examples=[("Invalid field", """<label class="orca-label" for="rtsp2">Stream address</label>
-<p class="orca-error" id="rtsp2-error">{% icon "error" %}<span>Enter an address that starts with rtsp://, for example rtsp://192.168.1.40/stream1.</span></p>
-<input class="orca-input" id="rtsp2" name="rtsp" value="192.168.1.40" aria-invalid="true" aria-describedby="rtsp2-error">""")],
+    examples=[("Invalid field", """<label class="orca-label" for="video-url2">Video address</label>
+<p class="orca-error" id="video-url2-error">{% icon "error" %}<span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span></p>
+<input class="orca-input" id="video-url2" name="video_url" value="media.example.com/v/4821" aria-invalid="true" aria-describedby="video-url2-error">""")],
     guide=["Error text"],
     related=["error-list"],
 ))
@@ -117,8 +117,8 @@ add(Element(
   {% icon "error" %}
   <p class="orca-error-list__title">2 fields need attention</p>
   <ul>
-    <li><a href="#rtsp2">Enter an address that starts with rtsp://</a></li>
-    <li><a href="#cam-name">Enter a camera name</a></li>
+    <li><a href="#video-url2">Enter a video address that starts with https://</a></li>
+    <li><a href="#image-name">Enter an image name</a></li>
   </ul>
 </div>""")],
     guide=["Error list"],

@@ -9,7 +9,38 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 
-LEVELS = ("primitive", "component", "pattern", "template", "page")
+
+
+@dataclass(frozen=True)
+class Level:
+    key: str
+    title: str
+    built_from: str  # the level it groups ("" for primitives)
+    definition: str
+    examples: str
+
+
+# The five ORCA levels. Each level is a group of the level before it, and only of that level:
+# a component groups primitives, a pattern groups components, a template groups patterns,
+# and a page is a template filled with real content. This is the one definition; docs read it from here.
+LEVEL_DEFS = (
+    Level("primitive", "Primitives", "",
+          "The smallest working pieces and the base styles. A primitive contains no other ORCA element.",
+          "button, input, icon, text style, status mark, token."),
+    Level("component", "Components", "primitive",
+          "A group of primitives with one job.",
+          "form field, search bar, date picker, pagination, stat card, toast."),
+    Level("pattern", "Patterns", "component",
+          "A group of components that forms a recognisable section of a page.",
+          "page head with page actions, filter drawer, sidebar, data table, month calendar."),
+    Level("template", "Templates", "pattern",
+          "A group of patterns arranged into a page layout, with placeholder content.",
+          "app shell, list page, detail page, form page, calendar page."),
+    Level("page", "Pages", "template",
+          "A template filled with real content, including the variations that test it.",
+          "a list page shown empty, overdue, right-to-left and dark."),
+)
+LEVELS = tuple(level.key for level in LEVEL_DEFS)
 
 # Short keys used in Element.laws → full names (Laws of UX, Yablonski 2024; Practical UI, Dannaway 2024).
 LAWS = {
@@ -164,7 +195,7 @@ def as_json() -> dict:
         "system": "ORCA",
         "appearance": "tangerine",
         "themes": ["light", "dark", "paper"],
-        "levels": list(LEVELS),
+        "levels": [asdict(level) for level in LEVEL_DEFS],
         "brand_tokens": [{"key": t.key, "css": t.css, "default": t.default, "usage": t.usage} for t in BRAND_TOKENS],
         "categories": [asdict(c) for c in categories()],
         "elements": [

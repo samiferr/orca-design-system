@@ -14,7 +14,7 @@ Three clearly different weights (filled, outlined, text) let people find the mai
 
 ### When to use
 
-- `orca-button--primary`: the one main action of the screen or form (Save, Create camera).
+- `orca-button--primary`: the one main action of the screen or form (Save, Add image).
 - default (no modifier): secondary actions and equal alternatives (Cancel, Export).
 - `--ghost`: low-priority or repeated actions in toolbars and rows.
 - `--danger`: only to confirm a destructive action inside a confirm dialog.
@@ -32,7 +32,7 @@ Three clearly different weights (filled, outlined, text) let people find the mai
 
 ### How to use
 
-- `<button class="orca-button orca-button--primary" type="submit">Save camera</button>`. Always set `type`.
+- `<button class="orca-button orca-button--primary" type="submit">Save image</button>`. Always set `type`.
 - Label: verb + object, one to three words, sentence case (B10).
 - Order: most important first, left to right; stack full width on phones (B08).
 - Icon + label: put `{% icon %}` before the text; the icon is decorative.
@@ -48,7 +48,7 @@ Three clearly different weights (filled, outlined, text) let people find the mai
 
 ```django
 <div class="orca-row">
-  <button class="orca-button orca-button--primary" type="button">Save camera</button>
+  <button class="orca-button orca-button--primary" type="button">Save image</button>
   <button class="orca-button" type="button">Cancel</button>
   <button class="orca-button orca-button--ghost" type="button">{% icon "copy" %}Duplicate</button>
 </div>
@@ -59,7 +59,7 @@ Three clearly different weights (filled, outlined, text) let people find the mai
 ```django
 <div class="orca-row">
   <button class="orca-button orca-button--brand" type="button">Start free trial</button>
-  <button class="orca-button orca-button--danger" type="button">Delete camera</button>
+  <button class="orca-button orca-button--danger" type="button">Delete image</button>
   <button class="orca-button orca-button--neutral" type="button">Neutral</button>
   <button class="orca-button orca-button--elevated" type="button">Elevated</button>
   <button class="orca-button orca-button--outline-accent" type="button">Outline accent</button>
@@ -125,7 +125,7 @@ Size follows context, not importance: dense toolbars need compact controls, phon
   <button class="orca-button orca-button--lg" type="button">Large</button>
   <button class="orca-button orca-button--icon-only" type="button" aria-label="Refresh">{% icon "restart" %}</button>
 </div>
-<div style="max-width: 20rem; margin-top: var(--orca-space-16)"><button class="orca-button orca-button--primary orca-button--block orca-button--xl" type="button">Save camera</button></div>
+<div style="max-width: 20rem; margin-top: var(--orca-space-16)"><button class="orca-button orca-button--primary orca-button--block orca-button--xl" type="button">Save image</button></div>
 ```
 
 **Classes:** `.orca-button--sm`, `.orca-button--dense`, `.orca-button--lg`, `.orca-button--xl`, `.orca-button--block`, `.orca-button--icon-only`
@@ -152,7 +152,7 @@ The tertiary weight keeps rare or repeated actions available without competing w
 
 ### When to use
 
-- 'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to cameras'.
+- 'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to images'.
 
 ### When not to use
 
@@ -194,7 +194,7 @@ Letting people keep their most-used items close reduces search effort on every v
 
 ### When to use
 
-- Lists where a few items are used much more than others (cameras, reports).
+- Lists where a few items are used much more than others (albums, reports).
 
 ### How to use
 
@@ -246,7 +246,7 @@ mailto fails silently when no mail app is set up; showing the address lets peopl
 
 ```django
 <div>
-  <a class="orca-button" href="mailto:support@example.com?subject=Camera%20offline">{% icon "mail" %}Email support</a>
+  <a class="orca-button" href="mailto:support@example.com?subject=Video%20will%20not%20play">{% icon "mail" %}Email support</a>
   <span class="orca-email-button__fallback">support@example.com</span>
 </div>
 ```
@@ -377,7 +377,7 @@ On phones the primary action floats within thumb reach at the bottom (Fitts's la
 
 ### How to use
 
-- Icon-only: `<a class="orca-fab" href="…" aria-label="Add camera">{% icon "plus" %}</a>`.
+- Icon-only: `<a class="orca-fab" href="…" aria-label="Add image">{% icon "plus" %}</a>`.
 - Extended (preferred: icon + label): add `.orca-fab--extended` and visible text.
 - Leave 5rem of bottom padding on the page so the FAB never covers the last row.
 
@@ -389,8 +389,8 @@ On phones the primary action floats within thumb reach at the bottom (Fitts's la
 
 ```django
 <div class="orca-row orca-row--16">
-  <a class="orca-fab orca-fab--static" href="#" aria-label="Add camera">{% icon "plus" %}</a>
-  <a class="orca-fab orca-fab--static orca-fab--extended" href="#">{% icon "plus" %}Add camera</a>
+  <a class="orca-fab orca-fab--static" href="#" aria-label="Add image">{% icon "plus" %}</a>
+  <a class="orca-fab orca-fab--static orca-fab--extended" href="#">{% icon "plus" %}Add image</a>
 </div>
 ```
 

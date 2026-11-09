@@ -11,7 +11,7 @@ add(Element(
     why="Three clearly different weights (filled, outlined, text) let people find the main action instantly and make "
         "the hierarchy survive colour-blindness (Practical UI B01, B02; Von Restorff effect). One primary action per screen "
         "keeps decisions fast (Hick's law, B03).",
-    when=["`orca-button--primary`: the one main action of the screen or form (Save, Create camera).",
+    when=["`orca-button--primary`: the one main action of the screen or form (Save, Add image).",
           "default (no modifier): secondary actions and equal alternatives (Cancel, Export).",
           "`--ghost`: low-priority or repeated actions in toolbars and rows.",
           "`--danger`: only to confirm a destructive action inside a confirm dialog.",
@@ -21,7 +21,7 @@ add(Element(
           "`--outline-accent` / `--outline-danger`: a secondary action that needs a colour cue (a quiet first step of a delete)."],
     avoid=["Navigation: use a link.", "Two primary buttons on one screen.", "A red button as the first step of a delete (B13): use the default or `--outline-danger`, confirm with `--danger`.",
            "'OK', 'Submit', 'Yes': name the action."],
-    how=["`<button class=\"orca-button orca-button--primary\" type=\"submit\">Save camera</button>`. Always set `type`.",
+    how=["`<button class=\"orca-button orca-button--primary\" type=\"submit\">Save image</button>`. Always set `type`.",
          "Label: verb + object, one to three words, sentence case (B10).",
          "Order: most important first, left to right; stack full width on phones (B08).",
          "Icon + label: put `{% icon %}` before the text; the icon is decorative.",
@@ -35,13 +35,13 @@ add(Element(
     laws=["B01", "B03", "B10", "B13", "hick", "restorff", "fitts"],
     examples=[
         ("Weights", """<div class="orca-row">
-  <button class="orca-button orca-button--primary" type="button">Save camera</button>
+  <button class="orca-button orca-button--primary" type="button">Save image</button>
   <button class="orca-button" type="button">Cancel</button>
   <button class="orca-button orca-button--ghost" type="button">{% icon "copy" %}Duplicate</button>
 </div>"""),
         ("Other variants", """<div class="orca-row">
   <button class="orca-button orca-button--brand" type="button">Start free trial</button>
-  <button class="orca-button orca-button--danger" type="button">Delete camera</button>
+  <button class="orca-button orca-button--danger" type="button">Delete image</button>
   <button class="orca-button orca-button--neutral" type="button">Neutral</button>
   <button class="orca-button orca-button--elevated" type="button">Elevated</button>
   <button class="orca-button orca-button--outline-accent" type="button">Outline accent</button>
@@ -78,7 +78,7 @@ add(Element(
   <button class="orca-button orca-button--lg" type="button">Large</button>
   <button class="orca-button orca-button--icon-only" type="button" aria-label="Refresh">{% icon "restart" %}</button>
 </div>
-<div style="max-width: 20rem; margin-top: var(--orca-space-16)"><button class="orca-button orca-button--primary orca-button--block orca-button--xl" type="button">Save camera</button></div>""")],
+<div style="max-width: 20rem; margin-top: var(--orca-space-16)"><button class="orca-button orca-button--primary orca-button--block orca-button--xl" type="button">Save image</button></div>""")],
     guide=["Button sizes (small, dense, block, icon-only)", "Button sizes (sm, lg, xl)"],
     related=["button", "control-heights"],
 ))
@@ -88,7 +88,7 @@ add(Element(
     "A text-styled button or link for the least important actions.",
     why="The tertiary weight keeps rare or repeated actions available without competing with the primary one (Practical UI B01, B05); "
         "the underline keeps it recognisably interactive.",
-    when=["'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to cameras'."],
+    when=["'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to images'."],
     avoid=["The main action of a screen."],
     how=["Command: `<button class=\"orca-button orca-button--link\" type=\"button\">Clear filters</button>`.",
          "Navigation: `<a class=\"orca-link\">`.", "Name the destination or result, never 'Click here'."],
@@ -103,7 +103,7 @@ add(Element(
     "pin-button", "Pin button", C,
     "A toggle that pins an item to the top of a list or to the dashboard.",
     why="Letting people keep their most-used items close reduces search effort on every visit (Fitts's law: shorter distance; Practical UI F03).",
-    when=["Lists where a few items are used much more than others (cameras, reports)."],
+    when=["Lists where a few items are used much more than others (albums, reports)."],
     how=["`<button class=\"orca-icon-button orca-pin\" type=\"button\" aria-pressed=\"false\" aria-label=\"Pin Entrance A\" data-orca-toggle data-orca-label-on=\"Unpin Entrance A\" data-orca-label-off=\"Pin Entrance A\">{% icon \"pin\" %}</button>`.",
          "Persist the state on the server; `data-orca-toggle` only flips the pressed state in the page."],
     a11y=["`aria-pressed` announces pinned/not pinned; the label names the item."],
@@ -125,7 +125,7 @@ add(Element(
     classes=[".orca-email-button__fallback"],
     laws=["postel"],
     examples=[("Email with fallback", """<div>
-  <a class="orca-button" href="mailto:support@example.com?subject=Camera%20offline">{% icon "mail" %}Email support</a>
+  <a class="orca-button" href="mailto:support@example.com?subject=Video%20will%20not%20play">{% icon "mail" %}Email support</a>
   <span class="orca-email-button__fallback">support@example.com</span>
 </div>""")],
     guide=["Email button"],
@@ -178,7 +178,7 @@ add(Element(
         "distinct shape makes it the one thing that stands out (Von Restorff). Familiar from mobile platforms (Jakob's law).",
     when=["Phone layouts (below 620px) of list pages with one create action."],
     avoid=["Desktop layouts: put the action in the page head.", "More than one FAB, or for anything other than the primary action."],
-    how=["Icon-only: `<a class=\"orca-fab\" href=\"…\" aria-label=\"Add camera\">{% icon \"plus\" %}</a>`.",
+    how=["Icon-only: `<a class=\"orca-fab\" href=\"…\" aria-label=\"Add image\">{% icon \"plus\" %}</a>`.",
          "Extended (preferred: icon + label): add `.orca-fab--extended` and visible text.",
          "Leave 5rem of bottom padding on the page so the FAB never covers the last row."],
     a11y=["Icon-only FABs need `aria-label`. The FAB is 56px."],
@@ -186,8 +186,8 @@ add(Element(
     tokens=["primary", "shadow-dragged", "layer-sticky"],
     laws=["fitts", "restorff", "jakob"],
     examples=[("FAB (shown in place)", """<div class="orca-row orca-row--16">
-  <a class="orca-fab orca-fab--static" href="#" aria-label="Add camera">{% icon "plus" %}</a>
-  <a class="orca-fab orca-fab--static orca-fab--extended" href="#">{% icon "plus" %}Add camera</a>
+  <a class="orca-fab orca-fab--static" href="#" aria-label="Add image">{% icon "plus" %}</a>
+  <a class="orca-fab orca-fab--static orca-fab--extended" href="#">{% icon "plus" %}Add image</a>
 </div>""")],
     guide=["Floating action button (FAB)", "Extended FAB"],
     source="ORCA",

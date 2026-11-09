@@ -29,7 +29,7 @@ GUIDE = [
     ("accessibility", "Accessibility", "Contrast, focus, touch targets, motion and markup commitments, and how they are tested."),
     ("localization", "Localization", "Translation, right-to-left layouts, text expansion, dates, times and numbers."),
     ("tooling", "Tooling", "Command line, lint, system checks, the build and the static documentation export."),
-    ("roadmap", "Levels and roadmap", "The five ORCA levels and what each release delivers."),
+    ("roadmap", "Levels and roadmap", "The five ORCA levels, each a group of the one before, and what each release delivers."),
 ]
 GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
 
@@ -69,7 +69,7 @@ def _stats() -> dict:
 def home(request):
     _guard()
     hero = mark_safe(render_snippet("""<div class="orca-row orca-row--16">
-  <button class="orca-button orca-button--primary" type="button">Save camera</button>
+  <button class="orca-button orca-button--primary" type="button">Save image</button>
   <button class="orca-button" type="button">Cancel</button>
   <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
   <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
@@ -105,7 +105,8 @@ def guide(request, slug):
     if slug == "principles":
         extra.update(principles=_principles())
     if slug == "roadmap":
-        extra.update(stats=_stats(), sections=[(s, len(items)) for s, items in PRIMITIVES.items()])
+        levels = [{"level": lv, "status": ("released", "next")[i] if i < 2 else ""} for i, lv in enumerate(registry.LEVEL_DEFS)]
+        extra.update(stats=_stats(), levels=levels, sections=[(s, len(items)) for s, items in PRIMITIVES.items()])
     if slug == "tooling":
         extra.update(stats=_stats())
     index = [s for s, _, _ in GUIDE].index(slug)

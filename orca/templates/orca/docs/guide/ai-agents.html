@@ -40,6 +40,8 @@ This project's interface uses the ORCA design system.
     <li><strong>ORCA icons only;</strong> icon-only buttons need <code class="orca-code">aria-label</code>.</li>
     <li><strong>Every button has a type; every image has alt.</strong></li>
     <li><strong>Native controls first:</strong> date inputs, select, dialog, details, progress.</li>
+    <li><strong>Page filters live in a right drawer,</strong> opened by a Filters button in the page actions; applied filters show as removable tags. See <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'drawer-backdrop' %}">Drawer backdrop</a>.</li>
+    <li><strong>Grounds as in wise_people_analyzer:</strong> <code class="orca-code">--orca-bg-page</code> behind, <code class="orca-code">--orca-bg-panel</code> for panels and the sidebar, <code class="orca-code">--orca-bg-stat</code> for stat cards, <code class="orca-code">--orca-brand-bar</code> for the top bar.</li>
     <li><strong>Write like ORCA:</strong> sentence case, verbs on buttons, no exclamation marks, digits for numbers, errors that say how to fix.</li>
   </ol>
 </section>
@@ -66,9 +68,9 @@ This project's interface uses the ORCA design system.
 <section class="docs-block-flow">
   <h2 class="orca-section-title">What the lint catches</h2>
   <pre class="docs-code"><code>$ python manage.py orca_lint templates/
-templates/cameras/list.html:12: hard-coded colour; use a --orca-* token.
-templates/cameras/list.html:18: icon-only button without aria-label.
-templates/cameras/list.html:22: unknown ORCA class 'orca-buton'. Run `python -m orca search` to find the right one.
+templates/images/list.html:12: hard-coded colour; use a --orca-* token.
+templates/images/list.html:18: icon-only button without aria-label.
+templates/images/list.html:22: unknown ORCA class 'orca-buton'. Run `python -m orca search` to find the right one.
 static/css/site.css:4: --orca-text is not a brand token; only brand tokens may be changed (settings.ORCA['BRAND']).
 4 problem(s) found.</code></pre>
   <p class="orca-p">It exits with status 1 when it finds a problem, so it can gate continuous integration as well as an agent's loop.</p>

@@ -7,11 +7,41 @@
   "paper"
  ],
  "levels": [
-  "primitive",
-  "component",
-  "pattern",
-  "template",
-  "page"
+  {
+   "key": "primitive",
+   "title": "Primitives",
+   "built_from": "",
+   "definition": "The smallest working pieces and the base styles. A primitive contains no other ORCA element.",
+   "examples": "button, input, icon, text style, status mark, token."
+  },
+  {
+   "key": "component",
+   "title": "Components",
+   "built_from": "primitive",
+   "definition": "A group of primitives with one job.",
+   "examples": "form field, search bar, date picker, pagination, stat card, toast."
+  },
+  {
+   "key": "pattern",
+   "title": "Patterns",
+   "built_from": "component",
+   "definition": "A group of components that forms a recognisable section of a page.",
+   "examples": "page head with page actions, filter drawer, sidebar, data table, month calendar."
+  },
+  {
+   "key": "template",
+   "title": "Templates",
+   "built_from": "pattern",
+   "definition": "A group of patterns arranged into a page layout, with placeholder content.",
+   "examples": "app shell, list page, detail page, form page, calendar page."
+  },
+  {
+   "key": "page",
+   "title": "Pages",
+   "built_from": "template",
+   "definition": "A template filled with real content, including the variations that test it.",
+   "examples": "a list page shown empty, overdue, right-to-left and dark."
+  }
  ],
  "brand_tokens": [
   {
@@ -38,7 +68,7 @@
     "--orca-brand"
    ],
    "default": "#0f95a1",
-   "usage": "The brand colour. Decorative brand marks and the 3px brand bars use it as given. ORCA derives --orca-brand-strong (fills that carry text, darkened until --orca-brand-on reads at 4.5:1), --orca-brand-strong-hover and --orca-brand-strong-active from it."
+   "usage": "The brand colour. Decorative brand marks and the 3px brand bars use it as given. ORCA derives --orca-brand-strong (fills that carry text, darkened until --orca-brand-on reads at 4.5:1), --orca-brand-strong-hover and --orca-brand-strong-active from it, and the top bar ground --orca-brand-bar (the colour mixed with 30% black, as in wise_people_analyzer) with --orca-brand-bar-on, -hover and -active."
   },
   {
    "key": "on_color",
@@ -1046,21 +1076,27 @@
    ],
    "how": [
     "`<h1 class=\"orca-page-title\">` (28/36, weight 700).",
-    "Name the object, not the action: 'Cameras', 'Entrance A', 'New capture run'.",
-    "Long names wrap; they are never cut, so an operator can always read the full name (L15)."
+    "Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.",
+    "Long names wrap; they are never cut, so people can always read the full name (L15).",
+    "Page head: `<div class=\"orca-page-head\"><div class=\"orca-page-head__text\">` title and subtitle `</div><div class=\"orca-page-actions\">` buttons `</div></div>`. The page actions sit on the inline end and wrap under the title on phones.",
+    "Page actions hold the actions on the whole page: at most one primary, then secondary buttons. When the page has filters, a 'Filters' button here opens them in a right drawer (see `drawer-backdrop`)."
    ],
    "avoid": [
     "Repeating the product name or the breadcrumb's last item word for word with extra decoration.",
     "Long titles: front-load the distinguishing word (W04)."
    ],
    "a11y": [
-    "It is the page's `<h1>`; the document `<title>` should start with the same words."
+    "It is the page's `<h1>`; the document `<title>` should start with the same words.",
+    "Put the page actions after the title in the source so the reading and tab order is title first."
    ],
    "tokens": [
     "type-page-title"
    ],
    "classes": [
-    ".orca-page-title"
+    ".orca-page-title",
+    ".orca-page-head",
+    ".orca-page-head__text",
+    ".orca-page-actions"
    ],
    "laws": [
     "jakob",
@@ -1071,7 +1107,11 @@
    "examples": [
     {
      "title": "Page title with subtitle",
-     "html": "<div>\n  <h1 class=\"orca-page-title\">Entrance A</h1>\n  <p class=\"orca-page-subtitle\">Counting people at the north door since 3 March 2026.</p>\n</div>"
+     "html": "<div>\n  <h1 class=\"orca-page-title\">Harbour at dusk</h1>\n  <p class=\"orca-page-subtitle\">Added to the library on 3 March 2026.</p>\n</div>"
+    },
+    {
+     "title": "Page head with page actions",
+     "html": "<div class=\"orca-page-head\">\n  <div class=\"orca-page-head__text\">\n    <h1 class=\"orca-page-title\">Images</h1>\n    <p class=\"orca-page-subtitle\">2,480 images in 36 albums.</p>\n  </div>\n  <div class=\"orca-page-actions\">\n    <button class=\"orca-button\" type=\"button\" aria-haspopup=\"dialog\">{% icon \"filter\" %}Filters</button>\n    <button class=\"orca-button orca-button--primary\" type=\"button\">{% icon \"plus\" %}Add image</button>\n  </div>\n</div>"
     }
    ],
    "guide": [
@@ -1079,7 +1119,8 @@
    ],
    "related": [
     "page-subtitle",
-    "heading"
+    "heading",
+    "drawer-backdrop"
    ],
    "source": "Tangerine",
    "level": "primitive",
@@ -1122,7 +1163,7 @@
    "examples": [
     {
      "title": "Subtitle",
-     "html": "<h1 class=\"orca-page-title\">Alert rules</h1>\n<p class=\"orca-page-subtitle\">Rules decide who gets an email when a camera or a KPI crosses a limit.</p>"
+     "html": "<h1 class=\"orca-page-title\">Alert rules</h1>\n<p class=\"orca-page-subtitle\">Rules decide who gets an email when a video upload fails or a KPI crosses a limit.</p>"
     }
    ],
    "guide": [
@@ -1237,7 +1278,7 @@
    ],
    "how": [
     "`<p class=\"orca-alert-title\">` (16/24, 550).",
-    "State the fact: 'Camera offline', 'Report sent'. No 'Error:' prefix, no exclamation marks."
+    "State the fact: 'Video unavailable', 'Report sent'. No 'Error:' prefix, no exclamation marks."
    ],
    "avoid": [],
    "a11y": [],
@@ -1254,7 +1295,7 @@
    "examples": [
     {
      "title": "Alert title",
-     "html": "<p class=\"orca-alert-title\">Recorder unreachable</p>\n<p class=\"orca-p\">Check that the NVR is on and connected, then test the connection again.</p>"
+     "html": "<p class=\"orca-alert-title\">Video unavailable</p>\n<p class=\"orca-p\">The file could not be loaded. Check your connection, then try playing it again.</p>"
     }
    ],
    "guide": [
@@ -1302,7 +1343,7 @@
    "examples": [
     {
      "title": "Paragraphs",
-     "html": "<p class=\"orca-p orca-p--lead\">Capture runs take one snapshot per camera at a fixed interval.</p>\n<p class=\"orca-p\">Use them to check framing before you draw zones. Shots are kept for 30 days.</p>"
+     "html": "<p class=\"orca-p orca-p--lead\">Thumbnails are taken from each video at a fixed interval.</p>\n<p class=\"orca-p\">Use them to check framing before you draw zones. Shots are kept for 30 days.</p>"
     }
    ],
    "guide": [
@@ -1408,7 +1449,7 @@
    "examples": [
     {
      "title": "Muted",
-     "html": "<p class=\"orca-p\">Entrance A <span class=\"orca-muted\">· 3 cameras</span></p>"
+     "html": "<p class=\"orca-p\">Summer 2026 <span class=\"orca-muted\">· 3 videos</span></p>"
     }
    ],
    "guide": [
@@ -1724,7 +1765,7 @@
    "examples": [
     {
      "title": "Inline code",
-     "html": "<p class=\"orca-p\">The recorder answered at <code class=\"orca-code\">192.168.1.40:554</code>.</p>"
+     "html": "<p class=\"orca-p\">The video server answered at <code class=\"orca-code\">media.example.com:443</code>.</p>"
     }
    ],
    "guide": [
@@ -1745,7 +1786,7 @@
    "summary": "A short uppercase category label above a card title.",
    "why": "A kicker places the card in a category before the title is read, aiding scanning of mixed card lists (W07: uppercase only for short labels).",
    "when": [
-    "Cards in a list that mixes types (camera, recorder, zone)."
+    "Cards in a list that mixes types (image, video, album)."
    ],
    "how": [
     "`<p class=\"orca-card-kicker\">` (12/16, 550, uppercase, letter-spaced, muted)."
@@ -1769,7 +1810,7 @@
    "examples": [
     {
      "title": "Card text stack",
-     "html": "<div class=\"orca-stack\" style=\"gap: var(--orca-space-4); max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\">\n  <p class=\"orca-card-kicker\">Camera</p>\n  <h3 class=\"orca-card-title\">Entrance A, north door</h3>\n  <p class=\"orca-card-meta\">Hikvision · 192.168.1.40 · added 3 March</p>\n</div>"
+     "html": "<div class=\"orca-stack\" style=\"gap: var(--orca-space-4); max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\">\n  <p class=\"orca-card-kicker\">Video</p>\n  <h3 class=\"orca-card-title\">Entrance A, north door</h3>\n  <p class=\"orca-card-meta\">Hikvision · 192.168.1.40 · added 3 March</p>\n</div>"
     }
    ],
    "guide": [
@@ -1860,7 +1901,7 @@
    "examples": [
     {
      "title": "Meta line",
-     "html": "<p class=\"orca-card-meta\">3 cameras · updated 2 minutes ago</p>"
+     "html": "<p class=\"orca-card-meta\">3 videos · updated 2 minutes ago</p>"
     }
    ],
    "guide": [
@@ -1885,7 +1926,7 @@
    ],
    "how": [
     "`<h2 class=\"orca-dialog-title\">` (24/32, light 275).",
-    "Confirmations ask the question with the object: 'Delete Entrance A?'. The action button repeats the verb: 'Delete camera'."
+    "Confirmations ask the question with the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'."
    ],
    "avoid": [],
    "a11y": [
@@ -1932,7 +1973,7 @@
     "A list, table, chart or search that has nothing to show."
    ],
    "how": [
-    "`<h2 class=\"orca-empty-title\">` (24/32, light). State the fact: 'No cameras yet', 'No events match these filters'."
+    "`<h2 class=\"orca-empty-title\">` (24/32, light). State the fact: 'No images yet', 'No videos match these filters'."
    ],
    "avoid": [],
    "a11y": [],
@@ -1949,7 +1990,7 @@
    "examples": [
     {
      "title": "Empty state text",
-     "html": "<div class=\"orca-stack\" style=\"align-items: center; text-align: center\">\n  {% orca_illustration \"empty\" %}\n  <h2 class=\"orca-empty-title\">No cameras yet</h2>\n  <p class=\"orca-empty-text\">Add a camera to start counting people at an entrance.</p>\n  <button class=\"orca-button orca-button--primary\" type=\"button\">Add camera</button>\n</div>"
+     "html": "<div class=\"orca-stack\" style=\"align-items: center; text-align: center\">\n  {% orca_illustration \"empty\" %}\n  <h2 class=\"orca-empty-title\">No images yet</h2>\n  <p class=\"orca-empty-text\">Add an image to start your library.</p>\n  <button class=\"orca-button orca-button--primary\" type=\"button\">Add image</button>\n</div>"
     }
    ],
    "guide": [
@@ -1997,7 +2038,7 @@
    "examples": [
     {
      "title": "Filtered empty",
-     "html": "<p class=\"orca-empty-text\">No events match “Entrance B” this week. Clear the filters to see all events.</p>"
+     "html": "<p class=\"orca-empty-text\">No videos match “harbour” this week. Clear the filters to see all videos.</p>"
     }
    ],
    "guide": [
@@ -2052,7 +2093,7 @@
    "examples": [
     {
      "title": "Label and input",
-     "html": "<label class=\"orca-label\" for=\"cam-name\">Camera name</label>\n<input class=\"orca-input orca-input--w30\" id=\"cam-name\" name=\"name\" autocomplete=\"off\">"
+     "html": "<label class=\"orca-label\" for=\"image-name\">Image name</label>\n<input class=\"orca-input orca-input--w30\" id=\"image-name\" name=\"name\" autocomplete=\"off\">"
     }
    ],
    "guide": [
@@ -2107,7 +2148,7 @@
    "examples": [
     {
      "title": "Optional field",
-     "html": "<label class=\"orca-label\" for=\"cam-note\">Note <span class=\"orca-optional\">(optional)</span></label>\n<input class=\"orca-input\" id=\"cam-note\" name=\"note\">"
+     "html": "<label class=\"orca-label\" for=\"image-note\">Note <span class=\"orca-optional\">(optional)</span></label>\n<input class=\"orca-input\" id=\"image-note\" name=\"note\">"
     }
    ],
    "guide": [
@@ -2129,7 +2170,7 @@
    "summary": "A hint between the label and the field that helps people answer correctly.",
    "why": "Guidance placed before the input is read before answering and is never covered by autofill or the on-screen keyboard (Practical UI R08). It prevents errors instead of reporting them (Peak–end rule).",
    "when": [
-    "Format expectations ('Use the address printed on the recorder'), consequences, or where to find a value."
+    "Format expectations ('Use the address from the video's Share menu'), consequences, or where to find a value."
    ],
    "how": [
     "`<p class=\"orca-help\" id=\"x-help\">` after the label, before the field.",
@@ -2158,7 +2199,7 @@
    "examples": [
     {
      "title": "Hint before the field",
-     "html": "<label class=\"orca-label\" for=\"rtsp\">Stream address</label>\n<p class=\"orca-help\" id=\"rtsp-help\">Starts with rtsp://. Find it in the camera's network settings.</p>\n<input class=\"orca-input\" id=\"rtsp\" name=\"rtsp\" inputmode=\"url\" aria-describedby=\"rtsp-help\">"
+     "html": "<label class=\"orca-label\" for=\"video-url\">Video address</label>\n<p class=\"orca-help\" id=\"video-url-help\">Starts with https://. Copy it from the video's Share menu.</p>\n<input class=\"orca-input\" id=\"video-url\" name=\"video_url\" inputmode=\"url\" aria-describedby=\"video-url-help\">"
     }
    ],
    "guide": [
@@ -2183,7 +2224,7 @@
     "After submit or after leaving a field with an invalid value."
    ],
    "how": [
-    "`<p class=\"orca-error\" id=\"x-error\">{% icon \"error\" %}<span>Enter a stream address that starts with rtsp://</span></p>` above the input, after the help text.",
+    "`<p class=\"orca-error\" id=\"x-error\">{% icon \"error\" %}<span>Enter a video address that starts with https://</span></p>` above the input, after the help text.",
     "Mark the field `aria-invalid=\"true\"` and add the error id to `aria-describedby` (first).",
     "Pattern: what is wrong + how to fix, in one sentence."
    ],
@@ -2211,7 +2252,7 @@
    "examples": [
     {
      "title": "Invalid field",
-     "html": "<label class=\"orca-label\" for=\"rtsp2\">Stream address</label>\n<p class=\"orca-error\" id=\"rtsp2-error\">{% icon \"error\" %}<span>Enter an address that starts with rtsp://, for example rtsp://192.168.1.40/stream1.</span></p>\n<input class=\"orca-input\" id=\"rtsp2\" name=\"rtsp\" value=\"192.168.1.40\" aria-invalid=\"true\" aria-describedby=\"rtsp2-error\">"
+     "html": "<label class=\"orca-label\" for=\"video-url2\">Video address</label>\n<p class=\"orca-error\" id=\"video-url2-error\">{% icon \"error\" %}<span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span></p>\n<input class=\"orca-input\" id=\"video-url2\" name=\"video_url\" value=\"media.example.com/v/4821\" aria-invalid=\"true\" aria-describedby=\"video-url2-error\">"
     }
    ],
    "guide": [
@@ -2310,7 +2351,7 @@
    "examples": [
     {
      "title": "Error summary",
-     "html": "<div class=\"orca-error-list\" role=\"alert\" tabindex=\"-1\">\n  {% icon \"error\" %}\n  <p class=\"orca-error-list__title\">2 fields need attention</p>\n  <ul>\n    <li><a href=\"#rtsp2\">Enter an address that starts with rtsp://</a></li>\n    <li><a href=\"#cam-name\">Enter a camera name</a></li>\n  </ul>\n</div>"
+     "html": "<div class=\"orca-error-list\" role=\"alert\" tabindex=\"-1\">\n  {% icon \"error\" %}\n  <p class=\"orca-error-list__title\">2 fields need attention</p>\n  <ul>\n    <li><a href=\"#video-url2\">Enter a video address that starts with https://</a></li>\n    <li><a href=\"#image-name\">Enter an image name</a></li>\n  </ul>\n</div>"
     }
    ],
    "guide": [
@@ -2334,7 +2375,7 @@
    "summary": "A command. Variants express importance: primary, secondary (default), ghost, link, plus brand, danger, neutral, elevated and outlines.",
    "why": "Three clearly different weights (filled, outlined, text) let people find the main action instantly and make the hierarchy survive colour-blindness (Practical UI B01, B02; Von Restorff effect). One primary action per screen keeps decisions fast (Hick's law, B03).",
    "when": [
-    "`orca-button--primary`: the one main action of the screen or form (Save, Create camera).",
+    "`orca-button--primary`: the one main action of the screen or form (Save, Add image).",
     "default (no modifier): secondary actions and equal alternatives (Cancel, Export).",
     "`--ghost`: low-priority or repeated actions in toolbars and rows.",
     "`--danger`: only to confirm a destructive action inside a confirm dialog.",
@@ -2344,7 +2385,7 @@
     "`--outline-accent` / `--outline-danger`: a secondary action that needs a colour cue (a quiet first step of a delete)."
    ],
    "how": [
-    "`<button class=\"orca-button orca-button--primary\" type=\"submit\">Save camera</button>`. Always set `type`.",
+    "`<button class=\"orca-button orca-button--primary\" type=\"submit\">Save image</button>`. Always set `type`.",
     "Label: verb + object, one to three words, sentence case (B10).",
     "Order: most important first, left to right; stack full width on phones (B08).",
     "Icon + label: put `{% icon %}` before the text; the icon is decorative.",
@@ -2392,11 +2433,11 @@
    "examples": [
     {
      "title": "Weights",
-     "html": "<div class=\"orca-row\">\n  <button class=\"orca-button orca-button--primary\" type=\"button\">Save camera</button>\n  <button class=\"orca-button\" type=\"button\">Cancel</button>\n  <button class=\"orca-button orca-button--ghost\" type=\"button\">{% icon \"copy\" %}Duplicate</button>\n</div>"
+     "html": "<div class=\"orca-row\">\n  <button class=\"orca-button orca-button--primary\" type=\"button\">Save image</button>\n  <button class=\"orca-button\" type=\"button\">Cancel</button>\n  <button class=\"orca-button orca-button--ghost\" type=\"button\">{% icon \"copy\" %}Duplicate</button>\n</div>"
     },
     {
      "title": "Other variants",
-     "html": "<div class=\"orca-row\">\n  <button class=\"orca-button orca-button--brand\" type=\"button\">Start free trial</button>\n  <button class=\"orca-button orca-button--danger\" type=\"button\">Delete camera</button>\n  <button class=\"orca-button orca-button--neutral\" type=\"button\">Neutral</button>\n  <button class=\"orca-button orca-button--elevated\" type=\"button\">Elevated</button>\n  <button class=\"orca-button orca-button--outline-accent\" type=\"button\">Outline accent</button>\n  <button class=\"orca-button orca-button--outline-danger\" type=\"button\">Delete</button>\n</div>"
+     "html": "<div class=\"orca-row\">\n  <button class=\"orca-button orca-button--brand\" type=\"button\">Start free trial</button>\n  <button class=\"orca-button orca-button--danger\" type=\"button\">Delete image</button>\n  <button class=\"orca-button orca-button--neutral\" type=\"button\">Neutral</button>\n  <button class=\"orca-button orca-button--elevated\" type=\"button\">Elevated</button>\n  <button class=\"orca-button orca-button--outline-accent\" type=\"button\">Outline accent</button>\n  <button class=\"orca-button orca-button--outline-danger\" type=\"button\">Delete</button>\n</div>"
     },
     {
      "title": "Busy and disabled",
@@ -2468,7 +2509,7 @@
    "examples": [
     {
      "title": "Sizes",
-     "html": "<div class=\"orca-row\">\n  <button class=\"orca-button orca-button--sm\" type=\"button\">Small</button>\n  <button class=\"orca-button orca-button--dense\" type=\"button\">Dense</button>\n  <button class=\"orca-button\" type=\"button\">Default</button>\n  <button class=\"orca-button orca-button--lg\" type=\"button\">Large</button>\n  <button class=\"orca-button orca-button--icon-only\" type=\"button\" aria-label=\"Refresh\">{% icon \"restart\" %}</button>\n</div>\n<div style=\"max-width: 20rem; margin-top: var(--orca-space-16)\"><button class=\"orca-button orca-button--primary orca-button--block orca-button--xl\" type=\"button\">Save camera</button></div>"
+     "html": "<div class=\"orca-row\">\n  <button class=\"orca-button orca-button--sm\" type=\"button\">Small</button>\n  <button class=\"orca-button orca-button--dense\" type=\"button\">Dense</button>\n  <button class=\"orca-button\" type=\"button\">Default</button>\n  <button class=\"orca-button orca-button--lg\" type=\"button\">Large</button>\n  <button class=\"orca-button orca-button--icon-only\" type=\"button\" aria-label=\"Refresh\">{% icon \"restart\" %}</button>\n</div>\n<div style=\"max-width: 20rem; margin-top: var(--orca-space-16)\"><button class=\"orca-button orca-button--primary orca-button--block orca-button--xl\" type=\"button\">Save image</button></div>"
     }
    ],
    "guide": [
@@ -2493,7 +2534,7 @@
    "summary": "A text-styled button or link for the least important actions.",
    "why": "The tertiary weight keeps rare or repeated actions available without competing with the primary one (Practical UI B01, B05); the underline keeps it recognisably interactive.",
    "when": [
-    "'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to cameras'."
+    "'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to images'."
    ],
    "how": [
     "Command: `<button class=\"orca-button orca-button--link\" type=\"button\">Clear filters</button>`.",
@@ -2543,7 +2584,7 @@
    "summary": "A toggle that pins an item to the top of a list or to the dashboard.",
    "why": "Letting people keep their most-used items close reduces search effort on every visit (Fitts's law: shorter distance; Practical UI F03).",
    "when": [
-    "Lists where a few items are used much more than others (cameras, reports)."
+    "Lists where a few items are used much more than others (albums, reports)."
    ],
    "how": [
     "`<button class=\"orca-icon-button orca-pin\" type=\"button\" aria-pressed=\"false\" aria-label=\"Pin Entrance A\" data-orca-toggle data-orca-label-on=\"Unpin Entrance A\" data-orca-label-off=\"Pin Entrance A\">{% icon \"pin\" %}</button>`.",
@@ -2608,7 +2649,7 @@
    "examples": [
     {
      "title": "Email with fallback",
-     "html": "<div>\n  <a class=\"orca-button\" href=\"mailto:support@example.com?subject=Camera%20offline\">{% icon \"mail\" %}Email support</a>\n  <span class=\"orca-email-button__fallback\">support@example.com</span>\n</div>"
+     "html": "<div>\n  <a class=\"orca-button\" href=\"mailto:support@example.com?subject=Video%20will%20not%20play\">{% icon \"mail\" %}Email support</a>\n  <span class=\"orca-email-button__fallback\">support@example.com</span>\n</div>"
     }
    ],
    "guide": [
@@ -2741,7 +2782,7 @@
     "Phone layouts (below 620px) of list pages with one create action."
    ],
    "how": [
-    "Icon-only: `<a class=\"orca-fab\" href=\"…\" aria-label=\"Add camera\">{% icon \"plus\" %}</a>`.",
+    "Icon-only: `<a class=\"orca-fab\" href=\"…\" aria-label=\"Add image\">{% icon \"plus\" %}</a>`.",
     "Extended (preferred: icon + label): add `.orca-fab--extended` and visible text.",
     "Leave 5rem of bottom padding on the page so the FAB never covers the last row."
    ],
@@ -2770,7 +2811,7 @@
    "examples": [
     {
      "title": "FAB (shown in place)",
-     "html": "<div class=\"orca-row orca-row--16\">\n  <a class=\"orca-fab orca-fab--static\" href=\"#\" aria-label=\"Add camera\">{% icon \"plus\" %}</a>\n  <a class=\"orca-fab orca-fab--static orca-fab--extended\" href=\"#\">{% icon \"plus\" %}Add camera</a>\n</div>"
+     "html": "<div class=\"orca-row orca-row--16\">\n  <a class=\"orca-fab orca-fab--static\" href=\"#\" aria-label=\"Add image\">{% icon \"plus\" %}</a>\n  <a class=\"orca-fab orca-fab--static orca-fab--extended\" href=\"#\">{% icon \"plus\" %}Add image</a>\n</div>"
     }
    ],
    "guide": [
@@ -2838,7 +2879,7 @@
    "examples": [
     {
      "title": "States: default, read-only, disabled",
-     "html": "<div class=\"orca-stack\" style=\"max-width: 24rem; gap: var(--orca-space-24)\">\n  <div><label class=\"orca-label\" for=\"ti-1\">Camera name</label>\n    <input class=\"orca-input\" id=\"ti-1\" value=\"Entrance A\"></div>\n  <div><label class=\"orca-label\" for=\"ti-2\">Serial number</label>\n    <input class=\"orca-input orca-input--w20\" id=\"ti-2\" value=\"DS-2CD2143G2\" readonly></div>\n  <div><label class=\"orca-label\" for=\"ti-3\">Port</label>\n    <input class=\"orca-input orca-input--w8\" id=\"ti-3\" inputmode=\"numeric\" value=\"554\" disabled></div>\n</div>"
+     "html": "<div class=\"orca-stack\" style=\"max-width: 24rem; gap: var(--orca-space-24)\">\n  <div><label class=\"orca-label\" for=\"ti-1\">Image name</label>\n    <input class=\"orca-input\" id=\"ti-1\" value=\"Entrance A\"></div>\n  <div><label class=\"orca-label\" for=\"ti-2\">Serial number</label>\n    <input class=\"orca-input orca-input--w20\" id=\"ti-2\" value=\"DS-2CD2143G2\" readonly></div>\n  <div><label class=\"orca-label\" for=\"ti-3\">Port</label>\n    <input class=\"orca-input orca-input--w8\" id=\"ti-3\" inputmode=\"numeric\" value=\"554\" disabled></div>\n</div>"
     },
     {
      "title": "Sizes",
@@ -2949,7 +2990,7 @@
    "examples": [
     {
      "title": "Select",
-     "html": "<label class=\"orca-label\" for=\"sel-1\">Recorder</label>\n<select class=\"orca-select\" id=\"sel-1\" style=\"max-width: 20rem\">\n  <option value=\"\">Choose a recorder</option>\n  <option>NVR north building</option>\n  <option>NVR warehouse</option>\n</select>"
+     "html": "<label class=\"orca-label\" for=\"sel-1\">Album</label>\n<select class=\"orca-select\" id=\"sel-1\" style=\"max-width: 20rem\">\n  <option value=\"\">Choose an album</option>\n  <option>Summer 2026</option>\n  <option>Product shots</option>\n</select>"
     }
    ],
    "guide": [
@@ -3000,7 +3041,7 @@
    "examples": [
     {
      "title": "Listbox",
-     "html": "<label class=\"orca-label\" for=\"lb-1\">Cameras</label>\n<p class=\"orca-help\" id=\"lb-1-help\">Hold Ctrl (Cmd on Mac) to choose more than one.</p>\n<select class=\"orca-select orca-listbox\" id=\"lb-1\" multiple size=\"4\" aria-describedby=\"lb-1-help\" style=\"max-width: 20rem\">\n  <option selected>Entrance A</option><option>Entrance B</option><option selected>Loading dock</option><option>Car park</option>\n</select>"
+     "html": "<label class=\"orca-label\" for=\"lb-1\">Albums</label>\n<p class=\"orca-help\" id=\"lb-1-help\">Hold Ctrl (Cmd on Mac) to choose more than one.</p>\n<select class=\"orca-select orca-listbox\" id=\"lb-1\" multiple size=\"4\" aria-describedby=\"lb-1-help\" style=\"max-width: 20rem\">\n  <option selected>Entrance A</option><option>Entrance B</option><option selected>Loading dock</option><option>Car park</option>\n</select>"
     }
    ],
    "guide": [
@@ -3048,7 +3089,7 @@
    "examples": [
     {
      "title": "Search with clear",
-     "html": "<form role=\"search\" class=\"orca-search\" style=\"max-width: 22rem\" onsubmit=\"return false\">\n  {% icon \"search\" %}\n  <input class=\"orca-input\" type=\"search\" name=\"q\" placeholder=\"Search cameras\" aria-label=\"Search cameras\" value=\"Entrance\">\n  <button class=\"orca-search__clear\" type=\"button\" aria-label=\"Clear search\" data-orca-clear>{% icon \"close\" %}</button>\n</form>"
+     "html": "<form role=\"search\" class=\"orca-search\" style=\"max-width: 22rem\" onsubmit=\"return false\">\n  {% icon \"search\" %}\n  <input class=\"orca-input\" type=\"search\" name=\"q\" placeholder=\"Search images\" aria-label=\"Search images\" value=\"Entrance\">\n  <button class=\"orca-search__clear\" type=\"button\" aria-label=\"Clear search\" data-orca-clear>{% icon \"close\" %}</button>\n</form>"
     }
    ],
    "guide": [
@@ -3107,7 +3148,7 @@
    "examples": [
     {
      "title": "Checkboxes",
-     "html": "<fieldset style=\"border: 0; margin: 0; padding: 0\" class=\"orca-stack\">\n  <legend class=\"orca-label\">Daily report</legend>\n  <label class=\"orca-check\"><input type=\"checkbox\" name=\"r\" checked><span class=\"orca-check__box\"></span>Email me a daily report</label>\n  <label class=\"orca-check\"><input type=\"checkbox\" name=\"r2\"><span class=\"orca-check__box\"></span><span class=\"orca-check__text\">Include snapshots<span class=\"orca-check__desc\">Adds one image per camera, about 2 MB.</span></span></label>\n  <label class=\"orca-check\"><input type=\"checkbox\" disabled><span class=\"orca-check__box\"></span>Attach recordings</label>\n</fieldset>"
+     "html": "<fieldset style=\"border: 0; margin: 0; padding: 0\" class=\"orca-stack\">\n  <legend class=\"orca-label\">Daily report</legend>\n  <label class=\"orca-check\"><input type=\"checkbox\" name=\"r\" checked><span class=\"orca-check__box\"></span>Email me a daily report</label>\n  <label class=\"orca-check\"><input type=\"checkbox\" name=\"r2\"><span class=\"orca-check__box\"></span><span class=\"orca-check__text\">Include thumbnails<span class=\"orca-check__desc\">Adds one image per video, about 2 MB.</span></span></label>\n  <label class=\"orca-check\"><input type=\"checkbox\" disabled><span class=\"orca-check__box\"></span>Attach videos</label>\n</fieldset>"
     }
    ],
    "guide": [
@@ -3163,7 +3204,7 @@
    "examples": [
     {
      "title": "Radio group",
-     "html": "<fieldset style=\"border: 0; margin: 0; padding: 0\" class=\"orca-stack\">\n  <legend class=\"orca-label\">Snapshot interval</legend>\n  <label class=\"orca-radio\"><input type=\"radio\" name=\"interval\" value=\"1\"><span class=\"orca-radio__dot\"></span>Every minute</label>\n  <label class=\"orca-radio\"><input type=\"radio\" name=\"interval\" value=\"5\" checked><span class=\"orca-radio__dot\"></span>Every 5 minutes (recommended)</label>\n  <label class=\"orca-radio\"><input type=\"radio\" name=\"interval\" value=\"15\"><span class=\"orca-radio__dot\"></span>Every 15 minutes</label>\n</fieldset>"
+     "html": "<fieldset style=\"border: 0; margin: 0; padding: 0\" class=\"orca-stack\">\n  <legend class=\"orca-label\">Thumbnail interval</legend>\n  <label class=\"orca-radio\"><input type=\"radio\" name=\"interval\" value=\"1\"><span class=\"orca-radio__dot\"></span>Every minute</label>\n  <label class=\"orca-radio\"><input type=\"radio\" name=\"interval\" value=\"5\" checked><span class=\"orca-radio__dot\"></span>Every 5 minutes (recommended)</label>\n  <label class=\"orca-radio\"><input type=\"radio\" name=\"interval\" value=\"15\"><span class=\"orca-radio__dot\"></span>Every 15 minutes</label>\n</fieldset>"
     }
    ],
    "guide": [
@@ -3186,10 +3227,10 @@
    "summary": "An on/off control that takes effect immediately.",
    "why": "A switch mirrors a physical switch: flipping it changes something now (Jakob's law, Practical UI R14). Immediate effect needs immediate feedback (Doherty threshold).",
    "when": [
-    "Settings saved at once: enable a camera, turn notifications on."
+    "Settings saved at once: play videos automatically, turn notifications on."
    ],
    "how": [
-    "`<label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" checked><span class=\"orca-switch__track\"></span><span>Camera enabled</span></label>`.",
+    "`<label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" checked><span class=\"orca-switch__track\"></span><span>Autoplay videos</span></label>`.",
     "Save on change (htmx `hx-trigger=\"change\"`) and confirm with a status message; revert and explain on failure.",
     "Label states what is on, not the action ('Notifications', not 'Turn on notifications')."
    ],
@@ -3216,7 +3257,7 @@
    "examples": [
     {
      "title": "Switches",
-     "html": "<div class=\"orca-stack\">\n  <label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" checked><span class=\"orca-switch__track\"></span><span>Camera enabled</span></label>\n  <label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\"><span class=\"orca-switch__track\"></span><span>Email alerts</span></label>\n  <label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" disabled><span class=\"orca-switch__track\"></span><span>Record audio</span></label>\n</div>"
+     "html": "<div class=\"orca-stack\">\n  <label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" checked><span class=\"orca-switch__track\"></span><span>Autoplay videos</span></label>\n  <label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\"><span class=\"orca-switch__track\"></span><span>Email alerts</span></label>\n  <label class=\"orca-switch\"><input type=\"checkbox\" role=\"switch\" disabled><span class=\"orca-switch__track\"></span><span>Record audio</span></label>\n</div>"
     }
    ],
    "guide": [
@@ -3327,7 +3368,7 @@
    "name": "File input",
    "category": "inputs",
    "summary": "The native file picker with an ORCA-styled button.",
-   "why": "The native control works with drag-and-drop, the camera on phones and assistive technology (Postel's law).",
+   "why": "The native control works with drag-and-drop, taking a photo on phones and assistive technology (Postel's law).",
    "when": [
     "Uploading images, CSV files, licences."
    ],
@@ -3422,10 +3463,10 @@
    "summary": "A fixed unit, prefix or button joined to an input.",
    "why": "Showing the unit beside the value removes guessing ('minutes or seconds?') and stops people typing the unit (Postel's law, Practical UI F03).",
    "when": [
-    "Units (min, %, m²), protocols (rtsp://), currency, an attached action (Copy, Test)."
+    "Units (min, %, m²), protocols (https://), currency, an attached action (Copy, Test)."
    ],
    "how": [
-    "`<div class=\"orca-input-group\"><span class=\"orca-addon\">rtsp://</span><input class=\"orca-input\" …><span class=\"orca-addon\">:554</span></div>`.",
+    "`<div class=\"orca-input-group\"><span class=\"orca-addon\">https://</span><input class=\"orca-input\" …><span class=\"orca-addon\">.mp4</span></div>`.",
     "A button suffix uses `.orca-button` inside the group.",
     "Link the addon text to the input with `aria-describedby` if it changes the meaning."
    ],
@@ -3446,7 +3487,7 @@
    "examples": [
     {
      "title": "Prefix and suffix",
-     "html": "<label class=\"orca-label\" for=\"ig1\">Snapshot interval</label>\n<div class=\"orca-input-group\" style=\"max-width: 14rem\"><input class=\"orca-input\" id=\"ig1\" type=\"number\" value=\"5\" aria-describedby=\"ig1-unit\"><span class=\"orca-addon\" id=\"ig1-unit\">minutes</span></div>\n<label class=\"orca-label\" for=\"ig2\" style=\"margin-top: var(--orca-space-16)\">Recorder address</label>\n<div class=\"orca-input-group\" style=\"max-width: 28rem\"><span class=\"orca-addon\">rtsp://</span><input class=\"orca-input\" id=\"ig2\" value=\"192.168.1.40\"><button class=\"orca-button\" type=\"button\">Test</button></div>"
+     "html": "<label class=\"orca-label\" for=\"ig1\">Thumbnail interval</label>\n<div class=\"orca-input-group\" style=\"max-width: 14rem\"><input class=\"orca-input\" id=\"ig1\" type=\"number\" value=\"5\" aria-describedby=\"ig1-unit\"><span class=\"orca-addon\" id=\"ig1-unit\">minutes</span></div>\n<label class=\"orca-label\" for=\"ig2\" style=\"margin-top: var(--orca-space-16)\">Video address</label>\n<div class=\"orca-input-group\" style=\"max-width: 28rem\"><span class=\"orca-addon\">https://</span><input class=\"orca-input\" id=\"ig2\" value=\"media.example.com/v/4821\"><button class=\"orca-button\" type=\"button\">Test</button></div>"
     }
    ],
    "guide": [
@@ -3837,7 +3878,7 @@
    "examples": [
     {
      "title": "Leading an alert",
-     "html": "<div class=\"orca-row\" style=\"align-items: flex-start; gap: var(--orca-space-16); max-width: 30rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border); border-inline-start: var(--orca-bar) solid var(--orca-caution)\">\n  <span class=\"orca-alert-icon\">{% status_icon \"caution\" %}</span>\n  <div><p class=\"orca-alert-title\">Disk almost full</p><p class=\"orca-p\">Recordings older than 20 days will be deleted tonight.</p></div>\n</div>"
+     "html": "<div class=\"orca-row\" style=\"align-items: flex-start; gap: var(--orca-space-16); max-width: 30rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border); border-inline-start: var(--orca-bar) solid var(--orca-caution)\">\n  <span class=\"orca-alert-icon\">{% status_icon \"caution\" %}</span>\n  <div><p class=\"orca-alert-title\">Disk almost full</p><p class=\"orca-p\">Videos older than 20 days will be deleted tonight.</p></div>\n</div>"
     }
    ],
    "guide": [
@@ -3889,7 +3930,7 @@
    "examples": [
     {
      "title": "Count on a button",
-     "html": "<div class=\"orca-row orca-row--16\">\n  <button class=\"orca-icon-button orca-has-count\" type=\"button\" aria-label=\"Notifications, 3 unread\">{% icon \"notifications\" %}<span class=\"orca-count\" aria-hidden=\"true\">3</span></button>\n  <span>Cameras <span class=\"orca-count orca-count--neutral\">12</span></span>\n</div>"
+     "html": "<div class=\"orca-row orca-row--16\">\n  <button class=\"orca-icon-button orca-has-count\" type=\"button\" aria-label=\"Notifications, 3 unread\">{% icon \"notifications\" %}<span class=\"orca-count\" aria-hidden=\"true\">3</span></button>\n  <span>Videos <span class=\"orca-count orca-count--neutral\">12</span></span>\n</div>"
     }
    ],
    "guide": [
@@ -4127,7 +4168,7 @@
    "summary": "A content image (the primary image of a record), plain or bordered.",
    "why": "Images are recognised faster than text but must not jump the layout when they load (Doherty threshold: perceived performance) and must be described for people who cannot see them (Postel's law).",
    "when": [
-    "The primary image of a record (product, floor plan, camera view)."
+    "The primary image of a record (product, floor plan, cover image)."
    ],
    "how": [
     "`<img class=\"orca-img\" src=… alt=… width=… height=… loading=\"lazy\">`. Always set width and height or put it in an `orca-ratio` frame.",
@@ -4266,7 +4307,7 @@
    "summary": "A box with a fixed aspect ratio that holds an image, video, map or chart and reserves its space.",
    "why": "Reserved space prevents layout shift while media loads, so nothing moves under the pointer (Doherty threshold, Fitts's law).",
    "when": [
-    "Any media whose dimensions are not known in the HTML; grids of snapshots or cards with images."
+    "Any media whose dimensions are not known in the HTML; image galleries and cards with images or video stills."
    ],
    "how": [
     "`<div class=\"orca-ratio orca-ratio--16x9\"><img src=… alt=…></div>`. Ratios: 1x1, 4x3, 3x2, 16x9, 21x9, 3x4, or `style=\"--orca-ratio: 5 / 4\"`.",
@@ -4289,7 +4330,7 @@
    "examples": [
     {
      "title": "4:3 frame",
-     "html": "<div class=\"orca-ratio orca-ratio--4x3\" style=\"max-width: 16rem\"><img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"Street outside entrance A\"></div>"
+     "html": "<div class=\"orca-ratio orca-ratio--4x3\" style=\"max-width: 16rem\"><img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"City street at night\"></div>"
     }
    ],
    "guide": [
@@ -4310,13 +4351,13 @@
    "id": "snapshot-image",
    "name": "Snapshot image",
    "category": "imagery",
-   "summary": "A camera snapshot in a 16:9 frame with its camera and capture time on a solid caption bar.",
-   "why": "A snapshot is evidence; its source and time must always be visible and readable over any picture (Practical UI T12: solid backing).",
+   "summary": "A still image taken from a video, in a 16:9 frame with its source and capture time on a solid caption bar.",
+   "why": "A snapshot is a record of a moment; where it comes from and when it was taken must always be visible and readable over any picture (Practical UI T12: solid backing).",
    "when": [
-    "Alert details, capture runs, camera cards."
+    "Video stills, thumbnails of video moments, image galleries that show when each image was taken."
    ],
    "how": [
-    "`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\"><span>Entrance A</span><time datetime=…>08:14:03</time></figcaption></figure>`.",
+    "`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\"><span>Harbour timelapse</span><time datetime=…>08:14:03</time></figcaption></figure>`.",
     "Removed or expired image: replace the img with `<div class=\"orca-ratio orca-ratio--16x9 orca-frame--removed\">Image removed after 30 days</div>`."
    ],
    "avoid": [],
@@ -4335,7 +4376,7 @@
    "examples": [
     {
      "title": "Snapshot and removed snapshot",
-     "html": "<div class=\"orca-row orca-row--16\" style=\"align-items: flex-start\">\n  <figure class=\"orca-ratio orca-ratio--16x9\" style=\"max-width: 18rem; margin: 0\">\n    <img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"Entrance A at 08:14, two people at the door\">\n    <figcaption class=\"orca-frame__caption\"><span>Entrance A</span><time datetime=\"2026-11-06T08:14:03\">08:14:03</time></figcaption>\n  </figure>\n  <div class=\"orca-ratio orca-ratio--16x9 orca-frame--removed\" style=\"max-width: 18rem\">Image removed after 30 days</div>\n</div>"
+     "html": "<div class=\"orca-row orca-row--16\" style=\"align-items: flex-start\">\n  <figure class=\"orca-ratio orca-ratio--16x9\" style=\"max-width: 18rem; margin: 0\">\n    <img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"Still from the harbour timelapse at 08:14: boats leaving the quay\">\n    <figcaption class=\"orca-frame__caption\"><span>Harbour timelapse</span><time datetime=\"2026-11-06T08:14:03\">08:14:03</time></figcaption>\n  </figure>\n  <div class=\"orca-ratio orca-ratio--16x9 orca-frame--removed\" style=\"max-width: 18rem\">Image removed after 30 days</div>\n</div>"
     }
    ],
    "guide": [
@@ -4378,7 +4419,7 @@
    "examples": [
     {
      "title": "Recording",
-     "html": "<div class=\"orca-ratio orca-ratio--16x9 orca-frame--recording\" style=\"max-width: 20rem\">\n  <img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"Live view of entrance A\">\n  <span class=\"orca-frame__flag\"><span class=\"orca-dot orca-dot--sm orca-dot--pulse\"></span>Recording</span>\n</div>"
+     "html": "<div class=\"orca-ratio orca-ratio--16x9 orca-frame--recording\" style=\"max-width: 20rem\">\n  <img src=\"{% static \"orca/img/sample-street.svg\" %}\" alt=\"Live video of the harbour\">\n  <span class=\"orca-frame__flag\"><span class=\"orca-dot orca-dot--sm orca-dot--pulse\"></span>Recording</span>\n</div>"
     }
    ],
    "guide": [
@@ -4421,7 +4462,7 @@
    "examples": [
     {
      "title": "Video",
-     "html": "<div class=\"orca-ratio orca-ratio--16x9\" style=\"max-width: 20rem\"><video class=\"orca-video\" controls preload=\"none\" poster=\"{% static \"orca/img/sample-street.svg\" %}\" aria-label=\"Clip from entrance A, 08:14\"></video></div>"
+     "html": "<div class=\"orca-ratio orca-ratio--16x9\" style=\"max-width: 20rem\"><video class=\"orca-video\" controls preload=\"none\" poster=\"{% static \"orca/img/sample-street.svg\" %}\" aria-label=\"Clip from the harbour timelapse, 08:14\"></video></div>"
     }
    ],
    "guide": [
@@ -4629,7 +4670,7 @@
    "summary": "A small muted chevron between breadcrumb items or path segments.",
    "why": "The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in right-to-left languages (Postel's law).",
    "when": [
-    "Breadcrumbs, path displays (Site › Building › Camera)."
+    "Breadcrumbs, path displays (Library › Album › Image)."
    ],
    "how": [
     "`<span class=\"orca-sep\" aria-hidden=\"true\">{% icon \"chevron-right\" %}</span>` between items.",
@@ -4650,7 +4691,7 @@
    "examples": [
     {
      "title": "Path",
-     "html": "<nav aria-label=\"Breadcrumb\" class=\"orca-small\"><a class=\"orca-link orca-link--plain\" href=\"#\">Sites</a><span class=\"orca-sep\" aria-hidden=\"true\">{% icon \"chevron-right\" %}</span><a class=\"orca-link orca-link--plain\" href=\"#\">North building</a><span class=\"orca-sep\" aria-hidden=\"true\">{% icon \"chevron-right\" %}</span><span aria-current=\"page\">Entrance A</span></nav>"
+     "html": "<nav aria-label=\"Breadcrumb\" class=\"orca-small\"><a class=\"orca-link orca-link--plain\" href=\"#\">Library</a><span class=\"orca-sep\" aria-hidden=\"true\">{% icon \"chevron-right\" %}</span><a class=\"orca-link orca-link--plain\" href=\"#\">Summer 2026</a><span class=\"orca-sep\" aria-hidden=\"true\">{% icon \"chevron-right\" %}</span><span aria-current=\"page\">Harbour at dusk</span></nav>"
     }
    ],
    "guide": [
@@ -4882,7 +4923,7 @@
    "examples": [
     {
      "title": "Markers",
-     "html": "<ol class=\"orca-stack\" style=\"list-style: none; padding: 0; margin: 0\">\n  <li class=\"orca-with-icon\"><span class=\"orca-step-marker orca-step-marker--done\"></span>Connect recorder<span class=\"orca-sr-only\">, done</span></li>\n  <li class=\"orca-with-icon\" aria-current=\"step\"><span class=\"orca-step-marker orca-step-marker--current\"></span><strong>Choose cameras</strong><span class=\"orca-sr-only\">, current step</span></li>\n  <li class=\"orca-with-icon\"><span class=\"orca-step-marker orca-step-marker--error\"></span>Test streams<span class=\"orca-sr-only\">, has errors</span></li>\n  <li class=\"orca-with-icon\"><span class=\"orca-step-marker\"></span>Draw zones</li>\n</ol>"
+     "html": "<ol class=\"orca-stack\" style=\"list-style: none; padding: 0; margin: 0\">\n  <li class=\"orca-with-icon\"><span class=\"orca-step-marker orca-step-marker--done\"></span>Upload video<span class=\"orca-sr-only\">, done</span></li>\n  <li class=\"orca-with-icon\" aria-current=\"step\"><span class=\"orca-step-marker orca-step-marker--current\"></span><strong>Choose a thumbnail</strong><span class=\"orca-sr-only\">, current step</span></li>\n  <li class=\"orca-with-icon\"><span class=\"orca-step-marker orca-step-marker--error\"></span>Add captions<span class=\"orca-sr-only\">, has errors</span></li>\n  <li class=\"orca-with-icon\"><span class=\"orca-step-marker\"></span>Publish</li>\n</ol>"
     }
    ],
    "guide": [
@@ -5022,7 +5063,7 @@
    "examples": [
     {
      "title": "Dialog",
-     "html": "<button class=\"orca-button\" type=\"button\" onclick=\"this.nextElementSibling.showModal()\">Open dialog</button>\n<dialog class=\"orca-dialog\" aria-labelledby=\"dlg-demo-title\">\n  <form method=\"dialog\" style=\"padding: var(--orca-space-24)\" class=\"orca-stack\">\n    <h2 class=\"orca-dialog-title\" id=\"dlg-demo-title\">Delete Entrance A?</h2>\n    <p class=\"orca-p\">Its counts are kept. Its zones and alert rules are deleted.</p>\n    <div class=\"orca-row\"><button class=\"orca-button orca-button--danger\" type=\"submit\" value=\"delete\">Delete camera</button><button class=\"orca-button\" type=\"submit\" value=\"cancel\" autofocus>Cancel</button></div>\n  </form>\n</dialog>"
+     "html": "<button class=\"orca-button\" type=\"button\" onclick=\"this.nextElementSibling.showModal()\">Open dialog</button>\n<dialog class=\"orca-dialog\" aria-labelledby=\"dlg-demo-title\">\n  <form method=\"dialog\" style=\"padding: var(--orca-space-24)\" class=\"orca-stack\">\n    <h2 class=\"orca-dialog-title\" id=\"dlg-demo-title\">Delete Harbour at dusk?</h2>\n    <p class=\"orca-p\">It is removed from every album and its share links stop working.</p>\n    <div class=\"orca-row\"><button class=\"orca-button orca-button--danger\" type=\"submit\" value=\"delete\">Delete image</button><button class=\"orca-button\" type=\"submit\" value=\"cancel\" autofocus>Cancel</button></div>\n  </form>\n</dialog>"
     }
    ],
    "guide": [
@@ -5041,44 +5082,70 @@
    "id": "drawer-backdrop",
    "name": "Drawer backdrop",
    "category": "structure",
-   "summary": "The scrim behind a side drawer; pressing it closes the drawer.",
-   "why": "The scrim shows the drawer sits above the page and offers a large, familiar target to dismiss it (Fitts's law, Jakob's law).",
+   "summary": "A side drawer on the inline end (right) with its scrim: where page filters live, opened from the page actions.",
+   "why": "Filters change what a page shows without taking the person away from it. A drawer keeps the results in view behind the scrim, keeps the page head free of a row of controls (Hick's law, Practical UI S04: reveal secondary controls when needed), and always opens from the same place, so people know where to look (Jakob's law). The scrim is a large, familiar target to dismiss it (Fitts's law).",
    "when": [
-    "Behind navigation drawers on phones and filter drawers."
+    "Page filters of a list, table, gallery or report: they always go in a right drawer.",
+    "Secondary detail or settings that people compare with the page behind."
    ],
    "how": [
-    "`<div class=\"orca-scrim\" data-close></div>` before the drawer; `--contained` keeps it inside a positioned parent.",
-    "Clicking the scrim must do the same as the drawer's Close button; Escape too."
+    "Open button in the page actions: `<button class=\"orca-button\" type=\"button\" data-orca-open=\"filters\" aria-haspopup=\"dialog\" aria-expanded=\"false\">{% icon \"filter\" %}Filters</button>`. When filters are applied, add their number: `<span class=\"orca-count orca-count--accent\">2</span>` and say it in `aria-label` ('Filters, 2 applied').",
+    "The drawer is a native dialog: `<dialog class=\"orca-drawer\" id=\"filters\" aria-labelledby=…><form method=\"get\">` with `.orca-drawer__head` (dialog title and a Close icon button with `data-orca-close`), `.orca-drawer__body` (one `<fieldset>` per filter) and `.orca-drawer__foot` (primary 'Show results' that submits, then 'Clear filters').",
+    "`orca.js` opens it as a modal (`showModal()`), closes it on Close, Escape or a press on the backdrop, and returns focus to the button.",
+    "Order filters by use; a search field that narrows the list goes first. Above the results, show each applied filter as a removable tag and a 'Clear filters' link button.",
+    "Without a dialog (custom overlays): `<div class=\"orca-scrim\" data-close></div>` before the panel; `--contained` keeps it inside a positioned parent."
    ],
-   "avoid": [],
-   "a11y": [],
+   "avoid": [
+    "A row of filter controls above the results: put them in the drawer and show the applied ones as tags.",
+    "A decision that must finish before going back: use a dialog.",
+    "Navigation on wide screens: use the sidebar; a navigation drawer is for phones only, on the inline start."
+   ],
+   "a11y": [
+    "`showModal()` traps focus and makes the page behind inert; the opener's `aria-expanded` follows the drawer.",
+    "The drawer's title names it ('Filters'); every control inside keeps its visible label."
+   ],
    "tokens": [
     "bg-overlay",
-    "layer-drawer"
+    "bg-elevated",
+    "shadow-dragged",
+    "layer-drawer",
+    "duration-brisk"
    ],
    "classes": [
+    ".orca-drawer",
+    ".orca-drawer__head",
+    ".orca-drawer__body",
+    ".orca-drawer__foot",
     ".orca-scrim",
     ".orca-scrim--contained"
    ],
    "laws": [
+    "hick",
+    "jakob",
     "fitts",
-    "jakob"
+    "S04"
    ],
    "examples": [
     {
-     "title": "Contained scrim",
-     "html": "<div style=\"position: relative; height: 8rem; overflow: hidden; border: var(--orca-border-width) solid var(--orca-border)\">\n  <p class=\"orca-p\" style=\"padding: var(--orca-space-16)\">Page content</p>\n  <div class=\"orca-scrim orca-scrim--contained\"></div>\n  <aside class=\"orca-elevation-2\" style=\"position: absolute; top: 0; bottom: 0; right: 0; width: 60%; padding: var(--orca-space-16); z-index: calc(var(--orca-layer-drawer) + 1)\"><p class=\"orca-dialog-title\">Filters</p></aside>\n</div>"
+     "title": "Page filters in a right drawer",
+     "html": "<div class=\"orca-page-head\">\n  <div class=\"orca-page-head__text\"><h1 class=\"orca-page-title\">Videos</h1><p class=\"orca-page-subtitle\">128 videos in the library.</p></div>\n  <div class=\"orca-page-actions\">\n    <button class=\"orca-button\" type=\"button\" data-orca-open=\"drawer-demo\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-label=\"Filters, 2 applied\">{% icon \"filter\" %}Filters<span class=\"orca-count orca-count--accent\" aria-hidden=\"true\">2</span></button>\n    <button class=\"orca-button orca-button--primary\" type=\"button\">{% icon \"plus\" %}Add video</button>\n  </div>\n</div>\n<div class=\"orca-row\" style=\"margin-top: var(--orca-space-16)\">\n  <span class=\"orca-tag\"><span class=\"orca-tag__text\">Published</span><button class=\"orca-tag__remove\" type=\"button\" aria-label=\"Remove Published\">{% icon \"close\" %}</button></span>\n  <span class=\"orca-tag\"><span class=\"orca-tag__text\">Longer than 10 min</span><button class=\"orca-tag__remove\" type=\"button\" aria-label=\"Remove Longer than 10 min\">{% icon \"close\" %}</button></span>\n  <button class=\"orca-button orca-button--link\" type=\"button\">Clear filters</button>\n</div>\n<dialog class=\"orca-drawer\" id=\"drawer-demo\" aria-labelledby=\"drawer-demo-title\">\n  <form method=\"dialog\">\n    <div class=\"orca-drawer__head\">\n      <h2 class=\"orca-dialog-title\" id=\"drawer-demo-title\">Filters</h2>\n      <button class=\"orca-icon-button\" type=\"button\" data-orca-close aria-label=\"Close filters\">{% icon \"close\" %}</button>\n    </div>\n    <div class=\"orca-drawer__body\">\n      <div><label class=\"orca-label\" for=\"drawer-demo-q\">Title contains</label>\n        <input class=\"orca-input\" type=\"search\" id=\"drawer-demo-q\" name=\"q\"></div>\n      <fieldset><legend class=\"orca-label\">Status</legend>\n        <label class=\"orca-check\"><input type=\"checkbox\" name=\"status\" value=\"published\" checked><span class=\"orca-check__box\"></span>Published</label>\n        <label class=\"orca-check\"><input type=\"checkbox\" name=\"status\" value=\"draft\"><span class=\"orca-check__box\"></span>Draft</label>\n      </fieldset>\n      <fieldset><legend class=\"orca-label\">Length</legend>\n        <label class=\"orca-radio\"><input type=\"radio\" name=\"length\" value=\"any\"><span class=\"orca-radio__dot\"></span>Any length</label>\n        <label class=\"orca-radio\"><input type=\"radio\" name=\"length\" value=\"long\" checked><span class=\"orca-radio__dot\"></span>Longer than 10 min</label>\n      </fieldset>\n    </div>\n    <div class=\"orca-drawer__foot\">\n      <button class=\"orca-button orca-button--primary\" type=\"submit\">Show 14 videos</button>\n      <button class=\"orca-button\" type=\"reset\">Clear filters</button>\n    </div>\n  </form>\n</dialog>"
     }
    ],
    "guide": [
     "Drawer backdrop"
    ],
-   "related": [],
+   "related": [
+    "page-title",
+    "tag",
+    "dialog-backdrop"
+   ],
    "source": "Tangerine",
    "level": "primitive",
    "law_names": [
+    "Hick's law: fewer, clearer choices mean faster decisions",
+    "Jakob's law: work the way products people already know work",
     "Fitts's law: big, close, well-spaced targets are faster and safer",
-    "Jakob's law: work the way products people already know work"
+    "Practical UI S04: Reveal secondary information when needed"
    ]
   },
   {
@@ -5088,7 +5155,7 @@
    "summary": "A 3px (or 8px large) track with a fill: determinate with a value, indeterminate without.",
    "why": "A progress bar makes a wait tolerable and shows the system is working (Doherty threshold); a visible end point motivates finishing (goal-gradient). Native `<progress>` is announced by screen readers.",
    "when": [
-    "Uploads, capture runs, imports, any task longer than about 1 second whose progress is known (determinate) or not (indeterminate).",
+    "Uploads, video exports, imports, any task longer than about 1 second whose progress is known (determinate) or not (indeterminate).",
     "Capacity or quota meters (use the track and fill parts with a status tone)."
    ],
    "how": [
@@ -5124,7 +5191,7 @@
    "examples": [
     {
      "title": "Determinate and indeterminate",
-     "html": "<div class=\"orca-stack\" style=\"max-width: 20rem\">\n  <div class=\"orca-row\" style=\"justify-content: space-between\"><span id=\"pb1\">Capture run</span><span class=\"orca-num orca-muted\">64%</span></div>\n  <progress class=\"orca-progress\" value=\"64\" max=\"100\" aria-labelledby=\"pb1\">64%</progress>\n  <span id=\"pb2\" class=\"orca-small orca-muted\">Connecting to the recorder, this can take up to 15 seconds</span>\n  <progress class=\"orca-progress\" aria-labelledby=\"pb2\"></progress>\n  <span id=\"pb3\">Disk used</span>\n  <span class=\"orca-progress-track\" role=\"meter\" aria-labelledby=\"pb3\" aria-valuenow=\"91\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"height: 0.5rem\"><span class=\"orca-progress-fill orca-progress-fill--negative\" style=\"--orca-value: 91%\"></span></span>\n</div>"
+     "html": "<div class=\"orca-stack\" style=\"max-width: 20rem\">\n  <div class=\"orca-row\" style=\"justify-content: space-between\"><span id=\"pb1\">Video export</span><span class=\"orca-num orca-muted\">64%</span></div>\n  <progress class=\"orca-progress\" value=\"64\" max=\"100\" aria-labelledby=\"pb1\">64%</progress>\n  <span id=\"pb2\" class=\"orca-small orca-muted\">Preparing the video, this can take up to 15 seconds</span>\n  <progress class=\"orca-progress\" aria-labelledby=\"pb2\"></progress>\n  <span id=\"pb3\">Disk used</span>\n  <span class=\"orca-progress-track\" role=\"meter\" aria-labelledby=\"pb3\" aria-valuenow=\"91\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"height: 0.5rem\"><span class=\"orca-progress-fill orca-progress-fill--negative\" style=\"--orca-value: 91%\"></span></span>\n</div>"
     }
    ],
    "guide": [
@@ -5210,7 +5277,7 @@
     "Whole pages or waits longer than ~3 seconds: use a skeleton or a progress bar with a message."
    ],
    "a11y": [
-    "Pair with text ('Searching the recorder…') in a `role=\"status\"` element."
+    "Pair with text ('Searching the library…') in a `role=\"status\"` element."
    ],
    "tokens": [
     "text-muted"
@@ -5226,7 +5293,7 @@
    "examples": [
     {
      "title": "Sizes and with text",
-     "html": "<div class=\"orca-row orca-row--16\">\n  <span class=\"orca-spinner orca-spinner--sm\" aria-hidden=\"true\"></span>\n  <span class=\"orca-spinner\" aria-hidden=\"true\"></span>\n  <span class=\"orca-spinner orca-spinner--lg\" aria-hidden=\"true\"></span>\n  <span class=\"orca-with-icon\" role=\"status\"><span class=\"orca-spinner\" aria-hidden=\"true\"></span>Searching the recorder…</span>\n</div>"
+     "html": "<div class=\"orca-row orca-row--16\">\n  <span class=\"orca-spinner orca-spinner--sm\" aria-hidden=\"true\"></span>\n  <span class=\"orca-spinner\" aria-hidden=\"true\"></span>\n  <span class=\"orca-spinner orca-spinner--lg\" aria-hidden=\"true\"></span>\n  <span class=\"orca-with-icon\" role=\"status\"><span class=\"orca-spinner\" aria-hidden=\"true\"></span>Searching the library…</span>\n</div>"
     }
    ],
    "guide": [
@@ -5247,11 +5314,11 @@
    "summary": "Grey placeholder blocks that hold the shape of content while it loads.",
    "why": "Showing the layout immediately and filling it in feels faster than a spinner and prevents layout jumps (Doherty threshold: perceived performance). Added to ORCA because the Laws of UX review found no skeleton pattern.",
    "when": [
-    "Heavy regions that load after the page: heat maps, camera grids, comparison tables, htmx `hx-trigger=\"load\"` sections."
+    "Heavy regions that load after the page: heat maps, image and video grids, comparison tables, htmx `hx-trigger=\"load\"` sections."
    ],
    "how": [
     "Mirror the real layout: `.orca-skeleton--title`, `.orca-skeleton--text` (vary widths with inline `max-width`), `.orca-skeleton--circle`, or a sized `.orca-skeleton` block.",
-    "Wrap the region in `aria-busy=\"true\"` and give it an accessible label 'Loading cameras'; remove both when content arrives."
+    "Wrap the region in `aria-busy=\"true\"` and give it an accessible label 'Loading images'; remove both when content arrives."
    ],
    "avoid": [
     "Content that loads in under ~300 ms (the flash is worse than nothing)."
@@ -5275,7 +5342,7 @@
    "examples": [
     {
      "title": "Card skeleton",
-     "html": "<div aria-busy=\"true\" aria-label=\"Loading camera\" style=\"max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\">\n  <div aria-hidden=\"true\">\n    <div class=\"orca-skeleton orca-aspect-16x9\" style=\"margin-bottom: var(--orca-space-8)\"></div>\n    <div class=\"orca-skeleton orca-skeleton--title\"></div>\n    <div class=\"orca-skeleton orca-skeleton--text\" style=\"max-width: 80%\"></div>\n    <div class=\"orca-skeleton orca-skeleton--text\" style=\"max-width: 50%\"></div>\n  </div>\n</div>"
+     "html": "<div aria-busy=\"true\" aria-label=\"Loading image\" style=\"max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)\">\n  <div aria-hidden=\"true\">\n    <div class=\"orca-skeleton orca-aspect-16x9\" style=\"margin-bottom: var(--orca-space-8)\"></div>\n    <div class=\"orca-skeleton orca-skeleton--title\"></div>\n    <div class=\"orca-skeleton orca-skeleton--text\" style=\"max-width: 80%\"></div>\n    <div class=\"orca-skeleton orca-skeleton--text\" style=\"max-width: 50%\"></div>\n  </div>\n</div>"
     }
    ],
    "guide": [],
@@ -5337,10 +5404,10 @@
    "id": "zone-swatch",
    "name": "Zone swatch",
    "category": "charts",
-   "summary": "A mark matching how a counting zone is drawn on video: coloured outline with a light fill, hatched when excluded.",
-   "why": "Using the same mark in lists as on the video lets people match a zone to its row without reading (Miller's law); hatching distinguishes excluded zones without relying on hue (C03).",
+   "summary": "A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.",
+   "why": "Using the same mark in lists as on the image or video lets people match a zone to its row without reading (Miller's law); hatching distinguishes excluded zones without relying on hue (C03).",
    "when": [
-    "Zone lists, zone editors, legends over camera images."
+    "Region lists, region editors, legends over images and videos."
    ],
    "how": [
     "`<span class=\"orca-zone-swatch\" style=\"--orca-zone: var(--orca-teal-500)\"></span>` + zone name.",
@@ -5362,7 +5429,7 @@
    "examples": [
     {
      "title": "Zones",
-     "html": "<div class=\"orca-stack\">\n  <span class=\"orca-with-icon\"><span class=\"orca-zone-swatch\" style=\"--orca-zone: var(--orca-teal-500)\"></span>Door line</span>\n  <span class=\"orca-with-icon\"><span class=\"orca-zone-swatch orca-zone-swatch--exclude\" style=\"--orca-zone: var(--orca-orange-500)\"></span>Staff area (excluded)</span>\n</div>"
+     "html": "<div class=\"orca-stack\">\n  <span class=\"orca-with-icon\"><span class=\"orca-zone-swatch\" style=\"--orca-zone: var(--orca-teal-500)\"></span>Subject</span>\n  <span class=\"orca-with-icon\"><span class=\"orca-zone-swatch orca-zone-swatch--exclude\" style=\"--orca-zone: var(--orca-orange-500)\"></span>Watermark area (excluded)</span>\n</div>"
     }
    ],
    "guide": [
@@ -5654,7 +5721,7 @@
    "summary": "A native select of IANA timezones, grouped by region, preselected from context.",
    "why": "Timezones are inherent complexity; ORCA moves it to the system by listing real zones and preselecting the site's or browser's zone so most people never touch it (Tesler's law).",
    "when": [
-    "Setting a site's, camera's or user's timezone."
+    "Setting a site's, an album's or a user's timezone."
    ],
    "how": [
     "`<select class=\"orca-select\">{% orca_timezone_options current_zone %}</select>`.",
@@ -5746,7 +5813,7 @@
    "summary": "A select of common repeat rules with a 'Custom…' option that reveals more fields.",
    "why": "Most repeats are a few common rules; listing them keeps the choice quick (Hick's law) and reveals the full rule editor only when needed (Practical UI S04, Tesler's law).",
    "when": [
-    "Repeating events, reports, capture runs."
+    "Repeating events, reports, video exports."
    ],
    "how": [
     "Options: Does not repeat · Daily · Every weekday (Mon–Fri) · Weekly on {day} · Monthly on day {n} · Yearly on {date} · Custom…",

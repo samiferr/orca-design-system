@@ -6,7 +6,9 @@
      data-orca-toggle          aria-pressed toggle buttons (pin, toggle, tag)
      data-orca-theme-toggle    cycles light / dark / paper and remembers the choice
      data-orca-countdown       live countdown to the ISO time in its datetime attribute
-     data-orca-copy            copies the text of the element named by its value (id) */
+     data-orca-copy            copies the text of the element named by its value (id)
+     data-orca-open="id"       opens the <dialog> (dialog or drawer) with that id as a modal; sets aria-expanded
+     data-orca-close           closes the dialog it is in; pressing a drawer's backdrop closes it too */
 (function () {
   "use strict";
   var THEME_KEY = "orca-theme";
@@ -15,6 +17,28 @@
 
   document.addEventListener("click", function (event) {
     var t = event.target;
+    var opener = closest(t, "[data-orca-open]");
+    if (opener) {
+      var dlg = document.getElementById(opener.getAttribute("data-orca-open"));
+      if (dlg && dlg.showModal && !dlg.open) {
+        dlg.showModal();
+        opener.setAttribute("aria-expanded", "true");
+        dlg.addEventListener("close", function () { opener.setAttribute("aria-expanded", "false"); }, { once: true });
+      }
+      return;
+    }
+    var closer = closest(t, "[data-orca-close]");
+    if (closer) {
+      var host = closest(closer, "dialog");
+      if (host) host.close();
+      return;
+    }
+    if (t.matches && t.matches("dialog.orca-drawer[open]")) {
+      /* A click on the dialog box itself, not on its content, is a click on the backdrop. */
+      var box = t.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) t.close();
+      return;
+    }
     var clear = closest(t, "[data-orca-clear]");
     if (clear) {
       var input = clear.parentElement.querySelector("input");

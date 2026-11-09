@@ -40,7 +40,7 @@ Native inputs with a visible boundary and a persistent label are instantly recog
 
 ```django
 <div class="orca-stack" style="max-width: 24rem; gap: var(--orca-space-24)">
-  <div><label class="orca-label" for="ti-1">Camera name</label>
+  <div><label class="orca-label" for="ti-1">Image name</label>
     <input class="orca-input" id="ti-1" value="Entrance A"></div>
   <div><label class="orca-label" for="ti-2">Serial number</label>
     <input class="orca-input orca-input--w20" id="ti-2" value="DS-2CD2143G2" readonly></div>
@@ -138,11 +138,11 @@ The native select works with every input method and opens the platform picker on
 #### Example: Select
 
 ```django
-<label class="orca-label" for="sel-1">Recorder</label>
+<label class="orca-label" for="sel-1">Album</label>
 <select class="orca-select" id="sel-1" style="max-width: 20rem">
-  <option value="">Choose a recorder</option>
-  <option>NVR north building</option>
-  <option>NVR warehouse</option>
+  <option value="">Choose an album</option>
+  <option>Summer 2026</option>
+  <option>Product shots</option>
 </select>
 ```
 
@@ -184,7 +184,7 @@ A visible list keeps options in view (recognition over recall, Miller's law) and
 #### Example: Listbox
 
 ```django
-<label class="orca-label" for="lb-1">Cameras</label>
+<label class="orca-label" for="lb-1">Albums</label>
 <p class="orca-help" id="lb-1-help">Hold Ctrl (Cmd on Mac) to choose more than one.</p>
 <select class="orca-select orca-listbox" id="lb-1" multiple size="4" aria-describedby="lb-1-help" style="max-width: 20rem">
   <option selected>Entrance A</option><option>Entrance B</option><option selected>Loading dock</option><option>Car park</option>
@@ -230,7 +230,7 @@ The magnifier is one of the few universally understood icons (Jakob's law); a cl
 ```django
 <form role="search" class="orca-search" style="max-width: 22rem" onsubmit="return false">
   {% icon "search" %}
-  <input class="orca-input" type="search" name="q" placeholder="Search cameras" aria-label="Search cameras" value="Entrance">
+  <input class="orca-input" type="search" name="q" placeholder="Search images" aria-label="Search images" value="Entrance">
   <button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>{% icon "close" %}</button>
 </form>
 ```
@@ -282,8 +282,8 @@ The square box is the convention for 'any number of these' (Practical UI R07), a
 <fieldset style="border: 0; margin: 0; padding: 0" class="orca-stack">
   <legend class="orca-label">Daily report</legend>
   <label class="orca-check"><input type="checkbox" name="r" checked><span class="orca-check__box"></span>Email me a daily report</label>
-  <label class="orca-check"><input type="checkbox" name="r2"><span class="orca-check__box"></span><span class="orca-check__text">Include snapshots<span class="orca-check__desc">Adds one image per camera, about 2 MB.</span></span></label>
-  <label class="orca-check"><input type="checkbox" disabled><span class="orca-check__box"></span>Attach recordings</label>
+  <label class="orca-check"><input type="checkbox" name="r2"><span class="orca-check__box"></span><span class="orca-check__text">Include thumbnails<span class="orca-check__desc">Adds one image per video, about 2 MB.</span></span></label>
+  <label class="orca-check"><input type="checkbox" disabled><span class="orca-check__box"></span>Attach videos</label>
 </fieldset>
 ```
 
@@ -331,7 +331,7 @@ Showing every option lets people compare without opening anything (Practical UI 
 
 ```django
 <fieldset style="border: 0; margin: 0; padding: 0" class="orca-stack">
-  <legend class="orca-label">Snapshot interval</legend>
+  <legend class="orca-label">Thumbnail interval</legend>
   <label class="orca-radio"><input type="radio" name="interval" value="1"><span class="orca-radio__dot"></span>Every minute</label>
   <label class="orca-radio"><input type="radio" name="interval" value="5" checked><span class="orca-radio__dot"></span>Every 5 minutes (recommended)</label>
   <label class="orca-radio"><input type="radio" name="interval" value="15"><span class="orca-radio__dot"></span>Every 15 minutes</label>
@@ -360,7 +360,7 @@ A switch mirrors a physical switch: flipping it changes something now (Jakob's l
 
 ### When to use
 
-- Settings saved at once: enable a camera, turn notifications on.
+- Settings saved at once: play videos automatically, turn notifications on.
 
 ### When not to use
 
@@ -368,7 +368,7 @@ A switch mirrors a physical switch: flipping it changes something now (Jakob's l
 
 ### How to use
 
-- `<label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Camera enabled</span></label>`.
+- `<label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Autoplay videos</span></label>`.
 - Save on change (htmx `hx-trigger="change"`) and confirm with a status message; revert and explain on failure.
 - Label states what is on, not the action ('Notifications', not 'Turn on notifications').
 
@@ -380,7 +380,7 @@ A switch mirrors a physical switch: flipping it changes something now (Jakob's l
 
 ```django
 <div class="orca-stack">
-  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Camera enabled</span></label>
+  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Autoplay videos</span></label>
   <label class="orca-switch"><input type="checkbox" role="switch"><span class="orca-switch__track"></span><span>Email alerts</span></label>
   <label class="orca-switch"><input type="checkbox" role="switch" disabled><span class="orca-switch__track"></span><span>Record audio</span></label>
 </div>
@@ -489,7 +489,7 @@ The native file picker with an ORCA-styled button.
 
 ### Why
 
-The native control works with drag-and-drop, the camera on phones and assistive technology (Postel's law).
+The native control works with drag-and-drop, taking a photo on phones and assistive technology (Postel's law).
 
 ### When to use
 
@@ -579,21 +579,21 @@ Showing the unit beside the value removes guessing ('minutes or seconds?') and s
 
 ### When to use
 
-- Units (min, %, m²), protocols (rtsp://), currency, an attached action (Copy, Test).
+- Units (min, %, m²), protocols (https://), currency, an attached action (Copy, Test).
 
 ### How to use
 
-- `<div class="orca-input-group"><span class="orca-addon">rtsp://</span><input class="orca-input" …><span class="orca-addon">:554</span></div>`.
+- `<div class="orca-input-group"><span class="orca-addon">https://</span><input class="orca-input" …><span class="orca-addon">.mp4</span></div>`.
 - A button suffix uses `.orca-button` inside the group.
 - Link the addon text to the input with `aria-describedby` if it changes the meaning.
 
 #### Example: Prefix and suffix
 
 ```django
-<label class="orca-label" for="ig1">Snapshot interval</label>
+<label class="orca-label" for="ig1">Thumbnail interval</label>
 <div class="orca-input-group" style="max-width: 14rem"><input class="orca-input" id="ig1" type="number" value="5" aria-describedby="ig1-unit"><span class="orca-addon" id="ig1-unit">minutes</span></div>
-<label class="orca-label" for="ig2" style="margin-top: var(--orca-space-16)">Recorder address</label>
-<div class="orca-input-group" style="max-width: 28rem"><span class="orca-addon">rtsp://</span><input class="orca-input" id="ig2" value="192.168.1.40"><button class="orca-button" type="button">Test</button></div>
+<label class="orca-label" for="ig2" style="margin-top: var(--orca-space-16)">Video address</label>
+<div class="orca-input-group" style="max-width: 28rem"><span class="orca-addon">https://</span><input class="orca-input" id="ig2" value="media.example.com/v/4821"><button class="orca-button" type="button">Test</button></div>
 ```
 
 **Classes:** `.orca-input-group`, `.orca-addon`

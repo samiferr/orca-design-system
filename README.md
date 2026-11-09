@@ -4,11 +4,15 @@ ORCA is a Django design system built so that developers and AI coding agents can
 interfaces without guessing. **Every element documents its why, when (and when not), and how**, the tokens and classes
 it uses, the UX principles it applies, and a copy-ready template example.
 
-- **Structure:** the ORCA Design System Guide (Atomic Design with ORCA names):
-  Primitives → Components → Patterns → Templates → Pages.
+- **Structure:** five levels from the ORCA Design System Guide, each a group of the level before it:
+  **Primitives** → **Components** (groups of primitives) → **Patterns** (groups of components) →
+  **Templates** (groups of patterns) → **Pages** (templates with real content).
 - **Rules:** *Practical UI* (Dannaway, 2024) and *Laws of UX* (Yablonski, 2024). Each element cites the rules it applies.
 - **Base:** the Tangerine system from `wise_people_analyzer` (Vanilla framework 4.59 values): square corners,
   1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance: Tangerine.
+- **Grounds:** the same backgrounds as `wise_people_analyzer`: a grey page (`--orca-bg-page`), white panels and
+  sidebar (`--orca-bg-panel`), pale yellow stat cards (`--orca-bg-stat`) and a dark brand top bar (`--orca-brand-bar`).
+- **Page filters** always open in a right drawer from a Filters button in the page actions (see `drawer-backdrop`).
 - **Phase 1 (this release): Primitives.** 141 elements covering all 214 primitive items of the guide, including the
   planning primitives (date, time, calendar marks) the guide marks as not built yet.
 
@@ -45,8 +49,8 @@ ORCA = {
 <body>
   <a class="orca-skip-link" href="#main">Skip to main content</a>
   <main id="main" tabindex="-1">
-    <h1 class="orca-page-title">Cameras</h1>
-    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add camera</button>
+    <h1 class="orca-page-title">Images</h1>
+    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add image</button>
   </main>
 </body>
 </html>
@@ -79,7 +83,7 @@ A project changes **brand tokens only**, through `settings.ORCA["BRAND"]`:
 |---|---|---|
 | `name` | – | Product name: logo alt text and wordmark |
 | `logo`, `favicon` | – | Static paths of the logo and favicon |
-| `color` | `--orca-brand`, `--orca-brand-strong*`, | Brand colour; fills that carry text are derived to reach 4.5:1 |
+| `color` | `--orca-brand`, `--orca-brand-strong*`, `--orca-brand-bar*` | Brand colour; fills that carry text are derived to reach 4.5:1; the top bar is the colour mixed with 30% black |
 | `on_color` | `--orca-brand-on` | Text on brand fills (auto black/white when empty) |
 | `accent`, `accent_dark` | `--orca-accent` | Interactive colour per theme; adjusted to reach 4.5:1 |
 | `font_sans`, `font_mono` | `--orca-font-sans`, `--orca-font-mono` | Font stacks |
@@ -130,9 +134,11 @@ documented classes and tokens exist, text and control contrast hold in all three
 
 ## Roadmap
 
-1. **Primitives** (this release).
-2. Components (form fields, pickers, calendar parts, plan items…).
-3. Patterns, 4. Templates, 5. Pages: following the ORCA guide.
+1. **Primitives** (this release): the smallest pieces and the base styles.
+2. Components: groups of primitives (form field, search bar, date picker, pagination, stat card…).
+3. Patterns: groups of components (page head with page actions, filter drawer, sidebar, data table…).
+4. Templates: groups of patterns (app shell, list page, detail page…).
+5. Pages: templates filled with real content.
 
 ## Licences
 

@@ -14,7 +14,7 @@ A progress bar makes a wait tolerable and shows the system is working (Doherty t
 
 ### When to use
 
-- Uploads, capture runs, imports, any task longer than about 1 second whose progress is known (determinate) or not (indeterminate).
+- Uploads, video exports, imports, any task longer than about 1 second whose progress is known (determinate) or not (indeterminate).
 - Capacity or quota meters (use the track and fill parts with a status tone).
 
 ### When not to use
@@ -37,9 +37,9 @@ A progress bar makes a wait tolerable and shows the system is working (Doherty t
 
 ```django
 <div class="orca-stack" style="max-width: 20rem">
-  <div class="orca-row" style="justify-content: space-between"><span id="pb1">Capture run</span><span class="orca-num orca-muted">64%</span></div>
+  <div class="orca-row" style="justify-content: space-between"><span id="pb1">Video export</span><span class="orca-num orca-muted">64%</span></div>
   <progress class="orca-progress" value="64" max="100" aria-labelledby="pb1">64%</progress>
-  <span id="pb2" class="orca-small orca-muted">Connecting to the recorder, this can take up to 15 seconds</span>
+  <span id="pb2" class="orca-small orca-muted">Preparing the video, this can take up to 15 seconds</span>
   <progress class="orca-progress" aria-labelledby="pb2"></progress>
   <span id="pb3">Disk used</span>
   <span class="orca-progress-track" role="meter" aria-labelledby="pb3" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="height: 0.5rem"><span class="orca-progress-fill orca-progress-fill--negative" style="--orca-value: 91%"></span></span>
@@ -126,7 +126,7 @@ Acknowledges an action immediately when the result takes more than a moment (Doh
 
 ### Accessibility
 
-- Pair with text ('Searching the recorder…') in a `role="status"` element.
+- Pair with text ('Searching the library…') in a `role="status"` element.
 
 #### Example: Sizes and with text
 
@@ -135,7 +135,7 @@ Acknowledges an action immediately when the result takes more than a moment (Doh
   <span class="orca-spinner orca-spinner--sm" aria-hidden="true"></span>
   <span class="orca-spinner" aria-hidden="true"></span>
   <span class="orca-spinner orca-spinner--lg" aria-hidden="true"></span>
-  <span class="orca-with-icon" role="status"><span class="orca-spinner" aria-hidden="true"></span>Searching the recorder…</span>
+  <span class="orca-with-icon" role="status"><span class="orca-spinner" aria-hidden="true"></span>Searching the library…</span>
 </div>
 ```
 
@@ -161,7 +161,7 @@ Showing the layout immediately and filling it in feels faster than a spinner and
 
 ### When to use
 
-- Heavy regions that load after the page: heat maps, camera grids, comparison tables, htmx `hx-trigger="load"` sections.
+- Heavy regions that load after the page: heat maps, image and video grids, comparison tables, htmx `hx-trigger="load"` sections.
 
 ### When not to use
 
@@ -170,7 +170,7 @@ Showing the layout immediately and filling it in feels faster than a spinner and
 ### How to use
 
 - Mirror the real layout: `.orca-skeleton--title`, `.orca-skeleton--text` (vary widths with inline `max-width`), `.orca-skeleton--circle`, or a sized `.orca-skeleton` block.
-- Wrap the region in `aria-busy="true"` and give it an accessible label 'Loading cameras'; remove both when content arrives.
+- Wrap the region in `aria-busy="true"` and give it an accessible label 'Loading images'; remove both when content arrives.
 
 ### Accessibility
 
@@ -179,7 +179,7 @@ Showing the layout immediately and filling it in feels faster than a spinner and
 #### Example: Card skeleton
 
 ```django
-<div aria-busy="true" aria-label="Loading camera" style="max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
+<div aria-busy="true" aria-label="Loading image" style="max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
   <div aria-hidden="true">
     <div class="orca-skeleton orca-aspect-16x9" style="margin-bottom: var(--orca-space-8)"></div>
     <div class="orca-skeleton orca-skeleton--title"></div>

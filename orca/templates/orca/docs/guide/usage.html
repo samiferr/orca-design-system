@@ -37,19 +37,19 @@
   <h2 class="orca-section-title">A form field, start to finish</h2>
   <p class="orca-p">Label above the field, help between label and field, error above the field, all linked with <code class="orca-code">aria-describedby</code>.</p>
   <div class="docs-example"><div class="docs-example__preview">
-    <label class="orca-label" for="u-rtsp">Stream address</label>
-    <p class="orca-help" id="u-rtsp-help">Starts with rtsp://. Find it in the camera's network settings.</p>
-    <p class="orca-error" id="u-rtsp-error">{% icon "error" %}<span>Enter an address that starts with rtsp://, for example rtsp://192.168.1.40/stream1.</span></p>
-    <input class="orca-input" id="u-rtsp" name="rtsp" value="192.168.1.40" aria-invalid="true" aria-describedby="u-rtsp-error u-rtsp-help">
-    <div class="orca-row" style="margin-top: var(--orca-space-24)"><button class="orca-button orca-button--primary" type="submit">Save camera</button><button class="orca-button" type="button">Cancel</button></div>
+    <label class="orca-label" for="u-video">Video address</label>
+    <p class="orca-help" id="u-video-help">Starts with https://. Copy it from the video's Share menu.</p>
+    <p class="orca-error" id="u-video-error">{% icon "error" %}<span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span></p>
+    <input class="orca-input" id="u-video" name="video_url" value="media.example.com/v/4821" aria-invalid="true" aria-describedby="u-video-error u-video-help">
+    <div class="orca-row" style="margin-top: var(--orca-space-24)"><button class="orca-button orca-button--primary" type="submit">Save video</button><button class="orca-button" type="button">Cancel</button></div>
   </div></div>
-  <pre class="docs-code"><code>{% verbatim %}<label class="orca-label" for="rtsp">Stream address</label>
-<p class="orca-help" id="rtsp-help">Starts with rtsp://. Find it in the camera's network settings.</p>
-{% if form.rtsp.errors %}
-<p class="orca-error" id="rtsp-error">{% icon "error" %}<span>{{ form.rtsp.errors.0 }}</span></p>
+  <pre class="docs-code"><code>{% verbatim %}<label class="orca-label" for="video-url">Video address</label>
+<p class="orca-help" id="video-url-help">Starts with https://. Copy it from the video's Share menu.</p>
+{% if form.video_url.errors %}
+<p class="orca-error" id="video-url-error">{% icon "error" %}<span>{{ form.video_url.errors.0 }}</span></p>
 {% endif %}
-<input class="orca-input" id="rtsp" name="rtsp" value="{{ form.rtsp.value|default:'' }}"
-       {% if form.rtsp.errors %}aria-invalid="true" aria-describedby="rtsp-error rtsp-help"{% else %}aria-describedby="rtsp-help"{% endif %}>{% endverbatim %}</code></pre>
+<input class="orca-input" id="video-url" name="video_url" value="{{ form.video_url.value|default:'' }}"
+       {% if form.video_url.errors %}aria-invalid="true" aria-describedby="video-url-error video-url-help"{% else %}aria-describedby="video-url-help"{% endif %}>{% endverbatim %}</code></pre>
   <p class="orca-p">Form fields as a ready component arrive with phase 2. Until then, compose them from the label, help text, error text and input primitives as above.</p>
 </section>
 

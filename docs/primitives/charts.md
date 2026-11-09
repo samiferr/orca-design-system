@@ -48,15 +48,15 @@ A legend links a colour to a name; without the name, colour-blind readers lose t
 
 `id: zone-swatch` · level: primitive · source: ORCA
 
-A mark matching how a counting zone is drawn on video: coloured outline with a light fill, hatched when excluded.
+A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.
 
 ### Why
 
-Using the same mark in lists as on the video lets people match a zone to its row without reading (Miller's law); hatching distinguishes excluded zones without relying on hue (C03).
+Using the same mark in lists as on the image or video lets people match a zone to its row without reading (Miller's law); hatching distinguishes excluded zones without relying on hue (C03).
 
 ### When to use
 
-- Zone lists, zone editors, legends over camera images.
+- Region lists, region editors, legends over images and videos.
 
 ### How to use
 
@@ -67,8 +67,8 @@ Using the same mark in lists as on the video lets people match a zone to its row
 
 ```django
 <div class="orca-stack">
-  <span class="orca-with-icon"><span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-500)"></span>Door line</span>
-  <span class="orca-with-icon"><span class="orca-zone-swatch orca-zone-swatch--exclude" style="--orca-zone: var(--orca-orange-500)"></span>Staff area (excluded)</span>
+  <span class="orca-with-icon"><span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-500)"></span>Subject</span>
+  <span class="orca-with-icon"><span class="orca-zone-swatch orca-zone-swatch--exclude" style="--orca-zone: var(--orca-orange-500)"></span>Watermark area (excluded)</span>
 </div>
 ```
 

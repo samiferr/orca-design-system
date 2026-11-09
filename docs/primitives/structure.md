@@ -62,7 +62,7 @@ The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in rig
 
 ### When to use
 
-- Breadcrumbs, path displays (Site › Building › Camera).
+- Breadcrumbs, path displays (Library › Album › Image).
 
 ### How to use
 
@@ -72,7 +72,7 @@ The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in rig
 #### Example: Path
 
 ```django
-<nav aria-label="Breadcrumb" class="orca-small"><a class="orca-link orca-link--plain" href="#">Sites</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><a class="orca-link orca-link--plain" href="#">North building</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span aria-current="page">Entrance A</span></nav>
+<nav aria-label="Breadcrumb" class="orca-small"><a class="orca-link orca-link--plain" href="#">Library</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><a class="orca-link orca-link--plain" href="#">Summer 2026</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span aria-current="page">Harbour at dusk</span></nav>
 ```
 
 **Classes:** `.orca-sep`
@@ -277,10 +277,10 @@ Showing where people are in a sequence motivates completion (goal-gradient effec
 
 ```django
 <ol class="orca-stack" style="list-style: none; padding: 0; margin: 0">
-  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--done"></span>Connect recorder<span class="orca-sr-only">, done</span></li>
-  <li class="orca-with-icon" aria-current="step"><span class="orca-step-marker orca-step-marker--current"></span><strong>Choose cameras</strong><span class="orca-sr-only">, current step</span></li>
-  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--error"></span>Test streams<span class="orca-sr-only">, has errors</span></li>
-  <li class="orca-with-icon"><span class="orca-step-marker"></span>Draw zones</li>
+  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--done"></span>Upload video<span class="orca-sr-only">, done</span></li>
+  <li class="orca-with-icon" aria-current="step"><span class="orca-step-marker orca-step-marker--current"></span><strong>Choose a thumbnail</strong><span class="orca-sr-only">, current step</span></li>
+  <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--error"></span>Add captions<span class="orca-sr-only">, has errors</span></li>
+  <li class="orca-with-icon"><span class="orca-step-marker"></span>Publish</li>
 </ol>
 ```
 
@@ -405,9 +405,9 @@ Dimming the page focuses attention on the decision (Von Restorff) and signals th
 <button class="orca-button" type="button" onclick="this.nextElementSibling.showModal()">Open dialog</button>
 <dialog class="orca-dialog" aria-labelledby="dlg-demo-title">
   <form method="dialog" style="padding: var(--orca-space-24)" class="orca-stack">
-    <h2 class="orca-dialog-title" id="dlg-demo-title">Delete Entrance A?</h2>
-    <p class="orca-p">Its counts are kept. Its zones and alert rules are deleted.</p>
-    <div class="orca-row"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete camera</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div>
+    <h2 class="orca-dialog-title" id="dlg-demo-title">Delete Harbour at dusk?</h2>
+    <p class="orca-p">It is removed from every album and its share links stop working.</p>
+    <div class="orca-row"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete image</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div>
   </form>
 </dialog>
 ```
@@ -426,36 +426,84 @@ Dimming the page focuses attention on the decision (Von Restorff) and signals th
 
 `id: drawer-backdrop` · level: primitive · source: Tangerine
 
-The scrim behind a side drawer; pressing it closes the drawer.
+A side drawer on the inline end (right) with its scrim: where page filters live, opened from the page actions.
 
 ### Why
 
-The scrim shows the drawer sits above the page and offers a large, familiar target to dismiss it (Fitts's law, Jakob's law).
+Filters change what a page shows without taking the person away from it. A drawer keeps the results in view behind the scrim, keeps the page head free of a row of controls (Hick's law, Practical UI S04: reveal secondary controls when needed), and always opens from the same place, so people know where to look (Jakob's law). The scrim is a large, familiar target to dismiss it (Fitts's law).
 
 ### When to use
 
-- Behind navigation drawers on phones and filter drawers.
+- Page filters of a list, table, gallery or report: they always go in a right drawer.
+- Secondary detail or settings that people compare with the page behind.
+
+### When not to use
+
+- A row of filter controls above the results: put them in the drawer and show the applied ones as tags.
+- A decision that must finish before going back: use a dialog.
+- Navigation on wide screens: use the sidebar; a navigation drawer is for phones only, on the inline start.
 
 ### How to use
 
-- `<div class="orca-scrim" data-close></div>` before the drawer; `--contained` keeps it inside a positioned parent.
-- Clicking the scrim must do the same as the drawer's Close button; Escape too.
+- Open button in the page actions: `<button class="orca-button" type="button" data-orca-open="filters" aria-haspopup="dialog" aria-expanded="false">{% icon "filter" %}Filters</button>`. When filters are applied, add their number: `<span class="orca-count orca-count--accent">2</span>` and say it in `aria-label` ('Filters, 2 applied').
+- The drawer is a native dialog: `<dialog class="orca-drawer" id="filters" aria-labelledby=…><form method="get">` with `.orca-drawer__head` (dialog title and a Close icon button with `data-orca-close`), `.orca-drawer__body` (one `<fieldset>` per filter) and `.orca-drawer__foot` (primary 'Show results' that submits, then 'Clear filters').
+- `orca.js` opens it as a modal (`showModal()`), closes it on Close, Escape or a press on the backdrop, and returns focus to the button.
+- Order filters by use; a search field that narrows the list goes first. Above the results, show each applied filter as a removable tag and a 'Clear filters' link button.
+- Without a dialog (custom overlays): `<div class="orca-scrim" data-close></div>` before the panel; `--contained` keeps it inside a positioned parent.
 
-#### Example: Contained scrim
+### Accessibility
+
+- `showModal()` traps focus and makes the page behind inert; the opener's `aria-expanded` follows the drawer.
+- The drawer's title names it ('Filters'); every control inside keeps its visible label.
+
+#### Example: Page filters in a right drawer
 
 ```django
-<div style="position: relative; height: 8rem; overflow: hidden; border: var(--orca-border-width) solid var(--orca-border)">
-  <p class="orca-p" style="padding: var(--orca-space-16)">Page content</p>
-  <div class="orca-scrim orca-scrim--contained"></div>
-  <aside class="orca-elevation-2" style="position: absolute; top: 0; bottom: 0; right: 0; width: 60%; padding: var(--orca-space-16); z-index: calc(var(--orca-layer-drawer) + 1)"><p class="orca-dialog-title">Filters</p></aside>
+<div class="orca-page-head">
+  <div class="orca-page-head__text"><h1 class="orca-page-title">Videos</h1><p class="orca-page-subtitle">128 videos in the library.</p></div>
+  <div class="orca-page-actions">
+    <button class="orca-button" type="button" data-orca-open="drawer-demo" aria-haspopup="dialog" aria-expanded="false" aria-label="Filters, 2 applied">{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true">2</span></button>
+    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add video</button>
+  </div>
 </div>
+<div class="orca-row" style="margin-top: var(--orca-space-16)">
+  <span class="orca-tag"><span class="orca-tag__text">Published</span><button class="orca-tag__remove" type="button" aria-label="Remove Published">{% icon "close" %}</button></span>
+  <span class="orca-tag"><span class="orca-tag__text">Longer than 10 min</span><button class="orca-tag__remove" type="button" aria-label="Remove Longer than 10 min">{% icon "close" %}</button></span>
+  <button class="orca-button orca-button--link" type="button">Clear filters</button>
+</div>
+<dialog class="orca-drawer" id="drawer-demo" aria-labelledby="drawer-demo-title">
+  <form method="dialog">
+    <div class="orca-drawer__head">
+      <h2 class="orca-dialog-title" id="drawer-demo-title">Filters</h2>
+      <button class="orca-icon-button" type="button" data-orca-close aria-label="Close filters">{% icon "close" %}</button>
+    </div>
+    <div class="orca-drawer__body">
+      <div><label class="orca-label" for="drawer-demo-q">Title contains</label>
+        <input class="orca-input" type="search" id="drawer-demo-q" name="q"></div>
+      <fieldset><legend class="orca-label">Status</legend>
+        <label class="orca-check"><input type="checkbox" name="status" value="published" checked><span class="orca-check__box"></span>Published</label>
+        <label class="orca-check"><input type="checkbox" name="status" value="draft"><span class="orca-check__box"></span>Draft</label>
+      </fieldset>
+      <fieldset><legend class="orca-label">Length</legend>
+        <label class="orca-radio"><input type="radio" name="length" value="any"><span class="orca-radio__dot"></span>Any length</label>
+        <label class="orca-radio"><input type="radio" name="length" value="long" checked><span class="orca-radio__dot"></span>Longer than 10 min</label>
+      </fieldset>
+    </div>
+    <div class="orca-drawer__foot">
+      <button class="orca-button orca-button--primary" type="submit">Show 14 videos</button>
+      <button class="orca-button" type="reset">Clear filters</button>
+    </div>
+  </form>
+</dialog>
 ```
 
-**Classes:** `.orca-scrim`, `.orca-scrim--contained`
+**Classes:** `.orca-drawer`, `.orca-drawer__head`, `.orca-drawer__body`, `.orca-drawer__foot`, `.orca-scrim`, `.orca-scrim--contained`
 
-**Tokens:** `--orca-bg-overlay`, `--orca-layer-drawer`
+**Tokens:** `--orca-bg-overlay`, `--orca-bg-elevated`, `--orca-shadow-dragged`, `--orca-layer-drawer`, `--orca-duration-brisk`
 
-**Principles applied:** Fitts's law: big, close, well-spaced targets are faster and safer; Jakob's law: work the way products people already know work
+**Principles applied:** Hick's law: fewer, clearer choices mean faster decisions; Jakob's law: work the way products people already know work; Fitts's law: big, close, well-spaced targets are faster and safer; Practical UI S04: Reveal secondary information when needed
+
+**Related:** `page-title`, `tag`, `dialog-backdrop`
 
 **ORCA guide items covered:** Drawer backdrop
 

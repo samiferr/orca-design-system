@@ -173,7 +173,7 @@ Timezones are inherent complexity; ORCA moves it to the system by listing real z
 
 ### When to use
 
-- Setting a site's, camera's or user's timezone.
+- Setting a site's, an album's or a user's timezone.
 
 ### How to use
 
@@ -252,7 +252,7 @@ Most repeats are a few common rules; listing them keeps the choice quick (Hick's
 
 ### When to use
 
-- Repeating events, reports, capture runs.
+- Repeating events, reports, video exports.
 
 ### How to use
 

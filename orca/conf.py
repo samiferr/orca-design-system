@@ -115,6 +115,8 @@ def compute_brand(raw: dict | None = None) -> Brand:
             f"Brand fills use {strong} (derived from {brand}) so {on} text on them reads at 4.5:1."
         )
     hover, active = _hover(strong, on)
+    # The top bar (wise_people_analyzer): the brand mixed with 30% black, white text, lighter on hover and press.
+    bar = color.toward(color.mix(brand, "#000000", 0.30), "#000000", "#ffffff", 4.5)
 
     accent = values["accent"]
     accent_ok = accent
@@ -143,6 +145,10 @@ def compute_brand(raw: dict | None = None) -> Brand:
         "--orca-brand-strong-hover": hover,
         "--orca-brand-strong-active": active,
         "--orca-brand-on": on,
+        "--orca-brand-bar": bar,
+        "--orca-brand-bar-hover": color.toward(color.mix(bar, "#ffffff", 0.14), "#000000", "#ffffff", 4.5),
+        "--orca-brand-bar-active": color.toward(color.mix(bar, "#ffffff", 0.22), "#000000", "#ffffff", 4.5),
+        "--orca-brand-bar-on": "#ffffff",
         "--orca-font-sans": values["font_sans"],
         "--orca-font-mono": values["font_mono"],
     }
