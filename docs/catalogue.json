@@ -456,6 +456,7 @@
     "semantic-colors",
     "swatch"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -524,6 +525,7 @@
     "color-palette",
     "themes"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -593,6 +595,7 @@
     "button",
     "logo"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -650,6 +653,7 @@
     "text-link",
     "checkbox"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -707,6 +711,7 @@
    "related": [
     "toggle-button"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -783,6 +788,7 @@
     "heading",
     "paragraph"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -845,6 +851,7 @@
    "related": [
     "divider"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -903,6 +910,7 @@
    "related": [
     "divider"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -954,6 +962,7 @@
     "Corner radii (rounding)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1012,6 +1021,7 @@
     "Elevation utilities"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1063,6 +1073,7 @@
     "Layers"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -1113,6 +1124,7 @@
     "Control heights (sm, md, lg, xl)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1169,6 +1181,7 @@
     "Motion"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1215,6 +1228,7 @@
     "Aspect-ratio utilities"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -1261,6 +1275,7 @@
     "Scrollbar style"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -1331,6 +1346,7 @@
     "page-title",
     "section-title"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1391,6 +1407,7 @@
     "page-subtitle",
     "heading"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1444,6 +1461,7 @@
     "Page subtitle"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1494,6 +1512,7 @@
     "Section title"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1544,6 +1563,7 @@
     "Panel title"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1591,6 +1611,7 @@
     "Alert title"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1644,6 +1665,7 @@
     "Paragraph"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1709,6 +1731,7 @@
    "related": [
     "link-action"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1760,6 +1783,7 @@
     "Muted text"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1808,6 +1832,7 @@
     "Small text"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1853,6 +1878,7 @@
     "Tabular number"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1902,6 +1928,7 @@
     "Keyboard key"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -1952,6 +1979,7 @@
     "stat-value",
     "delta"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2005,6 +2033,7 @@
     "stat-label",
     "delta"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2062,6 +2091,7 @@
     "Delta (up, down, flat)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -2111,6 +2141,7 @@
     "Code text"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2164,6 +2195,7 @@
     "card-title",
     "card-meta"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2214,6 +2246,7 @@
     "card-kicker",
     "card-meta"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2262,6 +2295,7 @@
     "Card meta"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2314,6 +2348,7 @@
    "related": [
     "dialog-backdrop"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2364,6 +2399,7 @@
     "empty-text",
     "illustration"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2416,6 +2452,7 @@
    "related": [
     "empty-title"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2478,6 +2515,7 @@
     "required-marker",
     "help-text"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2534,6 +2572,7 @@
     "Required marker"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2590,6 +2629,7 @@
     "Help text"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2650,6 +2690,7 @@
    "related": [
     "error-list"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2704,6 +2745,7 @@
     "Help icon"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -2759,6 +2801,7 @@
    "related": [
     "error-text"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2859,6 +2902,7 @@
     "icon-button",
     "link-action"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2929,6 +2973,7 @@
     "button",
     "control-heights"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -2983,6 +3028,7 @@
     "text-link",
     "button"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3036,6 +3082,7 @@
    "related": [
     "toggle-button"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3080,6 +3127,7 @@
     "Email button"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3132,6 +3180,7 @@
     "Toggle button (pressed)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3197,6 +3246,7 @@
     "button",
     "icon"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3258,6 +3308,7 @@
     "Extended FAB"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -3341,6 +3392,7 @@
     "help-text",
     "error-text"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3395,6 +3447,7 @@
     "Fixed-size textarea"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3455,6 +3508,7 @@
     "listbox",
     "timezone-select"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3507,6 +3561,7 @@
     "Multiple select (listbox)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3561,6 +3616,7 @@
     "Search clear button"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3627,6 +3683,7 @@
     "switch",
     "radio"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3685,6 +3742,7 @@
     "Radio"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3743,6 +3801,7 @@
     "Switch"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3796,6 +3855,7 @@
     "Number input"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3845,6 +3905,7 @@
     "Colour input"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -3893,6 +3954,7 @@
     "File input"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -3947,6 +4009,7 @@
     "OTP digit box"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -3998,6 +4061,7 @@
     "Input addon (prefix, suffix)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4075,6 +4139,7 @@
     "icon-set",
     "icon-button"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4140,6 +4205,7 @@
     "badge",
     "alert-icon"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4220,6 +4286,7 @@
     "icon",
     "planning-icons"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4284,6 +4351,7 @@
    "related": [
     "badge"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4368,6 +4436,7 @@
     "tag",
     "count-badge"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4421,6 +4490,7 @@
    "related": [
     "status-icon"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4476,6 +4546,7 @@
     "Count badge"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -4539,6 +4610,7 @@
    "related": [
     "badge"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4598,6 +4670,7 @@
     "brand-color",
     "favicon"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4666,6 +4739,7 @@
     "Avatar image"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4714,6 +4788,7 @@
    "related": [
     "logo"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4770,6 +4845,7 @@
     "media-frame",
     "thumbnail"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4818,6 +4894,7 @@
     "Thumbnail image"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4867,6 +4944,7 @@
     "Hero image"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4919,6 +4997,7 @@
     "aspect-ratio",
     "snapshot-image"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -4967,6 +5046,7 @@
     "Snapshot image"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -5015,6 +5095,7 @@
     "Recording frame"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -5063,6 +5144,7 @@
     "Video frame"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5116,6 +5198,7 @@
    "related": [
     "empty-title"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5164,6 +5247,7 @@
     "QR code"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -5207,6 +5291,7 @@
     "Barcode"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -5270,6 +5355,7 @@
     "Divider (medium, large, vertical, labeled)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5317,6 +5403,7 @@
     "Chevron separator"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5366,6 +5453,7 @@
     "Screen-reader-only text"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5414,6 +5502,7 @@
     "Skip link"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5470,6 +5559,7 @@
     "Focus ring"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5520,6 +5610,7 @@
     "Accordion chevron"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5574,6 +5665,7 @@
     "Step marker"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5624,6 +5716,7 @@
     "Carousel dot"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -5672,6 +5765,7 @@
     "Pagination gap (ellipsis)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5729,6 +5823,7 @@
     "Dialog backdrop"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5780,6 +5875,7 @@
     "Drawer backdrop"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5847,6 +5943,7 @@
     "progress-ring",
     "spinner"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -5901,6 +5998,7 @@
     "Progress ring (track, indicator)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -5955,6 +6053,7 @@
     "Spinner"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -6006,6 +6105,7 @@
    ],
    "guide": [],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6058,6 +6158,7 @@
    "related": [
     "chart-dot"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -6105,6 +6206,7 @@
     "Zone swatch"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6155,6 +6257,7 @@
     "Dot"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -6210,6 +6313,7 @@
     "Heat-map cell"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -6267,6 +6371,7 @@
     "time-input",
     "datetime-input"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6315,6 +6420,7 @@
    "related": [
     "timezone-label"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6360,6 +6466,7 @@
     "Date-time input"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6406,6 +6513,7 @@
     "Duration input"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6454,6 +6562,7 @@
    "related": [
     "timezone-label"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "primitive",
    "uses": [],
@@ -6507,6 +6616,7 @@
     "Weekday toggle"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6555,6 +6665,7 @@
     "Recurrence select"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6602,6 +6713,7 @@
     "Reminder select"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6649,6 +6761,7 @@
     "Day number"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6695,6 +6808,7 @@
     "Weekday name"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6741,6 +6855,7 @@
     "Month name"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6786,6 +6901,7 @@
     "Year label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6832,6 +6948,7 @@
     "Week number"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6879,6 +6996,7 @@
     "Time label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6926,6 +7044,7 @@
     "Date label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -6974,6 +7093,7 @@
     "Relative time label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7021,6 +7141,7 @@
     "Timezone label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7067,6 +7188,7 @@
     "Duration label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7115,6 +7237,7 @@
     "Countdown label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7165,6 +7288,7 @@
     "Today marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7211,6 +7335,7 @@
     "Selected-day marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7256,6 +7381,7 @@
     "Out-of-month day marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7300,6 +7426,7 @@
     "Weekend marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7346,6 +7473,7 @@
     "Holiday marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7391,6 +7519,7 @@
     "Event dot"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7439,6 +7568,7 @@
     "Event bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7487,6 +7617,7 @@
     "All-day bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7534,6 +7665,7 @@
     "Hour gridline"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7578,6 +7710,7 @@
     "Now indicator"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7630,6 +7763,7 @@
     "Availability colour (free, busy, tentative)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7681,6 +7815,7 @@
     "Priority marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7729,6 +7864,7 @@
     "Deadline marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7776,6 +7912,7 @@
     "Overdue marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7827,6 +7964,7 @@
     "Milestone marker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7880,6 +8018,7 @@
     "Drag handle"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7929,6 +8068,7 @@
     "Resize handle"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -7989,6 +8129,7 @@
    "related": [
     "icon-set"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "primitive",
    "uses": [],
@@ -8061,6 +8202,12 @@
     "choice-group",
     "form-actions"
    ],
+   "server": [
+    {
+     "title": "Form and view",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Video\n\n\nclass VideoForm(forms.ModelForm):\n    class Meta:\n        model = Video\n        fields = [\"title\", \"album\", \"published\", \"recorded_on\"]\n        help_texts = {\"title\": \"Shown under the player and in search.\"}\n\n\n# videos/views.py\nfrom django.contrib import messages\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import VideoForm\nfrom .models import Video\n\n\ndef edit_video(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    form = VideoForm(request.POST or None, instance=video)\n    if request.method == \"POST\" and form.is_valid():\n        form.save()\n        messages.success(request, f\"Video “{video}” saved.\")\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {% orca_form_errors form %} then {% orca_field form.title %} for each field.\n    return render(request, \"videos/edit.html\", {\"form\": form, \"video\": video})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8128,6 +8275,12 @@
    "related": [
     "form-field"
    ],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass NotificationForm(forms.Form):\n    # A checkbox saved with the form: {% orca_field form.weekly_report %}\n    weekly_report = forms.BooleanField(label=\"Send me the weekly report\", required=False,\n                                       help_text=\"Every Monday at 07:00.\")\n    # A setting applied at once: {% orca_field form.autoplay switch=True %} in a form with data-orca-autosubmit,\n    # whose view saves it and redirects back.\n    autoplay = forms.BooleanField(label=\"Play videos automatically\", required=False)\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8190,6 +8343,12 @@
     "Form field (checkbox group)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass ExportForm(forms.Form):\n    # One answer: radios. {% orca_field form.format %} renders the fieldset, legend and options.\n    format = forms.ChoiceField(choices=[(\"mp4\", \"MP4\"), (\"webm\", \"WebM\"), (\"gif\", \"Animated GIF\")],\n                               widget=forms.RadioSelect, initial=\"mp4\")\n    # Several answers: checkboxes.\n    include = forms.MultipleChoiceField(choices=[(\"captions\", \"Captions\"), (\"chapters\", \"Chapters\")],\n                                        widget=forms.CheckboxSelectMultiple, required=False)\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8248,6 +8407,7 @@
    "related": [
     "search-bar"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8298,6 +8458,7 @@
     "Search bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8354,6 +8515,7 @@
    "related": [
     "filter-button"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8413,6 +8575,7 @@
     "Multi-picker"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -8464,6 +8627,12 @@
     "Language switcher"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "URLs and settings",
+     "python": "# project/urls.py — Django's set_language view receives the switcher's form\nfrom django.urls import include, path\n\nurlpatterns = [\n    path(\"i18n/\", include(\"django.conf.urls.i18n\")),   # the form posts to {% url 'set_language' %}\n]\n\n# project/settings.py\nMIDDLEWARE = [\n    \"django.contrib.sessions.middleware.SessionMiddleware\",\n    \"django.middleware.locale.LocaleMiddleware\",      # after sessions, before common\n    \"django.middleware.common.CommonMiddleware\",\n]\nLANGUAGES = [(\"en\", \"English\"), (\"fr\", \"Français\"), (\"de\", \"Deutsch\")]\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8513,6 +8682,7 @@
     "Input group (addon + input)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8567,6 +8737,7 @@
    "related": [
     "table-toolbar"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8630,6 +8801,7 @@
     "Dropdown select (picker)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -8692,6 +8864,7 @@
    "related": [
     "auto-suggest"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8742,6 +8915,7 @@
     "Auto-suggest input"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8791,6 +8965,7 @@
     "OTP input"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8843,6 +9018,7 @@
     "Rating input"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8896,6 +9072,7 @@
     "Split date input (day, month, year)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -8949,6 +9126,12 @@
     "File input field"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form and view",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass UploadForm(forms.Form):\n    file = forms.FileField(label=\"Video file\", help_text=\"MP4 or WebM, up to 2 GB.\")\n\n\n# videos/views.py\nfrom django.shortcuts import redirect, render\n\n\ndef upload(request):\n    # The form needs enctype=\"multipart/form-data\" and the files come in request.FILES.\n    form = UploadForm(request.POST or None, request.FILES or None)\n    if request.method == \"POST\" and form.is_valid():\n        handle_upload(form.cleaned_data[\"file\"])\n        return redirect(\"video-list\")\n    return render(request, \"videos/upload.html\", {\"form\": form})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9000,6 +9183,12 @@
     "Form alert (non-field errors)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form-wide errors",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass ShareForm(forms.Form):\n    email = forms.EmailField()\n    expires_on = forms.DateField(required=False)\n\n    def clean(self):\n        data = super().clean()\n        if not data.get(\"email\", \"\").endswith(\"@example.com\"):\n            # Errors not tied to one field show in the alert: {% orca_form_errors form %}\n            raise forms.ValidationError(\"Videos can only be shared inside your organisation.\")\n        return data\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9054,6 +9243,7 @@
     "Form actions"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9107,6 +9297,7 @@
     "Primary navigation"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9157,6 +9348,7 @@
    "related": [
     "user-chip"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9211,6 +9403,7 @@
     "Sidebar link"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -9263,6 +9456,7 @@
     "Breadcrumbs"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9320,6 +9514,12 @@
     "pagination-summary",
     "table-pager"
    ],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nfrom django.views.generic import ListView\n\nfrom .models import Video\n\n\nclass VideoList(ListView):\n    model = Video\n    paginate_by = 25          # gives the template page_obj\n    # Template: {% orca_pagination page_obj noun=\"videos\" %} — the links keep the other query\n    # parameters (filters, sort) and the summary says \"Showing 26–50 of 312 videos\".\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9369,6 +9569,7 @@
     "Pagination summary"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9418,6 +9619,7 @@
     "Table pager"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9478,6 +9680,7 @@
    "related": [
     "child-tabs"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -9530,6 +9733,7 @@
    "related": [
     "tab-bar"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9582,6 +9786,7 @@
     "Bottom navigation bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9633,6 +9838,7 @@
     "Tree leaf"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9682,6 +9888,7 @@
     "Back link"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9734,6 +9941,7 @@
     "View toggle (cards, table)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9784,6 +9992,7 @@
    "related": [
     "theme-toggle"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9832,6 +10041,7 @@
     "Create button (floating on phones)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -9900,6 +10110,7 @@
     "toast",
     "flash-message"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -9961,6 +10172,7 @@
     "Callout (info, success, warning, danger)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10012,6 +10224,7 @@
     "Empty state"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10062,6 +10275,7 @@
     "No-data state"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10110,6 +10324,7 @@
     "Status light"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10170,6 +10385,7 @@
    "related": [
     "confirm-dialog"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10231,6 +10447,12 @@
     "Confirm dialog"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py — the dialog only confirms; the delete is a POST the server checks\nfrom django.contrib import messages\nfrom django.shortcuts import get_object_or_404, redirect\nfrom django.views.decorators.http import require_POST\n\nfrom .models import Video\n\n\n@require_POST\ndef delete_video(request, pk):\n    video = get_object_or_404(Video, pk=pk, owner=request.user)\n    video.delete()\n    messages.success(request, f\"Video “{video}” deleted.\")\n    return redirect(\"video-list\")\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10285,6 +10507,7 @@
     "Progress bar with counts"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10344,6 +10567,7 @@
     "Toast stack"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10394,6 +10618,12 @@
     "Flash message"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py — needs django.contrib.messages in INSTALLED_APPS and its middleware\nfrom django.contrib import messages\nfrom django.shortcuts import redirect\n\n\ndef publish(request, pk):\n    video = publish_video(pk)\n    messages.success(request, f\"Video “{video}” published.\")      # positive\n    # messages.info / warning / error give the information, caution and negative tones.\n    return redirect(\"video-detail\", pk=pk)\n    # The app shell shows messages under the page head; elsewhere use {% orca_messages %}.\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10448,6 +10678,7 @@
     "Tooltip"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10500,6 +10731,7 @@
     "Button group"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10559,6 +10791,7 @@
     "Dropdown menu"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10613,6 +10846,7 @@
     "Dropdown item"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10665,6 +10899,7 @@
     "Copy button (copied confirmation)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10714,6 +10949,7 @@
     "Record actions (one button + overflow menu)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10764,6 +11000,7 @@
     "Row actions"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10820,6 +11057,12 @@
     "Stat card"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py (get_context_data of the page)\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour\nfrom django.utils import timezone\n\ntoday = timezone.localdate()\nviews = Visit.objects.filter(at__date=today)\nper_hour = dict(views.annotate(h=ExtractHour(\"at\")).values_list(\"h\").annotate(n=Count(\"id\")))\nctx[\"views_today\"] = views.count()\n# Template: {% orca_sparkline hourly \"Views per hour today\" %}\nctx[\"hourly\"] = [per_hour.get(h, 0) for h in range(8, 20)]\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10873,6 +11116,7 @@
     "Key/value list"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -10924,6 +11168,7 @@
     "List"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -10977,6 +11222,7 @@
     "List item"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11031,6 +11277,7 @@
     "Timeline item"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11079,6 +11326,7 @@
     "Sortable column header"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11129,6 +11377,7 @@
     "Legend item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11178,6 +11427,7 @@
     "Zone row"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11228,6 +11478,7 @@
     "Line-count item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11279,6 +11530,7 @@
     "Media object"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11339,6 +11591,7 @@
     "card-footer",
     "linked-card"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11389,6 +11642,7 @@
     "Card footer"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11438,6 +11692,7 @@
     "Linked card"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11490,6 +11745,7 @@
     "Accordion"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11544,6 +11800,7 @@
     "Steps"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11596,6 +11853,7 @@
     "Tree"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11643,6 +11901,7 @@
     "Avatar group"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -11693,6 +11952,7 @@
     "Table card"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11745,6 +12005,12 @@
     "Property row (key, value, remove)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Formset",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Chapter, Video\n\nChapterFormSet = forms.inlineformset_factory(\n    Video, Chapter, fields=[\"title\", \"starts_at\"], extra=0, can_delete=True,\n)\n\n\n# videos/views.py\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import ChapterFormSet\nfrom .models import Video\n\n\ndef edit_chapters(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    formset = ChapterFormSet(request.POST or None, instance=video, prefix=\"chapters\")\n    if request.method == \"POST\" and formset.is_valid():\n        formset.save()\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id=\"chapter-row\">\n    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with\n    # data-orca-add-row=\"chapter-row\" and data-orca-total=\"id_chapters-TOTAL_FORMS\".\n    return render(request, \"videos/chapters.html\", {\"video\": video, \"formset\": formset})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11797,6 +12063,7 @@
     "Activity entry (badge, actor, time, before and after)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11853,6 +12120,7 @@
     "Carousel"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11902,6 +12170,7 @@
     "Scroller (scroll-snap region)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -11951,6 +12220,12 @@
     "Sparkline"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py — a list of numbers, oldest first (or a string \"12,18,9\")\nfrom django.db.models import Count\nfrom django.db.models.functions import TruncDate\n\ndaily = (Visit.objects.filter(at__date__gte=start).annotate(day=TruncDate(\"at\"))\n         .values(\"day\").annotate(n=Count(\"id\")).order_by(\"day\"))\nctx[\"trend\"] = [row[\"n\"] for row in daily]   # {% orca_sparkline trend \"Views per day, last 30 days\" %}\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12002,6 +12277,12 @@
     "Donut chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py — (label, value) pairs, dicts with label and value, or \"A:3, B:1\"\nfrom django.db.models import Count\n\nctx[\"by_album\"] = list(Video.objects.values_list(\"album__title\").annotate(n=Count(\"id\")).order_by(\"-n\")[:5])\n# Template: {% orca_donut by_album total_label=\"Videos\" %}\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12054,6 +12335,7 @@
     "Chart frame"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12110,6 +12392,7 @@
     "Product item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12163,6 +12446,7 @@
     "Person block"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12214,6 +12498,7 @@
     "Block post (thumbnail + headline + excerpt)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12271,6 +12556,7 @@
     "Hero"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12322,6 +12608,7 @@
     "Photo-actions bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12372,6 +12659,7 @@
     "Video card"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -12426,6 +12714,7 @@
     "User chip"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -12477,6 +12766,7 @@
     "Panel header"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -12526,6 +12816,7 @@
     "Pin control"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -12578,6 +12869,7 @@
    "related": [
     "themes"
    ],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -12626,6 +12918,7 @@
     "Email button (with fallback link)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -12682,6 +12975,12 @@
     "mini-calendar",
     "date-range-picker"
    ],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass PublishForm(forms.Form):\n    # orca_field renders a DateField as a native <input type=\"date\"> with its label and help.\n    publish_on = forms.DateField(label=\"Publish on\", help_text=\"The video goes live at 08:00 that day.\")\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12732,6 +13031,7 @@
     "Time picker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12780,6 +13080,7 @@
     "Date-time picker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12832,6 +13133,7 @@
     "Date-range picker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12881,6 +13183,7 @@
     "Time-range input (start and end)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12930,6 +13233,7 @@
     "Duration picker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -12979,6 +13283,12 @@
     "Timezone selector"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form and middleware",
+     "python": "# accounts/forms.py — {% orca_field form.timezone %} with the \"Use my time zone\" button\nimport zoneinfo\n\nfrom django import forms\n\n\nclass TimezoneForm(forms.Form):\n    timezone = forms.ChoiceField(choices=[(z, z.replace(\"_\", \" \")) for z in sorted(zoneinfo.available_timezones())])\n\n\n# accounts/middleware.py — add \"accounts.middleware.TimezoneMiddleware\" to MIDDLEWARE\nfrom django.utils import timezone\n\n\nclass TimezoneMiddleware:\n    \"\"\"Show every date and time in the person's own time zone.\"\"\"\n\n    def __init__(self, get_response):\n        self.get_response = get_response\n\n    def __call__(self, request):\n        name = request.session.get(\"timezone\")\n        if name:\n            timezone.activate(zoneinfo.ZoneInfo(name))\n        else:\n            timezone.deactivate()\n        return self.get_response(request)\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -13027,6 +13337,12 @@
     "Month and year switcher"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py — the switcher submits ?month=2026-11 on change\nimport datetime as dt\n\nfrom django.utils import timezone\n\n\ndef chosen_month(request):\n    value = request.GET.get(\"month\", \"\")\n    try:\n        return dt.date.fromisoformat(value + \"-01\")\n    except ValueError:\n        return timezone.localdate().replace(day=1)\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13084,6 +13400,12 @@
     "Mini calendar"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nfrom django.utils import timezone\n\nmonth = chosen_month(self.request)   # see Month and year switcher\ndays_with_events = Event.objects.filter(starts_at__year=month.year, starts_at__month=month.month)\nctx.update(\n    month=month,\n    today=timezone.localdate(),\n    event_days=sorted({e.starts_at.date().isoformat() for e in days_with_events}),\n)\n# Template: {% orca_mini_calendar month selected=day today=today url=\"/calendar/{date}/\" events=event_days %}\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -13139,6 +13461,7 @@
     "Weekday selector"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13188,6 +13511,7 @@
     "Recurrence selector"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13240,6 +13564,12 @@
     "Reminder selector"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Formset",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Reminder, Video\n\nReminderFormSet = forms.inlineformset_factory(\n    Video, Reminder, fields=[\"minutes_before\", \"method\"], extra=0, can_delete=True,\n)\n\n\n# videos/views.py\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import ReminderFormSet\nfrom .models import Video\n\n\ndef edit_reminders(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    formset = ReminderFormSet(request.POST or None, instance=video, prefix=\"reminders\")\n    if request.method == \"POST\" and formset.is_valid():\n        formset.save()\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id=\"reminder-row\">\n    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with\n    # data-orca-add-row=\"reminder-row\" and data-orca-total=\"id_reminders-TOTAL_FORMS\".\n    return render(request, \"videos/reminders.html\", {\"video\": video, \"formset\": formset})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13292,6 +13622,7 @@
     "Period selector"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13343,6 +13674,7 @@
     "Granularity selector"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "component",
    "uses": [
@@ -13391,6 +13723,7 @@
     "Calendar view switcher (day, week, month, agenda)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13438,6 +13771,7 @@
     "Preset buttons (Today, Weekdays, This week, Next 7 days)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13486,6 +13820,7 @@
     "Calendar navigation (previous, today, next)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13545,6 +13880,7 @@
     "Day cell"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13597,6 +13933,7 @@
     "Week header"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13645,6 +13982,7 @@
     "Weekday header"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13691,6 +14029,7 @@
     "Week row"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13740,6 +14079,7 @@
     "Hour row"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13792,6 +14132,7 @@
     "Time slot"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13841,6 +14182,7 @@
     "All-day row"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13891,6 +14233,7 @@
     "Event chip"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13943,6 +14286,7 @@
     "Event card"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -13997,6 +14341,7 @@
     "Agenda item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14047,6 +14392,7 @@
     "Date badge"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14094,6 +14440,7 @@
     "Holiday label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14140,6 +14487,7 @@
     "More-events link (\"+3 more\")"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14188,6 +14536,7 @@
     "Calendar header (month label + navigation)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14243,6 +14592,7 @@
     "Schedule row (day, start, end)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14294,6 +14644,12 @@
     "Add-row button"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Formset",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Chapter, Video\n\nChapterFormSet = forms.inlineformset_factory(\n    Video, Chapter, fields=[\"title\", \"starts_at\"], extra=0, can_delete=True,\n)\n\n\n# videos/views.py\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import ChapterFormSet\nfrom .models import Video\n\n\ndef edit_chapters(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    formset = ChapterFormSet(request.POST or None, instance=video, prefix=\"chapters\")\n    if request.method == \"POST\" and formset.is_valid():\n        formset.save()\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id=\"chapter-row\">\n    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with\n    # data-orca-add-row=\"chapter-row\" and data-orca-total=\"id_chapters-TOTAL_FORMS\".\n    return render(request, \"videos/chapters.html\", {\"video\": video, \"formset\": formset})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14344,6 +14700,7 @@
     "Remove-row button"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14389,6 +14746,7 @@
     "Availability legend"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14437,6 +14795,7 @@
     "Exception entry (date override)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14487,6 +14846,7 @@
     "Time-off entry"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14540,6 +14900,7 @@
     "Booking slot"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14588,6 +14949,7 @@
     "Conflict warning"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14636,6 +14998,7 @@
     "Overlap warning"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14685,6 +15048,7 @@
     "Working-hours label"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14738,6 +15102,7 @@
     "Task item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14788,6 +15153,7 @@
     "Subtask item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14837,6 +15203,7 @@
     "Milestone item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14886,6 +15253,7 @@
     "Deadline item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14935,6 +15303,7 @@
     "Reminder item"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -14984,6 +15353,7 @@
     "Assignee chip"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15033,6 +15403,7 @@
     "Due-date chip"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15085,6 +15456,7 @@
     "Status chip (planned, in progress, done, overdue)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15132,6 +15504,7 @@
     "Priority chip"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15180,6 +15553,7 @@
     "Progress chip"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15233,6 +15607,7 @@
     "Gantt bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15281,6 +15656,7 @@
     "Plan card"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15334,6 +15710,7 @@
     "Board card"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15388,6 +15765,7 @@
     "Resource row"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15436,6 +15814,7 @@
     "Live example (preview and code tabs)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15501,6 +15880,7 @@
     "Code block"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15550,6 +15930,7 @@
     "Docs navigation tree"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15604,6 +15985,7 @@
     "site-header",
     "footer"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15653,6 +16035,7 @@
    "related": [
     "sidebar"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15702,6 +16085,7 @@
    "related": [
     "base-layout"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15753,6 +16137,7 @@
    "related": [
     "footer"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15805,6 +16190,7 @@
     "page-head",
     "docs-page-header"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15856,6 +16242,7 @@
    "related": [
     "form-section"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15908,6 +16295,7 @@
    "related": [
     "feature-grid"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -15962,6 +16350,7 @@
     "image-gallery",
     "story-feature"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16012,6 +16401,7 @@
    "related": [
     "image-gallery"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16067,6 +16457,7 @@
     "recording-player",
     "live-stream-panel"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16123,6 +16514,7 @@
     "email-frame",
     "hero"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16172,6 +16564,7 @@
     "footer",
     "email-frame"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16226,6 +16619,7 @@
    "related": [
     "factoid"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16278,6 +16672,7 @@
    "related": [
     "summary-tiles"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16329,6 +16724,7 @@
    "related": [
     "capacity-heat-map"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16376,6 +16772,7 @@
    "related": [
     "kanban-board"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16427,6 +16824,7 @@
     "data-table",
     "table-toolbar"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16476,6 +16874,7 @@
    "related": [
     "rich-text-editor"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16527,6 +16926,7 @@
     "filter-bar",
     "no-results"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16581,6 +16981,7 @@
     "video-grid",
     "loading-placeholder"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "component",
    "uses": [
@@ -16632,6 +17033,7 @@
     "Header"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -16690,6 +17092,7 @@
     "Top bar"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -16750,6 +17153,7 @@
     "Sidebar"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -16803,6 +17207,7 @@
     "Footer"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -16856,6 +17261,7 @@
     "Page head"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -16908,6 +17314,12 @@
     "Messages region"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# Any view: add a message, then redirect (needs django.contrib.messages)\nfrom django.contrib import messages\n\nmessages.success(request, \"Report sent to 3 people.\")\nmessages.error(request, \"The export failed. Try again in a few minutes.\")\n# The app shell renders them; in other layouts put {% orca_messages %} at the top of the content.\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -16963,6 +17375,7 @@
     "Drawer"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17012,6 +17425,7 @@
     "Top actions header (back link + actions)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17062,6 +17476,7 @@
     "Settings panel (appearance, theme, accent, rounding, card shadow)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17118,6 +17533,12 @@
     "Filter panel"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Filter form and list view",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Album, Video\n\n\nclass VideoFilterForm(forms.Form):\n    q = forms.CharField(label=\"Title contains\", required=False)\n    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label=\"Any album\")\n    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,\n                                       widget=forms.CheckboxSelectMultiple)\n\n\n# videos/views.py\nfrom django.views.generic import ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .forms import VideoFilterForm\nfrom .models import Video\n\n\nclass VideoList(OrcaPageMixin, ListView):\n    model = Video\n    paginate_by = 25\n    template_name = \"orca/generic/list.html\"   # or \"orca/layouts/simple_data.html\"\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    detail_url_name, create_url_name = \"video-detail\", \"video-create\"\n\n    def get_queryset(self):\n        qs = super().get_queryset()\n        self.filter_form = VideoFilterForm(self.request.GET or None)\n        if self.filter_form.is_valid():\n            data = self.filter_form.cleaned_data\n            if data[\"q\"]:\n                qs = qs.filter(title__icontains=data[\"q\"])\n            if data[\"album\"]:\n                qs = qs.filter(album=data[\"album\"])\n            if data[\"status\"]:\n                qs = qs.filter(status__in=data[\"status\"])\n        return qs\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        # The template puts the Filters button in the page actions and the form in the right drawer.\n        ctx[\"filter_form\"] = self.filter_form\n        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}\n        ctx[\"active_filters\"] = sum(1 for value in data.values() if value)\n        return ctx\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17175,6 +17596,12 @@
     "Filter drawer"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Filter form and list view",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Album, Video\n\n\nclass VideoFilterForm(forms.Form):\n    q = forms.CharField(label=\"Title contains\", required=False)\n    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label=\"Any album\")\n    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,\n                                       widget=forms.CheckboxSelectMultiple)\n\n\n# videos/views.py\nfrom django.views.generic import ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .forms import VideoFilterForm\nfrom .models import Video\n\n\nclass VideoList(OrcaPageMixin, ListView):\n    model = Video\n    paginate_by = 25\n    template_name = \"orca/generic/list.html\"   # or \"orca/layouts/simple_data.html\"\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    detail_url_name, create_url_name = \"video-detail\", \"video-create\"\n\n    def get_queryset(self):\n        qs = super().get_queryset()\n        self.filter_form = VideoFilterForm(self.request.GET or None)\n        if self.filter_form.is_valid():\n            data = self.filter_form.cleaned_data\n            if data[\"q\"]:\n                qs = qs.filter(title__icontains=data[\"q\"])\n            if data[\"album\"]:\n                qs = qs.filter(album=data[\"album\"])\n            if data[\"status\"]:\n                qs = qs.filter(status__in=data[\"status\"])\n        return qs\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        # The template puts the Filters button in the page actions and the form in the right drawer.\n        ctx[\"filter_form\"] = self.filter_form\n        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}\n        ctx[\"active_filters\"] = sum(1 for value in data.values() if value)\n        return ctx\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17226,6 +17653,7 @@
     "Product grid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -17276,6 +17704,7 @@
     "Video grid"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17327,6 +17756,7 @@
     "KPI grid"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17376,6 +17806,7 @@
     "Capacity heat map"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17426,6 +17857,7 @@
     "Event timeline"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17484,6 +17916,12 @@
     "Data table"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Sorting and bulk actions",
+     "python": "# videos/views.py\nfrom django.contrib import messages\nfrom django.shortcuts import redirect\nfrom django.views.decorators.http import require_POST\nfrom django.views.generic import ListView\n\nfrom .models import Video\n\nSORTABLE = {\"title\", \"-title\", \"recorded_on\", \"-recorded_on\", \"views_today\", \"-views_today\"}\n\n\nclass VideoList(ListView):\n    model = Video\n    paginate_by = 25\n\n    def get_ordering(self):\n        sort = self.request.GET.get(\"sort\", \"title\")     # sortable headers link to ?sort=-recorded_on\n        return sort if sort in SORTABLE else \"title\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        ctx[\"sort\"] = self.get_ordering()                 # the header marks aria-sort from it\n        return ctx\n\n\n@require_POST\ndef bulk_archive(request):\n    \"\"\"The table is a form; each row checkbox is name=\"selected\" value=\"{{ video.pk }}\".\"\"\"\n    ids = request.POST.getlist(\"selected\")\n    count = Video.objects.filter(pk__in=ids, owner=request.user).update(archived=True)\n    messages.success(request, f\"{count} videos archived.\")\n    return redirect(\"video-list\")\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17544,6 +17982,7 @@
     "Accuracy table"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17598,6 +18037,12 @@
     "Filter bar"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Filter form and list view",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Album, Video\n\n\nclass VideoFilterForm(forms.Form):\n    q = forms.CharField(label=\"Title contains\", required=False)\n    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label=\"Any album\")\n    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,\n                                       widget=forms.CheckboxSelectMultiple)\n\n\n# videos/views.py\nfrom django.views.generic import ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .forms import VideoFilterForm\nfrom .models import Video\n\n\nclass VideoList(OrcaPageMixin, ListView):\n    model = Video\n    paginate_by = 25\n    template_name = \"orca/generic/list.html\"   # or \"orca/layouts/simple_data.html\"\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    detail_url_name, create_url_name = \"video-detail\", \"video-create\"\n\n    def get_queryset(self):\n        qs = super().get_queryset()\n        self.filter_form = VideoFilterForm(self.request.GET or None)\n        if self.filter_form.is_valid():\n            data = self.filter_form.cleaned_data\n            if data[\"q\"]:\n                qs = qs.filter(title__icontains=data[\"q\"])\n            if data[\"album\"]:\n                qs = qs.filter(album=data[\"album\"])\n            if data[\"status\"]:\n                qs = qs.filter(status__in=data[\"status\"])\n        return qs\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        # The template puts the Filters button in the page actions and the form in the right drawer.\n        ctx[\"filter_form\"] = self.filter_form\n        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}\n        ctx[\"active_filters\"] = sum(1 for value in data.values() if value)\n        return ctx\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17651,6 +18096,7 @@
     "Panel"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17701,6 +18147,12 @@
     "Tabbed panel set"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Each tab's chart: labels and one series per line.\n        ctx[\"by_day\"] = {\"labels\": [\"Mon\", \"Tue\", \"Wed\"], \"series\": [{\"name\": \"Views\", \"values\": [120, 180, 150]}]}\n        return ctx\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17755,6 +18207,7 @@
     "Card list (record cards)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17810,6 +18263,12 @@
     "List header (search + filter + create)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Search in the list view",
+     "python": "# videos/views.py — the list header's search submits ?q=…\nfrom django.db.models import Q\nfrom django.views.generic import ListView\n\n\nclass VideoList(ListView):\n    model = Video\n    paginate_by = 25\n\n    def get_queryset(self):\n        qs = super().get_queryset()\n        q = self.request.GET.get(\"q\", \"\").strip()\n        if q:\n            qs = qs.filter(Q(title__icontains=q) | Q(album__title__icontains=q))\n        return qs\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17864,6 +18323,12 @@
     "Summary tiles"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Counts by status",
+     "python": "# videos/views.py (in the list view's get_context_data)\nfrom django.db.models import Count\nfrom django.http import QueryDict\n\ncounts = dict(Video.objects.values_list(\"status\").annotate(n=Count(\"id\")))\ncurrent = self.request.GET.get(\"status\", \"\")\n\n\ndef tile_url(status):\n    query = self.request.GET.copy()          # keep the other filters\n    query.pop(\"page\", None)\n    if status:\n        query[\"status\"] = status\n    else:\n        query.pop(\"status\", None)\n    return \"?\" + query.urlencode()\n\n\nctx[\"tiles\"] = [{\"label\": \"All videos\", \"value\": sum(counts.values()), \"url\": tile_url(\"\"), \"current\": not current}] + [\n    {\"label\": label, \"value\": counts.get(value, 0), \"url\": tile_url(value), \"current\": current == value,\n     \"tone\": {\"published\": \"positive\", \"draft\": \"neutral\", \"failed\": \"negative\"}.get(value, \"\")}\n    for value, label in Video.Status.choices\n]\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -17913,6 +18378,7 @@
     "Autocomplete results table"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -17965,6 +18431,7 @@
     "Form section"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18019,6 +18486,7 @@
     "Form stack (compact, two columns)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18069,6 +18537,12 @@
     "Schedule editor"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Formset",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import OpeningHours, Video\n\nOpeningHoursFormSet = forms.inlineformset_factory(\n    Video, OpeningHours, fields=[\"weekday\", \"opens\", \"closes\"], extra=0, can_delete=True,\n)\n\n\n# videos/views.py\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import OpeningHoursFormSet\nfrom .models import Video\n\n\ndef edit_hourss(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    formset = OpeningHoursFormSet(request.POST or None, instance=video, prefix=\"hourss\")\n    if request.method == \"POST\" and formset.is_valid():\n        formset.save()\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id=\"hours-row\">\n    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with\n    # data-orca-add-row=\"hours-row\" and data-orca-total=\"id_hourss-TOTAL_FORMS\".\n    return render(request, \"videos/hourss.html\", {\"video\": video, \"formset\": formset})\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18125,6 +18599,12 @@
     "Zone/line editor"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# videos/forms.py — the editor writes the points as JSON into a hidden field\nimport json\n\nfrom django import forms\n\n\nclass RegionForm(forms.Form):\n    name = forms.CharField()\n    points = forms.CharField(widget=forms.HiddenInput)\n\n    def clean_points(self):\n        try:\n            points = json.loads(self.cleaned_data[\"points\"])\n        except ValueError:\n            raise forms.ValidationError(\"Draw the region again: its points could not be read.\")\n        if len(points) < 3 or not all(len(p) == 2 and all(0 <= v <= 100 for v in p) for p in points):\n            raise forms.ValidationError(\"Draw at least three points inside the image.\")\n        return points   # [[x, y], …] in percent of the image; store it in a JSONField\n"
+    }
+   ],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18179,6 +18659,7 @@
     "Login card"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18231,6 +18712,12 @@
     "Properties editor (key and value rows)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Formset",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Property, Video\n\nPropertyFormSet = forms.inlineformset_factory(\n    Video, Property, fields=[\"key\", \"value\"], extra=0, can_delete=True,\n)\n\n\n# videos/views.py\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import PropertyFormSet\nfrom .models import Video\n\n\ndef edit_propertys(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    formset = PropertyFormSet(request.POST or None, instance=video, prefix=\"propertys\")\n    if request.method == \"POST\" and formset.is_valid():\n        formset.save()\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id=\"property-row\">\n    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with\n    # data-orca-add-row=\"property-row\" and data-orca-total=\"id_propertys-TOTAL_FORMS\".\n    return render(request, \"videos/propertys.html\", {\"video\": video, \"formset\": formset})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18286,6 +18773,12 @@
     "Rich text editor"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# videos/forms.py — the editor syncs its HTML into a hidden field; clean it before saving\nimport nh3   # pip install nh3\n\nfrom django import forms\n\nALLOWED = {\"p\", \"br\", \"strong\", \"b\", \"em\", \"i\", \"ul\", \"ol\", \"li\", \"a\"}\n\n\nclass DescriptionForm(forms.Form):\n    description = forms.CharField(widget=forms.HiddenInput, required=False)\n\n    def clean_description(self):\n        return nh3.clean(self.cleaned_data[\"description\"], tags=ALLOWED, link_rel=\"noopener noreferrer\")\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18339,6 +18832,7 @@
     "Recording player"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18389,6 +18883,7 @@
     "Live stream panel"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18441,6 +18936,7 @@
     "Photo post (user info + photo + actions + caption)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18491,6 +18987,7 @@
     "Image gallery (stage, thumbnails, dots)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18541,6 +19038,7 @@
     "Detail panel (header + actions + table)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18593,6 +19091,7 @@
     "Parent record with child tabs"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18643,6 +19142,7 @@
     "Child list tab"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18692,6 +19192,7 @@
     "Activity feed"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18740,6 +19241,7 @@
     "Delete-blocked notice (protected delete)"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18793,6 +19295,7 @@
     "Confirm action panel"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -18853,6 +19356,12 @@
     "Bar chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Categories as labels, one series per bar colour; stacked=True or horizontal=True.\n        rows = (Visit.objects.filter(at__date__gte=start).annotate(day=TruncDate(\"at\"))\n                .values_list(\"day\", \"entrance\").annotate(n=Count(\"id\")))\n        counts = {(day, entrance): n for day, entrance, n in rows}\n        days = [start + dt.timedelta(days=i) for i in range(7)]\n        entrances = sorted({entrance for _, entrance, _ in rows})\n        ctx[\"visits\"] = {\"labels\": [d.strftime(\"%a\") for d in days],\n                         \"series\": [{\"name\": e, \"values\": [counts.get((d, e), 0) for d in days]} for e in entrances]}\n        # Template: {% orca_chart \"bar\" visits title=\"Visitors per day\" subtitle=\"This week\" %}\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18911,6 +19420,12 @@
     "Line chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Time points as labels, one series per line.\n        hours = range(8, 20)\n        last_friday = today - dt.timedelta(days=(today.weekday() - 4) % 7 or 7)\n\n        def per_hour(day):\n            counts = dict(Visit.objects.filter(at__date=day).annotate(h=ExtractHour(\"at\"))\n                          .values_list(\"h\").annotate(n=Count(\"id\")))\n            return [counts.get(h, 0) for h in hours]\n        ctx[\"visits\"] = {\"labels\": [f\"{h:02}\" for h in hours],\n                         \"series\": [{\"name\": \"Today\", \"values\": per_hour(today)},\n                                    {\"name\": \"Last Friday\", \"values\": per_hour(last_friday)}]}\n        # Template: {% orca_chart \"line\" visits title=\"Visitors per hour\" %} (\"area\" for one series)\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -18967,6 +19482,12 @@
     "Pie chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Parts of a whole: labels and one series.\n        rows = Visit.objects.filter(at__date=today).values_list(\"entrance\").annotate(n=Count(\"id\")).order_by(\"-n\")\n        ctx[\"share\"] = {\"labels\": [name for name, _ in rows], \"series\": [{\"name\": \"Visitors\", \"values\": [n for _, n in rows]}]}\n        # Template: {% orca_chart \"pie\" share title=\"Visitors by entrance\" %} — one series; 2 to 5 parts read best\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19023,6 +19544,12 @@
     "Doughnut chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Parts of a whole: labels and one series.\n        rows = Visit.objects.filter(at__date=today).values_list(\"entrance\").annotate(n=Count(\"id\")).order_by(\"-n\")\n        ctx[\"share\"] = {\"labels\": [name for name, _ in rows], \"series\": [{\"name\": \"Visitors\", \"values\": [n for _, n in rows]}]}\n        # Template: {% orca_chart \"doughnut\" share title=\"Visitors by entrance\" %} — one series; 2 to 5 parts read best\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19079,6 +19606,12 @@
     "Scatter chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # No labels; each series is a list of (x, y).\n        # Points are (x, y) pairs; bubbles add a size: (x, y, size).\n        ctx[\"points\"] = {\"labels\": [], \"series\": [\n            {\"name\": \"Weekdays\", \"values\": [(s.avg_dwell, s.visits) for s in weekday_stats]},\n            {\"name\": \"Weekends\", \"values\": [(s.avg_dwell, s.visits) for s in weekend_stats]},\n        ]}\n        # Template: {% orca_chart \"scatter\" points title=\"Dwell time and visits\" subtitle=\"x: minutes, y: visits per hour\" %}\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19135,6 +19668,12 @@
     "Bubble chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # No labels; each series is a list of (x, y, size).\n        # Points are (x, y) pairs; bubbles add a size: (x, y, size).\n        ctx[\"points\"] = {\"labels\": [], \"series\": [\n            {\"name\": \"Weekdays\", \"values\": [(s.avg_dwell, s.visits, s.sites) for s in weekday_stats]},\n            {\"name\": \"Weekends\", \"values\": [(s.avg_dwell, s.visits, s.sites) for s in weekend_stats]},\n        ]}\n        # Template: {% orca_chart \"bubble\" points title=\"Dwell time and visits\" subtitle=\"x: minutes, y: visits per hour\" %}\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19191,6 +19730,12 @@
     "Radar chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Axes as labels, one series per shape.\n        axes = [\"Accuracy\", \"Uptime\", \"Coverage\", \"Freshness\", \"Calibration\"]\n        ctx[\"scores\"] = {\"labels\": axes, \"series\": [{\"name\": site.name, \"values\": [site.score(a) for a in axes]}\n                                                    for site in sites]}\n        # Template: {% orca_chart \"radar\" scores title=\"Site health\" unit=\"\" %}\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19247,6 +19792,12 @@
     "Polar area chart"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View: the chart data",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.db.models import Count\nfrom django.db.models.functions import ExtractHour, TruncDate\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Visit\n\n\nclass ReportView(TemplateView):\n    template_name = \"videos/report.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = today - dt.timedelta(days=6)\n        # Categories as labels and one series.\n        rows = Visit.objects.filter(at__date=today).values_list(\"entrance\").annotate(n=Count(\"id\")).order_by(\"-n\")\n        ctx[\"share\"] = {\"labels\": [name for name, _ in rows], \"series\": [{\"name\": \"Visitors\", \"values\": [n for _, n in rows]}]}\n        # Template: {% orca_chart \"polar\" share title=\"Visitors by entrance\" %} — one series; 2 to 5 parts read best\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19296,6 +19847,7 @@
     "Marketing hero"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19348,6 +19900,7 @@
     "Feature grid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19399,6 +19952,7 @@
     "Live design-token panel"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19448,6 +20002,7 @@
     "Code samples block"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19496,6 +20051,7 @@
     "Docs page header (title + intro)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19543,6 +20099,7 @@
     "Docs sidebar tree"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19594,6 +20151,7 @@
     "Video export progress"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "pattern",
    "uses": [
@@ -19647,6 +20205,7 @@
     "Story feature"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19700,6 +20259,7 @@
     "Factoid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19752,6 +20312,12 @@
     "Email frame"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Sending the email",
+     "python": "# videos/notifications.py\nfrom django.core.mail import EmailMultiAlternatives\nfrom django.template.loader import render_to_string\nfrom django.utils.html import strip_tags\n\n\ndef send_offline_alert(video, recipients):\n    context = {\n        \"title\": f\"{video} is offline\",\n        \"preheader\": f\"No video since {video.last_seen:%H:%M}\",\n        \"paragraphs\": [f\"{video} has sent nothing since {video.last_seen:%H:%M} today.\",\n                       \"Check the network connection; playback restarts on its own.\"],\n        \"action_url\": f\"https://example.com{video.get_absolute_url()}\",\n        \"action_label\": \"Open the video\",\n        \"footer\": \"You get this email because you are on the alert list.\",\n    }\n    html = render_to_string(\"orca/email/base.html\", context)   # colours are inlined: no CSS needed\n    message = EmailMultiAlternatives(context[\"title\"], strip_tags(html), to=recipients)\n    message.attach_alternative(html, \"text/html\")\n    message.send()\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19811,6 +20377,12 @@
     "Month calendar"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19873,6 +20445,12 @@
     "Week view"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19927,6 +20505,12 @@
     "Day view"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -19978,6 +20562,12 @@
     "Agenda (list) view"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20026,6 +20616,12 @@
     "Year view"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20073,6 +20669,12 @@
     "Multi-day view"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20125,6 +20727,7 @@
     "Calendar toolbar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20174,6 +20777,12 @@
     "Mini-calendar sidebar"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Event\n\n\nclass CalendarView(TemplateView):\n    template_name = \"videos/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        month = dt.date.fromisoformat(self.request.GET.get(\"month\", today.strftime(\"%Y-%m\")) + \"-01\")\n        # Events are dicts or objects with title, start, end (date or datetime), all_day, color (1–8 or a\n        # CSS colour), url, location and status (\"tentative\", \"cancelled\"). Aware datetimes are shown in the\n        # active time zone.\n        ctx[\"events\"] = [\n            {\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n             \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n            for e in Event.objects.filter(starts_at__date__lte=month + dt.timedelta(days=42),\n                                          ends_at__date__gte=month - dt.timedelta(days=7))\n        ]\n        ctx[\"holidays\"] = {\"2026-11-11\": \"Armistice Day\"}  # date → name\n        ctx.update(month=month, today=today, now=timezone.localtime())\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20222,6 +20831,7 @@
     "Calendar legend (calendars and colours)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20278,6 +20888,12 @@
     "Weekly availability editor"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Formset",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Availability, Video\n\nAvailabilityFormSet = forms.inlineformset_factory(\n    Video, Availability, fields=[\"weekday\", \"starts\", \"ends\"], extra=0, can_delete=True,\n)\n\n\n# videos/views.py\nfrom django.shortcuts import get_object_or_404, redirect, render\n\nfrom .forms import AvailabilityFormSet\nfrom .models import Video\n\n\ndef edit_availabilitys(request, pk):\n    video = get_object_or_404(Video, pk=pk)\n    formset = AvailabilityFormSet(request.POST or None, instance=video, prefix=\"availabilitys\")\n    if request.method == \"POST\" and formset.is_valid():\n        formset.save()\n        return redirect(\"video-detail\", pk=video.pk)\n    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id=\"availability-row\">\n    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with\n    # data-orca-add-row=\"availability-row\" and data-orca-total=\"id_availabilitys-TOTAL_FORMS\".\n    return render(request, \"videos/availabilitys.html\", {\"video\": video, \"formset\": formset})\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20330,6 +20946,7 @@
     "Working-hours editor"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20381,6 +20998,7 @@
     "Recurrence editor"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20432,6 +21050,7 @@
     "Exception and holiday editor"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20483,6 +21102,12 @@
     "Time-off editor"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass PeriodForm(forms.Form):\n    start = forms.DateField(label=\"From\")\n    end = forms.DateField(label=\"To\")\n\n    def clean(self):\n        data = super().clean()\n        if data.get(\"start\") and data.get(\"end\") and data[\"end\"] < data[\"start\"]:\n            self.add_error(\"end\", \"Choose an end date on or after the start date.\")\n        return data\n\n\n# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\n\n\ndef period(request):\n    \"\"\"The chosen period from ?start=…&end=…, the last 7 days by default.\"\"\"\n    form = PeriodForm(request.GET or None)\n    if form.is_valid():\n        return form.cleaned_data[\"start\"], form.cleaned_data[\"end\"]\n    today = timezone.localdate()\n    return today - dt.timedelta(days=6), today\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20536,6 +21161,7 @@
     "Resource scheduler (resources by time)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20587,6 +21213,7 @@
     "Shift planner (roster)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20637,6 +21264,7 @@
     "Booking slot picker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20688,6 +21316,7 @@
     "Appointment picker"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20740,6 +21369,7 @@
     "Conflict resolver"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20791,6 +21421,12 @@
     "Event editor"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form",
+     "python": "# events/forms.py\nfrom django import forms\n\nfrom .models import Event\n\n\nclass EventForm(forms.ModelForm):\n    class Meta:\n        model = Event\n        fields = [\"title\", \"starts_at\", \"ends_at\", \"all_day\", \"place\", \"calendar\", \"notes\"]\n        widgets = {\"starts_at\": forms.DateTimeInput(attrs={\"type\": \"datetime-local\"}, format=\"%Y-%m-%dT%H:%M\"),\n                   \"ends_at\": forms.DateTimeInput(attrs={\"type\": \"datetime-local\"}, format=\"%Y-%m-%dT%H:%M\")}\n\n    def clean(self):\n        data = super().clean()\n        if data.get(\"starts_at\") and data.get(\"ends_at\") and data[\"ends_at\"] <= data[\"starts_at\"]:\n            self.add_error(\"ends_at\", \"Choose an end after the start.\")\n        return data\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20851,6 +21487,7 @@
     "Event detail popover"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20900,6 +21537,7 @@
     "Event detail panel"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -20952,6 +21590,7 @@
     "Quick-add event"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21000,6 +21639,7 @@
     "Reminder manager"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21052,6 +21692,7 @@
     "Attendee list"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21102,6 +21743,7 @@
     "Invitation response bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21153,6 +21795,7 @@
     "Task list"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21212,6 +21855,12 @@
     "Kanban board"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Board view and move endpoint",
+     "python": "# tasks/views.py\nimport json\n\nfrom django.contrib.auth.decorators import login_required\nfrom django.http import JsonResponse\nfrom django.shortcuts import get_object_or_404\nfrom django.views.decorators.http import require_POST\nfrom django.views.generic import TemplateView\n\nfrom .models import Task\n\n\nclass Board(TemplateView):\n    template_name = \"orca/layouts/board.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        tasks = Task.objects.select_related(\"assignee\")\n        ctx[\"board_columns\"] = [\n            {\"key\": key, \"name\": name, \"limit\": 4 if key == \"progress\" else None,\n             \"cards\": [{\"id\": t.pk, \"title\": t.title, \"url\": t.get_absolute_url(), \"tags\": t.tag_names,\n                        \"due\": t.due.strftime(\"%a %-d %b\") if t.due else \"\", \"due_state\": t.due_state,\n                        \"assignee\": t.assignee.get_full_name() if t.assignee else \"\"}\n                       for t in tasks if t.status == key]}\n            for key, name in Task.Status.choices\n        ]\n        ctx[\"title\"] = \"Board\"\n        return ctx\n\n\n@login_required\n@require_POST\ndef move_task(request):\n    \"\"\"Called by the page script when a card is dropped in another column.\"\"\"\n    data = json.loads(request.body)\n    task = get_object_or_404(Task, pk=data[\"id\"].removeprefix(\"card-\"))\n    task.status = data[\"to\"]\n    task.save(update_fields=[\"status\"])\n    return JsonResponse({\"ok\": True})\n\n\n# The page script (in {% block extra_scripts %}): send each move to the view.\n#   document.addEventListener(\"orca:moved\", (e) => fetch(\"/tasks/move/\", {\n#     method: \"POST\", headers: {\"X-CSRFToken\": csrftoken, \"Content-Type\": \"application/json\"},\n#     body: JSON.stringify(e.detail),   // {id: \"card-12\", from: \"planned\", to: \"progress\"}\n#   }));\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21266,6 +21915,7 @@
     "Gantt chart"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21319,6 +21969,7 @@
     "Roadmap"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21367,6 +22018,7 @@
     "Milestone timeline"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21413,6 +22065,7 @@
     "Sprint or period overview"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21464,6 +22117,7 @@
     "Capacity planner (workload by resource)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21513,6 +22167,7 @@
     "Deadline list"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21564,6 +22219,7 @@
     "Planning summary (planned vs done)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21612,6 +22268,7 @@
     "Plan filter bar (period, assignee, status)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21661,6 +22318,12 @@
     "Date-range filter bar"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Form and view helper",
+     "python": "# videos/forms.py\nfrom django import forms\n\n\nclass PeriodForm(forms.Form):\n    start = forms.DateField(label=\"From\")\n    end = forms.DateField(label=\"To\")\n\n    def clean(self):\n        data = super().clean()\n        if data.get(\"start\") and data.get(\"end\") and data[\"end\"] < data[\"start\"]:\n            self.add_error(\"end\", \"Choose an end date on or after the start date.\")\n        return data\n\n\n# videos/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\n\n\ndef period(request):\n    \"\"\"The chosen period from ?start=…&end=…, the last 7 days by default.\"\"\"\n    form = PeriodForm(request.GET or None)\n    if form.is_valid():\n        return form.cleaned_data[\"start\"], form.cleaned_data[\"end\"]\n    today = timezone.localdate()\n    return today - dt.timedelta(days=6), today\n"
+    }
+   ],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21711,6 +22374,7 @@
    "related": [
     "base-layout"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21763,6 +22427,7 @@
    "related": [
     "error-layouts"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21816,6 +22481,7 @@
     "card-grid-layout",
     "person-block-grid"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21863,6 +22529,7 @@
     "feed-skeleton",
     "video-grid"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21910,6 +22577,7 @@
     "simple-data-page",
     "feed-skeleton"
    ],
+   "server": [],
    "source": "ORCA",
    "level": "pattern",
    "uses": [
@@ -21956,6 +22624,12 @@
    ],
    "guide": [],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nfrom django.utils.translation import get_language\nfrom django.views.generic import TemplateView\n\n\nclass Landing(TemplateView):\n    template_name = \"videos/landing.html\"   # {% extends \"orca/layouts/base.html\" %}\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        ctx.update(title=\"Welcome\", lang=get_language())   # <html lang=\"…\"> and the <title>\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22026,6 +22700,12 @@
     "App shell"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Context processor and view",
+     "python": "# videos/context_processors.py — add \"videos.context_processors.orca\" to TEMPLATES[\"OPTIONS\"][\"context_processors\"]\nfrom django.urls import reverse\n\n\ndef orca(request):\n    \"\"\"The sidebar of the app shell, on every page.\"\"\"\n    path = request.path\n\n    def item(label, name, icon, count=None):\n        url = reverse(name)\n        return {\"label\": label, \"url\": url, \"icon\": icon, \"count\": count, \"current\": path.startswith(url)}\n\n    return {\"nav\": [\n        {\"label\": \"Library\", \"items\": [item(\"Videos\", \"video-list\", \"play\"), item(\"Albums\", \"album-list\", \"folder\")]},\n        {\"label\": \"Admin\", \"items\": [item(\"Users\", \"user-list\", \"user\"), item(\"Settings\", \"settings\", \"settings\")]},\n    ]}\n\n\n# videos/views.py — any view that renders a template extending orca/layouts/app.html\nfrom django.views.generic import TemplateView\n\n\nclass Overview(TemplateView):\n    template_name = \"videos/overview.html\"   # {% extends \"orca/layouts/app.html\" %}\n    extra_context = {\n        \"title\": \"Overview\",\n        \"subtitle\": \"Everything that happened in your library today.\",\n        \"breadcrumbs\": [(\"Library\", \"/videos/\"), (\"Overview\", \"\")],\n    }\n    # `messages` and `user` come from Django's context processors; ORCA shows them in the shell.\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22115,6 +22795,12 @@
     "Auth layout"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "URLs",
+     "python": "# accounts/urls.py — Django's auth views with the ORCA layout\nfrom django.contrib.auth import views as auth_views\nfrom django.urls import path\n\nurlpatterns = [\n    path(\"login/\", auth_views.LoginView.as_view(\n        template_name=\"orca/layouts/auth.html\",\n        extra_context={\"title\": \"Sign in\", \"subtitle\": \"Use your work email.\", \"submit_label\": \"Sign in\"},\n    ), name=\"login\"),\n    path(\"password-reset/\", auth_views.PasswordResetView.as_view(\n        template_name=\"orca/layouts/auth.html\",\n        extra_context={\"title\": \"Reset your password\", \"submit_label\": \"Send the reset link\"},\n    ), name=\"password_reset\"),\n]\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22186,6 +22872,12 @@
     "Email layout"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Sending the email",
+     "python": "# videos/notifications.py\nfrom django.core.mail import EmailMultiAlternatives\nfrom django.template.loader import render_to_string\nfrom django.utils.html import strip_tags\n\n\ndef send_offline_alert(video, recipients):\n    context = {\n        \"title\": f\"{video} is offline\",\n        \"preheader\": f\"No video since {video.last_seen:%H:%M}\",\n        \"paragraphs\": [f\"{video} has sent nothing since {video.last_seen:%H:%M} today.\",\n                       \"Check the network connection; playback restarts on its own.\"],\n        \"action_url\": f\"https://example.com{video.get_absolute_url()}\",\n        \"action_label\": \"Open the video\",\n        \"footer\": \"You get this email because you are on the alert list.\",\n    }\n    html = render_to_string(\"orca/email/base.html\", context)   # colours are inlined: no CSS needed\n    message = EmailMultiAlternatives(context[\"title\"], strip_tags(html), to=recipients)\n    message.attach_alternative(html, \"text/html\")\n    message.send()\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22250,6 +22942,7 @@
     "Error layouts (403, 404, 500)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22315,6 +23008,12 @@
     "Homepage template"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nfrom django.views.generic import TemplateView\n\n\nclass Home(TemplateView):\n    template_name = \"orca/layouts/home.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        user = self.request.user\n        ctx[\"title\"] = f\"Good morning, {user.first_name}\"\n        ctx[\"stats\"] = [\n            {\"label\": \"Views today\", \"value\": f\"{views_today():,}\", \"icon\": \"show\", \"url\": \"/reports/\"},\n            {\"label\": \"Videos\", \"value\": Video.objects.count(), \"icon\": \"play\", \"foot\": \"3 processing\"},\n        ]\n        ctx[\"shortcuts\"] = [{\"label\": \"Add a video\", \"url\": \"/videos/new/\", \"icon\": \"plus\"},\n                            {\"label\": \"Open reports\", \"url\": \"/reports/\", \"icon\": \"statistics\"}]\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22406,6 +23105,12 @@
     "Feed skeleton"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nfrom django.views.generic import TemplateView\n\n\nclass Feed(TemplateView):\n    template_name = \"orca/layouts/feed.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        posts = Post.objects.select_related(\"author\").order_by(\"-created_at\")[:20]\n        ctx[\"posts\"] = [{\"author\": p.author.get_full_name(), \"when\": p.created_at, \"text\": p.text,\n                         \"image\": p.image.url if p.image else \"\", \"alt\": p.image_alt} for p in posts]\n        ctx.update(title=\"Feed\", has_more=Post.objects.count() > 20,\n                   empty_title=\"No posts yet\", empty_text=\"Share the first clip with your team.\")\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22495,6 +23200,12 @@
     "Person-block grid"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# people/views.py\nfrom django.contrib.auth import get_user_model\nfrom django.views.generic import TemplateView\n\n\nclass Team(TemplateView):\n    template_name = \"orca/layouts/people.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        users = get_user_model().objects.filter(is_active=True).order_by(\"first_name\")\n        ctx[\"people\"] = [{\"name\": u.get_full_name(), \"role\": u.profile.role, \"email\": u.email,\n                          \"url\": f\"/people/{u.pk}/\"} for u in users]\n        ctx.update(title=\"Team\", empty_title=\"No one here yet\")\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22584,6 +23295,12 @@
     "Marketing landing page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# site/views.py\nfrom django.views.generic import TemplateView\n\n\nclass Pricing(TemplateView):\n    template_name = \"site/pricing.html\"   # {% extends \"orca/layouts/marketing.html\" %}\n    extra_context = {\n        \"title\": \"Pricing\",\n        \"site_nav\": [{\"label\": \"Product\", \"url\": \"/\"}, {\"label\": \"Pricing\", \"url\": \"/pricing/\", \"current\": True},\n                     {\"label\": \"Docs\", \"url\": \"/docs/\"}],\n        \"footer_cols\": [{\"title\": \"Product\", \"links\": [{\"label\": \"Features\", \"url\": \"/\"}, {\"label\": \"Pricing\", \"url\": \"/pricing/\"}]},\n                        {\"title\": \"Help\", \"links\": [{\"label\": \"Documentation\", \"url\": \"/docs/\"}]}],\n    }\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22662,6 +23379,12 @@
     "Docs page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# docs/views.py\nfrom django.views.generic import TemplateView\n\n\nclass DocsPage(TemplateView):\n    template_name = \"docs/page.html\"   # {% extends \"orca/layouts/docs.html\" %}\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        here = self.request.path\n        sections = {\"Get started\": [(\"Installation\", \"/docs/install/\"), (\"Usage\", \"/docs/usage/\")],\n                    \"Guides\": [(\"Uploads\", \"/docs/uploads/\"), (\"Sharing\", \"/docs/sharing/\")]}\n        ctx[\"docs_nav\"] = [{\"label\": label, \"open\": any(url == here for _, url in items),\n                            \"items\": [{\"label\": t, \"url\": url, \"current\": url == here} for t, url in items]}\n                           for label, items in sections.items()]\n        ctx.update(title=\"Uploads\", subtitle=\"Add videos one by one or in bulk.\",\n                   breadcrumbs=[(\"Docs\", \"/docs/\"), (\"Uploads\", \"\")])\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22744,6 +23467,20 @@
     "List page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Views",
+     "python": "# videos/views.py\nfrom django.contrib import messages\nfrom django.contrib.messages.views import SuccessMessageMixin\nfrom django.urls import reverse_lazy\nfrom django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Video\n\n\nclass VideoPages(OrcaPageMixin):\n    \"\"\"What every video page shares: the model and the URL names the templates link to.\"\"\"\n\n    model = Video\n    list_url_name, detail_url_name, create_url_name = \"video-list\", \"video-detail\", \"video-create\"\n    update_url_name, delete_url_name = \"video-update\", \"video-delete\"\n\n\nclass VideoList(VideoPages, ListView):\n    template_name = \"orca/generic/list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    extra_context = {\"empty_title\": \"No videos yet\", \"empty_text\": \"Add your first video to start your library.\"}\n\n\nclass VideoDetail(VideoPages, DetailView):\n    template_name = \"orca/generic/detail.html\"\n    detail_fields = [\"title\", \"album\", \"status\", \"recorded_on\", (\"Length\", \"duration_text\")]\n\n    def get_title(self, obj=None):\n        return str(obj)\n\n\nclass VideoCreate(VideoPages, SuccessMessageMixin, CreateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    title = \"New video\"\n    success_message = \"Video “%(title)s” added.\"\n    extra_context = {\"submit_label\": \"Add video\"}\n\n\nclass VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    success_message = \"Video “%(title)s” saved.\"\n    extra_context = {\"submit_label\": \"Save video\"}\n\n    def get_title(self, obj=None):\n        return f\"Edit {obj}\"\n\n\nclass VideoDelete(VideoPages, DeleteView):\n    template_name = \"orca/generic/confirm_delete.html\"\n    success_url = reverse_lazy(\"video-list\")\n    # `blocked_by` (protected or restricted related objects) is filled by the mixin.\n    extra_context = {\"deleted\": [\"its chapters\", \"its share links\"], \"kept\": [\"the album\"], \"submit_label\": \"Delete video\"}\n\n    def get_title(self, obj=None):\n        return f\"Delete {obj}?\"\n\n    def form_valid(self, form):\n        messages.success(self.request, f\"Video “{self.object}” deleted.\")\n        return super().form_valid(form)\n"
+    },
+    {
+     "title": "URLs",
+     "python": "# videos/urls.py\nfrom django.urls import path\n\nfrom . import views\n\nurlpatterns = [\n    path(\"videos/\", views.VideoList.as_view(), name=\"video-list\"),\n    path(\"videos/new/\", views.VideoCreate.as_view(), name=\"video-create\"),\n    path(\"videos/<int:pk>/\", views.VideoDetail.as_view(), name=\"video-detail\"),\n    path(\"videos/<int:pk>/edit/\", views.VideoUpdate.as_view(), name=\"video-update\"),\n    path(\"videos/<int:pk>/delete/\", views.VideoDelete.as_view(), name=\"video-delete\"),\n]\n"
+    },
+    {
+     "title": "Filters (optional)",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Album, Video\n\n\nclass VideoFilterForm(forms.Form):\n    q = forms.CharField(label=\"Title contains\", required=False)\n    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label=\"Any album\")\n    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,\n                                       widget=forms.CheckboxSelectMultiple)\n\n\n# videos/views.py\nfrom django.views.generic import ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .forms import VideoFilterForm\nfrom .models import Video\n\n\nclass VideoList(OrcaPageMixin, ListView):\n    model = Video\n    paginate_by = 25\n    template_name = \"orca/generic/list.html\"   # or \"orca/layouts/simple_data.html\"\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    detail_url_name, create_url_name = \"video-detail\", \"video-create\"\n\n    def get_queryset(self):\n        qs = super().get_queryset()\n        self.filter_form = VideoFilterForm(self.request.GET or None)\n        if self.filter_form.is_valid():\n            data = self.filter_form.cleaned_data\n            if data[\"q\"]:\n                qs = qs.filter(title__icontains=data[\"q\"])\n            if data[\"album\"]:\n                qs = qs.filter(album=data[\"album\"])\n            if data[\"status\"]:\n                qs = qs.filter(status__in=data[\"status\"])\n        return qs\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        # The template puts the Filters button in the page actions and the form in the right drawer.\n        ctx[\"filter_form\"] = self.filter_form\n        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}\n        ctx[\"active_filters\"] = sum(1 for value in data.values() if value)\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22840,6 +23577,16 @@
     "Detail page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Views",
+     "python": "# videos/views.py\nfrom django.contrib import messages\nfrom django.contrib.messages.views import SuccessMessageMixin\nfrom django.urls import reverse_lazy\nfrom django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Video\n\n\nclass VideoPages(OrcaPageMixin):\n    \"\"\"What every video page shares: the model and the URL names the templates link to.\"\"\"\n\n    model = Video\n    list_url_name, detail_url_name, create_url_name = \"video-list\", \"video-detail\", \"video-create\"\n    update_url_name, delete_url_name = \"video-update\", \"video-delete\"\n\n\nclass VideoList(VideoPages, ListView):\n    template_name = \"orca/generic/list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    extra_context = {\"empty_title\": \"No videos yet\", \"empty_text\": \"Add your first video to start your library.\"}\n\n\nclass VideoDetail(VideoPages, DetailView):\n    template_name = \"orca/generic/detail.html\"\n    detail_fields = [\"title\", \"album\", \"status\", \"recorded_on\", (\"Length\", \"duration_text\")]\n\n    def get_title(self, obj=None):\n        return str(obj)\n\n\nclass VideoCreate(VideoPages, SuccessMessageMixin, CreateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    title = \"New video\"\n    success_message = \"Video “%(title)s” added.\"\n    extra_context = {\"submit_label\": \"Add video\"}\n\n\nclass VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    success_message = \"Video “%(title)s” saved.\"\n    extra_context = {\"submit_label\": \"Save video\"}\n\n    def get_title(self, obj=None):\n        return f\"Edit {obj}\"\n\n\nclass VideoDelete(VideoPages, DeleteView):\n    template_name = \"orca/generic/confirm_delete.html\"\n    success_url = reverse_lazy(\"video-list\")\n    # `blocked_by` (protected or restricted related objects) is filled by the mixin.\n    extra_context = {\"deleted\": [\"its chapters\", \"its share links\"], \"kept\": [\"the album\"], \"submit_label\": \"Delete video\"}\n\n    def get_title(self, obj=None):\n        return f\"Delete {obj}?\"\n\n    def form_valid(self, form):\n        messages.success(self.request, f\"Video “{self.object}” deleted.\")\n        return super().form_valid(form)\n"
+    },
+    {
+     "title": "URLs",
+     "python": "# videos/urls.py\nfrom django.urls import path\n\nfrom . import views\n\nurlpatterns = [\n    path(\"videos/\", views.VideoList.as_view(), name=\"video-list\"),\n    path(\"videos/new/\", views.VideoCreate.as_view(), name=\"video-create\"),\n    path(\"videos/<int:pk>/\", views.VideoDetail.as_view(), name=\"video-detail\"),\n    path(\"videos/<int:pk>/edit/\", views.VideoUpdate.as_view(), name=\"video-update\"),\n    path(\"videos/<int:pk>/delete/\", views.VideoDelete.as_view(), name=\"video-delete\"),\n]\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -22928,6 +23675,16 @@
     "Form page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Views",
+     "python": "# videos/views.py\nfrom django.contrib import messages\nfrom django.contrib.messages.views import SuccessMessageMixin\nfrom django.urls import reverse_lazy\nfrom django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Video\n\n\nclass VideoPages(OrcaPageMixin):\n    \"\"\"What every video page shares: the model and the URL names the templates link to.\"\"\"\n\n    model = Video\n    list_url_name, detail_url_name, create_url_name = \"video-list\", \"video-detail\", \"video-create\"\n    update_url_name, delete_url_name = \"video-update\", \"video-delete\"\n\n\nclass VideoList(VideoPages, ListView):\n    template_name = \"orca/generic/list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    extra_context = {\"empty_title\": \"No videos yet\", \"empty_text\": \"Add your first video to start your library.\"}\n\n\nclass VideoDetail(VideoPages, DetailView):\n    template_name = \"orca/generic/detail.html\"\n    detail_fields = [\"title\", \"album\", \"status\", \"recorded_on\", (\"Length\", \"duration_text\")]\n\n    def get_title(self, obj=None):\n        return str(obj)\n\n\nclass VideoCreate(VideoPages, SuccessMessageMixin, CreateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    title = \"New video\"\n    success_message = \"Video “%(title)s” added.\"\n    extra_context = {\"submit_label\": \"Add video\"}\n\n\nclass VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    success_message = \"Video “%(title)s” saved.\"\n    extra_context = {\"submit_label\": \"Save video\"}\n\n    def get_title(self, obj=None):\n        return f\"Edit {obj}\"\n\n\nclass VideoDelete(VideoPages, DeleteView):\n    template_name = \"orca/generic/confirm_delete.html\"\n    success_url = reverse_lazy(\"video-list\")\n    # `blocked_by` (protected or restricted related objects) is filled by the mixin.\n    extra_context = {\"deleted\": [\"its chapters\", \"its share links\"], \"kept\": [\"the album\"], \"submit_label\": \"Delete video\"}\n\n    def get_title(self, obj=None):\n        return f\"Delete {obj}?\"\n\n    def form_valid(self, form):\n        messages.success(self.request, f\"Video “{self.object}” deleted.\")\n        return super().form_valid(form)\n"
+    },
+    {
+     "title": "URLs",
+     "python": "# videos/urls.py\nfrom django.urls import path\n\nfrom . import views\n\nurlpatterns = [\n    path(\"videos/\", views.VideoList.as_view(), name=\"video-list\"),\n    path(\"videos/new/\", views.VideoCreate.as_view(), name=\"video-create\"),\n    path(\"videos/<int:pk>/\", views.VideoDetail.as_view(), name=\"video-detail\"),\n    path(\"videos/<int:pk>/edit/\", views.VideoUpdate.as_view(), name=\"video-update\"),\n    path(\"videos/<int:pk>/delete/\", views.VideoDelete.as_view(), name=\"video-delete\"),\n]\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23015,6 +23772,16 @@
     "Confirm page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Views",
+     "python": "# videos/views.py\nfrom django.contrib import messages\nfrom django.contrib.messages.views import SuccessMessageMixin\nfrom django.urls import reverse_lazy\nfrom django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Video\n\n\nclass VideoPages(OrcaPageMixin):\n    \"\"\"What every video page shares: the model and the URL names the templates link to.\"\"\"\n\n    model = Video\n    list_url_name, detail_url_name, create_url_name = \"video-list\", \"video-detail\", \"video-create\"\n    update_url_name, delete_url_name = \"video-update\", \"video-delete\"\n\n\nclass VideoList(VideoPages, ListView):\n    template_name = \"orca/generic/list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    extra_context = {\"empty_title\": \"No videos yet\", \"empty_text\": \"Add your first video to start your library.\"}\n\n\nclass VideoDetail(VideoPages, DetailView):\n    template_name = \"orca/generic/detail.html\"\n    detail_fields = [\"title\", \"album\", \"status\", \"recorded_on\", (\"Length\", \"duration_text\")]\n\n    def get_title(self, obj=None):\n        return str(obj)\n\n\nclass VideoCreate(VideoPages, SuccessMessageMixin, CreateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    title = \"New video\"\n    success_message = \"Video “%(title)s” added.\"\n    extra_context = {\"submit_label\": \"Add video\"}\n\n\nclass VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):\n    template_name = \"orca/generic/form.html\"\n    fields = [\"title\", \"album\", \"recorded_on\"]\n    success_message = \"Video “%(title)s” saved.\"\n    extra_context = {\"submit_label\": \"Save video\"}\n\n    def get_title(self, obj=None):\n        return f\"Edit {obj}\"\n\n\nclass VideoDelete(VideoPages, DeleteView):\n    template_name = \"orca/generic/confirm_delete.html\"\n    success_url = reverse_lazy(\"video-list\")\n    # `blocked_by` (protected or restricted related objects) is filled by the mixin.\n    extra_context = {\"deleted\": [\"its chapters\", \"its share links\"], \"kept\": [\"the album\"], \"submit_label\": \"Delete video\"}\n\n    def get_title(self, obj=None):\n        return f\"Delete {obj}?\"\n\n    def form_valid(self, form):\n        messages.success(self.request, f\"Video “{self.object}” deleted.\")\n        return super().form_valid(form)\n"
+    },
+    {
+     "title": "URLs",
+     "python": "# videos/urls.py\nfrom django.urls import path\n\nfrom . import views\n\nurlpatterns = [\n    path(\"videos/\", views.VideoList.as_view(), name=\"video-list\"),\n    path(\"videos/new/\", views.VideoCreate.as_view(), name=\"video-create\"),\n    path(\"videos/<int:pk>/\", views.VideoDetail.as_view(), name=\"video-detail\"),\n    path(\"videos/<int:pk>/edit/\", views.VideoUpdate.as_view(), name=\"video-update\"),\n    path(\"videos/<int:pk>/delete/\", views.VideoDelete.as_view(), name=\"video-delete\"),\n]\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23102,6 +23869,12 @@
     "Generic confirm-action template"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/views.py\nfrom django import forms\nfrom django.contrib import messages\nfrom django.shortcuts import get_object_or_404, redirect\nfrom django.views.generic import FormView\n\nfrom .models import Album\n\n\nclass ArchiveForm(forms.Form):\n    reason = forms.CharField(required=False, label=\"Reason (optional)\")\n\n\nclass ArchiveAlbum(FormView):\n    template_name = \"orca/generic/confirm_action.html\"\n    form_class = ArchiveForm\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = get_object_or_404(Album, pk=self.kwargs[\"pk\"])\n        ctx.update(title=f\"Archive {album}?\", text=\"Its videos stay available by link but leave the library.\",\n                   items=[str(v) for v in album.videos.all()[:10]], danger=False,\n                   submit_label=\"Archive album\", cancel_url=album.get_absolute_url())\n        return ctx\n\n    def form_valid(self, form):\n        album = get_object_or_404(Album, pk=self.kwargs[\"pk\"])\n        album.archive(reason=form.cleaned_data[\"reason\"])\n        messages.success(self.request, f\"Album “{album}” archived.\")\n        return redirect(\"album-list\")\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23189,6 +23962,12 @@
     "Parent base template"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Parent mixin and views",
+     "python": "# videos/views.py\nfrom django.shortcuts import get_object_or_404\nfrom django.urls import reverse\nfrom django.views.generic import DetailView, ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Album, Video\n\n\nclass AlbumTabs(OrcaPageMixin):\n    \"\"\"The parent (an album) and its tabs, for every page under /albums/<album_pk>/.\"\"\"\n\n    def get_parent(self):\n        return get_object_or_404(Album, pk=self.kwargs[\"album_pk\"])\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = ctx[\"parent\"] = self.get_parent()\n        here = self.request.path\n        tabs = [(\"Overview\", reverse(\"album-detail\", args=[album.pk]), None),\n                (\"Videos\", reverse(\"album-videos\", args=[album.pk]), album.videos.count())]\n        ctx[\"parent_tabs\"] = [{\"label\": label, \"url\": url, \"count\": count, \"current\": here == url} for label, url, count in tabs]\n        ctx[\"parent_stats\"] = [{\"label\": \"Videos\", \"value\": album.videos.count(), \"icon\": \"play\"},\n                               {\"label\": \"Last change\", \"value\": album.updated_at.strftime(\"%-d %b\"), \"icon\": \"history\"}]\n        ctx[\"parent_update_url\"] = reverse(\"album-update\", args=[album.pk])\n        return ctx\n\n\nclass AlbumDetail(AlbumTabs, DetailView):\n    model = Album\n    pk_url_kwarg = \"album_pk\"\n    template_name = \"orca/generic/parent_detail.html\"\n    detail_fields = [\"title\", \"owner\", \"created_at\"]\n\n\nclass AlbumVideos(AlbumTabs, ListView):\n    model = Video\n    template_name = \"orca/generic/child_list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"status\", \"recorded_on\"]\n    detail_url_name, create_url_name = \"video-detail\", \"album-video-create\"\n\n    def get_queryset(self):\n        return super().get_queryset().filter(album_id=self.kwargs[\"album_pk\"])\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23277,6 +24056,12 @@
     "Parent detail page (overview + child tabs)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Parent mixin and views",
+     "python": "# videos/views.py\nfrom django.shortcuts import get_object_or_404\nfrom django.urls import reverse\nfrom django.views.generic import DetailView, ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Album, Video\n\n\nclass AlbumTabs(OrcaPageMixin):\n    \"\"\"The parent (an album) and its tabs, for every page under /albums/<album_pk>/.\"\"\"\n\n    def get_parent(self):\n        return get_object_or_404(Album, pk=self.kwargs[\"album_pk\"])\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = ctx[\"parent\"] = self.get_parent()\n        here = self.request.path\n        tabs = [(\"Overview\", reverse(\"album-detail\", args=[album.pk]), None),\n                (\"Videos\", reverse(\"album-videos\", args=[album.pk]), album.videos.count())]\n        ctx[\"parent_tabs\"] = [{\"label\": label, \"url\": url, \"count\": count, \"current\": here == url} for label, url, count in tabs]\n        ctx[\"parent_stats\"] = [{\"label\": \"Videos\", \"value\": album.videos.count(), \"icon\": \"play\"},\n                               {\"label\": \"Last change\", \"value\": album.updated_at.strftime(\"%-d %b\"), \"icon\": \"history\"}]\n        ctx[\"parent_update_url\"] = reverse(\"album-update\", args=[album.pk])\n        return ctx\n\n\nclass AlbumDetail(AlbumTabs, DetailView):\n    model = Album\n    pk_url_kwarg = \"album_pk\"\n    template_name = \"orca/generic/parent_detail.html\"\n    detail_fields = [\"title\", \"owner\", \"created_at\"]\n\n\nclass AlbumVideos(AlbumTabs, ListView):\n    model = Video\n    template_name = \"orca/generic/child_list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"status\", \"recorded_on\"]\n    detail_url_name, create_url_name = \"video-detail\", \"album-video-create\"\n\n    def get_queryset(self):\n        return super().get_queryset().filter(album_id=self.kwargs[\"album_pk\"])\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23370,6 +24155,12 @@
     "Parent-child pages (list, detail, form, confirm)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Parent mixin and views",
+     "python": "# videos/views.py\nfrom django.shortcuts import get_object_or_404\nfrom django.urls import reverse\nfrom django.views.generic import DetailView, ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Album, Video\n\n\nclass AlbumTabs(OrcaPageMixin):\n    \"\"\"The parent (an album) and its tabs, for every page under /albums/<album_pk>/.\"\"\"\n\n    def get_parent(self):\n        return get_object_or_404(Album, pk=self.kwargs[\"album_pk\"])\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = ctx[\"parent\"] = self.get_parent()\n        here = self.request.path\n        tabs = [(\"Overview\", reverse(\"album-detail\", args=[album.pk]), None),\n                (\"Videos\", reverse(\"album-videos\", args=[album.pk]), album.videos.count())]\n        ctx[\"parent_tabs\"] = [{\"label\": label, \"url\": url, \"count\": count, \"current\": here == url} for label, url, count in tabs]\n        ctx[\"parent_stats\"] = [{\"label\": \"Videos\", \"value\": album.videos.count(), \"icon\": \"play\"},\n                               {\"label\": \"Last change\", \"value\": album.updated_at.strftime(\"%-d %b\"), \"icon\": \"history\"}]\n        ctx[\"parent_update_url\"] = reverse(\"album-update\", args=[album.pk])\n        return ctx\n\n\nclass AlbumDetail(AlbumTabs, DetailView):\n    model = Album\n    pk_url_kwarg = \"album_pk\"\n    template_name = \"orca/generic/parent_detail.html\"\n    detail_fields = [\"title\", \"owner\", \"created_at\"]\n\n\nclass AlbumVideos(AlbumTabs, ListView):\n    model = Video\n    template_name = \"orca/generic/child_list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"status\", \"recorded_on\"]\n    detail_url_name, create_url_name = \"video-detail\", \"album-video-create\"\n\n    def get_queryset(self):\n        return super().get_queryset().filter(album_id=self.kwargs[\"album_pk\"])\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23463,6 +24254,12 @@
     "Parent-child detail template"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Parent mixin and views",
+     "python": "# videos/views.py\nfrom django.shortcuts import get_object_or_404\nfrom django.urls import reverse\nfrom django.views.generic import DetailView, ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Album, Video\n\n\nclass AlbumTabs(OrcaPageMixin):\n    \"\"\"The parent (an album) and its tabs, for every page under /albums/<album_pk>/.\"\"\"\n\n    def get_parent(self):\n        return get_object_or_404(Album, pk=self.kwargs[\"album_pk\"])\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = ctx[\"parent\"] = self.get_parent()\n        here = self.request.path\n        tabs = [(\"Overview\", reverse(\"album-detail\", args=[album.pk]), None),\n                (\"Videos\", reverse(\"album-videos\", args=[album.pk]), album.videos.count())]\n        ctx[\"parent_tabs\"] = [{\"label\": label, \"url\": url, \"count\": count, \"current\": here == url} for label, url, count in tabs]\n        ctx[\"parent_stats\"] = [{\"label\": \"Videos\", \"value\": album.videos.count(), \"icon\": \"play\"},\n                               {\"label\": \"Last change\", \"value\": album.updated_at.strftime(\"%-d %b\"), \"icon\": \"history\"}]\n        ctx[\"parent_update_url\"] = reverse(\"album-update\", args=[album.pk])\n        return ctx\n\n\nclass AlbumDetail(AlbumTabs, DetailView):\n    model = Album\n    pk_url_kwarg = \"album_pk\"\n    template_name = \"orca/generic/parent_detail.html\"\n    detail_fields = [\"title\", \"owner\", \"created_at\"]\n\n\nclass AlbumVideos(AlbumTabs, ListView):\n    model = Video\n    template_name = \"orca/generic/child_list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"status\", \"recorded_on\"]\n    detail_url_name, create_url_name = \"video-detail\", \"album-video-create\"\n\n    def get_queryset(self):\n        return super().get_queryset().filter(album_id=self.kwargs[\"album_pk\"])\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23556,6 +24353,12 @@
     "Parent-child form template"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Parent mixin and views",
+     "python": "# videos/views.py\nfrom django.shortcuts import get_object_or_404\nfrom django.urls import reverse\nfrom django.views.generic import DetailView, ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Album, Video\n\n\nclass AlbumTabs(OrcaPageMixin):\n    \"\"\"The parent (an album) and its tabs, for every page under /albums/<album_pk>/.\"\"\"\n\n    def get_parent(self):\n        return get_object_or_404(Album, pk=self.kwargs[\"album_pk\"])\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = ctx[\"parent\"] = self.get_parent()\n        here = self.request.path\n        tabs = [(\"Overview\", reverse(\"album-detail\", args=[album.pk]), None),\n                (\"Videos\", reverse(\"album-videos\", args=[album.pk]), album.videos.count())]\n        ctx[\"parent_tabs\"] = [{\"label\": label, \"url\": url, \"count\": count, \"current\": here == url} for label, url, count in tabs]\n        ctx[\"parent_stats\"] = [{\"label\": \"Videos\", \"value\": album.videos.count(), \"icon\": \"play\"},\n                               {\"label\": \"Last change\", \"value\": album.updated_at.strftime(\"%-d %b\"), \"icon\": \"history\"}]\n        ctx[\"parent_update_url\"] = reverse(\"album-update\", args=[album.pk])\n        return ctx\n\n\nclass AlbumDetail(AlbumTabs, DetailView):\n    model = Album\n    pk_url_kwarg = \"album_pk\"\n    template_name = \"orca/generic/parent_detail.html\"\n    detail_fields = [\"title\", \"owner\", \"created_at\"]\n\n\nclass AlbumVideos(AlbumTabs, ListView):\n    model = Video\n    template_name = \"orca/generic/child_list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"status\", \"recorded_on\"]\n    detail_url_name, create_url_name = \"video-detail\", \"album-video-create\"\n\n    def get_queryset(self):\n        return super().get_queryset().filter(album_id=self.kwargs[\"album_pk\"])\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23647,6 +24450,12 @@
     "Parent-child confirm template"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Parent mixin and views",
+     "python": "# videos/views.py\nfrom django.shortcuts import get_object_or_404\nfrom django.urls import reverse\nfrom django.views.generic import DetailView, ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .models import Album, Video\n\n\nclass AlbumTabs(OrcaPageMixin):\n    \"\"\"The parent (an album) and its tabs, for every page under /albums/<album_pk>/.\"\"\"\n\n    def get_parent(self):\n        return get_object_or_404(Album, pk=self.kwargs[\"album_pk\"])\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        album = ctx[\"parent\"] = self.get_parent()\n        here = self.request.path\n        tabs = [(\"Overview\", reverse(\"album-detail\", args=[album.pk]), None),\n                (\"Videos\", reverse(\"album-videos\", args=[album.pk]), album.videos.count())]\n        ctx[\"parent_tabs\"] = [{\"label\": label, \"url\": url, \"count\": count, \"current\": here == url} for label, url, count in tabs]\n        ctx[\"parent_stats\"] = [{\"label\": \"Videos\", \"value\": album.videos.count(), \"icon\": \"play\"},\n                               {\"label\": \"Last change\", \"value\": album.updated_at.strftime(\"%-d %b\"), \"icon\": \"history\"}]\n        ctx[\"parent_update_url\"] = reverse(\"album-update\", args=[album.pk])\n        return ctx\n\n\nclass AlbumDetail(AlbumTabs, DetailView):\n    model = Album\n    pk_url_kwarg = \"album_pk\"\n    template_name = \"orca/generic/parent_detail.html\"\n    detail_fields = [\"title\", \"owner\", \"created_at\"]\n\n\nclass AlbumVideos(AlbumTabs, ListView):\n    model = Video\n    template_name = \"orca/generic/child_list.html\"\n    paginate_by = 25\n    list_columns = [\"title\", \"status\", \"recorded_on\"]\n    detail_url_name, create_url_name = \"video-detail\", \"album-video-create\"\n\n    def get_queryset(self):\n        return super().get_queryset().filter(album_id=self.kwargs[\"album_pk\"])\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23739,6 +24548,12 @@
     "Dashboard"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# reports/views.py\nfrom django.views.generic import TemplateView\n\n\nclass Dashboard(TemplateView):\n    template_name = \"orca/layouts/dashboard.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        period = self.request.GET.get(\"period\", \"week\")\n        ctx[\"periods\"] = [{\"label\": label, \"url\": f\"?period={key}\", \"current\": key == period}\n                          for key, label in [(\"day\", \"Today\"), (\"week\", \"This week\"), (\"month\", \"This month\")]]\n        ctx[\"stats\"] = [\n            {\"label\": \"Views\", \"value\": \"12,480\", \"icon\": \"show\", \"delta\": \"+8%\", \"trend\": \"up\", \"foot\": \" vs last week\", \"url\": \"/reports/views/\"},\n            {\"label\": \"Videos published\", \"value\": 36, \"icon\": \"play\", \"foot\": \"of 40 planned\"},\n        ]\n        # Each chart: kind, data (labels and series, as for {% orca_chart %}), title and subtitle.\n        ctx[\"charts\"] = [{\"kind\": \"bar\", \"data\": views_per_day(period), \"title\": \"Views per day\", \"subtitle\": \"People\"},\n                         {\"kind\": \"line\", \"data\": views_per_hour(), \"title\": \"Views per hour\", \"subtitle\": \"Today and last Friday\"}]\n        ctx[\"title\"] = \"Dashboard\"\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23832,6 +24647,12 @@
     "Calendar page (toolbar + view + side panel)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# events/views.py\nimport datetime as dt\n\nfrom django.urls import reverse\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Calendar, Event\n\n\nclass CalendarPage(TemplateView):\n    template_name = \"orca/layouts/calendar.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        view = self.request.GET.get(\"view\", \"month\")                  # month, week, day or agenda\n        day = dt.date.fromisoformat(self.request.GET.get(\"day\", today.isoformat()))\n        month = day.replace(day=1)\n        step = {\"month\": dt.timedelta(days=31), \"week\": dt.timedelta(days=7)}.get(view, dt.timedelta(days=1))\n        url = lambda d, v=view: f\"?view={v}&day={d.isoformat()}\"\n        ctx.update(\n            title=\"Calendar\", view=view, day=day, month=month, today=today, now=timezone.localtime(),\n            # Events: dicts (or objects) with title, start, end, all_day, color, url, location, status.\n            events=[{\"title\": e.title, \"start\": e.starts_at, \"end\": e.ends_at, \"all_day\": e.all_day,\n                     \"color\": e.calendar.color, \"url\": e.get_absolute_url(), \"location\": e.place}\n                    for e in Event.objects.filter(starts_at__date__gte=month - dt.timedelta(days=7),\n                                                  starts_at__date__lte=month + dt.timedelta(days=42))],\n            holidays={\"2026-11-11\": \"Armistice Day\"},\n            period_title=day.strftime(\"%B %Y\") if view == \"month\" else day.strftime(\"%-d %B %Y\"),\n            prev_url=url(day - step), next_url=url(day + step), today_url=url(today),\n            day_url=\"?view=day&day={date}\", month_url=\"?view=month&day={month}-01\",\n            views=[{\"label\": v.title(), \"url\": url(day, v), \"current\": v == view} for v in (\"month\", \"week\", \"day\", \"agenda\")],\n            calendars=[{\"key\": c.slug, \"label\": c.name, \"color\": c.color, \"checked\": True} for c in Calendar.objects.all()],\n            create_url=reverse(\"event-create\"),\n        )\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -23922,6 +24743,12 @@
     "Scheduler page (resources by time)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# bookings/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Booking, Room\n\n\nclass Scheduler(TemplateView):\n    template_name = \"orca/layouts/scheduler.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        day = dt.date.fromisoformat(self.request.GET.get(\"day\", today.isoformat()))\n        bookings = Booking.objects.filter(starts_at__date=day)\n        # One row per resource; its bookings are events (title, start, end, status, url).\n        ctx[\"resources\"] = [{\"name\": room.name, \"url\": room.get_absolute_url(),\n                             \"bookings\": [{\"title\": b.title, \"start\": b.starts_at, \"end\": b.ends_at, \"status\": b.status}\n                                          for b in bookings if b.room_id == room.pk]}\n                            for room in Room.objects.all()]\n        ctx.update(title=\"Rooms\", start_hour=8, end_hour=18, period_title=day.strftime(\"%A %-d %B\"),\n                   prev_url=f\"?day={day - dt.timedelta(days=1)}\", next_url=f\"?day={day + dt.timedelta(days=1)}\",\n                   today_url=f\"?day={today}\")\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24008,6 +24835,12 @@
     "Planning board page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "Board view and move endpoint",
+     "python": "# tasks/views.py\nimport json\n\nfrom django.contrib.auth.decorators import login_required\nfrom django.http import JsonResponse\nfrom django.shortcuts import get_object_or_404\nfrom django.views.decorators.http import require_POST\nfrom django.views.generic import TemplateView\n\nfrom .models import Task\n\n\nclass Board(TemplateView):\n    template_name = \"orca/layouts/board.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        tasks = Task.objects.select_related(\"assignee\")\n        ctx[\"board_columns\"] = [\n            {\"key\": key, \"name\": name, \"limit\": 4 if key == \"progress\" else None,\n             \"cards\": [{\"id\": t.pk, \"title\": t.title, \"url\": t.get_absolute_url(), \"tags\": t.tag_names,\n                        \"due\": t.due.strftime(\"%a %-d %b\") if t.due else \"\", \"due_state\": t.due_state,\n                        \"assignee\": t.assignee.get_full_name() if t.assignee else \"\"}\n                       for t in tasks if t.status == key]}\n            for key, name in Task.Status.choices\n        ]\n        ctx[\"title\"] = \"Board\"\n        return ctx\n\n\n@login_required\n@require_POST\ndef move_task(request):\n    \"\"\"Called by the page script when a card is dropped in another column.\"\"\"\n    data = json.loads(request.body)\n    task = get_object_or_404(Task, pk=data[\"id\"].removeprefix(\"card-\"))\n    task.status = data[\"to\"]\n    task.save(update_fields=[\"status\"])\n    return JsonResponse({\"ok\": True})\n\n\n# The page script (in {% block extra_scripts %}): send each move to the view.\n#   document.addEventListener(\"orca:moved\", (e) => fetch(\"/tasks/move/\", {\n#     method: \"POST\", headers: {\"X-CSRFToken\": csrftoken, \"Content-Type\": \"application/json\"},\n#     body: JSON.stringify(e.detail),   // {id: \"card-12\", from: \"planned\", to: \"progress\"}\n#   }));\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24092,6 +24925,12 @@
     "Timeline page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# projects/views.py\nimport datetime as dt\n\nfrom django.utils import timezone\nfrom django.views.generic import TemplateView\n\nfrom .models import Task\n\n\nclass Timeline(TemplateView):\n    template_name = \"orca/layouts/timeline.html\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        today = timezone.localdate()\n        start = dt.date.fromisoformat(self.request.GET.get(\"start\", (today - dt.timedelta(days=today.weekday())).isoformat()))\n        # Rows: label, start, end (dates, end included), progress 0–100, state \"done\" or \"late\", url, milestone.\n        ctx[\"rows\"] = [{\"label\": t.title, \"start\": t.starts_on, \"end\": t.due_on, \"progress\": t.progress,\n                        \"state\": \"done\" if t.done else (\"late\" if t.due_on < today else \"\"), \"url\": t.get_absolute_url()}\n                       for t in Task.objects.filter(due_on__gte=start)]\n        ctx.update(title=\"Timeline\", start=start, days=14, today=today,\n                   period_title=f\"{start:%-d %b} – {start + dt.timedelta(days=13):%-d %b %Y}\",\n                   prev_url=f\"?start={start - dt.timedelta(days=14)}\", next_url=f\"?start={start + dt.timedelta(days=14)}\",\n                   today_url=\"?\")\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24178,6 +25017,12 @@
     "Booking flow"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# bookings/views.py — one view per step, sharing what was chosen in the session\nfrom django.shortcuts import redirect, render\n\nSTEPS = [\"Service\", \"Date and time\", \"Your details\", \"Confirm\"]\n\n\ndef book_time(request):\n    chosen = request.session.setdefault(\"booking\", {})\n    form = SlotForm(request.POST or None)\n    if request.method == \"POST\" and form.is_valid():\n        chosen[\"slot\"] = form.cleaned_data[\"slot\"].isoformat()\n        request.session.modified = True\n        return redirect(\"book-details\")\n    summary = [(\"Service\", chosen.get(\"service\", \"\")), (\"Time\", chosen.get(\"slot\", \"\"))]\n    return render(request, \"bookings/time.html\", {      # extends \"orca/layouts/booking.html\"\n        \"title\": \"Choose a time\", \"steps\": STEPS, \"step\": 2, \"summary\": [s for s in summary if s[1]], \"form\": form,\n    })\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24265,6 +25110,12 @@
     "Event editor page"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# events/views.py\nfrom django.urls import reverse\nfrom django.views.generic import UpdateView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .forms import EventForm\nfrom .models import Event\n\n\nclass EventEdit(OrcaPageMixin, UpdateView):\n    model = Event\n    form_class = EventForm                     # see Event editor\n    template_name = \"orca/layouts/event_editor.html\"\n    list_url_name = \"calendar\"\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        event = self.object\n        # Bookings that overlap this one, shown as conflict warnings above the form.\n        ctx[\"conflicts\"] = [str(e) for e in Event.objects.filter(place=event.place, starts_at__lt=event.ends_at,\n                                                                  ends_at__gt=event.starts_at).exclude(pk=event.pk)]\n        ctx.update(title=f\"Edit {event}\", submit_label=\"Save event\",\n                   delete_url=reverse(\"event-delete\", args=[event.pk]), cancel_url=reverse(\"calendar\"))\n        return ctx\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24351,6 +25202,16 @@
     "Simple data page (title bar, search, filter drawer, summary tiles, table)"
    ],
    "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# videos/forms.py\nfrom django import forms\n\nfrom .models import Album, Video\n\n\nclass VideoFilterForm(forms.Form):\n    q = forms.CharField(label=\"Title contains\", required=False)\n    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label=\"Any album\")\n    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,\n                                       widget=forms.CheckboxSelectMultiple)\n\n\n# videos/views.py\nfrom django.views.generic import ListView\n\nfrom orca.mixins import OrcaPageMixin\n\nfrom .forms import VideoFilterForm\nfrom .models import Video\n\n\nclass VideoList(OrcaPageMixin, ListView):\n    model = Video\n    paginate_by = 25\n    template_name = \"orca/layouts/simple_data.html\"\n    list_columns = [\"title\", \"album\", \"status\", (\"Views today\", \"views_today\")]\n    detail_url_name, create_url_name = \"video-detail\", \"video-create\"\n\n    def get_queryset(self):\n        qs = super().get_queryset()\n        self.filter_form = VideoFilterForm(self.request.GET or None)\n        if self.filter_form.is_valid():\n            data = self.filter_form.cleaned_data\n            if data[\"q\"]:\n                qs = qs.filter(title__icontains=data[\"q\"])\n            if data[\"album\"]:\n                qs = qs.filter(album=data[\"album\"])\n            if data[\"status\"]:\n                qs = qs.filter(status__in=data[\"status\"])\n        return qs\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        # The template puts the Filters button in the page actions and the form in the right drawer.\n        ctx[\"filter_form\"] = self.filter_form\n        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}\n        ctx[\"active_filters\"] = sum(1 for value in data.values() if value)\n        return ctx\n"
+    },
+    {
+     "title": "Summary tiles",
+     "python": "# videos/views.py (in the list view's get_context_data)\nfrom django.db.models import Count\nfrom django.http import QueryDict\n\ncounts = dict(Video.objects.values_list(\"status\").annotate(n=Count(\"id\")))\ncurrent = self.request.GET.get(\"status\", \"\")\n\n\ndef tile_url(status):\n    query = self.request.GET.copy()          # keep the other filters\n    query.pop(\"page\", None)\n    if status:\n        query[\"status\"] = status\n    else:\n        query.pop(\"status\", None)\n    return \"?\" + query.urlencode()\n\n\nctx[\"tiles\"] = [{\"label\": \"All videos\", \"value\": sum(counts.values()), \"url\": tile_url(\"\"), \"current\": not current}] + [\n    {\"label\": label, \"value\": counts.get(value, 0), \"url\": tile_url(value), \"current\": current == value,\n     \"tone\": {\"published\": \"positive\", \"draft\": \"neutral\", \"failed\": \"negative\"}.get(value, \"\")}\n    for value, label in Video.Status.choices\n]\n"
+    }
+   ],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24445,6 +25306,7 @@
     "Vertical stack"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24491,6 +25353,7 @@
     "Stat grid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24539,6 +25402,7 @@
     "Card grid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24585,6 +25449,7 @@
     "Two-column grid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24633,6 +25498,7 @@
     "Split (main + aside)"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24681,6 +25547,7 @@
     "Media split"
    ],
    "related": [],
+   "server": [],
    "source": "Tangerine",
    "level": "template",
    "uses": [
@@ -24732,6 +25599,7 @@
     "Form grid"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24779,6 +25647,7 @@
     "Narrow form"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [
@@ -24824,6 +25693,7 @@
     "Title"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -24868,6 +25738,7 @@
     "Page title"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -24912,6 +25783,7 @@
     "Page subtitle"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -24956,6 +25828,7 @@
     "Page actions"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25001,6 +25874,7 @@
     "Breadcrumbs"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25046,6 +25920,7 @@
     "Content"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25090,6 +25965,7 @@
     "Scripts"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25133,6 +26009,7 @@
     "Head"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25176,6 +26053,7 @@
     "Body class"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25220,6 +26098,7 @@
     "Sidebar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25264,6 +26143,7 @@
     "Top bar"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25308,6 +26188,7 @@
     "Brand"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25352,6 +26233,7 @@
     "Sidebar extra"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25396,6 +26278,7 @@
     "Sidebar navigation"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25441,6 +26324,7 @@
     "Filter panel"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25485,6 +26369,7 @@
     "Body"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25528,6 +26413,7 @@
     "Modal"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25571,6 +26457,7 @@
     "Footer"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25614,6 +26501,7 @@
     "Extra head"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25657,6 +26545,7 @@
     "Extra scripts"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25700,6 +26589,7 @@
     "Theme bootstrap"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25744,6 +26634,7 @@
     "List actions"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],
@@ -25789,6 +26680,7 @@
     "Detail actions"
    ],
    "related": [],
+   "server": [],
    "source": "ORCA",
    "level": "template",
    "uses": [],

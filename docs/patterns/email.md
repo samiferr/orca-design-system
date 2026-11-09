@@ -34,6 +34,35 @@ Email clients ignore CSS variables and most stylesheets, so ORCA computes the co
 {% orca_email_preview title="Loading dock is offline" preheader="No stream since 08:14" paragraphs=sample.email_paragraphs action_url="https://example.com/videos/12/" action_label="Open the video" footer="You get this email because you are on the alert list for Warehouse." %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Sending the email
+
+```python
+# videos/notifications.py
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+
+def send_offline_alert(video, recipients):
+    context = {
+        "title": f"{video} is offline",
+        "preheader": f"No video since {video.last_seen:%H:%M}",
+        "paragraphs": [f"{video} has sent nothing since {video.last_seen:%H:%M} today.",
+                       "Check the network connection; playback restarts on its own."],
+        "action_url": f"https://example.com{video.get_absolute_url()}",
+        "action_label": "Open the video",
+        "footer": "You get this email because you are on the alert list.",
+    }
+    html = render_to_string("orca/email/base.html", context)   # colours are inlined: no CSS needed
+    message = EmailMultiAlternatives(context["title"], strip_tags(html), to=recipients)
+    message.attach_alternative(html, "text/html")
+    message.send()
+```
+
 **Classes:** `.orca-email-preview`
 
 **Principles applied:** Postel's law: accept varied input, output reliable and accessible UI; Peak–end rule: people judge an experience by its peak and its end; Practical UI W15: Help people recover from errors

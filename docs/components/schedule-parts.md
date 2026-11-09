@@ -71,6 +71,42 @@ Letting people add rows only when needed keeps the default form short (Practical
 <button class="orca-button orca-button--ghost" type="button" data-orca-add-row="ar-tpl" aria-controls="ar-list" style="margin-top: var(--orca-space-8)">{% icon "plus" %}Add hours</button>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Formset
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Chapter, Video
+
+ChapterFormSet = forms.inlineformset_factory(
+    Video, Chapter, fields=["title", "starts_at"], extra=0, can_delete=True,
+)
+
+
+# videos/views.py
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import ChapterFormSet
+from .models import Video
+
+
+def edit_chapters(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    formset = ChapterFormSet(request.POST or None, instance=video, prefix="chapters")
+    if request.method == "POST" and formset.is_valid():
+        formset.save()
+        return redirect("video-detail", pk=video.pk)
+    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id="chapter-row">
+    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with
+    # data-orca-add-row="chapter-row" and data-orca-total="id_chapters-TOTAL_FORMS".
+    return render(request, "videos/chapters.html", {"video": video, "formset": formset})
+```
+
 **Classes:** `.orca-button--ghost`
 
 **Principles applied:** Practical UI R02: Ask only for useful, necessary information; Fitts's law: big, close, well-spaced targets are faster and safer; Practical UI B10: Name the action clearly

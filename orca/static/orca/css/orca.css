@@ -25,7 +25,8 @@
   :focus-visible { outline: var(--orca-focus-width) solid var(--orca-focus); outline-offset: calc(-1 * var(--orca-focus-width)); }
   :focus:not(:focus-visible) { outline: 0; }
   img, svg, video, canvas { max-width: 100%; }
-  code, kbd, samp, pre { font-family: var(--orca-font-mono); font-variant-ligatures: none; }
+  /* Code shows every character as typed: no ligatures. Important, because any later font shorthand resets it. */
+  code, kbd, samp, pre { font-family: var(--orca-font-mono); font-feature-settings: "calt" 0, "liga" 0 !important; }
   pre > code { font: inherit; }
   [hidden] { display: none !important; }
   ::selection { background: var(--orca-info-bg-hover); }

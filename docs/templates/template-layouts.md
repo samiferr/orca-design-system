@@ -41,6 +41,27 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% templatetag openblock %} block content {% templatetag closeblock %}…{% templatetag openblock %} endblock {% templatetag closeblock %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+from django.utils.translation import get_language
+from django.views.generic import TemplateView
+
+
+class Landing(TemplateView):
+    template_name = "videos/landing.html"   # {% extends "orca/layouts/base.html" %}
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update(title="Welcome", lang=get_language())   # <html lang="…"> and the <title>
+        return ctx
+```
+
 **Principles applied:** Tesler's law: move unavoidable complexity from the user to the system; Jakob's law: work the way products people already know work
 
 ---
@@ -96,6 +117,45 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 </div>{% endblock %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Context processor and view
+
+```python
+# videos/context_processors.py — add "videos.context_processors.orca" to TEMPLATES["OPTIONS"]["context_processors"]
+from django.urls import reverse
+
+
+def orca(request):
+    """The sidebar of the app shell, on every page."""
+    path = request.path
+
+    def item(label, name, icon, count=None):
+        url = reverse(name)
+        return {"label": label, "url": url, "icon": icon, "count": count, "current": path.startswith(url)}
+
+    return {"nav": [
+        {"label": "Library", "items": [item("Videos", "video-list", "play"), item("Albums", "album-list", "folder")]},
+        {"label": "Admin", "items": [item("Users", "user-list", "user"), item("Settings", "settings", "settings")]},
+    ]}
+
+
+# videos/views.py — any view that renders a template extending orca/layouts/app.html
+from django.views.generic import TemplateView
+
+
+class Overview(TemplateView):
+    template_name = "videos/overview.html"   # {% extends "orca/layouts/app.html" %}
+    extra_context = {
+        "title": "Overview",
+        "subtitle": "Everything that happened in your library today.",
+        "breadcrumbs": [("Library", "/videos/"), ("Overview", "")],
+    }
+    # `messages` and `user` come from Django's context processors; ORCA shows them in the shell.
+```
+
 **Classes:** `.orca-shell__menu`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI L03: Establish an order of importance; Practical UI B03: One primary action; Tesler's law: move unavoidable complexity from the user to the system
@@ -143,6 +203,29 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% block footer %}<p class="orca-login__foot">No account? Ask your administrator.</p>{% endblock %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### URLs
+
+```python
+# accounts/urls.py — Django's auth views with the ORCA layout
+from django.contrib.auth import views as auth_views
+from django.urls import path
+
+urlpatterns = [
+    path("login/", auth_views.LoginView.as_view(
+        template_name="orca/layouts/auth.html",
+        extra_context={"title": "Sign in", "subtitle": "Use your work email.", "submit_label": "Sign in"},
+    ), name="login"),
+    path("password-reset/", auth_views.PasswordResetView.as_view(
+        template_name="orca/layouts/auth.html",
+        extra_context={"title": "Reset your password", "submit_label": "Send the reset link"},
+    ), name="password_reset"),
+]
+```
+
 **Classes:** `.orca-auth`, `.orca-auth-page`
 
 **Principles applied:** Hick's law: fewer, clearer choices mean faster decisions; Practical UI C08: Choose and adapt the brand colour deliberately; Practical UI R01: Keep the main form flow in one column
@@ -186,6 +269,35 @@ Blocks: `title`, `preheader`, `brand`, `heading`, `content`, `action`, `footer`
 ```django
 {% extends "orca/email/base.html" %}
 {% block footer %}{{ footer }} <a href="#">Email settings</a>{% endblock %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Sending the email
+
+```python
+# videos/notifications.py
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+
+def send_offline_alert(video, recipients):
+    context = {
+        "title": f"{video} is offline",
+        "preheader": f"No video since {video.last_seen:%H:%M}",
+        "paragraphs": [f"{video} has sent nothing since {video.last_seen:%H:%M} today.",
+                       "Check the network connection; playback restarts on its own."],
+        "action_url": f"https://example.com{video.get_absolute_url()}",
+        "action_label": "Open the video",
+        "footer": "You get this email because you are on the alert list.",
+    }
+    html = render_to_string("orca/email/base.html", context)   # colours are inlined: no CSS needed
+    message = EmailMultiAlternatives(context["title"], strip_tags(html), to=recipients)
+    message.attach_alternative(html, "text/html")
+    message.send()
 ```
 
 **Principles applied:** Postel's law: accept varied input, output reliable and accessible UI; Jakob's law: work the way products people already know work; Practical UI W05: Order explanations as an inverted pyramid
@@ -279,6 +391,33 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
   <div class="orca-vstack orca-vstack--tight">{% for i in "123" %}<div class="orca-activity"><span class="orca-avatar orca-avatar--s" aria-hidden="true">PN</span><div class="orca-activity__head"><strong>Person name</strong> changed Record name {{ i }}<time class="orca-activity__time">{{ i }} h ago</time></div></div>{% endfor %}</div></section>{% endblock %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+from django.views.generic import TemplateView
+
+
+class Home(TemplateView):
+    template_name = "orca/layouts/home.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        user = self.request.user
+        ctx["title"] = f"Good morning, {user.first_name}"
+        ctx["stats"] = [
+            {"label": "Views today", "value": f"{views_today():,}", "icon": "show", "url": "/reports/"},
+            {"label": "Videos", "value": Video.objects.count(), "icon": "play", "foot": "3 processing"},
+        ]
+        ctx["shortcuts"] = [{"label": "Add a video", "url": "/videos/new/", "icon": "plus"},
+                            {"label": "Open reports", "url": "/reports/", "icon": "statistics"}]
+        return ctx
+```
+
 **Principles applied:** Peak–end rule: people judge an experience by its peak and its end; Fitts's law: big, close, well-spaced targets are faster and safer; Practical UI L03: Establish an order of importance
 
 **ORCA guide items covered:** Homepage template
@@ -326,6 +465,30 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 ```django
 {% extends "orca/layouts/feed.html" %}
 {% block page_head %}{% endblock %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+from django.views.generic import TemplateView
+
+
+class Feed(TemplateView):
+    template_name = "orca/layouts/feed.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        posts = Post.objects.select_related("author").order_by("-created_at")[:20]
+        ctx["posts"] = [{"author": p.author.get_full_name(), "when": p.created_at, "text": p.text,
+                         "image": p.image.url if p.image else "", "alt": p.image_alt} for p in posts]
+        ctx.update(title="Feed", has_more=Post.objects.count() > 20,
+                   empty_title="No posts yet", empty_text="Share the first clip with your team.")
+        return ctx
 ```
 
 **Classes:** `.orca-feed`, `.orca-feed__skeleton`
@@ -376,6 +539,30 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 ```django
 {% extends "orca/layouts/people.html" %}
 {% block page_actions %}<a class="orca-button orca-button--primary" href="#">Invite people</a>{% endblock %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# people/views.py
+from django.contrib.auth import get_user_model
+from django.views.generic import TemplateView
+
+
+class Team(TemplateView):
+    template_name = "orca/layouts/people.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        users = get_user_model().objects.filter(is_active=True).order_by("first_name")
+        ctx["people"] = [{"name": u.get_full_name(), "role": u.profile.role, "email": u.email,
+                          "url": f"/people/{u.pk}/"} for u in users]
+        ctx.update(title="Team", empty_title="No one here yet")
+        return ctx
 ```
 
 **Classes:** `.orca-person-grid`
@@ -431,6 +618,28 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% endblock %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# site/views.py
+from django.views.generic import TemplateView
+
+
+class Pricing(TemplateView):
+    template_name = "site/pricing.html"   # {% extends "orca/layouts/marketing.html" %}
+    extra_context = {
+        "title": "Pricing",
+        "site_nav": [{"label": "Product", "url": "/"}, {"label": "Pricing", "url": "/pricing/", "current": True},
+                     {"label": "Docs", "url": "/docs/"}],
+        "footer_cols": [{"title": "Product", "links": [{"label": "Features", "url": "/"}, {"label": "Pricing", "url": "/pricing/"}]},
+                        {"title": "Help", "links": [{"label": "Documentation", "url": "/docs/"}]}],
+    }
+```
+
 **Classes:** `.orca-marketing-main`, `.orca-marketing-page`, `.orca-container`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Aesthetic–usability effect: consistent, careful visuals earn trust; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly
@@ -477,6 +686,33 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 <h2 class="orca-section-title">Section heading</h2>
 <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
 <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>{% endblock %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# docs/views.py
+from django.views.generic import TemplateView
+
+
+class DocsPage(TemplateView):
+    template_name = "docs/page.html"   # {% extends "orca/layouts/docs.html" %}
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        here = self.request.path
+        sections = {"Get started": [("Installation", "/docs/install/"), ("Usage", "/docs/usage/")],
+                    "Guides": [("Uploads", "/docs/uploads/"), ("Sharing", "/docs/sharing/")]}
+        ctx["docs_nav"] = [{"label": label, "open": any(url == here for _, url in items),
+                            "items": [{"label": t, "url": url, "current": url == here} for t, url in items]}
+                           for label, items in sections.items()]
+        ctx.update(title="Uploads", subtitle="Add videos one by one or in bulk.",
+                   breadcrumbs=[("Docs", "/docs/"), ("Uploads", "")])
+        return ctx
 ```
 
 **Classes:** `.orca-docs-main`, `.orca-docs-article`, `.orca-docs-page`
@@ -534,6 +770,150 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% comment %}A ListView with OrcaPageMixin needs no blocks at all; this preview only adds a filter form (filter_form).{% endcomment %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Views
+
+```python
+# videos/views.py
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Video
+
+
+class VideoPages(OrcaPageMixin):
+    """What every video page shares: the model and the URL names the templates link to."""
+
+    model = Video
+    list_url_name, detail_url_name, create_url_name = "video-list", "video-detail", "video-create"
+    update_url_name, delete_url_name = "video-update", "video-delete"
+
+
+class VideoList(VideoPages, ListView):
+    template_name = "orca/generic/list.html"
+    paginate_by = 25
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    extra_context = {"empty_title": "No videos yet", "empty_text": "Add your first video to start your library."}
+
+
+class VideoDetail(VideoPages, DetailView):
+    template_name = "orca/generic/detail.html"
+    detail_fields = ["title", "album", "status", "recorded_on", ("Length", "duration_text")]
+
+    def get_title(self, obj=None):
+        return str(obj)
+
+
+class VideoCreate(VideoPages, SuccessMessageMixin, CreateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    title = "New video"
+    success_message = "Video “%(title)s” added."
+    extra_context = {"submit_label": "Add video"}
+
+
+class VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    success_message = "Video “%(title)s” saved."
+    extra_context = {"submit_label": "Save video"}
+
+    def get_title(self, obj=None):
+        return f"Edit {obj}"
+
+
+class VideoDelete(VideoPages, DeleteView):
+    template_name = "orca/generic/confirm_delete.html"
+    success_url = reverse_lazy("video-list")
+    # `blocked_by` (protected or restricted related objects) is filled by the mixin.
+    extra_context = {"deleted": ["its chapters", "its share links"], "kept": ["the album"], "submit_label": "Delete video"}
+
+    def get_title(self, obj=None):
+        return f"Delete {obj}?"
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Video “{self.object}” deleted.")
+        return super().form_valid(form)
+```
+
+#### URLs
+
+```python
+# videos/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path("videos/", views.VideoList.as_view(), name="video-list"),
+    path("videos/new/", views.VideoCreate.as_view(), name="video-create"),
+    path("videos/<int:pk>/", views.VideoDetail.as_view(), name="video-detail"),
+    path("videos/<int:pk>/edit/", views.VideoUpdate.as_view(), name="video-update"),
+    path("videos/<int:pk>/delete/", views.VideoDelete.as_view(), name="video-delete"),
+]
+```
+
+#### Filters (optional)
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Album, Video
+
+
+class VideoFilterForm(forms.Form):
+    q = forms.CharField(label="Title contains", required=False)
+    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label="Any album")
+    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,
+                                       widget=forms.CheckboxSelectMultiple)
+
+
+# videos/views.py
+from django.views.generic import ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .forms import VideoFilterForm
+from .models import Video
+
+
+class VideoList(OrcaPageMixin, ListView):
+    model = Video
+    paginate_by = 25
+    template_name = "orca/generic/list.html"   # or "orca/layouts/simple_data.html"
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    detail_url_name, create_url_name = "video-detail", "video-create"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.filter_form = VideoFilterForm(self.request.GET or None)
+        if self.filter_form.is_valid():
+            data = self.filter_form.cleaned_data
+            if data["q"]:
+                qs = qs.filter(title__icontains=data["q"])
+            if data["album"]:
+                qs = qs.filter(album=data["album"])
+            if data["status"]:
+                qs = qs.filter(status__in=data["status"])
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        # The template puts the Filters button in the page actions and the form in the right drawer.
+        ctx["filter_form"] = self.filter_form
+        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}
+        ctx["active_filters"] = sum(1 for value in data.values() if value)
+        return ctx
+```
+
 **Classes:** `.orca-list-layout`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Tesler's law: move unavoidable complexity from the user to the system; Miller's law: chunk information so working memory is not overloaded; Practical UI L14: Reduce travel between related actions
@@ -585,6 +965,96 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% block detail_extra %}<section class="orca-panel" aria-labelledby="d-notes"><h2 class="orca-panel-title" id="d-notes">Related section</h2><p class="orca-p orca-muted">Extra panels go in the detail_extra block.</p></section>{% endblock %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Views
+
+```python
+# videos/views.py
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Video
+
+
+class VideoPages(OrcaPageMixin):
+    """What every video page shares: the model and the URL names the templates link to."""
+
+    model = Video
+    list_url_name, detail_url_name, create_url_name = "video-list", "video-detail", "video-create"
+    update_url_name, delete_url_name = "video-update", "video-delete"
+
+
+class VideoList(VideoPages, ListView):
+    template_name = "orca/generic/list.html"
+    paginate_by = 25
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    extra_context = {"empty_title": "No videos yet", "empty_text": "Add your first video to start your library."}
+
+
+class VideoDetail(VideoPages, DetailView):
+    template_name = "orca/generic/detail.html"
+    detail_fields = ["title", "album", "status", "recorded_on", ("Length", "duration_text")]
+
+    def get_title(self, obj=None):
+        return str(obj)
+
+
+class VideoCreate(VideoPages, SuccessMessageMixin, CreateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    title = "New video"
+    success_message = "Video “%(title)s” added."
+    extra_context = {"submit_label": "Add video"}
+
+
+class VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    success_message = "Video “%(title)s” saved."
+    extra_context = {"submit_label": "Save video"}
+
+    def get_title(self, obj=None):
+        return f"Edit {obj}"
+
+
+class VideoDelete(VideoPages, DeleteView):
+    template_name = "orca/generic/confirm_delete.html"
+    success_url = reverse_lazy("video-list")
+    # `blocked_by` (protected or restricted related objects) is filled by the mixin.
+    extra_context = {"deleted": ["its chapters", "its share links"], "kept": ["the album"], "submit_label": "Delete video"}
+
+    def get_title(self, obj=None):
+        return f"Delete {obj}?"
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Video “{self.object}” deleted.")
+        return super().form_valid(form)
+```
+
+#### URLs
+
+```python
+# videos/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path("videos/", views.VideoList.as_view(), name="video-list"),
+    path("videos/new/", views.VideoCreate.as_view(), name="video-create"),
+    path("videos/<int:pk>/", views.VideoDetail.as_view(), name="video-detail"),
+    path("videos/<int:pk>/edit/", views.VideoUpdate.as_view(), name="video-update"),
+    path("videos/<int:pk>/delete/", views.VideoDelete.as_view(), name="video-delete"),
+]
+```
+
 **Principles applied:** Practical UI L01: Group related information; Jakob's law: work the way products people already know work; Practical UI B08: Keep action order predictable
 
 **ORCA guide items covered:** Generic detail template; Detail page
@@ -631,6 +1101,96 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/generic/form.html" %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Views
+
+```python
+# videos/views.py
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Video
+
+
+class VideoPages(OrcaPageMixin):
+    """What every video page shares: the model and the URL names the templates link to."""
+
+    model = Video
+    list_url_name, detail_url_name, create_url_name = "video-list", "video-detail", "video-create"
+    update_url_name, delete_url_name = "video-update", "video-delete"
+
+
+class VideoList(VideoPages, ListView):
+    template_name = "orca/generic/list.html"
+    paginate_by = 25
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    extra_context = {"empty_title": "No videos yet", "empty_text": "Add your first video to start your library."}
+
+
+class VideoDetail(VideoPages, DetailView):
+    template_name = "orca/generic/detail.html"
+    detail_fields = ["title", "album", "status", "recorded_on", ("Length", "duration_text")]
+
+    def get_title(self, obj=None):
+        return str(obj)
+
+
+class VideoCreate(VideoPages, SuccessMessageMixin, CreateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    title = "New video"
+    success_message = "Video “%(title)s” added."
+    extra_context = {"submit_label": "Add video"}
+
+
+class VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    success_message = "Video “%(title)s” saved."
+    extra_context = {"submit_label": "Save video"}
+
+    def get_title(self, obj=None):
+        return f"Edit {obj}"
+
+
+class VideoDelete(VideoPages, DeleteView):
+    template_name = "orca/generic/confirm_delete.html"
+    success_url = reverse_lazy("video-list")
+    # `blocked_by` (protected or restricted related objects) is filled by the mixin.
+    extra_context = {"deleted": ["its chapters", "its share links"], "kept": ["the album"], "submit_label": "Delete video"}
+
+    def get_title(self, obj=None):
+        return f"Delete {obj}?"
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Video “{self.object}” deleted.")
+        return super().form_valid(form)
+```
+
+#### URLs
+
+```python
+# videos/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path("videos/", views.VideoList.as_view(), name="video-list"),
+    path("videos/new/", views.VideoCreate.as_view(), name="video-create"),
+    path("videos/<int:pk>/", views.VideoDetail.as_view(), name="video-detail"),
+    path("videos/<int:pk>/edit/", views.VideoUpdate.as_view(), name="video-update"),
+    path("videos/<int:pk>/delete/", views.VideoDelete.as_view(), name="video-delete"),
+]
 ```
 
 **Principles applied:** Practical UI R01: Keep the main form flow in one column; Practical UI W15: Help people recover from errors; Practical UI R09: Persistent labels, not placeholders
@@ -681,6 +1241,96 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% extends "orca/generic/confirm_delete.html" %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Views
+
+```python
+# videos/views.py
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Video
+
+
+class VideoPages(OrcaPageMixin):
+    """What every video page shares: the model and the URL names the templates link to."""
+
+    model = Video
+    list_url_name, detail_url_name, create_url_name = "video-list", "video-detail", "video-create"
+    update_url_name, delete_url_name = "video-update", "video-delete"
+
+
+class VideoList(VideoPages, ListView):
+    template_name = "orca/generic/list.html"
+    paginate_by = 25
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    extra_context = {"empty_title": "No videos yet", "empty_text": "Add your first video to start your library."}
+
+
+class VideoDetail(VideoPages, DetailView):
+    template_name = "orca/generic/detail.html"
+    detail_fields = ["title", "album", "status", "recorded_on", ("Length", "duration_text")]
+
+    def get_title(self, obj=None):
+        return str(obj)
+
+
+class VideoCreate(VideoPages, SuccessMessageMixin, CreateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    title = "New video"
+    success_message = "Video “%(title)s” added."
+    extra_context = {"submit_label": "Add video"}
+
+
+class VideoUpdate(VideoPages, SuccessMessageMixin, UpdateView):
+    template_name = "orca/generic/form.html"
+    fields = ["title", "album", "recorded_on"]
+    success_message = "Video “%(title)s” saved."
+    extra_context = {"submit_label": "Save video"}
+
+    def get_title(self, obj=None):
+        return f"Edit {obj}"
+
+
+class VideoDelete(VideoPages, DeleteView):
+    template_name = "orca/generic/confirm_delete.html"
+    success_url = reverse_lazy("video-list")
+    # `blocked_by` (protected or restricted related objects) is filled by the mixin.
+    extra_context = {"deleted": ["its chapters", "its share links"], "kept": ["the album"], "submit_label": "Delete video"}
+
+    def get_title(self, obj=None):
+        return f"Delete {obj}?"
+
+    def form_valid(self, form):
+        messages.success(self.request, f"Video “{self.object}” deleted.")
+        return super().form_valid(form)
+```
+
+#### URLs
+
+```python
+# videos/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path("videos/", views.VideoList.as_view(), name="video-list"),
+    path("videos/new/", views.VideoCreate.as_view(), name="video-create"),
+    path("videos/<int:pk>/", views.VideoDetail.as_view(), name="video-detail"),
+    path("videos/<int:pk>/edit/", views.VideoUpdate.as_view(), name="video-update"),
+    path("videos/<int:pk>/delete/", views.VideoDelete.as_view(), name="video-delete"),
+]
+```
+
 **Principles applied:** Practical UI B13: Scale friction to the consequence; Practical UI W15: Help people recover from errors; Practical UI B10: Name the action clearly
 
 **ORCA guide items covered:** Generic confirm (delete) template; Confirm page
@@ -727,6 +1377,45 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/generic/confirm_action.html" %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+from django import forms
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import FormView
+
+from .models import Album
+
+
+class ArchiveForm(forms.Form):
+    reason = forms.CharField(required=False, label="Reason (optional)")
+
+
+class ArchiveAlbum(FormView):
+    template_name = "orca/generic/confirm_action.html"
+    form_class = ArchiveForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = get_object_or_404(Album, pk=self.kwargs["pk"])
+        ctx.update(title=f"Archive {album}?", text="Its videos stay available by link but leave the library.",
+                   items=[str(v) for v in album.videos.all()[:10]], danger=False,
+                   submit_label="Archive album", cancel_url=album.get_absolute_url())
+        return ctx
+
+    def form_valid(self, form):
+        album = get_object_or_404(Album, pk=self.kwargs["pk"])
+        album.archive(reason=form.cleaned_data["reason"])
+        messages.success(self.request, f"Album “{album}” archived.")
+        return redirect("album-list")
 ```
 
 **Principles applied:** Practical UI B13: Scale friction to the consequence; Practical UI B10: Name the action clearly; Practical UI W04: Lead with the information people seek
@@ -778,6 +1467,60 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 ```django
 {% extends "orca/generic/parent_base.html" %}
 {% block child_content %}<section class="orca-panel" aria-label="Tab content"><div class="orca-skeleton orca-skeleton--title" style="max-width: 14rem"></div><div class="orca-skeleton orca-skeleton--text"></div><div class="orca-skeleton orca-skeleton--text" style="max-width: 60%"></div></section>{% endblock %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Parent mixin and views
+
+```python
+# videos/views.py
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Album, Video
+
+
+class AlbumTabs(OrcaPageMixin):
+    """The parent (an album) and its tabs, for every page under /albums/<album_pk>/."""
+
+    def get_parent(self):
+        return get_object_or_404(Album, pk=self.kwargs["album_pk"])
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = ctx["parent"] = self.get_parent()
+        here = self.request.path
+        tabs = [("Overview", reverse("album-detail", args=[album.pk]), None),
+                ("Videos", reverse("album-videos", args=[album.pk]), album.videos.count())]
+        ctx["parent_tabs"] = [{"label": label, "url": url, "count": count, "current": here == url} for label, url, count in tabs]
+        ctx["parent_stats"] = [{"label": "Videos", "value": album.videos.count(), "icon": "play"},
+                               {"label": "Last change", "value": album.updated_at.strftime("%-d %b"), "icon": "history"}]
+        ctx["parent_update_url"] = reverse("album-update", args=[album.pk])
+        return ctx
+
+
+class AlbumDetail(AlbumTabs, DetailView):
+    model = Album
+    pk_url_kwarg = "album_pk"
+    template_name = "orca/generic/parent_detail.html"
+    detail_fields = ["title", "owner", "created_at"]
+
+
+class AlbumVideos(AlbumTabs, ListView):
+    model = Video
+    template_name = "orca/generic/child_list.html"
+    paginate_by = 25
+    list_columns = ["title", "status", "recorded_on"]
+    detail_url_name, create_url_name = "video-detail", "album-video-create"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(album_id=self.kwargs["album_pk"])
 ```
 
 **Classes:** `.orca-parent__panel`
@@ -832,6 +1575,60 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% extends "orca/generic/parent_detail.html" %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Parent mixin and views
+
+```python
+# videos/views.py
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Album, Video
+
+
+class AlbumTabs(OrcaPageMixin):
+    """The parent (an album) and its tabs, for every page under /albums/<album_pk>/."""
+
+    def get_parent(self):
+        return get_object_or_404(Album, pk=self.kwargs["album_pk"])
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = ctx["parent"] = self.get_parent()
+        here = self.request.path
+        tabs = [("Overview", reverse("album-detail", args=[album.pk]), None),
+                ("Videos", reverse("album-videos", args=[album.pk]), album.videos.count())]
+        ctx["parent_tabs"] = [{"label": label, "url": url, "count": count, "current": here == url} for label, url, count in tabs]
+        ctx["parent_stats"] = [{"label": "Videos", "value": album.videos.count(), "icon": "play"},
+                               {"label": "Last change", "value": album.updated_at.strftime("%-d %b"), "icon": "history"}]
+        ctx["parent_update_url"] = reverse("album-update", args=[album.pk])
+        return ctx
+
+
+class AlbumDetail(AlbumTabs, DetailView):
+    model = Album
+    pk_url_kwarg = "album_pk"
+    template_name = "orca/generic/parent_detail.html"
+    detail_fields = ["title", "owner", "created_at"]
+
+
+class AlbumVideos(AlbumTabs, ListView):
+    model = Video
+    template_name = "orca/generic/child_list.html"
+    paginate_by = 25
+    list_columns = ["title", "status", "recorded_on"]
+    detail_url_name, create_url_name = "video-detail", "album-video-create"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(album_id=self.kwargs["album_pk"])
+```
+
 **Principles applied:** Practical UI W04: Lead with the information people seek; Practical UI L01: Group related information
 
 **ORCA guide items covered:** Parent detail template (tabbed); Parent detail page (overview + child tabs)
@@ -882,6 +1679,60 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/generic/child_list.html" %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Parent mixin and views
+
+```python
+# videos/views.py
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Album, Video
+
+
+class AlbumTabs(OrcaPageMixin):
+    """The parent (an album) and its tabs, for every page under /albums/<album_pk>/."""
+
+    def get_parent(self):
+        return get_object_or_404(Album, pk=self.kwargs["album_pk"])
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = ctx["parent"] = self.get_parent()
+        here = self.request.path
+        tabs = [("Overview", reverse("album-detail", args=[album.pk]), None),
+                ("Videos", reverse("album-videos", args=[album.pk]), album.videos.count())]
+        ctx["parent_tabs"] = [{"label": label, "url": url, "count": count, "current": here == url} for label, url, count in tabs]
+        ctx["parent_stats"] = [{"label": "Videos", "value": album.videos.count(), "icon": "play"},
+                               {"label": "Last change", "value": album.updated_at.strftime("%-d %b"), "icon": "history"}]
+        ctx["parent_update_url"] = reverse("album-update", args=[album.pk])
+        return ctx
+
+
+class AlbumDetail(AlbumTabs, DetailView):
+    model = Album
+    pk_url_kwarg = "album_pk"
+    template_name = "orca/generic/parent_detail.html"
+    detail_fields = ["title", "owner", "created_at"]
+
+
+class AlbumVideos(AlbumTabs, ListView):
+    model = Video
+    template_name = "orca/generic/child_list.html"
+    paginate_by = 25
+    list_columns = ["title", "status", "recorded_on"]
+    detail_url_name, create_url_name = "video-detail", "album-video-create"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(album_id=self.kwargs["album_pk"])
 ```
 
 **Principles applied:** Practical UI W04: Lead with the information people seek; Practical UI B10: Name the action clearly; Jakob's law: work the way products people already know work
@@ -935,6 +1786,60 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% extends "orca/generic/child_detail.html" %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Parent mixin and views
+
+```python
+# videos/views.py
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Album, Video
+
+
+class AlbumTabs(OrcaPageMixin):
+    """The parent (an album) and its tabs, for every page under /albums/<album_pk>/."""
+
+    def get_parent(self):
+        return get_object_or_404(Album, pk=self.kwargs["album_pk"])
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = ctx["parent"] = self.get_parent()
+        here = self.request.path
+        tabs = [("Overview", reverse("album-detail", args=[album.pk]), None),
+                ("Videos", reverse("album-videos", args=[album.pk]), album.videos.count())]
+        ctx["parent_tabs"] = [{"label": label, "url": url, "count": count, "current": here == url} for label, url, count in tabs]
+        ctx["parent_stats"] = [{"label": "Videos", "value": album.videos.count(), "icon": "play"},
+                               {"label": "Last change", "value": album.updated_at.strftime("%-d %b"), "icon": "history"}]
+        ctx["parent_update_url"] = reverse("album-update", args=[album.pk])
+        return ctx
+
+
+class AlbumDetail(AlbumTabs, DetailView):
+    model = Album
+    pk_url_kwarg = "album_pk"
+    template_name = "orca/generic/parent_detail.html"
+    detail_fields = ["title", "owner", "created_at"]
+
+
+class AlbumVideos(AlbumTabs, ListView):
+    model = Video
+    template_name = "orca/generic/child_list.html"
+    paginate_by = 25
+    list_columns = ["title", "status", "recorded_on"]
+    detail_url_name, create_url_name = "video-detail", "album-video-create"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(album_id=self.kwargs["album_pk"])
+```
+
 **Principles applied:** Jakob's law: work the way products people already know work; Practical UI L14: Reduce travel between related actions
 
 **ORCA guide items covered:** Parent-child detail template
@@ -986,6 +1891,60 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 {% extends "orca/generic/child_form.html" %}
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Parent mixin and views
+
+```python
+# videos/views.py
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Album, Video
+
+
+class AlbumTabs(OrcaPageMixin):
+    """The parent (an album) and its tabs, for every page under /albums/<album_pk>/."""
+
+    def get_parent(self):
+        return get_object_or_404(Album, pk=self.kwargs["album_pk"])
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = ctx["parent"] = self.get_parent()
+        here = self.request.path
+        tabs = [("Overview", reverse("album-detail", args=[album.pk]), None),
+                ("Videos", reverse("album-videos", args=[album.pk]), album.videos.count())]
+        ctx["parent_tabs"] = [{"label": label, "url": url, "count": count, "current": here == url} for label, url, count in tabs]
+        ctx["parent_stats"] = [{"label": "Videos", "value": album.videos.count(), "icon": "play"},
+                               {"label": "Last change", "value": album.updated_at.strftime("%-d %b"), "icon": "history"}]
+        ctx["parent_update_url"] = reverse("album-update", args=[album.pk])
+        return ctx
+
+
+class AlbumDetail(AlbumTabs, DetailView):
+    model = Album
+    pk_url_kwarg = "album_pk"
+    template_name = "orca/generic/parent_detail.html"
+    detail_fields = ["title", "owner", "created_at"]
+
+
+class AlbumVideos(AlbumTabs, ListView):
+    model = Video
+    template_name = "orca/generic/child_list.html"
+    paginate_by = 25
+    list_columns = ["title", "status", "recorded_on"]
+    detail_url_name, create_url_name = "video-detail", "album-video-create"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(album_id=self.kwargs["album_pk"])
+```
+
 **Principles applied:** Practical UI W04: Lead with the information people seek; Practical UI R01: Keep the main form flow in one column; Practical UI R02: Ask only for useful, necessary information
 
 **ORCA guide items covered:** Parent-child form template
@@ -1035,6 +1994,60 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/generic/child_confirm.html" %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Parent mixin and views
+
+```python
+# videos/views.py
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .models import Album, Video
+
+
+class AlbumTabs(OrcaPageMixin):
+    """The parent (an album) and its tabs, for every page under /albums/<album_pk>/."""
+
+    def get_parent(self):
+        return get_object_or_404(Album, pk=self.kwargs["album_pk"])
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        album = ctx["parent"] = self.get_parent()
+        here = self.request.path
+        tabs = [("Overview", reverse("album-detail", args=[album.pk]), None),
+                ("Videos", reverse("album-videos", args=[album.pk]), album.videos.count())]
+        ctx["parent_tabs"] = [{"label": label, "url": url, "count": count, "current": here == url} for label, url, count in tabs]
+        ctx["parent_stats"] = [{"label": "Videos", "value": album.videos.count(), "icon": "play"},
+                               {"label": "Last change", "value": album.updated_at.strftime("%-d %b"), "icon": "history"}]
+        ctx["parent_update_url"] = reverse("album-update", args=[album.pk])
+        return ctx
+
+
+class AlbumDetail(AlbumTabs, DetailView):
+    model = Album
+    pk_url_kwarg = "album_pk"
+    template_name = "orca/generic/parent_detail.html"
+    detail_fields = ["title", "owner", "created_at"]
+
+
+class AlbumVideos(AlbumTabs, ListView):
+    model = Video
+    template_name = "orca/generic/child_list.html"
+    paginate_by = 25
+    list_columns = ["title", "status", "recorded_on"]
+    detail_url_name, create_url_name = "video-detail", "album-video-create"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(album_id=self.kwargs["album_pk"])
 ```
 
 **Principles applied:** Practical UI B13: Scale friction to the consequence; Practical UI W04: Lead with the information people seek

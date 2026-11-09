@@ -655,6 +655,52 @@ class TemplateLevelTests(SimpleTestCase):
         self.assertEqual(ctx["create_url"], reverse("orca:home"))
 
 
+class ServerCodeTests(SimpleTestCase):
+    DATA_TAGS = ("orca_chart", "orca_month_calendar", "orca_week_view", "orca_agenda", "orca_year_view", "orca_scheduler",
+                 "orca_gantt", "orca_field", "orca_form_errors", "orca_messages", "orca_pagination", "orca_mini_calendar",
+                 "orca_sparkline", "orca_donut", "orca_email_preview")
+    POSTS_BACK = ("data-orca-board", "data-orca-zone-editor", "data-orca-richtext", "data-orca-add-row", "data-orca-file-list",
+                  "data-orca-autosubmit")
+
+    def test_every_element_that_needs_the_server_documents_it(self):
+        missing = []
+        for el in registry.all_elements():
+            text = " ".join(h for _, h in el.example_list()) + " ".join(el.how)
+            needs = any(t in text for t in self.DATA_TAGS + self.POSTS_BACK) or el.context
+            if needs and not el.server:
+                missing.append(el.id)
+        self.assertEqual(missing, [], "elements that read data or post back need server code")
+
+    def test_server_code_compiles_and_its_django_and_orca_imports_exist(self):
+        import ast
+
+        for el in registry.all_elements():
+            for title, code in el.server:
+                with self.subTest(el=el.id, snippet=title):
+                    tree = ast.parse(code)
+                    imports = [n for n in ast.walk(tree) if isinstance(n, (ast.Import, ast.ImportFrom))
+                               and (getattr(n, "module", "") or n.names[0].name).split(".")[0] in ("django", "orca")]
+                    for node in imports:
+                        try:
+                            exec(compile(ast.Module(body=[node], type_ignores=[]), f"<{el.id}>", "exec"), {})
+                        except RuntimeError as exc:  # a contrib app the test settings do not install
+                            import importlib.util
+
+                            self.assertIn("INSTALLED_APPS", str(exc))
+                            self.assertIsNotNone(importlib.util.find_spec(node.module), node.module)
+
+    def test_element_page_and_markdown_show_it(self):
+        res = self.client.get(reverse("orca:element", args=["generic-list"]))
+        self.assertContains(res, "Server code")
+        self.assertContains(res, 'data-orca-highlight="python"')
+        self.assertContains(res, "class VideoList(VideoPages, ListView):")
+        from orca.catalogue.render import element_markdown
+
+        md = element_markdown(registry.get("bar-chart"))
+        self.assertIn("### Server code", md)
+        self.assertIn("```python", md)
+
+
 class StatCardTests(SimpleTestCase):
     def test_templates_render_the_descriptive_icon_of_each_stat(self):
         from django.template.loader import render_to_string

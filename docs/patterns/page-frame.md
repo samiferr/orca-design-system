@@ -248,6 +248,21 @@ Results always in the same place are found at once (Jakob's law); a live region 
 </div></div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# Any view: add a message, then redirect (needs django.contrib.messages)
+from django.contrib import messages
+
+messages.success(request, "Report sent to 3 people.")
+messages.error(request, "The export failed. Try again in a few minutes.")
+# The app shell renders them; in other layouts put {% orca_messages %} at the top of the content.
+```
+
 **Classes:** `.orca-messages-region`, `.orca-messages`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Postel's law: accept varied input, output reliable and accessible UI; Peak–end rule: people judge an experience by its peak and its end
@@ -413,6 +428,64 @@ Seeing all filters and the result count at once lets people narrow a list confid
 </form>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Filter form and list view
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Album, Video
+
+
+class VideoFilterForm(forms.Form):
+    q = forms.CharField(label="Title contains", required=False)
+    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label="Any album")
+    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,
+                                       widget=forms.CheckboxSelectMultiple)
+
+
+# videos/views.py
+from django.views.generic import ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .forms import VideoFilterForm
+from .models import Video
+
+
+class VideoList(OrcaPageMixin, ListView):
+    model = Video
+    paginate_by = 25
+    template_name = "orca/generic/list.html"   # or "orca/layouts/simple_data.html"
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    detail_url_name, create_url_name = "video-detail", "video-create"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.filter_form = VideoFilterForm(self.request.GET or None)
+        if self.filter_form.is_valid():
+            data = self.filter_form.cleaned_data
+            if data["q"]:
+                qs = qs.filter(title__icontains=data["q"])
+            if data["album"]:
+                qs = qs.filter(album=data["album"])
+            if data["status"]:
+                qs = qs.filter(status__in=data["status"])
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        # The template puts the Filters button in the page actions and the form in the right drawer.
+        ctx["filter_form"] = self.filter_form
+        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}
+        ctx["active_filters"] = sum(1 for value in data.values() if value)
+        return ctx
+```
+
 **Classes:** `.orca-filter-panel`, `.orca-filter-panel__head`, `.orca-filter-panel__group`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Doherty threshold: respond within 400 ms; show progress for anything slower; Practical UI S04: Reveal secondary information when needed
@@ -458,6 +531,64 @@ Filters change what a page shows without taking people away from it: a right dra
   <div class="orca-drawer__body orca-filter-panel"><fieldset class="orca-filter-panel__group"><legend>Status</legend><div class="orca-choice-group__items"><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Published</label><label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Draft</label></div></fieldset></div>
   <div class="orca-drawer__footer"><button class="orca-button orca-button--primary" type="submit" value="apply">Show 11 videos</button><button class="orca-button orca-button--ghost" type="reset">Clear all</button></div>
 </form></dialog>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Filter form and list view
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Album, Video
+
+
+class VideoFilterForm(forms.Form):
+    q = forms.CharField(label="Title contains", required=False)
+    album = forms.ModelChoiceField(Album.objects.all(), required=False, empty_label="Any album")
+    status = forms.MultipleChoiceField(choices=Video.Status.choices, required=False,
+                                       widget=forms.CheckboxSelectMultiple)
+
+
+# videos/views.py
+from django.views.generic import ListView
+
+from orca.mixins import OrcaPageMixin
+
+from .forms import VideoFilterForm
+from .models import Video
+
+
+class VideoList(OrcaPageMixin, ListView):
+    model = Video
+    paginate_by = 25
+    template_name = "orca/generic/list.html"   # or "orca/layouts/simple_data.html"
+    list_columns = ["title", "album", "status", ("Views today", "views_today")]
+    detail_url_name, create_url_name = "video-detail", "video-create"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.filter_form = VideoFilterForm(self.request.GET or None)
+        if self.filter_form.is_valid():
+            data = self.filter_form.cleaned_data
+            if data["q"]:
+                qs = qs.filter(title__icontains=data["q"])
+            if data["album"]:
+                qs = qs.filter(album=data["album"])
+            if data["status"]:
+                qs = qs.filter(status__in=data["status"])
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        # The template puts the Filters button in the page actions and the form in the right drawer.
+        ctx["filter_form"] = self.filter_form
+        data = self.filter_form.cleaned_data if self.filter_form.is_valid() else {}
+        ctx["active_filters"] = sum(1 for value in data.values() if value)
+        return ctx
 ```
 
 **Classes:** `.orca-drawer`, `.orca-filter-panel`

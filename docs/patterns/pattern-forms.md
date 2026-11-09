@@ -118,6 +118,42 @@ Schedules vary day by day; rows handle every shape without special fields (Tesle
 </fieldset>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Formset
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import OpeningHours, Video
+
+OpeningHoursFormSet = forms.inlineformset_factory(
+    Video, OpeningHours, fields=["weekday", "opens", "closes"], extra=0, can_delete=True,
+)
+
+
+# videos/views.py
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import OpeningHoursFormSet
+from .models import Video
+
+
+def edit_hourss(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    formset = OpeningHoursFormSet(request.POST or None, instance=video, prefix="hourss")
+    if request.method == "POST" and formset.is_valid():
+        formset.save()
+        return redirect("video-detail", pk=video.pk)
+    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id="hours-row">
+    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with
+    # data-orca-add-row="hours-row" and data-orca-total="id_hourss-TOTAL_FORMS".
+    return render(request, "videos/hourss.html", {"video": video, "formset": formset})
+```
+
 **Classes:** `.orca-schedule`
 
 **Principles applied:** Tesler's law: move unavoidable complexity from the user to the system; Peak–end rule: people judge an experience by its peak and its end; Practical UI R21: Validate after leaving a field when context matters
@@ -161,6 +197,33 @@ Zones are spatial, so they are drawn where they apply (Practical UI F03: direct 
     <p class="orca-zone-editor__hint" data-orca-zone-status aria-live="polite"></p></div>
   <div><p class="orca-panel-title">Zones</p><div class="orca-zone-row"><span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-400)"></span><span class="orca-zone-row__name">Door line</span><span class="orca-zone-row__count orca-num">4 points</span><span></span></div></div>
 </div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# videos/forms.py — the editor writes the points as JSON into a hidden field
+import json
+
+from django import forms
+
+
+class RegionForm(forms.Form):
+    name = forms.CharField()
+    points = forms.CharField(widget=forms.HiddenInput)
+
+    def clean_points(self):
+        try:
+            points = json.loads(self.cleaned_data["points"])
+        except ValueError:
+            raise forms.ValidationError("Draw the region again: its points could not be read.")
+        if len(points) < 3 or not all(len(p) == 2 and all(0 <= v <= 100 for v in p) for p in points):
+            raise forms.ValidationError("Draw at least three points inside the image.")
+        return points   # [[x, y], …] in percent of the image; store it in a JSONField
 ```
 
 **Classes:** `.orca-zone-editor`, `.orca-zone-editor__stage`, `.orca-zone-editor__toolbar`, `.orca-zone-editor__hint`
@@ -247,6 +310,42 @@ Free-form data needs structure without a fixed schema (Tesler's law); one row pe
 </fieldset>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Formset
+
+```python
+# videos/forms.py
+from django import forms
+
+from .models import Property, Video
+
+PropertyFormSet = forms.inlineformset_factory(
+    Video, Property, fields=["key", "value"], extra=0, can_delete=True,
+)
+
+
+# videos/views.py
+from django.shortcuts import get_object_or_404, redirect, render
+
+from .forms import PropertyFormSet
+from .models import Video
+
+
+def edit_propertys(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    formset = PropertyFormSet(request.POST or None, instance=video, prefix="propertys")
+    if request.method == "POST" and formset.is_valid():
+        formset.save()
+        return redirect("video-detail", pk=video.pk)
+    # Template: {{ formset.management_form }}, one [data-orca-row] per form, and a <template id="property-row">
+    # holding {{ formset.empty_form }} (its names contain __prefix__). The add-row button points at it with
+    # data-orca-add-row="property-row" and data-orca-total="id_propertys-TOTAL_FORMS".
+    return render(request, "videos/propertys.html", {"video": video, "formset": formset})
+```
+
 **Classes:** `.orca-property-rows`
 
 **Principles applied:** Tesler's law: move unavoidable complexity from the user to the system; Postel's law: accept varied input, output reliable and accessible UI
@@ -293,6 +392,28 @@ A few familiar formatting buttons cover most needs (Hick's law, Jakob's law); ke
   <div class="orca-richtext__area" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="rt-label" data-placeholder="Write a note"><p>Video moved <strong>30 cm left</strong> on 3 March.</p></div>
   <textarea name="note" hidden></textarea>
 </div></div>
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# videos/forms.py — the editor syncs its HTML into a hidden field; clean it before saving
+import nh3   # pip install nh3
+
+from django import forms
+
+ALLOWED = {"p", "br", "strong", "b", "em", "i", "ul", "ol", "li", "a"}
+
+
+class DescriptionForm(forms.Form):
+    description = forms.CharField(widget=forms.HiddenInput, required=False)
+
+    def clean_description(self):
+        return nh3.clean(self.cleaned_data["description"], tags=ALLOWED, link_rel="noopener noreferrer")
 ```
 
 **Classes:** `.orca-richtext`, `.orca-richtext__toolbar`, `.orca-richtext__area`

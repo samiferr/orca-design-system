@@ -38,6 +38,22 @@ The native picker is familiar and accessible on every device (Jakob's law); one-
 </div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form
+
+```python
+# videos/forms.py
+from django import forms
+
+
+class PublishForm(forms.Form):
+    # orca_field renders a DateField as a native <input type="date"> with its label and help.
+    publish_on = forms.DateField(label="Publish on", help_text="The video goes live at 08:00 that day.")
+```
+
 **Classes:** `.orca-field`, `.orca-shortcuts`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Tesler's law: move unavoidable complexity from the user to the system; Fitts's law: big, close, well-spaced targets are faster and safer
@@ -269,6 +285,42 @@ Detecting the zone moves the complexity to the system (Tesler's law); keeping th
   <div class="orca-row" style="flex-wrap: nowrap"><select class="orca-select" id="tzs" aria-describedby="tzs-help">{% orca_timezone_options "Europe/Paris" %}</select><button class="orca-button orca-button--ghost" type="button" data-orca-detect-tz aria-controls="tzs">Use my timezone</button></div></div>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### Form and middleware
+
+```python
+# accounts/forms.py — {% orca_field form.timezone %} with the "Use my time zone" button
+import zoneinfo
+
+from django import forms
+
+
+class TimezoneForm(forms.Form):
+    timezone = forms.ChoiceField(choices=[(z, z.replace("_", " ")) for z in sorted(zoneinfo.available_timezones())])
+
+
+# accounts/middleware.py — add "accounts.middleware.TimezoneMiddleware" to MIDDLEWARE
+from django.utils import timezone
+
+
+class TimezoneMiddleware:
+    """Show every date and time in the person's own time zone."""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        name = request.session.get("timezone")
+        if name:
+            timezone.activate(zoneinfo.ZoneInfo(name))
+        else:
+            timezone.deactivate()
+        return self.get_response(request)
+```
+
 **Classes:** `.orca-field`
 
 **Principles applied:** Tesler's law: move unavoidable complexity from the user to the system; Postel's law: accept varied input, output reliable and accessible UI
@@ -309,6 +361,27 @@ Arrows serve small moves; selects jump far without many clicks (Fitts's law, Hic
 </form>
 ```
 
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py — the switcher submits ?month=2026-11 on change
+import datetime as dt
+
+from django.utils import timezone
+
+
+def chosen_month(request):
+    value = request.GET.get("month", "")
+    try:
+        return dt.date.fromisoformat(value + "-01")
+    except ValueError:
+        return timezone.localdate().replace(day=1)
+```
+
 **Classes:** `.orca-month-switcher`
 
 **Principles applied:** Fitts's law: big, close, well-spaced targets are faster and safer; Hick's law: fewer, clearer choices mean faster decisions
@@ -347,6 +420,26 @@ A month grid shows a date in context (weekday, week, neighbours) in the layout e
 
 ```django
 {% orca_mini_calendar "2026-11-01" selected="2026-11-12" today="2026-11-06" url="#{date}" nav_url="#{month}" events="2026-11-04" week_numbers=True %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# videos/views.py
+from django.utils import timezone
+
+month = chosen_month(self.request)   # see Month and year switcher
+days_with_events = Event.objects.filter(starts_at__year=month.year, starts_at__month=month.month)
+ctx.update(
+    month=month,
+    today=timezone.localdate(),
+    event_days=sorted({e.starts_at.date().isoformat() for e in days_with_events}),
+)
+# Template: {% orca_mini_calendar month selected=day today=today url="/calendar/{date}/" events=event_days %}
 ```
 
 **Classes:** `.orca-mini-calendar`, `.orca-mini-calendar__head`, `.orca-calendar`, `.orca-calendar__week`
