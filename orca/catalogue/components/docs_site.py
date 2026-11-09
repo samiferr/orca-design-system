@@ -31,11 +31,15 @@ add(Component(
     why="Copying code by selecting is error-prone; a Copy button with confirmation is exact and fast (Doherty threshold, Tesler's law). A monospaced face keeps similar characters distinct (Practical UI T01).",
     when=["Commands, configuration and code samples in documentation and settings (API keys use the copy button)."],
     how=["`<div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"code-id\"><span data-orca-copy-label>Copy</span></button></div><pre><code id=\"code-id\">…</code></pre></div>`.",
+         "The Copy button carries the copy icon and a check icon (`class=\"orca-icon--copy\"` and `\"orca-icon--copied\"`); the check shows while it says Copied.",
+         "Code is coloured by `orca.js` (the vendored highlight.js, loaded only on pages with code) in the `--orca-code-*` colours of the theme, "
+         "set in the JetBrains Mono font. Name the language with `data-orca-highlight=\"python\"` on the `<code>`, or leave it out to detect it.",
          "Lines scroll sideways instead of wrapping; keep samples short and runnable."],
-    classes=[".orca-code-block", ".orca-code-block__head"],
+    classes=[".orca-code-block", ".orca-code-block__head", ".orca-hl-keyword", ".orca-hl-string", ".orca-hl-comment"],
+    tokens=["font-mono", "code-keyword", "code-tag", "code-attr", "code-string", "code-number", "code-template", "code-title", "code-comment"],
     laws=["doherty", "tesler", "T01"],
     uses=["copy-button"],
-    examples=[("Settings", """<div class="orca-code-block" style="max-width: 32rem"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="cbk-1"><span data-orca-copy-label>Copy</span></button></div><pre><code id="cbk-1">ORCA = {
+    examples=[("Settings", """<div class="orca-code-block" style="max-width: 32rem"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="cbk-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="cbk-1" data-orca-highlight="python">ORCA = {
     "BRAND": {"name": "Acme", "color": "#0f95a1"},
 }</code></pre></div>""")],
     guide=["Code block"],

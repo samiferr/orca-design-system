@@ -220,5 +220,5 @@ documented classes and tokens exist, text and control contrast hold in all three
 ## Licences
 
 ORCA's code is MIT. Token values, component measurements and 106 icon shapes come from Canonical's Vanilla framework
-4.59 (LGPL-3.0) through Tangerine; Ubuntu Sans fonts are under the Ubuntu Font Licence 1.0; the vendored Chart.js 4.4.7 is MIT. ORCA is not affiliated with
+4.59 (LGPL-3.0) through Tangerine; Ubuntu Sans fonts are under the Ubuntu Font Licence 1.0; the vendored Chart.js 4.4.7 is MIT, highlight.js 11.10 is BSD-3-Clause and JetBrains Mono is under the SIL Open Font Licence 1.1. ORCA is not affiliated with
 Canonical. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

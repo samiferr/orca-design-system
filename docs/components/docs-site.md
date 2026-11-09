@@ -60,17 +60,21 @@ Copying code by selecting is error-prone; a Copy button with confirmation is exa
 ### How to use
 
 - `<div class="orca-code-block"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="code-id"><span data-orca-copy-label>Copy</span></button></div><pre><code id="code-id">…</code></pre></div>`.
+- The Copy button carries the copy icon and a check icon (`class="orca-icon--copy"` and `"orca-icon--copied"`); the check shows while it says Copied.
+- Code is coloured by `orca.js` (the vendored highlight.js, loaded only on pages with code) in the `--orca-code-*` colours of the theme, set in the JetBrains Mono font. Name the language with `data-orca-highlight="python"` on the `<code>`, or leave it out to detect it.
 - Lines scroll sideways instead of wrapping; keep samples short and runnable.
 
 #### Example: Settings
 
 ```django
-<div class="orca-code-block" style="max-width: 32rem"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="cbk-1"><span data-orca-copy-label>Copy</span></button></div><pre><code id="cbk-1">ORCA = {
+<div class="orca-code-block" style="max-width: 32rem"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="cbk-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="cbk-1" data-orca-highlight="python">ORCA = {
     "BRAND": {"name": "Acme", "color": "#0f95a1"},
 }</code></pre></div>
 ```
 
-**Classes:** `.orca-code-block`, `.orca-code-block__head`
+**Classes:** `.orca-code-block`, `.orca-code-block__head`, `.orca-hl-keyword`, `.orca-hl-string`, `.orca-hl-comment`
+
+**Tokens:** `--orca-font-mono`, `--orca-code-keyword`, `--orca-code-tag`, `--orca-code-attr`, `--orca-code-string`, `--orca-code-number`, `--orca-code-template`, `--orca-code-title`, `--orca-code-comment`
 
 **Principles applied:** Doherty threshold: respond within 400 ms; show progress for anything slower; Tesler's law: move unavoidable complexity from the user to the system; Practical UI T01: One legible sans serif family
 

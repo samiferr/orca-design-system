@@ -158,16 +158,16 @@ Copying exact values (keys, addresses) by hand causes errors; one click with vis
 
 ### How to use
 
-- `<div class="orca-copy"><code class="orca-copy__value" id="v1">…</code><button class="orca-button" type="button" data-orca-copy="v1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>`.
-- The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead.
+- `<div class="orca-copy"><code class="orca-copy__value" id="v1">…</code><button class="orca-button" type="button" data-orca-copy="v1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div>`.
+- While it says 'Copied', the copy icon turns into a check mark. The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead.
 
 #### Example: Copy a stream address
 
 ```django
-<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>
+<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div>
 ```
 
-**Classes:** `.orca-copy`, `.orca-copy__value`
+**Classes:** `.orca-copy`, `.orca-copy__value`, `.orca-icon--copy`, `.orca-icon--copied`
 
 **Principles applied:** Doherty threshold: respond within 400 ms; show progress for anything slower; Tesler's law: move unavoidable complexity from the user to the system
 

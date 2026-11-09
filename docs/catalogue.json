@@ -113,8 +113,8 @@
    "css": [
     "--orca-font-mono"
    ],
-   "default": "\"Ubuntu Sans Mono\", ui-monospace, Consolas, Menlo, monospace",
-   "usage": "Font stack for code, keyboard keys and tabular identifiers."
+   "default": "\"JetBrains Mono\", ui-monospace, Consolas, Menlo, monospace",
+   "usage": "Font stack for code, keyboard keys and tabular identifiers. ORCA self-hosts JetBrains Mono (variable, 100–800, Latin and Latin Extended); \"Ubuntu Sans Mono\" is also bundled if you prefer it."
   }
  ],
  "categories": [
@@ -724,7 +724,7 @@
    "id": "typography",
    "name": "Fonts and type styles",
    "category": "foundations",
-   "summary": "Ubuntu Sans (variable) for everything, Ubuntu Sans Mono for code, on a fixed type scale.",
+   "summary": "Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type scale.",
    "why": "One legible sans serif with two working weights keeps the interface calm and readable (Practical UI T01, T04); a fixed scale makes hierarchy predictable (T05).",
    "when": [
     "Every piece of text. Pick the style by role: heading, title, body, detail, label, code."
@@ -733,8 +733,9 @@
     "Heading: `--orca-type-h1`…`h6`, `--orca-type-page-title`, `--orca-type-display`.",
     "Title: `--orca-type-title` (panel and card titles, 18/24 550).",
     "Body: `--orca-type-body` (16/24) and `--orca-type-body-strong` (550). Bold is 550, not 700.",
-    "Detail: `--orca-type-detail` (14/20) for help, meta and timestamps; `--orca-type-label` (12/16 550) for table headers, badges, kickers.",
-    "Code: `--orca-type-code` with `--orca-font-mono`.",
+    "Detail: `--orca-type-detail` (14/20) for help, meta and timestamps; `--orca-type-label` (12/16 550) for table headers, badges, kickers and stat card labels.",
+    "Figure: `--orca-type-figure` (28/36 550) for the number of a stat card.",
+    "Code: `--orca-type-code` with `--orca-font-mono` (JetBrains Mono, self-hosted; it tells 0/O and 1/l/I apart). Code blocks are coloured with the `--orca-code-*` tokens.",
     "Numbers in tables and stats get `font-variant-numeric: tabular-nums` (`.orca-num`).",
     "Use as `font: var(--orca-type-body)`. Brand tokens `font_sans` / `font_mono` swap the families."
    ],
@@ -769,7 +770,7 @@
    "examples": [
     {
      "title": "The scale",
-     "html": "<div class=\"orca-stack\">\n  <p class=\"orca-h3\">Heading 3 · 24/32 550</p>\n  <p class=\"orca-panel-title\">Title · 18/24 550</p>\n  <p class=\"orca-p\">Body · 16/24 400</p>\n  <p class=\"orca-small orca-muted\">Detail · 14/20 400</p>\n  <p class=\"orca-card-kicker\">Label · 12/16 550</p>\n  <code class=\"orca-code\">Code · Ubuntu Sans Mono</code>\n</div>"
+     "html": "<div class=\"orca-stack\">\n  <p class=\"orca-h3\">Heading 3 · 24/32 550</p>\n  <p class=\"orca-panel-title\">Title · 18/24 550</p>\n  <p class=\"orca-p\">Body · 16/24 400</p>\n  <p class=\"orca-small orca-muted\">Detail · 14/20 400</p>\n  <p class=\"orca-card-kicker\">Label · 12/16 550</p>\n  <code class=\"orca-code\">Code · JetBrains Mono</code>\n</div>"
     }
    ],
    "guide": [
@@ -10638,15 +10639,17 @@
     "IDs, API keys, addresses, links, commands."
    ],
    "how": [
-    "`<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"v1\">…</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"v1\">{% icon \"copy\" %}<span data-orca-copy-label>Copy</span></button></div>`.",
-    "The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead."
+    "`<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"v1\">…</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"v1\">{% icon \"copy\" class=\"orca-icon--copy\" %}{% icon \"check\" class=\"orca-icon--copied\" %}<span data-orca-copy-label>Copy</span></button></div>`.",
+    "While it says 'Copied', the copy icon turns into a check mark. The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead."
    ],
    "avoid": [],
    "a11y": [],
    "tokens": [],
    "classes": [
     ".orca-copy",
-    ".orca-copy__value"
+    ".orca-copy__value",
+    ".orca-icon--copy",
+    ".orca-icon--copied"
    ],
    "laws": [
     "doherty",
@@ -10655,7 +10658,7 @@
    "examples": [
     {
      "title": "Copy a stream address",
-     "html": "<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"cp-1\">https://media.example.com/v/4821</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"cp-1\">{% icon \"copy\" %}<span data-orca-copy-label>Copy</span></button></div>"
+     "html": "<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"cp-1\">https://media.example.com/v/4821</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"cp-1\">{% icon \"copy\" class=\"orca-icon--copy\" %}{% icon \"check\" class=\"orca-icon--copied\" %}<span data-orca-copy-label>Copy</span></button></div>"
     }
    ],
    "guide": [
@@ -12616,7 +12619,7 @@
    "examples": [
     {
      "title": "Email support",
-     "html": "<div class=\"orca-stack\" style=\"align-items: flex-start\">\n  <a class=\"orca-button\" href=\"mailto:support@example.com?subject=Video%20offline\">{% icon \"mail\" %}Email support</a>\n  <div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"ef-addr\">support@example.com</code><button class=\"orca-button orca-button--dense\" type=\"button\" data-orca-copy=\"ef-addr\"><span data-orca-copy-label>Copy address</span></button></div>\n</div>"
+     "html": "<div class=\"orca-stack\" style=\"align-items: flex-start\">\n  <a class=\"orca-button\" href=\"mailto:support@example.com?subject=Video%20offline\">{% icon \"mail\" %}Email support</a>\n  <div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"ef-addr\">support@example.com</code><button class=\"orca-button orca-button--dense\" type=\"button\" data-orca-copy=\"ef-addr\">{% icon \"copy\" class=\"orca-icon--copy\" %}{% icon \"check\" class=\"orca-icon--copied\" %}<span data-orca-copy-label>Copy address</span></button></div>\n</div>"
     }
    ],
    "guide": [
@@ -15459,14 +15462,29 @@
    ],
    "how": [
     "`<div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"code-id\"><span data-orca-copy-label>Copy</span></button></div><pre><code id=\"code-id\">…</code></pre></div>`.",
+    "The Copy button carries the copy icon and a check icon (`class=\"orca-icon--copy\"` and `\"orca-icon--copied\"`); the check shows while it says Copied.",
+    "Code is coloured by `orca.js` (the vendored highlight.js, loaded only on pages with code) in the `--orca-code-*` colours of the theme, set in the JetBrains Mono font. Name the language with `data-orca-highlight=\"python\"` on the `<code>`, or leave it out to detect it.",
     "Lines scroll sideways instead of wrapping; keep samples short and runnable."
    ],
    "avoid": [],
    "a11y": [],
-   "tokens": [],
+   "tokens": [
+    "font-mono",
+    "code-keyword",
+    "code-tag",
+    "code-attr",
+    "code-string",
+    "code-number",
+    "code-template",
+    "code-title",
+    "code-comment"
+   ],
    "classes": [
     ".orca-code-block",
-    ".orca-code-block__head"
+    ".orca-code-block__head",
+    ".orca-hl-keyword",
+    ".orca-hl-string",
+    ".orca-hl-comment"
    ],
    "laws": [
     "doherty",
@@ -15476,7 +15494,7 @@
    "examples": [
     {
      "title": "Settings",
-     "html": "<div class=\"orca-code-block\" style=\"max-width: 32rem\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"cbk-1\"><span data-orca-copy-label>Copy</span></button></div><pre><code id=\"cbk-1\">ORCA = {\n    \"BRAND\": {\"name\": \"Acme\", \"color\": \"#0f95a1\"},\n}</code></pre></div>"
+     "html": "<div class=\"orca-code-block\" style=\"max-width: 32rem\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"cbk-1\">{% icon \"copy\" class=\"orca-icon--copy\" %}{% icon \"check\" class=\"orca-icon--copied\" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id=\"cbk-1\" data-orca-highlight=\"python\">ORCA = {\n    \"BRAND\": {\"name\": \"Acme\", \"color\": \"#0f95a1\"},\n}</code></pre></div>"
     }
    ],
    "guide": [
@@ -19423,7 +19441,7 @@
    "examples": [
     {
      "title": "Samples",
-     "html": "<div class=\"orca-live-example\"><div class=\"orca-tabs__list\" role=\"tablist\" aria-label=\"Language\" data-orca-tabs><button class=\"orca-tab\" role=\"tab\" type=\"button\" id=\"cs-1\" aria-controls=\"cs-p1\" aria-selected=\"true\">Python</button><button class=\"orca-tab\" role=\"tab\" type=\"button\" id=\"cs-2\" aria-controls=\"cs-p2\" aria-selected=\"false\">curl</button></div>\n  <div class=\"orca-tabs__panel orca-tabs__panel--code\" role=\"tabpanel\" id=\"cs-p1\" aria-labelledby=\"cs-1\"><div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"cs-c1\"><span data-orca-copy-label>Copy</span></button></div><pre><code id=\"cs-c1\">requests.get(\"https://api.example.com/v1/counts\", params={\"site\": \"north\"})</code></pre></div></div>\n  <div class=\"orca-tabs__panel orca-tabs__panel--code\" role=\"tabpanel\" id=\"cs-p2\" aria-labelledby=\"cs-2\" hidden><div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Shell</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"cs-c2\"><span data-orca-copy-label>Copy</span></button></div><pre><code id=\"cs-c2\">curl \"https://api.example.com/v1/counts?site=north\"</code></pre></div></div></div>"
+     "html": "<div class=\"orca-live-example\"><div class=\"orca-tabs__list\" role=\"tablist\" aria-label=\"Language\" data-orca-tabs><button class=\"orca-tab\" role=\"tab\" type=\"button\" id=\"cs-1\" aria-controls=\"cs-p1\" aria-selected=\"true\">Python</button><button class=\"orca-tab\" role=\"tab\" type=\"button\" id=\"cs-2\" aria-controls=\"cs-p2\" aria-selected=\"false\">curl</button></div>\n  <div class=\"orca-tabs__panel orca-tabs__panel--code\" role=\"tabpanel\" id=\"cs-p1\" aria-labelledby=\"cs-1\"><div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"cs-c1\">{% icon \"copy\" class=\"orca-icon--copy\" %}{% icon \"check\" class=\"orca-icon--copied\" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id=\"cs-c1\">requests.get(\"https://api.example.com/v1/counts\", params={\"site\": \"north\"})</code></pre></div></div>\n  <div class=\"orca-tabs__panel orca-tabs__panel--code\" role=\"tabpanel\" id=\"cs-p2\" aria-labelledby=\"cs-2\" hidden><div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Shell</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"cs-c2\">{% icon \"copy\" class=\"orca-icon--copy\" %}{% icon \"check\" class=\"orca-icon--copied\" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id=\"cs-c2\">curl \"https://api.example.com/v1/counts?site=north\"</code></pre></div></div></div>"
     }
    ],
    "guide": [

@@ -8,7 +8,8 @@
      data-orca-toggle           aria-pressed toggle buttons (pin, toggle, tag); data-orca-label-on / -off
      data-orca-theme-toggle     cycles light / dark / paper and remembers the choice
      data-orca-countdown        live countdown to the ISO time in its datetime attribute
-     data-orca-copy="id"        copies the text of the element with that id; says "Copied"
+     data-orca-copy="id"        copies the text of the element with that id; says "Copied" and shows its check icon
+     data-orca-highlight="lang" code coloured by the vendored highlight.js (loaded on demand); empty: detect the language
    Components
      data-orca-menu             button that opens the [role=menu] it controls (aria-controls)
      data-orca-listbox          dropdown select: button + [role=listbox] + hidden input
@@ -245,7 +246,8 @@
       var done = function () {
         var label = el.querySelector("[data-orca-copy-label]") || el;
         var old = label.textContent; label.textContent = "Copied"; announce("Copied to clipboard");
-        setTimeout(function () { label.textContent = old; }, 1500);
+        el.setAttribute("data-copied", "");
+        setTimeout(function () { label.textContent = old; el.removeAttribute("data-copied"); }, 1500);
       };
       if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () { selectText(source); });
       else selectText(source);
@@ -856,4 +858,28 @@
     });
   }
   window.ORCA.drawCharts = function () { loadChartJs(drawCharts); };
+
+  /* ---------------------------------------------------------------- code colouring (highlight.js) */
+  /* Code in [data-orca-highlight] and in code blocks is coloured by the vendored highlight.js, loaded only on pages that
+     have code. Classes are prefixed orca-hl- and read the --orca-code-* tokens, so colours follow the theme. */
+  var CODE = "code[data-orca-highlight], .orca-code-block pre > code";
+  function highlightAll() {
+    window.hljs.configure({ classPrefix: "orca-hl-", ignoreUnescapedHTML: true,
+                            languages: ["django", "xml", "python", "bash", "css", "javascript", "json"] });
+    doc.querySelectorAll(CODE).forEach(function (code) {
+      if (code.hasAttribute("data-highlighted")) return;
+      var lang = code.getAttribute("data-orca-highlight");
+      if (lang) code.classList.add("language-" + lang);
+      window.hljs.highlightElement(code);
+    });
+  }
+  if (doc.querySelector(CODE)) {
+    if (window.hljs) highlightAll();
+    else {
+      var hl = doc.createElement("script");
+      hl.src = SELF_SRC.replace(/js\/orca\.js(\?.*)?$/, "vendor/highlight.min.js"); hl.onload = highlightAll;
+      var hlNonce = doc.querySelector("script[nonce]"); if (hlNonce) hl.nonce = hlNonce.nonce || hlNonce.getAttribute("nonce");
+      doc.head.appendChild(hl);
+    }
+  }
 })();

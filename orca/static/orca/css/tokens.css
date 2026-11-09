@@ -215,6 +215,14 @@
   --orca-bg-elevated: #ffffff;
   --orca-bg-code: rgba(0,0,0,0.03);
   --orca-bg-overlay: rgba(17,17,17,0.85);
+  --orca-code-keyword: #70449c;
+  --orca-code-tag: #195daa;
+  --orca-code-attr: #934302;
+  --orca-code-string: #157123;
+  --orca-code-number: #026d64;
+  --orca-code-template: #943569;
+  --orca-code-title: #4d51aa;
+  --orca-code-comment: #666666;
   --orca-border: rgba(0,0,0,0.2);
   --orca-border-strong: #707070;
   --orca-border-weak: rgba(0,0,0,0.1);
@@ -291,6 +299,14 @@
     --orca-bg-elevated: #2c2c2c;
     --orca-bg-code: rgba(255,255,255,0.15);
     --orca-bg-overlay: rgba(17,17,17,0.85);
+    --orca-code-keyword: #c297f2;
+    --orca-code-tag: #74b1fe;
+    --orca-code-attr: #f1935b;
+    --orca-code-string: #73c477;
+    --orca-code-number: #0bc8b9;
+    --orca-code-template: #ed88ba;
+    --orca-code-title: #9ba5fe;
+    --orca-code-comment: #999999;
     --orca-border: rgba(255,255,255,0.2);
     --orca-border-strong: #939393;
     --orca-border-weak: rgba(255,255,255,0.1);
@@ -367,6 +383,14 @@
   --orca-bg-elevated: #2c2c2c;
   --orca-bg-code: rgba(255,255,255,0.15);
   --orca-bg-overlay: rgba(17,17,17,0.85);
+  --orca-code-keyword: #c297f2;
+  --orca-code-tag: #74b1fe;
+  --orca-code-attr: #f1935b;
+  --orca-code-string: #73c477;
+  --orca-code-number: #0bc8b9;
+  --orca-code-template: #ed88ba;
+  --orca-code-title: #9ba5fe;
+  --orca-code-comment: #999999;
   --orca-border: rgba(255,255,255,0.2);
   --orca-border-strong: #939393;
   --orca-border-weak: rgba(255,255,255,0.1);
@@ -502,7 +526,7 @@
   --orca-type-code: 400 0.9375rem/1.5rem var(--orca-font-mono);
 }
 /* Brand tokens (defaults). {% orca_head %} re-emits them from settings.ORCA['BRAND']. */
-:root { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-brand-bar: #0a6871; --orca-brand-bar-hover: #2c7d85; --orca-brand-bar-active: #3b7e84; --orca-brand-bar-on: #ffffff; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "Ubuntu Sans Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #0066cc; --orca-accent-hover: #0057ad; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="paper"]) { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-brand-bar: #0a6871; --orca-brand-bar-hover: #2c7d85; --orca-brand-bar-active: #3b7e84; --orca-brand-bar-on: #ffffff; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "Ubuntu Sans Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #6699cc; --orca-accent-hover: #7da8d4; } }
-:root[data-theme="dark"] { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-brand-bar: #0a6871; --orca-brand-bar-hover: #2c7d85; --orca-brand-bar-active: #3b7e84; --orca-brand-bar-on: #ffffff; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "Ubuntu Sans Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #6699cc; --orca-accent-hover: #7da8d4; }
+:root { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-brand-bar: #0a6871; --orca-brand-bar-hover: #2c7d85; --orca-brand-bar-active: #3b7e84; --orca-brand-bar-on: #ffffff; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "JetBrains Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #0066cc; --orca-accent-hover: #0057ad; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="paper"]) { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-brand-bar: #0a6871; --orca-brand-bar-hover: #2c7d85; --orca-brand-bar-active: #3b7e84; --orca-brand-bar-on: #ffffff; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "JetBrains Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #6699cc; --orca-accent-hover: #7da8d4; } }
+:root[data-theme="dark"] { --orca-brand: #0f95a1; --orca-brand-strong: #0f95a1; --orca-brand-strong-hover: #2ca2ac; --orca-brand-strong-active: #3faab4; --orca-brand-on: #000000; --orca-brand-bar: #0a6871; --orca-brand-bar-hover: #2c7d85; --orca-brand-bar-active: #3b7e84; --orca-brand-bar-on: #ffffff; --orca-font-sans: "Ubuntu Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --orca-font-mono: "JetBrains Mono", ui-monospace, Consolas, Menlo, monospace; --orca-accent: #6699cc; --orca-accent-hover: #7da8d4; }
 }

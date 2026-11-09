@@ -76,12 +76,12 @@ add(Component(
     "A value with a Copy button that confirms 'Copied' in place and for screen readers.",
     why="Copying exact values (keys, addresses) by hand causes errors; one click with visible confirmation is faster and certain (Doherty threshold, Tesler's law).",
     when=["IDs, API keys, addresses, links, commands."],
-    how=["`<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"v1\">…</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"v1\">{% templatetag openblock %} icon \"copy\" {% templatetag closeblock %}<span data-orca-copy-label>Copy</span></button></div>`.",
-         "The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead."],
-    classes=[".orca-copy", ".orca-copy__value"],
+    how=["`<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"v1\">…</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"v1\">{% templatetag openblock %} icon \"copy\" class=\"orca-icon--copy\" {% templatetag closeblock %}{% templatetag openblock %} icon \"check\" class=\"orca-icon--copied\" {% templatetag closeblock %}<span data-orca-copy-label>Copy</span></button></div>`.",
+         "While it says 'Copied', the copy icon turns into a check mark. The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead."],
+    classes=[".orca-copy", ".orca-copy__value", ".orca-icon--copy", ".orca-icon--copied"],
     laws=["doherty", "tesler"],
     uses=["button", "code-text"],
-    examples=[("Copy a stream address", """<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" %}<span data-orca-copy-label>Copy</span></button></div>""")],
+    examples=[("Copy a stream address", """<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div>""")],
     guide=["Copy button (copied confirmation)"],
 ))
 

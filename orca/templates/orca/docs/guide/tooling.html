@@ -3,7 +3,7 @@
 {% block article %}
 <section class="docs-block-flow">
   <h2 class="orca-section-title">Command line (no project needed)</h2>
-  <pre class="docs-code"><code>python -m orca list                 # {{ stats.elements }} elements by category
+  <pre class="docs-code"><code data-orca-highlight>python -m orca list                 # {{ stats.elements }} elements by category
 python -m orca list inputs          # one category
 python -m orca show button          # why, when, how, example
 python -m orca search date          # by name, guide item or class
@@ -29,14 +29,14 @@ python -m orca json                 # the whole catalogue</code></pre>
 <section class="docs-block-flow">
   <h2 class="orca-section-title">Publishing this documentation</h2>
   <p class="orca-p">The export writes one HTML file per page with relative links, plus ORCA's static files, so the folder works on any static host or straight from disk.</p>
-  <pre class="docs-code"><code>python demo/manage.py orca_site site/
+  <pre class="docs-code"><code data-orca-highlight>python demo/manage.py orca_site site/
 python -m http.server --directory site 8000</code></pre>
   <p class="orca-p">The repository's GitHub Actions workflow (<code class="orca-code">.github/workflows/docs.yml</code>) runs the tests, exports the site and deploys it to GitHub Pages on every push to the main branch. Enable it once under the repository's Settings, Pages, Source: GitHub Actions.</p>
 </section>
 
 <section class="docs-block-flow">
   <h2 class="orca-section-title">Maintaining ORCA</h2>
-  <pre class="docs-code"><code>python -m orca build                                   # tokens.css, docs/primitives/, catalogue.json
+  <pre class="docs-code"><code data-orca-highlight>python -m orca build                                   # tokens.css, docs/primitives/, catalogue.json
 python -m django test tests --settings=tests.settings  # the suite
 python demo/manage.py runserver                        # this site at /orca/</code></pre>
   <ul class="docs-list">
