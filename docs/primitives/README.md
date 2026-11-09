@@ -150,7 +150,7 @@ Marks that organise and connect: rules, separators, focus, markers and backdrops
 - `carousel-dot` **Carousel dot**: A position marker and button for one slide of a carousel or gallery.
 - `pagination-gap` **Pagination gap (ellipsis)**: The ellipsis between page numbers that are not shown.
 - `dialog-backdrop` **Dialog backdrop**: The dimmed layer behind a modal dialog, plus the dialog surface itself.
-- `drawer-backdrop` **Drawer backdrop**: A side drawer on the inline end (right) with its scrim: where page filters live, opened from the page actions.
+- `drawer-backdrop` **Drawer backdrop**: The scrim behind a side drawer; pressing it closes the drawer.
 
 ## [Progress](progress.md) (4)
 

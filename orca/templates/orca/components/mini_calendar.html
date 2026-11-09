@@ -1,0 +1,11 @@
+{% load orca %}<div class="orca-mini-calendar">
+  <div class="orca-mini-calendar__head">
+    {% if prev_href %}<a class="orca-icon-button orca-icon-button--dense" href="{{ prev_href }}" aria-label="Previous month, {{ prev_label }}">{% icon "chevron-left" %}</a>{% else %}<span></span>{% endif %}
+    <h2 class="orca-month-name" id="cal-{{ month_iso }}">{{ title }}</h2>
+    {% if next_href %}<a class="orca-icon-button orca-icon-button--dense" href="{{ next_href }}" aria-label="Next month, {{ next_label }}">{% icon "chevron-right" %}</a>{% else %}<span></span>{% endif %}
+  </div>
+  <table class="orca-calendar" aria-labelledby="cal-{{ month_iso }}">
+    <thead><tr>{% if week_numbers %}<th scope="col"><abbr title="Week number">Wk</abbr></th>{% endif %}{% for d in weekdays %}<th scope="col"><abbr title="{{ d.long }}">{{ d.short }}</abbr></th>{% endfor %}</tr></thead>
+    <tbody>{% for w in weeks %}<tr>{% if week_numbers %}<td class="orca-calendar__week">{{ w.number }}</td>{% endif %}{% for d in w.days %}<td>{% if d.href %}<a class="orca-day{% if d.outside %} orca-day--outside{% endif %}{% if d.weekend %} orca-day--weekend{% endif %}{% if d.holiday %} orca-day--holiday{% endif %}{% if d.events %} orca-day--has-events{% endif %}{% if d.selected %} orca-day--selected{% endif %}" href="{{ d.href }}" aria-label="{{ d.label }}"{% if d.today %} aria-current="date"{% endif %}{% if d.holiday %} title="{{ d.holiday }}"{% endif %}>{{ d.day }}</a>{% else %}<button class="orca-day{% if d.outside %} orca-day--outside{% endif %}{% if d.weekend %} orca-day--weekend{% endif %}{% if d.holiday %} orca-day--holiday{% endif %}{% if d.events %} orca-day--has-events{% endif %}" type="button" data-date="{{ d.iso }}" aria-label="{{ d.label }}" aria-pressed="{% if d.selected %}true{% else %}false{% endif %}"{% if d.today %} aria-current="date"{% endif %}{% if d.holiday %} title="{{ d.holiday }}"{% endif %}>{{ d.day }}</button>{% endif %}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table>
+</div>

@@ -1,0 +1,5 @@
+{% extends "orca/generic/parent_base.html" %}{% load orca %}
+{% block child_content %}<div class="orca-vstack">
+  {% block overview %}<section class="orca-detail-panel" aria-label="Overview"><dl class="orca-kv">{% for f in fields %}<div><dt>{{ f.label }}</dt><dd{% if f.numeric %} class="orca-num"{% endif %}>{{ parent|orca_value:f.name }}</dd></div>{% endfor %}</dl></section>{% endblock %}
+  {% block overview_extra %}{% endblock %}
+</div>{% endblock %}

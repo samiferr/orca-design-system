@@ -1,0 +1,1 @@
+{% load orca %}{% if filter_form %}<button class="orca-button" type="button" data-orca-dialog-open="orca-filters">{% icon "filter" %}Filters{% if active_filters %}<span class="orca-count orca-count--accent" aria-hidden="true">{{ active_filters }}</span><span class="orca-sr-only">, {{ active_filters }} active</span>{% endif %}</button>{% endif %}

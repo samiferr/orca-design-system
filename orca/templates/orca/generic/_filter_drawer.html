@@ -1,0 +1,5 @@
+{% load orca %}{% if filter_form %}<dialog class="orca-drawer" id="orca-filters" aria-labelledby="orca-filters-t" data-orca-light-dismiss><form method="get" style="display: contents">
+  <div class="orca-drawer__header"><h2 class="orca-dialog-title" id="orca-filters-t">Filters</h2><button class="orca-icon-button" type="button" aria-label="Close" data-orca-dialog-close>{% icon "close" %}</button></div>
+  <div class="orca-drawer__body orca-filter-panel">{% if request.GET.q %}<input type="hidden" name="q" value="{{ request.GET.q }}">{% endif %}{% for field in filter_form %}{% orca_field field optional_mark=False %}{% endfor %}</div>
+  <div class="orca-drawer__footer"><button class="orca-button orca-button--primary" type="submit">Show results</button><a class="orca-button orca-button--ghost" href="?">Clear all</a></div>
+</form></dialog>{% endif %}

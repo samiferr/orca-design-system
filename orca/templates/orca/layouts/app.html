@@ -1,0 +1,34 @@
+{% extends "orca/layouts/base.html" %}{% load orca %}
+{% block body_class %}orca-shell{% endblock %}
+{% block body %}
+{% block top_bar %}<header class="orca-topbar">
+  <div class="orca-topbar__start">
+    <button class="orca-icon-button orca-icon-button--dense orca-shell__menu" type="button" aria-controls="orca-sidebar" aria-expanded="false" aria-label="Show navigation" data-orca-sidebar-open>{% icon "menu" %}</button>
+    {% block brand %}{% orca_logo %}{% endblock %}
+    {% block top_nav %}{% endblock %}
+  </div>
+  <div class="orca-topbar__end">{% block top_bar_end %}{% if user.is_authenticated %}<span class="orca-user-chip"><span class="orca-avatar orca-avatar--s" aria-hidden="true">{{ user.get_full_name|default:user.get_username|orca_initials }}</span><span class="orca-user-chip__text"><span class="orca-user-chip__name">{{ user.get_full_name|default:user.get_username }}</span></span></span>{% endif %}{% endblock %}</div>
+</header>{% endblock %}
+<div class="orca-app">
+  {% block sidebar %}<nav class="orca-sidebar" id="orca-sidebar" aria-label="Sections" data-collapsed="false">
+    {% block sidebar_nav %}{% for section in nav %}<div class="orca-sidebar__section">{% if section.label %}<p class="orca-sidebar__label">{{ section.label }}</p>{% endif %}
+      <ul class="orca-side-nav">{% for item in section.items %}<li><a class="orca-side-link" href="{{ item.url }}" title="{{ item.label }}"{% if item.current %} aria-current="page"{% endif %}>{% icon item.icon|default:"chevron-right" %}<span class="orca-side-link__label">{{ item.label }}</span>{% if item.count != None and item.count != "" %}<span class="orca-count orca-count--neutral">{{ item.count }}</span>{% endif %}</a></li>{% endfor %}</ul>
+    </div>{% endfor %}{% endblock %}
+    {% block sidebar_extra %}{% endblock %}
+    <div class="orca-sidebar__foot"><button class="orca-icon-button orca-sidebar__toggle" type="button" aria-controls="orca-sidebar" aria-expanded="true" aria-label="Collapse navigation" data-orca-sidebar-toggle>{% icon "chevron-left" %}</button></div>
+  </nav>{% endblock %}
+  <main id="main" class="orca-app__main" tabindex="-1">
+    {% block page_head %}<header class="orca-page-head">
+      <div class="orca-page-head__text">
+        {% block breadcrumbs %}{% if breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol>{% for label, url in breadcrumbs %}<li>{% if url %}<a href="{{ url }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}</li>{% endfor %}</ol></nav>{% endif %}{% endblock %}
+        <h1 class="orca-page-title">{% block page_title %}{{ title }}{% endblock %}</h1>
+        {% block page_subtitle %}{% if subtitle %}<p class="orca-page-subtitle">{{ subtitle }}</p>{% endif %}{% endblock %}
+      </div>
+      <div class="orca-page-head__actions">{% block page_actions %}{% endblock %}</div>
+    </header>{% endblock %}
+    {% block messages %}{% orca_messages %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+  </main>
+</div>
+{% endblock %}

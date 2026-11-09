@@ -11,6 +11,8 @@ def _bullets(items: list[str]) -> str:
 
 def element_markdown(el: registry.Element) -> str:
     out = [f"## {el.name}", "", f"`id: {el.id}` · level: {el.level} · source: {el.source}", "", el.summary, ""]
+    if el.uses:
+        out += ["Built from: " + ", ".join(f"`{u}`" for u in el.uses), ""]
     out += ["### Why", "", el.why, ""]
     out += ["### When to use", "", _bullets(el.when), ""]
     if el.avoid:
@@ -18,7 +20,13 @@ def element_markdown(el: registry.Element) -> str:
     out += ["### How to use", "", _bullets(el.how), ""]
     if el.a11y:
         out += ["### Accessibility", "", _bullets(el.a11y), ""]
-    for title, html in el.examples:
+    if el.template:
+        out += [f"Extend: `{{% extends \"{el.template}\" %}}`", ""]
+    if el.blocks:
+        out += ["Blocks: " + ", ".join(f"`{b}`" for b in el.blocks), ""]
+    if el.context:
+        out += ["### Context it reads", "", _bullets(el.context), ""]
+    for title, html in el.example_list():
         out += [f"#### Example: {title}", "", "```django", html.strip(), "```", ""]
     meta = []
     if el.classes:
@@ -35,9 +43,10 @@ def element_markdown(el: registry.Element) -> str:
     return "\n".join(out)
 
 
-def index_markdown() -> str:
+def index_markdown(level: str = "primitive") -> str:
+    title = registry.LEVEL_TITLES[level]
     out = [
-        "# ORCA primitives",
+        f"# ORCA {title.lower()}",
         "",
         "Generated from `orca/catalogue/` by `python -m orca build`. Do not edit by hand.",
         "",
@@ -46,7 +55,7 @@ def index_markdown() -> str:
         "Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.",
         "",
     ]
-    for cat in registry.categories():
+    for cat in registry.categories(level):
         els = registry.by_category(cat.key)
         out.append(f"## [{cat.title}]({cat.key}.md) ({len(els)})")
         out.append("")

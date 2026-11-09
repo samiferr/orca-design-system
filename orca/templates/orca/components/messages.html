@@ -1,0 +1,3 @@
+{% load orca %}{% if messages_list %}<div class="orca-messages">{% for m in messages_list %}
+  <div class="orca-alert orca-alert--{{ m.tone }}" role="{{ m.role }}">{% status_icon m.tone %}<p class="orca-alert__body">{{ m.text }}</p><button class="orca-icon-button orca-icon-button--dense orca-alert__close" type="button" aria-label="Dismiss message" data-orca-dismiss>{% icon "close" %}</button></div>{% endfor %}
+</div>{% endif %}

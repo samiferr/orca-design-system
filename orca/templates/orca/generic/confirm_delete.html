@@ -1,0 +1,16 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block title %}{{ title|default:"Delete" }}{% if not title %} {{ object }}{% endif %}{% endblock %}
+{% block page_head %}{% if breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol>{% for label, url in breadcrumbs %}<li>{% if url %}<a href="{{ url }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}</li>{% endfor %}</ol></nav>{% endif %}{% endblock %}
+{% block content %}<div class="orca-narrow-form">
+  {% if blocked_by %}<div class="orca-callout orca-callout--negative" role="alert">{% icon "error" %}<h1 class="orca-callout__title">{{ object }} cannot be deleted yet</h1>
+    <div class="orca-callout__body"><p class="orca-p">These still use it. Remove or move them first.</p><ul class="orca-blocked-list">{% for item in blocked_by %}<li>{{ item }}</li>{% endfor %}</ul>
+      <div class="orca-row">{% block blocked_actions %}{% if cancel_url %}<a class="orca-button orca-button--dense" href="{{ cancel_url }}">Back</a>{% endif %}{% endblock %}</div></div></div>
+  {% else %}<form class="orca-confirm-panel" method="post">{% csrf_token %}
+    <h1 class="orca-confirm-panel__title">{% block page_title %}{{ title|default:"" }}{% if not title %}Delete {{ object }}?{% endif %}{% endblock %}</h1>
+    {% block consequences %}{% if deleted %}<div><p class="orca-p"><strong>Deleted:</strong></p><ul>{% for d in deleted %}<li>{{ d }}</li>{% endfor %}</ul></div>{% endif %}
+    {% if kept %}<div><p class="orca-p"><strong>Kept:</strong> {{ kept }}</p></div>{% endif %}
+    {% if not deleted and not kept %}<p class="orca-p">This cannot be undone.</p>{% endif %}{% endblock %}
+    {% if confirm_text %}<label class="orca-check"><input type="checkbox" required><span class="orca-check__box"></span>{{ confirm_text }}</label>{% endif %}
+    <div class="orca-form-actions"><button class="orca-button orca-button--danger" type="submit">{{ submit_label|default:"Delete" }}</button>{% if cancel_url %}<a class="orca-button" href="{{ cancel_url }}">Cancel</a>{% endif %}</div>
+  </form>{% endif %}
+</div>{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_actions %}{% if create_url %}<a class="orca-button orca-button--primary orca-create" href="{{ create_url }}">{% icon "plus" %}New event</a>{% endif %}{% endblock %}
+{% block content %}<div class="orca-vstack">
+  {% block calendar_toolbar %}<div class="orca-cal-header"><div class="orca-cal-nav"><a class="orca-icon-button orca-icon-button--outlined" href="{{ prev_url }}" aria-label="Previous">{% icon "chevron-left" %}</a><a class="orca-button" href="{{ today_url }}">Today</a><a class="orca-icon-button orca-icon-button--outlined" href="{{ next_url }}" aria-label="Next">{% icon "chevron-right" %}</a></div>
+    <h2 class="orca-cal-header__title" aria-live="polite">{{ period_title }}</h2>
+    {% if views %}<nav class="orca-segmented orca-segmented--dense orca-cal-header__end" aria-label="Calendar view">{% for v in views %}<a class="orca-segmented__item" href="{{ v.url }}"{% if v.current %} aria-current="page"{% endif %}>{{ v.label }}</a>{% endfor %}</nav>{% endif %}</div>{% endblock %}
+  <div class="orca-cal-layout">
+    <aside class="orca-cal-sidebar" aria-label="Calendar options">{% block calendar_side %}{% orca_mini_calendar month selected=day today=today url=day_url nav_url=month_url events=event_days %}
+      {% if calendars %}<fieldset class="orca-cal-legend"><legend>Calendars</legend>{% for c in calendars %}<label class="orca-check" style="--orca-event: var(--orca-chart-{{ c.color|default:forloop.counter }})"><input type="checkbox" name="cal" value="{{ c.key }}"{% if c.checked %} checked{% endif %}><span class="orca-check__box"></span>{{ c.label }}</label>{% endfor %}</fieldset>{% endif %}{% endblock %}</aside>
+    <div class="orca-cal-main">{% block calendar_view %}{% if view == "week" %}{% orca_week_view events start=day today=today now=now %}{% elif view == "day" %}{% orca_week_view events start=day days=1 today=today now=now %}{% elif view == "agenda" %}{% orca_agenda events start=day today=today %}{% else %}{% orca_month_calendar events month=month today=today selected=day day_url=day_url holidays=holidays %}{% endif %}{% endblock %}</div>
+  </div>
+</div>{% endblock %}

@@ -41,29 +41,16 @@ add(Element(
     how=["`<h1 class=\"orca-page-title\">` (28/36, weight 700).",
          "Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.",
          "Long names wrap; they are never cut, so people can always read the full name (L15).",
-         "Page head: `<div class=\"orca-page-head\"><div class=\"orca-page-head__text\">` title and subtitle `</div><div class=\"orca-page-actions\">` "
-         "buttons `</div></div>`. The page actions sit on the inline end and wrap under the title on phones.",
-         "Page actions hold the actions on the whole page: at most one primary, then secondary buttons. "
-         "When the page has filters, a 'Filters' button here opens them in a right drawer (see `drawer-backdrop`)."],
-    a11y=["It is the page's `<h1>`; the document `<title>` should start with the same words.",
-          "Put the page actions after the title in the source so the reading and tab order is title first."],
-    classes=[".orca-page-title", ".orca-page-head", ".orca-page-head__text", ".orca-page-actions"], tokens=["type-page-title"],
+         "On application pages it sits in the `page-head` pattern, with the page actions beside it."],
+    a11y=["It is the page's `<h1>`; the document `<title>` should start with the same words."],
+    classes=[".orca-page-title"], tokens=["type-page-title"],
     laws=["jakob", "restorff", "W04", "L15"],
     examples=[("Page title with subtitle", """<div>
   <h1 class="orca-page-title">Harbour at dusk</h1>
   <p class="orca-page-subtitle">Added to the library on 3 March 2026.</p>
-</div>"""), ("Page head with page actions", """<div class="orca-page-head">
-  <div class="orca-page-head__text">
-    <h1 class="orca-page-title">Images</h1>
-    <p class="orca-page-subtitle">2,480 images in 36 albums.</p>
-  </div>
-  <div class="orca-page-actions">
-    <button class="orca-button" type="button" aria-haspopup="dialog">{% icon "filter" %}Filters</button>
-    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add image</button>
-  </div>
 </div>""")],
     guide=["Page title"],
-    related=["page-subtitle", "heading", "drawer-backdrop"],
+    related=["page-subtitle", "heading"],
 ))
 
 add(Element(
@@ -294,7 +281,7 @@ add(Element(
     examples=[("Card text stack", """<div class="orca-stack" style="gap: var(--orca-space-4); max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
   <p class="orca-card-kicker">Video</p>
   <h3 class="orca-card-title">Entrance A, north door</h3>
-  <p class="orca-card-meta">Hikvision · 192.168.1.40 · added 3 March</p>
+  <p class="orca-card-meta">MP4 · 1080p · added 3 March</p>
 </div>""")],
     guide=["Card kicker"],
     related=["card-title", "card-meta"],

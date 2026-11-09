@@ -1,0 +1,8 @@
+{% load orca %}{% if not single %}<nav class="orca-pagination" aria-label="Pages">
+  <ul>
+    <li>{% if prev_href %}<a class="orca-page-link" href="{{ prev_href }}" rel="prev">{% icon "chevron-left" %}<span>Previous</span></a>{% else %}<span class="orca-page-link" aria-disabled="true">{% icon "chevron-left" %}<span>Previous</span></span>{% endif %}</li>
+    {% for p in pages %}<li>{% if p.n is None %}<span class="orca-page-gap" aria-hidden="true">…</span>{% elif p.current %}<a class="orca-page-link" href="{{ p.href }}" aria-current="page" aria-label="Page {{ p.n }}, current">{{ p.n }}</a>{% else %}<a class="orca-page-link" href="{{ p.href }}" aria-label="Page {{ p.n }}">{{ p.n }}</a>{% endif %}</li>{% endfor %}
+    <li>{% if next_href %}<a class="orca-page-link" href="{{ next_href }}" rel="next"><span>Next</span>{% icon "chevron-right" %}</a>{% else %}<span class="orca-page-link" aria-disabled="true"><span>Next</span>{% icon "chevron-right" %}</span>{% endif %}</li>
+  </ul>
+</nav>{% endif %}
+<p class="orca-pagination-summary">{% if count %}Showing {{ start }}–{{ end }} of {{ count }} {{ noun }}{% else %}No {{ noun }}{% endif %}</p>

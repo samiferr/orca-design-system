@@ -1,0 +1,15 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block title %}{{ parent }}{% endblock %}
+{% block page_head %}<div class="orca-parent">
+  <header class="orca-page-head">
+    <div class="orca-page-head__text">
+      {% block breadcrumbs %}{% if breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol>{% for label, url in breadcrumbs %}<li>{% if url %}<a href="{{ url }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}</li>{% endfor %}</ol></nav>{% endif %}{% endblock %}
+      <h1 class="orca-page-title">{% block page_title %}{{ parent }}{% endblock %}</h1>
+      {% block page_subtitle %}{% if subtitle %}<p class="orca-page-subtitle">{{ subtitle }}</p>{% endif %}{% endblock %}
+    </div>
+    <div class="orca-page-head__actions">{% block page_actions %}{% block detail_actions %}{% if parent_update_url %}<a class="orca-button" href="{{ parent_update_url }}">{% icon "edit" %}Edit</a>{% endif %}{% endblock %}{% endblock %}</div>
+  </header>
+  {% block parent_summary %}{% if parent_stats %}<div class="orca-parent__summary">{% for s in parent_stats %}<div class="orca-stat-card"><p class="orca-stat-label">{{ s.label }}</p><p class="orca-stat-value">{{ s.value }}</p></div>{% endfor %}</div>{% endif %}{% endblock %}
+  {% block parent_tabs %}<nav class="orca-tabs__list" aria-label="{{ parent }}">{% for tab in parent_tabs %}<a class="orca-tab" href="{{ tab.url }}"{% if tab.current %} aria-current="page"{% endif %}>{{ tab.label }}{% if tab.count != None and tab.count != "" %} <span class="orca-count orca-count--neutral">{{ tab.count }}</span>{% endif %}</a>{% endfor %}</nav>{% endblock %}
+</div>{% endblock %}
+{% block content %}<div class="orca-parent__panel">{% block child_content %}{% endblock %}</div>{% endblock %}

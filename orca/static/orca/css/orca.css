@@ -3,7 +3,7 @@
    Read tokens only (--orca-*); never hard-code a colour, size or radius here.
    Cascade layers keep every rule easy to override from unlayered project CSS, but projects should
    change brand tokens only (see settings.ORCA["BRAND"]). */
-@layer orca.tokens, orca.base, orca.primitives, orca.utilities;
+@layer orca.tokens, orca.base, orca.primitives, orca.components, orca.patterns, orca.templates, orca.utilities;
 
 /* ===================================================================== Fonts */
 @font-face { font-family: "Ubuntu Sans"; font-style: normal; font-weight: 100 800; font-display: swap; src: url("../fonts/UbuntuSans-Variable.woff2") format("woff2"); }
@@ -428,24 +428,6 @@ button.orca-tag:hover { background: var(--orca-neutral-bg-hover); }
 .orca-scrim { position: fixed; inset: 0; z-index: var(--orca-layer-drawer); background: var(--orca-bg-overlay); animation: orca-fade-in var(--orca-duration-brisk) var(--orca-ease-out); }
 .orca-scrim--contained, .orca-backdrop--contained { position: absolute; }
 @keyframes orca-fade-in { from { opacity: 0; } }
-/* Drawer: a native <dialog> docked to the inline end (right in LTR). Page filters live here. */
-.orca-drawer { position: fixed; inset-block: 0; inset-inline: auto 0; width: min(24rem, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0; border-inline-start: var(--orca-border-width) solid var(--orca-border); border-radius: var(--orca-radius-none); background: var(--orca-bg-elevated); color: var(--orca-text); box-shadow: var(--orca-shadow-dragged); }
-.orca-drawer[open] { display: flex; flex-direction: column; animation: orca-drawer-in var(--orca-duration-brisk) var(--orca-ease-out); }
-.orca-drawer::backdrop { background: var(--orca-bg-overlay); animation: orca-fade-in var(--orca-duration-brisk) var(--orca-ease-out); }
-.orca-drawer > form { display: flex; flex-direction: column; flex: 1; min-height: 0; margin: 0; }
-.orca-drawer__head { display: flex; align-items: center; justify-content: space-between; gap: var(--orca-space-16); padding: var(--orca-space-16) var(--orca-space-24); border-bottom: var(--orca-hairline) solid var(--orca-border); }
-.orca-drawer__body { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: var(--orca-space-24); padding: var(--orca-space-24); }
-.orca-drawer__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-8); padding: var(--orca-space-16) var(--orca-space-24); padding-bottom: max(var(--orca-space-16), env(safe-area-inset-bottom, 0px)); border-top: var(--orca-hairline) solid var(--orca-border); }
-.orca-drawer__body fieldset { display: flex; flex-direction: column; gap: var(--orca-space-8); min-width: 0; margin: 0; padding: 0; border: 0; }
-@keyframes orca-drawer-in { from { transform: translateX(100%); } }
-@keyframes orca-drawer-in-rtl { from { transform: translateX(-100%); } }
-[dir="rtl"] .orca-drawer[open] { animation-name: orca-drawer-in-rtl; }
-
-/* Page head: the title on the start side, the page actions on the end side (they wrap below on phones). */
-.orca-page-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--orca-space-16) var(--orca-space-24); }
-.orca-page-head__text { flex: 1 1 20rem; min-width: 0; }
-.orca-page-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-8); }
-.orca-page-actions .orca-count { margin-inline-start: var(--orca-space-4); }
 
 /* ===================================================================== Progress */
 .orca-progress { display: block; width: 100%; height: var(--orca-bar); border: 0; border-radius: var(--orca-radius-bar); background: var(--orca-border); color: var(--orca-accent); overflow: hidden; -webkit-appearance: none; appearance: none; }

@@ -1,0 +1,12 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_actions %}{% include "orca/generic/_filter_button.html" %}{% if create_url %}<a class="orca-button orca-button--primary orca-create" href="{{ create_url }}">{% icon "plus" %}New task</a>{% endif %}{% endblock %}
+{% block content %}<div class="orca-vstack">
+  {% block board %}<div class="orca-board" data-orca-board aria-label="{{ title }}">{% for col in board_columns %}<section class="orca-board__col{% if col.limit and col.cards|length > col.limit %} is-over{% endif %}" aria-label="{{ col.name }}">
+    <h2 class="orca-board__head">{{ col.name }} <span class="orca-badge orca-badge--grey" data-orca-count>{{ col.cards|length }}</span>{% if col.limit %}<span class="orca-board__limit">limit {{ col.limit }}</span>{% endif %}</h2>
+    <ul class="orca-board__cards" data-orca-column="{{ col.key }}">{% for card in col.cards %}<li class="orca-board-card" id="card-{{ card.id }}" draggable="true">
+      <div class="orca-board-card__head"><button class="orca-drag-handle" type="button" aria-label="Move {{ card.title }}">{% icon "drag" %}</button><h3 class="orca-board-card__title"><a href="{{ card.url|default:'#' }}">{{ card.title }}</a></h3></div>
+      {% if card.tags %}<div class="orca-row">{% for t in card.tags %}<span class="orca-tag">{{ t }}</span>{% endfor %}</div>{% endif %}
+      <div class="orca-board-card__foot">{% if card.due %}<span class="orca-chip{% if card.due_state %} orca-chip--{{ card.due_state }}{% endif %}">{% icon "calendar" %}{{ card.due }}</span>{% endif %}{% if card.assignee %}<span class="orca-avatar orca-avatar--xs" title="{{ card.assignee }}">{{ card.assignee|orca_initials }}</span>{% endif %}</div>
+    </li>{% endfor %}</ul></section>{% endfor %}</div>{% endblock %}
+</div>{% endblock %}
+{% block modal %}{% block filter_panel %}{% include "orca/generic/_filter_drawer.html" %}{% endblock %}{% endblock %}

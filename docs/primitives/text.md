@@ -78,13 +78,11 @@ People confirm they are in the right place from the title first (Jakob's law); o
 - `<h1 class="orca-page-title">` (28/36, weight 700).
 - Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.
 - Long names wrap; they are never cut, so people can always read the full name (L15).
-- Page head: `<div class="orca-page-head"><div class="orca-page-head__text">` title and subtitle `</div><div class="orca-page-actions">` buttons `</div></div>`. The page actions sit on the inline end and wrap under the title on phones.
-- Page actions hold the actions on the whole page: at most one primary, then secondary buttons. When the page has filters, a 'Filters' button here opens them in a right drawer (see `drawer-backdrop`).
+- On application pages it sits in the `page-head` pattern, with the page actions beside it.
 
 ### Accessibility
 
 - It is the page's `<h1>`; the document `<title>` should start with the same words.
-- Put the page actions after the title in the source so the reading and tab order is title first.
 
 #### Example: Page title with subtitle
 
@@ -95,28 +93,13 @@ People confirm they are in the right place from the title first (Jakob's law); o
 </div>
 ```
 
-#### Example: Page head with page actions
-
-```django
-<div class="orca-page-head">
-  <div class="orca-page-head__text">
-    <h1 class="orca-page-title">Images</h1>
-    <p class="orca-page-subtitle">2,480 images in 36 albums.</p>
-  </div>
-  <div class="orca-page-actions">
-    <button class="orca-button" type="button" aria-haspopup="dialog">{% icon "filter" %}Filters</button>
-    <button class="orca-button orca-button--primary" type="button">{% icon "plus" %}Add image</button>
-  </div>
-</div>
-```
-
-**Classes:** `.orca-page-title`, `.orca-page-head`, `.orca-page-head__text`, `.orca-page-actions`
+**Classes:** `.orca-page-title`
 
 **Tokens:** `--orca-type-page-title`
 
 **Principles applied:** Jakob's law: work the way products people already know work; Von Restorff effect: the one thing that differs is noticed; use emphasis sparingly; Practical UI W04: Lead with the information people seek; Practical UI L15: Design for long and unusual content
 
-**Related:** `page-subtitle`, `heading`, `drawer-backdrop`
+**Related:** `page-subtitle`, `heading`
 
 **ORCA guide items covered:** Page title
 
@@ -710,7 +693,7 @@ A kicker places the card in a category before the title is read, aiding scanning
 <div class="orca-stack" style="gap: var(--orca-space-4); max-width: 18rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
   <p class="orca-card-kicker">Video</p>
   <h3 class="orca-card-title">Entrance A, north door</h3>
-  <p class="orca-card-meta">Hikvision · 192.168.1.40 · added 3 March</p>
+  <p class="orca-card-meta">MP4 · 1080p · added 3 March</p>
 </div>
 ```
 

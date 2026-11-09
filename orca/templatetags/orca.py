@@ -28,7 +28,7 @@ from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 
 from .. import icons
-from ..conf import brand_style, compute_brand, theme
+from ..conf import brand_style, compute_brand, density as _density, theme
 
 register = template.Library()
 
@@ -52,6 +52,9 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
     parts = [
         f'<link rel="stylesheet" href="{static("orca/css/tokens.css")}">',
         f'<link rel="stylesheet" href="{static("orca/css/orca.css")}">',
+        f'<link rel="stylesheet" href="{static("orca/css/components.css")}">',
+        f'<link rel="stylesheet" href="{static("orca/css/patterns.css")}">',
+        f'<link rel="stylesheet" href="{static("orca/css/templates.css")}">',
         f"<style{nonce}>{brand_style(brand)}</style>",
         f'<meta name="theme-color" content="{brand.css["light"]["--orca-brand-strong"]}">',
     ]
@@ -63,15 +66,35 @@ def orca_head(context, script: bool = True, theme_restore: bool = True):
         parts.append(f"<script{nonce}>{_THEME_RESTORE}</script>")
     if script:
         parts.append(f'<script src="{static("orca/js/orca.js")}" defer></script>')
+        # Status glyphs for toasts the script creates (ORCA.toast)
+        for glyph in ("success", "error", "warning", "info"):
+            parts.append(f'<template data-orca-icon="{glyph}">{icons.svg(glyph)}</template>')
     return mark_safe("\n".join(parts))
 
 
+@register.simple_tag(takes_context=True)
+def orca_theme_bootstrap(context):
+    """The inline script that restores the reader's theme before first paint (only when THEME is "auto").
+
+    orca_head already includes it; use this when you call ``orca_head theme_restore=False`` and place it yourself.
+    """
+    if theme() != "auto":
+        return ""
+    return mark_safe(f"<script{_nonce(context)}>{_THEME_RESTORE}</script>")
+
+
 @register.simple_tag
-def orca_html_attrs(lang: str = "en"):
-    """Attributes for <html>: language and, when settings fix one, the theme."""
+def orca_html_attrs(lang: str = "en", density: str = ""):
+    """Attributes for <html>: language, the theme when settings fix one, and the density.
+
+    ``density`` ("comfortable" or "dense") overrides settings.ORCA["DENSITY"] for this page.
+    """
     attrs = f'lang="{escape(lang)}"'
     if theme() != "auto":
         attrs += f' data-theme="{theme()}"'
+    chosen = density if density in ("comfortable", "dense") else _density()
+    if chosen == "dense":
+        attrs += ' data-density="dense"'
     return mark_safe(attrs)
 
 
@@ -193,3 +216,176 @@ def orca_initials(value):
     if len(words) == 1:
         return words[0][:2].upper()
     return (words[0][0] + words[-1][0]).upper()
+
+
+# ============================================================================================ component tags
+from .. import components as _c  # noqa: E402
+
+
+@register.inclusion_tag("orca/components/field.html")
+def orca_field(bound_field, switch=False, width="", label=None, help_text=None, hide_label=False, horizontal=False,
+               optional_mark=True):
+    """One form field, the ORCA way: label, optional marker, help, error and control, all wired with ARIA.
+
+    {% orca_field form.name %}  {% orca_field form.enabled switch=True %}  {% orca_field form.port width="w8" %}
+    ``optional_mark=False`` drops "(optional)" where every field is optional (filters).
+    """
+    return dict(_c.field_context(bound_field, switch=switch, width=width, label=label, help_text=help_text,
+                                 hide_label=hide_label, horizontal=horizontal), optional_mark=optional_mark)
+
+
+@register.inclusion_tag("orca/components/form_errors.html")
+def orca_form_errors(form):
+    """Non-field errors as a callout, and a linked summary when two or more fields are invalid."""
+    return _c.form_errors_context(form)
+
+
+@register.inclusion_tag("orca/components/messages.html", takes_context=True)
+def orca_messages(context):
+    """django.contrib.messages as dismissible ORCA alerts (errors use role=alert)."""
+    return _c.messages_context(context)
+
+
+@register.inclusion_tag("orca/components/pagination.html", takes_context=True)
+def orca_pagination(context, page_obj, noun="items", param="page"):
+    """Pagination with gaps and a summary; keeps the other query parameters (filters, sort)."""
+    return _c.pagination_context(context, page_obj, noun=noun, param=param)
+
+
+@register.inclusion_tag("orca/components/mini_calendar.html")
+def orca_mini_calendar(month=None, selected=None, today=None, url="", nav_url="", events=(), holidays=None,
+                       week_numbers=False):
+    """A month grid in the locale's first weekday. url/nav_url patterns use {date} and {month}."""
+    return _c.mini_calendar_context(month=month, selected=selected, today=today, url=url, nav_url=nav_url,
+                                    events=events, holidays=holidays, week_numbers=week_numbers)
+
+
+@register.simple_tag
+def orca_sparkline(values, label=""):
+    """Inline trend line from a list or a comma-separated string of numbers."""
+    return mark_safe(_c.sparkline_svg(values, label=label))
+
+
+@register.inclusion_tag("orca/components/donut.html")
+def orca_donut(segments, total_label="Total"):
+    """Donut chart with legend from [(label, value), …] or [{"label", "value"}, …]."""
+    return _c.donut_context(segments, total_label=total_label)
+
+
+# ============================================================================================== pattern tags
+from .. import calendar_views as _cv  # noqa: E402
+from .. import charts as _charts  # noqa: E402
+
+
+@register.inclusion_tag("orca/patterns/chart.html")
+def orca_chart(kind, data, title="", subtitle="", caption="", unit="", stacked=False, horizontal=False):
+    """A chart pattern: chart frame, SVG, legend and data table. kind: bar, line, area, pie, doughnut, scatter, bubble, radar, polar."""
+    return _charts.chart_context(kind, data, title=title, subtitle=subtitle, caption=caption, unit=unit,
+                                 stacked=stacked, horizontal=horizontal)
+
+
+@register.inclusion_tag("orca/patterns/month_calendar.html")
+def orca_month_calendar(events=(), month=None, today=None, selected=None, day_url="", holidays=None, max_per_day=3):
+    """Month view: weeks of day cells with up to max_per_day events each and '+N more'."""
+    return _cv.month_context(events, month=month, today=today, selected=selected, day_url=day_url,
+                             max_per_day=int(max_per_day), holidays=holidays)
+
+
+@register.inclusion_tag("orca/patterns/time_grid.html")
+def orca_week_view(events=(), start=None, days=7, start_hour=7, end_hour=19, today=None, now=None):
+    """Week (days=7), multi-day (days=3) or day (days=1) view with positioned events and an all-day row."""
+    return _cv.time_grid_context(events, start=start, days=int(days), start_hour=int(start_hour), end_hour=int(end_hour),
+                                 today=today, now=now)
+
+
+@register.inclusion_tag("orca/patterns/agenda.html")
+def orca_agenda(events=(), start=None, days=7, today=None):
+    """Agenda view: days that have events, each with its list."""
+    return _cv.agenda_context(events, start=start, days=int(days), today=today)
+
+
+@register.inclusion_tag("orca/patterns/year.html")
+def orca_year_view(year=None, events=(), today=None, url=""):
+    """Year view: twelve mini calendars with event days marked."""
+    return _cv.year_context(year=year, events=events, today=today, url=url)
+
+
+@register.inclusion_tag("orca/patterns/scheduler.html")
+def orca_scheduler(resources=(), start_hour=8, end_hour=18):
+    """Resource scheduler: resources as rows, bookings as cards placed by time (see calendar_views.scheduler_context)."""
+    return _cv.scheduler_context(resources, start_hour=int(start_hour), end_hour=int(end_hour))
+
+
+@register.inclusion_tag("orca/patterns/gantt.html")
+def orca_gantt(rows=(), start=None, days=7, today=None, label=""):
+    """Gantt chart with a day scale and a today line (see calendar_views.gantt_context)."""
+    return dict(_cv.gantt_context(rows, start=start, days=days, today=today), label=label)
+
+
+@register.simple_tag
+def orca_email_colors():
+    """Hex colours and font for HTML emails (email clients cannot read CSS variables)."""
+    from ..color import composite, to_hex
+
+    brand = compute_brand()
+    light = brand.css["light"]
+    return {
+        "name": brand.values["name"], "font": "-apple-system, 'Segoe UI', Roboto, Ubuntu, Arial, sans-serif",
+        "page": "#f7f7f7", "bg": "#ffffff", "text": "#1a1a1a", "muted": to_hex(composite("rgba(0,0,0,0.6)", "#ffffff")),
+        "border": to_hex(composite("rgba(0,0,0,0.2)", "#ffffff")), "brand": light["--orca-brand"],
+        "button": light["--orca-brand-strong"], "button_text": light["--orca-brand-on"], "link": light["--orca-accent"],
+    }
+
+
+@register.simple_tag
+def orca_email_preview(template="orca/email/base.html", title="", **context):
+    """Render an email template into a sandboxed iframe, for documentation and previews."""
+    from django.template.loader import render_to_string
+
+    html = render_to_string(template, dict(context, title=title))
+    return mark_safe(f'<iframe class="orca-email-preview" sandbox title="Email preview: {escape(title)}" srcdoc="{escape(html)}"></iframe>')
+
+
+# ----------------------------------------------------------------- template level (generic templates)
+
+@register.filter
+def orca_value(obj, name):
+    """The display value of ``obj.<name>`` for generic tables and detail lists.
+
+    Works on model instances and dicts; uses ``get_<name>_display`` for choices, calls methods, shows booleans as
+    Yes/No and empty values as an em dash.
+    """
+    if obj is None or not name:
+        return ""
+    if isinstance(obj, dict):
+        value = obj.get(name)
+    else:
+        display = getattr(obj, f"get_{name}_display", None)
+        value = display() if callable(display) else getattr(obj, name, None)
+        if callable(value) and not hasattr(value, "all"):
+            value = value()
+        elif hasattr(value, "all") and callable(value.all):  # many-to-many manager
+            value = ", ".join(str(v) for v in value.all())
+    if value is True:
+        return "Yes"
+    if value is False:
+        return "No"
+    if value in (None, ""):
+        return "\u2014"
+    return value
+
+
+@register.filter
+def orca_object_url(obj, url_name):
+    """``reverse(url_name, args=[obj.pk])``, or "" when it cannot be reversed. "#" passes through (previews)."""
+    from django.urls import NoReverseMatch, reverse
+
+    if not url_name:
+        return ""
+    if url_name == "#":
+        return "#"
+    pk = obj.get("pk") if isinstance(obj, dict) else getattr(obj, "pk", None)
+    try:
+        return reverse(url_name, args=[pk])
+    except NoReverseMatch:
+        return ""

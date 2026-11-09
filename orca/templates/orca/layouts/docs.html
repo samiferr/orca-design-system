@@ -1,0 +1,24 @@
+{% extends "orca/layouts/base.html" %}{% load orca %}
+{% block body_class %}orca-docs-page{% endblock %}
+{% block body %}
+{% block top_bar %}<header class="orca-topbar">
+  <div class="orca-topbar__start"><button class="orca-icon-button orca-icon-button--dense orca-shell__menu" type="button" aria-controls="orca-sidebar" aria-expanded="false" aria-label="Show navigation" data-orca-sidebar-open>{% icon "menu" %}</button>{% block brand %}{% orca_logo %}{% endblock %}</div>
+  <div class="orca-topbar__end">{% block top_bar_end %}{% endblock %}</div>
+</header>{% endblock %}
+<div class="orca-app">
+  {% block sidebar %}<nav class="orca-sidebar orca-docs-sidebar" id="orca-sidebar" aria-label="Documentation" data-collapsed="false">
+    {% block sidebar_nav %}<div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="orca-docs-tree"></div>
+    <ul class="orca-nav-tree" id="orca-docs-tree">{% for section in docs_nav %}<li><details{% if section.open %} open{% endif %}><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>{{ section.label }}</summary><ul>{% for item in section.items %}<li><a href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.label }}</a></li>{% endfor %}</ul></details></li>{% endfor %}</ul>{% endblock %}
+    {% block sidebar_extra %}{% endblock %}
+  </nav>{% endblock %}
+  <main id="main" class="orca-app__main orca-docs-main" tabindex="-1">
+    {% block page_head %}<header class="orca-docs-head">
+      {% block breadcrumbs %}{% if breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol>{% for label, url in breadcrumbs %}<li>{% if url %}<a href="{{ url }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}</li>{% endfor %}</ol></nav>{% endif %}{% endblock %}
+      <h1 class="orca-page-title">{% block page_title %}{{ title }}{% endblock %}</h1>
+      {% block page_subtitle %}{% if subtitle %}<p class="orca-p orca-p--lead">{{ subtitle }}</p>{% endif %}{% endblock %}
+    </header>{% endblock %}
+    <article class="orca-docs-article">{% block content %}{% endblock %}</article>
+    {% block footer %}{% endblock %}
+  </main>
+</div>
+{% endblock %}

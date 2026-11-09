@@ -1,0 +1,8 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block title %}{{ title|default:object }}{% endblock %}
+{% block page_title %}{{ title|default:object }}{% endblock %}
+{% block page_actions %}{% block detail_actions %}{% if update_url %}<a class="orca-button" href="{{ update_url }}">{% icon "edit" %}Edit</a>{% endif %}{% if delete_url %}<a class="orca-button orca-button--outline-danger" href="{{ delete_url }}">{% icon "delete" %}Delete</a>{% endif %}{% endblock %}{% endblock %}
+{% block content %}<div class="orca-vstack">
+  {% block detail %}<section class="orca-detail-panel" aria-label="Details"><dl class="orca-kv">{% for f in fields %}<div><dt>{{ f.label }}</dt><dd{% if f.numeric %} class="orca-num"{% endif %}>{{ object|orca_value:f.name }}</dd></div>{% endfor %}</dl></section>{% endblock %}
+  {% block detail_extra %}{% endblock %}
+</div>{% endblock %}

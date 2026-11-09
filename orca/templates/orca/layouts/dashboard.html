@@ -1,0 +1,7 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{% block page_actions %}{% block dashboard_period %}{% if periods %}<nav class="orca-segmented orca-segmented--dense" aria-label="Period">{% for p in periods %}<a class="orca-segmented__item" href="{{ p.url }}"{% if p.current %} aria-current="page"{% endif %}>{{ p.label }}</a>{% endfor %}</nav>{% endif %}{% endblock %}{% endblock %}
+{% block content %}<div class="orca-vstack">
+  {% block dashboard_stats %}{% if stats %}<div class="orca-stat-grid">{% for s in stats %}{% if s.url %}<a class="orca-stat-card" href="{{ s.url }}">{% else %}<div class="orca-stat-card">{% endif %}<p class="orca-stat-label">{{ s.label }}</p><p class="orca-stat-value">{{ s.value }}</p>{% if s.foot or s.delta %}<div class="orca-stat-card__foot">{% if s.delta %}<span class="orca-delta orca-delta--{{ s.trend|default:'flat' }}">{{ s.delta }}</span>{% endif %}{{ s.foot }}</div>{% endif %}{% if s.url %}</a>{% else %}</div>{% endif %}{% endfor %}</div>{% endif %}{% endblock %}
+  <div class="orca-two-col">{% block dashboard_main %}{% for c in charts %}{% orca_chart c.kind c.data title=c.title subtitle=c.subtitle %}{% endfor %}{% endblock %}</div>
+  {% block dashboard_extra %}{% endblock %}
+</div>{% endblock %}

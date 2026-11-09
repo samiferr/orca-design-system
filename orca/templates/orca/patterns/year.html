@@ -1,0 +1,1 @@
+{% load orca %}<div class="orca-year-view" role="group" aria-label="{{ year }}">{% for m in months %}{% include "orca/components/mini_calendar.html" with title=m.title month_iso=m.month_iso weeks=m.weeks weekdays=m.weekdays week_numbers=False prev_href="" next_href="" %}{% endfor %}</div>
