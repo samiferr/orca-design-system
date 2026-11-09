@@ -30,7 +30,7 @@ add(Template(
     when=["Headline numbers at the top of a dashboard or a parent record."],
     how=["`<div class=\"orca-stat-grid\">` of stat cards; keep to 3–6 cards."],
     laws=["miller", "L11"], uses=["kpi-grid"], classes=[".orca-stat-grid"],
-    examples=[("Stats", '<div class="orca-stat-grid">' + "".join(f'<div class="orca-stat-card"><p class="orca-stat-label">Metric {i}</p><p class="orca-stat-value">{v}</p></div>' for i, v in ((1, "1,234"), (2, "56"), (3, "98%"))) + "</div>")],
+    examples=[("Stats", '<div class="orca-stat-grid">' + "".join(f'<div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">Metric {i}</p><span class="orca-stat-card__icon" aria-hidden="true">{{% icon "statistics" %}}</span></div><p class="orca-stat-value">{v}</p></div>' for i, v in ((1, "1,234"), (2, "56"), (3, "98%"))) + "</div>")],
     guide=["Stat grid"],
 ))
 

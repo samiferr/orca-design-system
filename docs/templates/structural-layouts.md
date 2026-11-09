@@ -60,7 +60,7 @@ Equal tiles in a row are compared at a glance (Miller's law); a minimum width ke
 #### Example: Stats
 
 ```django
-<div class="orca-stat-grid"><div class="orca-stat-card"><p class="orca-stat-label">Metric 1</p><p class="orca-stat-value">1,234</p></div><div class="orca-stat-card"><p class="orca-stat-label">Metric 2</p><p class="orca-stat-value">56</p></div><div class="orca-stat-card"><p class="orca-stat-label">Metric 3</p><p class="orca-stat-value">98%</p></div></div>
+<div class="orca-stat-grid"><div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">Metric 1</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span></div><p class="orca-stat-value">1,234</p></div><div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">Metric 2</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span></div><p class="orca-stat-value">56</p></div><div class="orca-stat-card"><div class="orca-stat-card__head"><p class="orca-stat-label">Metric 3</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span></div><p class="orca-stat-value">98%</p></div></div>
 ```
 
 **Classes:** `.orca-stat-grid`

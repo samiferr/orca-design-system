@@ -87,7 +87,7 @@ Groups of actions: button groups, menus and the action sets that sit on records 
 
 Ways to present records and numbers: stat cards, lists, key/value lists, cards, tables, timelines and small charts.
 
-- `stat-card` **Stat card**: One measured value with its label, change and context, optionally with a sparkline.
+- `stat-card` **Stat card**: One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.
 - `key-value-list` **Key/value list**: Properties of a record as label and value pairs.
 - `list` **List**: A divided list of items with optional visual, text and end detail.
 - `list-item` **List item**: One row of a list: leading visual, title and description, trailing detail; static, link, button or selected.

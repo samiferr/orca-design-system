@@ -1,7 +1,7 @@
 {% extends "orca/layouts/app.html" %}{% load orca %}
 {% block page_title %}{{ title|default:"Home" }}{% endblock %}
 {% block content %}<div class="orca-vstack">
-  {% block home_stats %}{% if stats %}<div class="orca-stat-grid">{% for s in stats %}{% if s.url %}<a class="orca-stat-card" href="{{ s.url }}">{% else %}<div class="orca-stat-card">{% endif %}<p class="orca-stat-label">{{ s.label }}</p><p class="orca-stat-value">{{ s.value }}</p>{% if s.foot %}<div class="orca-stat-card__foot">{{ s.foot }}</div>{% endif %}{% if s.url %}</a>{% else %}</div>{% endif %}{% endfor %}</div>{% endif %}{% endblock %}
+  {% block home_stats %}{% if stats %}<div class="orca-stat-grid">{% for s in stats %}{% if s.url %}<a class="orca-stat-card" href="{{ s.url }}">{% else %}<div class="orca-stat-card">{% endif %}<div class="orca-stat-card__head"><p class="orca-stat-label">{{ s.label }}</p>{% if s.icon %}<span class="orca-stat-card__icon" aria-hidden="true">{% icon s.icon %}</span>{% endif %}</div><p class="orca-stat-value">{{ s.value }}</p>{% if s.foot %}<div class="orca-stat-card__foot">{{ s.foot }}</div>{% endif %}{% if s.url %}</a>{% else %}</div>{% endif %}{% endfor %}</div>{% endif %}{% endblock %}
   <div class="orca-split">
     <div class="orca-vstack">{% block home_main %}{% endblock %}</div>
     <aside class="orca-vstack" aria-label="More">{% block home_aside %}{% if shortcuts %}<section class="orca-panel"><h2 class="orca-panel-title">Shortcuts</h2><ul class="orca-side-nav">{% for s in shortcuts %}<li><a class="orca-side-link" href="{{ s.url }}">{% icon s.icon|default:"arrow-right" %}<span class="orca-side-link__label">{{ s.label }}</span></a></li>{% endfor %}</ul></section>{% endif %}{% endblock %}</aside>

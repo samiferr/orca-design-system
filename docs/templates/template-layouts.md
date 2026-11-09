@@ -254,7 +254,7 @@ The first screen should answer 'is everything all right, and what needs me?' (Pe
 ### How to use
 
 - Extend it: `{% extends "orca/layouts/home.html" %}`, then fill only the blocks you need.
-- Pass `stats` (label, value, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks.
+- Pass `stats` (label, value, icon, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks.
 
 Extend: `{% extends "orca/layouts/home.html" %}`
 

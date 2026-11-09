@@ -103,7 +103,7 @@ layout("homepage-template", "Homepage template", "orca/layouts/home.html",
        "The page people land on after signing in: a greeting, a stat grid, a main column for what changed and an aside with shortcuts.",
        "The first screen should answer 'is everything all right, and what needs me?' (Peak–end rule); stats first and shortcuts to frequent tasks shorten every visit (Fitts's law).",
        ["The start page of an application."],
-       ["Pass `stats` (label, value, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks."],
+       ["Pass `stats` (label, value, icon, foot, url) and `shortcuts` (label, url, icon); fill `home_main` with recent activity or tasks."],
        ["peak-end", "fitts", "L03"], ["app-shell", "kpi-grid", "activity-feed"], ["Homepage template"],
        blocks=APP_BLOCKS + ["home_stats", "home_main", "home_aside"], context=APP_CONTEXT + ["`stats`, `shortcuts`."])
 

@@ -47,10 +47,10 @@ add(Pattern(
     laws=["miller", "restorff"],
     uses=["stat-card"],
     examples=[("KPIs", """<div class="orca-kpi-grid">
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Visitors today</p><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Inside now</p><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Videos online</p><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
-  <a class="orca-stat-card" href="#"><p class="orca-stat-label">Count accuracy</p><p class="orca-stat-value">96.4%</p><div class="orca-stat-card__foot">last 7 days</div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><p class="orca-stat-label">Visitors today</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span></div><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><p class="orca-stat-label">Inside now</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "home" %}</span></div><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><p class="orca-stat-label">Videos online</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "play" %}</span></div><p class="orca-stat-value">11 of 12</p><div class="orca-stat-card__foot"><span class="orca-with-icon">{% status_icon "negative" size="xs" %}Loading dock offline</span></div></a>
+  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><p class="orca-stat-label">Count accuracy</p><span class="orca-stat-card__icon" aria-hidden="true">{% icon "statistics" %}</span></div><p class="orca-stat-value">96.4%</p><div class="orca-stat-card__foot">last 7 days</div></a>
 </div>""")],
     guide=["KPI grid"], source="Tangerine",
 ))

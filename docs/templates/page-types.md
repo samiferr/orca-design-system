@@ -21,7 +21,7 @@ A dashboard answers 'how are we doing?' at a glance: a few headline numbers firs
 ### How to use
 
 - Extend it: `{% extends "orca/layouts/dashboard.html" %}`, then fill only the blocks you need.
-- Pass `stats` (label, value, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.
+- Pass `stats` (label, value, icon, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.
 - Keep it to 4–6 stats and 2–4 charts; link each stat to the list behind it.
 
 Extend: `{% extends "orca/layouts/dashboard.html" %}`

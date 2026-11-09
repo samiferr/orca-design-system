@@ -23,7 +23,7 @@ page("dashboard", "Dashboard", "orca/layouts/dashboard.html",
      "A dashboard answers 'how are we doing?' at a glance: a few headline numbers first (Miller's law), then the charts that explain them, "
      "all for one clearly stated period (Practical UI W11).",
      ["The home of an analytics or operations application; the overview of a site or team."],
-     ["Pass `stats` (label, value, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.",
+     ["Pass `stats` (label, value, icon, foot, delta, trend, url), `charts` (kind, data, title, subtitle) and `periods`.",
       "Keep it to 4–6 stats and 2–4 charts; link each stat to the list behind it."],
      ["miller", "W11", "L03"], ["app-shell", "kpi-grid", "bar-chart", "line-chart", "two-column-grid"], ["Dashboard"],
      ["dashboard_period", "dashboard_stats", "dashboard_main", "dashboard_extra"], ["`stats`, `charts`, `periods`."])

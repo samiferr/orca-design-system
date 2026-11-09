@@ -624,6 +624,18 @@ class TemplateLevelTests(SimpleTestCase):
         self.assertEqual(ctx["create_url"], reverse("orca:home"))
 
 
+class StatCardTests(SimpleTestCase):
+    def test_templates_render_the_descriptive_icon_of_each_stat(self):
+        from django.template.loader import render_to_string
+
+        stats = [{"label": "Visitors today", "value": "12,480", "icon": "user"}, {"label": "Inside now", "value": "1,204"}]
+        for name, key in (("orca/layouts/dashboard.html", "stats"), ("orca/layouts/home.html", "stats"),
+                          ("orca/generic/parent_base.html", "parent_stats")):
+            with self.subTest(template=name):
+                html = render_to_string(name, {key: stats, "title": "T"})
+                self.assertEqual(html.count('class="orca-stat-card__icon" aria-hidden="true"'), 1)
+
+
 class LintTests(SimpleTestCase):
     def test_lint_finds_problems(self):
         with tempfile.TemporaryDirectory() as d:
