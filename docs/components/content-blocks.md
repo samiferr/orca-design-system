@@ -28,7 +28,7 @@ Image, name and price grouped by proximity let people compare products at a glan
 ```django
 <article class="orca-product" style="max-width: 14rem">
   <div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>
-  <h3 class="orca-product__name"><a href="#">Dome video, 4 MP, outdoor</a></h3>
+  <h3 class="orca-product__name"><a href="#">Ring light, 18 inch, dimmable</a></h3>
   <p class="orca-product__price" style="margin: 0">€189<s><span class="orca-sr-only">was </span>€229</s></p>
   <button class="orca-button orca-button--dense" type="button">Add to quote</button>
 </article>
