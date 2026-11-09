@@ -294,9 +294,11 @@
 
 /* ===================================================================== Data display */
 .orca-stat-card { display: flex; flex-direction: column; gap: var(--orca-space-4); min-width: 0; padding: var(--orca-space-16); background: var(--orca-bg-stat); border: var(--orca-border-width) solid var(--orca-border-stat); }
-.orca-stat-card__head { display: flex; align-items: center; gap: var(--orca-space-8); }
+.orca-stat-card__head { display: flex; align-items: center; gap: var(--orca-space-4); }
 .orca-stat-card__icon { flex: none; display: inline-flex; color: var(--orca-text-muted); background: transparent; }
-.orca-stat-card__icon > .orca-icon { width: var(--orca-icon-m); height: var(--orca-icon-m); }
+.orca-stat-card__icon > .orca-icon { width: var(--orca-icon-s); height: var(--orca-icon-s); }
+.orca-stat-card .orca-stat-label { font: var(--orca-type-label); }
+.orca-stat-card .orca-stat-value { font: var(--orca-type-figure); }
 .orca-stat-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--orca-space-4) var(--orca-space-8); font: var(--orca-type-detail); color: var(--orca-text-muted); }
 .orca-stat-card > .orca-sparkline { margin-top: var(--orca-space-8); }
 a.orca-stat-card { color: inherit; text-decoration: none; }

@@ -259,12 +259,14 @@ label.orca-label { cursor: pointer; }
 .orca-check__box { border-radius: var(--orca-radius-none); }
 .orca-radio__dot { border-radius: var(--orca-radius-round); }
 .orca-check:hover .orca-check__box, .orca-radio:hover .orca-radio__dot { background: var(--orca-bg-hover); }
-.orca-check__box::after { content: ""; position: absolute; left: calc(0.1875rem - var(--orca-border-width)); top: calc(0.1875rem - var(--orca-border-width)); width: 0.625rem; height: 0.375rem; border-bottom: 2px solid var(--orca-bg); border-left: 2px solid var(--orca-bg); transform: rotate(-45deg); opacity: 0; transition: opacity var(--orca-duration-brisk) var(--orca-ease-out); }
-.orca-radio__dot::after { content: ""; position: absolute; left: calc(0.3125rem - var(--orca-border-width)); top: calc(0.3125rem - var(--orca-border-width)); width: 0.375rem; height: 0.375rem; border-radius: var(--orca-radius-round); background: var(--orca-bg); opacity: 0; }
+/* Marks are centred with inset: 0 and margin: auto. The tick is an L (two borders) turned 45deg, whose visible centre
+   sits 1px below its box centre, so it is lifted by 1px: centred to the pixel in the 13px inside of the box. */
+.orca-check__box::after { content: ""; position: absolute; inset: 0; margin: auto; width: 0.5625rem; height: 0.3125rem; border-bottom: 2px solid var(--orca-bg); border-left: 2px solid var(--orca-bg); transform: translate(-0.03125rem, -0.1rem) rotate(-45deg); opacity: 0; transition: opacity var(--orca-duration-brisk) var(--orca-ease-out); }
+.orca-radio__dot::after { content: ""; position: absolute; inset: 0; margin: auto; width: 0.375rem; height: 0.375rem; border-radius: var(--orca-radius-round); background: var(--orca-bg); opacity: 0; }
 .orca-check > input:checked + .orca-check__box, .orca-check > input:indeterminate + .orca-check__box,
 .orca-radio > input:checked + .orca-radio__dot { background: var(--orca-accent); border-color: var(--orca-accent); }
 .orca-check > input:checked + .orca-check__box::after, .orca-check > input:indeterminate + .orca-check__box::after, .orca-radio > input:checked + .orca-radio__dot::after { opacity: 1; }
-.orca-check > input:indeterminate + .orca-check__box::after { border-left: 0; transform: none; top: 0.125rem; }
+.orca-check > input:indeterminate + .orca-check__box::after { width: 0.5rem; height: 0; border-left: 0; transform: none; }
 .orca-check > input:focus-visible + .orca-check__box, .orca-radio > input:focus-visible + .orca-radio__dot { outline: var(--orca-focus-width) solid var(--orca-focus); outline-offset: var(--orca-border-width); }
 .orca-check > input[aria-invalid="true"] + .orca-check__box { border-color: var(--orca-negative); }
 .orca-check:has(> input:disabled), .orca-radio:has(> input:disabled) { opacity: var(--orca-opacity-disabled); cursor: not-allowed; }

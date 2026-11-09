@@ -361,6 +361,7 @@ TYPE = [
     S("type-detail", "400 0.875rem/1.25rem var(--orca-font-sans)", "Help text, validation messages, meta, timestamps.", "Type"),
     S("type-label", "550 0.75rem/1rem var(--orca-font-sans)", "Table headers, badges, kickers, stat labels (uppercase allowed).", "Type"),
     S("type-stat", "550 1.25rem/1.75rem var(--orca-font-sans)", "Stat values.", "Type"),
+    S("type-figure", "550 1.75rem/2.25rem var(--orca-font-sans)", "ORCA: the number of a stat card, larger than its label so it is read first.", "Type"),
     S("type-code", "400 0.9375rem/1.5rem var(--orca-font-mono)", "Code and keyboard keys.", "Type"),
     S("weight-regular", "400", "Body text.", "Type"),
     S("weight-strong", "550", "Bold text and headings.", "Type"),
@@ -391,6 +392,7 @@ DENSE = {
     "type-body-strong": "550 0.875rem/1.25rem var(--orca-font-sans)",
     "type-detail": "400 0.8125rem/1.125rem var(--orca-font-sans)",
     "type-stat": "550 1.125rem/1.5rem var(--orca-font-sans)",
+    "type-figure": "550 1.5rem/2rem var(--orca-font-sans)",
     "type-code": "400 0.8125rem/1.25rem var(--orca-font-mono)",
 }
 

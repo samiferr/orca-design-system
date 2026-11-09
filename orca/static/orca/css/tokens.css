@@ -195,6 +195,7 @@
   --orca-type-detail: 400 0.875rem/1.25rem var(--orca-font-sans);
   --orca-type-label: 550 0.75rem/1rem var(--orca-font-sans);
   --orca-type-stat: 550 1.25rem/1.75rem var(--orca-font-sans);
+  --orca-type-figure: 550 1.75rem/2.25rem var(--orca-font-sans);
   --orca-type-code: 400 0.9375rem/1.5rem var(--orca-font-mono);
   --orca-weight-regular: 400;
   --orca-weight-strong: 550;
@@ -464,6 +465,7 @@
   --orca-type-body-strong: 550 0.875rem/1.25rem var(--orca-font-sans);
   --orca-type-detail: 400 0.8125rem/1.125rem var(--orca-font-sans);
   --orca-type-stat: 550 1.125rem/1.5rem var(--orca-font-sans);
+  --orca-type-figure: 550 1.5rem/2rem var(--orca-font-sans);
   --orca-type-code: 400 0.8125rem/1.25rem var(--orca-font-mono);
 }
 /* A comfortable region inside a dense page. */
@@ -496,6 +498,7 @@
   --orca-type-body-strong: 550 1rem/1.5rem var(--orca-font-sans);
   --orca-type-detail: 400 0.875rem/1.25rem var(--orca-font-sans);
   --orca-type-stat: 550 1.25rem/1.75rem var(--orca-font-sans);
+  --orca-type-figure: 550 1.75rem/2.25rem var(--orca-font-sans);
   --orca-type-code: 400 0.9375rem/1.5rem var(--orca-font-mono);
 }
 /* Brand tokens (defaults). {% orca_head %} re-emits them from settings.ORCA['BRAND']. */
