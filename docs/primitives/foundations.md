@@ -24,7 +24,7 @@ A small, named palette keeps colour consistent and lets semantic tokens point at
 
 ### How to use
 
-- Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), Tangerine's values.
+- Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), ORCA's values.
 - Hues: `--orca-{red|orange|amber|yellow|green|teal|cyan|blue|indigo|purple|pink}-{100..900}`; 100 is lightest.
 - For data series prefer `--orca-chart-1`…`--orca-chart-8`, which already pick contrasting steps per theme.
 - Text on a hue step: steps 100–400 take `--orca-text` in light themes; 600–900 take white.
@@ -208,7 +208,7 @@ One consistent action colour teaches people what they can act on (Practical UI C
 
 `id: themes` · level: primitive · source: Tangerine
 
-Light, dark and paper share every token name. ORCA has one appearance: Tangerine.
+Light, dark and paper share every token name. ORCA has one appearance, named ORCA.
 
 ### Why
 
@@ -228,7 +228,7 @@ Writing components once against shared names means a theme can never break a com
 
 - Put `{% orca_html_attrs %}` on `<html>` and `{% orca_head %}` in `<head>`.
 - A theme toggle is a button with `data-orca-theme-toggle`; it cycles light → dark → paper and remembers the choice.
-- Appearance: Tangerine only (square corners, 1.5px borders, filled fields with a bottom border, inside focus ring).
+- Appearance: ORCA only (square corners, 1.5px borders, filled fields with a bottom border, inside focus ring).
 
 ### Accessibility
 
@@ -402,7 +402,7 @@ Consistent line weights make structure readable without decoration (Practical UI
 
 `id: radii` · level: primitive · source: Tangerine
 
-Tangerine is square; only round marks and bar ends are rounded.
+ORCA is square; only round marks and bar ends are rounded.
 
 ### Why
 

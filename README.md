@@ -9,7 +9,7 @@ it uses, the UX principles it applies, and a copy-ready template example.
   **Templates** (groups of patterns) → **Pages** (templates with real content).
 - **Rules:** *Practical UI* (Dannaway, 2024) and *Laws of UX* (Yablonski, 2024). Each element cites the rules it applies.
 - **Base:** the Tangerine system from `wise_people_analyzer` (Vanilla framework 4.59 values): square corners,
-  1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance: Tangerine.
+  1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance, named ORCA.
 - **Grounds:** the same backgrounds as `wise_people_analyzer`: a grey page (`--orca-bg-page`), white panels and
   sidebar (`--orca-bg-panel`), pale yellow stat cards (`--orca-bg-stat`) and a dark brand top bar (`--orca-brand-bar`).
 - **Page filters** always open in a right drawer from a Filters button in the page actions (the `filter-drawer` pattern).

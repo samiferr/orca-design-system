@@ -1,35 +1,40 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block title %}Overview{% endblock %}
-{% block content %}
-<section class="docs-hero" aria-labelledby="hero-title">
-  <p class="orca-card-kicker">Django design system · phase 4: templates</p>
-  <h1 class="docs-hero__title" id="hero-title">Every element says why, when and how.</h1>
-  <p class="docs-hero__lead">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>
-  <div class="orca-row orca-row--16">
-    <a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a>
-    <a class="orca-button" href="{% url 'orca:templates' %}">Browse templates</a>
+{% block page_head %}{% endblock %}
+{% block page %}
+<section class="orca-hero" aria-labelledby="hero-title">
+  <div class="orca-hero__text">
+    <p class="orca-card-kicker">Django design system · phase 4: templates</p>
+    <h1 class="orca-hero__title" id="hero-title">Every element says why, when and how.</h1>
+    <p class="orca-hero__lead">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>
+    <div class="orca-row orca-row--16">
+      <a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a>
+      <a class="orca-button" href="{% url 'orca:templates' %}">Browse templates</a>
+    </div>
   </div>
-  <div class="docs-hero__sample" aria-label="Live ORCA primitives">{{ hero }}</div>
+  <section class="orca-panel" aria-labelledby="hero-sample">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="hero-sample">Live ORCA primitives</h2><p class="orca-panel-header__desc">Rendered by the package you install.</p></div></div>
+    <div class="orca-panel__body">{{ hero }}</div>
+  </section>
 </section>
 
-<section class="docs-section" aria-labelledby="facts-h">
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="facts-h">
   <h2 class="orca-sr-only" id="facts-h">In numbers</h2>
-  <ul class="docs-facts">
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "grid" %}</span><p class="orca-stat-label">Primitives</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.primitives }}</p></li>
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "cluster-host" %}</span><p class="orca-stat-label">Components</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.components }}</p></li>
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "blueprint" %}</span><p class="orca-stat-label">Patterns</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.patterns }}</p></li>
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "folder" %}</span><p class="orca-stat-label">Templates</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.templates }}</p></li>
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "book" %}</span><p class="orca-stat-label">Guide items covered</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.guide_items }} of {{ stats.guide_items }}</p></li>
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "sliders" %}</span><p class="orca-stat-label">Brand keys</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.brand_keys }}</p></li>
-    <li class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "star" %}</span><p class="orca-stat-label">Icons</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.icons }}</p></li>
-  </ul>
+  <div class="orca-stat-grid">
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "grid" %}</span><p class="orca-stat-label">Primitives</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.primitives }}</p></div>
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "cluster-host" %}</span><p class="orca-stat-label">Components</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.components }}</p></div>
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "blueprint" %}</span><p class="orca-stat-label">Patterns</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.patterns }}</p></div>
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "folder" %}</span><p class="orca-stat-label">Templates</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.templates }}</p></div>
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "book" %}</span><p class="orca-stat-label">Guide items covered</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.guide_items }} of {{ stats.guide_items }}</p></div>
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "sliders" %}</span><p class="orca-stat-label">Brand keys</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.brand_keys }}</p></div>
+    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "star" %}</span><p class="orca-stat-label">Icons</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.icons }}</p></div>
+  </div>
 </section>
 
-<section class="docs-section docs-split" aria-labelledby="anatomy-h">
-  <div>
+<div class="orca-split orca-split--wide-aside">
+  <section class="orca-vstack orca-vstack--tight" aria-labelledby="anatomy-h">
     <h2 class="orca-section-title" id="anatomy-h">What an element looks like</h2>
     <p class="orca-p">Each record in the catalogue answers the same questions, in the same order. Developers read it on these pages; agents read it with <code class="orca-code">python -m orca show switch</code> or from <code class="orca-code">catalogue.json</code>.</p>
-    <dl class="docs-anatomy">
+    <dl class="orca-kv">
       <div><dt>Why</dt><dd>The user need, tied to a named principle.</dd></div>
       <div><dt>When, and when not</dt><dd>The situations it fits and the alternatives to use instead.</dd></div>
       <div><dt>How</dt><dd>Exact markup, classes, sizes and wording rules.</dd></div>
@@ -37,43 +42,45 @@
       <div><dt>Tokens and principles</dt><dd>The <code class="orca-code">--orca-*</code> values it reads and the rules it applies.</dd></div>
       <div><dt>Example</dt><dd>A template snippet that renders on this site and in your project.</dd></div>
     </dl>
-  </div>
-  <figure class="docs-card docs-excerpt">
-    <figcaption class="orca-card-kicker">From the catalogue · switch</figcaption>
-    <p class="orca-panel-title">Switch</p>
-    <p class="orca-small"><strong>Why.</strong> A switch mirrors a physical switch: flipping it changes something now. Immediate effect needs immediate feedback.</p>
-    <p class="orca-small"><strong>When.</strong> Settings saved at once: play videos automatically, turn notifications on.</p>
-    <p class="orca-small"><strong>Not when.</strong> Inside forms that need a Save button: use a checkbox.</p>
-    <label class="orca-switch"><input type="checkbox" role="switch" checked id="home-switch"><span class="orca-switch__track"></span><span>Autoplay videos</span></label>
-    <a class="orca-link orca-link--plain orca-small" href="{% url 'orca:element' 'switch' %}">Read the full switch entry</a>
-  </figure>
-</section>
+  </section>
+  <aside>
+    <figure class="orca-card">
+      <div class="orca-card__body">
+        <figcaption class="orca-card-kicker">From the catalogue · switch</figcaption>
+        <p class="orca-card-title">Switch</p>
+        <p class="orca-small"><strong>Why.</strong> A switch mirrors a physical switch: flipping it changes something now. Immediate effect needs immediate feedback.</p>
+        <p class="orca-small"><strong>When.</strong> Settings saved at once: play videos automatically, turn notifications on.</p>
+        <p class="orca-small"><strong>Not when.</strong> Inside forms that need a Save button: use a checkbox.</p>
+        <label class="orca-switch"><input type="checkbox" role="switch" checked id="home-switch"><span class="orca-switch__track"></span><span>Autoplay videos</span></label>
+      </div>
+      <div class="orca-card__footer"><a class="orca-link orca-link--plain orca-small" href="{% url 'orca:element' 'switch' %}">Read the full switch entry</a></div>
+    </figure>
+  </aside>
+</div>
 
-<section class="docs-section" aria-labelledby="start-h">
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="start-h">
   <h2 class="orca-section-title" id="start-h">Start in three steps</h2>
-  <ol class="docs-steps">
-    <li><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div><p class="orca-panel-title">Install</p>
-      <pre class="docs-code"><code data-orca-highlight>pip install git+https://github.com/samiferr/orca-design-system.git</code></pre></div></li>
-    <li><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div><p class="orca-panel-title">Add the app and your brand</p>
-      <pre class="docs-code"><code data-orca-highlight>INSTALLED_APPS += ["orca"]
-ORCA = {"BRAND": {"name": "Acme", "color": "#0f95a1"}}</code></pre></div></li>
-    <li><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div><p class="orca-panel-title">Load it in your base template</p>
-      <pre class="docs-code"><code data-orca-highlight>{% verbatim %}{% load orca %}
-<html {% orca_html_attrs %}>
-<head>{% orca_head %}</head>{% endverbatim %}</code></pre></div></li>
+  <ol class="orca-steps orca-steps--vertical">
+    <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div class="orca-stack"><span class="orca-steps__title">Install</span>
+      <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="start-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="start-1" data-orca-highlight="bash">pip install git+https://github.com/samiferr/orca-design-system.git</code></pre></div></div></li>
+    <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div class="orca-stack"><span class="orca-steps__title">Add the app and your brand</span>
+      <div class="orca-code-block"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="start-2">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="start-2" data-orca-highlight="python">INSTALLED_APPS += ["orca"]
+ORCA = {"BRAND": {"name": "Acme", "color": "#0f95a1"}}</code></pre></div></div></li>
+    <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><div class="orca-stack"><span class="orca-steps__title">Load it in your base template</span>
+      <div class="orca-code-block"><div class="orca-code-block__head"><span>Django template</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="start-3">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="start-3" data-orca-highlight="django">{% verbatim %}{% load orca %}
+&lt;html {% orca_html_attrs %}&gt;
+&lt;head&gt;{% orca_head %}&lt;/head&gt;{% endverbatim %}</code></pre></div></div></li>
   </ol>
   <p class="orca-p"><a class="orca-link orca-link--plain" href="{% url 'orca:guide' 'installation' %}">Full installation guide</a></p>
 </section>
 
-{% for lvl in levels %}<section class="docs-section" aria-labelledby="cats-{{ lvl.key }}">
+{% for lvl in levels %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="cats-{{ lvl.key }}">
   <h2 class="orca-section-title" id="cats-{{ lvl.key }}">{{ lvl.title }} by category</h2>
-  <ul class="docs-cards">
-    {% for cat, els in lvl.nav %}
-    <li class="docs-card">
-      <h3 class="orca-card-title"><a class="orca-link orca-link--quiet orca-link--plain" href="{% url lvl.url %}#cat-{{ cat.key }}">{{ cat.title }}</a></h3>
+  <ul class="orca-card-grid">
+    {% for cat, els in lvl.nav %}<li class="orca-card orca-card--link"><div class="orca-card__body">
+      <h3 class="orca-card-title"><a class="orca-card__link" href="{% url lvl.url %}#cat-{{ cat.key }}">{{ cat.title }}</a></h3>
       <p class="orca-card-meta">{{ els|length }} element{{ els|length|pluralize }} · {{ cat.intro|truncatewords:14 }}</p>
-    </li>
-    {% endfor %}
+    </div></li>{% endfor %}
   </ul>
 </section>
 {% endfor %}

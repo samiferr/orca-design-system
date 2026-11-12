@@ -353,7 +353,7 @@ Putting the way back and the actions on the same line saves height and keeps the
 
 `id: settings-panel` · level: pattern · source: Tangerine
 
-Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.
+Display preferences in groups: theme and density, with a live result. ORCA has a single appearance and brand colours set by the project.
 
 Built from: `theme-toggle`, `toggle-field`, `settings-toggle`
 

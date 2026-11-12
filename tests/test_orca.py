@@ -288,6 +288,22 @@ class DocsSiteTests(SimpleTestCase):
             self.assertEqual(broken, [])
             self.assertTrue((root / "static/orca/fonts/UbuntuSans-Variable.woff2").exists())
 
+    def test_site_uses_only_orca(self):
+        """The documentation website is built from ORCA elements only: no stylesheet or classes of its own."""
+        from orca.management.commands.orca_lint import Command, known_classes
+
+        templates = ROOT / "orca/templates/orca/docs"
+        problems = [p for path in templates.rglob("*.html") for p in Command()._check(path, known_classes())
+                    if "unknown ORCA class" in p]
+        self.assertEqual(problems, [])
+        own = [str(p) for p in templates.rglob("*.html") if re.search(r'class="(?:[^"]* )?docs-', p.read_text())]
+        self.assertEqual(own, [], "docs pages use ORCA classes, not docs-* ones")
+        self.assertEqual(list((ROOT / "orca/static/orca/css").glob("docs*.css")), [])
+        for url in (reverse("orca:home"), reverse("orca:index"), reverse("orca:element", args=["button"])):
+            html = self.client.get(url).content.decode()
+            self.assertNotIn("docs.css", html)
+            self.assertIn('class="orca-topbar"', html)
+
     def test_unknown_element_404(self):
         self.assertEqual(self.client.get("/orca/nope/").status_code, 404)
 

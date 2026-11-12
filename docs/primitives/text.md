@@ -10,7 +10,7 @@ Document headings from h1 to h6, plus a display style for marketing pages.
 
 ### Why
 
-A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: chunking; Practical UI W08). Tangerine's thin h2 is the system's typographic signature.
+A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: chunking; Practical UI W08). ORCA's thin h2 is the system's typographic signature.
 
 ### When to use
 

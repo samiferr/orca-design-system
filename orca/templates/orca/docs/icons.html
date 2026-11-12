@@ -1,13 +1,18 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block title %}Icons{% endblock %}
-{% block content %}
-<header class="docs-head"><h1 class="orca-page-title">Icons</h1>
-<p class="orca-page-subtitle">{{ items|length }} glyphs. Use <code class="orca-code">{% templatetag openblock %} icon "name" {% templatetag closeblock %}</code>. Always pair an icon with a word or an accessible name.</p></header>
-<ul class="docs-icons">
-  {% for name, svg in items %}<li>{{ svg }}<code class="orca-small">{{ name }}</code></li>{% endfor %}
-</ul>
-<section class="docs-section" aria-labelledby="ic-al">
+{% block page_subtitle %}<p class="orca-page-subtitle">{{ items|length }} glyphs. Use <code class="orca-code">{% templatetag openblock %} icon "name" {% templatetag closeblock %}</code>. Always pair an icon with a word or an accessible name.</p>{% endblock %}
+{% block page %}
+<section class="orca-panel" aria-labelledby="ic-all">
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="ic-all">All icons</h2><p class="orca-panel-header__desc">Filter by name to find one.</p></div></div>
+  <div class="orca-panel__body orca-vstack orca-vstack--tight">
+    <div class="orca-search orca-search-field">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" aria-label="Filter icons" placeholder="Filter icons" data-orca-filter-list="icon-list" data-orca-status="icon-list-status"><span class="orca-search-field__count orca-small orca-muted" id="icon-list-status" role="status"></span></div>
+    <ul class="orca-list" id="icon-list">
+      {% for name, svg in items %}<li><span class="orca-list-item">{{ svg }}<span class="orca-list-item__text"><code class="orca-list-item__title">{{ name }}</code></span></span></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="ic-al">
   <h2 class="orca-section-title" id="ic-al">Aliases</h2>
-  <p class="orca-row">{% for a, target in aliases %}<span class="orca-tag"><code>{{ a }}</code> → <code>{{ target }}</code></span>{% endfor %}</p>
+  <p class="orca-p">Other names that resolve to the same glyph.</p>
+  <p class="orca-row">{% for a, target in aliases %}<span class="orca-tag"><span class="orca-tag__text"><code>{{ a }}</code> → <code>{{ target }}</code></span></span>{% endfor %}</p>
 </section>
 {% endblock %}

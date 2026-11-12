@@ -16,7 +16,7 @@ add(Element(
           "Defining a new semantic token inside ORCA itself."],
     avoid=["Text, controls, grounds and status: use semantic tokens (`semantic-colors`) instead.",
            "Telling two series apart by hue alone: change lightness or add a shape, label or pattern."],
-    how=["Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), Tangerine's values.",
+    how=["Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), ORCA's values.",
          "Hues: `--orca-{red|orange|amber|yellow|green|teal|cyan|blue|indigo|purple|pink}-{100..900}`; 100 is lightest.",
          "For data series prefer `--orca-chart-1`…`--orca-chart-8`, which already pick contrasting steps per theme.",
          "Text on a hue step: steps 100–400 take `--orca-text` in light themes; 600–900 take white."],
@@ -112,7 +112,7 @@ add(Element(
 
 add(Element(
     "themes", "Themes", C,
-    "Light, dark and paper share every token name. ORCA has one appearance: Tangerine.",
+    "Light, dark and paper share every token name. ORCA has one appearance, named ORCA.",
     why="Writing components once against shared names means a theme can never break a component (Postel's law: "
         "reliable output in every context). Users with light sensitivity or bright surroundings choose what suits them.",
     when=["Always: every page supports all three themes for free.",
@@ -121,7 +121,7 @@ add(Element(
            "Pure black grounds: dark uses #262626 and #202020."],
     how=["Put `{% orca_html_attrs %}` on `<html>` and `{% orca_head %}` in `<head>`.",
          "A theme toggle is a button with `data-orca-theme-toggle`; it cycles light → dark → paper and remembers the choice.",
-         "Appearance: Tangerine only (square corners, 1.5px borders, filled fields with a bottom border, inside focus ring)."],
+         "Appearance: ORCA only (square corners, 1.5px borders, filled fields with a bottom border, inside focus ring)."],
     a11y=["Contrast promises hold in every theme; dark lifts floating surfaces one step so elevation shows without shadows."],
     tokens=["bg", "text"],
     laws=["postel", "C11", "C12"],
@@ -206,7 +206,7 @@ add(Element(
 
 add(Element(
     "radii", "Corner radii", C,
-    "Tangerine is square; only round marks and bar ends are rounded.",
+    "ORCA is square; only round marks and bar ends are rounded.",
     why="One consistent shape language is part of the system's recognisable look (Aesthetic–usability effect); "
         "rounding reserved for round marks (radios, dots, avatars) keeps those marks distinct from boxes (checkboxes).",
     when=["`--orca-radius-none` for every box: buttons, fields, cards, menus, dialogs, badges, tags.",
