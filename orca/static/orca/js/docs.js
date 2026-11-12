@@ -1,34 +1,12 @@
-/* ORCA documentation site only: sidebar page search, page filters in the right drawer, phone menu, copy buttons. */
+/* ORCA documentation site only: behaviour, no styling. Everything it touches is ORCA markup
+   (the docs sidebar tree, the filter drawer, applied filters and the empty state).
+   - opens the sidebar scrolled to the current page;
+   - narrows the element cards live from the filter drawer, because the exported site has no server to filter on. */
 (function () {
   "use strict";
-  var filter = document.querySelector("[data-docs-filter]");
-  var nav = document.getElementById("docs-nav");
-
-  if (filter && nav) {
-    var empty = nav.querySelector("[data-docs-empty]");
-    filter.addEventListener("input", function () {
-      var q = filter.value.trim().toLowerCase();
-      var shown = 0;
-      nav.querySelectorAll(".docs-nav__section").forEach(function (section) {
-        var sectionShown = 0;
-        section.querySelectorAll("li").forEach(function (li) {
-          var hit = !q || li.textContent.toLowerCase().indexOf(q) !== -1;
-          li.hidden = !hit;
-          if (hit) sectionShown++;
-        });
-        section.querySelectorAll("details").forEach(function (d) {
-          var any = d.querySelector("li:not([hidden])");
-          d.hidden = !any;
-          if (q && any) d.open = true;
-        });
-        section.hidden = q && !sectionShown;
-        shown += sectionShown;
-      });
-      if (empty) empty.hidden = shown > 0;
-    });
-    var current = nav.querySelector("[aria-current=page]");
-    if (current && current.scrollIntoView) current.scrollIntoView({ block: "center" });
-  }
+  var nav = document.getElementById("orca-sidebar");
+  var current = nav && nav.querySelector("[aria-current=page]");
+  if (current && nav.scrollHeight > nav.clientHeight) nav.scrollTop = Math.max(0, current.offsetTop - nav.clientHeight / 2);
 
   /* Page filters (Primitives page): the drawer's form narrows the cards live; applied filters show as tags. */
   var drawer = document.querySelector("[data-docs-filters]");
@@ -102,52 +80,4 @@
     apply();
   }
 
-  var menu = document.querySelector("[data-docs-menu]");
-  if (menu && nav) {
-    menu.addEventListener("click", function () {
-      var open = menu.getAttribute("aria-expanded") !== "true";
-      menu.setAttribute("aria-expanded", open ? "true" : "false");
-      menu.setAttribute("aria-label", open ? "Hide navigation" : "Show navigation");
-      document.body.classList.toggle("docs--nav-open", open);
-      if (open && filter) filter.focus();
-    });
-  }
-
-  // Template previews: show the page at desktop, tablet or phone width.
-  document.querySelectorAll("[data-docs-viewport]").forEach(function (group) {
-    var frame = group.closest(".docs-example").querySelector("[data-docs-frame]");
-    group.addEventListener("click", function (e) {
-      var b = e.target.closest("button[data-width]"); if (!b || !frame) return;
-      group.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      frame.style.maxWidth = b.getAttribute("data-width") || "";
-    });
-  });
-
-  document.querySelectorAll("pre.docs-code").forEach(function (pre) {
-    var button = document.createElement("button");
-    button.type = "button";
-    button.className = "orca-button orca-button--sm docs-code__copy";
-    var icons = document.getElementById("docs-copy-icons");
-    if (icons) button.appendChild(icons.content.cloneNode(true));
-    var label = document.createElement("span");
-    label.textContent = "Copy";
-    button.appendChild(label);
-    button.addEventListener("click", function () {
-      var text = pre.querySelector("code").textContent;
-      var done = function () {
-        label.textContent = "Copied"; button.setAttribute("data-copied", "");
-        setTimeout(function () { label.textContent = "Copy"; button.removeAttribute("data-copied"); }, 1500);
-      };
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(done, function () { select(pre); });
-      } else { select(pre); }
-    });
-    pre.appendChild(button);
-  });
-
-  function select(el) {
-    var range = document.createRange();
-    range.selectNodeContents(el.querySelector("code"));
-    var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-  }
 })();

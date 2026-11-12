@@ -1,9 +1,9 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
 {% block lead %}<p class="orca-page-subtitle">ORCA is plain HTML with <code class="orca-code">orca-*</code> classes, a handful of template tags and an optional script. Look an element up, copy its example, adapt the content.</p>{% endblock %}
 {% block article %}
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">The working loop</h2>
-  <ol class="docs-list">
+  <ol>
     <li>Find the element for the job on the <a class="orca-link orca-link--plain" href="{% url 'orca:index' %}">primitives</a> pages, or with <code class="orca-code">python -m orca search &lt;words&gt;</code>.</li>
     <li>Read its <strong>when not to use</strong> first: it usually names the element you need instead.</li>
     <li>Copy the example template, then replace the content. Keep the classes, attributes and structure.</li>
@@ -11,9 +11,9 @@
   </ol>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Template tags</h2>
-  <div class="docs-table-wrap"><table class="docs-table">
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Tag</th><th scope="col">Output</th></tr></thead>
     <tbody>
       <tr><td><code class="orca-code">{% templatetag openblock %} orca_head {% templatetag closeblock %}</code></td><td>Stylesheets, brand values, theme restore, favicon, script. Arguments: <code class="orca-code">script=False</code>, <code class="orca-code">theme_restore=False</code>.</td></tr>
@@ -37,42 +37,42 @@
       <tr><td><code class="orca-code">{% templatetag openblock %} extends "orca/email/base.html" {% templatetag closeblock %}</code></td><td>The <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'email-frame' %}">email frame</a>: table layout with your brand colours written inline. <code class="orca-code">{% templatetag openblock %} orca_email_colors as c {% templatetag closeblock %}</code> gives the hex values.</td></tr>
     </tbody>
   </table></div>
-  <h3 class="orca-panel-title docs-sub">Filters</h3>
-  <ul class="docs-list">
+  <h3 class="orca-panel-title">Filters</h3>
+  <ul>
     <li><code class="orca-code">{% templatetag openvariable %} minutes|orca_duration {% templatetag closevariable %}</code>: 90 becomes “1 h 30 min”. Accepts an integer of minutes or a <code class="orca-code">timedelta</code>.</li>
     <li><code class="orca-code">{% templatetag openvariable %} user.get_full_name|orca_initials {% templatetag closevariable %}</code>: “Ada Lovelace” becomes “AL”.</li>
   </ul>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">A form field, start to finish</h2>
   <p class="orca-p">Label above the field, help between label and field, error above the field, all linked with <code class="orca-code">aria-describedby</code>.</p>
-  <div class="docs-example"><div class="docs-example__preview">
+  <div class="orca-panel"><div class="orca-panel__body orca-vstack orca-vstack--tight">
     <label class="orca-label" for="u-video">Video address</label>
     <p class="orca-help" id="u-video-help">Starts with https://. Copy it from the video's Share menu.</p>
     <p class="orca-error" id="u-video-error">{% icon "error" %}<span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span></p>
     <input class="orca-input" id="u-video" name="video_url" value="media.example.com/v/4821" aria-invalid="true" aria-describedby="u-video-error u-video-help">
-    <div class="orca-row" style="margin-top: var(--orca-space-24)"><button class="orca-button orca-button--primary" type="submit">Save video</button><button class="orca-button" type="button">Cancel</button></div>
+    <div class="orca-form-actions"><button class="orca-button orca-button--primary" type="submit">Save video</button><button class="orca-button" type="button">Cancel</button></div>
   </div></div>
-  <pre class="docs-code"><code data-orca-highlight>{% verbatim %}<label class="orca-label" for="video-url">Video address</label>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Django template</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="usage-code-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="usage-code-1" data-orca-highlight="django">{% verbatim %}<label class="orca-label" for="video-url">Video address</label>
 <p class="orca-help" id="video-url-help">Starts with https://. Copy it from the video's Share menu.</p>
 {% if form.video_url.errors %}
 <p class="orca-error" id="video-url-error">{% icon "error" %}<span>{{ form.video_url.errors.0 }}</span></p>
 {% endif %}
 <input class="orca-input" id="video-url" name="video_url" value="{{ form.video_url.value|default:'' }}"
-       {% if form.video_url.errors %}aria-invalid="true" aria-describedby="video-url-error video-url-help"{% else %}aria-describedby="video-url-help"{% endif %}>{% endverbatim %}</code></pre>
+       {% if form.video_url.errors %}aria-invalid="true" aria-describedby="video-url-error video-url-help"{% else %}aria-describedby="video-url-help"{% endif %}>{% endverbatim %}</code></pre></div>
   <p class="orca-p">With a Django form, <code class="orca-code">{% templatetag openblock %} orca_field form.video_url {% templatetag closeblock %}</code> writes exactly this markup, for any widget.</p>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Layout helpers</h2>
   <p class="orca-p">Primitives do not set outer margins. Space groups with the spacing tokens and the two utilities <code class="orca-code">.orca-stack</code> (a column with an 8px gap) and <code class="orca-code">.orca-row</code> (a wrapping row; <code class="orca-code">.orca-row--16</code> for 16px). For anything else use <code class="orca-code">gap: var(--orca-space-24)</code> and friends in your own CSS.</p>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Optional script behaviours</h2>
   <p class="orca-p"><code class="orca-code">orca.js</code> only acts on markup that asks for it with a data attribute. Every primitive works without it.</p>
-  <div class="docs-table-wrap"><table class="docs-table">
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Attribute</th><th scope="col">Behaviour</th></tr></thead>
     <tbody>
       <tr><td><code class="orca-code">data-orca-clear</code></td><td>Search clear button empties its input and returns focus.</td></tr>
@@ -95,7 +95,7 @@
   </table></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Your own CSS</h2>
   <p class="orca-p">ORCA's rules live in cascade layers (<code class="orca-code">orca.tokens</code>, <code class="orca-code">orca.base</code>, <code class="orca-code">orca.primitives</code>, <code class="orca-code">orca.utilities</code>), so any unlayered rule of yours wins without <code class="orca-code">!important</code>. Use that for layout only. Read every colour, size, radius, shadow, layer and duration from a <code class="orca-code">--orca-*</code> token, and never redefine a token other than the brand ones.</p>
 </section>

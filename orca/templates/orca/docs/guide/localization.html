@@ -1,38 +1,38 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
 {% block lead %}<p class="orca-page-subtitle">ORCA leaves words to your templates and formats to Django's locale machinery, and its primitives are built to survive longer text and right-to-left layouts.</p>{% endblock %}
 {% block article %}
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Translation</h2>
   <p class="orca-p">Primitives contain no fixed words: labels, button text and messages are yours, so translate them with Django as usual. Set the page language with <code class="orca-code">{% templatetag openblock %} orca_html_attrs LANGUAGE_CODE {% templatetag closeblock %}</code>.</p>
-  <pre class="docs-code"><code data-orca-highlight>{% verbatim %}{% load i18n orca %}
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Django template</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="localization-code-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="localization-code-1" data-orca-highlight="django">{% verbatim %}{% load i18n orca %}
 {% get_current_language as LANGUAGE_CODE %}
 <html {% orca_html_attrs LANGUAGE_CODE %}>
 ...
-<button class="orca-button orca-button--primary" type="submit">{% translate "Save video" %}</button>{% endverbatim %}</code></pre>
+<button class="orca-button orca-button--primary" type="submit">{% translate "Save video" %}</button>{% endverbatim %}</code></pre></div>
   <p class="orca-p">Write the source text the ORCA way (sentence case, a verb on every button, errors that say how to fix) and ask translators to keep it.</p>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Text expansion</h2>
   <p class="orca-p">Translated text can be much longer than English. ORCA's primitives grow with their content: buttons widen, titles wrap instead of truncating, tags and badges ellipsize inside themselves, and nothing has a fixed width except the controls where width is the message (digit boxes, weekday toggles). Test with your longest language before release.</p>
-  <div class="docs-example"><div class="docs-example__preview orca-stack">
+  <div class="orca-panel"><div class="orca-panel__body orca-vstack orca-vstack--tight">
     <div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save video settings</button><button class="orca-button orca-button--primary" type="button">Videoeinstellungen speichern</button></div>
-    <h3 class="orca-card-title" style="max-width: 16rem">Sommerurlaub an der Nordseeküste, Abendstimmung am Hafen</h3>
+    <ul class="orca-card-grid"><li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Sommerurlaub an der Nordseeküste, Abendstimmung am Hafen</h3><p class="orca-card-meta">Video · 4 min</p></div></li></ul>
   </div></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Right-to-left</h2>
   <p class="orca-p">Primitives use logical properties (<code class="orca-code">inset-inline-start</code>, <code class="orca-code">padding-inline</code>), and direction-bearing marks mirror under <code class="orca-code">dir="rtl"</code>: chevron separators, accordion chevrons, the select arrow. Set <code class="orca-code">dir</code> on <code class="orca-code">&lt;html&gt;</code> for right-to-left languages.</p>
-  <div class="docs-example"><div class="docs-example__preview" dir="rtl" lang="ar">
+  <div class="orca-panel" dir="rtl" lang="ar"><div class="orca-panel__body orca-vstack orca-vstack--tight">
     <nav aria-label="مسار التنقل" class="orca-small"><a class="orca-link orca-link--plain" href="#">المواقع</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span aria-current="page">المدخل أ</span></nav>
-    <div class="orca-row" style="margin-top: var(--orca-space-16)"><button class="orca-button orca-button--primary" type="button">حفظ الكاميرا</button><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}متصل</span></div>
+    <div class="orca-row"><button class="orca-button orca-button--primary" type="button">حفظ الكاميرا</button><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}متصل</span></div>
   </div></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Dates, times and numbers</h2>
-  <ul class="docs-list">
+  <ul>
     <li>Turn on <code class="orca-code">USE_TZ</code>, store times in UTC and convert to the viewer's zone with <code class="orca-code">{% templatetag openblock %} timezone {% templatetag closeblock %}</code>; store zones as IANA names (see the <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'timezone-select' %}">timezone select</a>).</li>
     <li>Format with Django's <code class="orca-code">date</code> and <code class="orca-code">time</code> filters and the locale's <code class="orca-code">DATE_FORMAT</code> and <code class="orca-code">TIME_FORMAT</code>; write months in words for mixed audiences (<a class="orca-link orca-link--plain" href="{% url 'orca:element' 'date-label' %}">date label</a>).</li>
     <li>Native date and time inputs follow the reader's locale on their own, including 12 or 24 hours.</li>

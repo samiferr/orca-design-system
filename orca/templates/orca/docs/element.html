@@ -1,63 +1,92 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block title %}{{ el.name }}{% endblock %}
-{% block content %}
-<nav aria-label="Breadcrumb" class="orca-small">
-  <a class="orca-link orca-link--plain" href="{% url level_url %}">{{ level_title }}</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span>
-  <a class="orca-link orca-link--plain" href="{% url level_url %}#cat-{{ category.key }}">{{ category.title }}</a>
-</nav>
-<div class="docs-head">
-  <h1 class="orca-page-title">{{ el.name }}</h1>
-  <p class="orca-page-subtitle">{{ el.summary|orca_inline_code }}</p>
-  <p class="orca-row orca-small"><code class="orca-code">id: {{ el.id }}</code><span class="orca-badge orca-badge--grey">{{ el.level }}</span><span class="orca-badge orca-badge--subtle orca-badge--info">Source: {{ el.source }}</span></p>
-</div>
-
+{% block page_subtitle %}<p class="orca-page-subtitle">{{ el.summary|orca_inline_code }}</p>
+<div class="orca-page-head__meta"><code class="orca-code">id: {{ el.id }}</code><span class="orca-badge orca-badge--grey">{{ el.level }}</span><span class="orca-badge orca-badge--subtle orca-badge--info">Source: {{ el.source }}</span></div>{% endblock %}
+{% block page %}
 {% for ex in examples %}
-<section class="docs-example orca-tabs" aria-labelledby="ex-{{ forloop.counter }}-t">
-  <div class="docs-example__head">
-    <h2 class="orca-panel-title" id="ex-{{ forloop.counter }}-t">{{ ex.title }}</h2>
-    <div class="orca-tabs__list docs-example__tabs" role="tablist" aria-label="{{ ex.title }}" data-orca-tabs>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="ex-{{ forloop.counter }}-t">
+  <div class="orca-panel-header">
+    <div class="orca-panel-header__text"><h2 class="orca-panel-title" id="ex-{{ forloop.counter }}-t">{{ ex.title }}</h2></div>
+    {% if ex.preview_url %}<div class="orca-panel-header__actions">
+      <fieldset class="orca-segmented orca-segmented--dense"><legend class="orca-sr-only">Preview width</legend>
+        <label class="orca-segmented__item"><input type="radio" name="ex-{{ forloop.counter }}-width" value="none" data-orca-token="max-width" aria-controls="{{ ex.frame_id }}" checked>Desktop</label>
+        <label class="orca-segmented__item"><input type="radio" name="ex-{{ forloop.counter }}-width" value="48rem" data-orca-token="max-width" aria-controls="{{ ex.frame_id }}">Tablet</label>
+        <label class="orca-segmented__item"><input type="radio" name="ex-{{ forloop.counter }}-width" value="24.375rem" data-orca-token="max-width" aria-controls="{{ ex.frame_id }}">Phone</label>
+      </fieldset>
+      <a class="orca-link orca-small" href="{{ ex.preview_url }}" target="_blank" rel="noopener">Open the page on its own{% icon "external-link" size="xs" %}</a>
+    </div>{% endif %}
+  </div>
+  <div class="orca-live-example">
+    <div class="orca-tabs__list" role="tablist" aria-label="{{ ex.title }}" data-orca-tabs>
       <button class="orca-tab" role="tab" type="button" id="ex-{{ forloop.counter }}-tp" aria-controls="ex-{{ forloop.counter }}-pp" aria-selected="true">Preview</button>
       <button class="orca-tab" role="tab" type="button" id="ex-{{ forloop.counter }}-tc" aria-controls="ex-{{ forloop.counter }}-pc" aria-selected="false" tabindex="-1">{% if ex.preview_url %}Child template{% else %}Code{% endif %}</button>
     </div>
-  </div>
-  <div class="orca-tabs__panel docs-example__panel" role="tabpanel" id="ex-{{ forloop.counter }}-pp" aria-labelledby="ex-{{ forloop.counter }}-tp" tabindex="0">
-    {% if ex.preview_url %}<div class="orca-row docs-example__bar"><nav class="orca-segmented orca-segmented--dense" aria-label="Preview width" data-docs-viewport><button class="orca-segmented__item" type="button" aria-pressed="true" data-width="">Desktop</button><button class="orca-segmented__item" type="button" aria-pressed="false" data-width="48rem">Tablet</button><button class="orca-segmented__item" type="button" aria-pressed="false" data-width="24.375rem">Phone</button></nav><a class="orca-link orca-small" href="{{ ex.preview_url }}" target="_blank" rel="noopener">Open the page on its own{% icon "external-link" size="xs" %}</a></div>{% endif %}
-    <div class="docs-example__preview{% if ex.preview_url %} docs-example__preview--page{% endif %}">{{ ex.rendered }}</div>
-  </div>
-  <div class="orca-tabs__panel docs-example__panel" role="tabpanel" id="ex-{{ forloop.counter }}-pc" aria-labelledby="ex-{{ forloop.counter }}-tc" tabindex="0" hidden>
-    <pre class="docs-code docs-example__code orca-scroll"><code data-orca-highlight="django">{{ ex.html }}</code></pre>
+    <div class="orca-tabs__panel" role="tabpanel" id="ex-{{ forloop.counter }}-pp" aria-labelledby="ex-{{ forloop.counter }}-tp" tabindex="0">{{ ex.rendered }}</div>
+    <div class="orca-tabs__panel orca-tabs__panel--code" role="tabpanel" id="ex-{{ forloop.counter }}-pc" aria-labelledby="ex-{{ forloop.counter }}-tc" tabindex="0" hidden>
+      <div class="orca-code-block"><div class="orca-code-block__head"><span>Django template</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="ex-{{ forloop.counter }}-code">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre class="orca-scroll"><code id="ex-{{ forloop.counter }}-code" data-orca-highlight="django">{{ ex.html }}</code></pre></div>
+    </div>
   </div>
 </section>
 {% endfor %}
 
-{% if el.server %}<section class="docs-section docs-server" aria-labelledby="server-h">
+{% if el.server %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="server-h">
   <h2 class="orca-section-title" id="server-h">Server code</h2>
   <p class="orca-p orca-muted">What your views, forms, URLs or settings provide for this element. The examples above show the template side.</p>
-  {% for title, code in el.server %}<div class="docs-server__item">
-    <h3 class="orca-panel-title">{{ title }}</h3>
-    <pre class="docs-code orca-scroll"><code data-orca-highlight="python">{{ code }}</code></pre>
-  </div>{% endfor %}
+  {% for title, code in el.server %}<div class="orca-code-block"><div class="orca-code-block__head"><span>{{ title }}</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="server-{{ forloop.counter }}">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre class="orca-scroll"><code id="server-{{ forloop.counter }}" data-orca-highlight="python">{{ code }}</code></pre></div>{% endfor %}
 </section>{% endif %}
 
-<div class="docs-grid">
-  <section class="docs-block"><h2 class="orca-panel-title">Why</h2><p class="orca-p">{{ el.why|orca_inline_code }}</p></section>
-  <section class="docs-block"><h2 class="orca-panel-title">When to use</h2><ul class="docs-list">{% for i in el.when %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul>
-    {% if el.avoid %}<h3 class="orca-h5 docs-sub">When not to use</h3><ul class="docs-list">{% for i in el.avoid %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul>{% endif %}</section>
-  {% if el.template or el.blocks %}<section class="docs-block docs-block--wide"><h2 class="orca-panel-title">Template</h2>
-    {% if el.template %}<p class="orca-p">Extend <code class="orca-code">{{ el.template }}</code></p>{% endif %}
-    {% if el.blocks %}<p class="orca-small orca-muted" style="margin-top: var(--orca-space-8)">Blocks</p><p class="orca-row">{% for b in el.blocks %}<code class="orca-code">{{ b }}</code>{% endfor %}</p>{% endif %}
-    {% if el.context %}<p class="orca-small orca-muted" style="margin-top: var(--orca-space-8)">Context it reads</p><ul class="docs-list">{% for c in el.context %}<li>{{ c|orca_inline_code }}</li>{% endfor %}</ul>{% endif %}</section>{% endif %}
-  <section class="docs-block docs-block--wide"><h2 class="orca-panel-title">How to use</h2><ul class="docs-list">{% for i in el.how %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul></section>
-  {% if el.a11y %}<section class="docs-block"><h2 class="orca-panel-title">Accessibility</h2><ul class="docs-list">{% for i in el.a11y %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul></section>{% endif %}
-  <section class="docs-block"><h2 class="orca-panel-title">Principles applied</h2><ul class="docs-list">{% for i in el.law_names %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul></section>
-  {% if el.classes or el.tokens %}<section class="docs-block"><h2 class="orca-panel-title">Classes and tokens</h2>
-    <p class="orca-row">{% for c in el.classes %}<code class="orca-code">{{ c }}</code>{% endfor %}</p>
-    <p class="orca-row" style="margin-top: var(--orca-space-8)">{% for t in el.tokens %}<code class="orca-code">--orca-{{ t }}</code>{% endfor %}</p></section>{% endif %}
-  {% if uses or used_by %}<section class="docs-block"><h2 class="orca-panel-title">Built from and used by</h2>
-    {% if uses %}<p class="orca-small orca-muted">Built from</p><p class="orca-row">{% for u in uses %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' u.id %}">{{ u.name }}</a>{% endfor %}</p>{% endif %}
-    {% if used_by %}<p class="orca-small orca-muted" style="margin-top: var(--orca-space-8)">Used by</p><p class="orca-row">{% for u in used_by %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' u.id %}">{{ u.name }}</a>{% endfor %}</p>{% endif %}</section>{% endif %}
-  {% if el.guide or related %}<section class="docs-block"><h2 class="orca-panel-title">Guide items and related</h2>
-    {% if el.guide %}<p class="orca-small orca-muted">{{ el.guide|join:" · " }}</p>{% endif %}
-    {% if related %}<p class="orca-row" style="margin-top: var(--orca-space-8)">{% for r in related %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' r.id %}">{{ r.name }}</a>{% endfor %}</p>{% endif %}</section>{% endif %}
+<section class="orca-panel" aria-labelledby="how-h">
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="how-h">How to use</h2></div></div>
+  <div class="orca-panel__body"><ul>{% for i in el.how %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul></div>
+</section>
+
+{% if el.template or el.blocks %}<section class="orca-panel" aria-labelledby="tpl-h">
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="tpl-h">Template</h2>{% if el.template %}<p class="orca-panel-header__desc">Extend <code class="orca-code">{{ el.template }}</code></p>{% endif %}</div></div>
+  <div class="orca-panel__body"><dl class="orca-kv">
+    {% if el.blocks %}<div><dt>Blocks</dt><dd><span class="orca-row">{% for b in el.blocks %}<code class="orca-code">{{ b }}</code>{% endfor %}</span></dd></div>{% endif %}
+    {% if el.context %}<div><dt>Context it reads</dt><dd><ul>{% for c in el.context %}<li>{{ c|orca_inline_code }}</li>{% endfor %}</ul></dd></div>{% endif %}
+  </dl></div>
+</section>{% endif %}
+
+<div class="orca-panels">
+  <section class="orca-panel" aria-labelledby="why-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="why-h">Why</h2></div></div>
+    <div class="orca-panel__body"><p class="orca-p">{{ el.why|orca_inline_code }}</p></div>
+  </section>
+  <section class="orca-panel" aria-labelledby="when-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="when-h">When to use</h2></div></div>
+    <div class="orca-panel__body orca-vstack orca-vstack--tight">
+      <ul>{% for i in el.when %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul>
+      {% if el.avoid %}<h3 class="orca-h5">When not to use</h3><ul>{% for i in el.avoid %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+  </section>
+  {% if el.a11y %}<section class="orca-panel" aria-labelledby="a11y-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="a11y-h">Accessibility</h2></div></div>
+    <div class="orca-panel__body"><ul>{% for i in el.a11y %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul></div>
+  </section>{% endif %}
+  <section class="orca-panel" aria-labelledby="laws-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="laws-h">Principles applied</h2></div></div>
+    <div class="orca-panel__body"><ul>{% for i in el.law_names %}<li>{{ i|orca_inline_code }}</li>{% endfor %}</ul></div>
+  </section>
+  {% if el.classes or el.tokens %}<section class="orca-panel" aria-labelledby="cls-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="cls-h">Classes and tokens</h2></div></div>
+    <div class="orca-panel__body"><dl class="orca-kv orca-kv--stacked">
+      {% if el.classes %}<div><dt>Classes</dt><dd><span class="orca-row">{% for c in el.classes %}<code class="orca-code">{{ c }}</code>{% endfor %}</span></dd></div>{% endif %}
+      {% if el.tokens %}<div><dt>Tokens</dt><dd><span class="orca-row">{% for t in el.tokens %}<code class="orca-code">--orca-{{ t }}</code>{% endfor %}</span></dd></div>{% endif %}
+    </dl></div>
+  </section>{% endif %}
+  {% if uses or used_by %}<section class="orca-panel" aria-labelledby="uses-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="uses-h">Built from and used by</h2></div></div>
+    <div class="orca-panel__body"><dl class="orca-kv orca-kv--stacked">
+      {% if uses %}<div><dt>Built from</dt><dd><span class="orca-row">{% for u in uses %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' u.id %}">{{ u.name }}</a>{% endfor %}</span></dd></div>{% endif %}
+      {% if used_by %}<div><dt>Used by</dt><dd><span class="orca-row">{% for u in used_by %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' u.id %}">{{ u.name }}</a>{% endfor %}</span></dd></div>{% endif %}
+    </dl></div>
+  </section>{% endif %}
+  {% if el.guide or related %}<section class="orca-panel" aria-labelledby="rel-h">
+    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="rel-h">Guide items and related</h2></div></div>
+    <div class="orca-panel__body"><dl class="orca-kv orca-kv--stacked">
+      {% if el.guide %}<div><dt>Guide items</dt><dd>{{ el.guide|join:" · " }}</dd></div>{% endif %}
+      {% if related %}<div><dt>Related</dt><dd><span class="orca-row">{% for r in related %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' r.id %}">{{ r.name }}</a>{% endfor %}</span></dd></div>{% endif %}
+    </dl></div>
+  </section>{% endif %}
 </div>
 {% endblock %}

@@ -94,7 +94,7 @@ def home(request):
   <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
   <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
 </div>"""))
-    return render(request, "orca/docs/home.html", _ctx("home", stats=_stats(), hero=hero))
+    return render(request, "orca/docs/home.html", _ctx("home", title="Overview", stats=_stats(), hero=hero))
 
 
 LEVEL_INTROS = {
@@ -108,7 +108,7 @@ LEVEL_INTROS = {
 def level_index(request, level="primitive"):
     _guard()
     return render(request, "orca/docs/index.html", _ctx(
-        registry.LEVEL_TITLES[level].lower(), level=level, level_title=registry.LEVEL_TITLES[level],
+        registry.LEVEL_TITLES[level].lower(), level=level, level_title=registry.LEVEL_TITLES[level], title=registry.LEVEL_TITLES[level],
         level_intro=LEVEL_INTROS[level], elements=registry.all_elements(level), brand_tokens=tokens.BRAND_TOKENS,
         level_nav=[(c, registry.by_category(c.key)) for c in registry.categories(level)],
     ))
@@ -156,7 +156,7 @@ def guide(request, slug):
     _guard()
     if slug not in GUIDE_TITLES:
         raise Http404(f"No guide page {slug!r}")
-    extra = {"title": GUIDE_TITLES[slug], "slug": slug}
+    extra = {"title": GUIDE_TITLES[slug], "slug": slug, "breadcrumbs": [("Overview", reverse("orca:home")), ("Guide", "")]}
     if slug == "brand-and-themes":
         extra.update(brand_tokens=tokens.BRAND_TOKENS, brand=compute_brand())
     if slug == "principles":
@@ -183,18 +183,19 @@ def element(request, element_id):
         raise Http404(f"No ORCA element {element_id!r}")
     if el.preview:
         src = reverse("orca:preview", args=[el.id])
-        frame = (f'<iframe class="orca-template-preview" src="{src}" title="Preview: {escape(el.name)}" loading="lazy" '
-                 f'data-docs-frame></iframe>')
-        examples = [{"title": "Live preview", "html": el.example_list()[0][1], "rendered": mark_safe(frame), "preview_url": src}]
+        frame = f'<iframe class="orca-template-preview" id="preview-{el.id}" src="{src}" title="Preview: {escape(el.name)}" loading="lazy"></iframe>'
+        examples = [{"title": "Live preview", "html": el.example_list()[0][1], "rendered": mark_safe(frame), "preview_url": src,
+                     "frame_id": f"preview-{el.id}"}]
     else:
         examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
     related = [registry.get(r) for r in el.related if registry.get(r)]
     uses = [registry.get(u) for u in el.uses if registry.get(u)]
     used_by = [e for e in registry.all_elements() if el.id in e.uses]
+    category = next(c for c in registry.categories() if c.key == el.category)
+    level_url = reverse(LEVEL_URLS.get(el.level, "orca:index"))
     return render(request, "orca/docs/element.html", _ctx(
-        el.id, el=el, examples=examples, related=related, uses=uses, used_by=used_by,
-        level_url=LEVEL_URLS.get(el.level, "orca:index"), level_title=registry.LEVEL_TITLES[el.level],
-        category=next(c for c in registry.categories() if c.key == el.category),
+        el.id, el=el, examples=examples, related=related, uses=uses, used_by=used_by, title=el.name,
+        breadcrumbs=[(registry.LEVEL_TITLES[el.level], level_url), (category.title, f"{level_url}#cat-{category.key}")],
     ))
 
 
@@ -202,7 +203,7 @@ def token_list(request):
     _guard()
     brand = compute_brand()
     return render(request, "orca/docs/tokens.html", _ctx(
-        "tokens", semantic=tokens.semantic_tokens(), scales=tokens.ALL_SCALES, brand=brand,
+        "tokens", title="Tokens", semantic=tokens.semantic_tokens(), scales=tokens.ALL_SCALES, brand=brand,
         brand_rows=[(k, v, brand.css["dark"][k]) for k, v in brand.css["light"].items()],
         brand_tokens=tokens.BRAND_TOKENS, neutral=tokens.NEUTRAL, hues=tokens.HUES, steps=list(tokens.STEPS),
     ))
@@ -211,7 +212,7 @@ def token_list(request):
 def icon_list(request):
     _guard()
     items = [(name, mark_safe(icons.svg(name, size="m"))) for name in icons.names()]
-    return render(request, "orca/docs/icons.html", _ctx("icons", items=items, aliases=sorted(icons.ALIASES.items())))
+    return render(request, "orca/docs/icons.html", _ctx("icons", title="Icons", items=items, aliases=sorted(icons.ALIASES.items())))
 
 
 def catalogue_json(request):

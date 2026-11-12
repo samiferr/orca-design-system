@@ -1,9 +1,9 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
 {% block lead %}<p class="orca-page-subtitle">ORCA targets WCAG 2.1 AA. The commitments below hold in light, dark and paper, and the ones that can be measured are checked by the test suite.</p>{% endblock %}
 {% block article %}
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Commitments</h2>
-  <div class="docs-table-wrap"><table class="docs-table">
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Area</th><th scope="col">Commitment</th><th scope="col">Checked by</th></tr></thead>
     <tbody>
       <tr><td>Text contrast</td><td>Body, muted and inactive text read at 4.5:1 on every ground, hover and pressed fill, in every theme.</td><td>Tests</td></tr>
@@ -20,18 +20,18 @@
   </table></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Known exceptions</h2>
   <p class="orca-p">Kept from Vanilla framework on purpose, and documented on the tokens they affect:</p>
-  <ul class="docs-list">
+  <ul>
     <li><code class="orca-code">--orca-caution</code> as text is 3.0:1 in light and paper. Never set caution text on its own: pair it with the warning icon, at 16px or more.</li>
   </ul>
   <p class="orca-p">Departures ORCA made from Vanilla for accessibility: the light and paper focus colour is darker (<code class="orca-code">#0f6dcc</code>, at least 3.9:1 on every ground instead of 2.3–3.0:1), brand fills are derived to reach 4.5:1, and the switch animates in 0.333s instead of 0.5s.</p>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">What remains yours</h2>
-  <ul class="docs-list">
+  <ul>
     <li>Writing alt text that describes what matters in each image.</li>
     <li>Keeping the heading outline in order and one <code class="orca-code">&lt;h1&gt;</code> per page.</li>
     <li>Moving focus sensibly after actions: to the error summary after a failed submit, back to the opener when a dialog closes.</li>

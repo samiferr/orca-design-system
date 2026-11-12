@@ -1,18 +1,10 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block title %}{{ title }}{% endblock %}
-{% block content %}
-<nav aria-label="Breadcrumb" class="orca-small">
-  <a class="orca-link orca-link--plain" href="{% url 'orca:home' %}">Overview</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span>Guide</span>
-</nav>
-<article class="docs-article">
-  <header class="docs-head">
-    <h1 class="orca-page-title">{{ title }}</h1>
-    {% block lead %}{% endblock %}
-  </header>
-  {% block article %}{% endblock %}
-</article>
-<nav class="docs-pager" aria-label="Guide pages">
-  {% if prev %}<a class="docs-pager__link" href="{% url 'orca:guide' prev.0 %}"><span class="orca-small orca-muted">Previous</span><span>{{ prev.1 }}</span></a>{% else %}<span></span>{% endif %}
-  {% if next %}<a class="docs-pager__link docs-pager__link--next" href="{% url 'orca:guide' next.0 %}"><span class="orca-small orca-muted">Next</span><span>{{ next.1 }}</span></a>{% else %}<a class="docs-pager__link docs-pager__link--next" href="{% url 'orca:index' %}"><span class="orca-small orca-muted">Next</span><span>Primitives</span></a>{% endif %}
-</nav>
+{% block page_subtitle %}{% block lead %}{% endblock %}{% endblock %}
+{% block page %}
+{% block article %}{% endblock %}
+<nav aria-label="Guide pages"><ul class="orca-card-grid">
+  {% if prev %}<li class="orca-card orca-card--link"><div class="orca-card__body"><p class="orca-card-kicker">Previous</p><p class="orca-card-title"><a class="orca-card__link" href="{% url 'orca:guide' prev.0 %}" rel="prev">{{ prev.1 }}</a></p></div></li>{% endif %}
+  {% if next %}<li class="orca-card orca-card--link"><div class="orca-card__body"><p class="orca-card-kicker">Next</p><p class="orca-card-title"><a class="orca-card__link" href="{% url 'orca:guide' next.0 %}" rel="next">{{ next.1 }}</a></p></div></li>
+  {% else %}<li class="orca-card orca-card--link"><div class="orca-card__body"><p class="orca-card-kicker">Next</p><p class="orca-card-title"><a class="orca-card__link" href="{% url 'orca:index' %}">Primitives</a></p></div></li>{% endif %}
+</ul></nav>
 {% endblock %}

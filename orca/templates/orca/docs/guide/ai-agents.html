@@ -1,9 +1,9 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
 {% block lead %}<p class="orca-page-subtitle">ORCA is written so a coding agent can choose the right element, write it correctly and have its output checked, without guessing.</p>{% endblock %}
 {% block article %}
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Where agents read ORCA</h2>
-  <div class="docs-table-wrap"><table class="docs-table">
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Source</th><th scope="col">Best for</th></tr></thead>
     <tbody>
       <tr><td><code class="orca-code">AGENTS.md</code></td><td>The hard rules and the decision table. Point your agent's instructions file at it.</td></tr>
@@ -17,20 +17,20 @@
   <p class="orca-p">No Django project is needed for the command line: it reads the catalogue directly from the installed package.</p>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Add ORCA to your agent instructions</h2>
-  <pre class="docs-code"><code data-orca-highlight># UI rules (CLAUDE.md, AGENTS.md or your agent's equivalent)
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Markdown</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="ai-agents-code-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="ai-agents-code-1" data-orca-highlight="markdown"># UI rules (CLAUDE.md, AGENTS.md or your agent's equivalent)
 This project's interface uses the ORCA design system.
 - Before writing any UI, run `python -m orca search <what you need>` and `python -m orca show <id>`.
 - Copy the element's example and keep its classes and attributes; change only the content.
 - Use --orca-* tokens for every colour, size, radius, shadow, layer and duration.
 - Change brand values only in settings.ORCA["BRAND"].
-- Run `python manage.py orca_lint templates/` and fix every finding before you finish.</code></pre>
+- Run `python manage.py orca_lint templates/` and fix every finding before you finish.</code></pre></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">The hard rules</h2>
-  <ol class="docs-list">
+  <ol>
     <li><strong>Tokens only.</strong> Never hard-code a colour, size, radius, shadow, z-index or duration.</li>
     <li><strong>Brand tokens only can change</strong>, and only in settings.</li>
     <li><strong>Only classes that exist.</strong> Compose missing pieces from primitives with <code class="orca-code">.orca-stack</code> and <code class="orca-code">.orca-row</code>.</li>
@@ -46,9 +46,9 @@ This project's interface uses the ORCA design system.
   </ol>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Choosing between similar elements</h2>
-  <div class="docs-table-wrap"><table class="docs-table">
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Need</th><th scope="col">Use</th><th scope="col">Not</th></tr></thead>
     <tbody>
       <tr><td>On/off saved with the form</td><td><a class="orca-link orca-link--plain" href="{% url 'orca:element' 'checkbox' %}">Checkbox</a></td><td>Switch</td></tr>
@@ -65,14 +65,14 @@ This project's interface uses the ORCA design system.
   </table></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">What the lint catches</h2>
-  <pre class="docs-code"><code data-orca-highlight>$ python manage.py orca_lint templates/
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="ai-agents-code-2">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="ai-agents-code-2" data-orca-highlight="bash">$ python manage.py orca_lint templates/
 templates/images/list.html:12: hard-coded colour; use a --orca-* token.
 templates/images/list.html:18: icon-only button without aria-label.
 templates/images/list.html:22: unknown ORCA class 'orca-buton'. Run `python -m orca search` to find the right one.
 static/css/site.css:4: --orca-text is not a brand token; only brand tokens may be changed (settings.ORCA['BRAND']).
-4 problem(s) found.</code></pre>
+4 problem(s) found.</code></pre></div>
   <p class="orca-p">It exits with status 1 when it finds a problem, so it can gate continuous integration as well as an agent's loop.</p>
 </section>
 {% endblock %}

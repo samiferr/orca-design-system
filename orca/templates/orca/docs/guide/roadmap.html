@@ -1,30 +1,32 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
 {% block lead %}<p class="orca-page-subtitle">ORCA has five levels. Each level is a group of the level before it, and only of that level. Each release completes one level.</p>{% endblock %}
 {% block article %}
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">The five levels</h2>
-  <ol class="docs-levels">
+  <ol class="orca-steps orca-steps--vertical">
     {% for item in level_defs %}{% with lv=item.level %}
-    <li class="docs-level{% if item.released %} docs-level--done{% elif item.next %} docs-level--current{% endif %}">
+    <li class="orca-steps__item{% if item.released %} orca-steps__item--done{% endif %}"{% if item.next %} aria-current="step"{% endif %}>
       <span class="orca-step-marker{% if item.released %} orca-step-marker--done{% elif item.next %} orca-step-marker--current{% endif %}" aria-hidden="true"></span>
-      <div><p class="orca-panel-title">{{ lv.title }}{% if item.released %} <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span>{% elif item.next %} <span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Next</span>{% endif %}</p>
-      <p class="orca-small">{{ lv.definition }}</p>
-      <p class="orca-small orca-muted">For example: {{ lv.examples }}</p></div>
+      <span class="orca-stack"><span class="orca-steps__title"><span class="orca-row">{{ lv.title }}{% if item.released %}<span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Released</span>{% elif item.next %}<span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Next</span>{% endif %}</span></span>
+      <span class="orca-steps__desc">{{ lv.definition }}</span>
+      <span class="orca-steps__desc">For example: {{ lv.examples }}</span></span>
     </li>
     {% endwith %}{% endfor %}
   </ol>
   <p class="orca-p">Each component, pattern and template lists what it is built from: elements of the level directly below, or of its own level when it nests one. A level is never skipped, and a part is listed once: when a listed element already contains it, it is not listed again. The test suite enforces both.</p>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Coverage</h2>
   <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components, {{ stats.patterns }} patterns and {{ stats.templates }} templates cover all {{ stats.guide_items }} primitive, component, pattern and template items of the ORCA guide, including the planning items the guide lists as not built yet. Several guide items share one element where they are variants of the same thing. The test suite fails if any item loses its element.</p>
   {% for title, sections in coverage %}
-  <div class="docs-table-wrap"><table class="docs-table">
-    <caption class="orca-panel-title" style="text-align: start; padding-bottom: var(--orca-space-8)">{{ title }}</caption>
-    <thead><tr><th scope="col">Guide section</th><th scope="col" class="docs-num">Items</th><th scope="col">Status</th></tr></thead>
-    <tbody>{% for section, count in sections %}<tr><td>{{ section }}</td><td class="docs-num orca-num">{{ count }}</td><td><span class="orca-status"><span class="orca-dot orca-dot--positive"></span>Covered</span></td></tr>{% endfor %}</tbody>
+  <section class="orca-table-card" aria-label="{{ title }}">
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h3 class="orca-panel-title">{{ title }}</h3></div></div>
+  <div class="orca-table-wrap"><table class="orca-table">
+    <thead><tr><th scope="col">Guide section</th><th scope="col" class="is-num">Items</th><th scope="col">Status</th></tr></thead>
+    <tbody>{% for section, count in sections %}<tr><td>{{ section }}</td><td class="is-num">{{ count }}</td><td><span class="orca-status"><span class="orca-dot orca-dot--positive"></span>Covered</span></td></tr>{% endfor %}</tbody>
   </table></div>
+  </section>
   {% endfor %}
   <p class="orca-p">Additions beyond the guide: a <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'skeleton' %}">skeleton</a> loading primitive, and template tags that render components from Django objects: <code class="orca-code">orca_field</code>, <code class="orca-code">orca_form_errors</code>, <code class="orca-code">orca_messages</code>, <code class="orca-code">orca_pagination</code>, <code class="orca-code">orca_mini_calendar</code>, <code class="orca-code">orca_sparkline</code> and <code class="orca-code">orca_donut</code>; and for patterns, Chart.js charts and server-rendered calendars: <code class="orca-code">orca_chart</code>, <code class="orca-code">orca_month_calendar</code>, <code class="orca-code">orca_week_view</code>, <code class="orca-code">orca_agenda</code>, <code class="orca-code">orca_year_view</code>, plus an inline-styled email frame (<code class="orca-code">orca/email/base.html</code>) and realistic sample data in <code class="orca-code">orca.samples</code>.</p>
 </section>

@@ -1,27 +1,21 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block title %}{{ level_title }}{% endblock %}
-{% block content %}
-<header class="docs-head orca-page-head">
-  <div class="orca-page-head__text">
-    <h1 class="orca-page-title">{{ level_title }}</h1>
-    <p class="orca-page-subtitle">{{ level_intro }} {{ elements|length }} elements, each with why, when and how to use it and a live example.</p>
+{% block page_subtitle %}<p class="orca-page-subtitle">{{ level_intro }} {{ elements|length }} elements, each with why, when and how to use it and a live example.</p>{% endblock %}
+{% block page_actions %}<button class="orca-button" type="button" data-orca-dialog-open="docs-filters" aria-haspopup="dialog" data-docs-filters-open>{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true" data-docs-filters-count hidden></span></button>{% endblock %}
+{% block page %}
+<div class="orca-vstack orca-vstack--tight" data-docs-applied hidden>
+  <div class="orca-filter-bar__applied">
+    <span class="orca-small orca-muted">Filtered by</span>
+    <span class="orca-row" data-docs-tags></span>
+    <template data-docs-close-icon>{% icon "close" %}</template>
+    <button class="orca-button orca-button--link" type="button" data-docs-clear>Clear all</button>
+    <span class="orca-small orca-muted" role="status" data-docs-results></span>
   </div>
-  <div class="orca-page-head__actions">
-    <button class="orca-button" type="button" data-orca-dialog-open="docs-filters" aria-haspopup="dialog" data-docs-filters-open>{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true" data-docs-filters-count hidden></span></button>
+  <div class="orca-empty" data-docs-none hidden>
+    {% orca_illustration "search" %}
+    <h2 class="orca-empty-title">No {{ level_title|lower }} match these filters</h2>
+    <p class="orca-empty-text">Try another word, or clear the filters to see all {{ elements|length }} elements.</p>
+    <div class="orca-empty__actions"><button class="orca-button" type="button" data-docs-clear>Clear all</button></div>
   </div>
-</header>
-
-<div class="orca-filter-bar__applied docs-applied" data-docs-applied hidden>
-  <span class="orca-small orca-muted" data-docs-results aria-live="polite"></span>
-  <span class="orca-row" data-docs-tags></span>
-  <template data-docs-close-icon>{% icon "close" %}</template>
-  <button class="orca-button orca-button--link" type="button" data-docs-clear>Clear all</button>
-</div>
-<div class="docs-empty" data-docs-none hidden>
-  {% orca_illustration "search" %}
-  <h2 class="orca-empty-title">No {{ level_title|lower }} match these filters</h2>
-  <p class="orca-empty-text">Try another word, or clear the filters to see all {{ elements|length }} elements.</p>
-  <button class="orca-button" type="button" data-docs-clear>Clear all</button>
 </div>
 
 <dialog class="orca-drawer" id="docs-filters" aria-labelledby="docs-filters-title" data-orca-light-dismiss data-docs-filters>
@@ -31,7 +25,7 @@
       <button class="orca-icon-button" type="button" aria-label="Close filters" data-orca-dialog-close>{% icon "close" %}</button>
     </div>
     <div class="orca-drawer__body orca-filter-panel">
-      <div>
+      <div class="orca-field">
         <label class="orca-label" for="docs-filter-q">Name, summary or class</label>
         <p class="orca-help" id="docs-filter-q-help">For example: date, badge or orca-tag.</p>
         <div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" id="docs-filter-q" name="q" aria-describedby="docs-filter-q-help" autocomplete="off"></div>
@@ -53,26 +47,23 @@
   </form>
 </dialog>
 
-{% if level == "primitive" %}<section class="docs-section" aria-labelledby="brand-h" data-docs-unfiltered>
-  <h2 class="orca-section-title" id="brand-h">What a project may change</h2>
-  <p class="orca-p">Only brand tokens, through <code class="orca-code">settings.ORCA["BRAND"]</code>. Everything else is fixed so that contrast, spacing and behaviour stay tested.</p>
-  <div class="docs-table-wrap"><table class="docs-table">
+{% if level == "primitive" %}<section class="orca-table-card" aria-labelledby="brand-h" data-docs-unfiltered>
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="brand-h">What a project may change</h2><p class="orca-panel-header__desc">Only brand tokens, through <code class="orca-code">settings.ORCA["BRAND"]</code>. Everything else is fixed so that contrast, spacing and behaviour stay tested.</p></div></div>
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Key</th><th scope="col">CSS</th><th scope="col">Use</th></tr></thead>
-    <tbody>{% for t in brand_tokens %}<tr><td><code class="orca-code">{{ t.key }}</code></td><td>{% for c in t.css %}<code class="orca-code">{{ c }}</code> {% empty %}<span class="orca-muted">template only</span>{% endfor %}</td><td class="orca-small">{{ t.usage }}</td></tr>{% endfor %}</tbody>
+    <tbody>{% for t in brand_tokens %}<tr><th scope="row" class="orca-table__name"><code>{{ t.key }}</code></th><td>{% for c in t.css %}<code class="orca-code">{{ c }}</code> {% empty %}<span class="orca-muted">template only</span>{% endfor %}</td><td class="orca-small">{{ t.usage }}</td></tr>{% endfor %}</tbody>
   </table></div>
 </section>{% endif %}
 
 {% for cat, els in level_nav %}
-<section class="docs-section" aria-labelledby="cat-{{ cat.key }}" data-docs-group>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="cat-{{ cat.key }}" data-docs-group>
   <h2 class="orca-section-title" id="cat-{{ cat.key }}">{{ cat.title }}</h2>
   <p class="orca-p orca-muted">{{ cat.intro }}</p>
-  <ul class="docs-cards">
-    {% for e in els %}
-    <li class="docs-card" data-docs-item data-category="{{ e.category }}" data-source="{{ e.source }}" data-text="{{ e.id }} {{ e.name|lower }} {{ e.summary|lower }} {{ e.classes|join:' ' }}">
-      <h3 class="orca-card-title"><a class="orca-link orca-link--quiet orca-link--plain" href="{% url 'orca:element' e.id %}">{{ e.name }}</a></h3>
+  <ul class="orca-card-grid">
+    {% for e in els %}<li class="orca-card orca-card--link" data-docs-item data-category="{{ e.category }}" data-source="{{ e.source }}" data-text="{{ e.id }} {{ e.name|lower }} {{ e.summary|lower }} {{ e.classes|join:' ' }}"><div class="orca-card__body">
+      <h3 class="orca-card-title"><a class="orca-card__link" href="{% url 'orca:element' e.id %}">{{ e.name }}</a></h3>
       <p class="orca-card-meta">{{ e.summary }}</p>
-    </li>
-    {% endfor %}
+    </div></li>{% endfor %}
   </ul>
 </section>
 {% endfor %}

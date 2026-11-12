@@ -1,21 +1,21 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
 {% block lead %}<p class="orca-page-subtitle">A project changes brand tokens only. Everything else stays fixed so contrast, spacing and behaviour remain tested in every theme.</p>{% endblock %}
 {% block article %}
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">The brand keys</h2>
-  <div class="docs-table-wrap"><table class="docs-table">
+  <div class="orca-table-wrap"><table class="orca-table">
     <thead><tr><th scope="col">Key</th><th scope="col">CSS</th><th scope="col">Default</th><th scope="col">What it does</th></tr></thead>
     <tbody>{% for t in brand_tokens %}<tr>
-      <td><code class="orca-code">{{ t.key }}</code></td>
+      <th scope="row" class="orca-table__name"><code>{{ t.key }}</code></th>
       <td>{% for c in t.css %}<code class="orca-code">{{ c }}</code> {% empty %}<span class="orca-muted">template only</span>{% endfor %}</td>
       <td class="orca-small">{% if t.default %}<code class="orca-code">{{ t.default|truncatechars:28 }}</code>{% else %}<span class="orca-muted">empty</span>{% endif %}</td>
       <td class="orca-small">{{ t.usage }}</td></tr>{% endfor %}</tbody>
   </table></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">How ORCA treats your values</h2>
-  <ul class="docs-list">
+  <ul>
     <li><strong>Accepted liberally.</strong> <code class="orca-code">"0F95A1"</code>, <code class="orca-code">"#06c"</code> and <code class="orca-code">"rgb(15, 149, 161)"</code> all work and are normalised to lowercase hex.</li>
     <li><strong>Adjusted for readability.</strong> Brand fills that carry text are darkened (or lightened) until <code class="orca-code">--orca-brand-on</code> reads at 4.5:1. The accent is darkened to 4.5:1 on the light and paper grounds; its dark-theme value is derived and lightened to 4.5:1 on the dark grounds.</li>
     <li><strong>Reported.</strong> Every adjustment appears as the system-check warning <code class="orca-code">orca.W001</code> with the value used, so you can set it explicitly and silence it.</li>
@@ -31,41 +31,49 @@
   </div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Examples</h2>
-  <pre class="docs-code"><code data-orca-highlight># A purple brand with white text: ORCA darkens the fill if needed
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="brand-and-themes-code-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="brand-and-themes-code-1" data-orca-highlight="python"># A purple brand with white text: ORCA darkens the fill if needed
 ORCA = {"BRAND": {"color": "#7a1fa2", "on_color": "#ffffff"}}
 
 # A pale accent: ORCA darkens it for light themes and derives the dark one
 ORCA = {"BRAND": {"accent": "#7fb2ff"}}
 
 # Your own typeface (load it yourself, e.g. in your base template)
-ORCA = {"BRAND": {"font_sans": '"Inter", system-ui, sans-serif'}}</code></pre>
+ORCA = {"BRAND": {"font_sans": '"Inter", system-ui, sans-serif'}}</code></pre></div>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Themes</h2>
   <p class="orca-p">Light, dark and paper share every token name, so components are written once. ORCA has one appearance, Tangerine: square corners, 1.5px borders, filled fields with a bottom border, and a 3px focus ring drawn inside controls.</p>
-  <div class="docs-themes">
-    <div class="docs-theme" data-theme="light"><p class="orca-panel-title">Light</p><p class="orca-small orca-muted">White page, default.</p><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span></div>
-    <div class="docs-theme" data-theme="dark"><p class="orca-panel-title">Dark</p><p class="orca-small orca-muted">#262626 page; floating surfaces lift a step.</p><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span></div>
-    <div class="docs-theme" data-theme="paper"><p class="orca-panel-title">Paper</p><p class="orca-small orca-muted">#f3f3f3 page with deeper fills.</p><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span></div>
-  </div>
-  <ul class="docs-list">
+  <fieldset class="orca-segmented" data-orca-theme-choice><legend class="orca-label">Try a theme on this page</legend>
+    <label class="orca-segmented__item"><input type="radio" name="guide-theme" value="auto" checked>Auto</label>
+    <label class="orca-segmented__item"><input type="radio" name="guide-theme" value="light">{% icon "sun" %}Light</label>
+    <label class="orca-segmented__item"><input type="radio" name="guide-theme" value="dark">{% icon "moon" %}Dark</label>
+    <label class="orca-segmented__item"><input type="radio" name="guide-theme" value="paper">Paper</label>
+  </fieldset>
+  <dl class="orca-kv">
+    <div><dt>Light</dt><dd>White panels on a light grey page. The default.</dd></div>
+    <div><dt>Dark</dt><dd>#262626 page; floating surfaces lift a step.</dd></div>
+    <div><dt>Paper</dt><dd>#f3f3f3 page with deeper fills.</dd></div>
+  </dl>
+  <ul>
     <li><code class="orca-code">ORCA["THEME"] = "auto"</code> (default): follows the operating system, and a <code class="orca-code">data-orca-theme-toggle</code> button lets each reader choose; the choice is remembered in their browser.</li>
     <li><code class="orca-code">"light"</code>, <code class="orca-code">"dark"</code> or <code class="orca-code">"paper"</code>: one theme for everyone, written on <code class="orca-code">&lt;html&gt;</code> by <code class="orca-code">orca_html_attrs</code>.</li>
-    <li>Set the theme on <code class="orca-code">&lt;html&gt;</code> only. The previews above are a documentation-only exception that scopes the theme tokens to a box.</li>
+    <li>Set the theme on <code class="orca-code">&lt;html&gt;</code> only. The choice above uses the <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'theme-toggle' %}">theme toggle</a>, which does exactly that.</li>
   </ul>
 </section>
 
-<section class="docs-block-flow">
+<section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Density</h2>
   <p class="orca-p">Density is separate from the theme: any theme can be comfortable or dense. Dense tightens the type scale (body 14px, detail 13px), control heights (32px instead of 37px), the top bar and the larger spacing steps, for data-heavy screens such as dashboards, admin tools and this documentation, which uses it.</p>
-  <div class="docs-themes">
-    <div class="docs-theme" data-theme="light" data-density="comfortable"><p class="orca-panel-title">Comfortable</p><p class="orca-small orca-muted">The default.</p><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input" aria-label="Name" value="Gate 1" style="width: 8rem"></div></div>
-    <div class="docs-theme" data-theme="light" data-density="dense"><p class="orca-panel-title">Dense</p><p class="orca-small orca-muted">More on screen.</p><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input" aria-label="Name" value="Gate 1" style="width: 8rem"></div></div>
+  <div class="orca-panels">
+    <section class="orca-panel" data-density="comfortable" aria-labelledby="dn-c"><div class="orca-panel-header"><div class="orca-panel-header__text"><h3 class="orca-panel-title" id="dn-c">Comfortable</h3><p class="orca-panel-header__desc">The default.</p></div></div>
+      <div class="orca-panel__body"><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input orca-input--w8" aria-label="Name" value="Gate 1"></div></div></section>
+    <section class="orca-panel" data-density="dense" aria-labelledby="dn-d"><div class="orca-panel-header"><div class="orca-panel-header__text"><h3 class="orca-panel-title" id="dn-d">Dense</h3><p class="orca-panel-header__desc">More on screen.</p></div></div>
+      <div class="orca-panel__body"><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input orca-input--w8" aria-label="Name" value="Gate 1"></div></div></section>
   </div>
-  <ul class="docs-list">
+  <ul>
     <li><code class="orca-code">ORCA["DENSITY"] = "dense"</code> writes <code class="orca-code">data-density="dense"</code> on <code class="orca-code">&lt;html&gt;</code> through <code class="orca-code">orca_html_attrs</code>. One template can choose its own: <code class="orca-code">{% templatetag openblock %} orca_html_attrs density="dense" {% templatetag closeblock %}</code>.</li>
     <li><code class="orca-code">data-density="dense"</code> also works on a single region (a table panel, a sidebar) while the rest of the page stays comfortable.</li>
     <li>Density never costs accessibility: body text stays at 14px or more, contrast is unchanged, and every control still grows to the 44px touch minimum on touch screens. For long reading, keep the comfortable density.</li>
