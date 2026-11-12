@@ -137,13 +137,36 @@ layout("marketing-layout", "Marketing page layout", "orca/layouts/marketing.html
        context=["`site_nav` (label, url, current), `footer_cols` (title, links).", "`title`."],
        classes=[".orca-marketing-main", ".orca-marketing-page", ".orca-container"])
 
+BLOG_BLOCKS = BASE_BLOCKS + ["top_bar", "brand", "top_nav", "top_bar_end", "sidebar", "sidebar_nav", "sidebar_extra", "messages", "blog_modifier",
+                             "breadcrumbs", "blog_kicker", "page_title", "page_subtitle", "blog_meta", "page_actions", "blog_body", "blog_footer",
+                             "blog_aside", "blog_toc", "content", "footer"]
+
+layout("blog-layout", "Blog page layout", "orca/layouts/blog.html",
+       "A long-form page that reads well: breadcrumbs, title, introduction, version and last update, sections in a measured reading column, "
+       "and an \"On this page\" column on the right.",
+       "Long text is read, not scanned: a front-loaded introduction (Practical UI W05), a line length near 70 characters (T09) and a contents column "
+       "that shows where you are (Miller's law) let people read comfortably on any screen, and a centred column never stretches across a large window. "
+       "Version and last update tell the reader whether to trust the page.",
+       ["Articles, guides, documentation pages, release notes, case studies and policies: any page that is mostly sections of text."],
+       ["Pass `title`, `subtitle` (the introduction: one or two sentences), `version` and `updated` (a date); optional `kicker`, `author`, `reading_time` (minutes), `breadcrumbs`.",
+        "Fill `blog_body` with sections: each `<section>` has an `h2.orca-section-title` with an `id`. The contents column is built from those `h2` headings, "
+        "or pass `toc` (`[{\"id\", \"label\"}]`) to write it yourself.",
+        "Indexes, tables and galleries that need the full width: add `{% templatetag openblock %} block blog_modifier {% templatetag closeblock %} orca-blog--wide{% templatetag openblock %} endblock {% templatetag closeblock %}`; the head keeps its reading width.",
+        "The page has the app shell's top bar and sidebar (`nav`, or your own `sidebar` block); the Docs page layout is this layout with a documentation sidebar."],
+       ["W05", "T09", "miller", "jakob"], ["docs-page-header", "table-of-contents", "top-bar"], ["Blog page layout", "Blog page"],
+       blocks=BLOG_BLOCKS,
+       context=["`title`, `subtitle` (introduction), `kicker`, `breadcrumbs`.", "`version`, `updated` (a date), `author`, `reading_time`: shown as the meta line when present.",
+                "`toc`: optional contents `[{\"id\", \"label\"}]`; without it the `h2` headings of the body are listed."],
+       classes=[".orca-blog", ".orca-blog--wide", ".orca-blog__article", ".orca-blog__head", ".orca-blog__intro", ".orca-blog__meta", ".orca-blog__body", ".orca-blog__aside", ".orca-blog-page"])
+
 layout("docs-layout", "Docs page layout", "orca/layouts/docs.html",
-       "Documentation frame: top bar, a sidebar with a filter and a page tree, and a reading column with breadcrumbs, title and introduction.",
-       "Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and a measured reading column keeps long text comfortable (Practical UI T09, W05).",
+       "The Blog page with a documentation sidebar: a filter and a page tree on the left, the reading column and \"On this page\" on the right.",
+       "Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and the Blog page's measured reading column keeps long text comfortable (Practical UI T09, W05).",
        ["Product documentation, help centres, internal handbooks."],
-       ["Pass `docs_nav` (sections with `label`, `open` and `items`: label, url, current), `title`, `subtitle` and `breadcrumbs`; fill `content`.",
+       ["Pass `docs_nav` (sections with `label`, `icon`, `open` and `items`: label, url, current), `title`, `subtitle`, `version`, `updated` and `breadcrumbs`; fill `blog_body`.",
+        "First-level sections lead with an `icon` and end with a small chevron that shows open or closed.",
         "This documentation site uses the same structure with the sidebar pattern."],
        ["miller", "hick", "T09", "W05"], ["docs-sidebar", "docs-page-header", "top-bar"], ["Docs page layout", "Docs page"],
-       blocks=BASE_BLOCKS + ["top_bar", "brand", "top_bar_end", "sidebar", "sidebar_nav", "sidebar_extra", "page_head",
-                             "breadcrumbs", "page_title", "page_subtitle", "content", "footer"],
-       context=["`docs_nav`, `title`, `subtitle`, `breadcrumbs`."], classes=[".orca-docs-main", ".orca-docs-article", ".orca-docs-page"])
+       blocks=BLOG_BLOCKS,
+       context=["`docs_nav`, `title`, `subtitle`, `version`, `updated`, `breadcrumbs`."],
+       classes=[".orca-docs-sidebar", ".orca-docs-page", ".orca-blog"])

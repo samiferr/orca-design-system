@@ -648,17 +648,104 @@ class Pricing(TemplateView):
 
 ---
 
+## Blog page layout
+
+`id: blog-layout` · level: template · source: ORCA
+
+A long-form page that reads well: breadcrumbs, title, introduction, version and last update, sections in a measured reading column, and an "On this page" column on the right.
+
+Built from: `docs-page-header`, `table-of-contents`, `top-bar`
+
+### Why
+
+Long text is read, not scanned: a front-loaded introduction (Practical UI W05), a line length near 70 characters (T09) and a contents column that shows where you are (Miller's law) let people read comfortably on any screen, and a centred column never stretches across a large window. Version and last update tell the reader whether to trust the page.
+
+### When to use
+
+- Articles, guides, documentation pages, release notes, case studies and policies: any page that is mostly sections of text.
+
+### How to use
+
+- Extend it: `{% extends "orca/layouts/blog.html" %}`, then fill only the blocks you need.
+- Pass `title`, `subtitle` (the introduction: one or two sentences), `version` and `updated` (a date); optional `kicker`, `author`, `reading_time` (minutes), `breadcrumbs`.
+- Fill `blog_body` with sections: each `<section>` has an `h2.orca-section-title` with an `id`. The contents column is built from those `h2` headings, or pass `toc` (`[{"id", "label"}]`) to write it yourself.
+- Indexes, tables and galleries that need the full width: add `{% block blog_modifier %} orca-blog--wide{% endblock %}`; the head keeps its reading width.
+- The page has the app shell's top bar and sidebar (`nav`, or your own `sidebar` block); the Docs page layout is this layout with a documentation sidebar.
+
+Extend: `{% extends "orca/layouts/blog.html" %}`
+
+Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_class`, `skip_link`, `body`, `modal`, `scripts`, `extra_scripts`, `top_bar`, `brand`, `top_nav`, `top_bar_end`, `sidebar`, `sidebar_nav`, `sidebar_extra`, `messages`, `blog_modifier`, `breadcrumbs`, `blog_kicker`, `page_title`, `page_subtitle`, `blog_meta`, `page_actions`, `blog_body`, `blog_footer`, `blog_aside`, `blog_toc`, `content`, `footer`
+
+### Context it reads
+
+- `title`, `subtitle` (introduction), `kicker`, `breadcrumbs`.
+- `version`, `updated` (a date), `author`, `reading_time`: shown as the meta line when present.
+- `toc`: optional contents `[{"id", "label"}]`; without it the `h2` headings of the body are listed.
+
+#### Example: Child template
+
+```django
+{% extends "orca/layouts/blog.html" %}
+{% block blog_body %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-one">
+  <h2 class="orca-section-title" id="section-one">Section one</h2>
+  <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs; the column stays about 70 characters wide, however large the window.</p>
+  <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-two">
+  <h2 class="orca-section-title" id="section-two">Section two</h2>
+  <p class="orca-p">Each section starts with an <code class="orca-code">h2</code> that has an <code class="orca-code">id</code>, so the contents column can link to it.</p>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-three">
+  <h2 class="orca-section-title" id="section-three">Section three</h2>
+  <p class="orca-p">Close with what to do next.</p>
+</section>{% endblock %}
+```
+
+### Server code
+
+What your views, forms, URLs or settings provide for this element.
+
+#### View
+
+```python
+# blog/views.py
+from datetime import date
+
+from django.views.generic import TemplateView
+
+
+class PostDetail(TemplateView):
+    template_name = "blog/post.html"   # {% extends "orca/layouts/blog.html" %}, sections in {% block blog_body %}
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update(title="How we count visitors", kicker="Case study",
+                   subtitle="Two sentences that say what this page covers and who it is for.",
+                   version="1.2.0", updated=date(2026, 11, 6), author="Person name", reading_time=4,
+                   breadcrumbs=[("Blog", "/blog/"), ("How we count visitors", "")])
+        return ctx
+```
+
+**Classes:** `.orca-blog`, `.orca-blog--wide`, `.orca-blog__article`, `.orca-blog__head`, `.orca-blog__intro`, `.orca-blog__meta`, `.orca-blog__body`, `.orca-blog__aside`, `.orca-blog-page`
+
+**Principles applied:** Practical UI W05: Order explanations as an inverted pyramid; Practical UI T09: Limit reading measure; Miller's law: chunk information so working memory is not overloaded; Jakob's law: work the way products people already know work
+
+**ORCA guide items covered:** Blog page layout; Blog page
+
+---
+
 ## Docs page layout
 
 `id: docs-layout` · level: template · source: ORCA
 
-Documentation frame: top bar, a sidebar with a filter and a page tree, and a reading column with breadcrumbs, title and introduction.
+The Blog page with a documentation sidebar: a filter and a page tree on the left, the reading column and "On this page" on the right.
 
 Built from: `docs-sidebar`, `docs-page-header`, `top-bar`
 
 ### Why
 
-Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and a measured reading column keeps long text comfortable (Practical UI T09, W05).
+Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and the Blog page's measured reading column keeps long text comfortable (Practical UI T09, W05).
 
 ### When to use
 
@@ -667,25 +754,31 @@ Documentation readers both browse and look up (Miller's law, Hick's law): a filt
 ### How to use
 
 - Extend it: `{% extends "orca/layouts/docs.html" %}`, then fill only the blocks you need.
-- Pass `docs_nav` (sections with `label`, `open` and `items`: label, url, current), `title`, `subtitle` and `breadcrumbs`; fill `content`.
+- Pass `docs_nav` (sections with `label`, `icon`, `open` and `items`: label, url, current), `title`, `subtitle`, `version`, `updated` and `breadcrumbs`; fill `blog_body`.
+- First-level sections lead with an `icon` and end with a small chevron that shows open or closed.
 - This documentation site uses the same structure with the sidebar pattern.
 
 Extend: `{% extends "orca/layouts/docs.html" %}`
 
-Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_class`, `skip_link`, `body`, `modal`, `scripts`, `extra_scripts`, `top_bar`, `brand`, `top_bar_end`, `sidebar`, `sidebar_nav`, `sidebar_extra`, `page_head`, `breadcrumbs`, `page_title`, `page_subtitle`, `content`, `footer`
+Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_class`, `skip_link`, `body`, `modal`, `scripts`, `extra_scripts`, `top_bar`, `brand`, `top_nav`, `top_bar_end`, `sidebar`, `sidebar_nav`, `sidebar_extra`, `messages`, `blog_modifier`, `breadcrumbs`, `blog_kicker`, `page_title`, `page_subtitle`, `blog_meta`, `page_actions`, `blog_body`, `blog_footer`, `blog_aside`, `blog_toc`, `content`, `footer`
 
 ### Context it reads
 
-- `docs_nav`, `title`, `subtitle`, `breadcrumbs`.
+- `docs_nav`, `title`, `subtitle`, `version`, `updated`, `breadcrumbs`.
 
 #### Example: Child template
 
 ```django
 {% extends "orca/layouts/docs.html" %}
-{% block content %}<p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>
-<h2 class="orca-section-title">Section heading</h2>
-<p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
-<div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>{% endblock %}
+{% block blog_body %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="s-one">
+  <h2 class="orca-section-title" id="s-one">Section heading</h2>
+  <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>
+  <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="s-two">
+  <h2 class="orca-section-title" id="s-two">Another section</h2>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>
+</section>{% endblock %}
 ```
 
 ### Server code
@@ -696,26 +789,28 @@ What your views, forms, URLs or settings provide for this element.
 
 ```python
 # docs/views.py
+from datetime import date
+
 from django.views.generic import TemplateView
 
 
 class DocsPage(TemplateView):
-    template_name = "docs/page.html"   # {% extends "orca/layouts/docs.html" %}
+    template_name = "docs/page.html"   # {% extends "orca/layouts/docs.html" %}, sections in {% block blog_body %}
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         here = self.request.path
-        sections = {"Get started": [("Installation", "/docs/install/"), ("Usage", "/docs/usage/")],
-                    "Guides": [("Uploads", "/docs/uploads/"), ("Sharing", "/docs/sharing/")]}
-        ctx["docs_nav"] = [{"label": label, "open": any(url == here for _, url in items),
+        sections = {"Get started": ("book", [("Installation", "/docs/install/"), ("Usage", "/docs/usage/")]),
+                    "Guides": ("repository", [("Uploads", "/docs/uploads/"), ("Sharing", "/docs/sharing/")])}
+        ctx["docs_nav"] = [{"label": label, "icon": icon, "open": any(url == here for _, url in items),
                             "items": [{"label": t, "url": url, "current": url == here} for t, url in items]}
-                           for label, items in sections.items()]
-        ctx.update(title="Uploads", subtitle="Add videos one by one or in bulk.",
+                           for label, (icon, items) in sections.items()]
+        ctx.update(title="Uploads", subtitle="Add videos one by one or in bulk.", version="1.2.0", updated=date(2026, 11, 6),
                    breadcrumbs=[("Docs", "/docs/"), ("Uploads", "")])
         return ctx
 ```
 
-**Classes:** `.orca-docs-main`, `.orca-docs-article`, `.orca-docs-page`
+**Classes:** `.orca-docs-sidebar`, `.orca-docs-page`, `.orca-blog`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Hick's law: fewer, clearer choices mean faster decisions; Practical UI T09: Limit reading measure; Practical UI W05: Order explanations as an inverted pyramid
 

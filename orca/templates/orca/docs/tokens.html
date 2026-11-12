@@ -1,5 +1,6 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block page_subtitle %}<p class="orca-page-subtitle">Generated from <code class="orca-code">orca/tokens.py</code>. Use the CSS names; never raw values.</p>{% endblock %}
+{% block blog_modifier %} orca-blog--wide{% endblock %}
+{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">Generated from <code class="orca-code">orca/tokens.py</code>. Use the CSS names; never raw values.</p>{% endblock %}
 {% block page %}
 <section class="orca-table-card" aria-labelledby="t-brand">
   <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="t-brand">Brand tokens</h2><p class="orca-panel-header__desc">The only tokens a project may change, through <code class="orca-code">settings.ORCA["BRAND"]</code>.</p></div></div>

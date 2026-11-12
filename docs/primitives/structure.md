@@ -225,7 +225,7 @@ The rotating chevron is the familiar cue for 'this expands' (Jakob's law, Practi
 ### How to use
 
 - Inside a `<summary>` or a button with `aria-expanded`: `<span class="orca-chevron">{% icon "chevron-down" %}</span>`. It rotates automatically when closed.
-- Put it at the start of the row (left), in the same place on every row.
+- Accordions and trees: at the start of the row, in the same place on every row. Navigation trees: small, at the end of the row (see the nav tree).
 
 ### Accessibility
 

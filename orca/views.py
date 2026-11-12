@@ -14,7 +14,7 @@ from django.urls import reverse
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
-from . import __version__, icons, tokens
+from . import __released__, __version__, icons, tokens
 from .catalogue import registry
 from .catalogue.guide import LEVELS
 from .conf import compute_brand, docs_enabled
@@ -66,7 +66,7 @@ def _levels() -> list[dict]:
 def _ctx(page: str, **extra) -> dict:
     return {
         "levels": _levels(), "nav": [(c, registry.by_category(c.key)) for c in registry.categories()],
-        "guide": GUIDE, "guide_nav": [(s, t, GUIDE_ICONS.get(s, "book")) for s, t, _ in GUIDE], "page": page, "version": __version__, **extra,
+        "guide": GUIDE, "guide_nav": [(s, t, GUIDE_ICONS.get(s, "book")) for s, t, _ in GUIDE], "page": page, "version": __version__, "updated": __released__, **extra,
     }
 
 
@@ -109,7 +109,7 @@ def level_index(request, level="primitive"):
     _guard()
     return render(request, "orca/docs/index.html", _ctx(
         registry.LEVEL_TITLES[level].lower(), level=level, level_title=registry.LEVEL_TITLES[level], title=registry.LEVEL_TITLES[level],
-        level_intro=LEVEL_INTROS[level], elements=registry.all_elements(level), brand_tokens=tokens.BRAND_TOKENS,
+        kicker="Catalogue", level_intro=LEVEL_INTROS[level], elements=registry.all_elements(level), brand_tokens=tokens.BRAND_TOKENS,
         level_nav=[(c, registry.by_category(c.key)) for c in registry.categories(level)],
     ))
 
@@ -156,7 +156,7 @@ def guide(request, slug):
     _guard()
     if slug not in GUIDE_TITLES:
         raise Http404(f"No guide page {slug!r}")
-    extra = {"title": GUIDE_TITLES[slug], "slug": slug, "breadcrumbs": [("Overview", reverse("orca:home")), ("Guide", "")]}
+    extra = {"title": GUIDE_TITLES[slug], "kicker": "Guide", "slug": slug, "breadcrumbs": [("Overview", reverse("orca:home")), ("Guide", "")]}
     if slug == "brand-and-themes":
         extra.update(brand_tokens=tokens.BRAND_TOKENS, brand=compute_brand())
     if slug == "principles":
@@ -195,6 +195,7 @@ def element(request, element_id):
     level_url = reverse(LEVEL_URLS.get(el.level, "orca:index"))
     return render(request, "orca/docs/element.html", _ctx(
         el.id, el=el, examples=examples, related=related, uses=uses, used_by=used_by, title=el.name,
+        kicker=f"{registry.LEVEL_TITLES[el.level]} · {category.title}",
         breadcrumbs=[(registry.LEVEL_TITLES[el.level], level_url), (category.title, f"{level_url}#cat-{category.key}")],
     ))
 
@@ -203,7 +204,7 @@ def token_list(request):
     _guard()
     brand = compute_brand()
     return render(request, "orca/docs/tokens.html", _ctx(
-        "tokens", title="Tokens", semantic=tokens.semantic_tokens(), scales=tokens.ALL_SCALES, brand=brand,
+        "tokens", title="Tokens", kicker="Reference", semantic=tokens.semantic_tokens(), scales=tokens.ALL_SCALES, brand=brand,
         brand_rows=[(k, v, brand.css["dark"][k]) for k, v in brand.css["light"].items()],
         brand_tokens=tokens.BRAND_TOKENS, neutral=tokens.NEUTRAL, hues=tokens.HUES, steps=list(tokens.STEPS),
     ))
@@ -212,7 +213,7 @@ def token_list(request):
 def icon_list(request):
     _guard()
     items = [(name, mark_safe(icons.svg(name, size="m"))) for name in icons.names()]
-    return render(request, "orca/docs/icons.html", _ctx("icons", title="Icons", items=items, aliases=sorted(icons.ALIASES.items())))
+    return render(request, "orca/docs/icons.html", _ctx("icons", title="Icons", kicker="Reference", items=items, aliases=sorted(icons.ALIASES.items())))
 
 
 def catalogue_json(request):

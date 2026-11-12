@@ -1,24 +1,17 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block page_head %}{% endblock %}
+{% block blog_modifier %} orca-blog--wide{% endblock %}
+{% block blog_kicker %}<p class="orca-card-kicker">Django design system · phase 4: templates</p>{% endblock %}
+{% block page_title %}Every element says why, when and how.{% endblock %}
+{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>{% endblock %}
+{% block page_actions %}<a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a><a class="orca-button" href="{% url 'orca:templates' %}">Browse templates</a>{% endblock %}
 {% block page %}
-<section class="orca-hero" aria-labelledby="hero-title">
-  <div class="orca-hero__text">
-    <p class="orca-card-kicker">Django design system · phase 4: templates</p>
-    <h1 class="orca-hero__title" id="hero-title">Every element says why, when and how.</h1>
-    <p class="orca-hero__lead">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>
-    <div class="orca-row orca-row--16">
-      <a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a>
-      <a class="orca-button" href="{% url 'orca:templates' %}">Browse templates</a>
-    </div>
-  </div>
-  <section class="orca-panel" aria-labelledby="hero-sample">
-    <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="hero-sample">Live ORCA primitives</h2><p class="orca-panel-header__desc">Rendered by the package you install.</p></div></div>
-    <div class="orca-panel__body">{{ hero }}</div>
-  </section>
+<section class="orca-panel" aria-labelledby="hero-sample">
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="hero-sample">Live ORCA primitives</h2><p class="orca-panel-header__desc">Rendered by the package you install.</p></div></div>
+  <div class="orca-panel__body">{{ hero }}</div>
 </section>
 
 <section class="orca-vstack orca-vstack--tight" aria-labelledby="facts-h">
-  <h2 class="orca-sr-only" id="facts-h">In numbers</h2>
+  <h2 class="orca-section-title" id="facts-h">In numbers</h2>
   <div class="orca-stat-grid">
     <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "grid" %}</span><p class="orca-stat-label">Primitives</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.primitives }}</p></div>
     <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "cluster-host" %}</span><p class="orca-stat-label">Components</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.components }}</p></div>

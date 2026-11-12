@@ -80,6 +80,39 @@
 .orca-docs-main { max-width: 64rem; }
 .orca-docs-article { display: flex; flex-direction: column; gap: var(--orca-space-24); max-width: var(--orca-measure); }
 
+/* Blog page: head, a measured reading column of sections, and an "On this page" column on the right (below the head on
+   narrow screens). The group is centred, so on a large screen the text never stretches across the window. */
+.orca-blog-page { background: var(--orca-bg-page); }
+.orca-blog { padding: var(--orca-space-24) max(var(--orca-space-16), env(safe-area-inset-left, 0px)) var(--orca-space-64); }
+.orca-blog__layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--orca-space-24); align-items: start; max-width: 72rem; margin-inline: auto; }
+.orca-blog__aside { order: -1; min-width: 0; }
+.orca-blog__article { min-width: 0; max-width: 52rem; }
+.orca-blog__head { display: flex; flex-direction: column; gap: var(--orca-space-12); margin-bottom: var(--orca-space-32); padding-bottom: var(--orca-space-24); border-bottom: var(--orca-hairline) solid var(--orca-border); }
+.orca-blog__head > * { margin-block: 0; }
+.orca-blog__head > .orca-page-head__actions:empty { display: none; }
+.orca-blog__head .orca-page-title { font: var(--orca-type-h1); }
+.orca-blog__intro { color: var(--orca-text-muted); text-wrap: pretty; }
+.orca-blog__meta { display: flex; flex-wrap: wrap; gap: var(--orca-space-4) var(--orca-space-24); margin: 0; font: var(--orca-type-detail); }
+.orca-blog__meta > div { display: flex; gap: var(--orca-space-8); }
+.orca-blog__meta dt { color: var(--orca-text-muted); }
+.orca-blog__meta dd { margin: 0; color: var(--orca-text); font-weight: 550; }
+.orca-blog__body { display: flex; flex-direction: column; gap: var(--orca-space-40); min-width: 0; }
+.orca-blog__body :is(h2, h3, [id]) { scroll-margin-top: calc(var(--orca-nav-height) + var(--orca-space-24)); }
+.orca-blog__body :is(p, li) { text-wrap: pretty; }
+.orca-blog__body > * { min-width: 0; }
+.orca-blog__body img, .orca-blog__body svg:not(.orca-icon), .orca-blog__body iframe { max-width: 100%; }
+/* Wide variant: indexes, tables and galleries take the full width; the head keeps its reading width. */
+.orca-blog--wide .orca-blog__layout { max-width: 96rem; }
+.orca-blog--wide .orca-blog__article { max-width: none; }
+.orca-blog--wide .orca-blog__head > :is(.orca-p, .orca-blog__meta) { max-width: 52rem; }
+@media (min-width: 620px) { .orca-blog { padding-inline: var(--orca-space-32); } }
+@media (min-width: 1100px) {
+  .orca-blog { padding-top: var(--orca-space-40); }
+  .orca-blog__layout { grid-template-columns: minmax(0, 1fr) 14rem; gap: var(--orca-space-48); }
+  .orca-blog__aside { order: 0; position: sticky; top: calc(var(--orca-nav-height) + var(--orca-space-24)); max-height: calc(100vh - var(--orca-nav-height) - var(--orca-space-48)); overflow-y: auto; }
+}
+@media print { .orca-blog__aside { display: none; } }
+
 /* Documentation previews of whole templates */
 .orca-template-preview { display: block; width: 100%; height: 40rem; margin-inline: auto; border: var(--orca-border-width) solid var(--orca-border); background: var(--orca-bg); transition: max-width var(--orca-duration-fast) var(--orca-ease-out); }
 

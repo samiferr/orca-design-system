@@ -1,5 +1,7 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block page_subtitle %}<p class="orca-page-subtitle">{{ el.summary|orca_inline_code }}</p>
+{% block blog_modifier %}{% if el.preview %} orca-blog--wide{% endif %}{% endblock %}
+{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">{{ el.summary|orca_inline_code }}</p>{% endblock %}
+{% block blog_meta %}{{ block.super }}
 <div class="orca-page-head__meta"><code class="orca-code">id: {{ el.id }}</code><span class="orca-badge orca-badge--grey">{{ el.level }}</span><span class="orca-badge orca-badge--subtle orca-badge--info">Source: {{ el.source }}</span></div>{% endblock %}
 {% block page %}
 {% for ex in examples %}

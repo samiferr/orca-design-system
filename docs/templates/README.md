@@ -6,7 +6,7 @@ Every element below has a **why**, **when**, **when not**, **how**, accessibilit
 classes it uses, the UX principles it applies, and a copy-ready Django template example.
 Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.
 
-## [Layouts](template-layouts.md) (21)
+## [Layouts](template-layouts.md) (22)
 
 Whole-page Django templates you extend. They place patterns in a fixed structure and leave named blocks for your content. Every page of an ORCA project starts from one of these.
 
@@ -19,7 +19,8 @@ Whole-page Django templates you extend. They place patterns in a fixed structure
 - `feed-skeleton` **Feed skeleton**: A centred column of posts with skeleton posts while more load, and an empty state when there are none.
 - `person-block-grid` **Person-block grid**: A grid of people cards: avatar, name, role and a contact action.
 - `marketing-layout` **Marketing page layout**: The public site frame: site header with navigation and actions, full-width sections, and a footer with link columns.
-- `docs-layout` **Docs page layout**: Documentation frame: top bar, a sidebar with a filter and a page tree, and a reading column with breadcrumbs, title and introduction.
+- `blog-layout` **Blog page layout**: A long-form page that reads well: breadcrumbs, title, introduction, version and last update, sections in a measured reading column, and an "On this page" column on the right.
+- `docs-layout` **Docs page layout**: The Blog page with a documentation sidebar: a filter and a page tree on the left, the reading column and "On this page" on the right.
 - `generic-list` **Generic list template**: A list page from a ListView: title and Add button, optional filter panel, list header with count and search, a table that becomes cards on phones, pagination and the right empty state.
 - `generic-detail` **Generic detail template**: A record page from a DetailView: title, Edit and Delete actions, and the record's fields as a key–value list.
 - `generic-form` **Generic form template**: A create or edit page from a CreateView or UpdateView: one column of ORCA fields with the error summary and Save and Cancel.

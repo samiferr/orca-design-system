@@ -5584,7 +5584,7 @@
    ],
    "how": [
     "Inside a `<summary>` or a button with `aria-expanded`: `<span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>`. It rotates automatically when closed.",
-    "Put it at the start of the row (left), in the same place on every row."
+    "Accordions and trees: at the start of the row, in the same place on every row. Navigation trees: small, at the end of the row (see the nav tree)."
    ],
    "avoid": [],
    "a11y": [
@@ -9813,9 +9813,10 @@
     "Sidebars and documentation with more than about 12 destinations in groups."
    ],
    "how": [
-    "`<nav aria-label=…><ul class=\"orca-nav-tree\">` with `<details>` sections: `<summary>` (chevron, name, optional count) and a `<ul>` of leaf links.",
+    "`<nav aria-label=…><ul class=\"orca-nav-tree\">` with `<details>` sections: `<summary>` (an icon on first-level parents, the name, an optional count and a small chevron at the end) and a `<ul>` of leaf links.",
     "Open the section that contains the current page; leaves use `aria-current=\"page\"`.",
-    "Nest a second level of details for sub-sections; avoid a third."
+    "First-level parents lead with an icon (`{% icon \"name\" %}`); the chevron sits at the end of the row, small (`size=\"xs\"`), and turns from pointing right (closed) to down (open).",
+    "Nest a second level of details for sub-sections without an icon; avoid a third."
    ],
    "avoid": [],
    "a11y": [],
@@ -9830,7 +9831,7 @@
    "examples": [
     {
      "title": "Tree",
-     "html": "<nav aria-label=\"Settings\" style=\"max-width: 16rem\"><ul class=\"orca-nav-tree\">\n  <li><details open><summary><span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>Organisation<span class=\"orca-count orca-count--neutral\">3</span></summary>\n    <ul><li><a href=\"#\">Profile</a></li><li><a href=\"#\" aria-current=\"page\">Users</a></li><li><a href=\"#\">Billing</a></li></ul></details></li>\n  <li><details><summary><span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>Devices<span class=\"orca-count orca-count--neutral\">2</span></summary>\n    <ul><li><a href=\"#\">Videos</a></li><li><a href=\"#\">Media servers</a></li></ul></details></li>\n</ul></nav>"
+     "html": "<nav aria-label=\"Settings\" style=\"max-width: 16rem\"><ul class=\"orca-nav-tree\">\n  <li><details open><summary>{% icon \"settings\" %}Organisation<span class=\"orca-count orca-count--neutral\">3</span><span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary>\n    <ul><li><a href=\"#\">Profile</a></li><li><a href=\"#\" aria-current=\"page\">Users</a></li><li><a href=\"#\">Billing</a></li></ul></details></li>\n  <li><details><summary>{% icon \"snapshot\" %}Devices<span class=\"orca-count orca-count--neutral\">2</span><span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary>\n    <ul><li><a href=\"#\">Videos</a></li><li><a href=\"#\">Media servers</a></li></ul></details></li>\n</ul></nav>"
     }
    ],
    "guide": [
@@ -15923,7 +15924,7 @@
    "examples": [
     {
      "title": "Docs tree",
-     "html": "<nav aria-label=\"Documentation\" style=\"max-width: 16rem\">\n  <div class=\"orca-search\" style=\"margin-bottom: var(--orca-space-8)\">{% icon \"search\" %}<input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dnt\"></div>\n  <ul class=\"orca-nav-tree\" id=\"dnt\">\n    <li><details open><summary><span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>Get started</summary><ul><li><a href=\"#\">Installation</a></li><li><a href=\"#\" aria-current=\"page\">Usage</a></li></ul></details></li>\n    <li><details><summary><span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>Forms</summary><ul><li><a href=\"#\">Form field</a></li><li><a href=\"#\">Combobox</a></li></ul></details></li>\n  </ul>\n</nav>"
+     "html": "<nav aria-label=\"Documentation\" style=\"max-width: 16rem\">\n  <div class=\"orca-search\" style=\"margin-bottom: var(--orca-space-8)\">{% icon \"search\" %}<input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dnt\"></div>\n  <ul class=\"orca-nav-tree\" id=\"dnt\">\n    <li><details open><summary>{% icon \"book\" %}Get started<span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary><ul><li><a href=\"#\">Installation</a></li><li><a href=\"#\" aria-current=\"page\">Usage</a></li></ul></details></li>\n    <li><details><summary>{% icon \"grid\" %}Forms<span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary><ul><li><a href=\"#\">Form field</a></li><li><a href=\"#\">Combobox</a></li></ul></details></li>\n  </ul>\n</nav>"
     }
    ],
    "guide": [
@@ -20092,7 +20093,7 @@
    "examples": [
     {
      "title": "Sidebar",
-     "html": "<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\"><div class=\"orca-search\">{% icon \"search\" %}<input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dsb\"></div>\n  <ul class=\"orca-nav-tree\" id=\"dsb\"><li><details open><summary><span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>Get started</summary><ul><li><a href=\"#\">Installation</a></li><li><a href=\"#\" aria-current=\"page\">Usage</a></li></ul></details></li>\n    <li><details><summary><span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>Patterns</summary><ul><li><a href=\"#\">Data table</a></li><li><a href=\"#\">Month calendar</a></li></ul></details></li></ul></nav>"
+     "html": "<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\"><div class=\"orca-search\">{% icon \"search\" %}<input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dsb\"></div>\n  <ul class=\"orca-nav-tree\" id=\"dsb\"><li><details open><summary>{% icon \"book\" %}Get started<span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary><ul><li><a href=\"#\">Installation</a></li><li><a href=\"#\" aria-current=\"page\">Usage</a></li></ul></details></li>\n    <li><details><summary>{% icon \"blueprint\" %}Patterns<span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary><ul><li><a href=\"#\">Data table</a></li><li><a href=\"#\">Month calendar</a></li></ul></details></li></ul></nav>"
     }
    ],
    "guide": [
@@ -20113,6 +20114,66 @@
    "law_names": [
     "Miller's law: chunk information so working memory is not overloaded",
     "Hick's law: fewer, clearer choices mean faster decisions"
+   ]
+  },
+  {
+   "id": "table-of-contents",
+   "name": "Table of contents",
+   "category": "marketing-docs",
+   "summary": "An \"On this page\" list of a long page's sections that marks the section being read.",
+   "why": "On a long page people want to know what it covers and where they are (Miller's law); links to each section let them jump instead of scrolling, and the marked section keeps them oriented (Jakob's law).",
+   "when": [
+    "Long pages of several sections: documentation, articles, guides, release notes. Put it in the right-hand column of the Blog page."
+   ],
+   "how": [
+    "`<nav aria-label=\"On this page\"><details class=\"orca-toc\" open data-orca-toc=\"body-id\">` with a `<summary class=\"orca-toc__title\">` and an `<ol class=\"orca-toc__list\">` of links to the sections' `id`s.",
+    "Leave the list empty and `orca.js` fills it from the `h2` headings of the element named in `data-orca-toc` (adding ids where missing), skipping headings inside live examples, code blocks and dialogs.",
+    "`orca.js` marks the section being read with `aria-current=\"location\"`, keeps the list open on wide screens and closed behind its summary on narrow ones; without script the list stays open.",
+    "Keep labels to the section's name; list `h2` only."
+   ],
+   "avoid": [
+    "Pages with fewer than three sections.",
+    "Navigating between pages: use the nav tree or tabs."
+   ],
+   "a11y": [
+    "A `nav` landmark labelled \"On this page\"; the current section is exposed with `aria-current=\"location\"`, not by colour alone (bold text and a bar)."
+   ],
+   "tokens": [
+    "brand",
+    "text-inactive"
+   ],
+   "classes": [
+    ".orca-toc",
+    ".orca-toc__title",
+    ".orca-toc__list"
+   ],
+   "laws": [
+    "miller",
+    "jakob"
+   ],
+   "examples": [
+    {
+     "title": "On this page",
+     "html": "<nav aria-label=\"On this page\" style=\"max-width: 14rem\"><details class=\"orca-toc\" open><summary class=\"orca-toc__title\"><span>On this page</span><span class=\"orca-chevron\">{% icon \"chevron-down\" size=\"xs\" %}</span></summary>\n  <ol class=\"orca-toc__list\"><li><a href=\"#\">Install</a></li><li><a href=\"#\" aria-current=\"location\">Configure your brand</a></li><li><a href=\"#\">Load ORCA in a template</a></li><li><a href=\"#\">Check your templates</a></li></ol></details></nav>"
+    }
+   ],
+   "guide": [
+    "Table of contents (On this page)"
+   ],
+   "related": [],
+   "server": [],
+   "source": "ORCA",
+   "level": "pattern",
+   "uses": [
+    "nav-tree"
+   ],
+   "template": "",
+   "preview": "",
+   "blocks": [],
+   "context": [],
+   "law_names": [
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Jakob's law: work the way products people already know work"
    ]
   },
   {
@@ -23341,26 +23402,135 @@
    ]
   },
   {
+   "id": "blog-layout",
+   "name": "Blog page layout",
+   "category": "template-layouts",
+   "summary": "A long-form page that reads well: breadcrumbs, title, introduction, version and last update, sections in a measured reading column, and an \"On this page\" column on the right.",
+   "why": "Long text is read, not scanned: a front-loaded introduction (Practical UI W05), a line length near 70 characters (T09) and a contents column that shows where you are (Miller's law) let people read comfortably on any screen, and a centred column never stretches across a large window. Version and last update tell the reader whether to trust the page.",
+   "when": [
+    "Articles, guides, documentation pages, release notes, case studies and policies: any page that is mostly sections of text."
+   ],
+   "how": [
+    "Extend it: `{% extends \"orca/layouts/blog.html\" %}`, then fill only the blocks you need.",
+    "Pass `title`, `subtitle` (the introduction: one or two sentences), `version` and `updated` (a date); optional `kicker`, `author`, `reading_time` (minutes), `breadcrumbs`.",
+    "Fill `blog_body` with sections: each `<section>` has an `h2.orca-section-title` with an `id`. The contents column is built from those `h2` headings, or pass `toc` (`[{\"id\", \"label\"}]`) to write it yourself.",
+    "Indexes, tables and galleries that need the full width: add `{% block blog_modifier %} orca-blog--wide{% endblock %}`; the head keeps its reading width.",
+    "The page has the app shell's top bar and sidebar (`nav`, or your own `sidebar` block); the Docs page layout is this layout with a documentation sidebar."
+   ],
+   "avoid": [],
+   "a11y": [],
+   "tokens": [],
+   "classes": [
+    ".orca-blog",
+    ".orca-blog--wide",
+    ".orca-blog__article",
+    ".orca-blog__head",
+    ".orca-blog__intro",
+    ".orca-blog__meta",
+    ".orca-blog__body",
+    ".orca-blog__aside",
+    ".orca-blog-page"
+   ],
+   "laws": [
+    "W05",
+    "T09",
+    "miller",
+    "jakob"
+   ],
+   "examples": [
+    {
+     "title": "Child template",
+     "html": "{% extends \"orca/layouts/blog.html\" %}\n{% block blog_body %}<section class=\"orca-vstack orca-vstack--tight\" aria-labelledby=\"section-one\">\n  <h2 class=\"orca-section-title\" id=\"section-one\">Section one</h2>\n  <p class=\"orca-p\">Body text of the page. Keep paragraphs short and lead with what the reader needs; the column stays about 70 characters wide, however large the window.</p>\n  <p class=\"orca-p\">More body text, with <code class=\"orca-code\">inline code</code> and a <a class=\"orca-link\" href=\"#\">link to another page</a>.</p>\n</section>\n<section class=\"orca-vstack orca-vstack--tight\" aria-labelledby=\"section-two\">\n  <h2 class=\"orca-section-title\" id=\"section-two\">Section two</h2>\n  <p class=\"orca-p\">Each section starts with an <code class=\"orca-code\">h2</code> that has an <code class=\"orca-code\">id</code>, so the contents column can link to it.</p>\n  <div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Shell</span></div><pre><code>pip install example</code></pre></div>\n</section>\n<section class=\"orca-vstack orca-vstack--tight\" aria-labelledby=\"section-three\">\n  <h2 class=\"orca-section-title\" id=\"section-three\">Section three</h2>\n  <p class=\"orca-p\">Close with what to do next.</p>\n</section>{% endblock %}"
+    }
+   ],
+   "guide": [
+    "Blog page layout",
+    "Blog page"
+   ],
+   "related": [],
+   "server": [
+    {
+     "title": "View",
+     "python": "# blog/views.py\nfrom datetime import date\n\nfrom django.views.generic import TemplateView\n\n\nclass PostDetail(TemplateView):\n    template_name = \"blog/post.html\"   # {% extends \"orca/layouts/blog.html\" %}, sections in {% block blog_body %}\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        ctx.update(title=\"How we count visitors\", kicker=\"Case study\",\n                   subtitle=\"Two sentences that say what this page covers and who it is for.\",\n                   version=\"1.2.0\", updated=date(2026, 11, 6), author=\"Person name\", reading_time=4,\n                   breadcrumbs=[(\"Blog\", \"/blog/\"), (\"How we count visitors\", \"\")])\n        return ctx\n"
+    }
+   ],
+   "source": "ORCA",
+   "level": "template",
+   "uses": [
+    "docs-page-header",
+    "table-of-contents",
+    "top-bar"
+   ],
+   "template": "orca/layouts/blog.html",
+   "preview": "blog-layout",
+   "blocks": [
+    "title",
+    "title_suffix",
+    "head",
+    "theme_bootstrap",
+    "extra_head",
+    "body_class",
+    "skip_link",
+    "body",
+    "modal",
+    "scripts",
+    "extra_scripts",
+    "top_bar",
+    "brand",
+    "top_nav",
+    "top_bar_end",
+    "sidebar",
+    "sidebar_nav",
+    "sidebar_extra",
+    "messages",
+    "blog_modifier",
+    "breadcrumbs",
+    "blog_kicker",
+    "page_title",
+    "page_subtitle",
+    "blog_meta",
+    "page_actions",
+    "blog_body",
+    "blog_footer",
+    "blog_aside",
+    "blog_toc",
+    "content",
+    "footer"
+   ],
+   "context": [
+    "`title`, `subtitle` (introduction), `kicker`, `breadcrumbs`.",
+    "`version`, `updated` (a date), `author`, `reading_time`: shown as the meta line when present.",
+    "`toc`: optional contents `[{\"id\", \"label\"}]`; without it the `h2` headings of the body are listed."
+   ],
+   "law_names": [
+    "Practical UI W05: Order explanations as an inverted pyramid",
+    "Practical UI T09: Limit reading measure",
+    "Miller's law: chunk information so working memory is not overloaded",
+    "Jakob's law: work the way products people already know work"
+   ]
+  },
+  {
    "id": "docs-layout",
    "name": "Docs page layout",
    "category": "template-layouts",
-   "summary": "Documentation frame: top bar, a sidebar with a filter and a page tree, and a reading column with breadcrumbs, title and introduction.",
-   "why": "Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and a measured reading column keeps long text comfortable (Practical UI T09, W05).",
+   "summary": "The Blog page with a documentation sidebar: a filter and a page tree on the left, the reading column and \"On this page\" on the right.",
+   "why": "Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and the Blog page's measured reading column keeps long text comfortable (Practical UI T09, W05).",
    "when": [
     "Product documentation, help centres, internal handbooks."
    ],
    "how": [
     "Extend it: `{% extends \"orca/layouts/docs.html\" %}`, then fill only the blocks you need.",
-    "Pass `docs_nav` (sections with `label`, `open` and `items`: label, url, current), `title`, `subtitle` and `breadcrumbs`; fill `content`.",
+    "Pass `docs_nav` (sections with `label`, `icon`, `open` and `items`: label, url, current), `title`, `subtitle`, `version`, `updated` and `breadcrumbs`; fill `blog_body`.",
+    "First-level sections lead with an `icon` and end with a small chevron that shows open or closed.",
     "This documentation site uses the same structure with the sidebar pattern."
    ],
    "avoid": [],
    "a11y": [],
    "tokens": [],
    "classes": [
-    ".orca-docs-main",
-    ".orca-docs-article",
-    ".orca-docs-page"
+    ".orca-docs-sidebar",
+    ".orca-docs-page",
+    ".orca-blog"
    ],
    "laws": [
     "miller",
@@ -23371,7 +23541,7 @@
    "examples": [
     {
      "title": "Child template",
-     "html": "{% extends \"orca/layouts/docs.html\" %}\n{% block content %}<p class=\"orca-p\">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>\n<h2 class=\"orca-section-title\">Section heading</h2>\n<p class=\"orca-p\">More body text, with <code class=\"orca-code\">inline code</code> and a <a class=\"orca-link\" href=\"#\">link to another page</a>.</p>\n<div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Shell</span></div><pre><code>pip install example</code></pre></div>{% endblock %}"
+     "html": "{% extends \"orca/layouts/docs.html\" %}\n{% block blog_body %}<section class=\"orca-vstack orca-vstack--tight\" aria-labelledby=\"s-one\">\n  <h2 class=\"orca-section-title\" id=\"s-one\">Section heading</h2>\n  <p class=\"orca-p\">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>\n  <p class=\"orca-p\">More body text, with <code class=\"orca-code\">inline code</code> and a <a class=\"orca-link\" href=\"#\">link to another page</a>.</p>\n</section>\n<section class=\"orca-vstack orca-vstack--tight\" aria-labelledby=\"s-two\">\n  <h2 class=\"orca-section-title\" id=\"s-two\">Another section</h2>\n  <div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Shell</span></div><pre><code>pip install example</code></pre></div>\n</section>{% endblock %}"
     }
    ],
    "guide": [
@@ -23382,7 +23552,7 @@
    "server": [
     {
      "title": "View",
-     "python": "# docs/views.py\nfrom django.views.generic import TemplateView\n\n\nclass DocsPage(TemplateView):\n    template_name = \"docs/page.html\"   # {% extends \"orca/layouts/docs.html\" %}\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        here = self.request.path\n        sections = {\"Get started\": [(\"Installation\", \"/docs/install/\"), (\"Usage\", \"/docs/usage/\")],\n                    \"Guides\": [(\"Uploads\", \"/docs/uploads/\"), (\"Sharing\", \"/docs/sharing/\")]}\n        ctx[\"docs_nav\"] = [{\"label\": label, \"open\": any(url == here for _, url in items),\n                            \"items\": [{\"label\": t, \"url\": url, \"current\": url == here} for t, url in items]}\n                           for label, items in sections.items()]\n        ctx.update(title=\"Uploads\", subtitle=\"Add videos one by one or in bulk.\",\n                   breadcrumbs=[(\"Docs\", \"/docs/\"), (\"Uploads\", \"\")])\n        return ctx\n"
+     "python": "# docs/views.py\nfrom datetime import date\n\nfrom django.views.generic import TemplateView\n\n\nclass DocsPage(TemplateView):\n    template_name = \"docs/page.html\"   # {% extends \"orca/layouts/docs.html\" %}, sections in {% block blog_body %}\n\n    def get_context_data(self, **kwargs):\n        ctx = super().get_context_data(**kwargs)\n        here = self.request.path\n        sections = {\"Get started\": (\"book\", [(\"Installation\", \"/docs/install/\"), (\"Usage\", \"/docs/usage/\")]),\n                    \"Guides\": (\"repository\", [(\"Uploads\", \"/docs/uploads/\"), (\"Sharing\", \"/docs/sharing/\")])}\n        ctx[\"docs_nav\"] = [{\"label\": label, \"icon\": icon, \"open\": any(url == here for _, url in items),\n                            \"items\": [{\"label\": t, \"url\": url, \"current\": url == here} for t, url in items]}\n                           for label, (icon, items) in sections.items()]\n        ctx.update(title=\"Uploads\", subtitle=\"Add videos one by one or in bulk.\", version=\"1.2.0\", updated=date(2026, 11, 6),\n                   breadcrumbs=[(\"Docs\", \"/docs/\"), (\"Uploads\", \"\")])\n        return ctx\n"
     }
    ],
    "source": "ORCA",
@@ -23408,19 +23578,28 @@
     "extra_scripts",
     "top_bar",
     "brand",
+    "top_nav",
     "top_bar_end",
     "sidebar",
     "sidebar_nav",
     "sidebar_extra",
-    "page_head",
+    "messages",
+    "blog_modifier",
     "breadcrumbs",
+    "blog_kicker",
     "page_title",
     "page_subtitle",
+    "blog_meta",
+    "page_actions",
+    "blog_body",
+    "blog_footer",
+    "blog_aside",
+    "blog_toc",
     "content",
     "footer"
    ],
    "context": [
-    "`docs_nav`, `title`, `subtitle`, `breadcrumbs`."
+    "`docs_nav`, `title`, `subtitle`, `version`, `updated`, `breadcrumbs`."
    ],
    "law_names": [
     "Miller's law: chunk information so working memory is not overloaded",

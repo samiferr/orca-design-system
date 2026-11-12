@@ -1,5 +1,6 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
-{% block page_subtitle %}<p class="orca-page-subtitle">{{ items|length }} glyphs. Use <code class="orca-code">{% templatetag openblock %} icon "name" {% templatetag closeblock %}</code>. Always pair an icon with a word or an accessible name.</p>{% endblock %}
+{% block blog_modifier %} orca-blog--wide{% endblock %}
+{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">{{ items|length }} glyphs. Use <code class="orca-code">{% templatetag openblock %} icon "name" {% templatetag closeblock %}</code>. Always pair an icon with a word or an accessible name.</p>{% endblock %}
 {% block page %}
 <section class="orca-panel" aria-labelledby="ic-all">
   <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="ic-all">All icons</h2><p class="orca-panel-header__desc">Filter by name to find one.</p></div></div>

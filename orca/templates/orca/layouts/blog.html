@@ -1,0 +1,32 @@
+{% extends "orca/layouts/app.html" %}{% load orca %}
+{# Blog page: a long-form page that reads well. Head (breadcrumbs, kicker, title, introduction, version and last update),
+   a measured reading column of sections, and an "On this page" column on the right. Docs, guides, articles and release notes extend it. #}
+{% block body_class %}orca-shell orca-blog-page{% endblock %}
+{% block page_head %}{% endblock %}
+{% block content %}<div class="orca-blog{% block blog_modifier %}{% endblock %}">
+  <div class="orca-blog__layout">
+    <article class="orca-blog__article">
+      <header class="orca-blog__head">
+        {% block breadcrumbs %}{% if breadcrumbs %}<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol>{% for label, url in breadcrumbs %}<li>{% if url %}<a href="{{ url }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}</li>{% endfor %}</ol></nav>{% endif %}{% endblock %}
+        {% block blog_kicker %}{% if kicker %}<p class="orca-card-kicker">{{ kicker }}</p>{% endif %}{% endblock %}
+        <h1 class="orca-page-title">{% block page_title %}{{ title }}{% endblock %}</h1>
+        {% block page_subtitle %}{% if subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">{{ subtitle }}</p>{% endif %}{% endblock %}
+        {% block blog_meta %}{% if version or updated or author or reading_time %}<dl class="orca-blog__meta">
+          {% if version %}<div><dt>Version</dt><dd>{{ version }}</dd></div>{% endif %}
+          {% if updated %}<div><dt>Last updated</dt><dd><time class="orca-date" datetime="{{ updated|date:'Y-m-d' }}">{{ updated|date:"j F Y" }}</time></dd></div>{% endif %}
+          {% if author %}<div><dt>Author</dt><dd>{{ author }}</dd></div>{% endif %}
+          {% if reading_time %}<div><dt>Reading time</dt><dd>{{ reading_time }} min</dd></div>{% endif %}
+        </dl>{% endif %}{% endblock %}
+        <div class="orca-page-head__actions">{% block page_actions %}{% endblock %}</div>
+      </header>
+      <div class="orca-blog__body" id="orca-blog-body">{% block blog_body %}{% endblock %}</div>
+      {% block blog_footer %}{% endblock %}
+    </article>
+    {% block blog_aside %}<nav class="orca-blog__aside" aria-label="On this page">
+      {% block blog_toc %}<details class="orca-toc" open data-orca-toc="orca-blog-body"{% if toc %} data-orca-toc-static{% endif %}{% if not toc %} hidden{% endif %}>
+        <summary class="orca-toc__title"><span>On this page</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
+        <ol class="orca-toc__list">{% for item in toc %}<li><a href="#{{ item.id }}">{{ item.label }}</a></li>{% endfor %}</ol>
+      </details>{% endblock %}
+    </nav>{% endblock %}
+  </div>
+</div>{% endblock %}

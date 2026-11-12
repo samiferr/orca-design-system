@@ -1,5 +1,5 @@
-{% extends "orca/layouts/app.html" %}{% load orca static %}
-{# The ORCA documentation website: the app shell template with the docs sidebar pattern, filled with ORCA elements only. No styles of its own. #}
+{% extends "orca/layouts/blog.html" %}{% load orca static %}
+{# The ORCA documentation website: the Blog page template with the docs sidebar pattern, filled with ORCA elements only. No styles of its own. #}
 {% block html_attrs %}{% orca_html_attrs density="dense" %}{% endblock %}
 {% block title %}{{ title|default:"ORCA" }}{% endblock %}
 {% block title_suffix %} · ORCA design system{% endblock %}
@@ -19,17 +19,17 @@
   <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="orca-docs-tree" data-orca-status="orca-docs-tree-status"></div>
   <p class="orca-sr-only" id="orca-docs-tree-status" role="status"></p>
   <ul class="orca-nav-tree" id="orca-docs-tree">
-    <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Get started</summary><ul>
+    <li><details open><summary>{% icon "book" %}Get started<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul>
       <li><a href="{% url 'orca:home' %}"{% if page == "home" %} aria-current="page"{% endif %}>Overview</a></li>
       {% for slug, guide_title, icon_name in guide_nav %}<li><a href="{% url 'orca:guide' slug %}"{% if page == "guide-"|add:slug %} aria-current="page"{% endif %}>{{ guide_title }}</a></li>{% endfor %}
     </ul></details></li>
-    {% for lvl in levels %}<li><details{% if el.level == lvl.key or page == lvl.title|lower %} open{% endif %}><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>{{ lvl.title }}<span class="orca-count orca-count--neutral">{{ lvl.count }}</span></summary><ul>
+    {% for lvl in levels %}<li><details{% if el.level == lvl.key or page == lvl.title|lower %} open{% endif %}><summary>{% icon lvl.icon %}{{ lvl.title }}<span class="orca-count orca-count--neutral">{{ lvl.count }}</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul>
       <li><a href="{% url lvl.url %}"{% if page == lvl.title|lower %} aria-current="page"{% endif %}>All {{ lvl.title|lower }}</a></li>
-      {% for cat, els in lvl.nav %}<li><details{% if el.category == cat.key %} open{% endif %}><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>{{ cat.title }}<span class="orca-count orca-count--neutral">{{ els|length }}</span></summary>
+      {% for cat, els in lvl.nav %}<li><details{% if el.category == cat.key %} open{% endif %}><summary>{{ cat.title }}<span class="orca-count orca-count--neutral">{{ els|length }}</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
         <ul>{% for e in els %}<li><a href="{% url 'orca:element' e.id %}"{% if page == e.id %} aria-current="page"{% endif %}>{{ e.name }}</a></li>{% endfor %}</ul>
       </details></li>{% endfor %}
     </ul></details></li>{% endfor %}
-    <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Reference</summary><ul>
+    <li><details open><summary>{% icon "devtools" %}Reference<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul>
       <li><a href="{% url 'orca:tokens' %}"{% if page == "tokens" %} aria-current="page"{% endif %}>Tokens</a></li>
       <li><a href="{% url 'orca:icons' %}"{% if page == "icons" %} aria-current="page"{% endif %}>Icons</a></li>
       <li><a href="{% url 'orca:catalogue-json' %}">Catalogue JSON</a></li>
@@ -38,7 +38,7 @@
 </nav>{% endblock %}
 
 {% block messages %}{% endblock %}
-{% block content %}<div class="orca-vstack orca-vstack--loose">{% block page %}{% endblock %}</div>{% endblock %}
+{% block blog_body %}{% block page %}{% endblock %}{% endblock %}
 
 {% block footer %}<footer class="orca-footer">
   <p class="orca-footer__legal">ORCA {{ version }} · Built on Tangerine (Vanilla framework 4.59 values, LGPL-3.0) and Ubuntu Sans (Ubuntu Font Licence). Generated from the <code class="orca-code">orca</code> package: the catalogue, tokens and icons on these pages are the ones you install.</p>

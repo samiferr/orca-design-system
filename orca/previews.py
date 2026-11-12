@@ -6,6 +6,8 @@ A template shows structure, not real content (ORCA guide, level 4), so the recor
 
 from __future__ import annotations
 
+from datetime import date
+
 from django import forms
 from django.core.paginator import Paginator
 from django.templatetags.static import static
@@ -127,10 +129,14 @@ def context(element_id: str) -> dict:
         "marketing-layout": dict(site_nav=[{"label": "Product", "url": "#", "current": True}, {"label": "Pricing", "url": "#"}, {"label": "Docs", "url": "#"}],
                                  footer_cols=[{"title": "Product", "links": [{"label": "Features", "url": "#"}, {"label": "Pricing", "url": "#"}]},
                                               {"title": "Help", "links": [{"label": "Documentation", "url": "#"}, {"label": "Contact", "url": "#"}]}]),
-        "docs-layout": dict(title="Page title", subtitle="One or two sentences: what this page explains and who it is for.",
+        "blog-layout": dict(title="Page title", kicker="Guide", subtitle="One or two sentences: what this page explains, who it is for and what they will be able to do.",
+                            breadcrumbs=[("Section", "#"), ("Page title", "")], nav=nav("Overview"), version="1.2.0", updated=date(2026, 11, 6),
+                            author="Person name", reading_time=4,
+                            toc=[{"id": "section-one", "label": "Section one"}, {"id": "section-two", "label": "Section two"}, {"id": "section-three", "label": "Section three"}]),
+        "docs-layout": dict(title="Page title", subtitle="One or two sentences: what this page explains and who it is for.", version="1.2.0", updated=date(2026, 11, 6),
                             breadcrumbs=[("Section", "#"), ("Page title", "")],
-                            docs_nav=[{"label": "Get started", "open": True, "items": [{"label": "Installation", "url": "#"}, {"label": "Page title", "url": "#", "current": True}]},
-                                      {"label": "Reference", "items": [{"label": "Settings", "url": "#"}, {"label": "Template tags", "url": "#"}]}]),
+                            docs_nav=[{"label": "Get started", "icon": "book", "open": True, "items": [{"label": "Installation", "url": "#"}, {"label": "Page title", "url": "#", "current": True}]},
+                                      {"label": "Reference", "icon": "devtools", "items": [{"label": "Settings", "url": "#"}, {"label": "Template tags", "url": "#"}]}]),
         "dashboard": dict(title="Dashboard", nav=nav("Overview"),
                           periods=[{"label": "Today", "url": "#"}, {"label": "This week", "url": "#", "current": True}, {"label": "This month", "url": "#"}],
                           stats=[{"label": "Metric one", "value": "12,480", "delta": "+8%", "trend": "up", "foot": " vs last week", "url": "#", "icon": "user"},
