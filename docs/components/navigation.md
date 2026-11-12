@@ -464,17 +464,18 @@ Grouping many destinations into named sections keeps a long navigation scannable
 
 ### How to use
 
-- `<nav aria-label=…><ul class="orca-nav-tree">` with `<details>` sections: `<summary>` (chevron, name, optional count) and a `<ul>` of leaf links.
+- `<nav aria-label=…><ul class="orca-nav-tree">` with `<details>` sections: `<summary>` (an icon on first-level parents, the name, an optional count and a small chevron at the end) and a `<ul>` of leaf links.
 - Open the section that contains the current page; leaves use `aria-current="page"`.
-- Nest a second level of details for sub-sections; avoid a third.
+- First-level parents lead with an icon (`{% icon "name" %}`); the chevron sits at the end of the row, small (`size="xs"`), and turns from pointing right (closed) to down (open).
+- Nest a second level of details for sub-sections without an icon; avoid a third.
 
 #### Example: Tree
 
 ```django
 <nav aria-label="Settings" style="max-width: 16rem"><ul class="orca-nav-tree">
-  <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Organisation<span class="orca-count orca-count--neutral">3</span></summary>
+  <li><details open><summary>{% icon "settings" %}Organisation<span class="orca-count orca-count--neutral">3</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
     <ul><li><a href="#">Profile</a></li><li><a href="#" aria-current="page">Users</a></li><li><a href="#">Billing</a></li></ul></details></li>
-  <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Devices<span class="orca-count orca-count--neutral">2</span></summary>
+  <li><details><summary>{% icon "snapshot" %}Devices<span class="orca-count orca-count--neutral">2</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
     <ul><li><a href="#">Videos</a></li><li><a href="#">Media servers</a></li></ul></details></li>
 </ul></nav>
 ```

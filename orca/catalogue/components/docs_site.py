@@ -58,8 +58,8 @@ add(Component(
     examples=[("Docs tree", """<nav aria-label="Documentation" style="max-width: 16rem">
   <div class="orca-search" style="margin-bottom: var(--orca-space-8)">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dnt"></div>
   <ul class="orca-nav-tree" id="dnt">
-    <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Get started</summary><ul><li><a href="#">Installation</a></li><li><a href="#" aria-current="page">Usage</a></li></ul></details></li>
-    <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Forms</summary><ul><li><a href="#">Form field</a></li><li><a href="#">Combobox</a></li></ul></details></li>
+    <li><details open><summary>{% icon "book" %}Get started<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul><li><a href="#">Installation</a></li><li><a href="#" aria-current="page">Usage</a></li></ul></details></li>
+    <li><details><summary>{% icon "grid" %}Forms<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul><li><a href="#">Form field</a></li><li><a href="#">Combobox</a></li></ul></details></li>
   </ul>
 </nav>""")],
     guide=["Docs navigation tree"],

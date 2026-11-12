@@ -100,7 +100,7 @@ add(Element(
     why="The rotating chevron is the familiar cue for 'this expands' (Jakob's law, Practical UI F06), and its motion confirms the change.",
     when=["Disclosure and accordion triggers, collapsible sidebar groups, tree nodes."],
     how=["Inside a `<summary>` or a button with `aria-expanded`: `<span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>`. It rotates automatically when closed.",
-         "Put it at the start of the row (left), in the same place on every row."],
+         "Accordions and trees: at the start of the row, in the same place on every row. Navigation trees: small, at the end of the row (see the nav tree)."],
     a11y=["`<details>`/`<summary>` or `aria-expanded` announces the state; the chevron is decorative."],
     classes=[".orca-chevron"], tokens=["duration-fast"],
     laws=["jakob", "F06"],

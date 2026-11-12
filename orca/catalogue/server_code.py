@@ -953,22 +953,41 @@ class Pricing(TemplateView):
                         {"title": "Help", "links": [{"label": "Documentation", "url": "/docs/"}]}],
     }
 ''')],
+    "blog-layout": [("View", '''# blog/views.py
+from datetime import date
+
+from django.views.generic import TemplateView
+
+
+class PostDetail(TemplateView):
+    template_name = "blog/post.html"   # {% extends "orca/layouts/blog.html" %}, sections in {% block blog_body %}
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update(title="How we count visitors", kicker="Case study",
+                   subtitle="Two sentences that say what this page covers and who it is for.",
+                   version="1.2.0", updated=date(2026, 11, 6), author="Person name", reading_time=4,
+                   breadcrumbs=[("Blog", "/blog/"), ("How we count visitors", "")])
+        return ctx
+''')],
     "docs-layout": [("View", '''# docs/views.py
+from datetime import date
+
 from django.views.generic import TemplateView
 
 
 class DocsPage(TemplateView):
-    template_name = "docs/page.html"   # {% extends "orca/layouts/docs.html" %}
+    template_name = "docs/page.html"   # {% extends "orca/layouts/docs.html" %}, sections in {% block blog_body %}
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         here = self.request.path
-        sections = {"Get started": [("Installation", "/docs/install/"), ("Usage", "/docs/usage/")],
-                    "Guides": [("Uploads", "/docs/uploads/"), ("Sharing", "/docs/sharing/")]}
-        ctx["docs_nav"] = [{"label": label, "open": any(url == here for _, url in items),
+        sections = {"Get started": ("book", [("Installation", "/docs/install/"), ("Usage", "/docs/usage/")]),
+                    "Guides": ("repository", [("Uploads", "/docs/uploads/"), ("Sharing", "/docs/sharing/")])}
+        ctx["docs_nav"] = [{"label": label, "icon": icon, "open": any(url == here for _, url in items),
                             "items": [{"label": t, "url": url, "current": url == here} for t, url in items]}
-                           for label, items in sections.items()]
-        ctx.update(title="Uploads", subtitle="Add videos one by one or in bulk.",
+                           for label, (icon, items) in sections.items()]
+        ctx.update(title="Uploads", subtitle="Add videos one by one or in bulk.", version="1.2.0", updated=date(2026, 11, 6),
                    breadcrumbs=[("Docs", "/docs/"), ("Uploads", "")])
         return ctx
 ''')],

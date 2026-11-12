@@ -276,12 +276,27 @@
 .orca-nav-tree summary { display: flex; align-items: center; gap: var(--orca-space-8); min-height: 2rem; padding: var(--orca-space-4) var(--orca-space-16); list-style: none; cursor: pointer; font: var(--orca-type-body-strong); }
 .orca-nav-tree summary::-webkit-details-marker { display: none; }
 .orca-nav-tree summary:hover { background: var(--orca-bg-hover); }
+/* Navigation trees: an optional icon leads first-level parents; a small chevron at the end shows open or closed. */
 .orca-nav-tree summary > .orca-count { margin-inline-start: auto; }
+.orca-nav-tree summary > .orca-chevron { margin-inline-start: auto; color: var(--orca-text-muted); }
+.orca-nav-tree summary > .orca-count + .orca-chevron { margin-inline-start: 0; }
+.orca-nav-tree summary > .orca-icon:first-child { color: var(--orca-text-muted); }
+.orca-nav-tree details[open] > summary > .orca-icon:first-child { color: var(--orca-text); }
 .orca-nav-tree a { display: block; padding: var(--orca-space-4) var(--orca-space-16) var(--orca-space-4) var(--orca-space-40); color: var(--orca-text-inactive); text-decoration: none; font: var(--orca-type-detail); }
 .orca-nav-tree a:hover { background: var(--orca-bg-hover); color: var(--orca-text); }
 .orca-nav-tree a[aria-current="page"] { background: var(--orca-bg-active); color: var(--orca-text); box-shadow: inset var(--orca-bar) 0 0 var(--orca-text); }
 .orca-nav-tree details details summary { padding-inline-start: var(--orca-space-40); font: var(--orca-type-body); }
 .orca-nav-tree details details a { padding-inline-start: 4rem; }
+/* Table of contents ("On this page"): section links with the section being read marked. Open on wide screens, a disclosure on narrow ones. */
+.orca-toc { font: var(--orca-type-detail); }
+.orca-toc__title { display: flex; align-items: center; justify-content: space-between; gap: var(--orca-space-8); min-height: 2rem; list-style: none; cursor: pointer; font: var(--orca-type-label); text-transform: uppercase; letter-spacing: 0.04em; color: var(--orca-text-muted); }
+.orca-toc__title::-webkit-details-marker { display: none; }
+.orca-toc__list { display: flex; flex-direction: column; margin: var(--orca-space-4) 0 0; padding: 0; list-style: none; box-shadow: inset var(--orca-hairline) 0 0 var(--orca-border); }
+.orca-toc__list a { display: block; padding: var(--orca-space-4) var(--orca-space-12); color: var(--orca-text-inactive); text-decoration: none; box-shadow: inset var(--orca-bar) 0 0 transparent; overflow-wrap: anywhere; }
+.orca-toc__list a:hover { color: var(--orca-text); background: var(--orca-bg-hover); }
+.orca-toc__list a[aria-current="location"] { color: var(--orca-text); font-weight: 550; box-shadow: inset var(--orca-bar) 0 0 var(--orca-brand); }
+@media (min-width: 1100px) { .orca-toc__title { pointer-events: none; cursor: default; } .orca-toc__title .orca-chevron { display: none; } }
+
 .orca-back-link { display: inline-flex; align-items: center; gap: var(--orca-space-4); font: var(--orca-type-detail); color: var(--orca-accent); text-decoration: none; }
 .orca-back-link:hover { text-decoration: underline; }
 [dir="rtl"] .orca-back-link .orca-icon { transform: scaleX(-1); }
@@ -681,7 +696,7 @@ button.orca-event-card { width: 100%; border-top: 0; border-right: 0; border-bot
 .orca-live-example > .orca-tabs__list { padding-inline: var(--orca-space-8); }
 .orca-live-example .orca-tabs__panel { padding: var(--orca-space-24) var(--orca-space-16); overflow-x: auto; }
 .orca-live-example .orca-tabs__panel--code { padding: 0; }
-.orca-code-block { position: relative; margin: 0; background: var(--orca-bg-alt); border: var(--orca-hairline) solid var(--orca-border); min-width: 0; }
+.orca-code-block { position: relative; margin: 0; background: var(--orca-bg); border: var(--orca-hairline) solid var(--orca-border); min-width: 0; }
 .orca-code-block__head { display: flex; align-items: center; justify-content: space-between; gap: var(--orca-space-8); padding: var(--orca-space-4) var(--orca-space-4) var(--orca-space-4) var(--orca-space-16); border-bottom: var(--orca-hairline) solid var(--orca-border); font: var(--orca-type-label); text-transform: uppercase; letter-spacing: 0.04em; color: var(--orca-text-muted); }
 /* Syntax colours: orca.js colours code blocks with the vendored highlight.js (class prefix orca-hl-). */
 .orca-hl-keyword, .orca-hl-literal, .orca-hl-built_in, .orca-hl-type, .orca-hl-selector-tag, .orca-hl-doctag { color: var(--orca-code-keyword); }

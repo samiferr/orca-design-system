@@ -24,7 +24,7 @@ it uses, the UX principles it applies, and a copy-ready template example.
   Charts are drawn by Chart.js (vendored, loaded only on pages with charts) and calendars render on the server, both
   from plain Python data through one template tag.
 - **Phase 4 (this release): Templates.** 60 elements covering all 67 template items of the guide: real Django templates
-  you extend (app shell, auth, error, email, marketing and docs layouts), generic list / detail / form / confirm and
+  you extend (app shell, auth, error, email, marketing, blog and docs layouts), generic list / detail / form / confirm and
   parent-child templates that work with class-based views, page-type skeletons (dashboard, calendar, scheduler, board,
   timeline, booking, event editor, simple data page), structural layouts and the named slots (blocks) you fill.
 

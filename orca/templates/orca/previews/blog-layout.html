@@ -1,0 +1,15 @@
+{% extends "orca/layouts/blog.html" %}
+{% block blog_body %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-one">
+  <h2 class="orca-section-title" id="section-one">Section one</h2>
+  <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs; the column stays about 70 characters wide, however large the window.</p>
+  <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-two">
+  <h2 class="orca-section-title" id="section-two">Section two</h2>
+  <p class="orca-p">Each section starts with an <code class="orca-code">h2</code> that has an <code class="orca-code">id</code>, so the contents column can link to it.</p>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-three">
+  <h2 class="orca-section-title" id="section-three">Section three</h2>
+  <p class="orca-p">Close with what to do next.</p>
+</section>{% endblock %}

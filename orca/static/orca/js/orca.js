@@ -37,6 +37,8 @@
      data-orca-light-dismiss    on a <dialog>: a click on the backdrop closes it (drawers)
      data-orca-richtext         rich text editor: toolbar commands, pressed states, syncs to a hidden field
      data-orca-zone-editor      draw a polygon on an image; points saved as JSON in a hidden field
+     data-orca-toc="id"         "On this page" <details>: lists the h2 headings of the element with that id (when the list is empty), marks the
+                                section being read with aria-current="location", and is closed on narrow screens, open on wide ones
      data-orca-seek="s"         jumps the video it controls to s seconds
      data-orca-gallery          thumbnails swap the stage image
      data-orca-token="--name"   input that sets a CSS custom property on the element it controls (live token preview)
@@ -858,6 +860,45 @@
     });
   }
   window.ORCA.drawCharts = function () { loadChartJs(drawCharts); };
+
+  /* ---------------------------------------------------------------- table of contents ("On this page") */
+  function slug(text) { return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "section"; }
+  function initToc(toc) {
+    var body = byId(toc.getAttribute("data-orca-toc")); var list = toc.querySelector(".orca-toc__list");
+    if (!body || !list) return;
+    if (!list.children.length) {
+      var used = {};
+      Array.prototype.forEach.call(body.querySelectorAll("h2"), function (h) {
+        if (closest(h, ".orca-live-example, .orca-code-block, dialog, template, [hidden], .orca-sr-only") || h.classList.contains("orca-sr-only")) return;
+        if (!h.id) { var base = slug(h.textContent), id = base, n = 2; while (byId(id) || used[id]) id = base + "-" + n++; h.id = id; }
+        used[h.id] = true;
+        var li = doc.createElement("li"), a = doc.createElement("a");
+        a.href = "#" + h.id; a.textContent = h.textContent.trim(); li.appendChild(a); list.appendChild(li);
+      });
+    }
+    toc.hidden = !list.children.length;
+    if (toc.hidden) return;
+    var links = Array.prototype.slice.call(list.querySelectorAll("a"));
+    var targets = links.map(function (a) { return byId(decodeURIComponent(a.getAttribute("href").slice(1))); });
+    var queued = false;
+    function spy() {
+      queued = false;
+      var at = -1;
+      targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= 120) at = i; });
+      if (window.innerHeight + window.pageYOffset >= doc.documentElement.scrollHeight - 2) at = links.length - 1;
+      links.forEach(function (a, i) { if (i === at) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current"); });
+    }
+    window.addEventListener("scroll", function () { if (!queued) { queued = true; window.requestAnimationFrame(spy); } }, { passive: true });
+    window.addEventListener("resize", spy);
+    spy();
+    if (window.matchMedia) {
+      var narrow = window.matchMedia("(max-width: 1099px)");
+      var fit = function () { toc.open = !narrow.matches; };
+      fit();
+      if (narrow.addEventListener) narrow.addEventListener("change", fit);
+    }
+  }
+  doc.querySelectorAll("[data-orca-toc]").forEach(initToc);
 
   /* ---------------------------------------------------------------- code colouring (highlight.js) */
   /* Code in [data-orca-highlight] and in code blocks is coloured by the vendored highlight.js, loaded only on pages that

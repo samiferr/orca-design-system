@@ -96,7 +96,7 @@ Charts drawn by Chart.js in a chart frame, in token colours, each with a text su
 - `radar-chart` **Radar chart**: Scores on several axes drawn as a polygon, comparing one or two items.
 - `polar-area-chart` **Polar area chart**: Equal-angle segments whose radius shows each value.
 
-## [Marketing and documentation site](marketing-docs.md) (6)
+## [Marketing and documentation site](marketing-docs.md) (7)
 
 Sections for a product's public pages and its documentation: hero, features, live tokens, code samples and docs navigation.
 
@@ -106,6 +106,7 @@ Sections for a product's public pages and its documentation: hero, features, liv
 - `code-samples` **Code samples block**: The same example in several languages or frameworks as tabs of code blocks.
 - `docs-page-header` **Docs page header**: A documentation page's breadcrumb, title, one-paragraph introduction and meta (status, source, version).
 - `docs-sidebar` **Docs sidebar tree**: The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open and visible.
+- `table-of-contents` **Table of contents**: An "On this page" list of a long page's sections that marks the section being read.
 
 ## [Process and status](process.md) (1)
 

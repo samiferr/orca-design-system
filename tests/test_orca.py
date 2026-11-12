@@ -246,6 +246,47 @@ class DocsSiteTests(SimpleTestCase):
             with self.subTest(name=name):
                 self.assertEqual(self.client.get(reverse(f"orca:{name}")).status_code, 200)
 
+    def test_every_docs_page_is_a_blog_page(self):
+        """Docs pages use the Blog page template: title, introduction, version and last update, a reading column and "On this page"."""
+        from orca import __released__, __version__
+        from orca.views import GUIDE
+
+        urls = [reverse(f"orca:{n}") for n in ("home", "index", "components", "patterns", "templates", "tokens", "icons")]
+        urls += [reverse("orca:guide", args=[slug]) for slug, _, _ in GUIDE] + [reverse("orca:element", args=["button"])]
+        for url in urls:
+            with self.subTest(url=url):
+                html = self.client.get(url).content.decode()
+                self.assertEqual(html.count('class="orca-blog__article"'), 1)
+                self.assertEqual(html.count("<h1"), 1)
+                self.assertIn('class="orca-p orca-p--lead orca-blog__intro"', html)
+                self.assertIn(f"<dd>{__version__}</dd>", html)
+                self.assertIn(f'<time class="orca-date" datetime="{__released__:%Y-%m-%d}">{__released__.day} {__released__:%B %Y}</time>', html)
+                self.assertIn('data-orca-toc="orca-blog-body"', html)
+                self.assertIn('id="orca-blog-body"', html)
+
+    def test_blog_layout_toc_can_be_written_by_the_page(self):
+        from django.template.loader import render_to_string
+
+        html = render_to_string("orca/previews/blog-layout.html", {"title": "T", "subtitle": "S", "toc": [{"id": "a", "label": "Section A"}]})
+        self.assertIn('<a href="#a">Section A</a>', html)
+        self.assertNotIn("hidden", re.search(r"<details[^>]*orca-toc[^>]*>", html).group(0))
+        bare = render_to_string("orca/previews/blog-layout.html", {"title": "T"})
+        self.assertIn("hidden", re.search(r"<details[^>]*orca-toc[^>]*>", bare).group(0), "without a toc the column waits for the script")
+        self.assertNotIn("Version", bare, "meta shows only what the page passes")
+
+    def test_nav_tree_parents_have_icons_and_a_chevron_at_the_end(self):
+        html = self.client.get(reverse("orca:home")).content.decode()
+        tree = html[html.index('id="orca-docs-tree"'):]
+        for summary in re.findall(r"<summary>(.*?)</summary>", tree[:tree.index("</nav>")], re.S):
+            self.assertTrue(summary.endswith("</svg></span>") and summary.count('class="orca-chevron"') == 1, summary[:80])
+            self.assertFalse(summary.startswith('<span class="orca-chevron">'), "the chevron is at the end, not the start")
+        top = re.findall(r"<li><details[^>]*><summary>(<svg.*?)</summary>", tree[:tree.index("</nav>")], re.S)
+        self.assertGreaterEqual(len(top), 6, "first-level parents lead with an icon")
+
+    def test_code_blocks_are_white(self):
+        block = re.search(r"\.orca-code-block \{([^}]*)\}", CSS).group(1)
+        self.assertIn("background: var(--orca-bg);", block)
+
     def test_every_element_page(self):
         for el in registry.all_elements():
             with self.subTest(el=el.id):

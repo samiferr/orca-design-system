@@ -1,5 +1,10 @@
 {% extends "orca/layouts/docs.html" %}
-{% block content %}<p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>
-<h2 class="orca-section-title">Section heading</h2>
-<p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
-<div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>{% endblock %}
+{% block blog_body %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="s-one">
+  <h2 class="orca-section-title" id="s-one">Section heading</h2>
+  <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>
+  <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
+</section>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="s-two">
+  <h2 class="orca-section-title" id="s-two">Another section</h2>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>
+</section>{% endblock %}

@@ -101,7 +101,27 @@ add(Pattern(
     laws=["miller", "hick"],
     uses=["docs-nav-tree", "drawer"],
     examples=[("Sidebar", """<nav class="orca-docs-sidebar" aria-label="Documentation"><div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dsb"></div>
-  <ul class="orca-nav-tree" id="dsb"><li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Get started</summary><ul><li><a href="#">Installation</a></li><li><a href="#" aria-current="page">Usage</a></li></ul></details></li>
-    <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Patterns</summary><ul><li><a href="#">Data table</a></li><li><a href="#">Month calendar</a></li></ul></details></li></ul></nav>""")],
+  <ul class="orca-nav-tree" id="dsb"><li><details open><summary>{% icon "book" %}Get started<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul><li><a href="#">Installation</a></li><li><a href="#" aria-current="page">Usage</a></li></ul></details></li>
+    <li><details><summary>{% icon "blueprint" %}Patterns<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul><li><a href="#">Data table</a></li><li><a href="#">Month calendar</a></li></ul></details></li></ul></nav>""")],
     guide=["Docs sidebar tree"],
+))
+
+add(Pattern(
+    "table-of-contents", "Table of contents", C,
+    "An \"On this page\" list of a long page's sections that marks the section being read.",
+    why="On a long page people want to know what it covers and where they are (Miller's law); links to each section let them jump instead of scrolling, and the marked section keeps them oriented (Jakob's law).",
+    when=["Long pages of several sections: documentation, articles, guides, release notes. Put it in the right-hand column of the Blog page."],
+    avoid=["Pages with fewer than three sections.", "Navigating between pages: use the nav tree or tabs."],
+    how=["`<nav aria-label=\"On this page\"><details class=\"orca-toc\" open data-orca-toc=\"body-id\">` with a `<summary class=\"orca-toc__title\">` and an `<ol class=\"orca-toc__list\">` of links to the sections' `id`s.",
+         "Leave the list empty and `orca.js` fills it from the `h2` headings of the element named in `data-orca-toc` (adding ids where missing), skipping headings inside live examples, code blocks and dialogs.",
+         "`orca.js` marks the section being read with `aria-current=\"location\"`, keeps the list open on wide screens and closed behind its summary on narrow ones; without script the list stays open.",
+         "Keep labels to the section's name; list `h2` only."],
+    a11y=["A `nav` landmark labelled \"On this page\"; the current section is exposed with `aria-current=\"location\"`, not by colour alone (bold text and a bar)."],
+    classes=[".orca-toc", ".orca-toc__title", ".orca-toc__list"],
+    tokens=["brand", "text-inactive"],
+    laws=["miller", "jakob"],
+    uses=["nav-tree"],
+    examples=[("On this page", """<nav aria-label="On this page" style="max-width: 14rem"><details class="orca-toc" open><summary class="orca-toc__title"><span>On this page</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
+  <ol class="orca-toc__list"><li><a href="#">Install</a></li><li><a href="#" aria-current="location">Configure your brand</a></li><li><a href="#">Load ORCA in a template</a></li><li><a href="#">Check your templates</a></li></ol></details></nav>""")],
+    guide=["Table of contents (On this page)"], source="ORCA",
 ))
