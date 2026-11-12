@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from . import color
 
 THEMES = ("light", "dark", "paper")
-APPEARANCE = "tangerine"  # ORCA has one appearance: Tangerine.
+APPEARANCE = "orca"  # ORCA has one appearance, named ORCA.
 
 
 @dataclass(frozen=True)
@@ -226,7 +226,7 @@ SEMANTIC = [
     T("on-fill", "#ffffff", group="Status", usage="Text on the solid info, positive, negative, neutral and purple fills."),
     T("on-caution", "#000000", group="Status", usage="Text on the caution fill."),
     # Action fills
-    T("primary", "#0e8420", "#008013", group="Actions", usage="Fill of the one main action on a screen (Tangerine: green)."),
+    T("primary", "#0e8420", "#008013", group="Actions", usage="Fill of the one main action on a screen (ORCA: green)."),
     T("primary-hover", "#0c6d1a", "#00660f", group="Actions", usage="Hover fill of the primary button."),
     T("primary-active", "#0a5f17", "#00570d", group="Actions", usage="Pressed fill of the primary button."),
     T("primary-on", "#ffffff", group="Actions", usage="Text on the primary fill. 4.8:1 light, 5.0:1 dark."),
@@ -281,7 +281,7 @@ SPACE = [
 ]
 
 RADII = [
-    S("radius-none", "0", "Tangerine is square: buttons, fields, cards, menus, dialogs, tables, badges.", "Shape"),
+    S("radius-none", "0", "ORCA is square: buttons, fields, cards, menus, dialogs, tables, badges.", "Shape"),
     S("radius-bar", "0.1875rem", "The 3px ends of progress tracks and event bars.", "Shape"),
     S("radius-pill", "1rem", "Switch track and count badges.", "Shape"),
     S("radius-round", "50%", "Round marks: radios, switch handle, status dots, avatars, step markers.", "Shape"),

@@ -1,6 +1,6 @@
 {
  "system": "ORCA",
- "appearance": "tangerine",
+ "appearance": "orca",
  "themes": [
   "light",
   "dark",
@@ -419,7 +419,7 @@
     "Defining a new semantic token inside ORCA itself."
    ],
    "how": [
-    "Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), Tangerine's values.",
+    "Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), ORCA's values.",
     "Hues: `--orca-{red|orange|amber|yellow|green|teal|cyan|blue|indigo|purple|pink}-{100..900}`; 100 is lightest.",
     "For data series prefer `--orca-chart-1`…`--orca-chart-8`, which already pick contrasting steps per theme.",
     "Text on a hue step: steps 100–400 take `--orca-text` in light themes; 600–900 take white."
@@ -670,7 +670,7 @@
    "id": "themes",
    "name": "Themes",
    "category": "foundations",
-   "summary": "Light, dark and paper share every token name. ORCA has one appearance: Tangerine.",
+   "summary": "Light, dark and paper share every token name. ORCA has one appearance, named ORCA.",
    "why": "Writing components once against shared names means a theme can never break a component (Postel's law: reliable output in every context). Users with light sensitivity or bright surroundings choose what suits them.",
    "when": [
     "Always: every page supports all three themes for free.",
@@ -679,7 +679,7 @@
    "how": [
     "Put `{% orca_html_attrs %}` on `<html>` and `{% orca_head %}` in `<head>`.",
     "A theme toggle is a button with `data-orca-theme-toggle`; it cycles light → dark → paper and remembers the choice.",
-    "Appearance: Tangerine only (square corners, 1.5px borders, filled fields with a bottom border, inside focus ring)."
+    "Appearance: ORCA only (square corners, 1.5px borders, filled fields with a bottom border, inside focus ring)."
    ],
    "avoid": [
     "Theme-specific CSS in your own code: if something needs it, the token is missing; report it.",
@@ -927,7 +927,7 @@
    "id": "radii",
    "name": "Corner radii",
    "category": "foundations",
-   "summary": "Tangerine is square; only round marks and bar ends are rounded.",
+   "summary": "ORCA is square; only round marks and bar ends are rounded.",
    "why": "One consistent shape language is part of the system's recognisable look (Aesthetic–usability effect); rounding reserved for round marks (radios, dots, avatars) keeps those marks distinct from boxes (checkboxes).",
    "when": [
     "`--orca-radius-none` for every box: buttons, fields, cards, menus, dialogs, badges, tags.",
@@ -1292,7 +1292,7 @@
    "name": "Heading (h1–h6)",
    "category": "text",
    "summary": "Document headings from h1 to h6, plus a display style for marketing pages.",
-   "why": "A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: chunking; Practical UI W08). Tangerine's thin h2 is the system's typographic signature.",
+   "why": "A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: chunking; Practical UI W08). ORCA's thin h2 is the system's typographic signature.",
    "when": [
     "Structuring long content: docs, settings pages, reports.",
     "Marketing pages: `.orca-display` for the one hero line."
@@ -17445,7 +17445,7 @@
    "id": "settings-panel",
    "name": "Settings panel",
    "category": "page-frame",
-   "summary": "Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.",
+   "summary": "Display preferences in groups: theme and density, with a live result. ORCA has a single appearance and brand colours set by the project.",
    "why": "People adapt the interface to their eyes and work (Tesler's law); grouping preferences and applying them at once confirms each choice (Doherty threshold).",
    "when": [
     "A drawer or popover opened by the settings toggle; an account preferences page."

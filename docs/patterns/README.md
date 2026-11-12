@@ -18,7 +18,7 @@ The parts every page sits in: headers, top bar, sidebar, footer, page head, mess
 - `messages-region` **Messages region**: The place under the page head where results of the last action appear, announced politely.
 - `drawer` **Drawer**: A panel that slides over the page from one edge, built on the native dialog.
 - `top-actions-header` **Top actions header**: A thin row above a detail or form page: back link on one side, the page's actions on the other.
-- `settings-panel` **Settings panel**: Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.
+- `settings-panel` **Settings panel**: Display preferences in groups: theme and density, with a live result. ORCA has a single appearance and brand colours set by the project.
 - `filter-panel` **Filter panel**: Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.
 - `filter-drawer` **Filter drawer**: Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.
 - `page-landmarks` **Page landmarks**: The regions every page has: skip navigation, the main landmark and the place dialogs open in.

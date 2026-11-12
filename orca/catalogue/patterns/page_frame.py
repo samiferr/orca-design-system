@@ -167,7 +167,7 @@ add(Pattern(
 
 add(Pattern(
     "settings-panel", "Settings panel", C,
-    "Display preferences in groups: theme and density, with a live result. ORCA has one appearance (Tangerine) and brand colours set by the project.",
+    "Display preferences in groups: theme and density, with a live result. ORCA has a single appearance and brand colours set by the project.",
     why="People adapt the interface to their eyes and work (Tesler's law); grouping preferences and applying them at once confirms each choice (Doherty threshold).",
     when=["A drawer or popover opened by the settings toggle; an account preferences page."],
     how=["`<div class=\"orca-settings-panel\">` of `<fieldset class=\"orca-settings-panel__group\">`: the theme toggle (Auto, Light, Dark, Paper), and switches for personal preferences such as reduced motion or compact tables.",

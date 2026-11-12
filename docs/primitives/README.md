@@ -14,11 +14,11 @@ Tokens every other element is built from: colour, type, space, shape, elevation,
 - `semantic-colors` **Semantic colour tokens**: Colours named by their job: text, grounds, lines, interaction, status, actions, planning, data.
 - `brand-color` **Brand colour and surfaces**: The one brand colour, the fills derived from it, and the page surfaces it sits on.
 - `accent-color` **Accent colour**: The single interactive colour: links, checked ticks, radios, switches, progress, selected days.
-- `themes` **Themes**: Light, dark and paper share every token name. ORCA has one appearance: Tangerine.
+- `themes` **Themes**: Light, dark and paper share every token name. ORCA has one appearance, named ORCA.
 - `typography` **Fonts and type styles**: Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type scale.
 - `spacing` **Spacing scale**: Eleven spacing steps on the 8px unit, named by their pixel value.
 - `borders` **Borders**: Three line weights: 1px hairline, 1.5px outline, 3px emphasis bar.
-- `radii` **Corner radii**: Tangerine is square; only round marks and bar ends are rounded.
+- `radii` **Corner radii**: ORCA is square; only round marks and bar ends are rounded.
 - `shadows` **Shadows and elevation**: Three shadows (card, elevated, dragged) and elevation utilities. Only floating things cast a shadow.
 - `layers` **Layers (z-index)**: A fixed stacking order from page content to the skip link.
 - `control-heights` **Control heights**: Five heights shared by buttons, fields, selects and toggles: sm, dense, md, lg, xl.

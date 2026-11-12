@@ -261,7 +261,7 @@ def as_json() -> dict:
 
     return {
         "system": "ORCA",
-        "appearance": "tangerine",
+        "appearance": "orca",
         "themes": ["light", "dark", "paper"],
         "levels": [asdict(level) for level in LEVEL_DEFS],
         "released_levels": list(RELEASED_LEVELS),

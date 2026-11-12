@@ -9,7 +9,7 @@ add(Element(
     "heading", "Heading (h1–h6)", C,
     "Document headings from h1 to h6, plus a display style for marketing pages.",
     why="A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: "
-        "chunking; Practical UI W08). Tangerine's thin h2 is the system's typographic signature.",
+        "chunking; Practical UI W08). ORCA's thin h2 is the system's typographic signature.",
     when=["Structuring long content: docs, settings pages, reports.",
           "Marketing pages: `.orca-display` for the one hero line."],
     avoid=["Choosing a heading level for its size: keep levels in order and restyle with a class if needed.",
