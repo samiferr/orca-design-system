@@ -1,5 +1,5 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
-{% block lead %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA has five levels. Each level is a group of the level before it, and only of that level. Each release completes one level.</p>{% endblock %}
+{% block lead %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA has five levels. Each is built only from the level below it, and each release completes one level.</p>{% endblock %}
 {% block article %}
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">The five levels</h2>
@@ -13,12 +13,12 @@
     </li>
     {% endwith %}{% endfor %}
   </ol>
-  <p class="orca-p">Each component, pattern and template lists what it is built from: elements of the level directly below, or of its own level when it nests one. A level is never skipped, and a part is listed once: when a listed element already contains it, it is not listed again. The test suite enforces both.</p>
+  <p class="orca-p">Each component, pattern and template lists what it is built from. That means elements from the level directly below, or from its own level when it nests one. No level is skipped, and a part is listed once: if a listed element already contains it, it is not listed again. The tests enforce both rules.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Coverage</h2>
-  <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components, {{ stats.patterns }} patterns and {{ stats.templates }} templates cover all {{ stats.guide_items }} primitive, component, pattern and template items of the ORCA guide, including the planning items the guide lists as not built yet. Several guide items share one element where they are variants of the same thing. The test suite fails if any item loses its element.</p>
+  <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components, {{ stats.patterns }} patterns and {{ stats.templates }} templates cover all {{ stats.guide_items }} primitive, component, pattern and template items of the ORCA guide, including the planning items the guide lists as not built yet. Items that are variants of one thing share an element. The tests fail if any item loses its element.</p>
   {% for title, sections in coverage %}
   <section class="orca-table-card" aria-label="{{ title }}">
   <div class="orca-panel-header"><div class="orca-panel-header__text"><h3 class="orca-panel-title">{{ title }}</h3></div></div>
@@ -28,6 +28,7 @@
   </table></div>
   </section>
   {% endfor %}
-  <p class="orca-p">Additions beyond the guide: a <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'skeleton' %}">skeleton</a> loading primitive, and template tags that render components from Django objects: <code class="orca-code">orca_field</code>, <code class="orca-code">orca_form_errors</code>, <code class="orca-code">orca_messages</code>, <code class="orca-code">orca_pagination</code>, <code class="orca-code">orca_mini_calendar</code>, <code class="orca-code">orca_sparkline</code> and <code class="orca-code">orca_donut</code>; and for patterns, Chart.js charts and server-rendered calendars: <code class="orca-code">orca_chart</code>, <code class="orca-code">orca_month_calendar</code>, <code class="orca-code">orca_week_view</code>, <code class="orca-code">orca_agenda</code>, <code class="orca-code">orca_year_view</code>, plus an inline-styled email frame (<code class="orca-code">orca/email/base.html</code>) and realistic sample data in <code class="orca-code">orca.samples</code>.</p>
+  <p class="orca-p">ORCA adds a few things the guide does not list: a <a class="orca-link orca-link--plain" href="{% url 'orca:element' 'skeleton' %}">skeleton</a> loading primitive, realistic sample data in <code class="orca-code">orca.samples</code>, and template tags that render components from Django objects: <code class="orca-code">orca_field</code>, <code class="orca-code">orca_form_errors</code>, <code class="orca-code">orca_messages</code>, <code class="orca-code">orca_pagination</code>, <code class="orca-code">orca_mini_calendar</code>, <code class="orca-code">orca_sparkline</code> and <code class="orca-code">orca_donut</code>.</p>
+  <p class="orca-p">For patterns, there are Chart.js charts and server-rendered calendars: <code class="orca-code">orca_chart</code>, <code class="orca-code">orca_month_calendar</code>, <code class="orca-code">orca_week_view</code>, <code class="orca-code">orca_agenda</code>, <code class="orca-code">orca_year_view</code>. Emails get an inline-styled frame (<code class="orca-code">orca/email/base.html</code>).</p>
 </section>
 {% endblock %}

@@ -17,8 +17,8 @@
   <h2 class="orca-section-title">How ORCA treats your values</h2>
   <ul>
     <li><strong>Accepted liberally.</strong> <code class="orca-code">"0F95A1"</code>, <code class="orca-code">"#06c"</code> and <code class="orca-code">"rgb(15, 149, 161)"</code> all work and are normalised to lowercase hex.</li>
-    <li><strong>Adjusted for readability.</strong> Brand fills that carry text are darkened (or lightened) until <code class="orca-code">--orca-brand-on</code> reads at 4.5:1. The accent is darkened to 4.5:1 on the light and paper grounds; its dark-theme value is derived and lightened to 4.5:1 on the dark grounds.</li>
-    <li><strong>Reported.</strong> Every adjustment appears as the system-check warning <code class="orca-code">orca.W001</code> with the value used, so you can set it explicitly and silence it.</li>
+    <li><strong>Adjusted for readability.</strong> Brand fills that carry text are darkened or lightened until <code class="orca-code">--orca-brand-on</code> reaches 4.5:1. The accent is darkened to 4.5:1 on the light and paper grounds. For the dark theme, ORCA derives a lighter accent that reaches 4.5:1 on the dark grounds.</li>
+    <li><strong>Reported.</strong> Every adjustment appears as the system-check warning <code class="orca-code">orca.W001</code> with the value used, so you can set that value yourself and silence the warning.</li>
     <li><strong>Strict about the rest.</strong> Unknown keys and unreadable values are errors (<code class="orca-code">orca.E002</code>), and <code class="orca-code">orca_lint</code> flags any stylesheet that redefines a non-brand <code class="orca-code">--orca-*</code> token.</li>
   </ul>
   <p class="orca-p">Current values on this site:</p>
@@ -45,7 +45,7 @@ ORCA = {"BRAND": {"font_sans": '"Inter", system-ui, sans-serif'}}</code></pre></
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Themes</h2>
-  <p class="orca-p">Light, dark and paper share every token name, so components are written once. ORCA has one appearance, also called ORCA: square corners, 1.5px borders, filled fields with a bottom border, and a 3px focus ring drawn inside controls.</p>
+  <p class="orca-p">Light, dark and paper share every token name, so each component is written once. ORCA has one appearance, also named ORCA: square corners, 1.5px borders, filled fields with a bottom border, and a 3px focus ring inside controls.</p>
   <fieldset class="orca-segmented" data-orca-theme-choice><legend class="orca-label">Try a theme on this page</legend>
     <label class="orca-segmented__item"><input type="radio" name="guide-theme" value="auto" checked>Auto</label>
     <label class="orca-segmented__item"><input type="radio" name="guide-theme" value="light">{% icon "sun" %}Light</label>
@@ -66,7 +66,7 @@ ORCA = {"BRAND": {"font_sans": '"Inter", system-ui, sans-serif'}}</code></pre></
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Density</h2>
-  <p class="orca-p">Density is separate from the theme: any theme can be comfortable or dense. Dense tightens the type scale (body 14px, detail 13px), control heights (32px instead of 37px), the top bar and the larger spacing steps, for data-heavy screens such as dashboards, admin tools and this documentation, which uses it.</p>
+  <p class="orca-p">Density is separate from the theme: any theme can be comfortable or dense. Dense mode tightens the type scale (body 14px, detail 13px), control heights (32px instead of 37px), the top bar and the larger spacing steps. Use it for data-heavy screens such as dashboards and admin tools. This documentation uses it.</p>
   <div class="orca-vstack orca-vstack--tight">
     <section class="orca-panel" data-density="comfortable" aria-labelledby="dn-c"><div class="orca-panel-header"><div class="orca-panel-header__text"><h3 class="orca-panel-title" id="dn-c">Comfortable</h3><p class="orca-panel-header__desc">The default.</p></div></div>
       <div class="orca-panel__body"><div class="orca-row"><button class="orca-button orca-button--primary" type="button">Save</button><input class="orca-input orca-input--w8" aria-label="Name" value="Gate 1"></div></div></section>

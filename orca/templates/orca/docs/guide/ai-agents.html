@@ -14,7 +14,7 @@
       <tr><td><code class="orca-code">python manage.py orca_lint</code></td><td>Checking the result before it is committed.</td></tr>
     </tbody>
   </table></div>
-  <p class="orca-p">No Django project is needed for the command line: it reads the catalogue directly from the installed package.</p>
+  <p class="orca-p">The command line needs no Django project. It reads the catalogue from the installed package.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
@@ -73,6 +73,6 @@ templates/images/list.html:18: icon-only button without aria-label.
 templates/images/list.html:22: unknown ORCA class 'orca-buton'. Run `python -m orca search` to find the right one.
 static/css/site.css:4: --orca-text is not a brand token; only brand tokens may be changed (settings.ORCA['BRAND']).
 4 problem(s) found.</code></pre></div>
-  <p class="orca-p">It exits with status 1 when it finds a problem, so it can gate continuous integration as well as an agent's loop.</p>
+  <p class="orca-p">It exits with status 1 when it finds a problem, so it can block a failing build as well as check an agent's work.</p>
 </section>
 {% endblock %}

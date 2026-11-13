@@ -93,10 +93,10 @@ def home(request):
 
 
 LEVEL_INTROS = {
-    "primitive": "The smallest building blocks and the base styles every other level uses. Each one cannot be broken down further without ceasing to be useful.",
-    "component": "Simple groups of primitives that work together as one unit and do one job. Each is reusable on its own and sits inside many patterns.",
-    "pattern": "Components combined into larger, recurring sections of an interface: page frames, data tables, forms, charts, calendars, schedulers and planning boards. Complex ones come from your data with one template tag.",
-    "template": "Whole-page Django templates you extend: layouts, generic CRUD and parent-child templates for class-based views, page-type skeletons, the structural layouts they are built with, and the named blocks (slots) you fill. Each one has a live preview with placeholder content.",
+    "primitive": "The smallest building blocks and the base styles every other level uses. Break one down further and it stops being useful.",
+    "component": "Small groups of primitives that work as one unit and do one job. Each can be reused on its own and appears inside many patterns.",
+    "pattern": "Components combined into larger sections that recur across an interface: page frames, data tables, forms, charts, calendars, schedulers and planning boards. The complex ones are built from your data with one template tag.",
+    "template": "Whole-page Django templates you extend: layouts, generic CRUD and parent-child templates for class-based views, page-type skeletons, the structural layouts they use, and the named blocks (slots) you fill. Each has a live preview with placeholder content.",
 }
 
 
