@@ -692,7 +692,7 @@ button.orca-event-card { width: 100%; border-top: 0; border-right: 0; border-bot
 @media (max-width: 619px) { .orca-resource-row { grid-template-columns: minmax(0, 1fr); } .orca-resource-row__slots { overflow-x: auto; } }
 
 /* ===================================================================== Documentation site */
-.orca-live-example { border: var(--orca-border-width) solid var(--orca-border); min-width: 0; }
+.orca-live-example { background: var(--orca-bg-panel); border: var(--orca-border-width) solid var(--orca-border); min-width: 0; }
 .orca-live-example > .orca-tabs__list { padding-inline: var(--orca-space-8); }
 .orca-live-example .orca-tabs__panel { padding: var(--orca-space-24) var(--orca-space-16); overflow-x: auto; }
 .orca-live-example .orca-tabs__panel--code { padding: 0; }

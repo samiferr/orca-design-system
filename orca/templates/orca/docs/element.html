@@ -4,15 +4,17 @@
 {% block blog_meta %}{{ block.super }}
 <div class="orca-page-head__meta"><code class="orca-code">id: {{ el.id }}</code><span class="orca-badge orca-badge--grey">{{ el.level }}</span><span class="orca-badge orca-badge--subtle orca-badge--info">Source: {{ el.source }}</span></div>{% endblock %}
 {% block page %}
-{% if el.about %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="about-h">
-  <h2 class="orca-section-title" id="about-h">General guidance</h2>
-  <p class="orca-p">{{ el.about.what }}</p>
-  <h3 class="orca-h5">Use cases</h3>
-  <ul>{% for i in el.about.uses %}<li>{{ i }}</li>{% endfor %}</ul>
-  <h3 class="orca-h5">When not to use it</h3>
-  <ul>{% for i in el.about.avoid %}<li>{{ i }}</li>{% endfor %}</ul>
-  <h3 class="orca-h5">Best practices</h3>
-  <ul>{% for i in el.about.practices %}<li>{{ i }}</li>{% endfor %}</ul>
+{% if el.about %}<section class="orca-panel" aria-labelledby="about-h">
+  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="about-h">General guidance</h2></div></div>
+  <div class="orca-panel__body orca-vstack orca-vstack--tight">
+    <p class="orca-p">{{ el.about.what }}</p>
+    <h3 class="orca-h5">Use cases</h3>
+    <ul>{% for i in el.about.uses %}<li>{{ i }}</li>{% endfor %}</ul>
+    <h3 class="orca-h5">When not to use it</h3>
+    <ul>{% for i in el.about.avoid %}<li>{{ i }}</li>{% endfor %}</ul>
+    <h3 class="orca-h5">Best practices</h3>
+    <ul>{% for i in el.about.practices %}<li>{{ i }}</li>{% endfor %}</ul>
+  </div>
 </section>{% endif %}
 {% for ex in examples %}
 <section class="orca-vstack orca-vstack--tight" aria-labelledby="ex-{{ forloop.counter }}-t">
