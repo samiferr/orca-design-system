@@ -31,7 +31,7 @@ python -m orca json                 # the whole catalogue</code></pre></div>
   <p class="orca-p">The export writes one HTML file per page with relative links, plus ORCA's static files, so the folder works on any static host or straight from disk.</p>
   <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="tooling-code-2">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="tooling-code-2" data-orca-highlight="bash">python demo/manage.py orca_site site/
 python -m http.server --directory site 8000</code></pre></div>
-  <p class="orca-p">The repository's GitHub Actions workflow (<code class="orca-code">.github/workflows/docs.yml</code>) runs the tests, exports the site and deploys it to GitHub Pages on every push to the main branch. Enable it once under the repository's Settings, Pages, Source: GitHub Actions.</p>
+  <p class="orca-p">On every push to the main branch, the GitHub Actions workflow (<code class="orca-code">.github/workflows/docs.yml</code>) runs the tests and deploys the site to GitHub Pages. Turn it on once under Settings, Pages, Source: GitHub Actions.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
@@ -41,7 +41,7 @@ python -m django test tests --settings=tests.settings  # the suite
 python demo/manage.py runserver                        # this site at /orca/</code></pre></div>
   <ul>
     <li>Tokens live in <code class="orca-code">orca/tokens.py</code>; elements in <code class="orca-code">orca/catalogue/</code>, one module per category.</li>
-    <li>The suite fails when a generated file is stale, when a guide item has no element, when an element lacks its when or how, when an example uses a class or token that does not exist, when contrast drops in any theme, or when a page of this site breaks.</li>
+    <li>The tests fail on a stale generated file, a guide item without an element, an element without a when or how, an example using a class or token that does not exist, low contrast in any theme, or a broken page.</li>
   </ul>
 </section>
 {% endblock %}

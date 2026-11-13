@@ -55,7 +55,7 @@ ORCA = {
   <main id="main" tabindex="-1">{% block content %}{% endblock %}</main>
 </body>
 </html>{% endverbatim %}</code></pre></div>
-  <p class="orca-p"><code class="orca-code">{% templatetag openblock %} orca_head {% templatetag closeblock %}</code> writes the token and primitive stylesheets, your brand values, the favicon, the theme restore and the optional script. <code class="orca-code">{% templatetag openblock %} orca_html_attrs {% templatetag closeblock %}</code> writes <code class="orca-code">lang</code> and, when you fix a theme, <code class="orca-code">data-theme</code>.</p>
+  <p class="orca-p"><code class="orca-code">{% templatetag openblock %} orca_head {% templatetag closeblock %}</code> adds the token and primitive stylesheets, your brand values, the favicon, the saved-theme restore and the optional script. <code class="orca-code">{% templatetag openblock %} orca_html_attrs {% templatetag closeblock %}</code> writes <code class="orca-code">lang</code> and, when you fix a theme, <code class="orca-code">data-theme</code>.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
@@ -78,6 +78,6 @@ python manage.py orca_lint templates/</code></pre></div>
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Content Security Policy</h2>
-  <p class="orca-p">ORCA writes one small inline <code class="orca-code">&lt;style&gt;</code> (brand values) and, with the automatic theme, one inline <code class="orca-code">&lt;script&gt;</code> that restores the reader's theme before the page paints. If your request carries a <code class="orca-code">csp_nonce</code> attribute (as set by django-csp), ORCA adds it to both. To avoid the script, fix a theme or call <code class="orca-code">{% templatetag openblock %} orca_head theme_restore=False {% templatetag closeblock %}</code>.</p>
+  <p class="orca-p">ORCA writes one inline <code class="orca-code">&lt;style&gt;</code> for your brand values and, with the automatic theme, one inline <code class="orca-code">&lt;script&gt;</code> that restores the reader's theme before the page paints. If the request has a <code class="orca-code">csp_nonce</code> (django-csp sets one), ORCA adds it to both. To drop the script, fix a theme or use <code class="orca-code">{% templatetag openblock %} orca_head theme_restore=False {% templatetag closeblock %}</code>.</p>
 </section>
 {% endblock %}

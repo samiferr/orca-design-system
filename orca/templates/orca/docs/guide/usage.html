@@ -66,7 +66,7 @@
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Layout helpers</h2>
-  <p class="orca-p">Primitives do not set outer margins. Space groups with the spacing tokens and the two utilities <code class="orca-code">.orca-stack</code> (a column with an 8px gap) and <code class="orca-code">.orca-row</code> (a wrapping row; <code class="orca-code">.orca-row--16</code> for 16px). For anything else use <code class="orca-code">gap: var(--orca-space-24)</code> and friends in your own CSS.</p>
+  <p class="orca-p">Primitives set no outer margins. Space them with <code class="orca-code">.orca-stack</code> (a column with an 8px gap) and <code class="orca-code">.orca-row</code> (a wrapping row; <code class="orca-code">.orca-row--16</code> for 16px), or with spacing tokens in your own CSS, such as <code class="orca-code">gap: var(--orca-space-24)</code>.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
@@ -97,6 +97,6 @@
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Your own CSS</h2>
-  <p class="orca-p">ORCA's rules live in cascade layers (<code class="orca-code">orca.tokens</code>, <code class="orca-code">orca.base</code>, <code class="orca-code">orca.primitives</code>, <code class="orca-code">orca.utilities</code>), so any unlayered rule of yours wins without <code class="orca-code">!important</code>. Use that for layout only. Read every colour, size, radius, shadow, layer and duration from a <code class="orca-code">--orca-*</code> token, and never redefine a token other than the brand ones.</p>
+  <p class="orca-p">ORCA's rules live in cascade layers (<code class="orca-code">orca.tokens</code>, <code class="orca-code">orca.base</code>, <code class="orca-code">orca.primitives</code>, <code class="orca-code">orca.utilities</code>), so any unlayered rule of yours wins without <code class="orca-code">!important</code>. Use that for layout only: take every colour, size, radius, shadow, layer and duration from a <code class="orca-code">--orca-*</code> token, and never redefine any token except the brand ones.</p>
 </section>
 {% endblock %}

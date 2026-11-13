@@ -1,5 +1,5 @@
 {% extends "orca/docs/guide/_base.html" %}{% load orca %}
-{% block lead %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA targets WCAG 2.1 AA. The commitments below hold in light, dark and paper, and the ones that can be measured are checked by the test suite.</p>{% endblock %}
+{% block lead %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA targets WCAG 2.1 AA. These commitments hold in light, dark and paper, and the tests check the ones that can be measured.</p>{% endblock %}
 {% block article %}
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Commitments</h2>
@@ -22,11 +22,11 @@
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Known exceptions</h2>
-  <p class="orca-p">Kept from Vanilla framework on purpose, and documented on the tokens they affect:</p>
+  <p class="orca-p">One exception, kept on purpose from the Vanilla framework and noted on the token it affects:</p>
   <ul>
-    <li><code class="orca-code">--orca-caution</code> as text is 3.0:1 in light and paper. Never set caution text on its own: pair it with the warning icon, at 16px or more.</li>
+    <li>Caution-coloured text (<code class="orca-code">--orca-caution</code>) has 3.0:1 contrast in light and paper. Never use it alone: add the warning icon and set the text at 16px or more.</li>
   </ul>
-  <p class="orca-p">Departures ORCA made from Vanilla for accessibility: the light and paper focus colour is darker (<code class="orca-code">#0f6dcc</code>, at least 3.9:1 on every ground instead of 2.3–3.0:1), brand fills are derived to reach 4.5:1, and the switch animates in 0.333s instead of 0.5s.</p>
+  <p class="orca-p">ORCA also departs from Vanilla in three places: a darker focus colour in light and paper (<code class="orca-code">#0f6dcc</code>, at least 3.9:1 instead of 2.3–3.0:1), brand fills adjusted to 4.5:1, and a switch that animates in 0.333s instead of 0.5s.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
@@ -34,7 +34,7 @@
   <ul>
     <li>Writing alt text that describes what matters in each image.</li>
     <li>Keeping the heading outline in order and one <code class="orca-code">&lt;h1&gt;</code> per page.</li>
-    <li>Moving focus sensibly after actions: to the error summary after a failed submit, back to the opener when a dialog closes.</li>
+    <li>Moving focus to the right place after an action: the error summary after a failed submit, the opener when a dialog closes.</li>
     <li>Announcing results that appear without a page load in a <code class="orca-code">role="status"</code> region.</li>
     <li>Testing with a keyboard and a screen reader, and with people who use them.</li>
   </ul>
