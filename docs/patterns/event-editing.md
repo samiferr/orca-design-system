@@ -1,14 +1,37 @@
 # Event editing
 
-Creating, viewing and answering events: full editor, popover, panel, quick add, reminders, attendees and RSVP.
+Creating, viewing and answering events: editor, popover, panel, quick add, reminders, attendees and RSVP.
 
 ## Event editor
 
 `id: event-editor` · level: pattern · source: ORCA
 
-The full form for an event: title, date and time (or all day), repeat, place, people, reminders, calendar and notes.
+The full event form: title, date and time (or all day), repeat, place, people, reminders, calendar and notes.
 
 Built from: `form-stack`, `datetime-picker`, `recurrence-selector`, `reminder-selector`, `multi-picker`, `conflict-warning`
+
+### General description
+
+A full form for creating or changing a calendar event, with title, date and time, repeat, place, people, reminders and notes.
+
+#### Use cases
+
+- Creating a new event with all details.
+- Changing an event's time, place or guests.
+- Setting repeats and reminders.
+
+#### When not to use it
+
+- Simple events can be created with a quick-add field.
+- Just viewing an event only needs a detail view.
+
+#### Best practices
+
+- Put title and time first, and optional fields after.
+- Use sensible defaults for time, length and reminder.
+- Warn about conflicts without blocking save.
+- Keep Delete apart from Save.
+- Label every field.
 
 ### When to use
 
@@ -17,7 +40,7 @@ Built from: `form-stack`, `datetime-picker`, `recurrence-selector`, `reminder-se
 ### How to use
 
 - A form stack: title (autofocus), date-time range with an 'All day' switch, recurrence selector, location, attendees (multi picker), reminders, calendar (select with colour), notes.
-- Warn about conflicts inline (conflict warning) without blocking save; keep 'Save' and 'Cancel' at the bottom and 'Delete' apart from them.
+- Warn about conflicts inline (conflict warning) without blocking save. Put 'Save' and 'Cancel' at the bottom, with 'Delete' apart from them.
 
 #### Example: New event
 
@@ -106,9 +129,31 @@ class EventForm(forms.ModelForm):
 
 `id: event-popover` · level: pattern · source: ORCA
 
-A small card that opens over the calendar when an event is clicked: title, time, place, people and quick actions.
+A small card over the calendar when an event is clicked, showing title, time, place, people and quick actions.
 
 Built from: `event-chip`, `panel-header`, `button-group`
+
+### General description
+
+A small card that opens over the calendar when someone clicks an event. It shows the main details without leaving the calendar.
+
+#### Use cases
+
+- Checking an event's time and place.
+- Quick actions such as edit or delete.
+- Calendar month, week and day views.
+
+#### When not to use it
+
+- Phones have little room; use a full detail page or bottom drawer.
+- Long descriptions fit better in a detail panel.
+
+#### Best practices
+
+- Keep it short: title, time, place and people.
+- Close it with Escape or a click outside.
+- Offer a link to open the full event.
+- Make sure keyboard users can open and close it.
 
 ### When to use
 
@@ -121,7 +166,7 @@ Built from: `event-chip`, `panel-header`, `button-group`
 ### How to use
 
 - A native popover: `<div class="orca-event-popover" id="…" popover>` opened by `<button popovertarget="…">` on the event; `--orca-event` colours its edge.
-- Head with title and close button; body lines with icons (time, place, calendar); foot with Edit, Delete and 'Open'. Escape and outside click close it (built into popover).
+- Head with title and close button; body lines with icons (time, place, calendar); foot with Edit, Delete and 'Open'. Escape and outside click close it (built in).
 
 #### Example: Popover
 
@@ -171,9 +216,31 @@ Built from: `event-chip`, `panel-header`, `button-group`
 
 `id: event-detail-panel` · level: pattern · source: ORCA
 
-All of an event's details in a panel or page: title, status, time, place, description, attendees and actions.
+An event's full details in a panel or page: title, status, time, place, description, attendees and actions.
 
 Built from: `key-value-list`, `attendee-list`, `invitation-response-bar`, `record-actions`
+
+### General description
+
+A panel or page that shows everything about one event: title, time, place, notes, guests and actions. It has room for the full detail.
+
+#### Use cases
+
+- Opening an event on a phone.
+- Showing an event from a notification or list.
+- A side panel next to a calendar.
+
+#### When not to use it
+
+- A quick peek at details suits a popover.
+- Editing needs the event editor.
+
+#### Best practices
+
+- Put time and place near the top.
+- Show guests and their answers.
+- Offer actions such as edit and duplicate.
+- Show the response bar if the person is invited.
 
 ### When to use
 
@@ -228,9 +295,31 @@ Built from: `key-value-list`, `attendee-list`, `invitation-response-bar`, `recor
 
 `id: quick-add-event` · level: pattern · source: ORCA
 
-One text field that creates an event from a sentence ('Audit Friday 10:00 at North building'), showing what it understood before saving.
+One text field that creates an event from a sentence ('Audit Friday 10:00 at North building') and shows what it understood before saving.
 
 Built from: `input-group`
+
+### General description
+
+A single text box where someone types a sentence like 'Lunch Friday 12:00' and the event is created. It shows what it understood before saving.
+
+#### Use cases
+
+- Adding simple events fast.
+- The top of a calendar or task list.
+- Command palettes.
+
+#### When not to use it
+
+- Events with many details need the full event editor.
+- Choosing from fixed options is clearer in a form.
+
+#### Best practices
+
+- Show the parsed date, time and place before saving.
+- Let people correct a wrong reading.
+- Link to the full editor for more options.
+- Give an example in the field.
 
 ### When to use
 
@@ -273,6 +362,28 @@ Built from: `input-group`
 The list of upcoming reminders with Snooze and Done, and the defaults for new events.
 
 Built from: `reminder-item`, `reminder-selector`
+
+### General description
+
+A list of upcoming reminders where people can snooze or mark them done, plus a place to set the defaults for new events.
+
+#### Use cases
+
+- A reminders page or panel.
+- Notification settings for events.
+- Acting on reminders when they fire.
+
+#### When not to use it
+
+- Reminders that need a message to the person belong in notifications.
+- Tasks with due dates belong in a task list.
+
+#### Best practices
+
+- Make Snooze and Done one tap each.
+- Group reminders by when they are due.
+- Offer common snooze times.
+- Show what each reminder is for and when.
 
 ### When to use
 
@@ -326,9 +437,31 @@ Built from: `reminder-item`, `reminder-selector`
 
 `id: attendee-list` · level: pattern · source: ORCA
 
-People invited to an event with their answers, a summary count and controls to add or remove.
+Invitees with their answers, a summary count and controls to add or remove people.
 
 Built from: `list-item`, `multi-picker`, `remove-row-button`
+
+### General description
+
+A list of people invited to an event, with their answers and a count of how many are coming. Organisers use it to see who will attend.
+
+#### Use cases
+
+- Event details and editors.
+- Checking who has replied.
+- Adding or removing guests.
+
+#### When not to use it
+
+- Large groups are better summarised as counts.
+- A single contact list is a general people list.
+
+#### Best practices
+
+- Put the summary count first.
+- Show each answer as an icon and a word, not only colour.
+- Mark the organiser.
+- Let organisers add and remove guests easily.
 
 ### When to use
 
@@ -393,9 +526,31 @@ Built from: `list-item`, `multi-picker`, `remove-row-button`
 
 `id: invitation-response-bar` · level: pattern · source: ORCA
 
-A bar on an invitation asking 'Going?' with Yes, Maybe and No, showing the current answer.
+A bar on an invitation asking 'Going?' with Yes, Maybe and No buttons, showing the current answer.
 
 Built from: `button-group`, `choice-group`
+
+### General description
+
+A bar on an invitation with buttons for answering, usually Yes, Maybe and No. It shows the person's current answer and lets them change it.
+
+#### Use cases
+
+- Answering an event invitation.
+- Event detail views and popovers.
+- Pages opened from an invitation email.
+
+#### When not to use it
+
+- Events with no invitees need no response.
+- Detailed replies need a form with a note.
+
+#### Best practices
+
+- Answer in one click.
+- Show the current answer clearly.
+- Let people change their answer later.
+- Offer a note only after answering.
 
 ### When to use
 

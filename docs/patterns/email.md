@@ -1,14 +1,36 @@
 # Email
 
-The frame every transactional email is written in: brand bar, title, text, one action, footer.
+The layout for every transactional email: brand bar, title, text, one action, footer.
 
 ## Email frame
 
 `id: email-frame` · level: pattern · source: ORCA
 
-A table-based, inline-styled email layout in the brand's colours with one action and a copyable link.
+A table-based email layout with inline styles in the brand's colours, one action and a copyable link.
 
 Built from: `logo-link`, `call-to-action`, `fine-print`
+
+### General description
+
+The standard layout wrapped around an automatic email, with a header, message, one main button and a footer.
+
+#### Use cases
+
+- Welcome and sign-up emails.
+- Password reset messages.
+- Alerts and report notifications.
+
+#### When not to use it
+
+- Marketing newsletters with many sections: use an email tool.
+- Long documents: link to a web page.
+
+#### Best practices
+
+- Keep the width around 600 pixels or less.
+- Offer one clear action and print its link too.
+- Always include a plain-text version.
+- Say the event in the subject line.
 
 ### When to use
 

@@ -10,6 +10,28 @@ Seven weekday toggles with presets for weekdays, every day and clear.
 
 Built from: `weekday-toggle`, `tag`
 
+### General description
+
+A weekday selector lets people pick one or more days of the week, usually with seven toggles and shortcuts for common sets.
+
+#### Use cases
+
+- Choosing which days an event repeats.
+- Setting opening days or shift patterns.
+- Picking days for a schedule or report.
+
+#### When not to use it
+
+- Choosing a single date; use a date picker.
+- Picking one day only; use a select or radio group.
+
+#### Best practices
+
+- Offer presets such as weekdays and every day.
+- Start the week on the local first day.
+- Give each day a full accessible name.
+- Show clearly which days are selected.
+
 ### When to use
 
 - Repeat on days, opening days, shift patterns.
@@ -85,6 +107,28 @@ A repeat select with common rules and a Custom option that reveals interval, day
 
 Built from: `recurrence-select`, `weekday-toggle`, `number-input`, `radio`
 
+### General description
+
+A recurrence selector lets people set how an event repeats, with common choices like daily or weekly and a custom option for complex rules.
+
+#### Use cases
+
+- Repeating calendar events and tasks.
+- Scheduling recurring reports or runs.
+- Setting repeating billing or reminders.
+
+#### When not to use it
+
+- One-off events; do not show repeat options.
+- Showing every custom field up front; reveal them only when needed.
+
+#### Best practices
+
+- Offer the most common rules first.
+- Name options with the real day, such as 'Weekly on Thursday'.
+- Summarize the custom rule in words.
+- Let people choose when the repeat ends.
+
 ### When to use
 
 - Repeating events, runs and reports.
@@ -92,7 +136,7 @@ Built from: `recurrence-select`, `weekday-toggle`, `number-input`, `radio`
 ### How to use
 
 - `<select class="orca-select" data-orca-reveal="custom-id" data-orca-reveal-value="custom">` with recurrence options; a hidden `.orca-recurrence__custom` panel with: every N (number) + unit (select), weekday toggles, and ends (never, on date, after N times) as a radio group.
-- Write options with the actual day from the start date ('Weekly on Thursday'); summarise the custom rule in words under it.
+- Name options with the real day from the start date ('Weekly on Thursday') and summarise the custom rule in words below.
 
 #### Example: Recurrence
 
@@ -181,6 +225,28 @@ Built from: `recurrence-select`, `weekday-toggle`, `number-input`, `radio`
 One or more reminder offsets, each removable, with an Add reminder button.
 
 Built from: `reminder-select`, `add-row-button`, `remove-row-button`
+
+### General description
+
+A reminder selector lets people choose how long before an event or deadline they are notified, and add several reminders.
+
+#### Use cases
+
+- Setting alerts before events.
+- Adding notifications to tasks and deadlines.
+- Offering more than one reminder for one item.
+
+#### When not to use it
+
+- Requiring a reminder; make it optional.
+- Free-typed times when standard offsets suffice.
+
+#### Best practices
+
+- Offer standard time offsets.
+- Let people add and remove reminders.
+- Default to the last choice.
+- Cap the number of reminders.
 
 ### When to use
 
@@ -279,6 +345,28 @@ A segmented choice of Today, This week, This month and Custom, revealing a date 
 
 Built from: `date-range-picker`, `date-label`
 
+### General description
+
+A period selector lets people choose a time range for data, such as today, this week or a custom range.
+
+#### Use cases
+
+- Filtering reports and dashboards by time.
+- Switching between common time windows.
+- Choosing a custom date range.
+
+#### When not to use it
+
+- Picking one exact date; use a date picker.
+- Long lists of periods; use a select.
+
+#### Best practices
+
+- Show the common periods as one visible set.
+- Print the actual dates that result.
+- Make the selected period obvious.
+- Keep the custom option for exceptions.
+
 ### When to use
 
 - Report and dashboard period filters.
@@ -286,7 +374,7 @@ Built from: `date-range-picker`, `date-label`
 ### How to use
 
 - Server-rendered links `<nav class="orca-segmented" aria-label="Period">` with `aria-current="page"`, or a radio fieldset.
-- Custom shows a date-range picker; always print the resolved dates under the control ('2–8 November 2026').
+- Custom shows a date-range picker; always print the resolved dates below ('2–8 November 2026').
 
 #### Example: Period
 
@@ -318,13 +406,35 @@ A segmented choice of how data is grouped: hour, day, week or month.
 
 Built from: `radio`
 
+### General description
+
+A granularity selector lets people choose how time-based data is grouped, such as by hour, day, week or month.
+
+#### Use cases
+
+- Changing the time grouping of a chart.
+- Summarizing a report by week or month.
+- Zooming between detail and overview.
+
+#### When not to use it
+
+- Data with no time dimension; do not offer it.
+- Offering groupings that would give unreadable results.
+
+#### Best practices
+
+- Place it next to the chart it changes.
+- Disable choices that make no sense for the period.
+- Explain why a choice is unavailable.
+- Choose a sensible default.
+
 ### When to use
 
 - Charts and reports with time on one axis.
 
 ### How to use
 
-- `<fieldset class="orca-segmented orca-segmented--dense">` with a hidden legend and radios (Hour, Day, Week, Month); disable options that would give too many or too few points and say why in a tooltip or help text.
+- `<fieldset class="orca-segmented orca-segmented--dense">` with a hidden legend and radios (Hour, Day, Week, Month); disable options that give too many or too few points and say why in a tooltip or help text.
 - Keep it next to the chart it changes.
 
 #### Example: Granularity
@@ -354,6 +464,28 @@ Built from: `radio`
 Day, Week, Month and Agenda views as a segmented control.
 
 Built from: `button`
+
+### General description
+
+A calendar view switcher lets people change how a calendar displays time, such as day, week, month or agenda.
+
+#### Use cases
+
+- Switching between detailed and overview views of a calendar.
+- Viewing a list of upcoming events.
+- Adapting to different screen sizes.
+
+#### When not to use it
+
+- Switching between unrelated pages; use tabs or navigation.
+- Offering unusual views people do not expect.
+
+#### Best practices
+
+- Keep the selected date when switching views.
+- Use the standard view names.
+- Mark the current view clearly.
+- Use the agenda view by default on phones.
 
 ### When to use
 
@@ -391,6 +523,28 @@ A row of one-tap choices (Today, Weekdays, This week, Next 7 days) that fill a m
 
 Built from: `tag`
 
+### General description
+
+Preset buttons are a row of one-tap shortcuts that fill in a more detailed control with common values.
+
+#### Use cases
+
+- Choosing common date ranges.
+- Choosing common sets of days.
+- Filling in typical durations.
+
+#### When not to use it
+
+- Replacing a detailed control entirely; keep it for exceptions.
+- Long lists of presets; use a select.
+
+#### Best practices
+
+- Offer only a few presets.
+- Name them by outcome.
+- Show which preset matches the current value.
+- Keep the detailed control available.
+
 ### When to use
 
 - Next to date ranges, weekday toggles and durations.
@@ -426,6 +580,28 @@ Built from: `tag`
 Previous, Today and Next buttons with the visible period's label.
 
 Built from: `icon-button`, `button`, `planning-icons`
+
+### General description
+
+Calendar navigation is a group of controls for moving to the previous or next period or jumping back to today, with a label for the period shown.
+
+#### Use cases
+
+- Moving through weeks or months in a calendar.
+- Stepping through report periods.
+- Returning to today quickly.
+
+#### When not to use it
+
+- Jumping far in time; add a date picker.
+- Leaving out the visible period label.
+
+#### Best practices
+
+- Show the current period label.
+- Name arrows by period, such as 'Previous week'.
+- Disable Today when it is already visible.
+- Announce label changes politely to screen readers.
 
 ### When to use
 

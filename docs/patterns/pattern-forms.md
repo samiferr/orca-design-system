@@ -1,6 +1,6 @@
 # Forms
 
-Whole form sections and specialised editors: sections, stacks, sign-in, schedules, zones, properties and rich text.
+Form sections, stacks and sign-in, plus editors for schedules, zones, properties and rich text.
 
 ## Form section
 
@@ -9,6 +9,29 @@ Whole form sections and specialised editors: sections, stacks, sign-in, schedule
 A titled group of related fields with a short explanation beside them.
 
 Built from: `form-field`, `section-heading`
+
+### General description
+
+A group of related fields under a heading, with a short note about what the group is for.
+
+#### Use cases
+
+- Splitting a long settings page into topics.
+- Grouping billing, contact and account details separately.
+- Making a long form feel shorter.
+
+#### When not to use it
+
+- For a short form with a handful of fields, headings only add clutter.
+- For steps that must happen in order, use a multi-step form.
+
+#### Best practices
+
+- Give each section a clear, descriptive heading.
+- Group only fields that belong together.
+- Add a one-sentence description when the purpose is unclear.
+- Keep the order logical, with the most important sections first.
+- Use proper heading levels so screen readers can navigate.
 
 ### When to use
 
@@ -61,6 +84,29 @@ Built from: `form-field`, `section-heading`
 Fields in one column (the default), or two columns for short, closely related fields.
 
 Built from: `form-field`, `form-actions`
+
+### General description
+
+A layout that arranges form fields in one column, or in two columns when fields are short and closely related.
+
+#### Use cases
+
+- Laying out almost any form in one clear column.
+- Placing start and end values side by side.
+- Fitting many short fields into a compact admin form.
+
+#### When not to use it
+
+- Do not use many columns for long forms; people skip fields and lose their place.
+- For unrelated fields, keep one column.
+
+#### Best practices
+
+- Prefer one column for a single reading path.
+- Use two columns only for short, related pairs.
+- Keep consistent spacing between fields.
+- Limit the line width so inputs are not stretched too wide.
+- Fall back to one column on phones.
 
 ### When to use
 
@@ -115,9 +161,32 @@ Built from: `form-field`, `form-actions`
 
 `id: schedule-editor` · level: pattern · source: Tangerine
 
-A weekly schedule made of rows (day, start, end), with presets, add and remove, and overlap checks.
+A weekly schedule of rows (day, start, end) with presets, add and remove, and overlap checks.
 
 Built from: `add-row-button`, `overlap-warning`, `preset-buttons`
+
+### General description
+
+A form control for setting weekly times, built from rows of day, start and end time that can be added or removed.
+
+#### Use cases
+
+- Setting opening hours for a shop or service.
+- Defining when a recording or alert is active.
+- Choosing quiet hours for notifications.
+
+#### When not to use it
+
+- For a single date and time, use a date and time picker.
+- For a repeating rule like every second Tuesday, use a recurrence form.
+
+#### Best practices
+
+- Offer presets such as business hours for common cases.
+- Let people add and remove rows easily.
+- Warn when rows overlap as soon as they are entered.
+- Show a time format people recognise.
+- Make each row's remove button describe which row it removes.
 
 ### When to use
 
@@ -125,7 +194,7 @@ Built from: `add-row-button`, `overlap-warning`, `preset-buttons`
 
 ### How to use
 
-- A form section containing preset buttons, the schedule rows (`<div class="orca-schedule" id=…>`), an add-row button with its `<template>`, and overlap warnings inside invalid rows.
+- A form section with preset buttons, the schedule rows (`<div class="orca-schedule" id=…>`), an add-row button with its `<template>`, and overlap warnings in invalid rows.
 - Django: a formset; the template uses `__prefix__` and `data-orca-total` points at TOTAL_FORMS.
 
 #### Example: Capture schedule
@@ -235,9 +304,32 @@ def edit_hourss(request, pk):
 
 `id: zone-editor` · level: pattern · source: Tangerine
 
-Draw a counting zone on the video image by clicking its corners, with a list of zones beside it.
+Draw a counting zone by clicking its corners on the video image, with the zone list beside it.
 
 Built from: `zone-row`, `captioned-media`
+
+### General description
+
+A tool for drawing shapes or lines over an image or map by clicking points, next to a list of the shapes drawn.
+
+#### Use cases
+
+- Marking areas of interest on a camera image.
+- Drawing a delivery or coverage area.
+- Defining regions to include or exclude on a floor plan.
+
+#### When not to use it
+
+- For choosing from fixed areas, use a list or select instead of drawing.
+- For precise measurements, offer typed coordinates instead of drawing only.
+
+#### Best practices
+
+- Offer undo and clear so mistakes cost little.
+- Show a status line saying what to do next.
+- Provide typed coordinate fields as an alternative to drawing.
+- Show a label and colour for each shape.
+- Store the shapes as simple data the server can check.
 
 ### When to use
 
@@ -246,7 +338,7 @@ Built from: `zone-row`, `captioned-media`
 ### How to use
 
 - `<div class="orca-zone-editor" data-orca-zone-editor>` with `.orca-zone-editor__stage` (the snapshot image + an empty `<svg viewBox="0 0 100 100" preserveAspectRatio="none">`), a toolbar (`data-orca-zone-action="undo|clear|close"`), a status line (`data-orca-zone-status`, polite) and a hidden input receiving the points as JSON percentages.
-- Beside it: the zone rows. Offer a coordinates form as the keyboard alternative.
+- Beside it: the zone rows, plus a coordinates form as the keyboard alternative.
 
 ### Accessibility
 
@@ -323,9 +415,32 @@ class RegionForm(forms.Form):
 
 `id: login-card` · level: pattern · source: Tangerine
 
-The sign-in form: logo, title, email, password, remember me, the sign-in button and recovery link.
+The sign-in form: logo, title, email, password, remember me, sign-in button and recovery link.
 
 Built from: `logo-link`, `form-field`, `toggle-field`, `form-actions`, `form-alert`
+
+### General description
+
+The sign-in form: a small panel with logo, email, password, a remember option, a sign-in button and a link to recover access.
+
+#### Use cases
+
+- Signing people in to an account or application.
+- Starting a session in an admin area.
+- Requesting access to a private site.
+
+#### When not to use it
+
+- For one-click access to a public site, avoid forcing a login.
+- For sign-up, use a registration form with more fields.
+
+#### Best practices
+
+- Keep it short: only ask for what is needed to sign in.
+- Allow browsers and password managers to fill in the fields.
+- Use a general error message that does not say which field was wrong.
+- Offer a clear password reset link.
+- Let people show the password they typed.
 
 ### When to use
 
@@ -381,6 +496,29 @@ Built from: `logo-link`, `form-field`, `toggle-field`, `form-actions`, `form-ale
 A list of key and value rows with add and remove, for free-form metadata.
 
 Built from: `property-row`, `add-row-button`
+
+### General description
+
+A list of key and value rows where people add their own details. It suits free-form data without a fixed structure.
+
+#### Use cases
+
+- Adding custom fields or labels to a record.
+- Editing HTTP headers or settings pairs.
+- Storing extra metadata that varies between items.
+
+#### When not to use it
+
+- For known fields, use normal form fields; they are clearer and easier to validate.
+- For large structured data, use an import or a dedicated editor.
+
+#### Best practices
+
+- Provide clear Key and Value labels on every row.
+- Reject duplicate keys with an error on the repeated row.
+- Trim extra spaces without bothering the person.
+- Make Add and Remove buttons easy to find and name.
+- Keep focus on the new row after adding it.
 
 ### When to use
 
@@ -487,6 +625,29 @@ def edit_propertys(request, pk):
 A text area with a small formatting toolbar (bold, italic, lists, link) that saves HTML to a field.
 
 Built from: `form-field`, `formatting-toolbar`
+
+### General description
+
+A text area with a small toolbar for formatting, such as bold, italic, lists and links. It produces formatted text.
+
+#### Use cases
+
+- Writing notes, comments or descriptions that need simple formatting.
+- Composing messages with links and lists.
+- Editing short content like a product description.
+
+#### When not to use it
+
+- For plain notes, use a normal text area.
+- For long documents or code, use a dedicated editor.
+
+#### Best practices
+
+- Offer only the few formatting options people really need.
+- Label every toolbar button and show its pressed state.
+- Support common keyboard shortcuts such as Ctrl+B.
+- Clean and sanitize the saved HTML on the server.
+- Keep a plain text fallback when scripts do not run.
 
 ### When to use
 

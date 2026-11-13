@@ -1,6 +1,6 @@
 # Inputs
 
-Native form controls styled by ORCA. Native first: they work with keyboards, screen readers, autofill and phones for free.
+Native form controls, styled. They work with keyboards, screen readers, autofill and phones for free.
 
 ## Text input
 
@@ -8,24 +8,47 @@ Native form controls styled by ORCA. Native first: they work with keyboards, scr
 
 A single-line field: filled, square, with a 1.5px bottom border.
 
+### General description
+
+A single-line box where people type short text such as a name, email address or code.
+
+#### Use cases
+
+- Collecting names, email addresses and phone numbers.
+- Entering short codes, usernames or search terms.
+- Capturing numbers with units, such as a port or a postcode.
+
+#### When not to use it
+
+- Long answers: use a multi-line text area instead.
+- A small set of known options: use radio buttons or a select.
+
+#### Best practices
+
+- Give every field a visible label, not just placeholder text.
+- Set the right input type so phones show a suitable keyboard.
+- Turn on autofill hints for common details like name and email.
+- Size the box to the expected answer length.
+- Explain errors next to the field and say how to fix them.
+
 ### When to use
 
 - Short free text: names, addresses, numbers with units, codes.
 
 ### When not to use
 
-- Choosing from fewer than ~10 known options: use radios or a select (R11).
+- Fewer than ~10 known options: use radios or a select (R11).
 - Long text: use a textarea.
 
 ### How to use
 
 - `<input class="orca-input" id=… name=… type="text">` under an `orca-label`.
 - Set `type` (email, tel, url, number, password, search), `inputmode`, and `autocomplete` (name, email, one-time-code…).
-- Space fields 24px apart and keep each label 8px above its own field, so a label never looks like the caption of the field before it (R10).
+- Space fields 24px apart and put each label 8px above its field, so it never looks like the previous field's caption (R10).
 - Match width to the answer with `--w4`, `--w8`, `--w12`, `--w20`, `--w30` (R06); default is full width.
-- Sizes: `--sm`, `--dense`, `--lg` (dense input), all reaching 44px on touch.
+- Sizes: `--sm`, `--dense`, `--lg`; all reach 44px on touch.
 - States: hover fill, inside focus ring, `aria-invalid="true"` (red tint + bottom border), `disabled`, `readonly` (dashed, no fill).
-- Accept liberal input and normalise it on the server: trim spaces, accept any case, strip separators (Postel's law).
+- Accept loose input and clean it on the server: trim spaces, ignore case, strip separators (Postel's law).
 
 ### Accessibility
 
@@ -79,14 +102,36 @@ A single-line field: filled, square, with a 1.5px bottom border.
 
 A multi-line field that grows vertically.
 
+### General description
+
+A multi-line box for longer free text such as notes, messages or descriptions. It grows or scrolls as people type.
+
+#### Use cases
+
+- Comments, feedback and support messages.
+- Descriptions and notes on a record.
+- Pasting in longer text, such as an address list.
+
+#### When not to use it
+
+- Short one-line answers: use a text input.
+- Rich formatting needs: use a rich text editor.
+
+#### Best practices
+
+- Make the box tall enough to show that a longer answer is expected.
+- State any character limit and show a live count.
+- Keep a visible label above the box.
+- Let people resize it vertically when the layout allows.
+
 ### When to use
 
-- Notes, descriptions, messages: anything that may run past one line.
+- Notes, descriptions, messages: anything longer than one line.
 
 ### How to use
 
-- `<textarea class="orca-textarea" rows="4">`. Resizable vertically by default; `.orca-textarea--fixed` stops resizing where layout depends on it.
-- If there is a limit, say it in the help text and show the count (`maxlength` plus a live count, phase 2).
+- `<textarea class="orca-textarea" rows="4">`. Resizes vertically by default; `.orca-textarea--fixed` stops that where layout depends on it.
+- For a limit, say so in the help text and show a count (`maxlength` plus a live count, phase 2).
 
 #### Example: Textarea
 
@@ -113,15 +158,37 @@ A multi-line field that grows vertically.
 
 The browser's dropdown, styled with an ORCA chevron.
 
+### General description
+
+A dropdown menu that lets people pick one option from a list. It saves space when the list is fairly long.
+
+#### Use cases
+
+- Choosing a country, state or time zone.
+- Picking one value from a medium list where space is tight.
+- Sorting or filtering by a single category.
+
+#### When not to use it
+
+- Very few options: radio buttons show all choices without a click.
+- Long lists people know by name: use a search field with suggestions.
+
+#### Best practices
+
+- Keep options in a meaningful order, such as alphabetical or by frequency.
+- Start with a clear prompt like 'Choose an option' when no default fits.
+- Group long lists under headings.
+- Prefer the browser's own dropdown, especially on phones.
+
 ### When to use
 
-- Choosing one of 7–15 options where space is short; options people know by name (country, timezone).
+- One choice from 7–15 options when space is short, or options people know by name (country, timezone).
 
 ### When not to use
 
-- Fewer than about 7 options: radios show the choices without a click (R11).
+- Fewer than about 7 options: radios show them without a click (R11).
 - Long lists people type rather than scroll: autocomplete (R12, phase 2).
-- A pre-selected value that looks like an answer: start with an empty 'Choose…' option when no default is right.
+- A pre-selected value that looks like an answer: start with an empty 'Choose…' option unless a default is right.
 
 ### How to use
 
@@ -158,13 +225,35 @@ The browser's dropdown, styled with an ORCA chevron.
 
 A native `<select multiple>` showing several options at once.
 
+### General description
+
+A list that shows several options at once and lets people select one or more. It is a plain form control with a visible list.
+
+#### Use cases
+
+- Picking several items from a short list in a dense admin screen.
+- Assigning multiple tags or roles to a record.
+- Choosing items where seeing all options at once helps.
+
+#### When not to use it
+
+- Most public forms: a group of checkboxes is easier to understand.
+- Long lists: use a search field with multi-select suggestions.
+
+#### Best practices
+
+- Tell people how to select more than one item.
+- Show enough rows to see most options without scrolling.
+- Label the list clearly and keep options short.
+- Make sure it works with the keyboard alone.
+
 ### When to use
 
-- Selecting several items from a short-to-medium list in a dense admin form.
+- Picking several items from a short or medium list in a dense admin form.
 
 ### When not to use
 
-- Most end-user forms: checkboxes are easier (ctrl-click is not discoverable); use a checkbox group or multi-picker.
+- Most end-user forms: use a checkbox group or multi-picker, since ctrl-click is hard to discover.
 
 ### How to use
 
@@ -200,6 +289,28 @@ A native `<select multiple>` showing several options at once.
 
 A text field with a magnifier and a clear button.
 
+### General description
+
+A text field made for searching, usually with a magnifier icon and a button to clear what was typed.
+
+#### Use cases
+
+- Searching a whole site or app.
+- Filtering a long list or table.
+- Finding a person, product or document by name.
+
+#### When not to use it
+
+- Choosing from a short, fixed list: use a select or radio buttons.
+- Browsing by category: use navigation or filters.
+
+#### Best practices
+
+- Use the familiar magnifier icon.
+- Give the field an accessible name even when there is no visible label.
+- Let people clear the text in one tap.
+- Show results quickly and say clearly when nothing matches.
+
 ### When to use
 
 - Filtering a list or table; searching the app.
@@ -208,7 +319,7 @@ A text field with a magnifier and a clear button.
 
 - Wrap: `<div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" placeholder=" " aria-label=…><button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>{% icon "close" %}</button></div>`.
 - Keep `placeholder` non-empty (a space is fine): the clear button hides while the placeholder shows.
-- A single search field may use placeholder text as its visible hint if it also has an accessible label (R09 exception).
+- A lone search field may use placeholder text as its hint if it also has an accessible label (R09 exception).
 
 ### Accessibility
 
@@ -240,11 +351,33 @@ A text field with a magnifier and a clear button.
 
 `id: checkbox` · level: primitive · source: Tangerine
 
-A square tick for an on/off choice that takes effect when the form is saved, or one of several choices.
+A square tick for an on/off choice applied when the form is saved, or for one of several choices.
+
+### General description
+
+A small box that people tick or untick. It records a yes or no, or lets people pick any number of options.
+
+#### Use cases
+
+- Agreeing to terms or opting in to emails.
+- Selecting several options in a form that is submitted.
+- Selecting rows in a list or table.
+
+#### When not to use it
+
+- Settings that apply instantly: use a switch.
+- Choosing exactly one option: use radio buttons.
+
+#### Best practices
+
+- Make the whole label clickable, not just the box.
+- Word labels positively so ticking means yes.
+- Group related checkboxes under a clear heading.
+- Never pre-tick boxes that help the business more than the user.
 
 ### When to use
 
-- Agreeing, opting in, or picking several options in a form that is submitted.
+- Agreeing, opting in or picking several options in a submitted form.
 
 ### When not to use
 
@@ -294,7 +427,29 @@ A square tick for an on/off choice that takes effect when the form is saved, or 
 
 `id: radio` · level: primitive · source: Tangerine
 
-A round mark for choosing exactly one option from a small visible set.
+A round mark for choosing exactly one of a few visible options.
+
+### General description
+
+A round button used in a group where only one option can be chosen at a time.
+
+#### Use cases
+
+- Choosing one plan, shipping method or payment type.
+- Answering a question with a few clear options.
+- Options that need a short description each.
+
+#### When not to use it
+
+- Many options: use a select or a search field.
+- A single yes or no: use a checkbox or switch.
+
+#### Best practices
+
+- List the options vertically so they are easy to compare.
+- Put the group under a clear question or heading.
+- Pre-select an option only if it is a sensible default.
+- Make the whole label clickable.
 
 ### When to use
 
@@ -308,7 +463,7 @@ A round mark for choosing exactly one option from a small visible set.
 ### How to use
 
 - `<label class="orca-radio"><input type="radio" name="grp" value=…><span class="orca-radio__dot"></span>Label</label>` inside a fieldset.
-- Stack vertically (R01). Pre-select the recommended option only when it is genuinely the right default (Hick's law; ethics of defaults).
+- Stack vertically (R01). Pre-select an option only when it is truly the right default (Hick's law; ethics of defaults).
 
 ### Accessibility
 
@@ -341,6 +496,28 @@ A round mark for choosing exactly one option from a small visible set.
 
 An on/off control that takes effect immediately.
 
+### General description
+
+A toggle that turns a setting on or off and takes effect right away, like a physical light switch.
+
+#### Use cases
+
+- Turning notifications or autoplay on and off.
+- Enabling a feature in a settings page.
+- Settings that save immediately without a Save button.
+
+#### When not to use it
+
+- Forms that are submitted with a button: use a checkbox.
+- Choosing between more than two options: use radio buttons.
+
+#### Best practices
+
+- Apply the change immediately and confirm it happened.
+- Label the setting itself, not the action.
+- Show the on and off states with more than colour alone.
+- Undo the change and explain if saving fails.
+
 ### When to use
 
 - Settings saved at once: play videos automatically, turn notifications on.
@@ -353,7 +530,7 @@ An on/off control that takes effect immediately.
 
 - `<label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Autoplay videos</span></label>`.
 - Save on change (htmx `hx-trigger="change"`) and confirm with a status message; revert and explain on failure.
-- Label states what is on, not the action ('Notifications', not 'Turn on notifications').
+- Name the setting, not the action ('Notifications', not 'Turn on notifications').
 
 ### Accessibility
 
@@ -395,7 +572,29 @@ An on/off control that takes effect immediately.
 
 `id: number-input` · level: primitive · source: Tangerine
 
-A numeric field with large minus and plus buttons for small adjustments.
+A number field with large minus and plus buttons for small adjustments.
+
+### General description
+
+A field for entering a number, often with plus and minus buttons for small changes.
+
+#### Use cases
+
+- Setting quantities, counts or limits.
+- Adjusting a value up or down by small steps.
+- Entering amounts with a minimum and maximum.
+
+#### When not to use it
+
+- Identifiers like phone, card or postcode numbers: use a text input with a numeric keyboard.
+- Wide ranges: use a slider or plain typing.
+
+#### Best practices
+
+- Set sensible minimum, maximum and step values.
+- Show the unit in the label or beside the field.
+- Let people type as well as use the buttons.
+- Name the buttons so screen readers say what they change.
 
 ### When to use
 
@@ -403,7 +602,7 @@ A numeric field with large minus and plus buttons for small adjustments.
 
 ### When not to use
 
-- Values that change by large amounts or are identifiers (phone, card, postcode): use a text input with `inputmode="numeric"`.
+- Large changes or identifiers (phone, card, postcode): use a text input with `inputmode="numeric"`.
 
 ### How to use
 
@@ -445,9 +644,31 @@ A numeric field with large minus and plus buttons for small adjustments.
 
 A native colour picker paired with its hex value.
 
+### General description
+
+A control for picking a colour, usually a swatch that opens a picker plus a text box for the exact colour code.
+
+#### Use cases
+
+- Choosing a theme or brand colour.
+- Labelling categories, calendars or zones with a colour.
+- Setting a colour in a drawing or design tool.
+
+#### When not to use it
+
+- Picking from a few set colours: use radio buttons with swatches.
+- Colour is the only way to tell options apart: add text or icons.
+
+#### Best practices
+
+- Show the current colour and its code together.
+- Accept codes with or without the hash and in any case.
+- Warn when a colour is hard to read against text.
+- Offer a few preset colours for quick picks.
+
 ### When to use
 
-- Choosing a zone colour, a calendar colour, a brand colour in settings.
+- Choosing a zone, calendar or brand colour in settings.
 
 ### How to use
 
@@ -480,6 +701,28 @@ A native colour picker paired with its hex value.
 `id: file-input` · level: primitive · source: Tangerine
 
 The native file picker with an ORCA-styled button.
+
+### General description
+
+A control that lets people choose a file from their device to upload, such as a photo or document.
+
+#### Use cases
+
+- Uploading photos, avatars or scans.
+- Attaching documents to a form or message.
+- Importing a data file such as a spreadsheet.
+
+#### When not to use it
+
+- Files already stored online: let people paste a link or pick from a library.
+- Typing short text: use a text input.
+
+#### Best practices
+
+- Say which file types and sizes are allowed before people choose.
+- Check the file again on the server.
+- Show the chosen file name and a way to remove it.
+- Allow several files only when you can handle them.
 
 ### When to use
 
@@ -515,6 +758,29 @@ The native file picker with an ORCA-styled button.
 
 One box per digit of a one-time code, with auto-advance and paste.
 
+### General description
+
+A row of single-digit boxes for entering a one-time code, such as a text-message or email verification code.
+
+#### Use cases
+
+- Two-step sign-in codes.
+- Email or phone number verification.
+- Confirming a sensitive action with a short code.
+
+#### When not to use it
+
+- Codes with letters or more than 8 characters: use one text field.
+- Long-term passwords: use a password field.
+
+#### Best practices
+
+- Move to the next box automatically after each digit.
+- Let people paste the whole code at once.
+- Allow phones to fill the code from a text message.
+- Use a numeric keyboard on phones.
+- Offer a way to resend the code.
+
 ### When to use
 
 - Two-factor codes and email verification codes of 4–8 digits.
@@ -527,8 +793,8 @@ One box per digit of a one-time code, with auto-advance and paste.
 
 - Group: `<div class="orca-row" data-orca-otp role="group" aria-labelledby=…>` with one `<input class="orca-input orca-otp-digit" inputmode="numeric" maxlength="1" aria-label="Digit 1 of 6">` per digit.
 - Put `autocomplete="one-time-code"` on the first box.
-- orca.js advances on input, goes back on Backspace and spreads a pasted code across the boxes.
-- Alternative with zero script: a single `<input class="orca-input orca-input--w8" autocomplete="one-time-code" inputmode="numeric">`.
+- orca.js moves forward on input, back on Backspace, and spreads a pasted code across the boxes.
+- No-script option: a single `<input class="orca-input orca-input--w8" autocomplete="one-time-code" inputmode="numeric">`.
 
 ### Accessibility
 
@@ -560,6 +826,28 @@ One box per digit of a one-time code, with auto-advance and paste.
 `id: input-addon` · level: primitive · source: Tangerine
 
 A fixed unit, prefix or button joined to an input.
+
+### General description
+
+A fixed piece of text or a button attached to the side of an input, such as a unit, a currency sign or a Copy button.
+
+#### Use cases
+
+- Showing a unit like minutes, percent or metres.
+- Adding a fixed prefix like https:// or a currency sign.
+- Attaching an action such as Copy or Test.
+
+#### When not to use it
+
+- Long explanations: put them in help text under the field.
+- Actions unrelated to the field: use a separate button.
+
+#### Best practices
+
+- Keep the addon text very short.
+- Make clear the addon is not part of what people type.
+- Connect the addon text to the input for screen readers.
+- Make sure attached buttons are large enough to tap.
 
 ### When to use
 

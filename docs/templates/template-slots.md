@@ -1,12 +1,34 @@
 # Template slots
 
-The named blocks of ORCA's layouts. A page fills slots instead of rewriting layouts, so every page keeps the same structure. Each slot below says which layouts have it and what belongs in it.
+The named blocks that ORCA's layouts offer. A page fills slots instead of rewriting the layout. Each slot lists the layouts that have it and what goes in it.
 
 ## Title
 
 `id: slot-title` · level: template · source: ORCA
 
 The text of the browser tab, before ` · Brand`.
+
+### General description
+
+The page title is the text shown on the browser tab, in history and in bookmarks. It also becomes the headline of a search result.
+
+#### Use cases
+
+- Telling open tabs apart.
+- Naming a page in browser history and bookmarks.
+- Giving search engines a clear headline for the page.
+
+#### When not to use it
+
+- Do not use it as the visible page heading; use the page's h1 for that.
+- Do not repeat the same title on every page.
+
+#### Best practices
+
+- Put the part that is specific to the page first.
+- Keep it short enough to avoid being cut off in a tab.
+- Add the site name at the end.
+- Make every page's title unique.
 
 ### When to use
 
@@ -15,7 +37,7 @@ The text of the browser tab, before ` · Brand`.
 ### How to use
 
 - `{% block title %}…{% endblock %}` in a template that extends every layout (from orca/layouts/base.html).
-- Defaults to `title` from the context; override for detail pages: the record's name first.
+- Defaults to `title` from the context; on detail pages, start with the record's name.
 - `title_suffix` changes or removes ` · Brand`.
 
 Blocks: `title`
@@ -39,6 +61,28 @@ Blocks: `title`
 `id: slot-page-title` · level: template · source: ORCA
 
 The page's one h1, in the page head.
+
+### General description
+
+The page title is the single main heading at the top of a page. It tells people what the page is and gives screen readers a way to jump to the start.
+
+#### Use cases
+
+- Naming a list, a record or a form.
+- Giving screen-reader users a clear starting point.
+- Confirming people landed where they meant to.
+
+#### When not to use it
+
+- Do not use several top-level headings on one page; use lower heading levels for sections.
+- Do not use it for long sentences; use a subtitle.
+
+#### Best practices
+
+- Use exactly one per page.
+- Keep it short and specific.
+- Match the label of the link people clicked to get there.
+- Use a real heading element, not styled plain text.
 
 ### When to use
 
@@ -69,7 +113,29 @@ Blocks: `page_title`
 
 `id: slot-page-subtitle` · level: template · source: ORCA
 
-One sentence under the title saying what the page is for or its scope.
+One sentence under the title: what the page is for or covers.
+
+### General description
+
+A page subtitle is one short line under the main heading. It explains what the page is for or what it covers.
+
+#### Use cases
+
+- Explaining the scope of a list or report.
+- Adding context the title is too short to give.
+- Reassuring people they are in the right place.
+
+#### When not to use it
+
+- Skip it when the title already says everything.
+- Do not use it for instructions that belong next to a form field.
+
+#### Best practices
+
+- Write one sentence, not a paragraph.
+- Say something the title does not.
+- Use plain words, not jargon.
+- Keep the style the same on every page.
 
 ### When to use
 
@@ -78,7 +144,7 @@ One sentence under the title saying what the page is for or its scope.
 ### How to use
 
 - `{% block page_subtitle %}…{% endblock %}` in a template that extends the app shell and every template built on it (generic, parent-child and page-type templates).
-- Defaults to `subtitle` from the context; leave it out when the title says it all.
+- Defaults to `subtitle` from the context; skip it when the title is enough.
 
 Blocks: `page_subtitle`
 
@@ -100,7 +166,29 @@ Blocks: `page_subtitle`
 
 `id: slot-page-actions` · level: template · source: ORCA
 
-The page's buttons, at the end of the page head: one primary action and few others.
+The page's buttons at the end of the page head: one primary action, few others.
+
+### General description
+
+Page actions are the main buttons of a page, placed in a fixed spot near the heading. They hold the things a person can do with the whole page.
+
+#### Use cases
+
+- Adding a new record from a list page.
+- Exporting or printing a report.
+- Editing the record shown on a detail page.
+
+#### When not to use it
+
+- Do not put actions for a single row there; place them on the row.
+- Do not fill it with many equal buttons; group extras in a menu.
+
+#### Best practices
+
+- Show one clear primary action.
+- Keep the same position on every page.
+- Start button labels with a verb.
+- Move rarely used actions into an overflow menu.
 
 ### When to use
 
@@ -109,7 +197,7 @@ The page's buttons, at the end of the page head: one primary action and few othe
 ### How to use
 
 - `{% block page_actions %}…{% endblock %}` in a template that extends the app shell and every template built on it (generic, parent-child and page-type templates).
-- List and detail templates fill it from `list_actions` and `detail_actions`; override those instead when you can.
+- List and detail templates fill it from `list_actions` and `detail_actions`; override those instead.
 
 Blocks: `page_actions`
 
@@ -135,6 +223,28 @@ Blocks: `page_actions`
 `id: slot-breadcrumbs` · level: template · source: ORCA
 
 The trail of parent pages above the title.
+
+### General description
+
+Breadcrumbs are a row of links showing the pages above the current one. They show where you are and let you jump back up.
+
+#### Use cases
+
+- Orienting people deep inside a site or app.
+- Going back to a parent list in one click.
+- Helping visitors who arrive from search on a nested page.
+
+#### When not to use it
+
+- Do not use them on flat sites with only one level; use plain navigation.
+- Do not use them as the main way to move around.
+
+#### Best practices
+
+- Show the path from the top level to the current page.
+- Make the last item plain text, not a link.
+- Keep labels short and match page titles.
+- Place them above the page title.
 
 ### When to use
 
@@ -176,6 +286,28 @@ Blocks: `breadcrumbs`
 
 The page's own content, inside the main landmark.
 
+### General description
+
+The content region is the main area of a page where its own material goes. Everything around it, such as the header and navigation, stays the same from page to page.
+
+#### Use cases
+
+- Holding the main text, forms or tables of a page.
+- Keeping a consistent frame around changing content.
+- Letting screen readers skip straight to the main part.
+
+#### When not to use it
+
+- Do not put site-wide navigation or footers inside it.
+- Do not make several competing main regions on one page.
+
+#### Best practices
+
+- Use one main region per page.
+- Mark it so skip links can reach it.
+- Structure it with clear headings and spacing.
+- Leave the surrounding frame untouched.
+
 ### When to use
 
 - Pages built on every layout (from orca/layouts/base.html).
@@ -207,7 +339,29 @@ Blocks: `content`
 
 `id: slot-scripts` · level: template · source: ORCA
 
-Script tags at the end of the body, for a project-wide script loaded on every page.
+Script tags at the end of the body, for scripts loaded on every page.
+
+### General description
+
+A scripts region holds the JavaScript files a page loads, placed at the end of the page. This lets the visible content appear first.
+
+#### Use cases
+
+- Loading site-wide behaviour such as menus.
+- Adding analytics or a shared library.
+- Keeping all script tags in one predictable place.
+
+#### When not to use it
+
+- Do not load scripts for one page on every page; load them only where needed.
+- Do not put code the page needs before it renders at the end.
+
+#### Best practices
+
+- Load scripts at the end or with defer.
+- Include only what the page uses.
+- Keep scripts in one place.
+- Make sure the page still works with scripts that fail to load.
 
 ### When to use
 
@@ -240,6 +394,28 @@ Blocks: `scripts`
 
 ORCA's stylesheets, brand values, favicon and script (`orca_head`).
 
+### General description
+
+The head of a page holds information for the browser that is not shown on screen: stylesheets, the icon, the title and meta tags.
+
+#### Use cases
+
+- Linking stylesheets and fonts.
+- Setting the page icon and character set.
+- Adding meta tags for phones and search engines.
+
+#### When not to use it
+
+- Do not put visible content in it; use the body.
+- Do not copy the head into every page by hand; share it.
+
+#### Best practices
+
+- Set the character encoding first.
+- Include the viewport meta tag for phones.
+- Keep it in one shared place.
+- Load only the styles the page needs.
+
 ### When to use
 
 - Pages built on every layout (from orca/layouts/base.html).
@@ -269,7 +445,29 @@ Blocks: `head`
 
 `id: slot-body-class` · level: template · source: ORCA
 
-Classes on the body element, for page-wide styling hooks.
+Classes on the body element, for page-wide styling.
+
+### General description
+
+A body class is a name added to the page's body element so styles can target one kind of page. It changes a page's look without touching shared code.
+
+#### Use cases
+
+- Giving a single page its own layout tweak.
+- Marking the type of page, such as an app or a report.
+- Switching a page to a full-width mode.
+
+#### When not to use it
+
+- Do not use it to restyle individual components; style those directly.
+- Do not use it to store state that scripts depend on.
+
+#### Best practices
+
+- Use short, descriptive names.
+- Keep the classes the layout already needs.
+- Scope styles with the class instead of overriding globally.
+- Remove unused classes.
 
 ### When to use
 
@@ -300,7 +498,29 @@ Blocks: `body_class`
 
 `id: slot-sidebar` · level: template · source: ORCA
 
-The whole sidebar element: navigation, extra content and the collapse toggle.
+The whole sidebar: navigation, extra content and the collapse toggle.
+
+### General description
+
+A sidebar is a vertical panel at the side of a page. It usually holds the main navigation and can collapse to save room.
+
+#### Use cases
+
+- Showing the main sections of an application.
+- Keeping navigation visible while content scrolls.
+- Docs sites with a long list of pages.
+
+#### When not to use it
+
+- Avoid it on short flows such as sign-up or checkout; use a simple page.
+- Avoid it for sites with only a few links; use a top bar.
+
+#### Best practices
+
+- Keep the order of items the same everywhere.
+- Mark the current page.
+- Let it collapse on small screens.
+- Limit the number of top-level items.
 
 ### When to use
 
@@ -309,7 +529,7 @@ The whole sidebar element: navigation, extra content and the collapse toggle.
 ### How to use
 
 - `{% block sidebar %}…{% endblock %}` in a template that extends the app shell and every template built on it (generic, parent-child and page-type templates) and the docs layout.
-- Override with an empty block for pages without navigation (a wizard, a full-screen editor).
+- Use an empty block for pages without navigation, such as a wizard or full-screen editor.
 
 Blocks: `sidebar`
 
@@ -332,6 +552,28 @@ Blocks: `sidebar`
 `id: slot-top-bar` · level: template · source: ORCA
 
 The bar at the top of the page: menu button, brand, top navigation and the user's controls.
+
+### General description
+
+A top bar is a strip across the top of every page. It holds the brand, main links and the person's own controls such as search or account.
+
+#### Use cases
+
+- Showing the logo and a link home.
+- Offering search, notifications and the account menu.
+- Giving public sites their main navigation.
+
+#### When not to use it
+
+- Do not crowd it with many links; move extras to a sidebar or menu.
+- Do not hide it on every scroll when people need quick access.
+
+#### Best practices
+
+- Keep it in the same place on every page.
+- Put the logo on the left and personal tools on the right.
+- Keep the height small.
+- Collapse links into a menu on phones.
 
 ### When to use
 
@@ -368,6 +610,28 @@ Blocks: `top_bar`
 
 The logo or wordmark, from `settings.ORCA['BRAND']`.
 
+### General description
+
+The brand area shows the logo or name of a product or company. It usually links back to the home page.
+
+#### Use cases
+
+- Confirming whose site this is.
+- Giving a one-click way back home.
+- Repeating identity across all pages.
+
+#### When not to use it
+
+- Do not use large logos that push content down; keep them compact.
+- Do not make it the only way to reach home on small screens without a label.
+
+#### Best practices
+
+- Place it in the same corner on every page.
+- Link it to the home page.
+- Give the logo image useful alternative text.
+- Use a version that stays readable on small screens.
+
 ### When to use
 
 - Pages built on the app shell and every template built on it (generic, parent-child and page-type templates), auth, error, marketing and docs layouts.
@@ -397,7 +661,29 @@ Blocks: `brand`
 
 `id: slot-sidebar-extra` · level: template · source: ORCA
 
-Content under the navigation in the sidebar: a site switcher, a plan meter, a help link.
+Content under the sidebar navigation: a site switcher, plan meter or help link.
+
+### General description
+
+A sidebar extra area is space under the main navigation for secondary items, such as a site switcher, a usage meter or a help link.
+
+#### Use cases
+
+- Switching between sites or workspaces.
+- Showing plan or storage usage.
+- Linking to help and support.
+
+#### When not to use it
+
+- Do not put main navigation here; keep it in the navigation list.
+- Do not add long content; it crowds the navigation.
+
+#### Best practices
+
+- Keep it short.
+- Group related items together.
+- Put the most useful item first.
+- Make sure it works when the sidebar is narrow.
 
 ### When to use
 
@@ -432,6 +718,28 @@ Blocks: `sidebar_extra`
 `id: slot-sidebar-nav` · level: template · source: ORCA
 
 The navigation sections of the sidebar.
+
+### General description
+
+Sidebar navigation is a list of links to the main sections of an app, usually grouped under short labels. It stays on screen as you move around.
+
+#### Use cases
+
+- Moving between the main areas of an application.
+- Showing where you are right now.
+- Grouping many pages into clear sections.
+
+#### When not to use it
+
+- Avoid it for a handful of links; use a top bar.
+- Avoid deep nesting; use breadcrumbs or tabs for lower levels.
+
+#### Best practices
+
+- Group related links under clear labels.
+- Mark the current page.
+- Use short, plain item names.
+- Keep the order stable between visits.
 
 ### When to use
 
@@ -471,7 +779,29 @@ Blocks: `sidebar_nav`
 
 `id: slot-filter-panel` · level: template · source: ORCA
 
-Where filters go: a right drawer, opened by the Filters button the template puts in the page actions.
+A right drawer for filters, opened by the Filters button in the page actions.
+
+### General description
+
+A filter panel is a set of controls for narrowing a list, often in a drawer or side panel. People pick values and the list updates.
+
+#### Use cases
+
+- Narrowing a long list by status, date or owner.
+- Combining several filters at once.
+- Keeping the list visible while filters stay out of the way.
+
+#### When not to use it
+
+- Avoid it for one or two simple filters; show them above the list.
+- Avoid it for finding by name; use a search box.
+
+#### Best practices
+
+- Open it from a clearly labelled Filters button.
+- Show which filters are active.
+- Offer a way to clear all filters.
+- Apply filters without losing the person's place.
 
 ### When to use
 
@@ -512,6 +842,28 @@ Blocks: `filter_panel`
 
 Everything inside the body element except the skip link, modal and scripts.
 
+### General description
+
+The body of a page is everything people see in the browser window. A layout fills it with the frame around the page's own content.
+
+#### Use cases
+
+- Defining the overall structure of a page type.
+- Building a new kind of layout.
+- Placing the skip link, main area and dialogs.
+
+#### When not to use it
+
+- Do not replace it on ordinary pages; fill the content area instead.
+- Do not put hidden tracking content in it.
+
+#### Best practices
+
+- Use proper landmark regions such as header, main and footer.
+- Keep one main region.
+- Place a skip link first.
+- Keep structure the same across pages.
+
 ### When to use
 
 - Pages built on every layout (from orca/layouts/base.html).
@@ -541,7 +893,29 @@ Blocks: `body`
 
 `id: slot-modal` · level: template · source: ORCA
 
-Dialogs and drawers, placed after the page so they open above everything.
+Dialogs and drawers, placed after the page so they open above it.
+
+### General description
+
+A modal region is the place in a page where dialogs and drawers are kept. They appear above everything else when opened.
+
+#### Use cases
+
+- Holding confirmation dialogs.
+- Holding side drawers with forms or details.
+- Keeping overlays out of the page's normal flow.
+
+#### When not to use it
+
+- Do not use a dialog for content people need to compare with the page; use a panel.
+- Do not open dialogs automatically on load.
+
+#### Best practices
+
+- Give each dialog a title.
+- Move focus into it when it opens.
+- Let Escape close it.
+- Return focus to the button that opened it.
 
 ### When to use
 
@@ -579,7 +953,29 @@ Blocks: `modal`
 
 `id: slot-footer` · level: template · source: ORCA
 
-The end of the page: legal and help links on public pages, a version line in applications.
+Legal and help links on public pages, a version line in applications.
+
+### General description
+
+A footer is the area at the end of a page. It holds links people expect to find last, such as legal notices, contact details and help.
+
+#### Use cases
+
+- Linking to terms, privacy and contact pages.
+- Showing the app version or copyright.
+- Repeating key links for people who reach the bottom.
+
+#### When not to use it
+
+- Do not hide essential actions there; people may never scroll that far.
+- Do not overload it with every site link.
+
+#### Best practices
+
+- Keep it the same on every page.
+- Group links under short headings.
+- Keep text small but readable.
+- Include only links people need.
 
 ### When to use
 
@@ -610,7 +1006,29 @@ Blocks: `footer`
 
 `id: slot-extra-head` · level: template · source: ORCA
 
-Page-specific additions to the head: a stylesheet, meta tags, preloads.
+Page-specific head content: a stylesheet, meta tags, preloads.
+
+### General description
+
+An extra head area lets one page add its own items to the head: a stylesheet, meta tags or preloaded files, without copying the shared head.
+
+#### Use cases
+
+- Adding a page-specific stylesheet.
+- Setting a page's social sharing tags.
+- Telling search engines not to index one page.
+
+#### When not to use it
+
+- Do not use it for content every page needs; add that to the shared head.
+- Do not use it to restyle the whole site.
+
+#### Best practices
+
+- Add only what this page needs.
+- Keep additions small.
+- Do not repeat tags the shared head already sets.
+- Test that the page still loads fast.
 
 ### When to use
 
@@ -619,7 +1037,7 @@ Page-specific additions to the head: a stylesheet, meta tags, preloads.
 ### How to use
 
 - `{% block extra_head %}…{% endblock %}` in a template that extends every layout (from orca/layouts/base.html).
-- Use it for one page's CSS or meta; never redefine ORCA tokens other than the brand ones.
+- Use it for one page's CSS or meta; redefine only the brand tokens.
 
 Blocks: `extra_head`
 
@@ -643,6 +1061,28 @@ Blocks: `extra_head`
 
 One page's scripts, after the site-wide ones.
 
+### General description
+
+An extra scripts area lets one page load its own JavaScript after the site-wide scripts. Other pages stay lighter because they skip it.
+
+#### Use cases
+
+- Loading a chart library on a report page.
+- Adding behaviour for one form.
+- Running a small page-specific script.
+
+#### When not to use it
+
+- Do not use it for scripts every page needs; load those site-wide.
+- Do not use it for behaviour a plain HTML feature already gives.
+
+#### Best practices
+
+- Load with defer.
+- Include only what the page uses.
+- Keep files small.
+- Make sure the page still works if the script fails.
+
 ### When to use
 
 - Pages built on every layout (from orca/layouts/base.html).
@@ -650,7 +1090,7 @@ One page's scripts, after the site-wide ones.
 ### How to use
 
 - `{% block extra_scripts %}…{% endblock %}` in a template that extends every layout (from orca/layouts/base.html).
-- Add `defer`; prefer ORCA's data attributes before writing script.
+- Add `defer`; try ORCA's data attributes before writing script.
 
 Blocks: `extra_scripts`
 
@@ -674,6 +1114,28 @@ Blocks: `extra_scripts`
 
 The inline script that applies the reader's saved theme before the page paints.
 
+### General description
+
+A theme bootstrap is a tiny script that runs early and applies the reader's saved light or dark choice before the page is drawn, so there is no flash of the wrong colours.
+
+#### Use cases
+
+- Remembering a dark theme between visits.
+- Avoiding a white flash on page load.
+- Applying a theme set by the system.
+
+#### When not to use it
+
+- Do not use it if the site has only one theme; it is not needed.
+- Do not make it large; slow code defeats the purpose.
+
+#### Best practices
+
+- Run it before the page is drawn.
+- Keep it very small.
+- Fall back to the system preference.
+- Save the choice in a place the script can read.
+
 ### When to use
 
 - Pages built on every layout (from orca/layouts/base.html).
@@ -681,7 +1143,7 @@ The inline script that applies the reader's saved theme before the page paints.
 ### How to use
 
 - `{% block theme_bootstrap %}…{% endblock %}` in a template that extends every layout (from orca/layouts/base.html).
-- Defaults to `orca_theme_bootstrap`, which outputs nothing when the theme is fixed in settings; empty it if your CSP forbids inline scripts and you fix the theme.
+- Defaults to `orca_theme_bootstrap`, which outputs nothing when settings fix the theme; empty it if your CSP forbids inline scripts and you fix the theme.
 
 Blocks: `theme_bootstrap`
 
@@ -704,6 +1166,28 @@ Blocks: `theme_bootstrap`
 `id: slot-list-actions` · level: template · source: ORCA
 
 The buttons of a list page: Add first, then exports or bulk tools.
+
+### General description
+
+List actions are the buttons at the top of a list page, such as adding a record, exporting or running bulk tools.
+
+#### Use cases
+
+- Adding a new item to a list.
+- Exporting the list to a file.
+- Starting actions on many selected rows.
+
+#### When not to use it
+
+- Do not put actions for one row here; keep them on that row.
+- Do not show many equal buttons; keep one primary action.
+
+#### Best practices
+
+- Put the main add button first.
+- Start labels with a verb and name the item.
+- Keep the position the same on every list.
+- Group less common actions in a menu.
 
 ### When to use
 
@@ -738,6 +1222,28 @@ Blocks: `list_actions`
 `id: slot-detail-actions` · level: template · source: ORCA
 
 The buttons of a record: Edit, then other actions, Delete last and quieter.
+
+### General description
+
+Detail actions are the buttons on the page of a single record, such as edit, duplicate or delete. They sit together near the record's title.
+
+#### Use cases
+
+- Editing the record being viewed.
+- Deleting or archiving the record.
+- Running other one-off actions such as export.
+
+#### When not to use it
+
+- Do not place delete beside the main action without separation; set it apart.
+- Do not hide Edit in a menu on a detail page.
+
+#### Best practices
+
+- Put Edit first and Delete last.
+- Make Delete look quieter and ask for confirmation.
+- Use clear verb labels.
+- Keep the same positions on every record.
 
 ### When to use
 

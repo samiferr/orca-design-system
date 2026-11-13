@@ -1,14 +1,37 @@
 # Grids and collections
 
-Repeating one component in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.
+One component repeated in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.
 
 ## Product grid
 
 `id: product-grid` · level: pattern · source: ORCA
 
-Product items in a responsive grid that adapts the number of columns to the screen.
+Product items in a responsive grid whose column count adapts to the screen.
 
 Built from: `product-item`, `list-header`, `pagination`
+
+### General description
+
+A grid of product tiles, each with a picture, name and price. The number of columns adapts to the screen.
+
+#### Use cases
+
+- Online shop and catalogue listings.
+- Category and search results pages.
+- Browsing items by picture.
+
+#### When not to use it
+
+- Comparing many specifications: use a table.
+- A single product: use a product page.
+
+#### Best practices
+
+- Keep tiles the same size and shape.
+- Show price and name consistently.
+- Use pagination or load more below the grid.
+- Put sorting and filtering above the grid.
+- Give every image a useful text alternative or an empty one if decorative.
 
 ### When to use
 
@@ -54,6 +77,28 @@ Built from: `product-item`, `list-header`, `pagination`
 Video cards in a grid, pinned videos first, offline videos clearly marked.
 
 Built from: `video-card`, `view-toggle`, `card-skeleton`
+
+### General description
+
+A grid of video cards showing a preview image, name and status for each video or camera.
+
+#### Use cases
+
+- Dashboards of cameras or video streams.
+- Video libraries in card view.
+- Showing which videos are live or offline.
+
+#### When not to use it
+
+- Comparing many details: use a table.
+- Watching one stream closely: use a full player.
+
+#### Best practices
+
+- Show important items such as pinned videos first.
+- Mark offline items with text and a badge, not colour alone.
+- Reserve the image space so the page does not jump.
+- Show a placeholder while previews load.
 
 ### When to use
 
@@ -103,9 +148,31 @@ Built from: `video-card`, `view-toggle`, `card-skeleton`
 
 `id: kpi-grid` · level: pattern · source: Tangerine
 
-A row of stat cards summarising the state of things, linking to the detail behind each.
+A row of stat cards that summarise current state, each linking to its detail.
 
 Built from: `stat-card`
+
+### General description
+
+A row of cards showing the most important numbers, each often with a change over time and a link to details.
+
+#### Use cases
+
+- The top of a dashboard or report.
+- A quick health check of a system or business.
+- Linking key numbers to deeper pages.
+
+#### When not to use it
+
+- Detailed analysis: use charts and tables.
+- More than about six metrics: pick the ones people act on.
+
+#### Best practices
+
+- Show only a few numbers that matter.
+- Add a comparison, such as change since last week.
+- Label every number with a clear name and unit.
+- Link each card to its source.
 
 ### When to use
 
@@ -189,9 +256,31 @@ Built from: `stat-card`
 
 `id: capacity-heat-map` · level: pattern · source: Tangerine
 
-Occupancy by weekday and hour as shaded cells with the value printed, and a legend of the scale.
+Occupancy by weekday and hour as shaded cells with printed values and a scale legend.
 
 Built from: `heat-row`, `legend-item`
+
+### General description
+
+A table of shaded cells showing how busy something is across days and hours. Darker cells mean higher values.
+
+#### Use cases
+
+- Spotting the busiest hours of a venue.
+- Planning staff and opening hours.
+- Finding patterns in activity over a week.
+
+#### When not to use it
+
+- Exact comparisons of a few values: use a table or bar chart.
+- Trends over time: use a line chart.
+
+#### Best practices
+
+- Print the value in each cell so it does not depend on colour.
+- Show a legend explaining the scale.
+- Use one colour in graded steps.
+- Mark missing data differently from low values.
 
 ### When to use
 
@@ -269,6 +358,29 @@ Alerts and events grouped by day, newest first, each with its status, time and s
 
 Built from: `timeline-item`, `media-object`
 
+### General description
+
+A list of events in time order, grouped by day, with markers showing the sequence and type of each event.
+
+#### Use cases
+
+- Alert and activity histories.
+- Audit logs and incident reviews.
+- The history of a single item.
+
+#### When not to use it
+
+- Comparing many events by detail: use a table.
+- Future plans: use a calendar or agenda.
+
+#### Best practices
+
+- Group by day with clear day headings.
+- Show the newest first unless the story reads better in order.
+- Use text as well as colour for status.
+- Show the time for each event.
+- Link each entry to its details.
+
 ### When to use
 
 - Alert lists, audit and incident views, a video's history.
@@ -340,6 +452,28 @@ Cards for records, products or people in as many equal columns as fit.
 
 Built from: `linked-card`, `person-block`
 
+### General description
+
+A card grid arranges cards in equal columns that adjust to the screen width. It suits browsing a collection.
+
+#### Use cases
+
+- Browsing products, people or media.
+- Showing records with an image.
+- Dashboards of equal items.
+
+#### When not to use it
+
+- Comparing items field by field: use a table.
+- A single long list of text: use a list.
+
+#### Best practices
+
+- Keep cards equal in size and layout.
+- Put content in the same order in each card.
+- Make the whole card clickable if it opens a record.
+- Keep spacing even.
+
 ### When to use
 
 - Collections people browse: records, products, people.
@@ -395,9 +529,31 @@ Built from: `linked-card`, `person-block`
 
 `id: loading-placeholder` · level: pattern · source: ORCA
 
-Placeholder cards in the shape of the content while a grid or feed loads, announced to screen readers.
+Placeholder cards shaped like the content while a grid or feed loads, announced to screen readers.
 
 Built from: `card-skeleton`
+
+### General description
+
+A loading placeholder shows grey shapes in the form of the content while it loads. It keeps the layout stable and shows that something is coming.
+
+#### Use cases
+
+- Loading a grid or feed.
+- Loading more items on scroll.
+- Loading content that takes over a second.
+
+#### When not to use it
+
+- Very quick loads: show nothing extra.
+- Long processes with known progress: use a progress bar.
+
+#### Best practices
+
+- Match the shape of the final content.
+- Mark the region as busy for screen readers.
+- Replace it all at once.
+- Avoid layout shifts.
 
 ### When to use
 

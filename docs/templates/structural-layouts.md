@@ -1,14 +1,35 @@
 # Structural layouts
 
-Layout classes that arrange sections inside a page: stacks, grids and splits. They hold patterns and never style them.
+Layout classes for arranging sections in a page: stacks, grids and splits. They hold patterns, never style them.
 
 ## Vertical stack
 
 `id: vertical-stack` · level: template · source: ORCA
 
-Sections one under another with one spacing step between them; tight and loose variants.
+Sections stacked with one spacing step between them, in tight and loose variants.
 
 Built from: `panel`
+
+### General description
+
+A layout that places sections one under another with even gaps between them.
+
+#### Use cases
+
+- The main column of a page.
+- Sections inside a side panel.
+- Forms and settings pages with several groups.
+
+#### When not to use it
+
+- Side-by-side content: use a grid or a split layout.
+
+#### Best practices
+
+- Use one consistent gap between sections.
+- Make gaps between sections larger than gaps inside them.
+- Control spacing from the parent, not each child.
+- Keep a logical reading order.
 
 ### When to use
 
@@ -49,6 +70,28 @@ Built from: `panel`
 Stat cards in equal columns that wrap, each at least 12rem wide.
 
 Built from: `kpi-grid`
+
+### General description
+
+A grid of small cards each showing one key number, arranged in equal columns that wrap on small screens.
+
+#### Use cases
+
+- Headline numbers at the top of a dashboard.
+- Summaries at the top of a record or report.
+- Comparing a few key figures at a glance.
+
+#### When not to use it
+
+- Many details per metric: use a table or chart.
+- More than about six numbers: pick the ones that matter.
+
+#### Best practices
+
+- Keep cards the same size so numbers are easy to compare.
+- Limit the grid to 3 to 6 cards.
+- Let cards wrap on narrow screens.
+- Label every number clearly with its unit.
 
 ### When to use
 
@@ -107,6 +150,28 @@ Built from: `kpi-grid`
 Cards in as many equal columns as fit, at least 15rem wide.
 
 Built from: `card-grid`
+
+### General description
+
+A layout that arranges cards in as many equal columns as fit the screen, from one column on phones to several on wide screens.
+
+#### Use cases
+
+- Browsing videos, products, people or plans.
+- Collections scanned by picture or title.
+- Dashboards of similar items.
+
+#### When not to use it
+
+- Comparing items across many attributes: use a table.
+- Long text: use a single-column list.
+
+#### Best practices
+
+- Give every card the same shape.
+- Set a minimum card width so text stays readable.
+- Keep gaps even in both directions.
+- Keep the order logical for keyboard and screen readers.
 
 ### When to use
 
@@ -167,6 +232,28 @@ Two equal columns from 1036px, one column below.
 
 Built from: `panel`
 
+### General description
+
+A layout with two equal columns that stack into one on narrow screens.
+
+#### Use cases
+
+- Pairing two charts or lists of equal weight.
+- Side-by-side comparisons.
+- Dashboards with two panels per row.
+
+#### When not to use it
+
+- Main content with a side note: use a main and aside split.
+- Three or more items: use a card grid.
+
+#### Best practices
+
+- Use it only for content of equal importance.
+- Make sure the stacked order reads well on phones.
+- Keep both columns similar in height.
+- Keep the gap between columns consistent.
+
 ### When to use
 
 - Pairs of charts or panels of the same importance.
@@ -202,9 +289,31 @@ Built from: `panel`
 
 `id: split-layout` · level: template · source: ORCA
 
-A main column and a 20rem aside (end by default, start or wider as variants); the aside drops below on narrow screens.
+A main column and a 20rem aside (at the end by default; start and wider variants) that drops below on narrow screens.
 
 Built from: `panel`
+
+### General description
+
+A page layout with a wide main column and a narrower side column beside it. The side column drops below on small screens.
+
+#### Use cases
+
+- A form with help or summary beside it.
+- A record with related items.
+- A booking page with an order summary.
+
+#### When not to use it
+
+- Content of equal weight: use two equal columns.
+- Long forms: use a single narrow column.
+
+#### Best practices
+
+- Put the main content first in the source order.
+- Keep the aside for secondary information only.
+- Move the aside below the main content on narrow screens.
+- Do not hide vital content in the aside.
 
 ### When to use
 
@@ -243,9 +352,31 @@ Built from: `panel`
 
 `id: media-split` · level: template · source: Tangerine
 
-The live picture in two thirds, details and actions in one third; the picture stays in view while the details scroll.
+The live picture in two thirds, details and actions in one third; the picture stays in view as the details scroll.
 
 Built from: `recording-player`, `panel`
+
+### General description
+
+A layout that shows a large picture or video beside its details and controls. The media stays in view while the rest scrolls.
+
+#### Use cases
+
+- Video, camera or recording pages.
+- Image editors with settings.
+- Maps or previews next to their options.
+
+#### When not to use it
+
+- Pages with little media: use a main and aside split.
+- Small screens: stack the media above the details.
+
+#### Best practices
+
+- Keep the media visible while people adjust settings.
+- Give the media about two thirds of the width.
+- Stack the media first on phones.
+- Reserve the media's space so the page does not jump.
 
 ### When to use
 
@@ -290,6 +421,28 @@ Built from: `recording-player`, `panel`
 Short fields side by side in as many 16rem columns as fit; long fields span the full width.
 
 Built from: `form-section`
+
+### General description
+
+A form layout that puts short related fields side by side and lets long fields use the full width.
+
+#### Use cases
+
+- Settings pages with many short fields.
+- Address and connection details.
+- Pairs such as host and port or from and to.
+
+#### When not to use it
+
+- Ordinary forms: one column is easier to follow.
+- Long answers: give them the full width.
+
+#### Best practices
+
+- Only pair fields that belong together.
+- Let long fields such as notes span the full width.
+- Keep the reading order logical when the grid collapses.
+- Keep labels above their fields.
 
 ### When to use
 
@@ -337,6 +490,28 @@ Built from: `form-section`
 One column of fields at most 36rem wide.
 
 Built from: `form-stack`
+
+### General description
+
+A form layout with a single column of fields that is kept narrow so lines are short and easy to follow.
+
+#### Use cases
+
+- Sign-up, login and contact forms.
+- Create and edit pages.
+- Settings forms.
+
+#### When not to use it
+
+- Forms with many short related fields: consider a form grid.
+- Wide data entry like tables: use a full-width layout.
+
+#### Best practices
+
+- Put fields in one column, top to bottom.
+- Keep the form around 36rem wide or less.
+- Group related fields under clear headings.
+- Put the main action at the end of the form.
 
 ### When to use
 

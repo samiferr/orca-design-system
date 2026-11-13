@@ -1,12 +1,34 @@
 # Icons
 
-One icon set, 16px, single ink in currentColor. Icons support words; they never replace them.
+One icon set, 16px, single ink in currentColor. Icons support words and never replace them.
 
 ## Icon
 
 `id: icon` · level: primitive · source: Tangerine
 
-An inline SVG glyph from the ORCA set, sized by token and coloured by its text.
+An inline SVG glyph from the ORCA set, sized by token and coloured like its text.
+
+### General description
+
+A small picture that stands for an object or action, such as a magnifier for search. Icons help people recognise things quickly.
+
+#### Use cases
+
+- Adding meaning next to labels in buttons and menus.
+- Marking status in messages and lists.
+- Saving space in toolbars with well-known symbols.
+
+#### When not to use it
+
+- Ideas without a well-known symbol: use words.
+- Decoration that competes with the content.
+
+#### Best practices
+
+- Pair icons with text whenever possible.
+- Use one style and line weight throughout.
+- Give standalone icons an accessible name.
+- Let icons inherit the colour of the text.
 
 ### When to use
 
@@ -24,7 +46,7 @@ An inline SVG glyph from the ORCA set, sized by token and coloured by its text.
 - `{% icon "search" %}` renders decorative inline SVG (`aria-hidden`).
 - `{% icon "close" label="Close" %}` only when the icon stands alone without a labelled control.
 - Sizes: `size="xs"` 12px (inside 12–14px text), `s` 16px default (every control), `m` 20px, `l` 24px (heading icons), `xl` 36px (empty states). Aliases: small=xs, default=s, large=l.
-- Colour comes from `currentColor`; set `color` on the parent, never on the path.
+- Colour follows `currentColor`: set `color` on the parent, never on the path.
 - List all names: `python -m orca icons`.
 
 ### Accessibility
@@ -70,22 +92,44 @@ An inline SVG glyph from the ORCA set, sized by token and coloured by its text.
 
 The four status glyphs (success, warning, error, info), each a distinct shape in its status colour.
 
+### General description
+
+A symbol that shows state, such as success, warning, error or information. Each has its own shape and colour so it can be told apart.
+
+#### Use cases
+
+- Showing results in alerts and messages.
+- Marking errors next to form fields.
+- Showing the state of a job, device or item.
+
+#### When not to use it
+
+- Pure decoration: choose a neutral icon or none.
+- Long explanations: use a text message.
+
+#### Best practices
+
+- Use different shapes, not only different colours.
+- Always add a word with the icon.
+- Use the same icon for the same meaning everywhere.
+- Keep colours with enough contrast.
+
 ### When to use
 
 - Alerts, field errors, validation summaries, status badges, run results.
 
 ### When not to use
 
-- Using a status glyph decoratively, or in another colour.
+- Using a status glyph as decoration or in another colour.
 
 ### How to use
 
 - `{% status_icon "positive" %}` · `"caution"` · `"negative"` · `"info"` · `"neutral"`.
-- Always followed by a word: 'Online', 'Needs attention', 'Failed'.
+- Always add a word: 'Online', 'Needs attention', 'Failed'.
 
 ### Accessibility
 
-- Decorative unless `label=` is given; prefer the visible word.
+- Decorative unless `label=` is given; the visible word is better.
 
 #### Example: Four statuses
 
@@ -128,18 +172,40 @@ The four status glyphs (success, warning, error, info), each a distinct shape in
 
 The named glyphs: 106 from Vanilla (via Tangerine) plus ORCA glyphs for ideas Vanilla lacks.
 
+### General description
+
+The collection of icons a product draws from, all sharing one size grid, line weight and style so the interface looks consistent.
+
+#### Use cases
+
+- Choosing a symbol for a new button or menu item.
+- Keeping the look of icons consistent across screens.
+- Finding standard names for common concepts.
+
+#### When not to use it
+
+- Mixing icons from several sets on one screen.
+- Inventing new symbols for well-known actions: use the familiar one.
+
+#### Best practices
+
+- Pick icons that match the word, such as a bin for delete.
+- Keep the same size and weight.
+- Do not use one icon for two meanings.
+- Add new icons in the same style.
+
 ### When to use
 
-- Pick a name from the set; use aliases when the guide's word differs (bell → notifications, refresh → restart, pencil → edit).
+- Pick a name from the set; use an alias when the guide's word differs (bell → notifications, refresh → restart, pencil → edit).
 
 ### When not to use
 
-- Adding SVGs from other sets (Lucide, Material) to an ORCA screen. If a glyph is missing, use a word and ask for it to be added.
+- Adding SVGs from other sets (Lucide, Material). If a glyph is missing, use a word and ask for it to be added.
 
 ### How to use
 
 - Guide icons: menu, notifications, snapshot, statistics, plus, search, play, arrow-right, chevron-left, chevron-right, chevron-down, close, delete, archive, restart, location, edit, filter, star, more, sort, grid, chat, sliders, home, help, unlock, success, error, settings.
-- Full list with previews: the docs site's Icons page, or `python -m orca icons`.
+- Full list with previews: the docs site's Icons page or `python -m orca icons`.
 - Arrows: arrow-up/down/left/right and diagonals. Chevrons: chevron-up/down/left/right (mirror left/right in RTL).
 
 #### Example: Guide icons

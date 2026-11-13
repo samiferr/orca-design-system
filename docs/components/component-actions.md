@@ -1,6 +1,6 @@
 # Actions
 
-Groups of actions: button groups, menus and the action sets that sit on records and rows.
+Button groups, menus, and the action sets on records and rows.
 
 ## Button group
 
@@ -9,6 +9,28 @@ Groups of actions: button groups, menus and the action sets that sit on records 
 Related buttons joined into one control, or spaced as a set.
 
 Built from: `button`
+
+### General description
+
+A button group is a set of related buttons placed together. Joined buttons act on the same thing, and spaced ones are separate actions.
+
+#### Use cases
+
+- Offering alternatives on one object, such as zoom in and out.
+- Grouping related actions like Export and Print.
+- Keeping toolbars tidy.
+
+#### When not to use it
+
+- Choosing one mode among several: use a segmented control or toggle buttons.
+- Many actions: use a menu.
+
+#### Best practices
+
+- Keep a consistent style in a group.
+- Label the group for screen readers.
+- Keep destructive actions apart.
+- Keep a group to a few buttons.
 
 ### When to use
 
@@ -59,6 +81,28 @@ Built from: `button`
 A button that opens a list of actions.
 
 Built from: `button`, `dropdown-item`
+
+### General description
+
+A dropdown menu is a button that opens a list of actions. It hides less common actions to keep the screen simple.
+
+#### Use cases
+
+- Grouping secondary actions on a record.
+- Account or user menus.
+- An 'Add' button with several kinds.
+
+#### When not to use it
+
+- Choosing a value for a field: use a select.
+- The main action: show it as a visible button.
+
+#### Best practices
+
+- Make the menu work with the keyboard.
+- Put destructive items last.
+- Use short verb labels.
+- Close on Escape and return focus.
 
 ### When to use
 
@@ -133,6 +177,28 @@ One action in a menu: icon, label, optional description or shortcut; danger and 
 
 Built from: `icon`, `kbd`
 
+### General description
+
+A dropdown item is one action in a menu, shown as a row with a label and often an icon, description or shortcut.
+
+#### Use cases
+
+- Listing actions in a menu.
+- Showing a shortcut next to an action.
+- Explaining why an action is unavailable.
+
+#### When not to use it
+
+- Navigation between main sections: use navigation links.
+- Setting options: use a checkbox or radio menu item.
+
+#### Best practices
+
+- Start labels with a verb.
+- Use icons the same way on every row.
+- Mark destructive items clearly.
+- Say why an item is disabled.
+
 ### When to use
 
 - Every row of a dropdown menu.
@@ -191,6 +257,28 @@ A value with a Copy button that confirms 'Copied' in place and for screen reader
 
 Built from: `button`, `code-text`
 
+### General description
+
+A copy button copies a value to the clipboard in one click and confirms that it worked.
+
+#### Use cases
+
+- Copying API keys, links or IDs.
+- Copying commands or addresses.
+- Avoiding typing mistakes with exact values.
+
+#### When not to use it
+
+- Long documents: offer a download instead.
+- Secrets that must not be shown: do not display them.
+
+#### Best practices
+
+- Show the value next to the button.
+- Confirm with 'Copied' and announce it to screen readers.
+- Give a fallback if the clipboard is blocked.
+- Keep the label clear.
+
 ### When to use
 
 - IDs, API keys, addresses, links, commands.
@@ -198,7 +286,7 @@ Built from: `button`, `code-text`
 ### How to use
 
 - `<div class="orca-copy"><code class="orca-copy__value" id="v1">…</code><button class="orca-button" type="button" data-orca-copy="v1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div>`.
-- While it says 'Copied', the copy icon turns into a check mark. The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead.
+- For 1.5 s the label reads 'Copied', the copy icon becomes a check mark and the change is announced. Where the clipboard is blocked, the value is selected instead.
 
 #### Example: Copy a stream address
 
@@ -228,6 +316,28 @@ Built from: `button`, `code-text`
 On a record's page: one visible main action and a 'More actions' menu for the rest.
 
 Built from: `icon-button`, `dropdown-menu`
+
+### General description
+
+Record actions put the main action of a record in view and tuck the others into a 'More actions' menu.
+
+#### Use cases
+
+- The header of a detail page.
+- A card with several actions.
+- Keeping a toolbar simple.
+
+#### When not to use it
+
+- Records with one action: show only a button.
+- Many equal actions: consider a toolbar.
+
+#### Best practices
+
+- Show one main action.
+- Name the record in the menu button's label.
+- Put destructive actions last.
+- Ask before destructive actions.
 
 ### When to use
 
@@ -288,6 +398,28 @@ Built from: `icon-button`, `dropdown-menu`
 Small actions at the end of a table row: one or two ghost buttons and an overflow menu.
 
 Built from: `icon-button`, `dropdown-menu`
+
+### General description
+
+Row actions are small buttons at the end of a table row that act on that row, with extra actions in a menu.
+
+#### Use cases
+
+- Editing or viewing a row.
+- Opening a menu of more actions.
+- Acting on a row without leaving the table.
+
+#### When not to use it
+
+- Actions for many rows at once: use bulk selection.
+- Hover-only actions: they fail on touch screens and keyboards.
+
+#### Best practices
+
+- Show at most two actions.
+- Name the row in each button's label.
+- Keep actions always visible.
+- Use a quiet button style.
 
 ### When to use
 

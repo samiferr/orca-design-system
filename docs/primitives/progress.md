@@ -8,9 +8,31 @@ Feedback while something takes time. Respond within 400 ms; show progress for lo
 
 A 3px (or 8px large) track with a fill: determinate with a value, indeterminate without.
 
+### General description
+
+A progress bar is a horizontal track that fills to show how much of a task is done, or that animates when the time left is unknown.
+
+#### Use cases
+
+- Showing upload, export or import progress.
+- Showing storage or quota use.
+- Showing steps completed in a task.
+
+#### When not to use it
+
+- Waits under about a second; a spinner is enough.
+- Tasks with no measurable progress; use a spinner with a message.
+
+#### Best practices
+
+- Label every bar and show the value as text.
+- Say what is happening for long waits.
+- Announce completion to screen readers.
+- Use color tones only with a text value.
+
 ### When to use
 
-- Uploads, video exports, imports, any task longer than about 1 second whose progress is known (determinate) or not (indeterminate).
+- Uploads, exports, imports and any task over about 1 second, whether progress is known (determinate) or not (indeterminate).
 - Capacity or quota meters (use the track and fill parts with a status tone).
 
 ### When not to use
@@ -23,7 +45,7 @@ A 3px (or 8px large) track with a fill: determinate with a value, indeterminate 
 - Indeterminate: omit `value`; it animates (static for reduced motion).
 - Large: `.orca-progress--lg`. Tones for meters: `--positive`, `--caution`, `--negative`.
 - Custom meter from parts: `<span class="orca-progress-track"><span class="orca-progress-fill" style="--orca-value: 64%"></span></span>` with `role="meter"` and aria values.
-- Past 10 seconds also say what is happening and how long is left ('Uploading 3 of 12 files, about 2 minutes left').
+- Past 10 seconds, say what is happening and how long is left ('Uploading 3 of 12 files, about 2 minutes left').
 
 ### Accessibility
 
@@ -64,6 +86,28 @@ A 3px (or 8px large) track with a fill: determinate with a value, indeterminate 
 `id: progress-ring` · level: primitive · source: ORCA
 
 A circular track and indicator with the value in the middle.
+
+### General description
+
+A progress ring is a circular indicator that fills to show a percentage, often with the value in the middle.
+
+#### Use cases
+
+- Showing completion in small tiles.
+- Showing a task's percent done.
+- Showing quota use in a compact space.
+
+#### When not to use it
+
+- Long operations whose estimate changes; use a bar with text.
+- Showing precise comparisons; a bar is easier to read.
+
+#### Best practices
+
+- Put the value in text inside or beside the ring.
+- Give it an accessible name.
+- Keep it large enough to read.
+- Do not rely on color alone.
 
 ### When to use
 
@@ -115,9 +159,31 @@ A circular track and indicator with the value in the middle.
 
 A small rotating ring for short, unknown waits.
 
+### General description
+
+A spinner is a small rotating icon showing that something is loading when the wait time is unknown.
+
+#### Use cases
+
+- Showing a busy button.
+- Showing a field being checked.
+- Showing a small region loading.
+
+#### When not to use it
+
+- Whole page loads or long waits; use a skeleton or progress bar.
+- Very short waits; flashing feels worse.
+
+#### Best practices
+
+- Pair it with a short text message.
+- Announce it as a status to screen readers.
+- Keep it small and calm.
+- Replace it with content as soon as ready.
+
 ### When to use
 
-- Inside a busy button, beside a field being checked, in a region that loads in under a few seconds.
+- Inside a busy button, beside a field being checked, or in a region that loads in a few seconds.
 
 ### When not to use
 
@@ -160,6 +226,28 @@ A small rotating ring for short, unknown waits.
 
 Grey placeholder blocks that hold the shape of content while it loads.
 
+### General description
+
+A skeleton is a grey placeholder shaped like the content that is loading. It shows the page layout early and makes waiting feel shorter.
+
+#### Use cases
+
+- Loading cards, lists and tables.
+- Loading image and video grids.
+- Loading sections that arrive after the page.
+
+#### When not to use it
+
+- Content that loads almost instantly; the flash is distracting.
+- Waits where no layout is known; use a spinner.
+
+#### Best practices
+
+- Match the real layout closely.
+- Vary line widths to look like text.
+- Mark the region as busy for screen readers.
+- Swap in content without moving the layout.
+
 ### When to use
 
 - Heavy regions that load after the page: heat maps, image and video grids, comparison tables, htmx `hx-trigger="load"` sections.
@@ -171,7 +259,7 @@ Grey placeholder blocks that hold the shape of content while it loads.
 ### How to use
 
 - Mirror the real layout: `.orca-skeleton--title`, `.orca-skeleton--text` (vary widths with inline `max-width`), `.orca-skeleton--circle`, or a sized `.orca-skeleton` block.
-- Wrap the region in `aria-busy="true"` and give it an accessible label 'Loading images'; remove both when content arrives.
+- Wrap the region in `aria-busy="true"` and give it an accessible label such as 'Loading images'; remove both when content arrives.
 
 ### Accessibility
 

@@ -1,6 +1,6 @@
 # Calendar parts
 
-The pieces month, week, day and agenda views are built from. Each states the date in words for screen readers.
+The building blocks of month, week, day and agenda views. Each gives screen readers the date in words.
 
 ## Day cell
 
@@ -9,6 +9,28 @@ The pieces month, week, day and agenda views are built from. Each states the dat
 One day of a month view: day number, up to three events and a '+N more' link.
 
 Built from: `day-number`, `today-marker`, `event-chip`, `more-events-link`, `holiday-label`
+
+### General description
+
+One day in a month calendar. It shows the date number and a few events for that day.
+
+#### Use cases
+
+- Showing a month of days in a grid.
+- Marking today, weekends and holidays.
+- Giving a quick view of what is on each day.
+
+#### When not to use it
+
+- Detailed schedules with times: use a week or day view.
+- Long lists of events: use an agenda list.
+
+#### Best practices
+
+- Mark today clearly and not by colour alone.
+- Limit visible events and link to the rest.
+- Make the day number a link to the day view.
+- Keep cell heights equal so weeks line up.
 
 ### When to use
 
@@ -79,6 +101,28 @@ The week number and its date range, heading a week view.
 
 Built from: `week-number`, `date-label`
 
+### General description
+
+A heading for a week view that shows the week number and the dates it covers.
+
+#### Use cases
+
+- Titling a week view or weekly planner.
+- Roster and sprint pages that plan by week.
+- Showing which dates a week covers.
+
+#### When not to use it
+
+- Month views: use a month heading.
+- Single-day views: show the full date instead.
+
+#### Best practices
+
+- Show both the week number and the date range.
+- Include the year when the range crosses a year end.
+- Use the local way of numbering weeks.
+- Mark dates with a proper date format for assistive tools.
+
 ### When to use
 
 - Week views, sprint and roster pages.
@@ -111,6 +155,27 @@ Built from: `week-number`, `date-label`
 The row of weekday names above a month or week grid.
 
 Built from: `weekday-name`
+
+### General description
+
+The row of day names, such as Mon to Sun, above the columns of a calendar grid.
+
+#### Use cases
+
+- Labelling columns in a month or week calendar.
+- Showing which days are weekends.
+- Date pickers and booking grids.
+
+#### When not to use it
+
+- Views where each row is a day: label the rows with full dates.
+
+#### Best practices
+
+- Start the week on the day people in that region expect.
+- Use short names, with the full name available to screen readers.
+- Set the weekend apart without relying on colour alone.
+- Mark them as column headers for assistive tools.
 
 ### When to use
 
@@ -169,6 +234,27 @@ One row of a month grid: the week number and seven day cells.
 
 Built from: `day-cell`, `week-number`
 
+### General description
+
+One row of a month calendar covering seven days, often with its week number at the start.
+
+#### Use cases
+
+- Building a month grid from week by week.
+- Showing week numbers beside each row.
+- Grouping days so the month is easier to scan.
+
+#### When not to use it
+
+- Week views with hours: use hour rows and day columns.
+
+#### Best practices
+
+- Always show exactly seven days per row.
+- Show week numbers only if people plan by week.
+- Mark the row's week number as a row header.
+- Keep rows equal in height.
+
 ### When to use
 
 - Month views.
@@ -213,6 +299,28 @@ Built from: `day-cell`, `week-number`
 One hour of a day or week view: the hour label and two half-hour slots.
 
 Built from: `hour-gridline`, `time-slot`, `time-label`
+
+### General description
+
+One hour of a day or week schedule, with a time label and space for events.
+
+#### Use cases
+
+- Day and week views with a time scale.
+- Resource and room schedulers.
+- Booking tools that show free and busy times.
+
+#### When not to use it
+
+- Month views, where days are too small for hours.
+- Short lists of events: use an agenda list.
+
+#### Best practices
+
+- Show working hours first and scroll to the current time.
+- Keep the lines faint so events stand out.
+- Use the same hour height across the whole view.
+- Use a 12 or 24 hour clock that matches local habits.
 
 ### When to use
 
@@ -266,6 +374,28 @@ An empty half-hour in a day view that creates an event when chosen; free, busy o
 
 Built from: `availability-color`
 
+### General description
+
+A block of time, often half an hour, in a schedule. People pick it to book or add an event.
+
+#### Use cases
+
+- Booking an appointment at a free time.
+- Adding an event by clicking where it should go.
+- Showing which times are free or busy.
+
+#### When not to use it
+
+- Picking a date only: use a date picker.
+- Long events: show them as event blocks across the slots.
+
+#### Best practices
+
+- Make every free slot large enough to tap.
+- Show busy and selected slots without relying on colour alone.
+- Name each slot with its date and time for screen readers.
+- Reveal hints on hover or focus to keep the grid calm.
+
 ### When to use
 
 - Day and week views, booking grids.
@@ -273,7 +403,7 @@ Built from: `availability-color`
 ### How to use
 
 - `<button class="orca-slot" type="button" aria-label="Add event at 09:30, Friday 6 November">` with a `.orca-slot__hint`; busy slots are spans with `--busy`; chosen slots use `aria-pressed="true"`.
-- Keep at least 24px height; snap new events to the slot.
+- Keep slots at least 24px high; snap new events to the slot.
 
 #### Example: Slots
 
@@ -299,9 +429,30 @@ Built from: `availability-color`
 
 `id: all-day-row` · level: component · source: ORCA
 
-The strip above the hours of a week view holding all-day and multi-day bars.
+The strip above a week view's hours that holds all-day and multi-day bars.
 
 Built from: `allday-bar`
+
+### General description
+
+A strip at the top of a day or week calendar for events that last all day or span several days.
+
+#### Use cases
+
+- Holidays, birthdays and day-long events.
+- Trips and multi-day events across columns.
+- Keeping all-day items apart from timed events.
+
+#### When not to use it
+
+- Events with a start and end time: place them in the hour grid.
+
+#### Best practices
+
+- Keep it above the timed hours.
+- Stretch multi-day events across the days they cover.
+- Show when an event continues past the visible days.
+- Label the row clearly, for example 'All day'.
 
 ### When to use
 
@@ -338,6 +489,28 @@ Built from: `allday-bar`
 A one-line event in a month cell: colour dot, time and title.
 
 Built from: `event-dot`, `time-label`
+
+### General description
+
+A small one-line label for an event, usually with a colour dot, a time and a title. It fits in a tight space.
+
+#### Use cases
+
+- Showing events inside month calendar cells.
+- Compact lists of events.
+- Linking a short entry to its full details.
+
+#### When not to use it
+
+- Roomy views: use an event card with more detail.
+- Long lists: use an agenda list.
+
+#### Best practices
+
+- Show the start time and the first words of the title.
+- Use a dot to show which calendar it belongs to.
+- Give each chip a full spoken name.
+- Mark cancelled events with more than colour alone.
 
 ### When to use
 
@@ -381,13 +554,36 @@ An event block in a day or week view: title, time, place and its calendar colour
 
 Built from: `event-bar`, `time-label`
 
+### General description
+
+A block that represents an event in a day or week calendar, showing its title, time and place.
+
+#### Use cases
+
+- Showing events in day and week views.
+- Opening the details of an event.
+- Showing how long events last.
+
+#### When not to use it
+
+- Crowded month cells: use small chips.
+- Simple lists: use an agenda item.
+
+#### Best practices
+
+- Size each block to the event's length.
+- Show title first, then time and place.
+- Mark tentative events with a pattern, not colour alone.
+- Keep text readable against the card colour.
+- Let overlapping events share the width.
+
 ### When to use
 
-- Day and week views; event detail popovers' trigger.
+- Day and week views; the trigger for an event's detail popover.
 
 ### How to use
 
-- `<button class="orca-event-card" style="--orca-event: var(--orca-chart-2)">` with `.orca-event-card__title` and `.orca-event-card__meta` (time and place); height from duration (positioned by the view).
+- `<button class="orca-event-card" style="--orca-event: var(--orca-chart-2)">` with `.orca-event-card__title` and `.orca-event-card__meta` (time and place); height follows duration (the view positions it).
 - `--tentative` for unconfirmed events. Overlapping events share the column width.
 
 #### Example: Cards
@@ -424,6 +620,27 @@ Built from: `event-bar`, `time-label`
 One event in a list view: time column, colour dot, title and details.
 
 Built from: `event-dot`, `time-label`, `date-badge`
+
+### General description
+
+One entry in a list of events, usually with the time on the left and the title and details beside it.
+
+#### Use cases
+
+- Upcoming event lists.
+- Calendars on small phone screens.
+- A day's schedule in text form.
+
+#### When not to use it
+
+- Seeing free and busy gaps at a glance: use a day or week grid.
+
+#### Best practices
+
+- Group events under day headings.
+- Put all-day events first.
+- Keep the time in a fixed column so it is easy to scan.
+- Show only the details people need, such as place.
 
 ### When to use
 
@@ -473,6 +690,28 @@ A small calendar-page box with month, day number and weekday.
 
 Built from: `month-name`, `day-number`, `weekday-name`
 
+### General description
+
+A small box that looks like a calendar page, showing the month, day number and weekday.
+
+#### Use cases
+
+- Marking dates beside events in a list.
+- Showing deadlines and upcoming dates.
+- Headings for each day in an agenda.
+
+#### When not to use it
+
+- Dates in running text: write the date in words.
+- Dates with times: show the time too.
+
+#### Best practices
+
+- Keep it small and consistent in every list.
+- Give screen readers the full date in words.
+- Use the real date tag for assistive tools.
+- Do not rely on colour to carry meaning.
+
 ### When to use
 
 - Beside events in lists, upcoming deadlines, day groups of an agenda.
@@ -507,6 +746,28 @@ The holiday's name on a purple tint with a diamond mark.
 
 Built from: `holiday-marker`
 
+### General description
+
+A short label naming a public holiday or closure on a calendar day.
+
+#### Use cases
+
+- Marking public holidays in a month view.
+- Explaining why a site or office is closed.
+- Showing closures in schedules.
+
+#### When not to use it
+
+- Personal events: use an event chip.
+- Normal working days: show nothing extra.
+
+#### Best practices
+
+- Use the holiday's name, not just a colour.
+- Add a mark or pattern so it is not colour-only.
+- Say clearly when the place is closed.
+- Keep the label short enough to fit the cell.
+
 ### When to use
 
 - Day cells, agenda days and schedules on public holidays and closures.
@@ -533,9 +794,30 @@ Built from: `holiday-marker`
 
 `id: more-events-link` · level: component · source: ORCA
 
-'+3 more' at the bottom of a crowded day cell, opening the full list of that day.
+'+3 more' at the bottom of a crowded day cell; opens that day's full list.
 
 Built from: `link-action`
+
+### General description
+
+A short link such as '+3 more' that shows when a calendar day has more events than fit.
+
+#### Use cases
+
+- Crowded cells in a month calendar.
+- Opening the full list of one day.
+- Showing that events are hidden, not missing.
+
+#### When not to use it
+
+- Days with space: show all events directly.
+
+#### Best practices
+
+- Show the exact number of hidden events.
+- Open a popover or the day view with the full list.
+- Give the link a spoken name that includes the date.
+- Make it big enough to tap on phones.
 
 ### When to use
 
@@ -566,6 +848,27 @@ Built from: `link-action`
 The month or period title with navigation and the view switcher.
 
 Built from: `calendar-navigation`, `calendar-view-switcher`, `month-name`
+
+### General description
+
+The top bar of a calendar with the current month or period, arrows to move, and a switch between views.
+
+#### Use cases
+
+- Showing which period is on screen.
+- Moving to the previous or next month or week.
+- Switching between day, week, month and agenda views.
+
+#### When not to use it
+
+- Date pickers inside forms: use a compact picker header.
+
+#### Best practices
+
+- Show the period in words, such as 'November 2026'.
+- Include a Today button to jump back.
+- Name the arrows for screen readers.
+- Keep the controls in the same place in every view.
 
 ### When to use
 

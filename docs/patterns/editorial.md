@@ -10,6 +10,29 @@ A featured article: large image, kicker, headline, lead and meta, side by side o
 
 Built from: `captioned-media`, `post-block`
 
+### General description
+
+A large featured article block with a big image, headline, intro text and details. It highlights the top story on a page.
+
+#### Use cases
+
+- Showing the lead story on a news or blog page.
+- Featuring a case study or announcement.
+- Highlighting the newest release notes.
+
+#### When not to use it
+
+- For lists of many stories, use smaller teaser blocks.
+- Do not feature several stories at once; the highlight is lost.
+
+#### Best practices
+
+- Use one strong image with a helpful description.
+- Write a headline that tells the story.
+- Keep the intro to a few lines.
+- Show the date and reading time.
+- Stack image and text on small screens.
+
 ### When to use
 
 - The top story of a news, blog or release-notes page.
@@ -51,6 +74,29 @@ Built from: `captioned-media`, `post-block`
 One striking number with a short statement and its source.
 
 Built from: `big-number`
+
+### General description
+
+A single large number or fact with a short sentence and its source. It makes one result easy to remember.
+
+#### Use cases
+
+- Highlighting a key result in a report or case study.
+- Adding a striking statistic to a landing page.
+- Summarizing one finding in a story.
+
+#### When not to use it
+
+- For several figures together, use a grid of summary tiles.
+- For data that needs context over time, use a chart.
+
+#### Best practices
+
+- Show one number only and make it large.
+- Explain in a sentence what the number means.
+- Always give the source and date.
+- Use a number you can back up.
+- Keep text readable against the background.
 
 ### When to use
 

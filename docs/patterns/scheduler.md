@@ -1,14 +1,37 @@
 # Scheduler
 
-Editing when things and people are available, and booking time against that availability.
+Setting when people and things are available, and booking time within that.
 
 ## Weekly availability editor
 
 `id: weekly-availability-editor` · level: pattern · source: ORCA
 
-Each day of the week with an open switch and one or more time spans, to set when something is open or someone is available.
+Each weekday with an open switch and one or more time spans, to set opening hours or availability.
 
 Built from: `add-row-button`, `toggle-field`, `overlap-warning`
+
+### General description
+
+A form where each day of the week can be switched on or off and given one or more time ranges. It sets when a place is open or a person is available.
+
+#### Use cases
+
+- Setting a shop's opening hours.
+- Letting staff or contractors set when they can work.
+- Defining when a service accepts bookings.
+- Setting a recording or maintenance schedule.
+
+#### When not to use it
+
+- Single dates such as holidays: use a separate list of exceptions.
+- Hours that are the same every day: use a simpler start and end form.
+
+#### Best practices
+
+- Allow several time ranges per day for lunch breaks and split shifts.
+- Show errors such as overlapping or reversed times on the row they affect.
+- Show the timezone the hours apply to.
+- Offer a shortcut to copy one day's hours to others.
 
 ### When to use
 
@@ -21,8 +44,8 @@ Built from: `add-row-button`, `toggle-field`, `overlap-warning`
 ### How to use
 
 - `<div class="orca-week-editor">` with one `.orca-week-editor__day` per weekday: a switch and name, then `.orca-week-editor__spans` holding schedule rows and an 'Add hours' button.
-- Offer 'Copy Monday to weekdays' when most days are the same; validate on the server (end after start, no overlaps) and show the overlap warning on the row.
-- Store spans as `(weekday, start, end)` in the site's timezone and show that timezone.
+- Offer 'Copy Monday to weekdays' when most days match. Validate on the server (end after start, no overlaps) and show the overlap warning on the row.
+- Store spans as `(weekday, start, end)` in the site's timezone, and show it.
 
 #### Example: Opening hours
 
@@ -251,13 +274,35 @@ def edit_availabilitys(request, pk):
 
 `id: working-hours-editor` · level: pattern · source: ORCA
 
-A compact editor for regular hours: the working days, one start and end time, a break and the timezone.
+A compact editor for regular hours: working days, one start and end time, a break and the timezone.
 
 Built from: `weekday-selector`, `time-range-input`, `timezone-selector`, `form-stack`
 
+### General description
+
+A short form for regular working hours: which days, one start and end time, an optional break and a timezone. It suits hours that repeat every working day.
+
+#### Use cases
+
+- Setting a person's standard working week.
+- Defining a team's core hours.
+- Setting default hours for a new account or location.
+
+#### When not to use it
+
+- Hours that differ by day: use a day-by-day editor.
+- One-off changes like holidays: use an exceptions list.
+
+#### Best practices
+
+- Preselect the most common days and times.
+- Write the result out in words so people can check it.
+- Always ask for or show the timezone.
+- Link to a per-day option for unusual weeks.
+
 ### When to use
 
-- A person's or team's standard hours; anything where days share the same hours.
+- Standard hours of a person or team, or any days that share the same hours.
 
 ### When not to use
 
@@ -265,7 +310,7 @@ Built from: `weekday-selector`, `time-range-input`, `timezone-selector`, `form-s
 
 ### How to use
 
-- A form stack with the weekday selector, a time range input, an optional break range and the timezone selector, ending with a summary line ('Monday to Friday, 08:00–17:00, Paris time').
+- A form stack with the weekday selector, a time range input, an optional break range and the timezone selector, then a summary line ('Monday to Friday, 08:00–17:00, Paris time').
 - Offer 'Different hours per day' as a link to the weekly editor.
 
 #### Example: Working hours
@@ -322,9 +367,32 @@ Built from: `weekday-selector`, `time-range-input`, `timezone-selector`, `form-s
 
 `id: recurrence-editor` · level: pattern · source: ORCA
 
-Repeat rules for an event or task: frequency, interval, days, end condition and a plain-language summary.
+Repeat rules for an event or task: frequency, interval, days, end and a plain-language summary.
 
 Built from: `recurrence-selector`, `weekday-selector`, `choice-group`, `date-picker`
+
+### General description
+
+A control for making an event, task or report repeat. People pick how often, on which days and when it stops, and see the rule in plain words.
+
+#### Use cases
+
+- Repeating meetings or appointments.
+- Scheduling recurring tasks and reminders.
+- Setting up reports that send on a schedule.
+- Repeating payments or deadlines.
+
+#### When not to use it
+
+- Events that happen once: a plain date picker is enough.
+- Irregular dates that follow no pattern: list the dates individually.
+
+#### Best practices
+
+- Offer common presets such as daily or weekly before a custom option.
+- Summarise the rule in a sentence, for example 'Every 2 weeks on Monday'.
+- Show the next few dates so mistakes are easy to spot.
+- Always give a clear way to end the repeat.
 
 ### When to use
 
@@ -332,7 +400,7 @@ Built from: `recurrence-selector`, `weekday-selector`, `choice-group`, `date-pic
 
 ### How to use
 
-- Start with the recurrence selector (presets plus Custom…); the custom part reveals interval, weekdays (for weekly), day-of-month or weekday-of-month (for monthly) and the end (never, on a date, after N times).
+- Start with the recurrence selector (presets plus Custom…). Custom reveals interval, weekdays (weekly), day-of-month or weekday-of-month (monthly) and the end (never, on a date, after N times).
 - Store as an RFC 5545 RRULE; show the next three dates as a check.
 
 #### Example: Repeat
@@ -392,9 +460,31 @@ Built from: `recurrence-selector`, `weekday-selector`, `choice-group`, `date-pic
 
 `id: exception-editor` · level: pattern · source: ORCA
 
-The list of dates that differ from the regular hours (closed days, short days) with a form to add one.
+A list of dates that differ from regular hours (closed or short days), with a form to add one.
 
 Built from: `exception-entry`, `date-picker`, `time-range-input`, `toggle-field`, `panel`
+
+### General description
+
+A list of dates that break from the usual schedule, such as holidays, closures or short days, with a way to add another.
+
+#### Use cases
+
+- Listing public holidays and closing days.
+- Setting special opening hours for an event or season.
+- Recording planned absences of a person or place.
+
+#### When not to use it
+
+- Changing the regular weekly pattern: edit the regular hours instead.
+- Recurring changes: use a repeat rule.
+
+#### Best practices
+
+- Sort by date and hide past entries by default.
+- Show the date prominently and the reason beside it.
+- Offer to import public holidays for the user's country.
+- Let people edit or remove an entry in one step.
 
 ### When to use
 
@@ -402,7 +492,7 @@ Built from: `exception-entry`, `date-picker`, `time-range-input`, `toggle-field`
 
 ### How to use
 
-- A panel listing exception entries sorted by date (past ones hidden behind 'Show past'), followed by an add form: date, 'Closed all day' switch or a time range, and a reason.
+- A panel of exception entries sorted by date (past ones behind 'Show past'), then an add form: date, 'Closed all day' switch or time range, and a reason.
 - Offer 'Import public holidays' for the site's country.
 
 #### Example: Exceptions
@@ -466,9 +556,31 @@ Built from: `exception-entry`, `date-picker`, `time-range-input`, `toggle-field`
 
 `id: time-off-editor` · level: pattern · source: ORCA
 
-A request form for time off (type, dates, half days, note) beside the person's balance and their existing requests.
+A time-off request form (type, dates, half days, note) beside the person's balance and existing requests.
 
 Built from: `date-range-picker`, `time-off-entry`, `form-stack`
+
+### General description
+
+A form for requesting leave, shown with the person's remaining balance and their existing requests. It can also let managers approve or decline.
+
+#### Use cases
+
+- Requesting holiday, sick leave or training days.
+- Managers approving or declining leave.
+- Showing a person's leave history and balance.
+
+#### When not to use it
+
+- Rostering who works when: use a schedule or roster view.
+- Recording hours worked: use a timesheet.
+
+#### Best practices
+
+- Show the remaining balance and how many days the request uses before sending.
+- Support half days at the start and end.
+- Show each request's status clearly, with a word and not only colour.
+- Tell people what happens next after they send.
 
 ### When to use
 
@@ -570,9 +682,31 @@ def period(request):
 
 `id: resource-scheduler` · level: pattern · source: ORCA
 
-Resources (people, rooms, videos) as rows against a time scale, with bookings as bars on each row.
+Resources (people, rooms, videos) as rows on a time scale, with bookings as bars.
 
 Built from: `event-card`, `resource-row`, `availability-legend`
+
+### General description
+
+A timeline grid with one row per person, room or item and bookings shown as bars along a time scale. It shows who or what is free when.
+
+#### Use cases
+
+- Assigning staff, rooms or vehicles to jobs.
+- Seeing a team's day at a glance.
+- Spotting gaps and double bookings.
+
+#### When not to use it
+
+- A single person's calendar: use a standard calendar view.
+- Long lists of events without a time dimension: use a table.
+
+#### Best practices
+
+- Keep resource names visible while scrolling sideways.
+- Label bars with a short title and the time.
+- Make the time scale and current time easy to read.
+- Allow horizontal scrolling on small screens rather than squeezing the grid.
 
 ### When to use
 
@@ -580,7 +714,7 @@ Built from: `event-card`, `resource-row`, `availability-legend`
 
 ### How to use
 
-- `<div class="orca-scheduler" style="--orca-cols: 10">`: a corner and `.orca-scheduler__scale` of hours, then per resource `.orca-scheduler__who` and `.orca-scheduler__lane` containing event cards placed with `--orca-start` and `--orca-span` (percentages of the day).
+- `<div class="orca-scheduler" style="--orca-cols: 10">`: a corner and `.orca-scheduler__scale` of hours, then per resource `.orca-scheduler__who` and `.orca-scheduler__lane` with event cards placed by `--orca-start` and `--orca-span` (percentages of the day).
 - Compute the percentages in the view: `(start - day_start) / (day_end - day_start)`; wrap in `.orca-table-wrap` to scroll on phones.
 
 #### Example: Installers, Friday
@@ -637,9 +771,31 @@ Built from: `event-card`, `resource-row`, `availability-legend`
 
 `id: shift-planner` · level: pattern · source: ORCA
 
-A roster table of people by days with shifts in each cell, weekly totals and over-hours highlighted.
+A roster table of people by day, with shifts in each cell, weekly totals and over-hours highlighted.
 
 Built from: `resource-row`
+
+### General description
+
+A table of people against days showing each person's shifts, with totals per week. It lets managers see coverage and workload together.
+
+#### Use cases
+
+- Planning weekly staff rotas.
+- Setting on-call schedules.
+- Checking people's hours against their contracts.
+
+#### When not to use it
+
+- Booking rooms or equipment by the hour: use a resource timeline.
+- Tracking hours already worked: use a timesheet.
+
+#### Best practices
+
+- Show totals next to contract hours and flag overtime in words and colour.
+- Mark weekends and days off clearly.
+- Distinguish shift types by label as well as colour.
+- Confirm before publishing the roster to staff.
 
 ### When to use
 
@@ -731,13 +887,35 @@ Built from: `resource-row`
 
 `id: booking-slot-picker` · level: pattern · source: ORCA
 
-A strip of dates and the free slots on the chosen date, grouped by part of day, for booking a fixed-length slot.
+A date strip and the free slots on the chosen date, grouped by part of day.
 
 Built from: `booking-slot`, `button-group`
 
+### General description
+
+A way for visitors to choose a date, then pick from the free time slots on that day. Slots have a fixed length and are often grouped by morning and afternoon.
+
+#### Use cases
+
+- Booking a call, visit or demo.
+- Reserving a time at a clinic, salon or service desk.
+- Scheduling a delivery or collection.
+
+#### When not to use it
+
+- Choosing a date range such as a stay: use a date range picker.
+- Bookings that depend on service or staff: use a stepped booking flow.
+
+#### Best practices
+
+- Show only times that can be booked, or show full ones as disabled with a reason.
+- Display the slot length and timezone near the slots.
+- Group times by part of day to shorten scanning.
+- Summarise the chosen time before the final confirm.
+
 ### When to use
 
-- Booking a visit, a call, a calibration slot: fixed length, chosen by the visitor.
+- Visitors booking a fixed-length visit, call or calibration slot.
 
 ### How to use
 
@@ -809,9 +987,31 @@ Built from: `booking-slot`, `button-group`
 
 `id: appointment-picker` · level: pattern · source: ORCA
 
-Booking in steps: choose the service and person, then the date and time, then confirm, with a running summary.
+Booking in steps: service and person, then date and time, then confirm, with a running summary.
 
 Built from: `steps`, `booking-slot`, `key-value-list`
+
+### General description
+
+A step-by-step booking flow: choose a service and person, then a date and time, then confirm. A running summary keeps earlier choices visible.
+
+#### Use cases
+
+- Booking appointments where the service sets the length.
+- Choosing a specific staff member or location.
+- Reserving a time with a deposit or contact details.
+
+#### When not to use it
+
+- One service and one person: a simple slot picker is enough.
+- Booking a long stay or date range: use a date range picker.
+
+#### Best practices
+
+- Keep each step to one decision.
+- Show duration and price with each service.
+- Hold the chosen slot briefly and say how long.
+- Let people go back and change a choice without losing others.
 
 ### When to use
 
@@ -877,9 +1077,31 @@ Built from: `steps`, `booking-slot`, `key-value-list`
 
 `id: conflict-resolver` · level: pattern · source: ORCA
 
-When two bookings clash: both side by side with what conflicts, and clear choices to resolve it.
+Shows two clashing bookings side by side, with what conflicts and clear choices to resolve it.
 
 Built from: `conflict-warning`, `event-card`, `choice-group`
+
+### General description
+
+A view that shows two bookings that overlap, side by side, and gives clear options to fix it such as moving or keeping both.
+
+#### Use cases
+
+- Saving an event that overlaps another.
+- Importing a calendar or schedule with clashes.
+- Handling double-booked rooms or people.
+
+#### When not to use it
+
+- Simple warnings that need no decision: use an inline message.
+- Preventing clashes altogether: hide or disable unavailable times.
+
+#### Best practices
+
+- Explain exactly what clashes and when.
+- Show both items so they can be compared.
+- Offer concrete actions, including a suggested free time.
+- Say what will change before the person confirms.
 
 ### When to use
 

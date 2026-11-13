@@ -1,18 +1,40 @@
 # Layouts
 
-Whole-page Django templates you extend. They place patterns in a fixed structure and leave named blocks for your content. Every page of an ORCA project starts from one of these.
+Whole-page Django templates you extend. Each places patterns in a fixed structure and leaves named blocks for your content. Every ORCA page starts from one of them.
 
 ## Base layout
 
 `id: base-layout` · level: template · source: ORCA
 
-The root every ORCA page extends: the html element with language, theme and density, the head with ORCA's styles and theme bootstrap, the skip link, and slots for body, modal and scripts.
+The root every ORCA page extends: the html element (language, theme, density), the head with styles and theme setup, the skip link, and slots for body, modal and scripts.
 
 Built from: `page-landmarks`
 
+### General description
+
+The basic page skeleton that every page of a site shares: document setup, language, head content, a skip link and places for the page body and scripts.
+
+#### Use cases
+
+- Making every page start from the same, correct HTML structure.
+- Setting the language, title and theme once.
+- Adding shared scripts and styles in one place.
+
+#### When not to use it
+
+- Pages that need a header, sidebar or footer: extend a layout that includes them.
+- Small fragments loaded inside a page: return only the fragment.
+
+#### Best practices
+
+- Set the page language.
+- Provide a skip link to the main content.
+- Load shared styles in the head and scripts at the end.
+- Keep page-specific code out of the shared base.
+
 ### When to use
 
-- Directly only for pages with no ORCA chrome (a print view, an embed); otherwise extend the app shell, auth, error, marketing or docs layout.
+- Only for pages without ORCA chrome (a print view, an embed); otherwise extend the app shell, auth, error, marketing or docs layout.
 
 ### How to use
 
@@ -80,9 +102,31 @@ class Landing(TemplateView):
 
 `id: app-shell` · level: template · source: ORCA
 
-The application frame: top bar with brand, sidebar navigation that collapses to a rail (a drawer on phones), and a main column with breadcrumbs, page title, subtitle, actions, messages and content.
+The application frame: top bar with brand, sidebar that collapses to a rail (a drawer on phones), and a main column with breadcrumbs, title, subtitle, actions, messages and content.
 
 Built from: `top-bar`, `sidebar`, `page-head`, `messages-region`
+
+### General description
+
+The standard frame of a web application: a top bar, a side navigation and a main area for the page title, actions and content.
+
+#### Use cases
+
+- Building signed-in screens such as lists, forms and dashboards.
+- Keeping navigation fixed while content changes.
+- Giving every page the same place for title and actions.
+
+#### When not to use it
+
+- Public marketing pages: use a simpler site layout with a header and footer.
+- Sign-in or error pages: use a focused layout without navigation.
+
+#### Best practices
+
+- Keep navigation in the same place on every page.
+- Let the sidebar collapse to save space.
+- Turn the sidebar into a drawer on phones.
+- Provide a skip link to the main content.
 
 ### When to use
 
@@ -93,7 +137,7 @@ Built from: `top-bar`, `sidebar`, `page-head`, `messages-region`
 - Extend it: `{% extends "orca/layouts/app.html" %}`, then fill only the blocks you need.
 - Fill `content`; set `title` and `nav` in the context (or override `sidebar_nav`).
 - Put the page's main button in `page_actions` (one primary, Practical UI B03).
-- On phones the sidebar opens over the page from the menu button (`data-orca-sidebar-open`); Escape closes it.
+- On phones the menu button (`data-orca-sidebar-open`) opens the sidebar over the page; Escape closes it.
 
 ### Accessibility
 
@@ -109,8 +153,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 
 #### Example: Child template
 
@@ -194,9 +238,31 @@ class Overview(TemplateView):
 
 `id: auth-layout` · level: template · source: ORCA
 
-A centred card on the alternate ground for sign-in, password reset and other pages before an account is open.
+A centred card for sign-in, password reset and other pages shown before sign-in.
 
 Built from: `login-card`
+
+### General description
+
+A simple, focused page for signing in, creating an account or resetting a password, usually with one centred card and no navigation.
+
+#### Use cases
+
+- Sign-in and sign-up pages.
+- Password reset and email confirmation pages.
+- Invitation or locked-out account pages.
+
+#### When not to use it
+
+- Pages for signed-in users: use the app layout with navigation.
+- Long registration with many steps: use a multi-step form layout.
+
+#### Best practices
+
+- Show one task and remove distractions.
+- Label every field and show errors next to it.
+- Allow password managers and show or hide of the password.
+- Offer a clear link for help or recovery.
 
 ### When to use
 
@@ -267,9 +333,31 @@ urlpatterns = [
 
 `id: email-layout` · level: template · source: ORCA
 
-The page frame of every transactional email: brand bar, title, paragraphs, one action with its link printed, and footer, with colours written inline.
+The frame of every transactional email: brand bar, title, paragraphs, one action with its link printed, and footer, with inline colours.
 
 Built from: `email-frame`
+
+### General description
+
+The shared structure of automatic emails such as receipts and password resets: a brand bar, a heading, short text, one main button and a footer.
+
+#### Use cases
+
+- Sending order confirmations and receipts.
+- Sending password reset and verification emails.
+- Sending alerts and notices from an app.
+
+#### When not to use it
+
+- Newsletters and campaigns with rich design: use a marketing email tool.
+- Messages that need an immediate response: consider an in-app notice or text message.
+
+#### Best practices
+
+- Use simple table layouts and inline styles for email apps.
+- Include a plain-text version.
+- Print the button's link so it works if the button fails.
+- Say why the reader got the email.
 
 ### When to use
 
@@ -278,7 +366,7 @@ Built from: `email-frame`
 ### How to use
 
 - Extend it: `{% extends "orca/email/base.html" %}`, then fill only the blocks you need.
-- Fill `content` (or pass `paragraphs`), set `action_url` and `action_label`, and `footer` with why the reader gets it.
+- Fill `content` (or pass `paragraphs`), set `action_url` and `action_label`, and use `footer` to say why the reader got the email.
 - Send it with `render_to_string` as the HTML alternative of an `EmailMultiAlternatives`; always add the plain-text body.
 
 Extend: `{% extends "orca/email/base.html" %}`
@@ -338,9 +426,31 @@ def send_offline_alert(video, recipients):
 
 `id: error-layouts` · level: template · source: ORCA
 
-403, 404 and 500 pages: logo, illustration, error code, what happened in plain words and what to do next.
+403, 404 and 500 pages: logo, illustration, error code, a plain explanation and a next step.
 
 Built from: `error-message`
+
+### General description
+
+Pages shown when something goes wrong, such as page not found or a server error. They explain what happened and offer a way forward.
+
+#### Use cases
+
+- Showing a page not found message.
+- Telling people they lack permission to open a page.
+- Handling server failures with a calm message.
+
+#### When not to use it
+
+- Mistakes in a form: show messages next to the fields instead.
+- Short problems on a part of a page: use an inline message.
+
+#### Best practices
+
+- Explain what happened in plain words.
+- Offer a clear next step such as home or search.
+- Avoid blame and technical jargon.
+- Keep the page light so it loads even when systems fail.
 
 ### When to use
 
@@ -351,7 +461,7 @@ Built from: `error-message`
 - Extend it: `{% extends "orca/layouts/error.html" %}`, then fill only the blocks you need.
 - Create `templates/404.html` containing `{% extends "orca/errors/404.html" %}`; the same for 403 and 500.
 - The 500 page renders without a request context: it uses no template tags that need one.
-- Override `error_text` and `error_actions` to point to your support or status page.
+- Override `error_text` and `error_actions` to link your support or status page.
 
 Extend: `{% extends "orca/layouts/error.html" %}`
 
@@ -375,9 +485,31 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 `id: homepage-template` · level: template · source: ORCA
 
-The page people land on after signing in: a greeting, a stat grid, a main column for what changed and an aside with shortcuts.
+The page after sign-in: a greeting, a stat grid, a main column for what changed and an aside of shortcuts.
 
 Built from: `app-shell`, `kpi-grid`, `activity-feed`
+
+### General description
+
+The first page people see after signing in to an app, summarising key numbers, recent activity and shortcuts to common tasks.
+
+#### Use cases
+
+- Giving a quick status overview of an account or project.
+- Linking to the tasks people do most.
+- Showing recent changes since the last visit.
+
+#### When not to use it
+
+- Marketing landing pages for visitors: use a public site layout.
+- Detailed analysis: use a dedicated report or dashboard page.
+
+#### Best practices
+
+- Answer what needs attention first.
+- Show only a few key figures.
+- Offer shortcuts to frequent tasks.
+- Handle new accounts with no data using a helpful empty state.
 
 ### When to use
 
@@ -398,8 +530,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `stats`, `shortcuts`.
 
 #### Example: Child template
@@ -461,13 +593,35 @@ class Home(TemplateView):
 
 `id: feed-skeleton` · level: template · source: ORCA
 
-A centred column of posts with skeleton posts while more load, and an empty state when there are none.
+A centred column of posts, with skeleton posts while more load and an empty state when there are none.
 
 Built from: `photo-post`, `loading-placeholder`, `no-results`
 
+### General description
+
+A scrolling column of posts or updates that shows grey placeholder shapes while more content loads, and a message when there is nothing yet.
+
+#### Use cases
+
+- Showing social posts, photo feeds or timelines.
+- Loading more items as people scroll.
+- Telling people when a feed is empty.
+
+#### When not to use it
+
+- Data that people compare in rows and columns: use a table.
+- Content that people need to jump around in: use pages with navigation.
+
+#### Best practices
+
+- Match the placeholder shape to the real post.
+- Keep the column at a readable width.
+- Avoid layout jumps when real content arrives.
+- Provide a way to reach the footer or load more with the keyboard.
+
 ### When to use
 
-- Photo and update feeds, timelines of posts.
+- Photo feeds, update feeds and timelines.
 
 ### How to use
 
@@ -485,8 +639,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `posts`, `loading`, `has_more`, `empty_title`, `empty_text`.
 
 #### Example: Child template
@@ -537,6 +691,28 @@ A grid of people cards: avatar, name, role and a contact action.
 
 Built from: `card-grid-layout`
 
+### General description
+
+A grid of cards, one per person, showing a photo or initials, a name, a role and a way to get in touch.
+
+#### Use cases
+
+- Showing a team or staff page.
+- Listing members of a project or group.
+- Building a contact directory.
+
+#### When not to use it
+
+- Comparing people by several details: use a table.
+- Long lists that people need to search or sort: use a searchable list.
+
+#### Best practices
+
+- Use the same card layout for everyone.
+- Show a name and role next to each photo.
+- Use initials when there is no photo.
+- Make contact links clear and large enough to tap.
+
 ### When to use
 
 - Team pages, members of a site or project, directories.
@@ -544,7 +720,7 @@ Built from: `card-grid-layout`
 ### How to use
 
 - Extend it: `{% extends "orca/layouts/people.html" %}`, then fill only the blocks you need.
-- Pass `people` (name, role, url, email). Use a table instead when people are compared on several attributes.
+- Pass `people` (name, role, url, email). Use a table instead to compare people on several attributes.
 
 Extend: `{% extends "orca/layouts/people.html" %}`
 
@@ -556,8 +732,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `people`, `empty_title`.
 
 #### Example: Child template
@@ -608,6 +784,28 @@ class Team(TemplateView):
 The public site frame: site header with navigation and actions, full-width sections, and a footer with link columns.
 
 Built from: `site-header`, `marketing-hero`, `feature-grid`, `footer`
+
+### General description
+
+The frame of public pages that promote a product or service: a header with links and a call to action, wide sections and a footer with link columns.
+
+#### Use cases
+
+- Building landing, product and pricing pages.
+- Telling a story in full-width sections.
+- Guiding visitors to sign up or contact sales.
+
+#### When not to use it
+
+- Signed-in application screens: use an app layout.
+- Long reading content: use an article or documentation layout.
+
+#### Best practices
+
+- Offer one clear main call to action per screen.
+- Keep the header simple and familiar.
+- Use generous spacing and short sections.
+- Put key links and legal information in the footer.
 
 ### When to use
 
@@ -702,13 +900,35 @@ class Pricing(TemplateView):
 
 `id: blog-layout` · level: template · source: ORCA
 
-A long-form page that reads well: breadcrumbs, title, introduction, version and last update, sections in a measured reading column, and an "On this page" column on the right.
+A long-form reading page: breadcrumbs, title, introduction, version and last update, sections in a measured reading column, and an "On this page" column on the right.
 
 Built from: `docs-page-header`, `table-of-contents`, `top-bar`
 
+### General description
+
+A page designed for reading long text, with a title, an introduction, sections in a comfortable column and a contents list to jump between them.
+
+#### Use cases
+
+- Articles, guides and release notes.
+- Case studies and policies.
+- Any page that is mostly sections of text.
+
+#### When not to use it
+
+- Short pages of mostly interface: use a standard page layout.
+- Data-heavy pages: use a dashboard or table layout.
+
+#### Best practices
+
+- Keep lines to about 60 to 75 characters.
+- Open with a short summary.
+- Use clear headings that match the contents list.
+- Show the publish or update date.
+
 ### When to use
 
-- Articles, guides, documentation pages, release notes, case studies and policies: any page that is mostly sections of text.
+- Articles, guides, documentation, release notes, case studies and policies: any page of mostly text sections.
 
 ### How to use
 
@@ -716,7 +936,7 @@ Built from: `docs-page-header`, `table-of-contents`, `top-bar`
 - Pass `title`, `subtitle` (the introduction: one or two sentences), `version` and `updated` (a date); optional `kicker`, `author`, `reading_time` (minutes), `breadcrumbs`.
 - Fill `blog_body` with sections: each `<section>` has an `h2.orca-section-title` with an `id`. The contents column is built from those `h2` headings, or pass `toc` (`[{"id", "label"}]`) to write it yourself.
 - Indexes, tables and galleries that need the full width: add `{% block blog_modifier %} orca-blog--wide{% endblock %}`; the head keeps its reading width.
-- The page has the app shell's top bar and sidebar (`nav`, or your own `sidebar` block); the Docs page layout is this layout with a documentation sidebar.
+- The page has the app shell's top bar and sidebar (`nav`, or your own `sidebar` block). The Docs page layout adds a documentation sidebar.
 
 Extend: `{% extends "orca/layouts/blog.html" %}`
 
@@ -795,6 +1015,28 @@ class PostDetail(TemplateView):
 The Blog page with a documentation sidebar: a filter and a page tree on the left, the reading column and "On this page" on the right.
 
 Built from: `docs-sidebar`, `docs-page-header`, `top-bar`
+
+### General description
+
+A page layout for documentation, with a navigation tree on the left, the article in the middle and a list of sections on the right.
+
+#### Use cases
+
+- Product documentation and help centres.
+- Internal handbooks and wikis.
+- API or developer guides.
+
+#### When not to use it
+
+- Marketing pages: use a public site layout.
+- A single short article: a simple reading layout is enough.
+
+#### Best practices
+
+- Group pages in clear, named sections.
+- Provide search or a filter for navigation.
+- Highlight the current page in the tree.
+- Show versions and last updated dates.
 
 ### When to use
 
@@ -878,9 +1120,32 @@ class DocsPage(TemplateView):
 
 `id: generic-list` · level: template · source: ORCA
 
-A list page from a ListView: title and Add button, optional filter panel, list header with count and search, a table that becomes cards on phones, pagination and the right empty state.
+A ListView page: title and Add button, optional filter panel, list header with count and search, a table that becomes cards on phones, pagination and empty states.
 
 Built from: `app-shell`, `list-header`, `data-table`, `filter-drawer`, `no-results`
+
+### General description
+
+A list page shows many records of one kind, with a title, search or filters, sortable rows and paging. It is the most common screen in business applications.
+
+#### Use cases
+
+- Browsing orders, customers or other records.
+- Finding and opening a record.
+- Adding a new record from the list.
+
+#### When not to use it
+
+- Comparing a few items in depth: use a detail or comparison view.
+- Browsing visual items: a card grid may suit better.
+
+#### Best practices
+
+- Show the total count.
+- Offer search and filters for long lists.
+- Add paging for long lists.
+- Show a helpful empty state and a no-results state.
+- Make rows open the record.
 
 ### When to use
 
@@ -891,7 +1156,7 @@ Built from: `app-shell`, `list-header`, `data-table`, `filter-drawer`, `no-resul
 - Extend it: `{% extends "orca/generic/list.html" %}`, then fill only the blocks you need.
 - Add `orca.mixins.OrcaPageMixin` to the view: it fills `title`, `model_name`, `model_name_plural`, `columns` (from `list_columns`), `fields` (from `detail_fields`), the URLs (from `*_url_name`), `cancel_url` and `breadcrumbs`.
 - Set `template_name = "orca/generic/list.html"`, `list_columns` and `paginate_by`; filter the queryset on `request.GET["q"]` for the search box.
-- Pass a `filter_form` (a GET form) to get the filter panel; override `list` to change the rows completely, `list_actions` for the buttons.
+- Pass a `filter_form` (a GET form) for the filter panel; override `list` to replace the rows, `list_actions` to change the buttons.
 
 Extend: `{% extends "orca/generic/list.html" %}`
 
@@ -903,8 +1168,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `object_list`, `page_obj`, `paginator` (from ListView).
 - `columns`: `[{"label", "name", "numeric"}]`.
 - `create_url`, `detail_url_name`, `update_url_name`, `delete_url_name` (URL names taking the object's pk), `cancel_url`.
@@ -1073,9 +1338,31 @@ class VideoList(OrcaPageMixin, ListView):
 
 `id: generic-detail` · level: template · source: ORCA
 
-A record page from a DetailView: title, Edit and Delete actions, and the record's fields as a key–value list.
+A DetailView page: title, Edit and Delete actions, and the record's fields as a key–value list.
 
 Built from: `app-shell`, `detail-panel`
+
+### General description
+
+A detail page shows everything about one record as label and value pairs, with the actions that apply to it, such as edit or delete.
+
+#### Use cases
+
+- Reading all fields of a record.
+- Starting an edit or a delete.
+- Checking a record before acting on it.
+
+#### When not to use it
+
+- Editing fields: use a form page.
+- Browsing many records: use a list page.
+
+#### Best practices
+
+- Put the record's name in the title.
+- Show label and value pairs in a steady order.
+- Keep actions in the same place on every record.
+- Show empty values clearly.
 
 ### When to use
 
@@ -1097,8 +1384,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `object`, `fields`, `update_url`, `delete_url`.
 
 #### Example: Child template
@@ -1214,9 +1501,31 @@ urlpatterns = [
 
 `id: generic-form` · level: template · source: ORCA
 
-A create or edit page from a CreateView or UpdateView: one column of ORCA fields with the error summary and Save and Cancel.
+A CreateView or UpdateView page: one column of ORCA fields with an error summary, Save and Cancel.
 
 Built from: `app-shell`, `narrow-form`
+
+### General description
+
+A form page is a page whose main job is one form to create or edit a record, with save and cancel actions.
+
+#### Use cases
+
+- Creating a new record.
+- Editing an existing record.
+- Collecting a few inputs on a page of their own.
+
+#### When not to use it
+
+- Very short edits: edit in place or in a dialog.
+- Long, many-step processes: use a step-by-step flow.
+
+#### Best practices
+
+- Use one column of fields.
+- Put clear labels above fields.
+- Show an error summary and inline errors.
+- Make Save the clear main action and add Cancel.
 
 ### When to use
 
@@ -1226,7 +1535,7 @@ Built from: `app-shell`, `narrow-form`
 
 - Extend it: `{% extends "orca/generic/form.html" %}`, then fill only the blocks you need.
 - Add `orca.mixins.OrcaPageMixin` to the view: it fills `title`, `model_name`, `model_name_plural`, `columns` (from `list_columns`), `fields` (from `detail_fields`), the URLs (from `*_url_name`), `cancel_url` and `breadcrumbs`.
-- Add help text on the model or form field: it is shown under the label. Use `form_fields` to group fields in form sections.
+- Help text on the model or form field shows under the label. Use `form_fields` to group fields in sections.
 
 Extend: `{% extends "orca/generic/form.html" %}`
 
@@ -1238,8 +1547,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `form`, `object` (when editing), `submit_label`, `cancel_url`.
 
 #### Example: Child template
@@ -1348,9 +1657,31 @@ urlpatterns = [
 
 `id: generic-confirm-delete` · level: template · source: ORCA
 
-The delete confirmation from a DeleteView: what will be deleted, what is kept, a danger button and Cancel; or, when other records still use it, why it cannot be deleted yet.
+A DeleteView confirmation: what will be deleted, what is kept, a danger button and Cancel; or, if other records still use it, why it cannot be deleted yet.
 
 Built from: `app-shell`, `confirm-action-panel`, `delete-blocked-notice`
+
+### General description
+
+A delete confirmation page asks people to confirm before a record is removed. It says what will be lost, or why it cannot be deleted.
+
+#### Use cases
+
+- Confirming permanent removal.
+- Explaining what else will be removed.
+- Explaining that related records block deletion.
+
+#### When not to use it
+
+- Deletes that can be undone: allow undo instead of asking first.
+- Minor, low-cost actions: do not add confirmation.
+
+#### Best practices
+
+- Name the record being deleted.
+- List what will be lost.
+- Label the button with the action, such as 'Delete order'.
+- Make Cancel easy to find.
 
 ### When to use
 
@@ -1372,8 +1703,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `object`, `deleted`, `kept`, `confirm_text`, `blocked_by`, `submit_label`, `cancel_url`.
 
 #### Example: Child template
@@ -1482,9 +1813,31 @@ urlpatterns = [
 
 `id: generic-confirm-action` · level: template · source: ORCA
 
-A confirmation page for any consequential action that is not a delete: archive, send, disable, run.
+A confirmation page for a consequential action other than delete: archive, send, disable, run.
 
 Built from: `app-shell`, `confirm-action-panel`
+
+### General description
+
+A confirm-action page asks for a second look before a consequential action that is not a delete, such as sending to everyone or disabling something.
+
+#### Use cases
+
+- Sending a message to many people.
+- Disabling or archiving a site or account.
+- Starting a long or costly run.
+
+#### When not to use it
+
+- Harmless, easily undone actions: just do them.
+- Deleting: use the delete confirmation.
+
+#### Best practices
+
+- Ask a clear question.
+- List the consequences.
+- Name the button with the action's verb.
+- Use a danger style only when something is lost.
 
 ### When to use
 
@@ -1506,8 +1859,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `title`, `text`, `items`, `form`, `danger`, `submit_label`, `cancel_url`.
 
 #### Example: Child template
@@ -1565,9 +1918,31 @@ class ArchiveAlbum(FormView):
 
 `id: parent-base` · level: template · source: ORCA
 
-The frame shared by every page of a parent record: its title and actions, optional summary stats, and tabs for the overview and each child list.
+The frame shared by a parent record's pages: title and actions, optional summary stats, and tabs for the overview and each child list.
 
 Built from: `parent-child-tabs`
+
+### General description
+
+A parent page is the shared frame for a record that owns other records. It keeps the record's title and tabs in place while the content changes.
+
+#### Use cases
+
+- Showing a project with its tasks and files.
+- Showing a customer with orders and invoices.
+- Keeping people oriented across related pages.
+
+#### When not to use it
+
+- Records with no related lists: use a single detail page.
+- Unrelated pages: use normal navigation.
+
+#### Best practices
+
+- Keep the header and tabs identical on every tab.
+- Mark the current tab.
+- Give each tab its own address.
+- Show key figures above the tabs.
 
 ### When to use
 
@@ -1577,7 +1952,7 @@ Built from: `parent-child-tabs`
 
 - Extend it: `{% extends "orca/generic/parent_base.html" %}`, then fill only the blocks you need.
 - Extend it for each tab and fill `child_content`; mark the current tab in `parent_tabs`.
-- Each tab is its own URL (and view), so tabs can be linked, bookmarked and refreshed.
+- Each tab has its own URL and view, so it can be linked, bookmarked and refreshed.
 
 Extend: `{% extends "orca/generic/parent_base.html" %}`
 
@@ -1589,8 +1964,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `parent`: the parent object (its title heads every tab).
 - `parent_tabs`: `[{"label", "url", "count", "current"}]`, Overview first.
 - `parent_stats`: optional `[{"label", "value"}]` shown above the tabs; `parent_update_url`.
@@ -1678,6 +2053,28 @@ The parent's Overview tab: its fields as a key–value list, with room for more 
 
 Built from: `parent-base`, `detail-panel`
 
+### General description
+
+A parent overview tab shows the main facts about a record that owns other records, before its related lists.
+
+#### Use cases
+
+- Showing the main details of a project, site or customer.
+- Starting point before related lists.
+- Adding summary panels.
+
+#### When not to use it
+
+- Long related lists: put them on their own tabs.
+- Editing: use a form page.
+
+#### Best practices
+
+- Make Overview the first tab.
+- Show label and value pairs.
+- Keep it short.
+- Link to the related lists.
+
 ### When to use
 
 - The first tab of a parent record.
@@ -1697,8 +2094,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `parent`: the parent object (its title heads every tab).
 - `parent_tabs`: `[{"label", "url", "count", "current"}]`, Overview first.
 - `parent_stats`: optional `[{"label", "value"}]` shown above the tabs; `parent_update_url`.
@@ -1778,6 +2175,28 @@ A child list inside a parent tab: header with count and 'Add … to parent', the
 
 Built from: `parent-base`, `child-list-tab`
 
+### General description
+
+A child list tab shows the records that belong to a parent, such as the tasks of a project, with a count and an add action.
+
+#### Use cases
+
+- Listing items owned by one parent.
+- Adding a new item to that parent.
+- Showing how many related items exist.
+
+#### When not to use it
+
+- Listing records from many parents: use a normal list page.
+- Single related item: show it on the overview.
+
+#### Best practices
+
+- Name the parent in the add button.
+- Show a count.
+- Name the parent in the empty state.
+- Add paging for long lists.
+
 ### When to use
 
 - Each child tab of a parent record. The four parent-child templates (list, detail, form, confirm) make up its pages.
@@ -1798,8 +2217,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `parent`: the parent object (its title heads every tab).
 - `parent_tabs`: `[{"label", "url", "count", "current"}]`, Overview first.
 - `parent_stats`: optional `[{"label", "value"}]` shown above the tabs; `parent_update_url`.
@@ -1880,6 +2299,28 @@ One child record inside its parent's tab: a back link to the list, Edit and Dele
 
 Built from: `parent-base`, `top-actions-header`, `detail-panel`
 
+### General description
+
+A child detail page shows one record that belongs to a parent, while keeping the parent's header and a way back to the list.
+
+#### Use cases
+
+- Reading a single task, invoice or video of a parent.
+- Starting an edit or a delete.
+- Moving back to the parent's list.
+
+#### When not to use it
+
+- Records that stand alone: use a normal detail page.
+- Editing: use a form page.
+
+#### Best practices
+
+- Provide a back link to the list.
+- Keep the parent's header visible.
+- Place edit and delete beside the title.
+- Use a steady field order.
+
 ### When to use
 
 - Opening a child record without leaving its parent.
@@ -1900,8 +2341,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `parent`: the parent object (its title heads every tab).
 - `parent_tabs`: `[{"label", "url", "count", "current"}]`, Overview first.
 - `parent_stats`: optional `[{"label", "value"}]` shown above the tabs; `parent_update_url`.
@@ -1981,6 +2422,28 @@ Create or edit a child inside its parent's tab, with a heading that names the pa
 
 Built from: `parent-base`, `form-stack`
 
+### General description
+
+A child form page creates or edits a record that belongs to a parent, with a heading that names the parent.
+
+#### Use cases
+
+- Adding a new item to a parent.
+- Editing an item of a parent.
+- Keeping context while entering data.
+
+#### When not to use it
+
+- Items that belong to no parent: use a normal form page.
+- Tiny edits: edit in place.
+
+#### Best practices
+
+- Name the parent in the heading.
+- Do not ask people to choose the parent again.
+- Use one column of fields.
+- Add Cancel back to the list.
+
 ### When to use
 
 - Adding and editing child records.
@@ -2001,8 +2464,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `parent`: the parent object (its title heads every tab).
 - `parent_tabs`: `[{"label", "url", "count", "current"}]`, Overview first.
 - `parent_stats`: optional `[{"label", "value"}]` shown above the tabs; `parent_update_url`.
@@ -2082,6 +2545,28 @@ Confirm removing a child from its parent, or explain what blocks it.
 
 Built from: `parent-base`, `confirm-action-panel`, `delete-blocked-notice`
 
+### General description
+
+A child confirm page asks people to confirm removing a record from its parent, or explains why it cannot be removed.
+
+#### Use cases
+
+- Confirming removal of an item from a parent.
+- Explaining what else will go with it.
+- Explaining why removal is blocked.
+
+#### When not to use it
+
+- Actions that can be undone: offer undo instead.
+- Deleting a whole parent: use a delete confirmation.
+
+#### Best practices
+
+- Name both the item and the parent.
+- List the consequences.
+- Name the button with the verb.
+- Give a way to cancel.
+
 ### When to use
 
 - Deleting a child record from inside its parent.
@@ -2102,8 +2587,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `parent`: the parent object (its title heads every tab).
 - `parent_tabs`: `[{"label", "url", "count", "current"}]`, Overview first.
 - `parent_stats`: optional `[{"label", "value"}]` shown above the tabs; `parent_update_url`.

@@ -1,6 +1,6 @@
 # Documentation site
 
-Components for documenting a design system or an API: live examples, code blocks and the navigation tree.
+Components for documenting a design system or API: live examples, code blocks and a navigation tree.
 
 ## Live example
 
@@ -10,6 +10,28 @@ A rendered example and its source as two tabs.
 
 Built from: `tab-bar`, `code-block`
 
+### General description
+
+A panel that shows a working example of a piece of interface next to the code that makes it.
+
+#### Use cases
+
+- Design-system and component documentation.
+- Style guides and tutorials.
+- Showing how an API or widget behaves.
+
+#### When not to use it
+
+- Long code files: link to the source instead.
+- Screenshots of static content: use an image.
+
+#### Best practices
+
+- Make sure the preview and code match.
+- Show the preview first, code second.
+- Let people copy the code easily.
+- Keep each example small and focused.
+
 ### When to use
 
 - Design-system documentation, component galleries, internal style guides.
@@ -17,7 +39,7 @@ Built from: `tab-bar`, `code-block`
 ### How to use
 
 - `<div class="orca-live-example">` with a tab bar (Preview, Code) and two panels; the code panel holds a code block.
-- Render the preview from the same source string you print, so they can never differ (this site does).
+- Render the preview from the same source string you print so they never differ (this site does).
 
 #### Example: Example
 
@@ -54,15 +76,37 @@ Multi-line code with its language and a Copy button.
 
 Built from: `copy-button`
 
+### General description
+
+A formatted area that shows lines of code or commands in an even-width font, usually with a copy button.
+
+#### Use cases
+
+- Documentation with commands and examples.
+- Showing settings or configuration.
+- Sharing API keys or tokens that people copy.
+
+#### When not to use it
+
+- A single word or short name in a sentence: use inline code.
+- Long files: link to the source.
+
+#### Best practices
+
+- Offer a Copy button and confirm it worked.
+- Name the language.
+- Keep samples short and runnable.
+- Scroll sideways instead of wrapping lines.
+
 ### When to use
 
-- Commands, configuration and code samples in documentation and settings (API keys use the copy button).
+- Commands, configuration and code samples in docs and settings (API keys use the copy button).
 
 ### How to use
 
 - `<div class="orca-code-block"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="code-id"><span data-orca-copy-label>Copy</span></button></div><pre><code id="code-id">…</code></pre></div>`.
-- The Copy button carries the copy icon and a check icon (`class="orca-icon--copy"` and `"orca-icon--copied"`); the check shows while it says Copied.
-- Code is coloured by `orca.js` (the vendored highlight.js, loaded only on pages with code) in the `--orca-code-*` colours of the theme, set in the JetBrains Mono font. Name the language with `data-orca-highlight="python"` on the `<code>`, or leave it out to detect it.
+- The Copy button holds a copy icon and a check icon (`class="orca-icon--copy"` and `"orca-icon--copied"`); the check shows while it says Copied.
+- `orca.js` colours code (using the vendored highlight.js, loaded only on pages with code) in the theme's `--orca-code-*` colours, in the JetBrains Mono font. Name the language with `data-orca-highlight="python"` on the `<code>`, or leave it out to detect it.
 - Lines scroll sideways instead of wrapping; keep samples short and runnable.
 
 #### Example: Settings
@@ -97,9 +141,31 @@ Built from: `copy-button`
 
 `id: docs-nav-tree` · level: component · source: ORCA
 
-A documentation sidebar: a filter box above a nav tree of sections and pages.
+A documentation sidebar: a filter box above a tree of sections and pages.
 
 Built from: `nav-tree`, `search-field`
+
+### General description
+
+A side menu for documentation that groups pages into sections and often has a search box to find a page quickly.
+
+#### Use cases
+
+- Documentation sites with many pages.
+- Help centres.
+- Design-system guides.
+
+#### When not to use it
+
+- Sites with only a few pages: use a simple menu.
+- Main product navigation: use a site menu.
+
+#### Best practices
+
+- Group pages into clear sections.
+- Highlight the current page.
+- Let people filter by name.
+- Keep section names short.
 
 ### When to use
 
@@ -107,7 +173,7 @@ Built from: `nav-tree`, `search-field`
 
 ### How to use
 
-- A search field with `data-orca-filter-list="tree-id"` above a nav tree `<ul id="tree-id">`; matching sections open while filtering, empty ones hide.
+- A search field with `data-orca-filter-list="tree-id"` above a nav tree `<ul id="tree-id">`; while filtering, matching sections open and empty ones hide.
 - Keep the current page highlighted and scrolled into view.
 
 #### Example: Docs tree

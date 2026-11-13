@@ -1,18 +1,40 @@
 # Page-type skeletons
 
-The app shell set up for one kind of screen: dashboard, calendar, scheduler, board, timeline, booking, event editor and simple data page. Pass data in the context; override a block only to change a region.
+App-shell setups for one kind of screen: dashboard, calendar, scheduler, board, timeline, booking, event editor and simple data page. Pass data in the context; override a block only to change a region.
 
 ## Dashboard
 
 `id: dashboard` · level: template · source: ORCA
 
-An overview page: a period switch, a stat grid, charts in two columns and room for lists below.
+An overview page: period switch, stat grid, two columns of charts and room for lists below.
 
 Built from: `app-shell`, `kpi-grid`, `bar-chart`, `line-chart`, `two-column-grid`
 
+### General description
+
+An overview page that gathers key numbers, charts and lists in one view so people can see how things are going at a glance.
+
+#### Use cases
+
+- The home screen of an analytics or admin tool.
+- A team or site overview for managers.
+- Monitoring key figures over a chosen period.
+
+#### When not to use it
+
+- Detailed work on single records; use detail or list pages.
+- Dense data exploration; use a report or table with filters.
+
+#### Best practices
+
+- Put the most important numbers at the top.
+- State the time period the figures cover.
+- Keep to a few charts, each answering one question.
+- Link each number to the detail behind it.
+
 ### When to use
 
-- The home of an analytics or operations application; the overview of a site or team.
+- The home page of an analytics or operations app, or the overview of a site or team.
 
 ### How to use
 
@@ -30,8 +52,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `stats`, `charts`, `periods`.
 
 #### Example: Child template
@@ -80,9 +102,31 @@ class Dashboard(TemplateView):
 
 `id: calendar-page` · level: template · source: ORCA
 
-A full calendar: toolbar (previous, Today, next, period, view switch), a side panel with a mini calendar and calendars legend, and the month, week, day or agenda view.
+A full calendar: toolbar (previous, Today, next, period, view switch), a side panel with a mini calendar and legend, and a month, week, day or agenda view.
 
 Built from: `calendar-toolbar`, `mini-calendar-sidebar`, `calendar-legend`, `month-calendar`, `week-view`, `agenda-view`
+
+### General description
+
+A full page for viewing events by month, week, day or agenda, with controls to move between dates and switch views.
+
+#### Use cases
+
+- Event, booking or shift calendars.
+- Planning a team's schedule.
+- Finding free days at a glance.
+
+#### When not to use it
+
+- A single date choice in a form; use a date picker.
+- Resource-by-time planning; use a scheduler.
+
+#### Best practices
+
+- Offer Today, previous and next controls in the same place.
+- Show the current period clearly in the title.
+- Let people switch between month, week, day and agenda views.
+- Do not rely on colour alone to tell event types apart.
 
 ### When to use
 
@@ -92,7 +136,7 @@ Built from: `calendar-toolbar`, `mini-calendar-sidebar`, `calendar-legend`, `mon
 
 - Extend it: `{% extends "orca/layouts/calendar.html" %}`, then fill only the blocks you need.
 - Pass `events`, `view` ("month", "week", "day", "agenda"), `month`, `day`, `today`, `now`, the navigation URLs and `views`.
-- Navigation is plain links with the period in the query string; `calendars` lists the legend checkboxes.
+- Navigation uses plain links with the period in the query string; `calendars` lists the legend checkboxes.
 
 Extend: `{% extends "orca/layouts/calendar.html" %}`
 
@@ -104,8 +148,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `events`, `view`, `month`, `day`, `today`, `now`, `holidays`, `event_days`.
 - `period_title`, `prev_url`, `next_url`, `today_url`, `day_url`, `month_url`, `views`, `calendars`, `create_url`.
 
@@ -173,9 +217,31 @@ class CalendarPage(TemplateView):
 
 `id: scheduler-page` · level: template · source: ORCA
 
-Resources by time for one day: a date toolbar, a row per person, room or vehicle with bookings placed by time, and the legend.
+One day by resource: a date toolbar, a row per person, room or vehicle with bookings placed by time, and a legend.
 
 Built from: `resource-scheduler`, `calendar-toolbar`
+
+### General description
+
+A page that shows one day or week by resource, such as people, rooms or vehicles, with bookings placed along a time axis. It shows who is free and when.
+
+#### Use cases
+
+- Dispatching staff or installers.
+- Booking rooms or equipment.
+- Planning vehicle use.
+
+#### When not to use it
+
+- General event calendars; use a calendar page.
+- Tasks with dependencies; use a timeline.
+
+#### Best practices
+
+- Put one row per resource with a clear name.
+- Show the hours along the top.
+- Make double bookings and gaps easy to see.
+- Keep date controls close to the grid.
 
 ### When to use
 
@@ -196,8 +262,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `resources`, `start_hour`, `end_hour`, `period_title`, `prev_url`, `next_url`, `today_url`.
 
 #### Example: Child template
@@ -251,9 +317,31 @@ class Scheduler(TemplateView):
 
 `id: planning-board-page` · level: template · source: ORCA
 
-A kanban board page: filters on top and columns of cards that move by drag and drop.
+A kanban board: filters on top and columns of cards you drag between stages.
 
 Built from: `kanban-board`, `plan-filter-bar`
+
+### General description
+
+A page that shows work as columns of cards, one column per stage, which people drag between columns. It is often called a kanban board.
+
+#### Use cases
+
+- Tracking tasks through stages such as to do, doing and done.
+- Managing a pipeline of requests or leads.
+- Team workflows with a few clear stages.
+
+#### When not to use it
+
+- Date-driven plans; use a timeline or calendar.
+- Large sets of records to sort or search; use a table.
+
+#### Best practices
+
+- Keep to a few stages with clear names.
+- Show a card's owner and due date at a glance.
+- Offer a keyboard-friendly alternative to dragging.
+- Show limits on work in progress and mark when one is exceeded.
 
 ### When to use
 
@@ -275,8 +363,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `board_columns`, `filter_form`, `create_url`.
 
 #### Example: Child template
@@ -354,6 +442,28 @@ A Gantt timeline: period toolbar, task bars on a day scale with progress, milest
 
 Built from: `gantt-chart`, `milestone-timeline`
 
+### General description
+
+A page that shows tasks as bars along a time scale, with progress, milestones and a line for today. It is also known as a Gantt chart.
+
+#### Use cases
+
+- Project plans and roll-outs.
+- Installation or production schedules.
+- Seeing which tasks overlap or slip.
+
+#### When not to use it
+
+- Simple ordered history; use a vertical timeline.
+- Planning by resource; use a scheduler.
+
+#### Best practices
+
+- Draw a clear marker for today.
+- Show progress on each bar.
+- Label bars with text, not colour alone.
+- Allow zooming or scrolling when the plan is long.
+
 ### When to use
 
 - Project plans, rollouts, installation schedules.
@@ -373,8 +483,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `rows`, `start`, `days`, `today`, `period_title`, navigation URLs.
 
 #### Example: Child template
@@ -427,13 +537,35 @@ class Timeline(TemplateView):
 
 `id: booking-flow` · level: template · source: ORCA
 
-A step-by-step booking page: steps on top, the current step's choices, and a summary of the booking so far beside it.
+A step-by-step booking page: steps on top, the current step's choices, and a booking summary beside them.
 
 Built from: `booking-slot-picker`, `appointment-picker`, `split-layout`
 
+### General description
+
+A page that guides someone through booking a service or time slot in a short series of steps, with a summary that updates as they choose.
+
+#### Use cases
+
+- Booking appointments or classes.
+- Reserving a time slot or table.
+- Short purchase-like processes.
+
+#### When not to use it
+
+- Long applications; use a multi-page form with saved progress.
+- A single quick choice; use one form.
+
+#### Best practices
+
+- Show all steps and where the person is.
+- Keep a running summary of the choices made.
+- Offer clear Back and Continue buttons.
+- End with a confirmation that shows what was booked.
+
 ### When to use
 
-- Appointment and slot booking, any short purchase-like flow.
+- Appointment and slot booking, or any short purchase-like flow.
 
 ### How to use
 
@@ -451,8 +583,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `steps`, `step`, `summary`.
 
 #### Example: Child template
@@ -532,13 +664,35 @@ def book_time(request):
 
 `id: event-editor-page` · level: template · source: ORCA
 
-Create or edit an event on its own page: the form on the left, conflicts and attendees on the right, Delete apart from Save.
+A full page to create or edit an event: form on the left, conflicts and attendees on the right, Delete apart from Save.
 
 Built from: `event-editor`, `attendee-list`, `split-layout`
 
+### General description
+
+A full page for creating or changing an event, with the form beside helpful context such as conflicts and guests. It gives space for many details.
+
+#### Use cases
+
+- Creating or editing events, shifts or bookings.
+- Checking for clashes before saving.
+- Inviting and reviewing attendees.
+
+#### When not to use it
+
+- A quick one-field edit; use inline editing.
+- Simple confirmations; use a dialog.
+
+#### Best practices
+
+- Show conflicts next to the form before people save.
+- Keep Delete apart from Save and ask for confirmation.
+- Offer a clear Cancel route back.
+- Group related fields, such as date and time, together.
+
 ### When to use
 
-- Creating and editing events, shifts, bookings in full.
+- Creating or editing events, shifts and bookings in full.
 
 ### How to use
 
@@ -555,8 +709,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `form`, `object`, `conflicts`, `delete_url`, `cancel_url`, `submit_label`.
 
 #### Example: Child template
@@ -609,9 +763,31 @@ class EventEdit(OrcaPageMixin, UpdateView):
 
 `id: simple-data-page` · level: template · source: ORCA
 
-A data page with everything in one place: title bar, summary tiles that filter, search, a filter drawer and the table.
+A data page with title bar, summary tiles that filter, search, a filter drawer and the table.
 
 Built from: `summary-tiles`, `list-header`, `filter-drawer`, `data-table`, `no-results`
+
+### General description
+
+A page that lists records in a table, with summary counts, search and filters above it. It is the standard page for browsing and managing data.
+
+#### Use cases
+
+- Lists of orders, tickets, alerts or users.
+- Operational screens where counts by status matter.
+- Pages for searching and filtering records.
+
+#### When not to use it
+
+- Overview of key figures; use a dashboard.
+- Editing one record in depth; use a detail page.
+
+#### Best practices
+
+- Show counts by status as quick filters.
+- Keep search easy to find.
+- Show which filters are active and how to clear them.
+- Show a helpful message when nothing matches.
 
 ### When to use
 
@@ -632,8 +808,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 - `subtitle`: one sentence under the title.
 - `breadcrumbs`: a list of `(label, url)`; the current page comes last with an empty url.
 - `nav`: sidebar sections, each `{"label": …, "items": [{"label", "url", "icon", "count", "current"}]}`.
-- `user`: when signed in, the top bar shows the user chip.
-- `messages`: Django messages are shown under the page head automatically.
+- `user`: the top bar shows the user chip when signed in.
+- `messages`: Django messages appear under the page head automatically.
 - `object_list`, `page_obj`, `columns`, `tiles`, `filter_form`, `active_filters`, URLs as in the generic list.
 
 #### Example: Child template

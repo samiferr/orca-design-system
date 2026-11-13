@@ -1,14 +1,37 @@
 # Page frame
 
-The parts every page sits in: headers, top bar, sidebar, footer, page head, messages, drawers and filter panels.
+The parts that surround every page: headers, top bar, sidebar, footer, page head, messages, drawers and filter panels.
 
 ## Header
 
 `id: site-header` · level: pattern · source: ORCA
 
-The public site header: logo, a few section links and one or two actions, sticky at the top.
+Header of public pages: logo, a few section links and one or two actions, sticky at the top.
 
 Built from: `logo-link`, `primary-navigation`, `call-to-action`
+
+### General description
+
+The bar at the top of a website with the logo, a few main links and one or two actions. It helps visitors know where they are and where to go.
+
+#### Use cases
+
+- Marketing pages and documentation sites.
+- Sign-in and sign-up pages.
+- Public pages with a few main sections.
+
+#### When not to use it
+
+- Inside an application with many sections, use a top bar and a sidebar.
+- Many links are better in a menu or footer.
+
+#### Best practices
+
+- Put the logo at the left and link it to the home page.
+- Keep to about 5 links.
+- Mark the current page.
+- Make one action stand out.
+- Let links wrap or collapse on small screens.
 
 ### When to use
 
@@ -60,9 +83,32 @@ Built from: `logo-link`, `primary-navigation`, `call-to-action`
 
 `id: top-bar` · level: pattern · source: Tangerine
 
-The application bar: menu button, logo, main sections, search and the user's tools.
+The application's top bar: menu button, logo, main sections, search and user tools.
 
 Built from: `logo-link`, `primary-navigation`, `utility-navigation`, `search-field`
+
+### General description
+
+The bar across the top of a web application. It usually holds the menu, the logo, main sections, search and tools for the signed-in person.
+
+#### Use cases
+
+- Every signed-in page of an application.
+- Giving quick access to search and notifications.
+- Showing the signed-in person and their menu.
+
+#### When not to use it
+
+- Public marketing pages suit a simple site header.
+- Long lists of sections fit better in a sidebar.
+
+#### Best practices
+
+- Keep it the same on every page.
+- Keep it low in height so content stays in view.
+- Move links into a menu on small screens.
+- Label icon-only buttons for screen readers.
+- Make sure text stays readable against the bar colour.
 
 ### When to use
 
@@ -72,7 +118,7 @@ Built from: `logo-link`, `primary-navigation`, `utility-navigation`, `search-fie
 
 - `<header class="orca-topbar">` with `.orca-topbar__start` (menu or sidebar toggle, logo, primary navigation) and `.orca-topbar__end` (search, utility navigation).
 - It is the wise_people_analyzer bar: `--orca-brand-bar` (the brand colour mixed with 30% black, darkened further if white text would fall below 4.5:1) with `--orca-brand-bar-on` text.
-- Below 1036px the navigation and search move into the drawer; the menu button opens it.
+- Below 1036px, navigation and search move into the drawer, opened by the menu button.
 
 #### Example: Top bar
 
@@ -132,9 +178,32 @@ Built from: `logo-link`, `primary-navigation`, `utility-navigation`, `search-fie
 
 `id: sidebar` · level: pattern · source: Tangerine
 
-The application's side navigation: grouped section links, collapsible to an icon rail, remembered per person.
+Side navigation for an application: grouped section links that collapse to an icon rail, remembered per person.
 
 Built from: `sidebar-link`, `nav-tree`, `collapse-toggle`
+
+### General description
+
+A vertical list of links down the side of an application. It shows the main sections at all times and often collapses to icons.
+
+#### Use cases
+
+- Applications with many sections.
+- Grouping links by area, such as admin.
+- Giving dense screens more room when collapsed.
+
+#### When not to use it
+
+- Sites with only a few sections work with a top bar.
+- On phones, show these links in a drawer instead.
+
+#### Best practices
+
+- Group related links under short headings.
+- Mark the current page.
+- Remember whether the person collapsed it.
+- Give icons text labels or tooltips.
+- Keep the order stable between visits.
 
 ### When to use
 
@@ -144,9 +213,10 @@ Built from: `sidebar-link`, `nav-tree`, `collapse-toggle`
 
 - `<div class="orca-app">` holds `<nav class="orca-sidebar" id=… aria-label="Sections">` and `<main class="orca-app__main">`.
 - Sections: `.orca-sidebar__section` with an optional `.orca-sidebar__label` and side links; `.orca-sidebar__foot` holds the collapse toggle (`data-orca-sidebar-toggle aria-controls=…`).
-- Collapsed (`data-collapsed="true"`): labels become visually hidden but stay readable by screen readers; the rail keeps icons. Give each link a `title` so the rail has tooltips.
+- Collapsed (`data-collapsed="true"`): labels are hidden visually but still read by screen readers, and the rail keeps icons. Give each link a `title` for tooltips.
 - The state is remembered per sidebar in `localStorage` under `orca-sidebar:<id>`, so give the sidebar an `id`.
-- Long lists (like this documentation's navigation) nest a nav tree inside a section; hide the tree when collapsed.Below 620px the sidebar hides; put the same links in a drawer opened from the top bar.
+- Nest a nav tree inside a section for long lists, such as this documentation's navigation; hide it when collapsed.
+- Below 620px the sidebar hides; put the same links in a drawer opened from the top bar.
 
 #### Example: Sidebar with collapse
 
@@ -221,6 +291,28 @@ The bottom of public pages: link columns, legal text and version.
 
 Built from: `logo-link`, `link-column`, `fine-print`
 
+### General description
+
+The area at the bottom of a page with links, legal text and company details. People look there for help, contact and policy links.
+
+#### Use cases
+
+- Contact, help and policy links.
+- Legal notices and copyright.
+- Secondary links not in the main navigation.
+
+#### When not to use it
+
+- Primary navigation belongs in the header.
+- Important actions should not hide in the footer.
+
+#### Best practices
+
+- Group links in columns with short titles.
+- Include privacy and terms links.
+- Keep it simple and consistent on every page.
+- Make links big enough to tap.
+
 ### When to use
 
 - Public and documentation sites; a slim version (legal and version only) in applications.
@@ -270,9 +362,31 @@ Built from: `logo-link`, `link-column`, `fine-print`
 
 `id: page-head` · level: pattern · source: Tangerine
 
-The top of a page's content: breadcrumbs or back link, title, subtitle, meta and the page's actions.
+The top of a page's content: breadcrumbs or back link, title, subtitle, meta info and page actions.
 
 Built from: `page-heading`, `breadcrumbs`, `create-button`
+
+### General description
+
+The top part of a page's content. It tells people where they are with a title and breadcrumbs, and offers the main actions for the page.
+
+#### Use cases
+
+- The top of every application page.
+- Showing the title with a short description.
+- Placing the main actions in a predictable spot.
+
+#### When not to use it
+
+- Marketing pages usually use a hero section instead.
+- Actions for a single row belong in that row.
+
+#### Best practices
+
+- Use one clear page title.
+- Show breadcrumbs or a back link to say where the page sits.
+- Make one action the main one.
+- Put the main action in the same place on every page.
 
 ### When to use
 
@@ -281,7 +395,7 @@ Built from: `page-heading`, `breadcrumbs`, `create-button`
 ### How to use
 
 - `<div class="orca-page-head">` with `.orca-page-head__text` (breadcrumbs or back link, `h1.orca-page-title`, `.orca-page-subtitle`, `.orca-page-head__meta`) and `.orca-page-head__actions`.
-- Actions: secondary buttons first, the primary (or the create button) last; on phones they stretch full width.
+- Actions: secondary buttons first, then the primary or create button; on phones they stretch full width.
 
 #### Example: Page head
 
@@ -330,9 +444,32 @@ Built from: `page-heading`, `breadcrumbs`, `create-button`
 
 `id: messages-region` · level: pattern · source: Tangerine
 
-The place under the page head where results of the last action appear, announced politely.
+A region under the page head that shows the result of the last action, announced politely.
 
 Built from: `flash-message`
+
+### General description
+
+A fixed spot on a page where messages about the result of an action appear, such as 'Saved' or a warning. Screen readers can announce them.
+
+#### Use cases
+
+- Confirming that a save or delete worked.
+- Showing errors that need attention.
+- Messages that must stay until read.
+
+#### When not to use it
+
+- Short, passing confirmations suit a toast.
+- Errors on one field belong next to that field.
+
+#### Best practices
+
+- Always show messages in the same place.
+- Announce them to screen readers.
+- Say what happened and what to do next.
+- Let people dismiss messages.
+- Do not rely on colour alone.
 
 ### When to use
 
@@ -341,7 +478,7 @@ Built from: `flash-message`
 ### How to use
 
 - `<div class="orca-messages-region" aria-live="polite">{% orca_messages %}</div>`; errors inside use `role="alert"`.
-- Toasts float elsewhere; this region holds messages that must stay until read.
+- Toasts float elsewhere; this region keeps messages until they are read.
 
 #### Example: Region
 
@@ -386,9 +523,32 @@ messages.error(request, "The export failed. Try again in a few minutes.")
 
 `id: drawer` · level: pattern · source: Tangerine
 
-A panel that slides over the page from one edge, built on the native dialog.
+A panel that slides in over the page from one edge, built on the native dialog.
 
 Built from: `dialog`, `form-actions`
+
+### General description
+
+A panel that slides in from the edge of the screen over the page. People can do a task there while still seeing the page behind it.
+
+#### Use cases
+
+- Navigation on phones.
+- Filters and quick settings.
+- Details of a selected row.
+
+#### When not to use it
+
+- Long forms need their own page.
+- A short yes or no question suits a dialog.
+
+#### Best practices
+
+- Trap focus inside while it is open.
+- Close it with Escape, the close button or a click outside.
+- Give it a clear title.
+- Return focus to the button that opened it.
+- Keep its content short.
 
 ### When to use
 
@@ -445,9 +605,31 @@ Built from: `dialog`, `form-actions`
 
 `id: top-actions-header` · level: pattern · source: Tangerine
 
-A thin row above a detail or form page: back link on one side, the page's actions on the other.
+A thin row above a detail or form page with a back link on one side and page actions on the other.
 
 Built from: `back-link`, `record-actions`
+
+### General description
+
+A thin row at the top of a detail or form page with a back link on one side and the page's actions on the other.
+
+#### Use cases
+
+- Detail pages reached from a list.
+- Form pages with Save and Cancel actions.
+- Tablet and phone layouts that need little height.
+
+#### When not to use it
+
+- Pages needing a title and subtitle need a full page head.
+- Navigation between sections belongs in the main navigation.
+
+#### Best practices
+
+- Name the place the back link goes to.
+- Keep the actions few.
+- Put less common actions in a 'More' menu.
+- Label icon-only buttons.
 
 ### When to use
 
@@ -489,9 +671,32 @@ Built from: `back-link`, `record-actions`
 
 `id: settings-panel` · level: pattern · source: Tangerine
 
-Display preferences in groups: theme and density, with a live result. ORCA has a single appearance and brand colours set by the project.
+Grouped display preferences, theme and density, applied live. ORCA has one appearance; the project sets brand colours.
 
 Built from: `theme-toggle`, `toggle-field`, `settings-toggle`
+
+### General description
+
+A panel where people adjust how the interface looks and behaves, such as theme, density or reduced motion. Changes take effect straight away.
+
+#### Use cases
+
+- Theme and density choices.
+- Accessibility preferences such as reduced motion.
+- Account preferences.
+
+#### When not to use it
+
+- Rarely changed technical settings belong on a settings page.
+- Preferences everyone must share are project settings, not personal ones.
+
+#### Best practices
+
+- Group related options under clear headings.
+- Apply changes at once and show the result.
+- Remember choices for each person.
+- Offer sensible defaults.
+- Use plain labels for each option.
 
 ### When to use
 
@@ -500,7 +705,7 @@ Built from: `theme-toggle`, `toggle-field`, `settings-toggle`
 ### How to use
 
 - `<div class="orca-settings-panel">` of `<fieldset class="orca-settings-panel__group">`: the theme toggle (Auto, Light, Dark, Paper), and switches for personal preferences such as reduced motion or compact tables.
-- Apply immediately and remember per person. Brand colour, accent and rounding are project settings (brand tokens), not personal ones: ORCA keeps one shape language.
+- Apply at once and remember per person. Brand colour, accent and rounding are project settings (brand tokens), not personal: ORCA keeps one shape language.
 
 #### Example: Panel
 
@@ -536,9 +741,32 @@ Built from: `theme-toggle`, `toggle-field`, `settings-toggle`
 
 `id: filter-panel` · level: pattern · source: Tangerine
 
-Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.
+Labelled groups of filters with a result count and Clear all: the content of the filter drawer.
 
 Built from: `choice-group`, `panel-header`, `search-field`
+
+### General description
+
+A set of filters in labelled groups with the number of matching results. People use it to narrow a long list or table to what they want.
+
+#### Use cases
+
+- Narrowing lists, tables and galleries.
+- Combining several filters at once.
+- Showing how many results match.
+
+#### When not to use it
+
+- A few simple options can be a dropdown or tabs.
+- Free text search alone needs only a search field.
+
+#### Best practices
+
+- Group filters under clear headings.
+- Show a live result count.
+- Offer one 'Clear all' action.
+- Put a search field first for long lists.
+- Use checkboxes for choosing several values.
 
 ### When to use
 
@@ -650,9 +878,32 @@ class VideoList(OrcaPageMixin, ListView):
 
 `id: filter-drawer` · level: pattern · source: Tangerine
 
-Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.
+Page filters in a right drawer opened by a Filters button in the page actions, with Show results and Clear all.
 
 Built from: `filter-button`, `dialog`, `filter-panel`
+
+### General description
+
+A drawer that holds a page's filters. A button opens it, people choose filters, and the results update behind it.
+
+#### Use cases
+
+- Filtering lists, tables and galleries.
+- Pages with many filters.
+- Reports and boards.
+
+#### When not to use it
+
+- One or two simple filters can sit above the results.
+- Quick sorting is better as a dropdown.
+
+#### Best practices
+
+- Show the number of applied filters on the button.
+- Use a clear 'Show results' button with the count.
+- List applied filters above the results so they can be removed.
+- Offer 'Clear all'.
+- Open it from the same place on every page.
 
 ### When to use
 
@@ -785,9 +1036,31 @@ class VideoList(OrcaPageMixin, ListView):
 
 `id: page-landmarks` · level: pattern · source: ORCA
 
-The regions every page has: skip navigation, the main landmark and the place dialogs open in.
+The regions every page has: skip navigation, the main landmark and a place for dialogs.
 
 Built from: `skip-navigation`, `dialog`
+
+### General description
+
+Page landmarks are the main regions every page has, such as a skip link, the main content and navigation. They let assistive technology jump straight to the content.
+
+#### Use cases
+
+- Letting keyboard users skip repeated navigation.
+- Helping screen-reader users move between regions.
+- Giving dialogs one place to open.
+
+#### When not to use it
+
+- Dividing content for looks only: use plain containers.
+- Multiple main areas: use only one per page.
+
+#### Best practices
+
+- Use one main region per page.
+- Make the skip link the first thing to tab to.
+- Label regions that appear more than once.
+- Use real landmark elements.
 
 ### When to use
 
@@ -827,6 +1100,28 @@ Built from: `skip-navigation`, `dialog`
 What an error page says: the code, what happened in plain words, what to do, and a way back.
 
 Built from: `empty-state`, `logo-link`, `back-link`
+
+### General description
+
+An error page tells people that something went wrong, such as a missing page or a server problem, in plain words and offers a way forward.
+
+#### Use cases
+
+- Showing a page not found (404).
+- Showing no access (403) or server error (500).
+- Replacing a section that cannot load.
+
+#### When not to use it
+
+- Mistakes in a form: show inline field errors.
+- Short-lived issues: show a banner or toast.
+
+#### Best practices
+
+- Say what happened in plain words.
+- Offer a clear next step.
+- Do not blame the person.
+- Never show technical traces.
 
 ### When to use
 

@@ -1,22 +1,45 @@
 # Date and time pickers
 
-Native date and time inputs, composed with shortcuts, ranges, time zones and a month grid. Native first: every device already knows how to pick a date.
+Native date and time inputs plus shortcuts, ranges, time zones and a month grid. Native comes first: every device already knows how to pick a date.
 
 ## Date picker
 
 `id: date-picker` · level: component · source: ORCA
 
-A labelled native date input with shortcut buttons for the most common dates.
+A native date input with shortcut buttons for common dates.
 
 Built from: `date-input`, `tag`, `help-text`
 
+### General description
+
+A field for choosing a date, usually through the browser's calendar or typing. Shortcuts can speed up the most common choices.
+
+#### Use cases
+
+- Due dates, start dates and report dates.
+- Booking or scheduling a single day.
+- Filtering by a date.
+
+#### When not to use it
+
+- Birthdates and other dates far in the past; use separate day, month and year fields.
+- Choosing a period; use a date range picker.
+
+#### Best practices
+
+- Use the native date input where possible.
+- Label the field and state the allowed range.
+- Offer shortcuts like Today and Tomorrow.
+- Allow typing as well as picking.
+- Show the date format people should use.
+
 ### When to use
 
-- Choosing one date near today: a report date, a due date, a start date.
+- One date near today, such as a report, due or start date.
 
 ### When not to use
 
-- Dates far in the past people know by heart: use the split date input.
+- Distant past dates people know by heart: use the split date input.
 
 ### How to use
 
@@ -72,6 +95,28 @@ A labelled native time input with a step and its timezone.
 
 Built from: `time-input`, `timezone-label`
 
+### General description
+
+A field for choosing a time of day. It follows the person's 12 or 24 hour habit and often moves in set steps.
+
+#### Use cases
+
+- Start times and reminders.
+- Opening hours.
+- Scheduling appointments.
+
+#### When not to use it
+
+- Lengths of time such as 90 minutes; use a duration picker.
+- Both a date and a time; use a date and time picker.
+
+#### Best practices
+
+- Use the native time input.
+- Use steps such as 15 minutes when exact minutes do not matter.
+- Show the time zone when it could be unclear.
+- Label the field clearly.
+
 ### When to use
 
 - Start times, reminder times, opening hours.
@@ -79,7 +124,7 @@ Built from: `time-input`, `timezone-label`
 ### How to use
 
 - `.orca-field` > label + `.orca-row` containing `<input class="orca-input" type="time" step="900">` and a timezone label.
-- Omit the timezone label when every time on the page is in the reader's zone.
+- Leave out the timezone label when all times on the page use the reader's zone.
 
 #### Example: Opening time
 
@@ -105,13 +150,35 @@ Built from: `time-input`, `timezone-label`
 
 `id: datetime-picker` · level: component · source: ORCA
 
-A date and a time as two labelled fields in one group, with the timezone.
+A date field and a time field in one group, with the timezone.
 
 Built from: `date-input`, `time-input`, `timezone-label`
 
+### General description
+
+A pair of fields for a date and a time, together describing one moment. Keeping them separate makes each easy to fill in and correct.
+
+#### Use cases
+
+- When a task starts or access expires.
+- Scheduling a message or publication.
+- Setting a deadline with a time.
+
+#### When not to use it
+
+- Date only; use a date picker.
+- A start and an end; use a date range picker.
+
+#### Best practices
+
+- Group the date and time under one label.
+- Show the time zone.
+- Store the moment in a standard form such as UTC.
+- Check that the moment is allowed, for example not in the past.
+
 ### When to use
 
-- One moment: when a run starts, when access expires.
+- A single moment, such as when a run starts or access expires.
 
 ### How to use
 
@@ -147,9 +214,32 @@ Built from: `date-input`, `time-input`, `timezone-label`
 
 `id: date-range-picker` · level: component · source: ORCA
 
-Start and end dates with presets, kept in order, and the length in days.
+Start and end dates with presets, always in order, and the length in days.
 
 Built from: `date-input`, `preset-buttons`
+
+### General description
+
+A control to choose a start and end date. Presets like Last 7 days make common periods quick, and the end stays after the start.
+
+#### Use cases
+
+- Report periods.
+- Booking time off or travel dates.
+- Filtering lists by date.
+
+#### When not to use it
+
+- A single day; use a date picker.
+- Ranges of time within one day; use a time range input.
+
+#### Best practices
+
+- Offer common presets.
+- Keep the end date on or after the start date.
+- Show the length of the chosen range.
+- Label the start and the end clearly.
+- Say whether the end date is included.
 
 ### When to use
 
@@ -158,7 +248,7 @@ Built from: `date-input`, `preset-buttons`
 ### How to use
 
 - `<fieldset class="orca-inline-fields" data-orca-range>` with a legend, a From date field, a To date field and `<p class="orca-inline-fields__note" data-orca-range-output aria-live="polite">`.
-- Presets: a preset-buttons row above it (Today, This week, Last 7 days, This month).
+- Presets go in a row above it (Today, This week, Last 7 days, This month).
 - orca.js sets the end field's `min` to the start and moves the end when needed.
 
 #### Example: Report period
@@ -191,9 +281,32 @@ Built from: `date-input`, `preset-buttons`
 
 `id: time-range-input` · level: component · source: ORCA
 
-Start and end times with the resulting duration, saying when it ends the next day.
+Start and end times with the duration, noting when it ends the next day.
 
 Built from: `time-input`, `duration-label`
+
+### General description
+
+Two time fields for a start and an end, usually with the resulting length. It helps people set periods within a day, including overnight ones.
+
+#### Use cases
+
+- Opening hours.
+- Work shifts.
+- Booking windows.
+
+#### When not to use it
+
+- Periods across several days; use a date range picker.
+- Only a length of time; use a duration picker.
+
+#### Best practices
+
+- Show the length that results.
+- Say clearly when the end is the next day.
+- Validate on the server as well.
+- Label start and end clearly.
+- Use steps that suit the task, such as 15 minutes.
 
 ### When to use
 
@@ -202,7 +315,7 @@ Built from: `time-input`, `duration-label`
 ### How to use
 
 - `<fieldset class="orca-inline-fields" data-orca-range>` with Start and End time fields and an `orca-inline-fields__note` output.
-- Validate on the server too; decide whether overnight ranges are allowed and say so.
+- Also validate on the server; decide whether overnight ranges are allowed and say so.
 
 #### Example: Shift
 
@@ -238,6 +351,28 @@ Hours and minutes fields with quick choices for common durations.
 
 Built from: `duration-input`, `tag`
 
+### General description
+
+A control for entering a length of time, such as hours and minutes. Quick choices cover usual lengths while fields allow exact values.
+
+#### Use cases
+
+- Meeting lengths.
+- Timeouts and retention periods.
+- Reminder offsets.
+
+#### When not to use it
+
+- A specific time of day; use a time picker.
+- A start and end; use a time range input.
+
+#### Best practices
+
+- Show units next to each field.
+- Offer common lengths as quick buttons.
+- Accept values like 90 minutes and tidy them up.
+- Set sensible minimum and maximum limits.
+
 ### When to use
 
 - Meeting lengths, retention, timeouts, reminder offsets.
@@ -245,7 +380,7 @@ Built from: `duration-input`, `tag`
 ### How to use
 
 - `.orca-field` containing a duration input (two parts with addons) and `.orca-shortcuts` tags (15 min, 30 min, 1 h).
-- Shortcuts set both parts with a small script or a server round-trip; normalise minutes over 59 on the server.
+- Shortcuts set both parts by script or server round-trip; normalise minutes over 59 on the server.
 
 #### Example: Meeting length
 
@@ -285,6 +420,28 @@ Built from: `duration-input`, `tag`
 A timezone select with a 'Use my timezone' button and the current offset.
 
 Built from: `timezone-select`, `button`
+
+### General description
+
+A control for choosing a time zone, often with a button to use the person's own. It prevents mix-ups when schedules cross regions.
+
+#### Use cases
+
+- Account or site settings.
+- Scheduling events for people in other places.
+- Reports that depend on local time.
+
+#### When not to use it
+
+- Sites where everything uses one fixed zone; just state the zone.
+- Guessing the zone silently; let people confirm it.
+
+#### Best practices
+
+- Detect the person's zone and let them change it.
+- Show the zone's current offset or local time.
+- Make the list searchable and use readable place names.
+- Store the zone by its standard name.
 
 ### When to use
 
@@ -362,9 +519,31 @@ Previous and next buttons around a month select and a year select.
 
 Built from: `icon-button`, `select`, `month-name`, `year-label`
 
+### General description
+
+Buttons and selects for moving a calendar or report between months and years. Arrows handle small steps and the selects allow big jumps.
+
+#### Use cases
+
+- Calendar headers.
+- Monthly reports.
+- Browsing archives by month.
+
+#### When not to use it
+
+- Picking one date to submit; use a date picker.
+- Browsing only a few days; use simple next and previous links.
+
+#### Best practices
+
+- Name the previous and next buttons with the month they lead to.
+- Show the current month and year clearly.
+- Limit years to a useful range.
+- Let people return to today quickly.
+
 ### When to use
 
-- Calendars and reports navigated by month, especially far from today.
+- Calendars and reports browsed by month, especially far from today.
 
 ### How to use
 
@@ -431,19 +610,41 @@ A server-rendered month grid with today, selected, outside, weekend and holiday 
 
 Built from: `day-number`, `weekday-name`, `today-marker`, `selected-day-marker`, `outside-day-marker`, `weekend-marker`, `holiday-marker`, `event-dot`
 
+### General description
+
+A small month grid that shows dates in context. Days can be marked as today, selected, holidays or days with events.
+
+#### Use cases
+
+- Sidebars on calendar pages.
+- Filtering a list by day.
+- Showing which days have events.
+
+#### When not to use it
+
+- Picking a single date in a form; a date input is simpler.
+- Detailed schedules with times; use a full calendar view.
+
+#### Best practices
+
+- Mark today and the selected day clearly, with more than colour.
+- Name each day with its full date for screen readers.
+- Start the week on the day people expect.
+- Make day cells large enough to tap.
+
 ### When to use
 
-- Sidebars of calendars, date filters, showing which days have events.
+- Calendar sidebars, date filters, marking days that have events.
 
 ### When not to use
 
-- Picking one date in a form: the native date input is simpler.
+- Picking one date in a form: use the simpler native date input.
 
 ### How to use
 
 - `{% orca_mini_calendar month selected=day url="/events/?day={date}" nav_url="?month={month}" events=event_days holidays=holiday_map week_numbers=True %}`.
 - Without `url`, days render as buttons with `data-date` for your own script.
-- Each day's accessible name is the full date plus today, holiday and 'has events' notes.
+- Each day is named by its full date plus any today, holiday or 'has events' note.
 
 #### Example: November 2026
 

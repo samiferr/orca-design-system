@@ -1,18 +1,40 @@
 # Feedback
 
-How the system tells people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.
+Messages that tell people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.
 
 ## Alert
 
 `id: alert` · level: component · source: Tangerine
 
-An event message in a white box with a coloured side bar: icon, title, text and optional actions.
+A message about an event, in a box with a coloured side bar, icon, title, text and optional actions.
 
 Built from: `alert-icon`, `alert-title`, `button`
 
+### General description
+
+A message that tells people something happened and needs their attention, such as an error, a warning or a success.
+
+#### Use cases
+
+- Showing that an action failed and how to fix it.
+- Warnings about problems with the system or an account.
+- Results that should stay visible on the page.
+
+#### When not to use it
+
+- Quick confirmations that can disappear: use a toast.
+- Permanent tips and notes: use a callout.
+
+#### Best practices
+
+- Say what happened in the title and what to do in the text.
+- Use plain words, not codes.
+- Never rely on colour alone to show the type.
+- Do not show more than one or two at a time.
+
 ### When to use
 
-- Results of an action that stay on the page: a failed test, a video offline, a saved setting with a warning.
+- Action results that stay on the page: a failed test, an offline video, a setting saved with a warning.
 - Server messages after a redirect (see flash message).
 
 ### When not to use
@@ -72,9 +94,31 @@ A tinted box of guidance that belongs to the page, not to an event.
 
 Built from: `status-icon`
 
+### General description
+
+A highlighted box that draws attention to a note, tip, warning or limit within the content of a page.
+
+#### Use cases
+
+- Explaining a consequence before someone acts.
+- Tips and limits on settings pages.
+- Pointing out an important note inside documentation.
+
+#### When not to use it
+
+- Results of something the user just did: use an alert.
+- Content that makes up most of the page: use normal text.
+
+#### Best practices
+
+- Keep it to a sentence or two.
+- Use a clear title and an icon.
+- Pick the tone to match the message.
+- Use few callouts per page or they get ignored.
+
 ### When to use
 
-- Explaining a consequence before people act ('Deleting a site deletes its videos').
+- Stating a consequence before people act ('Deleting a site deletes its videos').
 - Tips and limits on settings pages.
 
 ### When not to use
@@ -125,9 +169,31 @@ Built from: `status-icon`
 
 `id: empty-state` · level: component · source: Tangerine
 
-Illustration, title, explanation and the next action, where a list or page has nothing yet.
+An illustration, title, explanation and next action shown where a list or page is empty.
 
 Built from: `illustration`, `empty-title`, `empty-text`, `button`
+
+### General description
+
+What people see when a page or list has nothing to show yet, such as a new account or a search with no results.
+
+#### Use cases
+
+- First use, before any content exists.
+- Searches or filters with no matches.
+- A cleared inbox or finished list.
+
+#### When not to use it
+
+- Small areas such as one chart: use a short no-data message.
+- Loading in progress: use a loading indicator.
+
+#### Best practices
+
+- Say why it is empty in plain words.
+- Offer the next step, such as a create button.
+- Keep a friendly, calm tone.
+- Suggest how to change the search when nothing matches.
 
 ### When to use
 
@@ -180,9 +246,31 @@ Built from: `illustration`, `empty-title`, `empty-text`, `button`
 
 `id: no-data-state` · level: component · source: ORCA
 
-A compact message inside a chart, table or tile that has no data for the chosen period.
+A compact message in a chart, table or tile with no data for the chosen period.
 
 Built from: `muted-text`
+
+### General description
+
+A short message in a chart, table or tile that has nothing to show, saying there is no data and why.
+
+#### Use cases
+
+- Charts with no data for the chosen dates.
+- Table bodies when filters match nothing.
+- Dashboard tiles that have not collected data yet.
+
+#### When not to use it
+
+- Whole pages with nothing yet: use an empty state.
+- Content still loading: use a loading indicator.
+
+#### Best practices
+
+- Say there is no data, and give the reason if known.
+- Keep the message the same size as what it replaces.
+- Do not leave charts or tables blank.
+- Tell people how to get data if they can.
 
 ### When to use
 
@@ -215,6 +303,28 @@ A dot, a status word and an optional time: 'Offline since 08:14'.
 
 Built from: `status-dot`, `time-label`
 
+### General description
+
+A small coloured dot with a word showing whether something is working, such as online, offline or degraded.
+
+#### Use cases
+
+- Showing whether a device or service is up.
+- Job or connection state in lists and headers.
+- Dashboards of many systems.
+
+#### When not to use it
+
+- Progress of a task: use a progress bar.
+- Anything that needs explaining: use an alert.
+
+#### Best practices
+
+- Always include a word, not only a colour.
+- Show since when the state has held.
+- Use the same state words everywhere.
+- Keep the dot small and consistent in size.
+
 ### When to use
 
 - Device, service or job state in lists, cards and headers.
@@ -246,9 +356,31 @@ Built from: `status-dot`, `time-label`
 
 `id: dialog` · level: component · source: ORCA
 
-A modal window with a title, a body and actions, built on the native <dialog>.
+A modal window with a title, body and actions, built on the native <dialog>.
 
 Built from: `dialog-backdrop`, `dialog-title`, `button`, `icon-button`
+
+### General description
+
+A window that opens on top of the page and asks people to finish a short task or make a choice before going on.
+
+#### Use cases
+
+- Short tasks such as renaming or choosing an option.
+- Confirming a choice.
+- Collecting one or two details.
+
+#### When not to use it
+
+- Long forms: use a separate page.
+- Content people need to compare with the page: use a side panel.
+
+#### Best practices
+
+- Give it a clear title that names the task.
+- Move focus into the dialog and back when it closes.
+- Let Escape and a close button dismiss it.
+- Put the main action first and label it with a verb.
 
 ### When to use
 
@@ -256,7 +388,7 @@ Built from: `dialog-backdrop`, `dialog-title`, `button`, `icon-button`
 
 ### When not to use
 
-- Long forms or content people compare with the page: use a page or a drawer.
+- Long forms, or content people compare with the page: use a page or drawer.
 
 ### How to use
 
@@ -308,9 +440,31 @@ Built from: `dialog-backdrop`, `dialog-title`, `button`, `icon-button`
 
 `id: confirm-dialog` · level: component · source: Tangerine
 
-A dialog that names the consequence and the action before something irreversible happens.
+A dialog that names the consequence and action before something irreversible happens.
 
 Built from: `dialog-title`, `button`, `checkbox`
+
+### General description
+
+A dialog that asks people to confirm before something that cannot be undone, such as a deletion.
+
+#### Use cases
+
+- Deleting data or accounts.
+- Cancelling a running process.
+- Removing someone's access.
+
+#### When not to use it
+
+- Actions that can be reversed: do them and offer Undo.
+- Common, harmless actions: asking each time causes fatigue.
+
+#### Best practices
+
+- Ask a question that names the thing affected.
+- Say what will happen in one sentence.
+- Label the button with the action, such as Delete video.
+- Put focus on the safe choice, Cancel.
 
 ### When to use
 
@@ -322,9 +476,9 @@ Built from: `dialog-title`, `button`, `checkbox`
 
 ### How to use
 
-- Markup: a dialog with a question title ('Delete Entrance A?'), one sentence of consequence, a `--danger` button repeating the verb and object, and Cancel (focused first).
+- A dialog with a question title ('Delete Entrance A?'), one sentence on the consequence, a `--danger` button repeating the verb and object, and Cancel (focused first).
 - Shortcut: add `data-orca-confirm="Its zones and alert rules are deleted." data-orca-confirm-title="Delete Entrance A?" data-orca-confirm-action="Delete video"` to the form or submit button.
-- Very serious consequences: add a required acknowledgement checkbox in `.orca-dialog__ack`.
+- For very serious consequences, add a required acknowledgement checkbox in `.orca-dialog__ack`.
 
 #### Example: Shortcut attribute
 
@@ -390,9 +544,31 @@ def delete_video(request, pk):
 
 `id: progress-with-counts` · level: component · source: ORCA
 
-A labelled progress bar with the value in words and the counts behind it.
+A labelled progress bar showing the value and the counts behind it.
 
 Built from: `progress-bar`, `tabular-number`
+
+### General description
+
+A progress bar with a label and numbers saying how much is done, how much remains and how long it may take.
+
+#### Use cases
+
+- Uploads, exports and imports.
+- Batch jobs that process many items.
+- Multi-step tasks that take more than a few seconds.
+
+#### When not to use it
+
+- Waits under a second or two: no indicator is needed.
+- Unknown length: use a simple loading spinner.
+
+#### Best practices
+
+- Show real numbers, such as 77 of 120.
+- Give a time estimate when it is reliable.
+- Tell people about failures as they happen.
+- Announce when it finishes.
 
 ### When to use
 
@@ -435,9 +611,31 @@ Built from: `progress-bar`, `tabular-number`
 
 `id: toast` · level: component · source: ORCA
 
-A short message that appears at the bottom corner after an action and goes away by itself; several stack.
+A short message that appears in the bottom corner after an action and goes away on its own; several can stack.
 
 Built from: `status-icon`, `button`
+
+### General description
+
+A small message that appears briefly, usually at the edge of the screen, to confirm something just happened.
+
+#### Use cases
+
+- Confirming a saved or sent item.
+- Offering Undo after a quick action.
+- Short updates that need no reply.
+
+#### When not to use it
+
+- Errors and warnings people must act on: use an alert.
+- Messages people must be able to read later: keep them on the page.
+
+#### Best practices
+
+- Keep it to one short sentence.
+- Leave it up long enough to read, about 5 seconds.
+- Pause it while someone points at it.
+- Never move keyboard focus to it.
 
 ### When to use
 
@@ -501,6 +699,28 @@ Django messages shown as dismissible alerts at the top of the next page.
 
 Built from: `alert`
 
+### General description
+
+A message shown at the top of the next page after a form is sent, telling people what the result was.
+
+#### Use cases
+
+- Confirming a record was created, saved or deleted.
+- Reporting that a form submission failed.
+- Showing the result after a redirect.
+
+#### When not to use it
+
+- Errors next to a form field: show them beside the field.
+- Instant feedback without leaving the page: use a toast.
+
+#### Best practices
+
+- Place it where people will see it first.
+- State clearly what was done.
+- Let people dismiss it.
+- Use the right tone for success, warning and error.
+
 ### When to use
 
 - Results of form posts that redirect: created, saved, deleted, failed.
@@ -561,6 +781,28 @@ A short label that appears on hover and keyboard focus, naming an icon-only cont
 
 Built from: `icon-button`
 
+### General description
+
+A small label that appears when someone hovers over or focuses on an item, to name or explain it.
+
+#### Use cases
+
+- Naming icon-only buttons.
+- Showing the full text of a shortened label.
+- Giving a quick hint about a control.
+
+#### When not to use it
+
+- Important information: put it on the page where everyone can see it.
+- Touch devices, where hover does not exist: show the label.
+
+#### Best practices
+
+- Keep it to a few words.
+- Make it appear on keyboard focus, not only on hover.
+- Do not put links or buttons inside it.
+- Let Escape close it.
+
 ### When to use
 
 - Icon-only buttons in toolbars; truncated labels.
@@ -601,9 +843,31 @@ Built from: `icon-button`
 
 `id: card-skeleton` · level: component · source: ORCA
 
-The grey shape of a card (image, title, two lines) while the real card loads.
+The grey shape of a card (image, title, two lines) while it loads.
 
 Built from: `skeleton`
+
+### General description
+
+A grey outline shaped like a card, shown while the real card is loading. It tells people content is coming and keeps the page from jumping.
+
+#### Use cases
+
+- Grids and feeds that load content after the page appears.
+- Product, video or article cards.
+- Slow data that takes more than a moment.
+
+#### When not to use it
+
+- Quick loads under about a second; show nothing instead.
+- Actions in progress such as saving; use a spinner or progress message.
+
+#### Best practices
+
+- Match the size and shape of the real card.
+- Replace it in place when content arrives.
+- Hide the shapes from screen readers and announce loading instead.
+- Use a calm look and avoid fast flashing.
 
 ### When to use
 

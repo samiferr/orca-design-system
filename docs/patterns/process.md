@@ -1,6 +1,6 @@
 # Process and status
 
-Following a long-running job: what is done, what is happening, what failed and what to do.
+Following a long-running job: what is done, what is happening, what failed and what to do next.
 
 ## Video export progress
 
@@ -10,15 +10,37 @@ A running job's progress: overall bar with counts and time left, the steps, and 
 
 Built from: `progress-with-counts`, `steps`, `status-light`, `confirm-dialog`
 
+### General description
+
+A view of a long-running job, such as an export, that shows overall progress, the current step, time left and the result for each item.
+
+#### Use cases
+
+- Following exports, imports and bulk updates.
+- Showing which items finished or failed.
+- Letting people cancel or retry a job.
+
+#### When not to use it
+
+- Quick actions under about 10 seconds: a simple spinner is enough.
+- Jobs that run in the background for hours: send a notification when done.
+
+#### Best practices
+
+- Show progress, the current step and an estimate.
+- Tell screen readers about updates politely.
+- Update at a calm pace, not every frame.
+- End with a clear summary and a way to retry failures.
+
 ### When to use
 
-- Video exports, imports, bulk updates: anything that runs for more than ~10 seconds.
+- Video exports, imports, bulk updates: anything running longer than ~10 seconds.
 
 ### How to use
 
 - `<section class="orca-run-progress" aria-live="polite">` with progress-with-counts, steps (done, current), and `<ul class="orca-run-progress__cams">` with each item's status light.
 - Offer 'Cancel run' (confirmed) while it runs and 'Retry failed' at the end; refresh with htmx polling every few seconds, not every frame.
-- End with a clear result: an alert stating what was done and what failed.
+- End with an alert stating what was done and what failed.
 
 #### Example: Run
 

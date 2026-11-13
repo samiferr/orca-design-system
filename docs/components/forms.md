@@ -1,18 +1,41 @@
 # Forms
 
-Fields and the small groups around them. A form field is the unit people complete: label, hint, error and control in a fixed order.
+Fields and the small groups around them. A form field holds a label, hint, error and control in a fixed order.
 
 ## Form field
 
 `id: form-field` · level: component · source: ORCA
 
-Label, optional marker, help, error and one control, wired together. Text inputs and selects.
+One control with its label, optional marker, help and error, linked together. For text inputs and selects.
 
 Built from: `label`, `required-marker`, `help-text`, `error-text`, `text-input`, `select`, `textarea`, `color-input`
 
+### General description
+
+A form field pairs one input with its label, hint and error message. It is the basic unit people fill in to give information.
+
+#### Use cases
+
+- Collecting a name, email address or number in a sign-up or settings form.
+- Picking one option from a dropdown inside a form.
+- Entering longer text, such as a message or description.
+
+#### When not to use it
+
+- For a single yes or no choice, use a checkbox or switch instead.
+- For a short list of options, use radio buttons so all choices stay visible.
+
+#### Best practices
+
+- Put a visible label above every input; never rely on placeholder text alone.
+- Show the hint before the input and the error next to it.
+- Say what is wrong and how to fix it in error messages.
+- Mark optional fields rather than required ones when most fields are required.
+- Use the right input type so phones show a suitable keyboard.
+
 ### When to use
 
-- Every single-value field of a form: text, number, email, date, select, textarea.
+- Any single-value field: text, number, email, date, select, textarea.
 
 ### When not to use
 
@@ -23,13 +46,13 @@ Built from: `label`, `required-marker`, `help-text`, `error-text`, `text-input`,
 
 - Django forms: `{% orca_field form.name %}`. Options: `width="w8"` (input width), `label="…"`, `help_text="…"`, `hide_label=True` (search only).
 - Manual markup: `<div class="orca-field">` with `orca-label`, `orca-help` (id), `orca-error` (id) and the control with `aria-describedby="error-id help-id"` and `aria-invalid` when invalid.
-- Optional fields get “(optional)” automatically from `required=False`.
-- Stack fields in `.orca-fields` (24px apart) so each label sits closer to its own control than to the field above.
-- Date, time and date-time Django widgets render as native pickers with ISO values.
+- `required=False` adds “(optional)” automatically.
+- Stack fields in `.orca-fields` (24px apart) so each label sits nearer its own control than the field above.
+- Django date, time and date-time widgets render as native pickers with ISO values.
 
 ### Accessibility
 
-- The error id comes first in `aria-describedby` so it is read before the hint.
+- List the error id first in `aria-describedby` so it is read before the hint.
 
 #### Example: Text and select fields
 
@@ -129,10 +152,33 @@ One checkbox or switch with its label, description and error.
 
 Built from: `checkbox`, `switch`, `help-text`, `error-text`
 
+### General description
+
+A single checkbox or switch with its label and description. It lets people turn one option on or off.
+
+#### Use cases
+
+- Agreeing to terms or opting in to emails.
+- Turning a feature on or off in settings.
+- Marking one yes or no answer inside a longer form.
+
+#### When not to use it
+
+- For picking one answer from several, use radio buttons instead.
+- For a choice that needs a Save button, use a checkbox rather than an instant switch.
+
+#### Best practices
+
+- Word the label as the result of turning it on, in positive terms.
+- Use a switch only when the change takes effect immediately.
+- Make the whole label clickable, not just the small box.
+- Keep descriptions short and place them under the label.
+- Show an error next to the control if a required box is left unticked.
+
 ### When to use
 
 - Checkbox: an option saved with the form ('Email me a daily report').
-- Switch: a setting that applies the moment it changes ('Video enabled').
+- Switch: a setting that applies at once ('Video enabled').
 
 ### When not to use
 
@@ -201,9 +247,32 @@ class NotificationForm(forms.Form):
 
 `id: choice-group` · level: component · source: ORCA
 
-A fieldset of radios (one answer) or checkboxes (several answers) with a legend, hint and error.
+Radios (one answer) or checkboxes (several answers) in a fieldset with a legend, hint and error.
 
 Built from: `radio`, `checkbox`, `label`
+
+### General description
+
+A set of radio buttons or checkboxes under one question. Radios allow one answer; checkboxes allow several.
+
+#### Use cases
+
+- Choosing a plan, delivery method or frequency from a few options.
+- Selecting several interests or notification channels.
+- Answering a survey question with a short list of answers.
+
+#### When not to use it
+
+- For a long list of options, use a dropdown or searchable picker instead.
+- For one on or off setting, use a single checkbox or switch.
+
+#### Best practices
+
+- Wrap the options in a fieldset with a legend that states the question.
+- Keep the list short, usually 2 to 7 options for radios.
+- Order options in a logical way, not at random.
+- Pre-select a safe default only when most people would choose it.
+- Show an error message for the whole group, not each option.
 
 ### When to use
 
@@ -218,7 +287,7 @@ Built from: `radio`, `checkbox`, `label`
 
 - Django: `{% orca_field form.interval %}` for RadioSelect and CheckboxSelectMultiple widgets; `horizontal=True` for 2–3 short options.
 - Markup: `<fieldset class="orca-choice-group">`, `<legend class="orca-label">`, then `.orca-choice-group__items` with radios or checkboxes.
-- Order options logically (frequency, size, time); mark a recommended option in its label only when it is truly recommended.
+- Order options logically (frequency, size, time); mark one as recommended in its label only if it truly is.
 
 ### Accessibility
 
@@ -283,6 +352,29 @@ A labelled search input with magnifier, clear button and a live result count.
 
 Built from: `search-input`
 
+### General description
+
+A text box for typing a few words to narrow down what is already on the page, with a clear button and a result count.
+
+#### Use cases
+
+- Filtering a table, list or menu as the person types.
+- Finding one item in a long settings or help list.
+- Narrowing results on a page without reloading it.
+
+#### When not to use it
+
+- For searching a whole site or large collection, use a full search form with a button.
+- For a short list of 5 or fewer items, no search is needed.
+
+#### Best practices
+
+- Label the field clearly, even when the label is visually hidden.
+- Show the number of results and update it as people type.
+- Provide a clear button to reset the filter in one click.
+- Wait a moment after typing stops before filtering heavy lists.
+- Show a helpful message when nothing matches.
+
 ### When to use
 
 - Filtering a list, table or menu already on the page.
@@ -344,6 +436,29 @@ A search form: optional scope select, search field and a Search button.
 
 Built from: `search-input`, `select`, `button`
 
+### General description
+
+A search form with a text box and a button, sometimes with a menu to limit the search area. People submit it to see results.
+
+#### Use cases
+
+- Searching a whole website, shop or knowledge base.
+- Finding records in a large database or archive.
+- Searching within one category chosen from a menu.
+
+#### When not to use it
+
+- To narrow a list already on screen, use an instant filter field instead.
+- For a few items, browsing or a menu is quicker than searching.
+
+#### Best practices
+
+- Place it where people expect it, usually the top of the page.
+- Support the Enter key as well as the button.
+- Keep the typed query visible on the results page.
+- Put the query in the web address so results can be shared.
+- Offer help when there are no results, such as spelling tips.
+
 ### When to use
 
 - Searching the application or a large collection on the server.
@@ -351,7 +466,7 @@ Built from: `search-input`, `select`, `button`
 ### How to use
 
 - `<form class="orca-search-bar" role="search" method="get">` with an optional `.orca-select` scope, an `.orca-search` and `<button class="orca-button" type="submit">Search</button>`.
-- Keep the query in the field after submit; put it in the URL (`?q=`) so results can be shared.
+- Keep the query in the field after submit and in the URL (`?q=`) so results can be shared.
 
 #### Example: Search bar
 
@@ -389,9 +504,32 @@ The row above a table: search, filters and view options on the left, actions on 
 
 Built from: `search-input`, `button`, `count-badge`
 
+### General description
+
+A row of controls above a table or list that holds search, filters, view options and actions, plus bulk actions for selected rows.
+
+#### Use cases
+
+- Searching and filtering a large data table.
+- Applying one action to many selected rows at once.
+- Exporting or adding records from a list page.
+
+#### When not to use it
+
+- For short lists with no actions, a toolbar adds clutter; leave it out.
+- For actions on a single row, use a row menu instead.
+
+#### Best practices
+
+- Group controls by purpose: finding on the left, acting on the right.
+- Show the number of selected rows next to the bulk actions.
+- Hide actions that do not apply to the current selection.
+- Keep the toolbar in one row on wide screens and wrap it cleanly on small ones.
+- Give the toolbar a label so screen readers can announce it.
+
 ### When to use
 
-- Above data tables and card lists with more than one page of items.
+- Above tables and card lists that span more than one page.
 
 ### How to use
 
@@ -450,6 +588,29 @@ A dropdown with a filter and a checkbox list, showing the chosen values as remov
 
 Built from: `checkbox`, `search-input`, `tag`
 
+### General description
+
+A dropdown that lets people filter a long list and tick several items. The chosen items appear as tags that can be removed.
+
+#### Use cases
+
+- Assigning several people or teams to a task.
+- Choosing multiple categories or tags for an item.
+- Selecting several sites, devices or products from a long list.
+
+#### When not to use it
+
+- For a short list that fits on screen, use a checkbox group instead.
+- For picking only one item, use a select or searchable dropdown.
+
+#### Best practices
+
+- Add a filter box when the list has more than about 10 items.
+- Show chosen items as removable tags so they stay visible.
+- Summarize the selection in the button, such as the number chosen.
+- Provide Clear and Done buttons inside the list.
+- Make every option reachable and selectable by keyboard.
+
 ### When to use
 
 - Choosing several known items from 10 to a few hundred: videos, sites, people.
@@ -462,7 +623,7 @@ Built from: `checkbox`, `search-input`, `tag`
 
 - `<details class="orca-multipicker">` with `<summary class="orca-picker-btn">` (value text + chevron) and a panel `.orca-popover.orca-multipicker__panel`.
 - Inside the panel: a filter input with `data-orca-filter-list`, a `.orca-multipicker__list` of checkboxes, and `.orca-multipicker__foot` with Clear and Done.
-- Below: `.orca-multipicker__tags` with removable tags for the chosen values. Summary text: '3 videos' rather than a long list.
+- Below: `.orca-multipicker__tags` with a removable tag per chosen value. Summary text: '3 videos', not a long list.
 
 #### Example: Multi-picker
 
@@ -525,19 +686,42 @@ Built from: `checkbox`, `search-input`, `tag`
 
 `id: language-switcher` · level: component · source: ORCA
 
-A select of languages, each written in its own language, that posts to Django's set_language view.
+A select of languages, each named in its own language, posting to Django's set_language view.
 
 Built from: `select`, `button`
 
+### General description
+
+A control that lets people change the language of a site or app. Each language is shown in its own name.
+
+#### Use cases
+
+- Letting visitors switch a site between supported languages.
+- Setting the interface language in an account menu.
+- Offering translations in a footer of a public website.
+
+#### When not to use it
+
+- Do not guess language from location alone; offer a choice as well.
+- For a site in one language, leave the switcher out.
+
+#### Best practices
+
+- Write each language in its own language, such as Deutsch or Français.
+- Do not use flags, since one flag does not stand for one language.
+- Place it in a predictable spot, such as the header or footer.
+- Keep the person on the same page after switching.
+- Mark each option with its language code so screen readers read it correctly.
+
 ### When to use
 
-- Products translated into two or more languages; in the user menu or footer.
+- Products in two or more languages; place it in the user menu or footer.
 
 ### How to use
 
 - `<form action="{% url 'set_language' %}" method="post">` with csrf, a `next` hidden input and a select of `LANGUAGES` showing `language.name_local`.
 - Add `data-orca-autosubmit` to the select and keep a visible Change button inside `<noscript>`.
-- Add `lang` on each option so screen readers pronounce the names correctly.
+- Add `lang` to each option so screen readers pronounce names correctly.
 
 #### Example: Language switcher
 
@@ -598,9 +782,32 @@ An input joined to addons (unit, prefix) or a button that acts on it.
 
 Built from: `input-addon`, `text-input`, `button`
 
+### General description
+
+A text input joined to a fixed piece of text or a button, such as a unit, a currency sign or an action like Copy.
+
+#### Use cases
+
+- Entering an amount next to a currency or a unit like days or kg.
+- Typing a web address with a fixed prefix.
+- Adding a Copy or Test button right beside a value.
+
+#### When not to use it
+
+- For several unrelated actions, use separate buttons outside the field.
+- For plain values with no unit, a normal input is enough.
+
+#### Best practices
+
+- Show the unit or prefix beside the value so people do not guess.
+- Keep the attached text short.
+- Link the addon to the input so screen readers read both.
+- Use a button only for an action that directly relates to the input.
+- Make sure the group stays readable on narrow screens.
+
 ### When to use
 
-- Values with a fixed unit or prefix; a field with one directly related action (Test, Copy, Generate).
+- Values with a fixed unit or prefix; a field with one related action (Test, Copy, Generate).
 
 ### How to use
 
@@ -645,6 +852,29 @@ A button that opens the filters, showing how many are active.
 
 Built from: `button`, `count-badge`, `icon`
 
+### General description
+
+A button that opens a panel of filters and shows how many are active. It keeps the page simple until filters are needed.
+
+#### Use cases
+
+- Narrowing a product or record list by many attributes.
+- Showing advanced filters that do not fit in a toolbar.
+- Telling people at a glance that a list is already filtered.
+
+#### When not to use it
+
+- For one or two simple filters, show them directly instead of hiding them.
+- For free-text narrowing, use a search field.
+
+#### Best practices
+
+- Show the number of active filters on the button.
+- Show active filters as removable tags outside the panel.
+- Offer a clear all option.
+- Tell the person how many results the filters give.
+- Announce the open or closed state to assistive technology.
+
 ### When to use
 
 - Lists with more filters than fit in the toolbar.
@@ -652,8 +882,8 @@ Built from: `button`, `count-badge`, `icon`
 ### How to use
 
 - `<button class="orca-button" type="button" aria-expanded="false" aria-controls="filters" data-orca-disclose>{% icon "filter" %}Filters<span class="orca-count orca-count--accent">2</span></button>`.
-- Give the count a hidden explanation: `<span class="orca-sr-only">, 2 active</span>`.
-- When filters are active, also show them as removable tags with a Clear all link.
+- Explain the count to screen readers: `<span class="orca-sr-only">, 2 active</span>`.
+- Also show active filters as removable tags with a Clear all link.
 
 #### Example: Filter button with panel
 
@@ -683,9 +913,32 @@ Built from: `button`, `count-badge`, `icon`
 
 `id: dropdown-select` · level: component · source: Tangerine
 
-A select-like button opening a listbox whose options can carry a description.
+A select-style button that opens a listbox whose options can have a description.
 
 Built from: `select`
+
+### General description
+
+A button that opens a list of options, where each option can include a short description or icon.
+
+#### Use cases
+
+- Choosing a role and seeing what each role can do.
+- Picking a plan with a line explaining its limits.
+- Selecting an option that needs a second line to tell it apart.
+
+#### When not to use it
+
+- When options are plain words, use the native select; it works better everywhere.
+- When people must compare choices side by side, use radio buttons.
+
+#### Best practices
+
+- Keep the list to a manageable length, often 5 to 15 options.
+- Show the current choice on the button.
+- Support arrow keys, Enter and Escape.
+- Return focus to the button when the list closes.
+- Keep descriptions short and written in plain words.
 
 ### When to use
 
@@ -694,7 +947,7 @@ Built from: `select`
 ### When not to use
 
 - Plain options: the native select is more robust.
-- Choices people should compare side by side: radio cards or a choice group.
+- Choices to compare side by side: use radio cards or a choice group.
 
 ### How to use
 
@@ -704,7 +957,7 @@ Built from: `select`
 
 ### Accessibility
 
-- Label the button with the visible label and the value: `aria-labelledby="label-id value-id"`.
+- Name the button by its visible label and value: `aria-labelledby="label-id value-id"`.
 
 #### Example: Role picker
 
@@ -742,9 +995,32 @@ Built from: `select`
 
 `id: combobox` · level: component · source: ORCA
 
-A text input that suggests matching options as people type; the value must be one of the options.
+A text input that suggests matching options as people type. The value must be one of them.
 
 Built from: `text-input`
+
+### General description
+
+A text box that suggests matching options as people type. The final value must be one of the suggestions.
+
+#### Use cases
+
+- Choosing a country, city or person from a long list.
+- Finding a product or record by typing part of its name.
+- Selecting an item when people know its name already.
+
+#### When not to use it
+
+- For short lists of about 15 items or fewer, use a normal select.
+- When any text is allowed, use a plain input with optional suggestions.
+
+#### Best practices
+
+- Start suggesting after one or two typed letters.
+- Highlight the part of each suggestion that matches the typed text.
+- Show no more than about 10 suggestions at a time.
+- Support arrow keys, Enter and Escape.
+- Show a clear message when nothing matches.
 
 ### When to use
 
@@ -760,7 +1036,7 @@ Built from: `text-input`
 - Wrapper `.orca-combobox` with `data-orca-combobox-wrap`; `<input class="orca-input" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="list-id" data-orca-combobox>` and a hidden input for the value.
 - Options `<li class="orca-option" role="option" id=… data-value=…>` in a hidden `.orca-popover` listbox; show at most 10.
 - Server results: swap the listbox content with htmx (`hx-get`, `hx-trigger="input changed delay:300ms"`, `hx-target`).
-- Add a status element (`data-orca-status`) so the number of suggestions is announced.
+- Add a status element (`data-orca-status`) to announce the number of suggestions.
 
 ### Accessibility
 
@@ -805,6 +1081,29 @@ A free-text input with browser suggestions from a datalist.
 
 Built from: `text-input`
 
+### General description
+
+A free text box that offers common answers from a list while still allowing anything to be typed.
+
+#### Use cases
+
+- Entering a tag, department or location where many answers repeat.
+- Speeding up typing of common values without limiting them.
+- Entering a job title or company name.
+
+#### When not to use it
+
+- When the answer must be from a fixed list, use a combobox or select.
+- For answers that are always different, plain input is simpler.
+
+#### Best practices
+
+- Put the most common suggestions first.
+- Keep the list reasonably short.
+- Do not block answers that are not in the list.
+- Still label the field clearly.
+- Check typed values on the server, just as for any input.
+
 ### When to use
 
 - Free text where most answers repeat: a tag, a mounting location, a department.
@@ -816,7 +1115,7 @@ Built from: `text-input`
 ### How to use
 
 - `<input class="orca-input" list="dl-id">` + `<datalist id="dl-id"><option value="…"></datalist>`.
-- Order suggestions by how often they are used; keep the list under about 20.
+- Put the most used suggestions first; keep the list under about 20.
 
 #### Example: Mounting location
 
@@ -844,9 +1143,32 @@ Built from: `text-input`
 
 `id: otp-input` · level: component · source: ORCA
 
-The full one-time-code question: label, digit boxes, hint, error and a resend link.
+A one-time-code field: label, digit boxes, hint, error and a resend link.
 
 Built from: `otp-digit`, `help-text`, `countdown-label`
+
+### General description
+
+A set of boxes for typing a one-time code, such as a six-digit number sent by text or email to confirm identity.
+
+#### Use cases
+
+- Confirming a login with two-step verification.
+- Verifying a phone number or email address.
+- Approving a sensitive action such as a payment.
+
+#### When not to use it
+
+- For long passwords, use a password field; codes are meant to be short and single-use.
+- Do not use codes where a simpler check would do.
+
+#### Best practices
+
+- Tell people where the code was sent and how long it lasts.
+- Allow pasting the whole code and browser autofill.
+- Offer a Send a new code option after a short wait.
+- Show errors that say whether the code was wrong or expired.
+- Use a numeric keypad on phones.
 
 ### When to use
 
@@ -855,7 +1177,7 @@ Built from: `otp-digit`, `help-text`, `countdown-label`
 ### How to use
 
 - `<fieldset class="orca-otp">` with the legend, help ('We sent a 6-digit code to …'), the OTP digit boxes (`data-orca-otp`), errors above the boxes and a 'Send a new code' button after the countdown.
-- Submit automatically when the last digit is entered only if the server answers in under a second.
+- Auto-submit on the last digit only if the server answers in under a second.
 
 #### Example: Verification code
 
@@ -888,13 +1210,36 @@ One to five stars as a radio group, with the chosen value in words.
 
 Built from: `radio`, `icon`
 
+### General description
+
+A row of stars people select to give a score, usually from 1 to 5. It is a quick way to collect an opinion.
+
+#### Use cases
+
+- Rating a product, service or support conversation.
+- Collecting quick feedback after a task.
+- Letting people review a purchase or place.
+
+#### When not to use it
+
+- For detailed feedback, add a text box; stars alone say little.
+- For measuring likelihood to recommend, use a 0 to 10 scale instead.
+
+#### Best practices
+
+- Show the chosen value in words, such as 4 of 5.
+- Label each star so screen readers read the number.
+- Make stars large enough to tap easily.
+- Let people change their rating before submitting.
+- Make clear what the lowest and highest ratings mean.
+
 ### When to use
 
 - Feedback and review forms.
 
 ### How to use
 
-- `<fieldset class="orca-rating-wrap">` with a legend and `.orca-rating`, which lists radios from 5 down to 1 (CSS reverses them) each followed by a label containing a star icon and hidden text '4 stars'.
+- `<fieldset class="orca-rating-wrap">` with a legend and `.orca-rating`, which lists radios from 5 down to 1 (CSS reverses them), each followed by a label with a star icon and hidden text '4 stars'.
 - Show the value in words in `.orca-rating__value`.
 
 #### Example: Rating
@@ -937,9 +1282,32 @@ Day, month and year as three labelled numeric fields.
 
 Built from: `text-input`, `label`
 
+### General description
+
+Three separate boxes for day, month and year. People type a date they already know instead of picking it in a calendar.
+
+#### Use cases
+
+- Entering a birth date.
+- Entering a document date such as an expiry or issue date.
+- Any date far in the past or future.
+
+#### When not to use it
+
+- For dates near today, such as a booking, use a calendar date picker.
+- For relative dates like next week, offer shortcuts or a picker.
+
+#### Best practices
+
+- Label each box clearly as Day, Month and Year.
+- Give an example, such as 27 3 2024.
+- Order the boxes the way the reader's region writes dates.
+- Use numeric keypads on phones.
+- Show one error for the whole date, not three.
+
 ### When to use
 
-- Known dates, far in the past or future: birth date, licence expiry, contract start.
+- Dates people know, far in the past or future: birth date, licence expiry, contract start.
 
 ### When not to use
 
@@ -948,7 +1316,7 @@ Built from: `text-input`, `label`
 ### How to use
 
 - `<fieldset class="orca-split-date">` with legend, hint ('For example, 27 3 2024'), then `.orca-split-date__parts` with three `.orca-split-date__part` (label + `inputmode="numeric"` input); the year part adds `--year`.
-- Order the parts as the locale writes dates; validate the whole date on the server and report one error for the group.
+- Order the parts as the locale writes dates; validate the whole date on the server and give one error for the group.
 
 #### Example: Licence expiry
 
@@ -985,9 +1353,32 @@ Built from: `text-input`, `label`
 
 `id: file-field` · level: component · source: ORCA
 
-A labelled drop zone around a native file input, listing the chosen files.
+A labelled drop zone around a native file input that lists chosen files.
 
 Built from: `file-input`, `help-text`
+
+### General description
+
+An area where people choose or drag files to upload. It lists the chosen files and states what is allowed.
+
+#### Use cases
+
+- Uploading documents, photos or a profile picture.
+- Importing data from a spreadsheet file.
+- Attaching files to a message or request.
+
+#### When not to use it
+
+- For tiny text, ask people to type it rather than upload a file.
+- For many large files, use a dedicated uploader with progress and retry.
+
+#### Best practices
+
+- State accepted file types and the size limit before upload.
+- Let people click or drag and drop.
+- Show the chosen file names so they can be checked.
+- Show progress for large uploads.
+- Check file type and size again on the server.
 
 ### When to use
 
@@ -997,7 +1388,7 @@ Built from: `file-input`, `help-text`
 
 - `.orca-field` with label and help (accepted types, size limit), then `<div class="orca-dropzone">` containing the icon, a title, a hint and the `<input type="file">` (it covers the zone).
 - Add `data-orca-file-list="list-id"` to list chosen files in `.orca-file-list`.
-- Validate type and size again on the server; show upload progress with progress-bar-with-counts.
+- Check type and size again on the server; show upload progress with progress-bar-with-counts.
 
 #### Example: Drop zone
 
@@ -1059,6 +1450,29 @@ A message at the top of a form for errors that belong to no single field.
 
 Built from: `error-list`, `callout`
 
+### General description
+
+A message at the top of a form that reports a problem not tied to one field, such as a conflict or permission error.
+
+#### Use cases
+
+- Showing that a save failed because of a server problem.
+- Warning that chosen dates clash with another record.
+- Explaining that the person lacks permission to submit.
+
+#### When not to use it
+
+- For a problem with one field, show the error next to that field.
+- For good news or neutral tips, use an info or success message.
+
+#### Best practices
+
+- Place it above the fields so it is seen first.
+- Say what went wrong and what to do next.
+- Use an error icon as well as colour.
+- Announce it to screen readers when it appears.
+- Add a summary with links when several fields are invalid.
+
 ### When to use
 
 - Non-field errors after submit; conflicts with other records; permission problems.
@@ -1117,6 +1531,29 @@ The row of buttons that ends a form: the primary action first, then the alternat
 
 Built from: `button`
 
+### General description
+
+The row of buttons at the end of a form, with the main action first and others such as Cancel after it.
+
+#### Use cases
+
+- Saving or submitting a form.
+- Offering Cancel next to Save in a dialog.
+- Placing a Delete action away from the main buttons.
+
+#### When not to use it
+
+- Do not scatter several equal buttons through the form; keep actions together at the end.
+- For actions that apply instantly, such as switches, no button row is needed.
+
+#### Best practices
+
+- Make one primary action stand out, labelled with a verb.
+- Place buttons directly after the last field.
+- Put destructive actions apart and ask to confirm.
+- Keep the Cancel option easy to reach.
+- Stack buttons full width on small screens.
+
 ### When to use
 
 - The end of every form, dialog form and settings section with a Save.
@@ -1125,7 +1562,7 @@ Built from: `button`
 
 - `<div class="orca-form-actions">` after the last field: primary button first, then Cancel (default or link).
 - A destructive action (Delete) goes to the far end in `.orca-form-actions__end`, styled default or outline-danger, and asks for confirmation.
-- Long forms: `--sticky` keeps the actions visible at the bottom of the viewport. On phones the buttons stack full width.
+- Long forms: `--sticky` pins the actions to the bottom of the viewport. On phones the buttons stack full width.
 
 #### Example: Save, cancel and delete
 
@@ -1169,6 +1606,28 @@ A checkbox per table row and a select-all checkbox in the header.
 
 Built from: `checkbox`
 
+### General description
+
+Checkboxes at the start of table rows, with one at the top to select all. People pick several records and then act on them together.
+
+#### Use cases
+
+- Bulk delete, archive or export from a table.
+- Moving or assigning many items at once.
+- Comparing chosen rows.
+
+#### When not to use it
+
+- Tables where only a single action per row is needed; use row buttons.
+- Choosing just one row from a few; use radio buttons.
+
+#### Best practices
+
+- Name each checkbox after its row for screen readers.
+- Show how many rows are selected.
+- Show the available bulk actions as soon as something is selected.
+- Make select all clear about what it covers, such as this page or all results.
+
 ### When to use
 
 - Tables that offer bulk actions.
@@ -1176,7 +1635,7 @@ Built from: `checkbox`
 ### How to use
 
 - Header: `<th scope="col" class="orca-table__select"><label class="orca-check"><input type="checkbox" aria-label="Select all videos"><span class="orca-check__box"></span></label></th>`; one per row named after the row.
-- When rows are selected, the table toolbar shows the count and the bulk actions.
+- Selecting rows shows the count and the bulk actions in the table toolbar.
 
 ### Accessibility
 
@@ -1223,9 +1682,31 @@ Built from: `checkbox`
 
 `id: formatting-toolbar` · level: component · source: ORCA
 
-A row of pressed-state icon buttons for bold, italic, lists and links over a text area.
+A row of toggle icon buttons for bold, italic, lists and links above a text area.
 
 Built from: `icon-button`, `divider`
+
+### General description
+
+A row of small buttons for formatting text, such as bold, italic, lists and links. It sits above a text area that supports rich text.
+
+#### Use cases
+
+- Writing comments or descriptions with formatting.
+- Editing articles or emails.
+- Rich notes fields.
+
+#### When not to use it
+
+- Plain text fields; leave the toolbar out.
+- Very long documents needing many options; use a full editor with menus.
+
+#### Best practices
+
+- Use familiar icons with text names for assistive technology.
+- Show which formats are on.
+- Support keyboard shortcuts such as Ctrl+B.
+- Group related buttons and keep the set small.
 
 ### When to use
 
@@ -1237,7 +1718,7 @@ Built from: `icon-button`, `divider`
 
 ### Accessibility
 
-- Arrow keys move between the buttons of the toolbar; each has an accessible name.
+- Arrow keys move between buttons; each has an accessible name.
 
 #### Example: Toolbar
 
@@ -1268,13 +1749,35 @@ Built from: `icon-button`, `divider`
 
 `id: applied-filters` · level: component · source: ORCA
 
-The filters in effect as removable tags, with Clear all and the number of results.
+Active filters as removable tags, with Clear all and the result count.
 
 Built from: `tag`, `link-action`
 
+### General description
+
+A row showing which filters are currently active, each as a tag that can be removed. It also gives a way to clear them all and the number of results.
+
+#### Use cases
+
+- Above search results or lists that have been filtered.
+- Product listings with several filters.
+- Empty results, to show what caused them.
+
+#### When not to use it
+
+- When no filter is active; show nothing.
+- Choosing filters; use a filter panel or menu for that.
+
+#### Best practices
+
+- Show every active filter, never hide any.
+- Let people remove one filter with one click.
+- Offer Clear all when more than one is active.
+- Show the result count and update it right away.
+
 ### When to use
 
-- Above results while at least one filter is applied; inside a no-results state.
+- Above results while a filter is applied; inside a no-results state.
 
 ### How to use
 

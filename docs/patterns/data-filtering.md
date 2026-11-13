@@ -1,6 +1,6 @@
 # Data and filtering
 
-Tables, panels and the controls that narrow them: filter bars, list headers, summary tiles and record cards.
+Tables, panels and the controls that narrow them: filter bars, list headers, summary tiles, record cards.
 
 ## Data table
 
@@ -9,6 +9,29 @@ Tables, panels and the controls that narrow them: filter bars, list headers, sum
 A table of records with a toolbar, selectable rows, sortable headers, row actions and a pager; rows become cards on phones.
 
 Built from: `table-toolbar`, `sortable-header`, `row-actions`, `table-pager`, `row-select`, `status-light`
+
+### General description
+
+A grid of rows and columns for comparing records across several attributes. It usually supports sorting, selecting rows, searching and paging.
+
+#### Use cases
+
+- Lists of users, orders, devices or documents.
+- Comparing records on several fields at once.
+- Acting on many rows together.
+
+#### When not to use it
+
+- Browsing items mostly by image: use a card grid.
+- Layout of a page: use layout elements, not a table.
+- Two or three simple facts per item: use a list.
+
+#### Best practices
+
+- Give every column a clear header and a table caption.
+- Align numbers to the right and text to the left.
+- Show a helpful empty state when there are no rows.
+- Keep search, bulk actions and paging close to the table.
 
 ### When to use
 
@@ -21,8 +44,8 @@ Built from: `table-toolbar`, `sortable-header`, `row-actions`, `table-pager`, `r
 ### How to use
 
 - `<div class="orca-data-table">`: a table toolbar, then `.orca-table-wrap` > `table.orca-table.orca-table--cards` with a caption, sortable headers, an optional `.orca-table__select` column and row actions; then a table pager.
-- Each `td` carries `data-label` so phones show 'Label: value' cards; the name cell is `.orca-table__name`.
-- Selected rows `aria-selected="true"` and the toolbar switches to the selection bar. Numbers right-aligned (`.is-num`). Empty: a no-data state in one full-width cell.
+- Each `td` has `data-label` so phones show 'Label: value' cards; the name cell is `.orca-table__name`.
+- Selected rows get `aria-selected="true"` and the toolbar becomes the selection bar. Right-align numbers (`.is-num`). When empty, show a no-data state in one full-width cell.
 - Long tables: set `--orca-table-max: 32rem` on the wrapper for a scrolling body with a sticky header.
 
 #### Example: Videos
@@ -162,9 +185,31 @@ def bulk_archive(request):
 
 `id: accuracy-table` · level: pattern · source: Tangerine
 
-Counted versus reference values per video, with the difference and an accuracy bar coloured by threshold.
+Counted and reference values per video, with the difference and an accuracy bar coloured by threshold.
 
 Built from: `table-card`, `progress-with-counts`
+
+### General description
+
+A table comparing a measured value with a reference value, showing the difference and how close it is. Colour and words flag results that are too far off.
+
+#### Use cases
+
+- Checking automatic counts against manual counts.
+- Comparing model or test runs with expected results.
+- Reviewing measurement quality across sites.
+
+#### When not to use it
+
+- Showing a single score: use a progress bar or stat.
+- Trends over time: use a chart.
+
+#### Best practices
+
+- Show the difference as a signed number so direction is clear.
+- Say what the thresholds are in a caption.
+- Flag poor results with a word, not only colour.
+- Right-align the numbers so they compare easily.
 
 ### When to use
 
@@ -235,17 +280,39 @@ Built from: `table-card`, `progress-with-counts`
 
 `id: filter-bar` · level: pattern · source: Tangerine
 
-The row above the results that shows the applied filters as removable tags, the result count and Clear all.
+The row above results showing applied filters as removable tags, the result count and Clear all.
 
 Built from: `applied-filters`
 
+### General description
+
+A row above a list or table that shows which filters are active, usually as removable tags, with the result count and a way to clear them all.
+
+#### Use cases
+
+- Showing which filters narrow a list.
+- Letting people remove one filter at a time.
+- Confirming how many results match.
+
+#### When not to use it
+
+- The filter controls themselves: use a filter panel or drawer.
+- Choosing one view among a few: use tabs.
+
+#### Best practices
+
+- Show only filters that are applied.
+- Make each tag removable with one click.
+- Offer a single 'Clear all' action.
+- Announce the new result count to screen readers.
+
 ### When to use
 
-- Every list, table, gallery or report while at least one filter is applied.
+- Any list, table, gallery or report with at least one filter applied.
 
 ### When not to use
 
-- Filter fields in a row above the results: put them in the filter drawer, opened from the page actions.
+- Filter fields in a row above the results: use the filter drawer, opened from the page actions.
 
 ### How to use
 
@@ -347,9 +414,31 @@ class VideoList(OrcaPageMixin, ListView):
 
 `id: panel` · level: pattern · source: Tangerine
 
-A bordered section of a page with a header, a body and optional footer actions.
+A bordered page section with a header, a body and optional footer actions.
 
 Built from: `panel-header`
+
+### General description
+
+A bordered section of a page with a header and a body, grouping related content into one clearly labelled block. It may have actions in a footer.
+
+#### Use cases
+
+- Dashboard blocks such as charts or summaries.
+- Sections of a settings or detail page.
+- Grouping a form's related fields.
+
+#### When not to use it
+
+- Wrapping every small item: too many boxes create clutter.
+- Content that needs to stay hidden until asked for: use an accordion.
+
+#### Best practices
+
+- Give every panel a clear title that says what it answers.
+- Put actions that affect the panel in its header or footer.
+- Keep panels in a grid that reflows on small screens.
+- Avoid nesting panels inside panels.
 
 ### When to use
 
@@ -407,6 +496,28 @@ Built from: `panel-header`
 One panel whose body switches between related views with tabs.
 
 Built from: `panel`, `tab-bar`
+
+### General description
+
+A single box with tabs along the top that switch between related views of the same thing. Only one view shows at a time.
+
+#### Use cases
+
+- Switching a metric between day, week and month.
+- Showing the same data as a chart or a table.
+- Splitting a detail view into a few related parts.
+
+#### When not to use it
+
+- Steps that must happen in order: use a stepper.
+- Views people need to compare side by side: show them together.
+
+#### Best practices
+
+- Keep tab labels short and clear.
+- Keep the content height steady so the page does not jump.
+- Remember the last selected tab where that helps.
+- Limit tabs to a handful.
 
 ### When to use
 
@@ -492,9 +603,31 @@ class ReportView(TemplateView):
 
 `id: card-list` · level: pattern · source: Tangerine
 
-Records as a vertical list of cards: name, key facts and actions; the phone-friendly alternative to a table.
+Records as a vertical list of cards with name, key facts and actions; a phone-friendly alternative to a table.
 
 Built from: `status-light`, `linked-card`, `record-actions`
+
+### General description
+
+A vertical list where each record is a card showing its name, a few key facts and actions. It reads well on narrow screens.
+
+#### Use cases
+
+- Showing records on phones.
+- Browsing items with long names.
+- Lists where people read more than they compare.
+
+#### When not to use it
+
+- Comparing many attributes across rows: use a table.
+- Image-led browsing: use a card grid.
+
+#### Best practices
+
+- Make the whole card easy to tap.
+- Put the most important fact first.
+- Keep every card in the same layout.
+- Keep actions few and clearly labelled.
 
 ### When to use
 
@@ -542,9 +675,31 @@ Built from: `status-light`, `linked-card`, `record-actions`
 
 `id: list-header` · level: pattern · source: Tangerine
 
-Above a list: its title with the count, a search, the view toggle and, for a list panel inside a page, its create action.
+The bar above a list: title with count, search, view toggle and, for a list panel in a page, its create action.
 
 Built from: `search-field`, `view-toggle`, `create-button`
+
+### General description
+
+The area above a list with its title, item count, search, view options and create button. It gathers the controls that change the list.
+
+#### Use cases
+
+- Top of a list page.
+- Top of a list inside a dashboard panel.
+- Putting search and create actions together.
+
+#### When not to use it
+
+- Page titles with no list below: use a page header.
+- Complex filtering: use a filter panel.
+
+#### Best practices
+
+- Show the count next to the title.
+- Keep controls in a predictable order.
+- Put the main create action at the end.
+- Stack the tools below the title on small screens.
 
 ### When to use
 
@@ -553,7 +708,7 @@ Built from: `search-field`, `view-toggle`, `create-button`
 ### How to use
 
 - `<div class="orca-list-header">` with `h2.orca-list-header__title` + `.orca-list-header__count`, then `.orca-list-header__tools` (search field, view toggle, create button).
-- The page's Filters button is not here: it goes in the page actions and opens the filter drawer.
+- The page's Filters button goes in the page actions, not here, and opens the filter drawer.
 - On phones the tools take the full width under the title.
 
 #### Example: List header
@@ -624,6 +779,28 @@ class VideoList(ListView):
 A row of small counts by status that also act as quick filters.
 
 Built from: `summary-tile`
+
+### General description
+
+A row of small tiles, each showing a count for a status or group. They give a quick overview and often act as shortcuts to filter a list.
+
+#### Use cases
+
+- Counting items by state such as online or offline.
+- Showing open and closed tasks.
+- Counting issues by severity.
+
+#### When not to use it
+
+- Trends over time: use a chart.
+- Many categories: use a filter menu or a table.
+
+#### Best practices
+
+- Put a clear label with each number.
+- Start with an 'All' tile.
+- Highlight the active tile with more than colour.
+- Keep to a few meaningful states.
 
 ### When to use
 
@@ -713,9 +890,31 @@ Search-as-you-type results shown as a compact table with the matched text highli
 
 Built from: `search-field`, `table-card`
 
+### General description
+
+Search results shown as you type, in a compact table with the matching text highlighted. Several attributes per result help people tell them apart.
+
+#### Use cases
+
+- Finding records by name or code.
+- Telling apart similar names on different sites.
+- Quick lookup before opening a record.
+
+#### When not to use it
+
+- Choosing one value from a short fixed list: use a select.
+- Single-field suggestions: use a plain suggestion list.
+
+#### Best practices
+
+- Wait a moment after typing before searching.
+- Highlight the matching text.
+- Limit the rows and link to the full results.
+- Announce the result count to screen readers.
+
 ### When to use
 
-- Searching records by name or code where people must tell similar results apart (two 'Entrance A' on different sites).
+- Searching records by name or code when similar results must be told apart (two 'Entrance A' on different sites).
 
 ### How to use
 
@@ -773,9 +972,31 @@ Built from: `search-field`, `table-card`
 
 `id: no-results` · level: pattern · source: ORCA
 
-What a list, table or feed shows when it has nothing: the empty state, and the applied filters when filters hide everything.
+What a list, table or feed shows when empty: the empty state, plus the applied filters when filters hide everything.
 
 Built from: `empty-state`, `applied-filters`
+
+### General description
+
+A no-results state is what a list, table or search shows when there is nothing to display. It explains why and what to do next.
+
+#### Use cases
+
+- A new list with no items yet.
+- A search or filter that matches nothing.
+- A feed that is empty.
+
+#### When not to use it
+
+- Content that is still loading: show a loading state.
+- Errors: use an error message.
+
+#### Best practices
+
+- Say whether it is empty or filtered.
+- Offer a clear next step.
+- Show the active filters and a Clear all action.
+- Keep the tone calm.
 
 ### When to use
 

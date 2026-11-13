@@ -1,6 +1,6 @@
 # Base styles
 
-Tokens every other element is built from: colour, type, space, shape, elevation, layers, size and motion. Use these names, never raw values. Only brand tokens may be changed by a project.
+The tokens all other elements are built from: colour, type, space, shape, elevation, layers, size and motion. Use the names, never raw values. Projects may change only brand tokens.
 
 ## Colour palette
 
@@ -8,21 +8,43 @@ Tokens every other element is built from: colour, type, space, shape, elevation,
 
 Raw colours: a 13-step gray scale and eleven hues with nine numbered steps each.
 
+### General description
+
+A color palette is the fixed set of raw colors a product draws from, usually a gray scale plus a few hues in graded shades.
+
+#### Use cases
+
+- Choosing colors for charts and illustrations that need several distinct categories.
+- Defining the colors that interface roles such as text or errors point to.
+- Keeping brand and data colors consistent across pages.
+
+#### When not to use it
+
+- Coloring text, buttons or status directly from raw swatches; name colors by their job instead.
+- Telling chart series apart by hue alone; add labels, shapes or patterns.
+
+#### Best practices
+
+- Keep the palette small and name every shade.
+- Make neighboring shades differ enough to tell apart.
+- Check text contrast against every background it sits on.
+- Give each hue the same range of light to dark steps.
+
 ### When to use
 
-- Charts, zones, calendars and illustrations that need several distinguishable categories.
+- Charts, zones, calendars and illustrations that need several distinct categories.
 - Defining a new semantic token inside ORCA itself.
 
 ### When not to use
 
-- Text, controls, grounds and status: use semantic tokens (`semantic-colors`) instead.
-- Telling two series apart by hue alone: change lightness or add a shape, label or pattern.
+- Text, controls, backgrounds and status: use `semantic-colors`.
+- Separating series by hue alone: also vary lightness or add a shape, label or pattern.
 
 ### How to use
 
-- Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black), ORCA's values.
+- Gray: `--orca-gray-0` (white) to `--orca-gray-1000` (black).
 - Hues: `--orca-{red|orange|amber|yellow|green|teal|cyan|blue|indigo|purple|pink}-{100..900}`; 100 is lightest.
-- For data series prefer `--orca-chart-1`…`--orca-chart-8`, which already pick contrasting steps per theme.
+- For data series use `--orca-chart-1`…`--orca-chart-8`, which pick contrasting steps for each theme.
 - Text on a hue step: steps 100–400 take `--orca-text` in light themes; 600–900 take white.
 
 #### Example: Gray and one hue
@@ -52,7 +74,29 @@ Raw colours: a 13-step gray scale and eleven hues with nine numbered steps each.
 
 `id: semantic-colors` · level: primitive · source: Tangerine
 
-Colours named by their job: text, grounds, lines, interaction, status, actions, planning, data.
+Colours named by their job: text, backgrounds, lines, interaction, status, actions, planning and data.
+
+### General description
+
+Semantic colors are named by their purpose, such as text, border, error or success, rather than by how they look. They let one design work in many themes.
+
+#### Use cases
+
+- Coloring text, backgrounds and borders consistently across a product.
+- Showing status such as success, warning and error.
+- Switching between light and dark themes without changing components.
+
+#### When not to use it
+
+- Picking a color for its look instead of its meaning; choose the role it plays.
+- Using color alone to show status; add an icon and a word.
+
+#### Best practices
+
+- Name colors by job, not by hue.
+- Test each role for readable contrast in every theme.
+- Pair every status color with an icon and text.
+- Use one color per meaning, everywhere.
 
 ### When to use
 
@@ -60,13 +104,13 @@ Colours named by their job: text, grounds, lines, interaction, status, actions, 
 
 ### When not to use
 
-- Choosing a token for how it looks rather than what it is for (a muted heading is still `--orca-text`).
-- Using `--orca-border` (decorative, 1.6:1) on a control: controls need `--orca-border-strong` (3:1).
+- Picking a token for its look instead of its job (a muted heading is still `--orca-text`).
+- `--orca-border` (decorative, 1.6:1) on a control: controls need `--orca-border-strong` (3:1).
 
 ### How to use
 
 - Text: `text` (body, labels, headings), `text-muted` (help, meta), `text-inactive` (unselected nav).
-- Grounds: `bg` page, `bg-alt` set-apart region, `bg-input` fields, `bg-hover`, `bg-active` (pressed, selected), `bg-elevated` floating.
+- Backgrounds: `bg` page, `bg-alt` separate region, `bg-input` fields, `bg-hover`, `bg-active` (pressed, selected), `bg-elevated` floating.
 - Lines: `border` decorative, `border-strong` controls, `border-weak` row separators.
 - Status families `info`, `positive`, `caution`, `negative`, `neutral`: the bare name for marks and text, `-bg` for tints, `-fill` for solid badges.
 - Actions: `primary*` (main action, green), `danger*` (confirmed destruction), `brand-strong*` (brand fill).
@@ -75,7 +119,7 @@ Colours named by their job: text, grounds, lines, interaction, status, actions, 
 ### Accessibility
 
 - `text` and `text-muted` hold 4.5:1 on `bg`, `bg-alt` and `bg-input` in every theme.
-- Known exception kept from Vanilla: `caution` as text is 3.0:1 in light; never set caution text alone.
+- Known exception from Vanilla: `caution` text is 3.0:1 in light themes, so never use it alone.
 
 #### Example: Roles in use
 
@@ -106,28 +150,50 @@ Colours named by their job: text, grounds, lines, interaction, status, actions, 
 
 The one brand colour, the fills derived from it, and the page surfaces it sits on.
 
+### General description
+
+The brand color is the one signature color that identifies a product. It marks a few key moments, such as the logo, top bar or a main button.
+
+#### Use cases
+
+- Coloring the logo, header bar or a single main call to action.
+- Re-skinning a product for a new brand.
+- Adding a small highlight rule or accent mark.
+
+#### When not to use it
+
+- Showing success, warning or error; use status colors instead.
+- Filling many elements on one screen; repeated emphasis stops standing out.
+
+#### Best practices
+
+- Use the brand color sparingly so it keeps its impact.
+- Check that text on brand fills has enough contrast.
+- Pair it with neutral grays for most of the page.
+- Do not rely on it alone to show state.
+
 ### When to use
 
-- The one brand moment on a page: the top bar, the brand button, the logo mark, a highlight rule.
-- Re-branding a deployment: set `ORCA['BRAND']['color']` and nothing else.
+- One brand moment per page: the top bar, brand button, logo mark or a highlight rule.
+- Re-branding: set `ORCA['BRAND']['color']` and nothing else.
 
 ### When not to use
 
 - More than one brand-filled element per screen (Von Restorff: emphasis loses power when repeated).
-- Status meaning: brand is never success, warning or error.
-- Links and checked controls: those use the accent colour.
+- Showing status: brand never means success, warning or error.
+- Links and checked controls: use the accent colour.
 
 ### How to use
 
 - `--orca-brand`: the colour as given, for decorative marks and 3px bars (needs only 3:1).
-- `--orca-brand-strong`: fills that carry text; darkened by ORCA until `--orca-brand-on` reads at 4.5:1.
-- `--orca-brand-strong-hover` / `-active`: hover and pressed fills, derived.
+- `--orca-brand-strong`: fills that carry text, darkened until `--orca-brand-on` reads at 4.5:1.
+- `--orca-brand-strong-hover` / `-active`: derived hover and pressed fills.
 - Surfaces: page `--orca-bg`, set-apart regions `--orca-bg-alt`, floating `--orca-bg-elevated`.
-- Set it in settings; ORCA reports any adjustment it made as a system-check warning (`orca.W001`).
+- Set it in settings; any adjustment ORCA makes is reported as a system-check warning (`orca.W001`).
 
 ### Accessibility
 
-- Never rely on brand colour alone to show state; selection uses the accent and a shape.
+- Never show state by brand colour alone; selection uses the accent and a shape.
 
 #### Example: Brand moments
 
@@ -157,9 +223,31 @@ The one brand colour, the fills derived from it, and the page surfaces it sits o
 
 The single interactive colour: links, checked ticks, radios, switches, progress, selected days.
 
+### General description
+
+The accent color is the single color that signals something is interactive or selected, such as links, checked boxes and active controls.
+
+#### Use cases
+
+- Coloring links so people see what they can click.
+- Showing checked, on or selected states.
+- Filling progress indicators and highlighting selected dates.
+
+#### When not to use it
+
+- Coloring static headings or decorative icons; this makes people think they are clickable.
+- Large fills behind long text; they are hard to read.
+
+#### Best practices
+
+- Use one action color across the whole product.
+- Make sure link text reaches readable contrast on every background.
+- Do not depend on color alone; add underlines or shapes.
+- Reserve the color for things people can act on.
+
 ### When to use
 
-- Text links, the checked state of ticks, radios and switches, progress fills, selected calendar days, accent outlines and accent badges.
+- Links, checked ticks, radios and switches, progress fills, selected calendar days, accent outlines and badges.
 
 ### When not to use
 
@@ -169,12 +257,12 @@ The single interactive colour: links, checked ticks, radios, switches, progress,
 ### How to use
 
 - Use `var(--orca-accent)`; hover is `var(--orca-accent-hover)`.
-- Brand token: `ORCA['BRAND']['accent']` (light and paper) and optional `accent_dark`; ORCA darkens or lightens it to 4.5:1.
+- Set `ORCA['BRAND']['accent']` (light and paper) and optionally `accent_dark`; ORCA adjusts it to 4.5:1.
 - Text on an accent fill is `var(--orca-bg)`.
 
 ### Accessibility
 
-- Holds 4.5:1 on `bg` and `bg-alt` in every theme, so it can be used for link text.
+- Holds 4.5:1 on `bg` and `bg-alt` in every theme, so it works for link text.
 
 #### Example: Accent in use
 
@@ -199,15 +287,37 @@ The single interactive colour: links, checked ticks, radios, switches, progress,
 
 Light, dark and paper share every token name. ORCA has one appearance, named ORCA.
 
+### General description
+
+A theme is a complete set of colors for the same interface, such as light or dark. People choose one, or the system picks it for them.
+
+#### Use cases
+
+- Offering a dark mode for low light or light sensitivity.
+- Following the person's operating system setting automatically.
+- Offering a low-glare paper-like reading mode.
+
+#### When not to use it
+
+- Writing separate styles for each theme in every component; define shared color names once.
+- Using pure black backgrounds; very dark grays are easier on the eyes.
+
+#### Best practices
+
+- Respect the system theme by default and remember a manual choice.
+- Keep contrast readable in every theme.
+- Define colors by role so components need no theme-specific code.
+- Test every screen in all themes.
+
 ### When to use
 
-- Always: every page supports all three themes for free.
-- Set `ORCA['THEME']` to `light`, `dark` or `paper` to force one; `auto` (default) follows the OS and the user's stored choice.
+- Always: every page gets all three themes for free.
+- Set `ORCA['THEME']` to `light`, `dark` or `paper` to force one. `auto` (default) follows the OS and the user's saved choice.
 
 ### When not to use
 
-- Theme-specific CSS in your own code: if something needs it, the token is missing; report it.
-- Pure black grounds: dark uses #262626 and #202020.
+- Theme-specific CSS: if you need it, a token is missing, so report it.
+- Pure black backgrounds: dark uses #262626 and #202020.
 
 ### How to use
 
@@ -217,7 +327,7 @@ Light, dark and paper share every token name. ORCA has one appearance, named ORC
 
 ### Accessibility
 
-- Contrast promises hold in every theme; dark lifts floating surfaces one step so elevation shows without shadows.
+- Contrast holds in every theme; dark lifts floating surfaces one step so elevation shows without shadows.
 
 #### Example: Theme toggle
 
@@ -243,9 +353,31 @@ Light, dark and paper share every token name. ORCA has one appearance, named ORC
 
 Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type scale.
 
+### General description
+
+Typography is the choice and arrangement of fonts, sizes and weights so text is easy to read and its importance is clear.
+
+#### Use cases
+
+- Setting headings, body text, labels and captions.
+- Showing code in a monospaced font.
+- Building a clear visual hierarchy on a page.
+
+#### When not to use it
+
+- Inventing new sizes and weights for each page; use a fixed scale.
+- Setting long text in all capitals; use it only for short labels.
+
+#### Best practices
+
+- Use one readable font family with few weights.
+- Size text in relative units so it follows the user's settings.
+- Limit line length to about 70 characters.
+- Use tabular figures for numbers in tables.
+
 ### When to use
 
-- Every piece of text. Pick the style by role: heading, title, body, detail, label, code.
+- Every piece of text; pick the style by role: heading, title, body, detail, label or code.
 
 ### When not to use
 
@@ -259,10 +391,10 @@ Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type 
 - Title: `--orca-type-title` (panel and card titles, 18/24 550).
 - Body: `--orca-type-body` (16/24) and `--orca-type-body-strong` (550). Bold is 550, not 700.
 - Detail: `--orca-type-detail` (14/20) for help, meta and timestamps; `--orca-type-label` (12/16 550) for table headers, badges, kickers and stat card labels.
-- Figure: `--orca-type-figure` (28/36 550) for the number of a stat card.
-- Code: `--orca-type-code` with `--orca-font-mono` (JetBrains Mono, self-hosted; it tells 0/O and 1/l/I apart). Code blocks are coloured with the `--orca-code-*` tokens.
+- Figure: `--orca-type-figure` (28/36 550) for a stat card's number.
+- Code: `--orca-type-code` with `--orca-font-mono` (JetBrains Mono, self-hosted; it keeps 0/O and 1/l/I distinct). Code blocks use the `--orca-code-*` tokens.
 - Numbers in tables and stats get `font-variant-numeric: tabular-nums` (`.orca-num`).
-- Use as `font: var(--orca-type-body)`. Brand tokens `font_sans` / `font_mono` swap the families.
+- Apply as `font: var(--orca-type-body)`. Brand tokens `font_sans` / `font_mono` swap the families.
 
 ### Accessibility
 
@@ -298,6 +430,28 @@ Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type 
 
 Eleven spacing steps on the 8px unit, named by their pixel value.
 
+### General description
+
+Spacing is the empty room around and between elements. A fixed scale of steps makes layouts consistent and shows which things belong together.
+
+#### Use cases
+
+- Setting padding, margins and gaps between elements.
+- Grouping related items closer than unrelated ones.
+- Separating sections without lines or boxes.
+
+#### When not to use it
+
+- Picking one-off values such as 10px or 18px; use the scale.
+- Using the same gap at every level; it hides the grouping.
+
+#### Best practices
+
+- Base all spacing on one unit, such as 8px.
+- Work from the inside out: the smallest gap sits closest to the content.
+- Use space before adding borders.
+- Keep gaps larger between groups than within them.
+
 ### When to use
 
 - Every margin, padding and gap.
@@ -305,7 +459,7 @@ Eleven spacing steps on the 8px unit, named by their pixel value.
 ### When not to use
 
 - Values off the scale (6px, 10px, 18px).
-- The same small gap at every nesting level: it flattens grouping.
+- Using the same gap at every nesting level: it flattens grouping.
 
 ### How to use
 
@@ -343,6 +497,28 @@ Eleven spacing steps on the 8px unit, named by their pixel value.
 `id: borders` · level: primitive · source: Tangerine
 
 Three line weights: 1px hairline, 1.5px outline, 3px emphasis bar.
+
+### General description
+
+Borders are lines drawn around or between elements to outline them and separate content. A few set line weights keep them consistent.
+
+#### Use cases
+
+- Outlining buttons, cards, alerts and fields.
+- Separating rows in tables and lists.
+- Marking the selected tab or a highlight.
+
+#### When not to use it
+
+- Boxing every group; use spacing first and keep borders for real separation.
+- Using faint decorative lines as the edge of a control; controls need stronger contrast.
+
+#### Best practices
+
+- Use only a few line weights and give each a meaning.
+- Give control outlines enough contrast to see.
+- Keep thick lines for emphasis only.
+- Pick line color by purpose, decorative or functional.
 
 ### When to use
 
@@ -385,6 +561,28 @@ Three line weights: 1px hairline, 1.5px outline, 3px emphasis bar.
 
 ORCA is square; only round marks and bar ends are rounded.
 
+### General description
+
+Corner radii set how rounded the corners of elements are. A consistent corner style gives a product a recognizable look.
+
+#### Use cases
+
+- Setting square or rounded corners on buttons, cards and fields.
+- Making circles for avatars, status dots and radio buttons.
+- Giving pills and progress tracks their rounded ends.
+
+#### When not to use it
+
+- Mixing many corner styles in one screen; choose a small set.
+- Rounding checkboxes like radio buttons; shape tells people which is which.
+
+#### Best practices
+
+- Define radii as named values, even for zero.
+- Use round shapes only for round things.
+- Apply the same radius to the same kind of element.
+- Keep nested corners visually consistent.
+
 ### When to use
 
 - `--orca-radius-none` for every box: buttons, fields, cards, menus, dialogs, badges, tags.
@@ -393,11 +591,11 @@ ORCA is square; only round marks and bar ends are rounded.
 
 ### When not to use
 
-- Rounding a checkbox: the square box versus round radio is how people tell one-of-many from many (Practical UI R07).
+- Rounding a checkbox: square means pick many, round means pick one (Practical UI R07).
 
 ### How to use
 
-- Use the tokens even for 0 so a future rounding change is a token change, not a hunt.
+- Use the tokens even for 0, so a later rounding change only edits a token.
 
 #### Example: Shapes
 
@@ -424,6 +622,28 @@ ORCA is square; only round marks and bar ends are rounded.
 
 Three shadows (card, elevated, dragged) and elevation utilities. Only floating things cast a shadow.
 
+### General description
+
+Shadows suggest depth by making an element look lifted above the page. They help show what floats, such as menus, or what can be moved.
+
+#### Use cases
+
+- Lifting menus, dropdowns, popovers and toasts above content.
+- Showing a dragged item or a dialog.
+- Giving a card a hover lift.
+
+#### When not to use it
+
+- Putting shadows on every card and panel; use a border or background tint.
+- Using heavy shadows for decoration; they add noise.
+
+#### Best practices
+
+- Reserve shadows for things that float.
+- Use a few fixed levels, not custom blurs.
+- In dark themes, lighten the surface as well.
+- Keep shadows soft and subtle.
+
 ### When to use
 
 - `shadow-card`: the hover lift of an interactive card.
@@ -432,7 +652,7 @@ Three shadows (card, elevated, dragged) and elevation utilities. Only floating t
 
 ### When not to use
 
-- Shadows on cards at rest, panels or page sections: use a border or `bg-alt`.
+- Shadows on resting cards, panels or page sections: use a border or `bg-alt`.
 
 ### How to use
 
@@ -465,9 +685,31 @@ Three shadows (card, elevated, dragged) and elevation utilities. Only floating t
 
 A fixed stacking order from page content to the skip link.
 
+### General description
+
+Layers define the stacking order of elements that overlap, such as sticky headers, menus, dialogs and notifications.
+
+#### Use cases
+
+- Keeping dropdowns above the content around them.
+- Making sure notifications are not hidden behind dialogs.
+- Placing sticky headers and sidebars correctly.
+
+#### When not to use it
+
+- Using ever larger random z-index numbers; use named levels.
+- Layering many elements at once; reduce overlap where possible.
+
+#### Best practices
+
+- Define a fixed, named stacking order in one place.
+- Order levels by how urgent the element is.
+- Reference names, not raw numbers.
+- Let the skip link and tooltips sit on top.
+
 ### When to use
 
-- Anything positioned that must sit above or below something else.
+- Any positioned element that must sit above or below another.
 
 ### When not to use
 
@@ -499,6 +741,28 @@ A fixed stacking order from page content to the skip link.
 `id: control-heights` · level: primitive · source: Tangerine
 
 Five heights shared by buttons, fields, selects and toggles: sm, dense, md, lg, xl.
+
+### General description
+
+Control heights are the standard sizes shared by buttons, fields and selects, so controls line up and are big enough to tap.
+
+#### Use cases
+
+- Aligning buttons and fields in a row or toolbar.
+- Making denser controls for tables and filter bars.
+- Making larger controls for touch screens.
+
+#### When not to use it
+
+- Mixing heights in one row of controls.
+- Small controls on touch screens; make targets at least 44px.
+
+#### Best practices
+
+- Offer a few fixed heights, not custom ones.
+- Make touch targets at least 44px high.
+- Use the default height unless space is tight.
+- Grow controls automatically on touch devices.
 
 ### When to use
 
@@ -539,6 +803,28 @@ Five heights shared by buttons, fields, selects and toggles: sm, dense, md, lg, 
 
 Four durations and two easings, all under the 400 ms Doherty threshold.
 
+### General description
+
+Motion is movement and transition in an interface, such as fades and slides, used to give feedback and explain what changed.
+
+#### Use cases
+
+- Giving feedback on hover and press.
+- Showing something opening, arriving or closing.
+- Showing progress or loading.
+
+#### When not to use it
+
+- Decorative animation that slows people down.
+- Long or looping effects, except loading indicators; keep feedback fast.
+
+#### Best practices
+
+- Keep interface animations short, under about 400 milliseconds.
+- Use the same timing for the same kind of change.
+- Respect the reduced-motion setting and show the end state.
+- Use easing that decelerates for things that arrive.
+
 ### When to use
 
 - snap 0.1s: hover on buttons, tabs, rows.
@@ -554,7 +840,7 @@ Four durations and two easings, all under the 400 ms Doherty threshold.
 
 - `transition: background-color var(--orca-duration-snap) var(--orca-ease-in)` for hover.
 - `var(--orca-ease-out)` for anything arriving.
-- ORCA's base layer stops animations for `prefers-reduced-motion: reduce`.
+- The base layer stops animations for `prefers-reduced-motion: reduce`.
 
 #### Example: Hover speed
 
@@ -576,9 +862,31 @@ Four durations and two easings, all under the 400 ms Doherty threshold.
 
 Reserve the space of images and video before they load.
 
+### General description
+
+An aspect ratio is the proportion of an element's width to its height. Setting it ahead of time reserves space before the content loads.
+
+#### Use cases
+
+- Reserving room for images and video while they load.
+- Keeping thumbnails and cards a consistent shape.
+- Framing embedded maps or charts.
+
+#### When not to use it
+
+- Leaving media without set dimensions; the page jumps when it loads.
+- Stretching images to fit; crop or letterbox instead.
+
+#### Best practices
+
+- Set the ratio before the media loads.
+- Use common ratios such as 16:9, 4:3 and 1:1.
+- Crop images to fill the frame without distortion.
+- Write alt text for every image.
+
 ### When to use
 
-- Any image, video, snapshot or chart whose size is known only after loading.
+- Any image, video, snapshot or chart whose size is unknown until it loads.
 
 ### How to use
 
@@ -607,13 +915,35 @@ Reserve the space of images and video before they load.
 
 A thin, token-coloured scrollbar for inner scrolling regions.
 
+### General description
+
+A scrollbar shows that content continues beyond the visible area and lets people move through it. Inner regions can have their own slim scrollbar.
+
+#### Use cases
+
+- Scrolling long panels, menus and sidebars.
+- Scrolling code blocks and long lists inside a page.
+- Showing that a region holds more content.
+
+#### When not to use it
+
+- Restyling the main page scrollbar; leave the system default.
+- Hiding scrollbars completely; people lose the cue that more exists.
+
+#### Best practices
+
+- Keep scrollbars visible and with enough contrast.
+- Limit nested scrolling regions where possible.
+- Give scroll areas a clear height so the edge is obvious.
+- Make sure keyboard users can scroll them.
+
 ### When to use
 
 - Scrolling panels, menus, code blocks, sidebars.
 
 ### When not to use
 
-- Styling the page's main scrollbar; leave the OS default.
+- Styling the page's main scrollbar: leave the OS default.
 
 ### How to use
 
