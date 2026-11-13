@@ -1,7 +1,7 @@
 # ORCA design system
 
 ORCA is a Django design system built so that developers and AI coding agents can produce consistent, accessible
-interfaces without guessing. **Every element documents its why, when (and when not), and how**, the tokens and classes
+interfaces without guessing. **Every element documents when (and when not) and how to use it**, the tokens and classes
 it uses, the UX principles it applies, and a copy-ready template example.
 
 - **Structure:** five levels from the ORCA Design System Guide, each a group of the level before it:
@@ -165,7 +165,7 @@ Every other token is fixed, and `python manage.py orca_lint` flags any override 
 
 ```bash
 python -m orca list                 # every element by category
-python -m orca show button          # why / when / how / example
+python -m orca show button          # when / how / example
 python -m orca search date          # search names, guide items and classes
 python -m orca icons                # icon names and aliases
 python -m orca tokens               # token names and usage
@@ -192,7 +192,7 @@ The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`doc
 | `orca/samples.py` | Sample data used by the documentation examples |
 | `orca/static/orca/js/orca.js` | Optional progressive enhancement, opt-in by data attribute: menus, listbox, combobox, tabs, dialogs and confirm, toasts, date shortcuts and ranges, repeating rows, carousel, steppers, OTP, theme |
 | `orca/components.py` | Server side of the component tags (field wiring, page windows, month grids, charts) |
-| `orca/catalogue/` | The element catalogue: why, when, how, a11y, tokens, classes, principles, examples |
+| `orca/catalogue/` | The element catalogue: when, how, a11y, tokens, classes, principles, examples |
 | `orca/templatetags/orca.py` | `orca_head`, `orca_html_attrs`, `icon`, `status_icon`, `orca_logo`, `orca_illustration`, `orca_timezone_options`, filters `orca_duration`, `orca_initials` |
 | `orca/icons.py`, `orca/data/` | 106 Vanilla glyphs plus ORCA glyphs (home, edit, calendar, clock, …) |
 | `orca/checks.py` | Django system checks for `settings.ORCA` |
@@ -206,7 +206,7 @@ python -m venv .venv && .venv/bin/pip install -e .
 .venv/bin/python demo/manage.py runserver            # catalogue at http://127.0.0.1:8000/orca/
 ```
 
-The tests check that every guide item is covered, every element has its why/when/how and a rendering example,
+The tests check that every guide item is covered, every element has its when/how and a rendering example,
 documented classes and tokens exist, text and control contrast hold in all three themes, and generated files are current.
 
 ## Roadmap

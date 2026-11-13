@@ -8,10 +8,6 @@ The small marks charts, legends, zones and heat maps are made of. Every colour m
 
 A small square of colour that keys a legend entry or shows a chosen colour.
 
-### Why
-
-A legend links a colour to a name; without the name, colour-blind readers lose the chart (Practical UI C03).
-
 ### When to use
 
 - Chart legends, colour pickers, calendar lists, zone lists.
@@ -50,10 +46,6 @@ A legend links a colour to a name; without the name, colour-blind readers lose t
 
 A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.
 
-### Why
-
-Using the same mark in lists as on the image or video lets people match a zone to its row without reading (Miller's law); hatching distinguishes excluded zones without relying on hue (C03).
-
 ### When to use
 
 - Region lists, region editors, legends over images and videos.
@@ -87,10 +79,6 @@ Using the same mark in lists as on the image or video lets people match a zone t
 `id: chart-dot` · level: primitive · source: Tangerine
 
 A data-point marker: round, square, diamond or ring, coloured by series.
-
-### Why
-
-Different marker shapes keep series distinguishable in greyscale and for colour-blind readers (C03).
 
 ### When to use
 
@@ -128,10 +116,6 @@ Different marker shapes keep series distinguishable in greyscale and for colour-
 
 A cell shaded on a 6-step sequential scale, with its value printed in it.
 
-### Why
-
-Lightness steps show intensity at a glance (pre-attentive), and printing the value keeps it exact and accessible (C03, W11).
-
 ### When to use
 
 - Capacity by hour and day, occupancy grids, activity calendars.
@@ -153,11 +137,18 @@ Lightness steps show intensity at a glance (pre-attentive), and printing the val
 #### Example: Row of cells
 
 ```django
-<table style="border-collapse: separate; border-spacing: 2px"><tr>
-  <th scope="row" class="orca-small" style="padding-inline-end: var(--orca-space-8)">Mon</th>
-  <td class="orca-heat orca-heat--empty">–</td><td class="orca-heat orca-heat--0">4</td><td class="orca-heat orca-heat--1">18</td><td class="orca-heat orca-heat--2">40</td>
-  <td class="orca-heat orca-heat--3">96</td><td class="orca-heat orca-heat--4">142</td><td class="orca-heat orca-heat--5">210</td>
-</tr></table>
+<table style="border-collapse: separate; border-spacing: 2px">
+  <tr>
+    <th scope="row" class="orca-small" style="padding-inline-end: var(--orca-space-8)">Mon</th>
+    <td class="orca-heat orca-heat--empty">–</td>
+    <td class="orca-heat orca-heat--0">4</td>
+    <td class="orca-heat orca-heat--1">18</td>
+    <td class="orca-heat orca-heat--2">40</td>
+    <td class="orca-heat orca-heat--3">96</td>
+    <td class="orca-heat orca-heat--4">142</td>
+    <td class="orca-heat orca-heat--5">210</td>
+  </tr>
+</table>
 ```
 
 **Classes:** `.orca-heat`, `.orca-heat--1`, `.orca-heat--5`, `.orca-heat--empty`

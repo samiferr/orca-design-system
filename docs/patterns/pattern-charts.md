@@ -10,10 +10,6 @@ Bars comparing values across categories; grouped, stacked or horizontal.
 
 Built from: `chart-frame`
 
-### Why
-
-Lengths from a common baseline are the most accurately compared visual encoding, so bars are the default for comparing categories (Miller's law: one comparison at a glance).
-
 ### When to use
 
 - Comparing quantities across categories or a few periods: visitors per day, alerts per site.
@@ -95,10 +91,6 @@ class ReportView(TemplateView):
 Lines showing how one or more values change over time.
 
 Built from: `chart-frame`
-
-### Why
-
-A line shows trend and change over time better than bars, and comparing with a reference period answers 'is this normal?' (Peak–end rule: context).
 
 ### When to use
 
@@ -185,10 +177,6 @@ A circle split into the shares of one total, with a legend giving each value and
 
 Built from: `chart-frame`
 
-### Why
-
-Part-to-whole is understood at a glance when there are few parts; the legend gives exact numbers because angles are hard to compare (Practical UI C03, W11).
-
 ### When to use
 
 - 2–5 shares of one total.
@@ -264,10 +252,6 @@ A pie with the total in the middle.
 
 Built from: `chart-frame`
 
-### Why
-
-The hole leaves room for the total, so one figure answers both 'how many' and 'how split' (Miller's law).
-
 ### When to use
 
 - Shares of a total where the total itself matters: visitors today by entrance.
@@ -342,10 +326,6 @@ class ReportView(TemplateView):
 Points placed by two values to show a relationship.
 
 Built from: `chart-frame`
-
-### Why
-
-Plotting two measures against each other reveals correlation and outliers no table shows (Tesler's law: the chart does the comparison).
 
 ### When to use
 
@@ -425,10 +405,6 @@ A scatter chart whose point size shows a third value.
 
 Built from: `chart-frame`
 
-### Why
-
-Size adds a third dimension (for example site size) without a second chart; the data table gives exact values because area is hard to compare.
-
 ### When to use
 
 - Three measures per item, where the third is secondary: sites by dwell, visits and number of videos.
@@ -507,10 +483,6 @@ Scores on several axes drawn as a polygon, comparing one or two items.
 
 Built from: `chart-frame`
 
-### Why
-
-A shape shows the profile of an item across many criteria at once and makes weak spots visible (Von Restorff); limit to two items so shapes stay readable.
-
 ### When to use
 
 - Comparing one or two items across 4–8 scored criteria on the same scale.
@@ -586,10 +558,6 @@ class ReportView(TemplateView):
 Equal-angle segments whose radius shows each value.
 
 Built from: `chart-frame`
-
-### Why
-
-Equal angles avoid the pie's angle-reading problem while keeping a compact round form; area scales with value.
 
 ### When to use
 

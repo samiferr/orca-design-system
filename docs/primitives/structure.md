@@ -8,10 +8,6 @@ Marks that organise and connect: rules, separators, focus, markers and backdrops
 
 A horizontal or vertical rule: default, muted, medium and large spacing, labelled, highlight and brand.
 
-### Why
-
-A rule separates groups when space alone is not enough (Practical UI L01); used sparingly it chunks content (Miller's law).
-
 ### When to use
 
 - Between groups in a menu, between sections of a panel, between toolbar groups (vertical).
@@ -33,9 +29,15 @@ A rule separates groups when space alone is not enough (Practical UI L01); used 
 
 ```django
 <div style="max-width: 24rem">
-  <p class="orca-p">Above</p><hr class="orca-divider"><p class="orca-p">Below</p>
+  <p class="orca-p">Above</p>
+  <hr class="orca-divider">
+  <p class="orca-p">Below</p>
   <div class="orca-divider orca-divider--labeled" role="separator">or</div>
-  <div class="orca-row"><span>Left</span><span class="orca-divider orca-divider--vertical" role="separator" aria-orientation="vertical"></span><span>Right</span></div>
+  <div class="orca-row">
+    <span>Left</span>
+    <span class="orca-divider orca-divider--vertical" role="separator" aria-orientation="vertical"></span>
+    <span>Right</span>
+  </div>
   <hr class="orca-divider orca-divider--highlight orca-divider--md">
 </div>
 ```
@@ -56,10 +58,6 @@ A rule separates groups when space alone is not enough (Practical UI L01); used 
 
 A small muted chevron between breadcrumb items or path segments.
 
-### Why
-
-The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in right-to-left languages (Postel's law).
-
 ### When to use
 
 - Breadcrumbs, path displays (Library › Album › Image).
@@ -72,7 +70,17 @@ The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in rig
 #### Example: Path
 
 ```django
-<nav aria-label="Breadcrumb" class="orca-small"><a class="orca-link orca-link--plain" href="#">Library</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><a class="orca-link orca-link--plain" href="#">Summer 2026</a><span class="orca-sep" aria-hidden="true">{% icon "chevron-right" %}</span><span aria-current="page">Harbour at dusk</span></nav>
+<nav aria-label="Breadcrumb" class="orca-small">
+  <a class="orca-link orca-link--plain" href="#">Library</a>
+  <span class="orca-sep" aria-hidden="true">
+    {% icon "chevron-right" %}
+  </span>
+  <a class="orca-link orca-link--plain" href="#">Summer 2026</a>
+  <span class="orca-sep" aria-hidden="true">
+    {% icon "chevron-right" %}
+  </span>
+  <span aria-current="page">Harbour at dusk</span>
+</nav>
 ```
 
 **Classes:** `.orca-sep`
@@ -91,10 +99,6 @@ The chevron reads as 'inside' by convention (Jakob's law) and is mirrored in rig
 
 Text that is read by assistive technology but not shown.
 
-### Why
-
-Some meaning is visual only (an arrow, a position in a grid); hidden text gives screen-reader users the same information (Postel's law, Practical UI F01).
-
 ### When to use
 
 - Completing a visual cue: '(opens in a new tab)', 'compared with last week', the name of an icon-only control in a table.
@@ -112,7 +116,11 @@ Some meaning is visual only (an arrow, a position in a grid); hidden text gives 
 #### Example: Hidden context
 
 ```django
-<span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%<span class="orca-sr-only"> compared with last week</span></span>
+<span class="orca-delta orca-delta--up">
+  {% icon "arrow-up" size="xs" %}
+  +8%
+  <span class="orca-sr-only"> compared with last week</span>
+</span>
 ```
 
 **Classes:** `.orca-sr-only`, `.orca-sr-only-focusable`
@@ -128,10 +136,6 @@ Some meaning is visual only (an arrow, a position in a grid); hidden text gives 
 `id: skip-link` · level: primitive · source: Tangerine
 
 The first focusable link on every page, jumping past navigation to the main content.
-
-### Why
-
-Keyboard and screen-reader users would otherwise tab through the whole navigation on every page (Fitts's law for the keyboard: shortest path; WCAG 2.4.1).
 
 ### When to use
 
@@ -166,10 +170,6 @@ Keyboard and screen-reader users would otherwise tab through the whole navigatio
 `id: focus-ring` · level: primitive · source: Tangerine
 
 The 3px keyboard focus outline, drawn inside controls (outside for ticks and switches).
-
-### Why
-
-Keyboard users must always see where they are (Von Restorff accessibility, Practical UI F10). ORCA darkens Vanilla's light-theme focus blue so the ring holds 3:1 on every ground.
 
 ### When to use
 
@@ -214,10 +214,6 @@ Keyboard users must always see where they are (Von Restorff accessibility, Pract
 
 A chevron that points down when its section is open and sideways when closed.
 
-### Why
-
-The rotating chevron is the familiar cue for 'this expands' (Jakob's law, Practical UI F06), and its motion confirms the change.
-
 ### When to use
 
 - Disclosure and accordion triggers, collapsible sidebar groups, tree nodes.
@@ -235,7 +231,12 @@ The rotating chevron is the familiar cue for 'this expands' (Jakob's law, Practi
 
 ```django
 <details class="orca-stack" open>
-  <summary class="orca-with-icon" style="cursor: pointer; list-style: none"><span class="orca-chevron">{% icon "chevron-down" %}</span>Advanced settings</summary>
+  <summary class="orca-with-icon" style="cursor: pointer; list-style: none">
+    <span class="orca-chevron">
+      {% icon "chevron-down" %}
+    </span>
+    Advanced settings
+  </summary>
   <p class="orca-p" style="margin-inline-start: var(--orca-space-24)">Frame rate, codec and bitrate.</p>
 </details>
 ```
@@ -256,10 +257,6 @@ The rotating chevron is the familiar cue for 'this expands' (Jakob's law, Practi
 
 A round marker for one step of a process: to do, current, done or error.
 
-### Why
-
-Showing where people are in a sequence motivates completion (goal-gradient effect, Peak–end rule) and splits long tasks (Hick's law).
-
 ### When to use
 
 - Steps of a multi-step form or setup, timelines of a process.
@@ -278,7 +275,11 @@ Showing where people are in a sequence motivates completion (goal-gradient effec
 ```django
 <ol class="orca-stack" style="list-style: none; padding: 0; margin: 0">
   <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--done"></span>Upload video<span class="orca-sr-only">, done</span></li>
-  <li class="orca-with-icon" aria-current="step"><span class="orca-step-marker orca-step-marker--current"></span><strong>Choose a thumbnail</strong><span class="orca-sr-only">, current step</span></li>
+  <li class="orca-with-icon" aria-current="step">
+    <span class="orca-step-marker orca-step-marker--current"></span>
+    <strong>Choose a thumbnail</strong>
+    <span class="orca-sr-only">, current step</span>
+  </li>
   <li class="orca-with-icon"><span class="orca-step-marker orca-step-marker--error"></span>Add captions<span class="orca-sr-only">, has errors</span></li>
   <li class="orca-with-icon"><span class="orca-step-marker"></span>Publish</li>
 </ol>
@@ -299,10 +300,6 @@ Showing where people are in a sequence motivates completion (goal-gradient effec
 `id: carousel-dot` · level: primitive · source: ORCA
 
 A position marker and button for one slide of a carousel or gallery.
-
-### Why
-
-Dots show how many items there are and which is shown (Practical UI S06: show that more exists). The current dot changes shape, not only colour (C03), and the target is a full 29px/44px button (Fitts's law).
 
 ### When to use
 
@@ -343,10 +340,6 @@ Dots show how many items there are and which is shown (Practical UI S06: show th
 
 The ellipsis between page numbers that are not shown.
 
-### Why
-
-It tells people pages exist between the shown numbers without listing them all (Hick's law; S06).
-
 ### When to use
 
 - Pagination with more than 7 pages.
@@ -358,7 +351,13 @@ It tells people pages exist between the shown numbers without listing them all (
 #### Example: Gap
 
 ```django
-<div class="orca-row"><a class="orca-button" href="#">1</a><span class="orca-page-gap" aria-hidden="true">…</span><a class="orca-button" href="#" aria-current="page" style="background: var(--orca-bg-active)">7</a><span class="orca-page-gap" aria-hidden="true">…</span><a class="orca-button" href="#">24</a></div>
+<div class="orca-row">
+  <a class="orca-button" href="#">1</a>
+  <span class="orca-page-gap" aria-hidden="true">…</span>
+  <a class="orca-button" href="#" aria-current="page" style="background: var(--orca-bg-active)">7</a>
+  <span class="orca-page-gap" aria-hidden="true">…</span>
+  <a class="orca-button" href="#">24</a>
+</div>
 ```
 
 **Classes:** `.orca-page-gap`
@@ -376,10 +375,6 @@ It tells people pages exist between the shown numbers without listing them all (
 `id: dialog-backdrop` · level: primitive · source: Tangerine
 
 The dimmed layer behind a modal dialog, plus the dialog surface itself.
-
-### Why
-
-Dimming the page focuses attention on the decision (Von Restorff) and signals that the page is paused; the deliberate pause is useful friction before an irreversible action (Doherty: friction).
 
 ### When to use
 
@@ -407,7 +402,10 @@ Dimming the page focuses attention on the decision (Von Restorff) and signals th
   <form method="dialog" style="padding: var(--orca-space-24)" class="orca-stack">
     <h2 class="orca-dialog-title" id="dlg-demo-title">Delete Harbour at dusk?</h2>
     <p class="orca-p">It is removed from every album and its share links stop working.</p>
-    <div class="orca-row"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete image</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div>
+    <div class="orca-row">
+      <button class="orca-button orca-button--danger" type="submit" value="delete">Delete image</button>
+      <button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button>
+    </div>
   </form>
 </dialog>
 ```
@@ -428,10 +426,6 @@ Dimming the page focuses attention on the decision (Von Restorff) and signals th
 
 The scrim behind a side drawer; pressing it closes the drawer.
 
-### Why
-
-The scrim shows the drawer sits above the page and offers a large, familiar target to dismiss it (Fitts's law, Jakob's law).
-
 ### When to use
 
 - Behind the filter drawer (page filters always open in a right drawer) and behind navigation drawers on phones.
@@ -448,7 +442,9 @@ The scrim shows the drawer sits above the page and offers a large, familiar targ
 <div style="position: relative; height: 8rem; overflow: hidden; border: var(--orca-border-width) solid var(--orca-border)">
   <p class="orca-p" style="padding: var(--orca-space-16)">Page content</p>
   <div class="orca-scrim orca-scrim--contained"></div>
-  <aside class="orca-elevation-2" style="position: absolute; top: 0; bottom: 0; right: 0; width: 60%; padding: var(--orca-space-16); z-index: calc(var(--orca-layer-drawer) + 1)"><p class="orca-dialog-title">Filters</p></aside>
+  <aside class="orca-elevation-2" style="position: absolute; top: 0; bottom: 0; right: 0; width: 60%; padding: var(--orca-space-16); z-index: calc(var(--orca-layer-drawer) + 1)">
+    <p class="orca-dialog-title">Filters</p>
+  </aside>
 </div>
 ```
 

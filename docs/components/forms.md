@@ -10,10 +10,6 @@ Label, optional marker, help, error and one control, wired together. Text inputs
 
 Built from: `label`, `required-marker`, `help-text`, `error-text`, `text-input`, `select`, `textarea`, `color-input`
 
-### Why
-
-Most form errors come from fields people misread. A fixed order (label, hint, error, control) means every field is read the same way, the hint is seen before answering and the error sits above the control where the keyboard cannot hide it (Practical UI R08, R10, R20). Generating the ARIA wiring removes the most common accessibility bug (Tesler's law).
-
 ### When to use
 
 - Every single-value field of a form: text, number, email, date, select, textarea.
@@ -46,7 +42,11 @@ Most form errors come from fields people misread. A fixed order (label, hint, er
   </div>
   <div class="orca-field">
     <label class="orca-label" for="ff-site">Site <span class="orca-optional">(optional)</span></label>
-    <select class="orca-select" id="ff-site" name="site"><option value="">No site</option><option>North building</option><option>Warehouse</option></select>
+    <select class="orca-select" id="ff-site" name="site">
+      <option value="">No site</option>
+      <option>North building</option>
+      <option>Warehouse</option>
+    </select>
   </div>
 </div>
 ```
@@ -57,7 +57,10 @@ Most form errors come from fields people misread. A fixed order (label, hint, er
 <div class="orca-field" style="max-width: 24rem">
   <label class="orca-label" for="ff-port">Port</label>
   <p class="orca-help" id="ff-port-help">Usually 554 for HTTPS.</p>
-  <p class="orca-error" id="ff-port-error">{% icon "error" %}<span>Enter a port between 1 and 65535.</span></p>
+  <p class="orca-error" id="ff-port-error">
+    {% icon "error" %}
+    <span>Enter a port between 1 and 65535.</span>
+  </p>
   <input class="orca-input orca-input--w8" id="ff-port" name="port" value="70000" inputmode="numeric" aria-invalid="true" aria-describedby="ff-port-error ff-port-help">
 </div>
 ```
@@ -126,10 +129,6 @@ One checkbox or switch with its label, description and error.
 
 Built from: `checkbox`, `switch`, `help-text`, `error-text`
 
-### Why
-
-A single on/off question is clearest as one tick or switch whose label states the 'on' outcome (Practical UI R14, R15). The description sits inside the clickable label so the whole row is the target (Fitts's law).
-
 ### When to use
 
 - Checkbox: an option saved with the form ('Email me a daily report').
@@ -150,8 +149,21 @@ A single on/off question is clearest as one tick or switch whose label states th
 
 ```django
 <div class="orca-fields">
-  <div class="orca-field"><label class="orca-check"><input type="checkbox" name="daily" checked><span class="orca-check__box"></span><span class="orca-check__text">Email me a daily report<span class="orca-check__desc">Sent at 07:00 with yesterday's counts.</span></span></label></div>
-  <div class="orca-field"><label class="orca-switch"><input type="checkbox" role="switch" checked aria-describedby="tf-help"><span class="orca-switch__track"></span><span>Video enabled</span></label><p class="orca-help" id="tf-help">Turning it off stops counting immediately.</p></div>
+  <div class="orca-field">
+    <label class="orca-check">
+      <input type="checkbox" name="daily" checked>
+      <span class="orca-check__box"></span>
+      <span class="orca-check__text">Email me a daily report<span class="orca-check__desc">Sent at 07:00 with yesterday's counts.</span></span>
+    </label>
+  </div>
+  <div class="orca-field">
+    <label class="orca-switch">
+      <input type="checkbox" role="switch" checked aria-describedby="tf-help">
+      <span class="orca-switch__track"></span>
+      <span>Video enabled</span>
+    </label>
+    <p class="orca-help" id="tf-help">Turning it off stops counting immediately.</p>
+  </div>
 </div>
 ```
 
@@ -192,10 +204,6 @@ class NotificationForm(forms.Form):
 A fieldset of radios (one answer) or checkboxes (several answers) with a legend, hint and error.
 
 Built from: `radio`, `checkbox`, `label`
-
-### Why
-
-Visible options are compared without opening anything (Practical UI R11), and the fieldset's legend gives every option its question for screen-reader users (Postel's law).
 
 ### When to use
 
@@ -275,10 +283,6 @@ A labelled search input with magnifier, clear button and a live result count.
 
 Built from: `search-input`
 
-### Why
-
-Filtering in place is faster than navigating (Doherty threshold); announcing the result count tells screen-reader users the list changed (Postel's law).
-
 ### When to use
 
 - Filtering a list, table or menu already on the page.
@@ -297,10 +301,29 @@ Filtering in place is faster than navigating (Doherty threshold); announcing the
 
 ```django
 <div class="orca-search-field" style="max-width: 20rem">
-  <div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" placeholder=" " aria-label="Filter videos" data-orca-filter-list="sf-list" data-orca-status="sf-count"><button class="orca-search__clear" type="button" aria-label="Clear filter" data-orca-clear>{% icon "close" %}</button></div>
+  <div class="orca-search">
+    {% icon "search" %}
+    <input class="orca-input" type="search" placeholder=" " aria-label="Filter videos" data-orca-filter-list="sf-list" data-orca-status="sf-count">
+    <button class="orca-search__clear" type="button" aria-label="Clear filter" data-orca-clear>
+      {% icon "close" %}
+    </button>
+  </div>
   <p class="orca-search-field__count" id="sf-count" role="status">4 shown</p>
 </div>
-<ul id="sf-list" class="orca-list" style="max-width: 20rem"><li><span class="orca-list-item">Entrance A</span></li><li><span class="orca-list-item">Entrance B</span></li><li><span class="orca-list-item">Loading dock</span></li><li><span class="orca-list-item">Car park</span></li></ul>
+<ul id="sf-list" class="orca-list" style="max-width: 20rem">
+  <li>
+    <span class="orca-list-item">Entrance A</span>
+  </li>
+  <li>
+    <span class="orca-list-item">Entrance B</span>
+  </li>
+  <li>
+    <span class="orca-list-item">Loading dock</span>
+  </li>
+  <li>
+    <span class="orca-list-item">Car park</span>
+  </li>
+</ul>
 ```
 
 **Classes:** `.orca-search-field`, `.orca-search-field__count`
@@ -321,10 +344,6 @@ A search form: optional scope select, search field and a Search button.
 
 Built from: `search-input`, `select`, `button`
 
-### Why
-
-An explicit form with a button works for every input method and lets people search on purpose (Postel's law); the scope narrows choices before results (Hick's law).
-
 ### When to use
 
 - Searching the application or a large collection on the server.
@@ -338,8 +357,18 @@ An explicit form with a button works for every input method and lets people sear
 
 ```django
 <form class="orca-search-bar" role="search" method="get" style="max-width: 40rem" onsubmit="return false">
-  <select class="orca-select" name="scope" aria-label="Search in"><option>All</option><option>Videos</option><option>Events</option></select>
-  <div class="orca-search">{% icon "search" %}<input class="orca-input" type="search" name="q" placeholder="Search" aria-label="Search" value="entrance"><button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>{% icon "close" %}</button></div>
+  <select class="orca-select" name="scope" aria-label="Search in">
+    <option>All</option>
+    <option>Videos</option>
+    <option>Events</option>
+  </select>
+  <div class="orca-search">
+    {% icon "search" %}
+    <input class="orca-input" type="search" name="q" placeholder="Search" aria-label="Search" value="entrance">
+    <button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>
+      {% icon "close" %}
+    </button>
+  </div>
   <button class="orca-button" type="submit">Search</button>
 </form>
 ```
@@ -360,10 +389,6 @@ The row above a table: search, filters and view options on the left, actions on 
 
 Built from: `search-input`, `button`, `count-badge`
 
-### Why
-
-Grouping everything that changes the table in one row keeps it near what it affects (Practical UI L14) and separates viewing from acting (Miller's law).
-
 ### When to use
 
 - Above data tables and card lists with more than one page of items.
@@ -379,13 +404,31 @@ Grouping everything that changes the table in one row keeps it near what it affe
 ```django
 <div class="orca-stack" style="gap: var(--orca-space-8)">
   <div class="orca-toolbar" role="toolbar" aria-label="Videos">
-    <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter videos" aria-label="Filter videos"></div>
-    <button class="orca-button orca-button--dense" type="button" aria-expanded="false">{% icon "filter" %}Filters<span class="orca-count orca-count--accent">2</span></button>
+    <div class="orca-search">
+      {% icon "search" %}
+      <input class="orca-input orca-input--dense" type="search" placeholder="Filter videos" aria-label="Filter videos">
+    </div>
+    <button class="orca-button orca-button--dense" type="button" aria-expanded="false">
+      {% icon "filter" %}
+      Filters
+      <span class="orca-count orca-count--accent">2</span>
+    </button>
     <span class="orca-toolbar__spacer"></span>
-    <button class="orca-button orca-button--dense" type="button">{% icon "upload" %}Export</button>
-    <a class="orca-button orca-button--primary orca-button--dense" href="#">{% icon "plus" %}Add video</a>
+    <button class="orca-button orca-button--dense" type="button">
+      {% icon "upload" %}
+      Export
+    </button>
+    <a class="orca-button orca-button--primary orca-button--dense" href="#">
+      {% icon "plus" %}
+      Add video
+    </a>
   </div>
-  <div class="orca-toolbar__selection" role="region" aria-label="Selection"><strong>3 selected</strong><button class="orca-button orca-button--dense" type="button">Disable</button><button class="orca-button orca-button--dense" type="button">Move to site</button><button class="orca-button orca-button--link" type="button">Clear selection</button></div>
+  <div class="orca-toolbar__selection" role="region" aria-label="Selection">
+    <strong>3 selected</strong>
+    <button class="orca-button orca-button--dense" type="button">Disable</button>
+    <button class="orca-button orca-button--dense" type="button">Move to site</button>
+    <button class="orca-button orca-button--link" type="button">Clear selection</button>
+  </div>
 </div>
 ```
 
@@ -407,10 +450,6 @@ A dropdown with a filter and a checkbox list, showing the chosen values as remov
 
 Built from: `checkbox`, `search-input`, `tag`
 
-### Why
-
-Picking several items from a long list needs search and visible choices (Practical UI R12, S06); tags keep the selection visible and reversible after the list closes.
-
 ### When to use
 
 - Choosing several known items from 10 to a few hundred: videos, sites, people.
@@ -431,18 +470,46 @@ Picking several items from a long list needs search and visible choices (Practic
 <div style="max-width: 20rem">
   <p class="orca-label" id="mp-label">Videos</p>
   <details class="orca-multipicker" open>
-    <summary class="orca-picker-btn" aria-labelledby="mp-label mp-value"><span class="orca-picker-btn__value" id="mp-value">2 videos</span>{% icon "chevron-down" %}</summary>
+    <summary class="orca-picker-btn" aria-labelledby="mp-label mp-value">
+      <span class="orca-picker-btn__value" id="mp-value">2 videos</span>
+      {% icon "chevron-down" %}
+    </summary>
     <div class="orca-popover orca-multipicker__panel" style="position: static; box-shadow: var(--orca-shadow-elevated)">
-      <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter" aria-label="Filter videos" data-orca-filter-list="mp-list"></div>
+      <div class="orca-search">
+        {% icon "search" %}
+        <input class="orca-input orca-input--dense" type="search" placeholder="Filter" aria-label="Filter videos" data-orca-filter-list="mp-list">
+      </div>
       <ul class="orca-multipicker__list" id="mp-list">
-        <li><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Entrance A</label></li>
-        <li><label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Entrance B</label></li>
-        <li><label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Loading dock</label></li>
+        <li>
+          <label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Entrance A</label>
+        </li>
+        <li>
+          <label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Entrance B</label>
+        </li>
+        <li>
+          <label class="orca-check"><input type="checkbox"><span class="orca-check__box"></span>Loading dock</label>
+        </li>
       </ul>
-      <div class="orca-multipicker__foot"><button class="orca-button orca-button--link" type="button">Clear</button><button class="orca-button orca-button--dense" type="button">Done</button></div>
+      <div class="orca-multipicker__foot">
+        <button class="orca-button orca-button--link" type="button">Clear</button>
+        <button class="orca-button orca-button--dense" type="button">Done</button>
+      </div>
     </div>
   </details>
-  <div class="orca-multipicker__tags"><span class="orca-tag"><span class="orca-tag__text">Entrance A</span><button class="orca-tag__remove" type="button" aria-label="Remove Entrance A">{% icon "close" %}</button></span><span class="orca-tag"><span class="orca-tag__text">Entrance B</span><button class="orca-tag__remove" type="button" aria-label="Remove Entrance B">{% icon "close" %}</button></span></div>
+  <div class="orca-multipicker__tags">
+    <span class="orca-tag">
+      <span class="orca-tag__text">Entrance A</span>
+      <button class="orca-tag__remove" type="button" aria-label="Remove Entrance A">
+        {% icon "close" %}
+      </button>
+    </span>
+    <span class="orca-tag">
+      <span class="orca-tag__text">Entrance B</span>
+      <button class="orca-tag__remove" type="button" aria-label="Remove Entrance B">
+        {% icon "close" %}
+      </button>
+    </span>
+  </div>
 </div>
 ```
 
@@ -462,10 +529,6 @@ A select of languages, each written in its own language, that posts to Django's 
 
 Built from: `select`, `button`
 
-### Why
-
-People look for their language by its own name (Jakob's law), and a plain form works without script (Postel's law).
-
 ### When to use
 
 - Products translated into two or more languages; in the user menu or footer.
@@ -480,11 +543,19 @@ People look for their language by its own name (Jakob's law), and a plain form w
 
 ```django
 <form class="orca-row" method="post" action="#" onsubmit="return false">
-  <label class="orca-label" for="lang" style="margin: 0">{% icon "website" %} <span class="orca-sr-only">Language</span></label>
+  <label class="orca-label" for="lang" style="margin: 0">
+    {% icon "website" %}
+    <span class="orca-sr-only">Language</span>
+  </label>
   <select class="orca-select orca-select--dense" id="lang" name="language" style="width: auto" data-orca-autosubmit>
-    <option value="en" lang="en" selected>English</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="ar" lang="ar">العربية</option>
+    <option value="en" lang="en" selected>English</option>
+    <option value="fr" lang="fr">Français</option>
+    <option value="de" lang="de">Deutsch</option>
+    <option value="ar" lang="ar">العربية</option>
   </select>
-  <noscript><button class="orca-button orca-button--dense" type="submit">Change</button></noscript>
+  <noscript>
+    <button class="orca-button orca-button--dense" type="submit">Change</button>
+  </noscript>
 </form>
 ```
 
@@ -527,10 +598,6 @@ An input joined to addons (unit, prefix) or a button that acts on it.
 
 Built from: `input-addon`, `text-input`, `button`
 
-### Why
-
-Showing the unit and the action next to the value removes guessing and travel (Postel's law, Practical UI L14).
-
 ### When to use
 
 - Values with a fixed unit or prefix; a field with one directly related action (Test, Copy, Generate).
@@ -544,8 +611,21 @@ Showing the unit and the action next to the value removes guessing and travel (P
 
 ```django
 <div class="orca-fields" style="max-width: 28rem">
-  <div class="orca-field"><label class="orca-label" for="ig-a">Retention</label><div class="orca-input-group" style="max-width: 12rem"><input class="orca-input" id="ig-a" type="number" value="30" aria-describedby="ig-a-u"><span class="orca-addon" id="ig-a-u">days</span></div></div>
-  <div class="orca-field"><label class="orca-label" for="ig-b">Video address</label><div class="orca-input-group"><span class="orca-addon">https://</span><input class="orca-input" id="ig-b" value="media.example.com/v/4821"><button class="orca-button" type="button">Test</button></div></div>
+  <div class="orca-field">
+    <label class="orca-label" for="ig-a">Retention</label>
+    <div class="orca-input-group" style="max-width: 12rem">
+      <input class="orca-input" id="ig-a" type="number" value="30" aria-describedby="ig-a-u">
+      <span class="orca-addon" id="ig-a-u">days</span>
+    </div>
+  </div>
+  <div class="orca-field">
+    <label class="orca-label" for="ig-b">Video address</label>
+    <div class="orca-input-group">
+      <span class="orca-addon">https://</span>
+      <input class="orca-input" id="ig-b" value="media.example.com/v/4821">
+      <button class="orca-button" type="button">Test</button>
+    </div>
+  </div>
 </div>
 ```
 
@@ -565,10 +645,6 @@ A button that opens the filters, showing how many are active.
 
 Built from: `button`, `count-badge`, `icon`
 
-### Why
-
-Hiding advanced filters until needed keeps the screen simple (Practical UI S04, Hick's law); the count keeps active filters visible so results are never mysteriously empty.
-
 ### When to use
 
 - Lists with more filters than fit in the toolbar.
@@ -582,7 +658,12 @@ Hiding advanced filters until needed keeps the screen simple (Practical UI S04, 
 #### Example: Filter button with panel
 
 ```django
-<button class="orca-button" type="button" aria-expanded="false" aria-controls="fb-panel" data-orca-disclose>{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true">2</span><span class="orca-sr-only">, 2 active</span></button>
+<button class="orca-button" type="button" aria-expanded="false" aria-controls="fb-panel" data-orca-disclose>
+  {% icon "filter" %}
+  Filters
+  <span class="orca-count orca-count--accent" aria-hidden="true">2</span>
+  <span class="orca-sr-only">, 2 active</span>
+</button>
 <div id="fb-panel" hidden style="margin-top: var(--orca-space-8); padding: var(--orca-space-16); background: var(--orca-bg-alt)">
   <label class="orca-check"><input type="checkbox" checked><span class="orca-check__box"></span>Online only</label>
 </div>
@@ -605,10 +686,6 @@ Hiding advanced filters until needed keeps the screen simple (Practical UI S04, 
 A select-like button opening a listbox whose options can carry a description.
 
 Built from: `select`
-
-### Why
-
-When options need a second line (a plan's limits, a role's permissions) a native select cannot show it; a listbox keeps the select convention (Jakob's law) while showing the difference that matters (Practical UI R12).
 
 ### When to use
 
@@ -634,12 +711,21 @@ When options need a second line (a plan's limits, a role's permissions) a native
 ```django
 <div class="orca-anchor orca-anchor--block" data-orca-listbox-wrap style="max-width: 20rem">
   <span class="orca-label" id="dd-label">Role</span>
-  <button class="orca-picker-btn" type="button" data-orca-listbox aria-haspopup="listbox" aria-expanded="false" aria-controls="dd-list" aria-labelledby="dd-label dd-value"><span class="orca-picker-btn__value" id="dd-value">Viewer</span>{% icon "chevron-down" %}</button>
+  <button class="orca-picker-btn" type="button" data-orca-listbox aria-haspopup="listbox" aria-expanded="false" aria-controls="dd-list" aria-labelledby="dd-label dd-value">
+    <span class="orca-picker-btn__value" id="dd-value">Viewer</span>
+    {% icon "chevron-down" %}
+  </button>
   <input type="hidden" name="role" value="viewer">
   <ul class="orca-popover" id="dd-list" role="listbox" aria-labelledby="dd-label" hidden>
-    <li class="orca-option" role="option" tabindex="-1" data-value="viewer" data-label="Viewer" aria-selected="true"><span class="orca-option__text">Viewer<span class="orca-option__desc">Sees dashboards and reports.</span></span></li>
-    <li class="orca-option" role="option" tabindex="-1" data-value="operator" data-label="Operator" aria-selected="false"><span class="orca-option__text">Operator<span class="orca-option__desc">Also manages videos and runs.</span></span></li>
-    <li class="orca-option" role="option" tabindex="-1" data-value="admin" data-label="Administrator" aria-selected="false"><span class="orca-option__text">Administrator<span class="orca-option__desc">Also manages users and settings.</span></span></li>
+    <li class="orca-option" role="option" tabindex="-1" data-value="viewer" data-label="Viewer" aria-selected="true">
+      <span class="orca-option__text">Viewer<span class="orca-option__desc">Sees dashboards and reports.</span></span>
+    </li>
+    <li class="orca-option" role="option" tabindex="-1" data-value="operator" data-label="Operator" aria-selected="false">
+      <span class="orca-option__text">Operator<span class="orca-option__desc">Also manages videos and runs.</span></span>
+    </li>
+    <li class="orca-option" role="option" tabindex="-1" data-value="admin" data-label="Administrator" aria-selected="false">
+      <span class="orca-option__text">Administrator<span class="orca-option__desc">Also manages users and settings.</span></span>
+    </li>
   </ul>
 </div>
 ```
@@ -659,10 +745,6 @@ When options need a second line (a plan's limits, a role's permissions) a native
 A text input that suggests matching options as people type; the value must be one of the options.
 
 Built from: `text-input`
-
-### Why
-
-When people know the name of what they want, typing a few letters beats scrolling a long list (Practical UI R12, Hick's law); highlighting the matched letters shows why each suggestion appears.
 
 ### When to use
 
@@ -692,10 +774,14 @@ When people know the name of what they want, typing a few letters beats scrollin
   <input class="orca-input" id="cb-in" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cb-list" autocomplete="off" data-orca-combobox data-orca-status="cb-status">
   <input type="hidden" name="country">
   <ul class="orca-popover" id="cb-list" role="listbox" aria-label="Countries" hidden style="top: 100%">
-    <li class="orca-option" role="option" id="cb-1" data-value="DZ">Algeria</li><li class="orca-option" role="option" id="cb-2" data-value="BE">Belgium</li>
-    <li class="orca-option" role="option" id="cb-3" data-value="CA">Canada</li><li class="orca-option" role="option" id="cb-4" data-value="FR">France</li>
-    <li class="orca-option" role="option" id="cb-5" data-value="DE">Germany</li><li class="orca-option" role="option" id="cb-6" data-value="MA">Morocco</li>
-    <li class="orca-option" role="option" id="cb-7" data-value="TN">Tunisia</li><li class="orca-popover__empty" hidden>No country matches. Check the spelling.</li>
+    <li class="orca-option" role="option" id="cb-1" data-value="DZ">Algeria</li>
+    <li class="orca-option" role="option" id="cb-2" data-value="BE">Belgium</li>
+    <li class="orca-option" role="option" id="cb-3" data-value="CA">Canada</li>
+    <li class="orca-option" role="option" id="cb-4" data-value="FR">France</li>
+    <li class="orca-option" role="option" id="cb-5" data-value="DE">Germany</li>
+    <li class="orca-option" role="option" id="cb-6" data-value="MA">Morocco</li>
+    <li class="orca-option" role="option" id="cb-7" data-value="TN">Tunisia</li>
+    <li class="orca-popover__empty" hidden>No country matches. Check the spelling.</li>
   </ul>
   <span class="orca-sr-only" id="cb-status" role="status"></span>
 </div>
@@ -719,10 +805,6 @@ A free-text input with browser suggestions from a datalist.
 
 Built from: `text-input`
 
-### Why
-
-Suggestions speed up common answers without forbidding new ones (Tesler's law, Postel's law), and the native datalist needs no script.
-
 ### When to use
 
 - Free text where most answers repeat: a tag, a mounting location, a department.
@@ -742,7 +824,11 @@ Suggestions speed up common answers without forbidding new ones (Tesler's law, P
 <div class="orca-field" style="max-width: 20rem">
   <label class="orca-label" for="as-in">Mounting location</label>
   <input class="orca-input" id="as-in" list="as-dl" autocomplete="off">
-  <datalist id="as-dl"><option value="Above the door"></option><option value="Ceiling, centre"></option><option value="Wall, facing in"></option></datalist>
+  <datalist id="as-dl">
+    <option value="Above the door"></option>
+    <option value="Ceiling, centre"></option>
+    <option value="Wall, facing in"></option>
+  </datalist>
 </div>
 ```
 
@@ -762,10 +848,6 @@ The full one-time-code question: label, digit boxes, hint, error and a resend li
 
 Built from: `otp-digit`, `help-text`, `countdown-label`
 
-### Why
-
-Codes are short-lived and copied from another app; accepting paste and autofill and offering a resend avoids a dead end at the most fragile step (Peak–end rule, Tesler's law).
-
 ### When to use
 
 - Verification and two-factor steps.
@@ -781,7 +863,11 @@ Codes are short-lived and copied from another app; accepting paste and autofill 
 <fieldset class="orca-choice-group" aria-describedby="otp-help">
   <legend class="orca-label">Verification code</legend>
   <p class="orca-help" id="otp-help">We sent a 6-digit code to a••••@acme.com. It expires in 10 minutes.</p>
-  <div class="orca-row" data-orca-otp>{% for i in "123456" %}<input class="orca-input orca-otp-digit" inputmode="numeric" maxlength="1" aria-label="Digit {{ i }} of 6"{% if forloop.first %} autocomplete="one-time-code"{% endif %}>{% endfor %}</div>
+  <div class="orca-row" data-orca-otp>
+    {% for i in "123456" %}
+      <input class="orca-input orca-otp-digit" inputmode="numeric" maxlength="1" aria-label="Digit {{ i }} of 6"{% if forloop.first %} autocomplete="one-time-code"{% endif %}>
+    {% endfor %}
+  </div>
   <p class="orca-small">Didn't get it? <button class="orca-button orca-button--link" type="button">Send a new code</button></p>
 </fieldset>
 ```
@@ -802,10 +888,6 @@ One to five stars as a radio group, with the chosen value in words.
 
 Built from: `radio`, `icon`
 
-### Why
-
-Stars are a familiar scale (Jakob's law); built on radios they work with arrow keys and screen readers, and the word ('4 of 5') removes doubt.
-
 ### When to use
 
 - Feedback and review forms.
@@ -820,7 +902,21 @@ Stars are a familiar scale (Jakob's law); built on radios they work with arrow k
 ```django
 <fieldset class="orca-rating-wrap">
   <legend class="orca-label">How easy was the setup?</legend>
-  <div class="orca-rating">{% for n in "54321" %}<input type="radio" name="rate" id="rate-{{ n }}" value="{{ n }}"{% if n == "4" %} checked{% endif %}><label for="rate-{{ n }}">{% icon "star" %}<span class="orca-sr-only">{{ n }} star{% if n != "1" %}s{% endif %}</span></label>{% endfor %}</div>
+  <div class="orca-rating">
+    {% for n in "54321" %}
+      <input type="radio" name="rate" id="rate-{{ n }}" value="{{ n }}"{% if n == "4" %} checked{% endif %}>
+      <label for="rate-{{ n }}">
+        {% icon "star" %}
+        <span class="orca-sr-only">
+          {{ n }}
+          star
+          {% if n != "1" %}
+            s
+          {% endif %}
+        </span>
+      </label>
+    {% endfor %}
+  </div>
   <span class="orca-rating__value">4 of 5</span>
 </fieldset>
 ```
@@ -840,10 +936,6 @@ Stars are a familiar scale (Jakob's law); built on radios they work with arrow k
 Day, month and year as three labelled numeric fields.
 
 Built from: `text-input`, `label`
-
-### Why
-
-Dates people know by heart (birth dates, document dates) are faster to type than to pick from a calendar, and three labelled parts avoid day/month order confusion (Postel's law).
 
 ### When to use
 
@@ -865,9 +957,18 @@ Dates people know by heart (birth dates, document dates) are faster to type than
   <legend class="orca-label">Licence expiry date</legend>
   <p class="orca-help" id="sd-help">For example, 27 3 2027</p>
   <div class="orca-split-date__parts">
-    <div class="orca-split-date__part"><label class="orca-label" for="sd-d">Day</label><input class="orca-input" id="sd-d" inputmode="numeric" maxlength="2"></div>
-    <div class="orca-split-date__part"><label class="orca-label" for="sd-m">Month</label><input class="orca-input" id="sd-m" inputmode="numeric" maxlength="2"></div>
-    <div class="orca-split-date__part orca-split-date__part--year"><label class="orca-label" for="sd-y">Year</label><input class="orca-input" id="sd-y" inputmode="numeric" maxlength="4"></div>
+    <div class="orca-split-date__part">
+      <label class="orca-label" for="sd-d">Day</label>
+      <input class="orca-input" id="sd-d" inputmode="numeric" maxlength="2">
+    </div>
+    <div class="orca-split-date__part">
+      <label class="orca-label" for="sd-m">Month</label>
+      <input class="orca-input" id="sd-m" inputmode="numeric" maxlength="2">
+    </div>
+    <div class="orca-split-date__part orca-split-date__part--year">
+      <label class="orca-label" for="sd-y">Year</label>
+      <input class="orca-input" id="sd-y" inputmode="numeric" maxlength="4">
+    </div>
   </div>
 </fieldset>
 ```
@@ -888,10 +989,6 @@ A labelled drop zone around a native file input, listing the chosen files.
 
 Built from: `file-input`, `help-text`
 
-### Why
-
-A large target accepts both drag-and-drop and a click (Fitts's law); stating type and size limits up front prevents a failed upload (Peak–end rule).
-
 ### When to use
 
 - Uploading documents, images or imports.
@@ -908,8 +1005,12 @@ A large target accepts both drag-and-drop and a click (Fitts's law); stating typ
 <div class="orca-field" style="max-width: 28rem">
   <label class="orca-label" for="fz">Floor plan</label>
   <p class="orca-help" id="fz-help">PNG or JPG, up to 10 MB.</p>
-  <div class="orca-dropzone">{% icon "upload" size="l" %}<span class="orca-dropzone__title">Drop a file here or choose one</span><span class="orca-dropzone__hint">One file</span>
-    <input type="file" id="fz" accept="image/png,image/jpeg" aria-describedby="fz-help" data-orca-file-list="fz-list"></div>
+  <div class="orca-dropzone">
+    {% icon "upload" size="l" %}
+    <span class="orca-dropzone__title">Drop a file here or choose one</span>
+    <span class="orca-dropzone__hint">One file</span>
+    <input type="file" id="fz" accept="image/png,image/jpeg" aria-describedby="fz-help" data-orca-file-list="fz-list">
+  </div>
   <ul class="orca-file-list" id="fz-list" aria-live="polite"></ul>
 </div>
 ```
@@ -958,10 +1059,6 @@ A message at the top of a form for errors that belong to no single field.
 
 Built from: `error-list`, `callout`
 
-### Why
-
-Problems like 'These dates overlap an existing run' must be seen before the fields; a negative callout with the fix ends the dead end (Practical UI W15, Peak–end rule).
-
 ### When to use
 
 - Non-field errors after submit; conflicts with other records; permission problems.
@@ -974,7 +1071,11 @@ Problems like 'These dates overlap an existing run' must be seen before the fiel
 #### Example: Non-field error
 
 ```django
-<div class="orca-callout orca-callout--negative" role="alert">{% icon "error" %}<p class="orca-callout__title">This run overlaps “Morning check”</p><p class="orca-callout__body">Choose a start after 10:00 or stop the other run first.</p></div>
+<div class="orca-callout orca-callout--negative" role="alert">
+  {% icon "error" %}
+  <p class="orca-callout__title">This run overlaps “Morning check”</p>
+  <p class="orca-callout__body">Choose a start after 10:00 or stop the other run first.</p>
+</div>
 ```
 
 ### Server code
@@ -1016,10 +1117,6 @@ The row of buttons that ends a form: the primary action first, then the alternat
 
 Built from: `button`
 
-### Why
-
-Placing the submit action right after the last field shortens travel (Fitts's law); one primary action makes the next step obvious (Hick's law, Practical UI B03, B08).
-
 ### When to use
 
 - The end of every form, dialog form and settings section with a Save.
@@ -1036,9 +1133,24 @@ Placing the submit action right after the last field shortens travel (Fitts's la
 <div class="orca-form-actions">
   <button class="orca-button orca-button--primary" type="submit">Save video</button>
   <a class="orca-button" href="#">Cancel</a>
-  <span class="orca-form-actions__end"><button class="orca-button orca-button--outline-danger" type="button" data-orca-dialog-open="fa-confirm">Delete video</button></span>
+  <span class="orca-form-actions__end">
+    <button class="orca-button orca-button--outline-danger" type="button" data-orca-dialog-open="fa-confirm">Delete video</button>
+  </span>
 </div>
-<dialog class="orca-dialog" id="fa-confirm" aria-labelledby="fa-confirm-t"><form method="dialog"><div class="orca-dialog__header"><h2 class="orca-dialog-title" id="fa-confirm-t">Delete Entrance A?</h2></div><div class="orca-dialog__body"><p class="orca-p">Its counts are kept. Its zones and alert rules are deleted.</p></div><div class="orca-dialog__footer"><button class="orca-button orca-button--danger" type="submit" value="delete">Delete video</button><button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button></div></form></dialog>
+<dialog class="orca-dialog" id="fa-confirm" aria-labelledby="fa-confirm-t">
+  <form method="dialog">
+    <div class="orca-dialog__header">
+      <h2 class="orca-dialog-title" id="fa-confirm-t">Delete Entrance A?</h2>
+    </div>
+    <div class="orca-dialog__body">
+      <p class="orca-p">Its counts are kept. Its zones and alert rules are deleted.</p>
+    </div>
+    <div class="orca-dialog__footer">
+      <button class="orca-button orca-button--danger" type="submit" value="delete">Delete video</button>
+      <button class="orca-button" type="submit" value="cancel" autofocus>Cancel</button>
+    </div>
+  </form>
+</dialog>
 ```
 
 **Classes:** `.orca-form-actions`, `.orca-form-actions__end`, `.orca-form-actions--sticky`
@@ -1057,10 +1169,6 @@ A checkbox per table row and a select-all checkbox in the header.
 
 Built from: `checkbox`
 
-### Why
-
-Selecting rows before choosing an action lets people act on many records at once (Practical UI F03); checkboxes are the familiar control for it (Jakob's law, R14).
-
 ### When to use
 
 - Tables that offer bulk actions.
@@ -1077,8 +1185,30 @@ Selecting rows before choosing an action lets people act on many records at once
 #### Example: Select cells
 
 ```django
-<table class="orca-table"><thead><tr><th scope="col" class="orca-table__select"><label class="orca-check"><input type="checkbox" aria-label="Select all videos"><span class="orca-check__box"></span></label></th><th scope="col">Video</th></tr></thead>
-<tbody><tr><td class="orca-table__select"><label class="orca-check"><input type="checkbox" checked aria-label="Select Harbour at dusk"><span class="orca-check__box"></span></label></td><td>Harbour at dusk</td></tr></tbody></table>
+<table class="orca-table">
+  <thead>
+    <tr>
+      <th scope="col" class="orca-table__select">
+        <label class="orca-check">
+          <input type="checkbox" aria-label="Select all videos">
+          <span class="orca-check__box"></span>
+        </label>
+      </th>
+      <th scope="col">Video</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="orca-table__select">
+        <label class="orca-check">
+          <input type="checkbox" checked aria-label="Select Harbour at dusk">
+          <span class="orca-check__box"></span>
+        </label>
+      </td>
+      <td>Harbour at dusk</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 **Classes:** `.orca-table__select`
@@ -1097,10 +1227,6 @@ A row of pressed-state icon buttons for bold, italic, lists and links over a tex
 
 Built from: `icon-button`, `divider`
 
-### Why
-
-Formatting commands are recognised by their familiar glyphs (Jakob's law); pressed states show what applies to the selection (Practical UI F10).
-
 ### When to use
 
 - Above a rich text field.
@@ -1116,7 +1242,18 @@ Formatting commands are recognised by their familiar glyphs (Jakob's law); press
 #### Example: Toolbar
 
 ```django
-<div class="orca-richtext__toolbar" role="toolbar" aria-label="Formatting" style="max-width: 20rem"><button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="true" aria-label="Bold"><b>B</b></button><button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="false" aria-label="Italic"><i>I</i></button><span class="orca-divider orca-divider--vertical" role="separator"></span><button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="false" aria-label="Bulleted list">{% icon "list" %}</button></div>
+<div class="orca-richtext__toolbar" role="toolbar" aria-label="Formatting" style="max-width: 20rem">
+  <button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="true" aria-label="Bold">
+    <b>B</b>
+  </button>
+  <button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="false" aria-label="Italic">
+    <i>I</i>
+  </button>
+  <span class="orca-divider orca-divider--vertical" role="separator"></span>
+  <button class="orca-icon-button orca-icon-button--dense" type="button" aria-pressed="false" aria-label="Bulleted list">
+    {% icon "list" %}
+  </button>
+</div>
 ```
 
 **Classes:** `.orca-richtext__toolbar`
@@ -1135,10 +1272,6 @@ The filters in effect as removable tags, with Clear all and the number of result
 
 Built from: `tag`, `link-action`
 
-### Why
-
-Filters that are on must stay visible and reversible (Practical UI S06, Postel's law); the count confirms what they did (Doherty threshold).
-
 ### When to use
 
 - Above results while at least one filter is applied; inside a no-results state.
@@ -1154,7 +1287,17 @@ Filters that are on must stay visible and reversible (Practical UI S06, Postel's
 #### Example: Applied filters
 
 ```django
-<div class="orca-filter-bar__applied"><span class="orca-small orca-muted">Filtered by</span><span class="orca-tag"><span class="orca-tag__text">Type: Video</span><button class="orca-tag__remove" type="button" aria-label="Remove filter Type: Video">{% icon "close" %}</button></span><button class="orca-button orca-button--link" type="button">Clear all</button><span class="orca-small orca-muted" role="status">14 videos</span></div>
+<div class="orca-filter-bar__applied">
+  <span class="orca-small orca-muted">Filtered by</span>
+  <span class="orca-tag">
+    <span class="orca-tag__text">Type: Video</span>
+    <button class="orca-tag__remove" type="button" aria-label="Remove filter Type: Video">
+      {% icon "close" %}
+    </button>
+  </span>
+  <button class="orca-button orca-button--link" type="button">Clear all</button>
+  <span class="orca-small orca-muted" role="status">14 videos</span>
+</div>
 ```
 
 **Classes:** `.orca-filter-bar__applied`

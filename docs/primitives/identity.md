@@ -8,10 +8,6 @@ Who and what: the product's logo and favicon, and people's avatars.
 
 The product's logo image, or its name as a wordmark with a brand bar when no logo is set.
 
-### Why
-
-A consistent mark in a consistent place confirms where people are (Jakob's law). Falling back to plain type keeps every deployment branded without asking for artwork (Tesler's law).
-
 ### When to use
 
 - Top bar, sidebar header, login card, email header.
@@ -33,7 +29,10 @@ A consistent mark in a consistent place confirms where people are (Jakob's law).
 #### Example: Logo
 
 ```django
-<div class="orca-row orca-row--16">{% orca_logo %}{% orca_logo href="" size="lg" %}</div>
+<div class="orca-row orca-row--16">
+  {% orca_logo %}
+  {% orca_logo href="" size="lg" %}
+</div>
 ```
 
 **Classes:** `.orca-logo`, `.orca-logo__img`, `.orca-logo__mark`, `.orca-logo--lg`
@@ -53,10 +52,6 @@ A consistent mark in a consistent place confirms where people are (Jakob's law).
 `id: avatar` · level: primitive · source: Tangerine
 
 A person's picture or initials in a circle (or square for organisations and devices).
-
-### Why
-
-Faces and initials let people recognise who did what faster than reading names (Miller's law: recognition over recall). Initials keep the layout stable when there is no photo (Postel's law).
 
 ### When to use
 
@@ -85,7 +80,10 @@ Faces and initials let people recognise who did what faster than reading names (
   <span class="orca-avatar orca-avatar--xs" aria-hidden="true">AL</span>
   <span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span>
   <span class="orca-avatar" aria-hidden="true">{{ "Grace Hopper"|orca_initials }}</span>
-  <span class="orca-avatar orca-avatar--l"><img src="{% static "orca/img/sample-person.svg" %}" alt="Ada Lovelace"><span class="orca-avatar__presence orca-dot--positive"></span></span>
+  <span class="orca-avatar orca-avatar--l">
+    <img src="{% static "orca/img/sample-person.svg" %}" alt="Ada Lovelace">
+    <span class="orca-avatar__presence orca-dot--positive"></span>
+  </span>
   <span class="orca-avatar orca-avatar--xl orca-avatar--square" role="img" aria-label="North building">NB</span>
 </div>
 ```
@@ -105,10 +103,6 @@ Faces and initials let people recognise who did what faster than reading names (
 `id: favicon` · level: primitive · source: Tangerine
 
 The browser-tab and home-screen icons for the product.
-
-### Why
-
-People find their tab by its icon among many (Von Restorff); a consistent icon also marks installed apps.
 
 ### When to use
 

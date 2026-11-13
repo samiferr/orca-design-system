@@ -1,7 +1,7 @@
 """Command line for humans and AI agents. No Django project needed.
 
     python -m orca list [category]     every element id, grouped by category
-    python -m orca show <id>           why / when / how / example of one element
+    python -m orca show <id>           when / how / example of one element
     python -m orca search <words>      find elements by name, guide item or class
     python -m orca icons               all icon names and aliases
     python -m orca tokens              brand tokens and every CSS token name

@@ -10,10 +10,6 @@ The top-bar links to the main sections of the product.
 
 Built from: `text-link`
 
-### Why
-
-A short, always-visible set of sections in the familiar top position lets people know where they are and where they can go (Jakob's law); the 3px bar marks the current section without colour alone (C03).
-
 ### When to use
 
 - Products with 2 to about 6 top-level sections, in the top bar.
@@ -31,9 +27,22 @@ A short, always-visible set of sections in the familiar top position lets people
 #### Example: Top-bar links
 
 ```django
-<nav aria-label="Main"><ul class="orca-topnav" style="min-height: var(--orca-nav-height)">
-  <li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Videos</a></li><li><a href="#">Reports</a></li><li><a href="#">Alerts</a></li>
-</ul></nav>
+<nav aria-label="Main">
+  <ul class="orca-topnav" style="min-height: var(--orca-nav-height)">
+    <li>
+      <a href="#" aria-current="page">Dashboard</a>
+    </li>
+    <li>
+      <a href="#">Videos</a>
+    </li>
+    <li>
+      <a href="#">Reports</a>
+    </li>
+    <li>
+      <a href="#">Alerts</a>
+    </li>
+  </ul>
+</nav>
 ```
 
 **Classes:** `.orca-topnav`
@@ -52,10 +61,6 @@ Help, notifications and the user chip at the end of the top bar.
 
 Built from: `icon-button`, `count-badge`, `avatar`
 
-### Why
-
-Account and help live in the top-right corner of almost every product (Jakob's law); grouping them separates personal tools from sections (Miller's law).
-
 ### When to use
 
 - The end of the top bar, in every authenticated page.
@@ -69,9 +74,26 @@ Account and help live in the top-right corner of almost every product (Jakob's l
 
 ```django
 <ul class="orca-utility-nav">
-  <li><a class="orca-icon-button" href="#" aria-label="Help">{% icon "help" %}</a></li>
-  <li><a class="orca-icon-button orca-has-count" href="#" aria-label="Notifications, 3 unread">{% icon "notifications" %}<span class="orca-count" aria-hidden="true">3</span></a></li>
-  <li><button class="orca-user-chip" type="button" aria-haspopup="menu" aria-expanded="false"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span><span class="orca-user-chip__text"><span class="orca-user-chip__name">Ada Lovelace</span><span class="orca-user-chip__role">Administrator</span></span></button></li>
+  <li>
+    <a class="orca-icon-button" href="#" aria-label="Help">
+      {% icon "help" %}
+    </a>
+  </li>
+  <li>
+    <a class="orca-icon-button orca-has-count" href="#" aria-label="Notifications, 3 unread">
+      {% icon "notifications" %}
+      <span class="orca-count" aria-hidden="true">3</span>
+    </a>
+  </li>
+  <li>
+    <button class="orca-user-chip" type="button" aria-haspopup="menu" aria-expanded="false">
+      <span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span>
+      <span class="orca-user-chip__text">
+        <span class="orca-user-chip__name">Ada Lovelace</span>
+        <span class="orca-user-chip__role">Administrator</span>
+      </span>
+    </button>
+  </li>
 </ul>
 ```
 
@@ -93,10 +115,6 @@ One destination in the side navigation: icon, label and an optional count.
 
 Built from: `icon`, `count-badge`
 
-### Why
-
-A consistent row (icon, label, count) is scanned quickly and its full width is the target (Fitts's law); the current page gets a fill and a 3px bar.
-
 ### When to use
 
 - Every item of the sidebar.
@@ -110,12 +128,35 @@ A consistent row (icon, label, count) is scanned quickly and its full width is t
 #### Example: Side links
 
 ```django
-<nav aria-label="Sections" style="max-width: 15rem; background: var(--orca-bg-alt)"><ul class="orca-side-nav">
-  <li><a class="orca-side-link" href="#">{% icon "home" %}<span class="orca-side-link__label">Dashboard</span></a></li>
-  <li><a class="orca-side-link" href="#" aria-current="page">{% icon "snapshot" %}<span class="orca-side-link__label">Videos</span><span class="orca-count orca-count--neutral">12</span></a></li>
-  <li><a class="orca-side-link orca-side-link--l2" href="#"><span class="orca-side-link__label">Media servers</span></a></li>
-  <li><a class="orca-side-link" href="#">{% icon "notifications" %}<span class="orca-side-link__label">Alerts</span><span class="orca-count">3</span></a></li>
-</ul></nav>
+<nav aria-label="Sections" style="max-width: 15rem; background: var(--orca-bg-alt)">
+  <ul class="orca-side-nav">
+    <li>
+      <a class="orca-side-link" href="#">
+        {% icon "home" %}
+        <span class="orca-side-link__label">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a class="orca-side-link" href="#" aria-current="page">
+        {% icon "snapshot" %}
+        <span class="orca-side-link__label">Videos</span>
+        <span class="orca-count orca-count--neutral">12</span>
+      </a>
+    </li>
+    <li>
+      <a class="orca-side-link orca-side-link--l2" href="#">
+        <span class="orca-side-link__label">Media servers</span>
+      </a>
+    </li>
+    <li>
+      <a class="orca-side-link" href="#">
+        {% icon "notifications" %}
+        <span class="orca-side-link__label">Alerts</span>
+        <span class="orca-count">3</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 ```
 
 **Classes:** `.orca-side-nav`, `.orca-side-link`, `.orca-side-link__label`, `.orca-side-link--l2`
@@ -134,10 +175,6 @@ The path from the top of the hierarchy to the current page.
 
 Built from: `text-link`, `chevron-separator`
 
-### Why
-
-Breadcrumbs show where a page sits and offer one-click routes upward (Jakob's law); the list structure is announced as 'list, 3 items'.
-
 ### When to use
 
 - Pages two or more levels deep in a hierarchy (Site › Building › Video).
@@ -155,9 +192,19 @@ Breadcrumbs show where a page sits and offer one-click routes upward (Jakob's la
 #### Example: Breadcrumbs
 
 ```django
-<nav class="orca-breadcrumbs" aria-label="Breadcrumb"><ol>
-  <li><a href="#">Sites</a></li><li><a href="#">North building</a></li><li><span aria-current="page">Entrance A</span></li>
-</ol></nav>
+<nav class="orca-breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li>
+      <a href="#">Sites</a>
+    </li>
+    <li>
+      <a href="#">North building</a>
+    </li>
+    <li>
+      <span aria-current="page">Entrance A</span>
+    </li>
+  </ol>
+</nav>
 ```
 
 **Classes:** `.orca-breadcrumbs`
@@ -176,10 +223,6 @@ Previous, page numbers with gaps, next, and a summary of what is shown.
 
 Built from: `pagination-gap`, `icon`
 
-### Why
-
-Numbered pages tell people how much there is and let them jump (Miller's law); gaps keep the control short (Hick's law); big targets avoid mis-taps (Fitts's law).
-
 ### When to use
 
 - Lists and tables with more than one page of results.
@@ -197,13 +240,43 @@ Numbered pages tell people how much there is and let them jump (Miller's law); g
 #### Example: Pagination
 
 ```django
-<nav class="orca-pagination" aria-label="Pages"><ul>
-  <li><a class="orca-page-link" href="#" rel="prev">{% icon "chevron-left" %}<span>Previous</span></a></li>
-  <li><a class="orca-page-link" href="#" aria-label="Page 1">1</a></li><li><span class="orca-page-gap" aria-hidden="true">…</span></li>
-  <li><a class="orca-page-link" href="#" aria-label="Page 6">6</a></li><li><a class="orca-page-link" href="#" aria-current="page" aria-label="Page 7, current">7</a></li><li><a class="orca-page-link" href="#" aria-label="Page 8">8</a></li>
-  <li><span class="orca-page-gap" aria-hidden="true">…</span></li><li><a class="orca-page-link" href="#" aria-label="Page 16">16</a></li>
-  <li><a class="orca-page-link" href="#" rel="next"><span>Next</span>{% icon "chevron-right" %}</a></li>
-</ul></nav>
+<nav class="orca-pagination" aria-label="Pages">
+  <ul>
+    <li>
+      <a class="orca-page-link" href="#" rel="prev">
+        {% icon "chevron-left" %}
+        <span>Previous</span>
+      </a>
+    </li>
+    <li>
+      <a class="orca-page-link" href="#" aria-label="Page 1">1</a>
+    </li>
+    <li>
+      <span class="orca-page-gap" aria-hidden="true">…</span>
+    </li>
+    <li>
+      <a class="orca-page-link" href="#" aria-label="Page 6">6</a>
+    </li>
+    <li>
+      <a class="orca-page-link" href="#" aria-current="page" aria-label="Page 7, current">7</a>
+    </li>
+    <li>
+      <a class="orca-page-link" href="#" aria-label="Page 8">8</a>
+    </li>
+    <li>
+      <span class="orca-page-gap" aria-hidden="true">…</span>
+    </li>
+    <li>
+      <a class="orca-page-link" href="#" aria-label="Page 16">16</a>
+    </li>
+    <li>
+      <a class="orca-page-link" href="#" rel="next">
+        <span>Next</span>
+        {% icon "chevron-right" %}
+      </a>
+    </li>
+  </ul>
+</nav>
 ```
 
 ### Server code
@@ -244,10 +317,6 @@ class VideoList(ListView):
 
 Built from: `tabular-number`
 
-### Why
-
-A count anchors people in a long list and confirms filters worked (Miller's law, Peak–end rule).
-
 ### When to use
 
 - Under or above any paginated list, and alone when there is a single page.
@@ -279,10 +348,6 @@ A compact pager under a table: rows per page, the range shown, previous and next
 
 Built from: `select`, `icon-button`, `pagination-summary`
 
-### Why
-
-Dense data screens need paging in a small space near the rows (Practical UI L14) and a choice of page size for different tasks (Tesler's law).
-
 ### When to use
 
 - The footer of data tables and table cards.
@@ -298,7 +363,14 @@ Dense data screens need paging in a small space near the rows (Practical UI L14)
 <div class="orca-table-pager" style="border: var(--orca-border-width) solid var(--orca-border)">
   <label>Rows per page <select class="orca-select orca-select--dense"><option>20</option><option selected>50</option><option>100</option></select></label>
   <span class="orca-num">51–100 of 312</span>
-  <span class="orca-table-pager__nav"><a class="orca-icon-button orca-icon-button--dense" href="#" aria-label="Previous page">{% icon "chevron-left" %}</a><a class="orca-icon-button orca-icon-button--dense" href="#" aria-label="Next page">{% icon "chevron-right" %}</a></span>
+  <span class="orca-table-pager__nav">
+    <a class="orca-icon-button orca-icon-button--dense" href="#" aria-label="Previous page">
+      {% icon "chevron-left" %}
+    </a>
+    <a class="orca-icon-button orca-icon-button--dense" href="#" aria-label="Next page">
+      {% icon "chevron-right" %}
+    </a>
+  </span>
 </div>
 ```
 
@@ -317,10 +389,6 @@ Dense data screens need paging in a small space near the rows (Practical UI L14)
 Tabs that switch between views of the same object, in place or by page.
 
 Built from: `focus-ring`, `count-badge`, `text-link`
-
-### Why
-
-Tabs split related content into chunks people can switch between without losing context (Miller's law); the convention is universal (Jakob's law).
 
 ### When to use
 
@@ -346,9 +414,15 @@ Tabs split related content into chunks people can switch between without losing 
     <button class="orca-tab" role="tab" type="button" id="tb-2" aria-controls="tp-2" aria-selected="false">Zones</button>
     <button class="orca-tab" role="tab" type="button" id="tb-3" aria-controls="tp-3" aria-selected="false">Recordings</button>
   </div>
-  <div class="orca-tabs__panel" role="tabpanel" id="tp-1" aria-labelledby="tb-1" tabindex="0"><p class="orca-p">Counting since 3 March. 12,480 people this week.</p></div>
-  <div class="orca-tabs__panel" role="tabpanel" id="tp-2" aria-labelledby="tb-2" tabindex="0" hidden><p class="orca-p">2 zones: Door line, Staff area.</p></div>
-  <div class="orca-tabs__panel" role="tabpanel" id="tp-3" aria-labelledby="tb-3" tabindex="0" hidden><p class="orca-p">No recordings in the last 24 hours.</p></div>
+  <div class="orca-tabs__panel" role="tabpanel" id="tp-1" aria-labelledby="tb-1" tabindex="0">
+    <p class="orca-p">Counting since 3 March. 12,480 people this week.</p>
+  </div>
+  <div class="orca-tabs__panel" role="tabpanel" id="tp-2" aria-labelledby="tb-2" tabindex="0" hidden>
+    <p class="orca-p">2 zones: Door line, Staff area.</p>
+  </div>
+  <div class="orca-tabs__panel" role="tabpanel" id="tp-3" aria-labelledby="tb-3" tabindex="0" hidden>
+    <p class="orca-p">No recordings in the last 24 hours.</p>
+  </div>
 </div>
 ```
 
@@ -369,10 +443,6 @@ Tabs split related content into chunks people can switch between without losing 
 Page tabs on a parent record, one per kind of child, each showing how many there are.
 
 Built from: `count-badge`
-
-### Why
-
-Counts tell people where the content is before they click (Practical UI S06) and turn empty tabs into information instead of a surprise.
 
 ### When to use
 
@@ -412,10 +482,6 @@ Three to five main sections as icon-and-label buttons fixed at the bottom of pho
 
 Built from: `icon`, `count-badge`
 
-### Why
-
-The bottom of a phone is in thumb reach (Fitts's law) and the pattern is familiar from mobile platforms (Jakob's law); labels keep icons unambiguous (Hick's law).
-
 ### When to use
 
 - Phone layouts of products with 3 to 5 main sections used often.
@@ -434,7 +500,23 @@ The bottom of a phone is in thumb reach (Fitts's law) and the pattern is familia
 
 ```django
 <nav class="orca-bottom-nav orca-bottom-nav--static" aria-label="Main" style="max-width: 24rem">
-  <a href="#" aria-current="page">{% icon "home" %}Home</a><a href="#">{% icon "snapshot" %}Videos</a><a href="#">{% icon "notifications" %}Alerts<span class="orca-count" aria-label="3 new">3</span></a><a href="#">{% icon "user" %}Profile</a>
+  <a href="#" aria-current="page">
+    {% icon "home" %}
+    Home
+  </a>
+  <a href="#">
+    {% icon "snapshot" %}
+    Videos
+  </a>
+  <a href="#">
+    {% icon "notifications" %}
+    Alerts
+    <span class="orca-count" aria-label="3 new">3</span>
+  </a>
+  <a href="#">
+    {% icon "user" %}
+    Profile
+  </a>
 </nav>
 ```
 
@@ -454,10 +536,6 @@ Collapsible sections of navigation links (tree leaves) for large hierarchies.
 
 Built from: `chevron`, `count-badge`
 
-### Why
-
-Grouping many destinations into named sections keeps a long navigation scannable (Miller's law) and shows only what is relevant (Practical UI S04).
-
 ### When to use
 
 - Sidebars and documentation with more than about 12 destinations in groups.
@@ -472,12 +550,53 @@ Grouping many destinations into named sections keeps a long navigation scannable
 #### Example: Tree
 
 ```django
-<nav aria-label="Settings" style="max-width: 16rem"><ul class="orca-nav-tree">
-  <li><details open><summary>{% icon "settings" %}Organisation<span class="orca-count orca-count--neutral">3</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
-    <ul><li><a href="#">Profile</a></li><li><a href="#" aria-current="page">Users</a></li><li><a href="#">Billing</a></li></ul></details></li>
-  <li><details><summary>{% icon "snapshot" %}Devices<span class="orca-count orca-count--neutral">2</span><span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
-    <ul><li><a href="#">Videos</a></li><li><a href="#">Media servers</a></li></ul></details></li>
-</ul></nav>
+<nav aria-label="Settings" style="max-width: 16rem">
+  <ul class="orca-nav-tree">
+    <li>
+      <details open>
+        <summary>
+          {% icon "settings" %}
+          Organisation
+          <span class="orca-count orca-count--neutral">3</span>
+          <span class="orca-chevron">
+            {% icon "chevron-down" size="xs" %}
+          </span>
+        </summary>
+        <ul>
+          <li>
+            <a href="#">Profile</a>
+          </li>
+          <li>
+            <a href="#" aria-current="page">Users</a>
+          </li>
+          <li>
+            <a href="#">Billing</a>
+          </li>
+        </ul>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>
+          {% icon "snapshot" %}
+          Devices
+          <span class="orca-count orca-count--neutral">2</span>
+          <span class="orca-chevron">
+            {% icon "chevron-down" size="xs" %}
+          </span>
+        </summary>
+        <ul>
+          <li>
+            <a href="#">Videos</a>
+          </li>
+          <li>
+            <a href="#">Media servers</a>
+          </li>
+        </ul>
+      </details>
+    </li>
+  </ul>
+</nav>
 ```
 
 **Classes:** `.orca-nav-tree`
@@ -496,10 +615,6 @@ A link to the previous level, above the page title.
 
 Built from: `text-link`, `icon`
 
-### Why
-
-A visible way back near the top keeps people oriented, especially on phones where breadcrumbs do not fit (Jakob's law, Practical UI B09).
-
 ### When to use
 
 - Detail and form pages reached from a list; steps of a flow.
@@ -512,7 +627,10 @@ A visible way back near the top keeps people oriented, especially on phones wher
 #### Example: Back link
 
 ```django
-<a class="orca-back-link" href="#">{% icon "chevron-left" size="xs" %}Back to videos</a>
+<a class="orca-back-link" href="#">
+  {% icon "chevron-left" size="xs" %}
+  Back to videos
+</a>
 ```
 
 **Classes:** `.orca-back-link`
@@ -531,10 +649,6 @@ A segmented control switching a collection between cards and a table.
 
 Built from: `button`, `icon`
 
-### Why
-
-Cards suit browsing with images; tables suit comparing values. Letting people choose moves the decision to them (Tesler's law), and the segmented shape shows both options at once (Practical UI R11).
-
 ### When to use
 
 - Collections where both browsing and comparing are common.
@@ -549,8 +663,14 @@ Cards suit browsing with images; tables suit comparing values. Letting people ch
 
 ```django
 <nav class="orca-segmented orca-segmented--dense" aria-label="View">
-  <a class="orca-segmented__item" href="#" aria-current="page">{% icon "grid" %}Cards</a>
-  <a class="orca-segmented__item" href="#">{% icon "list" %}Table</a>
+  <a class="orca-segmented__item" href="#" aria-current="page">
+    {% icon "grid" %}
+    Cards
+  </a>
+  <a class="orca-segmented__item" href="#">
+    {% icon "list" %}
+    Table
+  </a>
 </nav>
 ```
 
@@ -570,10 +690,6 @@ An icon button that opens the display settings panel (theme, density).
 
 Built from: `icon-button`
 
-### Why
-
-Display preferences are needed rarely, so they sit behind one familiar icon (Hick's law, S04) that states its state with aria-expanded.
-
 ### When to use
 
 - Top bar or page head of products that offer display settings.
@@ -586,10 +702,15 @@ Display preferences are needed rarely, so they sit behind one familiar icon (Hic
 #### Example: Settings toggle
 
 ```django
-<button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="Display settings" aria-expanded="false" aria-controls="st-panel" data-orca-disclose>{% icon "sliders" %}</button>
+<button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="Display settings" aria-expanded="false" aria-controls="st-panel" data-orca-disclose>
+  {% icon "sliders" %}
+</button>
 <div id="st-panel" hidden style="margin-top: var(--orca-space-8); padding: var(--orca-space-16); max-width: 22rem" class="orca-elevation-2">
-  <fieldset class="orca-segmented" data-orca-theme-choice><legend class="orca-label">Theme</legend>
-    <label class="orca-segmented__item"><input type="radio" name="st-theme" value="auto" checked>Auto</label><label class="orca-segmented__item"><input type="radio" name="st-theme" value="light">Light</label><label class="orca-segmented__item"><input type="radio" name="st-theme" value="dark">Dark</label>
+  <fieldset class="orca-segmented" data-orca-theme-choice>
+    <legend class="orca-label">Theme</legend>
+    <label class="orca-segmented__item"><input type="radio" name="st-theme" value="auto" checked>Auto</label>
+    <label class="orca-segmented__item"><input type="radio" name="st-theme" value="light">Light</label>
+    <label class="orca-segmented__item"><input type="radio" name="st-theme" value="dark">Dark</label>
   </fieldset>
 </div>
 ```
@@ -612,10 +733,6 @@ The page's create action: a primary button in the page head that becomes a float
 
 Built from: `button`, `fab`
 
-### Why
-
-On desktop the create action belongs beside the title; on phones it must stay in thumb reach while scrolling (Fitts's law). One element serves both so the action is never duplicated.
-
 ### When to use
 
 - List pages with one create action (Add video, New report).
@@ -628,7 +745,10 @@ On desktop the create action belongs beside the title; on phones it must stay in
 #### Example: Create button
 
 ```django
-<a class="orca-button orca-button--primary orca-create orca-create--static" href="#">{% icon "plus" %}Add video</a>
+<a class="orca-button orca-button--primary orca-create orca-create--static" href="#">
+  {% icon "plus" %}
+  Add video
+</a>
 ```
 
 **Classes:** `.orca-create`
@@ -646,10 +766,6 @@ On desktop the create action belongs beside the title; on phones it must stay in
 The skip link and the focusable main landmark it jumps to.
 
 Built from: `skip-link`
-
-### Why
-
-Keyboard and screen-reader users skip the repeated navigation in one key press (WCAG 2.4.1, Fitts's law for the keyboard); the link only works with a target that can take focus, so the two belong together.
 
 ### When to use
 
@@ -689,10 +805,6 @@ A titled list of links, as in a footer or a site map.
 
 Built from: `text-link`
 
-### Why
-
-A short title over a few links lets people scan a footer by topic (Miller's law: chunking, Practical UI L01).
-
 ### When to use
 
 - Footer columns, site maps, 'Related' lists at the end of documentation pages.
@@ -709,7 +821,15 @@ A short title over a few links lets people scan a footer by topic (Miller's law:
 #### Example: Link column
 
 ```django
-<ul class="orca-footer__col"><li class="orca-footer__col-title">Help</li><li><a href="#">Documentation</a></li><li><a href="#">Contact support</a></li></ul>
+<ul class="orca-footer__col">
+  <li class="orca-footer__col-title">Help</li>
+  <li>
+    <a href="#">Documentation</a>
+  </li>
+  <li>
+    <a href="#">Contact support</a>
+  </li>
+</ul>
 ```
 
 **Classes:** `.orca-footer__col`, `.orca-footer__col-title`

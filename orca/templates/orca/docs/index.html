@@ -1,6 +1,6 @@
 {% extends "orca/docs/base.html" %}{% load orca %}
 {% block blog_modifier %} orca-blog--wide{% endblock %}
-{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">{{ level_intro }} {{ elements|length }} elements, each with why, when and how to use it and a live example.</p>{% endblock %}
+{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">{{ level_intro }} {{ elements|length }} elements, each with when and how to use it and a live example.</p>{% endblock %}
 {% block page_actions %}<button class="orca-button" type="button" data-orca-dialog-open="docs-filters" aria-haspopup="dialog" data-docs-filters-open>{% icon "filter" %}Filters<span class="orca-count orca-count--accent" aria-hidden="true" data-docs-filters-count hidden></span></button>{% endblock %}
 {% block page %}
 <div class="orca-vstack orca-vstack--tight" data-docs-applied hidden>

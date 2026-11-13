@@ -8,10 +8,6 @@ The words around a field: its label, requirement marker, help and errors. They d
 
 A visible, persistent name above every field.
 
-### Why
-
-Labels above inputs give one straight downward reading path (Practical UI R01) and stay visible while typing, unlike placeholders (R09). A `<label>` also enlarges the click target to its text (Fitts's law).
-
 ### When to use
 
 - Every input, select, textarea and group of ticks (use `<legend>` for groups).
@@ -57,10 +53,6 @@ Labels above inputs give one straight downward reading path (Practical UI R01) a
 
 The word 'required' or 'optional' after a label.
 
-### Why
-
-People cannot guess which fields they may skip; marking status at the field is the safest pattern (Practical UI R03, R05). Words are clearer than a red asterisk, which reads as an error.
-
 ### When to use
 
 - Mark optional fields when most are required; mark required ones when most are optional. Mark both in long or unfamiliar forms.
@@ -101,10 +93,6 @@ People cannot guess which fields they may skip; marking status at the field is t
 `id: help-text` · level: primitive · source: Tangerine
 
 A hint between the label and the field that helps people answer correctly.
-
-### Why
-
-Guidance placed before the input is read before answering and is never covered by autofill or the on-screen keyboard (Practical UI R08). It prevents errors instead of reporting them (Peak–end rule).
 
 ### When to use
 
@@ -149,10 +137,6 @@ Guidance placed before the input is read before answering and is never covered b
 
 A message above the field that says what is wrong and how to fix it.
 
-### Why
-
-Errors stated next to the field, with an icon and in words, are found and fixed fastest; colour alone is missed (Practical UI R20, C03). Telling people how to fix it avoids blame (W15, Postel's law).
-
 ### When to use
 
 - After submit or after leaving a field with an invalid value.
@@ -177,7 +161,10 @@ Errors stated next to the field, with an icon and in words, are found and fixed 
 
 ```django
 <label class="orca-label" for="video-url2">Video address</label>
-<p class="orca-error" id="video-url2-error">{% icon "error" %}<span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span></p>
+<p class="orca-error" id="video-url2-error">
+  {% icon "error" %}
+  <span>Enter an address that starts with https://, for example https://media.example.com/v/4821.</span>
+</p>
 <input class="orca-input" id="video-url2" name="video_url" value="media.example.com/v/4821" aria-invalid="true" aria-describedby="video-url2-error">
 ```
 
@@ -198,10 +185,6 @@ Errors stated next to the field, with an icon and in words, are found and fixed 
 `id: help-icon` · level: primitive · source: ORCA
 
 A question-mark button that reveals optional, extra explanation in place.
-
-### Why
-
-Secondary explanations stay out of the way until wanted (Practical UI S04, Tesler's law), while essential help stays visible as help text.
 
 ### When to use
 
@@ -227,7 +210,9 @@ Secondary explanations stay out of the way until wanted (Practical UI S04, Tesle
 <div>
   <span class="orca-label" style="display: inline">Dwell time</span>
   <details class="orca-help-toggle">
-    <summary aria-label="About dwell time">{% icon "help" %}</summary>
+    <summary aria-label="About dwell time">
+      {% icon "help" %}
+    </summary>
     <span class="orca-help-toggle__text">The average time between a person entering and leaving the zone, in minutes.</span>
   </details>
 </div>
@@ -246,10 +231,6 @@ Secondary explanations stay out of the way until wanted (Practical UI S04, Tesle
 `id: error-list` · level: primitive · source: Tangerine
 
 An error summary at the top of a form, linking to each invalid field.
-
-### Why
-
-With several errors, a counted list of links lets people fix them in order without hunting (Practical UI R20) and gives screen-reader users one place to start.
 
 ### When to use
 
@@ -272,8 +253,12 @@ With several errors, a counted list of links lets people fix them in order witho
   {% icon "error" %}
   <p class="orca-error-list__title">2 fields need attention</p>
   <ul>
-    <li><a href="#video-url2">Enter a video address that starts with https://</a></li>
-    <li><a href="#image-name">Enter an image name</a></li>
+    <li>
+      <a href="#video-url2">Enter a video address that starts with https://</a>
+    </li>
+    <li>
+      <a href="#image-name">Enter an image name</a>
+    </li>
   </ul>
 </div>
 ```

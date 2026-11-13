@@ -8,10 +8,6 @@ Native form controls styled by ORCA. Native first: they work with keyboards, scr
 
 A single-line field: filled, square, with a 1.5px bottom border.
 
-### Why
-
-Native inputs with a visible boundary and a persistent label are instantly recognisable (Jakob's law, Practical UI R07, R18). The right `type`, `inputmode` and `autocomplete` let phones and browsers do the typing (Tesler's law).
-
 ### When to use
 
 - Short free text: names, addresses, numbers with units, codes.
@@ -40,12 +36,18 @@ Native inputs with a visible boundary and a persistent label are instantly recog
 
 ```django
 <div class="orca-stack" style="max-width: 24rem; gap: var(--orca-space-24)">
-  <div><label class="orca-label" for="ti-1">Image name</label>
-    <input class="orca-input" id="ti-1" value="Entrance A"></div>
-  <div><label class="orca-label" for="ti-2">Serial number</label>
-    <input class="orca-input orca-input--w20" id="ti-2" value="DS-2CD2143G2" readonly></div>
-  <div><label class="orca-label" for="ti-3">Port</label>
-    <input class="orca-input orca-input--w8" id="ti-3" inputmode="numeric" value="554" disabled></div>
+  <div>
+    <label class="orca-label" for="ti-1">Image name</label>
+    <input class="orca-input" id="ti-1" value="Entrance A">
+  </div>
+  <div>
+    <label class="orca-label" for="ti-2">Serial number</label>
+    <input class="orca-input orca-input--w20" id="ti-2" value="DS-2CD2143G2" readonly>
+  </div>
+  <div>
+    <label class="orca-label" for="ti-3">Port</label>
+    <input class="orca-input orca-input--w8" id="ti-3" inputmode="numeric" value="554" disabled>
+  </div>
 </div>
 ```
 
@@ -76,10 +78,6 @@ Native inputs with a visible boundary and a persistent label are instantly recog
 `id: textarea` · level: primitive · source: Tangerine
 
 A multi-line field that grows vertically.
-
-### Why
-
-A taller box tells people a longer answer is expected (Practical UI R06).
 
 ### When to use
 
@@ -114,10 +112,6 @@ A taller box tells people a longer answer is expected (Practical UI R06).
 `id: select` · level: primitive · source: Tangerine
 
 The browser's dropdown, styled with an ORCA chevron.
-
-### Why
-
-The native select works with every input method and opens the platform picker on phones (Postel's law, Jakob's law).
 
 ### When to use
 
@@ -164,10 +158,6 @@ The native select works with every input method and opens the platform picker on
 
 A native `<select multiple>` showing several options at once.
 
-### Why
-
-A visible list keeps options in view (recognition over recall, Miller's law) and works with the keyboard natively.
-
 ### When to use
 
 - Selecting several items from a short-to-medium list in a dense admin form.
@@ -187,7 +177,10 @@ A visible list keeps options in view (recognition over recall, Miller's law) and
 <label class="orca-label" for="lb-1">Albums</label>
 <p class="orca-help" id="lb-1-help">Hold Ctrl (Cmd on Mac) to choose more than one.</p>
 <select class="orca-select orca-listbox" id="lb-1" multiple size="4" aria-describedby="lb-1-help" style="max-width: 20rem">
-  <option selected>Entrance A</option><option>Entrance B</option><option selected>Loading dock</option><option>Car park</option>
+  <option selected>Entrance A</option>
+  <option>Entrance B</option>
+  <option selected>Loading dock</option>
+  <option>Car park</option>
 </select>
 ```
 
@@ -206,10 +199,6 @@ A visible list keeps options in view (recognition over recall, Miller's law) and
 `id: search-input` · level: primitive · source: Tangerine
 
 A text field with a magnifier and a clear button.
-
-### Why
-
-The magnifier is one of the few universally understood icons (Jakob's law); a clear button saves selecting and deleting text (Fitts's law).
 
 ### When to use
 
@@ -231,7 +220,9 @@ The magnifier is one of the few universally understood icons (Jakob's law); a cl
 <form role="search" class="orca-search" style="max-width: 22rem" onsubmit="return false">
   {% icon "search" %}
   <input class="orca-input" type="search" name="q" placeholder="Search images" aria-label="Search images" value="Entrance">
-  <button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>{% icon "close" %}</button>
+  <button class="orca-search__clear" type="button" aria-label="Clear search" data-orca-clear>
+    {% icon "close" %}
+  </button>
 </form>
 ```
 
@@ -250,10 +241,6 @@ The magnifier is one of the few universally understood icons (Jakob's law); a cl
 `id: checkbox` · level: primitive · source: Tangerine
 
 A square tick for an on/off choice that takes effect when the form is saved, or one of several choices.
-
-### Why
-
-The square box is the convention for 'any number of these' (Practical UI R07), and the whole label row is the target (Fitts's law). Checkboxes apply on submit; switches apply at once (R14).
 
 ### When to use
 
@@ -282,7 +269,11 @@ The square box is the convention for 'any number of these' (Practical UI R07), a
 <fieldset style="border: 0; margin: 0; padding: 0" class="orca-stack">
   <legend class="orca-label">Daily report</legend>
   <label class="orca-check"><input type="checkbox" name="r" checked><span class="orca-check__box"></span>Email me a daily report</label>
-  <label class="orca-check"><input type="checkbox" name="r2"><span class="orca-check__box"></span><span class="orca-check__text">Include thumbnails<span class="orca-check__desc">Adds one image per video, about 2 MB.</span></span></label>
+  <label class="orca-check">
+    <input type="checkbox" name="r2">
+    <span class="orca-check__box"></span>
+    <span class="orca-check__text">Include thumbnails<span class="orca-check__desc">Adds one image per video, about 2 MB.</span></span>
+  </label>
   <label class="orca-check"><input type="checkbox" disabled><span class="orca-check__box"></span>Attach videos</label>
 </fieldset>
 ```
@@ -304,10 +295,6 @@ The square box is the convention for 'any number of these' (Practical UI R07), a
 `id: radio` · level: primitive · source: Tangerine
 
 A round mark for choosing exactly one option from a small visible set.
-
-### Why
-
-Showing every option lets people compare without opening anything (Practical UI R11); the round mark signals 'only one' by convention (R07, Jakob's law).
 
 ### When to use
 
@@ -354,10 +341,6 @@ Showing every option lets people compare without opening anything (Practical UI 
 
 An on/off control that takes effect immediately.
 
-### Why
-
-A switch mirrors a physical switch: flipping it changes something now (Jakob's law, Practical UI R14). Immediate effect needs immediate feedback (Doherty threshold).
-
 ### When to use
 
 - Settings saved at once: play videos automatically, turn notifications on.
@@ -380,9 +363,21 @@ A switch mirrors a physical switch: flipping it changes something now (Jakob's l
 
 ```django
 <div class="orca-stack">
-  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Autoplay videos</span></label>
-  <label class="orca-switch"><input type="checkbox" role="switch"><span class="orca-switch__track"></span><span>Email alerts</span></label>
-  <label class="orca-switch"><input type="checkbox" role="switch" disabled><span class="orca-switch__track"></span><span>Record audio</span></label>
+  <label class="orca-switch">
+    <input type="checkbox" role="switch" checked>
+    <span class="orca-switch__track"></span>
+    <span>Autoplay videos</span>
+  </label>
+  <label class="orca-switch">
+    <input type="checkbox" role="switch">
+    <span class="orca-switch__track"></span>
+    <span>Email alerts</span>
+  </label>
+  <label class="orca-switch">
+    <input type="checkbox" role="switch" disabled>
+    <span class="orca-switch__track"></span>
+    <span>Record audio</span>
+  </label>
 </div>
 ```
 
@@ -401,10 +396,6 @@ A switch mirrors a physical switch: flipping it changes something now (Jakob's l
 `id: number-input` · level: primitive · source: Tangerine
 
 A numeric field with large minus and plus buttons for small adjustments.
-
-### Why
-
-For small changes a stepper is faster than typing or a dropdown, and the field still accepts typing (Practical UI R13, Postel's law).
 
 ### When to use
 
@@ -428,9 +419,13 @@ For small changes a stepper is faster than typing or a dropdown, and the field s
 ```django
 <label class="orca-label" for="cap">Zone capacity</label>
 <div class="orca-number">
-  <button class="orca-icon-button" type="button" aria-label="Decrease zone capacity" data-orca-step="-1">{% icon "minus" %}</button>
+  <button class="orca-icon-button" type="button" aria-label="Decrease zone capacity" data-orca-step="-1">
+    {% icon "minus" %}
+  </button>
   <input class="orca-input" id="cap" type="number" min="0" max="999" step="1" value="40">
-  <button class="orca-icon-button" type="button" aria-label="Increase zone capacity" data-orca-step="1">{% icon "plus" %}</button>
+  <button class="orca-icon-button" type="button" aria-label="Increase zone capacity" data-orca-step="1">
+    {% icon "plus" %}
+  </button>
 </div>
 ```
 
@@ -450,10 +445,6 @@ For small changes a stepper is faster than typing or a dropdown, and the field s
 
 A native colour picker paired with its hex value.
 
-### Why
-
-The swatch gives a quick visual pick; the hex field lets people paste an exact brand value (Postel's law).
-
 ### When to use
 
 - Choosing a zone colour, a calendar colour, a brand colour in settings.
@@ -468,7 +459,10 @@ The swatch gives a quick visual pick; the hex field lets people paste an exact b
 
 ```django
 <label class="orca-label" for="zc">Zone colour</label>
-<div class="orca-color"><input type="color" id="zc" value="#0f95a1"><input class="orca-input" value="#0f95a1" aria-label="Zone colour hex value"></div>
+<div class="orca-color">
+  <input type="color" id="zc" value="#0f95a1">
+  <input class="orca-input" value="#0f95a1" aria-label="Zone colour hex value">
+</div>
 ```
 
 **Classes:** `.orca-color`
@@ -486,10 +480,6 @@ The swatch gives a quick visual pick; the hex field lets people paste an exact b
 `id: file-input` · level: primitive · source: Tangerine
 
 The native file picker with an ORCA-styled button.
-
-### Why
-
-The native control works with drag-and-drop, taking a photo on phones and assistive technology (Postel's law).
 
 ### When to use
 
@@ -525,10 +515,6 @@ The native control works with drag-and-drop, taking a photo on phones and assist
 
 One box per digit of a one-time code, with auto-advance and paste.
 
-### Why
-
-Separate boxes chunk the code (Miller's law) and show its length; accepting a pasted code and the SMS autofill removes typing entirely (Tesler's law, Postel's law).
-
 ### When to use
 
 - Two-factor codes and email verification codes of 4–8 digits.
@@ -553,7 +539,9 @@ Separate boxes chunk the code (Miller's law) and show its length; accepting a pa
 ```django
 <p class="orca-label" id="otp-label">Verification code</p>
 <div class="orca-row" data-orca-otp role="group" aria-labelledby="otp-label">
-  {% for i in "123456" %}<input class="orca-input orca-otp-digit" inputmode="numeric" maxlength="1" aria-label="Digit {{ i }} of 6"{% if forloop.first %} autocomplete="one-time-code"{% endif %}>{% endfor %}
+  {% for i in "123456" %}
+    <input class="orca-input orca-otp-digit" inputmode="numeric" maxlength="1" aria-label="Digit {{ i }} of 6"{% if forloop.first %} autocomplete="one-time-code"{% endif %}>
+  {% endfor %}
 </div>
 ```
 
@@ -573,10 +561,6 @@ Separate boxes chunk the code (Miller's law) and show its length; accepting a pa
 
 A fixed unit, prefix or button joined to an input.
 
-### Why
-
-Showing the unit beside the value removes guessing ('minutes or seconds?') and stops people typing the unit (Postel's law, Practical UI F03).
-
 ### When to use
 
 - Units (min, %, m²), protocols (https://), currency, an attached action (Copy, Test).
@@ -591,9 +575,16 @@ Showing the unit beside the value removes guessing ('minutes or seconds?') and s
 
 ```django
 <label class="orca-label" for="ig1">Thumbnail interval</label>
-<div class="orca-input-group" style="max-width: 14rem"><input class="orca-input" id="ig1" type="number" value="5" aria-describedby="ig1-unit"><span class="orca-addon" id="ig1-unit">minutes</span></div>
+<div class="orca-input-group" style="max-width: 14rem">
+  <input class="orca-input" id="ig1" type="number" value="5" aria-describedby="ig1-unit">
+  <span class="orca-addon" id="ig1-unit">minutes</span>
+</div>
 <label class="orca-label" for="ig2" style="margin-top: var(--orca-space-16)">Video address</label>
-<div class="orca-input-group" style="max-width: 28rem"><span class="orca-addon">https://</span><input class="orca-input" id="ig2" value="media.example.com/v/4821"><button class="orca-button" type="button">Test</button></div>
+<div class="orca-input-group" style="max-width: 28rem">
+  <span class="orca-addon">https://</span>
+  <input class="orca-input" id="ig2" value="media.example.com/v/4821">
+  <button class="orca-button" type="button">Test</button>
+</div>
 ```
 
 **Classes:** `.orca-input-group`, `.orca-addon`

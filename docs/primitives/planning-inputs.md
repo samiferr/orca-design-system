@@ -8,10 +8,6 @@ Date, time and schedule inputs. Native pickers first: they are what people alrea
 
 A native date field (`type="date"`) with ORCA styling.
 
-### Why
-
-The platform date picker is familiar, accessible and localised (Jakob's law, Postel's law); the guide's own advice is to prefer native date and time inputs for planning UI.
-
 ### When to use
 
 - Picking a single day: a deadline, a report date, a holiday.
@@ -56,10 +52,6 @@ The platform date picker is familiar, accessible and localised (Jakob's law, Pos
 
 A native time field (`type="time"`).
 
-### Why
-
-Native time fields follow the reader's 12/24-hour convention automatically (Postel's law) and open the platform picker on phones (Jakob's law).
-
 ### When to use
 
 - Start and end times, reminder times, opening hours.
@@ -73,7 +65,10 @@ Native time fields follow the reader's 12/24-hour convention automatically (Post
 
 ```django
 <label class="orca-label" for="t1">Opens at</label>
-<div class="orca-row"><input class="orca-input" type="time" id="t1" value="08:30" step="900"><span class="orca-tz" title="Europe/Paris">CET</span></div>
+<div class="orca-row">
+  <input class="orca-input" type="time" id="t1" value="08:30" step="900">
+  <span class="orca-tz" title="Europe/Paris">CET</span>
+</div>
 ```
 
 **Classes:** `.orca-input[type=time]`
@@ -91,10 +86,6 @@ Native time fields follow the reader's 12/24-hour convention automatically (Post
 `id: datetime-input` · level: primitive · source: ORCA
 
 A native `datetime-local` field for one moment.
-
-### Why
-
-One control for one moment avoids mismatched date and time pairs (Postel's law).
 
 ### When to use
 
@@ -129,10 +120,6 @@ One control for one moment avoids mismatched date and time pairs (Postel's law).
 
 Hours and minutes as two short numeric fields with their units.
 
-### Why
-
-Two labelled parts are faster and less error-prone than a free-text '1h30' or a long dropdown (Practical UI R13, Postel's law: accept the parts and normalise).
-
 ### When to use
 
 - Durations: shift length, retention, reminder offset.
@@ -148,8 +135,14 @@ Two labelled parts are faster and less error-prone than a free-text '1h30' or a 
 ```django
 <fieldset class="orca-duration" style="border: 0; padding: 0; margin: 0">
   <legend class="orca-label">Shift length</legend>
-  <span class="orca-duration__part"><input class="orca-input" type="number" min="0" max="23" value="7" aria-label="Hours" id="du-h"><span class="orca-addon">h</span></span>
-  <span class="orca-duration__part"><input class="orca-input" type="number" min="0" step="5" value="30" aria-label="Minutes" id="du-m"><span class="orca-addon">min</span></span>
+  <span class="orca-duration__part">
+    <input class="orca-input" type="number" min="0" max="23" value="7" aria-label="Hours" id="du-h">
+    <span class="orca-addon">h</span>
+  </span>
+  <span class="orca-duration__part">
+    <input class="orca-input" type="number" min="0" step="5" value="30" aria-label="Minutes" id="du-m">
+    <span class="orca-addon">min</span>
+  </span>
 </fieldset>
 ```
 
@@ -167,10 +160,6 @@ Two labelled parts are faster and less error-prone than a free-text '1h30' or a 
 
 A native select of IANA timezones, grouped by region, preselected from context.
 
-### Why
-
-Timezones are inherent complexity; ORCA moves it to the system by listing real zones and preselecting the site's or browser's zone so most people never touch it (Tesler's law).
-
 ### When to use
 
 - Setting a site's, an album's or a user's timezone.
@@ -185,7 +174,9 @@ Timezones are inherent complexity; ORCA moves it to the system by listing real z
 
 ```django
 <label class="orca-label" for="tz1">Site timezone</label>
-<select class="orca-select" id="tz1" style="max-width: 20rem">{% orca_timezone_options "Europe/Paris" %}</select>
+<select class="orca-select" id="tz1" style="max-width: 20rem">
+  {% orca_timezone_options "Europe/Paris" %}
+</select>
 ```
 
 **Classes:** `.orca-select`
@@ -204,10 +195,6 @@ Timezones are inherent complexity; ORCA moves it to the system by listing real z
 
 Seven square toggles for picking days of the week.
 
-### Why
-
-All seven days visible and toggled in place is faster than seven checkboxes or a multi-select (Practical UI F03, R11), and the checked fill plus bold text show state without colour alone.
-
 ### When to use
 
 - Recurrence on chosen days, opening days, shift days.
@@ -225,8 +212,43 @@ All seven days visible and toggled in place is faster than seven checkboxes or a
 #### Example: Days
 
 ```django
-<fieldset class="orca-weekday-toggles"><legend class="orca-label">Repeat on</legend>
-<label class="orca-weekday"><input type="checkbox" checked><span aria-hidden="true">M</span><span class="orca-sr-only">Monday</span></label><label class="orca-weekday"><input type="checkbox" checked><span aria-hidden="true">T</span><span class="orca-sr-only">Tuesday</span></label><label class="orca-weekday"><input type="checkbox" checked><span aria-hidden="true">W</span><span class="orca-sr-only">Wednesday</span></label><label class="orca-weekday"><input type="checkbox" checked><span aria-hidden="true">T</span><span class="orca-sr-only">Thursday</span></label><label class="orca-weekday"><input type="checkbox" checked><span aria-hidden="true">F</span><span class="orca-sr-only">Friday</span></label><label class="orca-weekday"><input type="checkbox"><span aria-hidden="true">S</span><span class="orca-sr-only">Saturday</span></label><label class="orca-weekday"><input type="checkbox"><span aria-hidden="true">S</span><span class="orca-sr-only">Sunday</span></label>
+<fieldset class="orca-weekday-toggles">
+  <legend class="orca-label">Repeat on</legend>
+  <label class="orca-weekday">
+    <input type="checkbox" checked>
+    <span aria-hidden="true">M</span>
+    <span class="orca-sr-only">Monday</span>
+  </label>
+  <label class="orca-weekday">
+    <input type="checkbox" checked>
+    <span aria-hidden="true">T</span>
+    <span class="orca-sr-only">Tuesday</span>
+  </label>
+  <label class="orca-weekday">
+    <input type="checkbox" checked>
+    <span aria-hidden="true">W</span>
+    <span class="orca-sr-only">Wednesday</span>
+  </label>
+  <label class="orca-weekday">
+    <input type="checkbox" checked>
+    <span aria-hidden="true">T</span>
+    <span class="orca-sr-only">Thursday</span>
+  </label>
+  <label class="orca-weekday">
+    <input type="checkbox" checked>
+    <span aria-hidden="true">F</span>
+    <span class="orca-sr-only">Friday</span>
+  </label>
+  <label class="orca-weekday">
+    <input type="checkbox">
+    <span aria-hidden="true">S</span>
+    <span class="orca-sr-only">Saturday</span>
+  </label>
+  <label class="orca-weekday">
+    <input type="checkbox">
+    <span aria-hidden="true">S</span>
+    <span class="orca-sr-only">Sunday</span>
+  </label>
 </fieldset>
 ```
 
@@ -246,10 +268,6 @@ All seven days visible and toggled in place is faster than seven checkboxes or a
 
 A select of common repeat rules with a 'Custom…' option that reveals more fields.
 
-### Why
-
-Most repeats are a few common rules; listing them keeps the choice quick (Hick's law) and reveals the full rule editor only when needed (Practical UI S04, Tesler's law).
-
 ### When to use
 
 - Repeating events, reports, video exports.
@@ -265,8 +283,13 @@ Most repeats are a few common rules; listing them keeps the choice quick (Hick's
 ```django
 <label class="orca-label" for="rec">Repeat</label>
 <select class="orca-select" id="rec" style="max-width: 20rem">
-  <option value="">Does not repeat</option><option>Daily</option><option selected>Every weekday (Monday to Friday)</option>
-  <option>Weekly on Thursday</option><option>Monthly on day 6</option><option>Yearly on 6 November</option><option value="custom">Custom…</option>
+  <option value="">Does not repeat</option>
+  <option>Daily</option>
+  <option selected>Every weekday (Monday to Friday)</option>
+  <option>Weekly on Thursday</option>
+  <option>Monthly on day 6</option>
+  <option>Yearly on 6 November</option>
+  <option value="custom">Custom…</option>
 </select>
 ```
 
@@ -284,10 +307,6 @@ Most repeats are a few common rules; listing them keeps the choice quick (Hick's
 
 A select of reminder offsets before an event.
 
-### Why
-
-A short list of standard offsets is faster than typing a duration (Hick's law) and matches calendar apps people know (Jakob's law).
-
 ### When to use
 
 - Event and deadline reminders.
@@ -302,8 +321,13 @@ A short list of standard offsets is faster than typing a duration (Hick's law) a
 ```django
 <label class="orca-label" for="rem">Remind me</label>
 <select class="orca-select" id="rem" style="max-width: 16rem">
-  <option>No reminder</option><option>At time of event</option><option>5 minutes before</option><option selected>15 minutes before</option>
-  <option>1 hour before</option><option>1 day before</option><option value="custom">Custom…</option>
+  <option>No reminder</option>
+  <option>At time of event</option>
+  <option>5 minutes before</option>
+  <option selected>15 minutes before</option>
+  <option>1 hour before</option>
+  <option>1 day before</option>
+  <option value="custom">Custom…</option>
 </select>
 ```
 

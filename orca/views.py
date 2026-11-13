@@ -16,6 +16,7 @@ from django.utils.safestring import mark_safe
 
 from . import __released__, __version__, icons, tokens
 from .catalogue import registry
+from .catalogue.format import format_example
 from .catalogue.guide import LEVELS
 from .conf import compute_brand, docs_enabled
 from .samples import SAMPLE
@@ -88,13 +89,7 @@ def _stats() -> dict:
 
 def home(request):
     _guard()
-    hero = mark_safe(render_snippet("""<div class="orca-row orca-row--16">
-  <button class="orca-button orca-button--primary" type="button">Save image</button>
-  <button class="orca-button" type="button">Cancel</button>
-  <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
-  <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
-</div>"""))
-    return render(request, "orca/docs/home.html", _ctx("home", title="Overview", stats=_stats(), hero=hero))
+    return render(request, "orca/docs/home.html", _ctx("home", title="Overview", stats=_stats(), reading_time=5))
 
 
 LEVEL_INTROS = {
@@ -187,7 +182,7 @@ def element(request, element_id):
         examples = [{"title": "Live preview", "html": el.example_list()[0][1], "rendered": mark_safe(frame), "preview_url": src,
                      "frame_id": f"preview-{el.id}"}]
     else:
-        examples = [{"title": t, "html": h.strip(), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
+        examples = [{"title": t, "html": format_example(h), "rendered": mark_safe(render_snippet(h))} for t, h in el.examples]
     related = [registry.get(r) for r in el.related if registry.get(r)]
     uses = [registry.get(u) for u in el.uses if registry.get(u)]
     used_by = [e for e in registry.all_elements() if el.id in e.uses]

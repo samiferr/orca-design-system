@@ -2,7 +2,7 @@
 
 Generated from `orca/catalogue/` by `python -m orca build`. Do not edit by hand.
 
-Every element below has a **why**, **when**, **when not**, **how**, accessibility notes, the tokens and
+Every element below has **when**, **when not**, **how**, accessibility notes, the tokens and
 classes it uses, the UX principles it applies, and a copy-ready Django template example.
 Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.
 

@@ -5,7 +5,7 @@ from ...catalogue.render import element_text
 
 
 class Command(BaseCommand):
-    help = "Print the why, when and how of an ORCA element (same as `python -m orca show <id>`)."
+    help = "Print the when, how and example of an ORCA element (same as `python -m orca show <id>`)."
 
     def add_arguments(self, parser):
         parser.add_argument("element_id", nargs="?", help="Element id, e.g. button. Omit to list all ids.")

@@ -8,10 +8,6 @@ How dates, times and durations are written. Always machine-readable (`<time date
 
 The day of the month in a calendar cell or date badge.
 
-### Why
-
-Tabular digits keep calendar columns aligned and scannable (Practical UI W11).
-
 ### When to use
 
 - Calendar cells, mini calendars, date badges.
@@ -45,10 +41,6 @@ Tabular digits keep calendar columns aligned and scannable (Practical UI W11).
 
 The day of the week as a short uppercase label or a full word.
 
-### Why
-
-Short uppercase labels head calendar columns without crowding them (Practical UI W07: uppercase only for short labels).
-
 ### When to use
 
 - Calendar column headers (short: MON), agenda rows and date labels (full: Monday).
@@ -66,7 +58,11 @@ Short uppercase labels head calendar columns without crowding them (Practical UI
 #### Example: Example
 
 ```django
-<div class="orca-row orca-row--16"><abbr class="orca-weekday-name" title="Monday">Mon</abbr><abbr class="orca-weekday-name" title="Tuesday">Tue</abbr><span>Friday</span></div>
+<div class="orca-row orca-row--16">
+  <abbr class="orca-weekday-name" title="Monday">Mon</abbr>
+  <abbr class="orca-weekday-name" title="Tuesday">Tue</abbr>
+  <span>Friday</span>
+</div>
 ```
 
 **Classes:** `.orca-weekday-name`
@@ -82,10 +78,6 @@ Short uppercase labels head calendar columns without crowding them (Practical UI
 `id: month-name` · level: primitive · source: ORCA
 
 The month (and year) heading a calendar or a group of agenda items.
-
-### Why
-
-A clear month heading orients people in time before they scan days (Miller's law).
 
 ### When to use
 
@@ -104,7 +96,10 @@ A clear month heading orients people in time before they scan days (Miller's law
 #### Example: Example
 
 ```django
-<h2 class="orca-month-name"><time datetime="2026-11">November</time> <span class="orca-year">2026</span></h2>
+<h2 class="orca-month-name">
+  <time datetime="2026-11">November</time>
+  <span class="orca-year">2026</span>
+</h2>
 ```
 
 **Classes:** `.orca-month-name`
@@ -120,10 +115,6 @@ A clear month heading orients people in time before they scan days (Miller's law
 `id: year-label` · level: primitive · source: ORCA
 
 The year, muted, beside a month or in a year view.
-
-### Why
-
-The year is context, not content: muting it keeps the month as the focus (Practical UI L03).
 
 ### When to use
 
@@ -157,10 +148,6 @@ The year is context, not content: muting it keeps the month as the focus (Practi
 `id: week-number` · level: primitive · source: ORCA
 
 The ISO week number, labelled.
-
-### Why
-
-Many teams plan in weeks; showing the number avoids mental calendar arithmetic (Tesler's law).
 
 ### When to use
 
@@ -196,10 +183,6 @@ Many teams plan in weeks; showing the number avoids mental calendar arithmetic (
 
 A clock time in the reader's 12- or 24-hour convention.
 
-### Why
-
-Times must read in the convention people use, and stay aligned in columns (Postel's law, W11).
-
 ### When to use
 
 - Event times, hour labels, log entries.
@@ -217,7 +200,9 @@ Times must read in the convention people use, and stay aligned in columns (Poste
 #### Example: Example
 
 ```django
-<time class="orca-time" datetime="2026-11-06T08:30">08:30</time>–<time class="orca-time" datetime="2026-11-06T10:00">10:00</time>
+<time class="orca-time" datetime="2026-11-06T08:30">08:30</time>
+–
+<time class="orca-time" datetime="2026-11-06T10:00">10:00</time>
 ```
 
 **Classes:** `.orca-time`
@@ -233,10 +218,6 @@ Times must read in the convention people use, and stay aligned in columns (Poste
 `id: date-label` · level: primitive · source: ORCA
 
 A date written for people: '6 November 2026', 'Fri 6 Nov'.
-
-### Why
-
-Written months avoid the 06/11 vs 11/06 ambiguity across countries (Postel's law).
 
 ### When to use
 
@@ -255,7 +236,9 @@ Written months avoid the 06/11 vs 11/06 ambiguity across countries (Postel's law
 #### Example: Example
 
 ```django
-<time class="orca-date" datetime="2026-11-06">6 November 2026</time> · <time class="orca-date" datetime="2026-11-06">Fri 6 Nov</time>
+<time class="orca-date" datetime="2026-11-06">6 November 2026</time>
+·
+<time class="orca-date" datetime="2026-11-06">Fri 6 Nov</time>
 ```
 
 **Classes:** `.orca-date`
@@ -271,10 +254,6 @@ Written months avoid the 06/11 vs 11/06 ambiguity across countries (Postel's law
 `id: relative-time` · level: primitive · source: ORCA
 
 '2 minutes ago', 'in 3 days', with the exact time on hover and for screen readers.
-
-### Why
-
-Recent events are judged by how long ago they happened; the exact time stays available (Postel's law).
 
 ### When to use
 
@@ -314,10 +293,6 @@ Recent events are judged by how long ago they happened; the exact time stays ava
 
 A small outlined abbreviation of the timezone, with the full zone in its title.
 
-### Why
-
-When people and places are in different zones, an explicit label prevents missed meetings (Postel's law, Tesler's law).
-
 ### When to use
 
 - Beside times whose zone may differ from the reader's: site schedules, shared events.
@@ -335,7 +310,8 @@ When people and places are in different zones, an explicit label prevents missed
 #### Example: Example
 
 ```django
-<span class="orca-time">08:30</span> <abbr class="orca-tz" title="Europe/Paris (UTC+01:00)">CET</abbr>
+<span class="orca-time">08:30</span>
+<abbr class="orca-tz" title="Europe/Paris (UTC+01:00)">CET</abbr>
 ```
 
 **Classes:** `.orca-tz`
@@ -351,10 +327,6 @@ When people and places are in different zones, an explicit label prevents missed
 `id: duration-label` · level: primitive · source: ORCA
 
 A length of time: '45 min', '1 h 30 min', '3 d'.
-
-### Why
-
-Short, consistent units are scanned faster than '90 minutes' or '1.5h' (Practical UI W11).
 
 ### When to use
 
@@ -388,10 +360,6 @@ Short, consistent units are scanned faster than '90 minutes' or '1.5h' (Practica
 `id: countdown-label` · level: primitive · source: ORCA
 
 Time left until a moment, updating live.
-
-### Why
-
-A visible countdown makes a deadline concrete and turns urgent in the final minute (Von Restorff), without announcing every second to screen readers.
 
 ### When to use
 

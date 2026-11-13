@@ -8,10 +8,6 @@ Marks drawn on calendars, schedules and timelines. Each state pairs colour with 
 
 Today's day number outlined in red, bold.
 
-### Why
-
-People orient on 'now' first in any calendar (Von Restorff); outline plus weight works without colour (C03).
-
 ### When to use
 
 - Today in month grids, mini calendars, date pickers.
@@ -47,10 +43,6 @@ People orient on 'now' first in any calendar (Von Restorff); outline plus weight
 
 The chosen day filled with the accent colour.
 
-### Why
-
-Selection uses the system's 'on' colour and a fill (shape change), consistent with ticks and radios (Practical UI F09).
-
 ### When to use
 
 - The chosen day or the ends of a chosen range.
@@ -80,10 +72,6 @@ Selection uses the system's 'on' colour and a fill (shape change), consistent wi
 `id: outside-day-marker` · level: primitive · source: ORCA
 
 Days of the previous or next month shown muted.
-
-### Why
-
-Muting days outside the month keeps full weeks visible while keeping focus on the month (Practical UI L03).
 
 ### When to use
 
@@ -115,10 +103,6 @@ Muting days outside the month keeps full weeks visible while keeping focus on th
 
 A faint tint behind weekend days and columns.
 
-### Why
-
-A subtle tint separates working days without competing with events (Miller's law: chunking the week).
-
 ### When to use
 
 - Month grids, week views, Gantt columns.
@@ -130,7 +114,11 @@ A subtle tint separates working days without competing with events (Miller's law
 #### Example: Example
 
 ```django
-<div class="orca-row" style="gap: 0"><button class="orca-day" type="button">6</button><button class="orca-day orca-day--weekend" type="button">7</button><button class="orca-day orca-day--weekend" type="button">8</button></div>
+<div class="orca-row" style="gap: 0">
+  <button class="orca-day" type="button">6</button>
+  <button class="orca-day orca-day--weekend" type="button">7</button>
+  <button class="orca-day orca-day--weekend" type="button">8</button>
+</div>
 ```
 
 **Classes:** `.orca-day--weekend`
@@ -148,10 +136,6 @@ A subtle tint separates working days without competing with events (Miller's law
 `id: holiday-marker` · level: primitive · source: ORCA
 
 A purple tint and underline mark on holidays and closed days, with the holiday's name.
-
-### Why
-
-Closed days change plans; tint plus a mark plus the name make them noticed and understood (C03).
 
 ### When to use
 
@@ -184,10 +168,6 @@ Closed days change plans; tint plus a mark plus the name make them noticed and u
 
 A small dot that says 'there are events here' or keys an event's calendar.
 
-### Why
-
-In small cells a dot shows presence without text (Miller's law); the count or list must be one tap away.
-
 ### When to use
 
 - Mini calendars (day has events), agenda rows (calendar colour).
@@ -199,7 +179,10 @@ In small cells a dot shows presence without text (Miller's law); the count or li
 #### Example: Example
 
 ```django
-<div class="orca-row"><span class="orca-with-icon"><span class="orca-event-dot" style="--orca-event: var(--orca-chart-3)"></span>Maintenance</span><button class="orca-day orca-day--has-events" type="button" aria-label="14 November, has events">14</button></div>
+<div class="orca-row">
+  <span class="orca-with-icon"><span class="orca-event-dot" style="--orca-event: var(--orca-chart-3)"></span>Maintenance</span>
+  <button class="orca-day orca-day--has-events" type="button" aria-label="14 November, has events">14</button>
+</div>
 ```
 
 **Classes:** `.orca-event-dot`, `.orca-day--has-events`
@@ -217,10 +200,6 @@ In small cells a dot shows presence without text (Miller's law); the count or li
 `id: event-bar` · level: primitive · source: ORCA
 
 A timed event in a day: tinted bar with a 3px leading edge in the calendar colour.
-
-### Why
-
-The coloured edge keys the calendar while the light tint keeps the title readable (C01); tentative events are hatched and cancelled ones struck through, so status never relies on colour (C03).
 
 ### When to use
 
@@ -257,10 +236,6 @@ The coloured edge keys the calendar while the light tint keeps the title readabl
 
 A solid bar for all-day and multi-day events, with arrow ends when it continues.
 
-### Why
-
-Solid fill separates all-day events from timed ones at a glance (Von Restorff); arrow ends show continuation without words (Jakob's law: familiar from calendars).
-
 ### When to use
 
 - All-day rows of week views; multi-day events in month grids.
@@ -272,7 +247,10 @@ Solid fill separates all-day events from timed ones at a glance (Von Restorff); 
 #### Example: Example
 
 ```django
-<div class="orca-stack" style="max-width: 18rem; gap: 2px"><div class="orca-allday-bar" style="--orca-event: var(--orca-chart-1)">Inventory day</div><div class="orca-allday-bar orca-allday-bar--continues-after" style="--orca-event: var(--orca-chart-4)">Trade fair, 6–9 November</div></div>
+<div class="orca-stack" style="max-width: 18rem; gap: 2px">
+  <div class="orca-allday-bar" style="--orca-event: var(--orca-chart-1)">Inventory day</div>
+  <div class="orca-allday-bar orca-allday-bar--continues-after" style="--orca-event: var(--orca-chart-4)">Trade fair, 6–9 November</div>
+</div>
 ```
 
 **Classes:** `.orca-allday-bar`, `.orca-allday-bar--continues-before`, `.orca-allday-bar--continues-after`
@@ -291,10 +269,6 @@ Solid fill separates all-day events from timed ones at a glance (Von Restorff); 
 
 Hour and half-hour lines with the hour label in the gutter.
 
-### Why
-
-Faint gridlines give scale to a day without competing with events (Practical UI S02).
-
 ### When to use
 
 - Day and week views, resource schedulers.
@@ -306,7 +280,17 @@ Faint gridlines give scale to a day without competing with events (Practical UI 
 #### Example: Example
 
 ```django
-<div style="position: relative; max-width: 18rem; padding-top: 0.75rem"><div class="orca-hour-line"><span class="orca-hour-line__label">09:00</span></div><div style="height: 1.5rem"></div><div class="orca-hour-line orca-hour-line--half"></div><div style="height: 1.5rem"></div><div class="orca-hour-line"><span class="orca-hour-line__label">10:00</span></div></div>
+<div style="position: relative; max-width: 18rem; padding-top: 0.75rem">
+  <div class="orca-hour-line">
+    <span class="orca-hour-line__label">09:00</span>
+  </div>
+  <div style="height: 1.5rem"></div>
+  <div class="orca-hour-line orca-hour-line--half"></div>
+  <div style="height: 1.5rem"></div>
+  <div class="orca-hour-line">
+    <span class="orca-hour-line__label">10:00</span>
+  </div>
+</div>
 ```
 
 **Classes:** `.orca-hour-line`, `.orca-hour-line--half`, `.orca-hour-line__label`
@@ -325,10 +309,6 @@ Faint gridlines give scale to a day without competing with events (Practical UI 
 
 A red line with a dot at the current time across day and week views.
 
-### Why
-
-The present moment is the anchor of any schedule (Von Restorff); the line plus dot shape reads without colour.
-
 ### When to use
 
 - Day and week views, timelines, Gantt charts (vertical).
@@ -340,7 +320,9 @@ The present moment is the anchor of any schedule (Von Restorff); the line plus d
 #### Example: Example
 
 ```django
-<div style="padding: var(--orca-space-8) var(--orca-space-16); max-width: 18rem"><div class="orca-now-line" aria-hidden="true"></div></div>
+<div style="padding: var(--orca-space-8) var(--orca-space-16); max-width: 18rem">
+  <div class="orca-now-line" aria-hidden="true"></div>
+</div>
 ```
 
 **Classes:** `.orca-now-line`
@@ -359,10 +341,6 @@ The present moment is the anchor of any schedule (Von Restorff); the line plus d
 
 Free, busy, tentative and off states as filled, solid, hatched and dashed marks.
 
-### Why
-
-Availability is compared across many slots; four distinct patterns (not just four colours) keep it readable for everyone (C03, Miller's law).
-
 ### When to use
 
 - Availability legends, booking slots, resource schedulers, people pickers.
@@ -375,7 +353,12 @@ Availability is compared across many slots; four distinct patterns (not just fou
 #### Example: Example
 
 ```django
-<div class="orca-row orca-row--16"><span class="orca-avail orca-avail--free">Free</span><span class="orca-avail orca-avail--busy">Busy</span><span class="orca-avail orca-avail--tentative">Tentative</span><span class="orca-avail orca-avail--off">Not working</span></div>
+<div class="orca-row orca-row--16">
+  <span class="orca-avail orca-avail--free">Free</span>
+  <span class="orca-avail orca-avail--busy">Busy</span>
+  <span class="orca-avail orca-avail--tentative">Tentative</span>
+  <span class="orca-avail orca-avail--off">Not working</span>
+</div>
 ```
 
 **Classes:** `.orca-avail`, `.orca-avail--free`, `.orca-avail--busy`, `.orca-avail--tentative`, `.orca-avail-fill--free`
@@ -393,10 +376,6 @@ Availability is compared across many slots; four distinct patterns (not just fou
 `id: priority-marker` · level: primitive · source: ORCA
 
 Signal bars plus a word: low, medium, high, urgent.
-
-### Why
-
-Bars rise with priority so the order is visible in greyscale (C03); the word removes doubt.
 
 ### When to use
 
@@ -433,10 +412,6 @@ Bars rise with priority so the order is visible in greyscale (C03); the word rem
 
 A flag icon with the due date; a caution flag when it is close.
 
-### Why
-
-A due date with a flag is found by scanning (Von Restorff); turning the icon amber when close prevents a negative peak (Peak–end rule).
-
 ### When to use
 
 - Tasks, plans, Gantt bars (`.orca-deadline-line` as a vertical rule).
@@ -448,7 +423,16 @@ A due date with a flag is found by scanning (Von Restorff); turning the icon amb
 #### Example: Example
 
 ```django
-<div class="orca-row orca-row--16"><span class="orca-deadline">{% icon "flag" %}<span>Due <time datetime="2026-11-20">Fri 20 Nov</time></span></span><span class="orca-deadline orca-deadline--soon">{% icon "flag" %}<span>Due tomorrow</span></span></div>
+<div class="orca-row orca-row--16">
+  <span class="orca-deadline">
+    {% icon "flag" %}
+    <span>Due <time datetime="2026-11-20">Fri 20 Nov</time></span>
+  </span>
+  <span class="orca-deadline orca-deadline--soon">
+    {% icon "flag" %}
+    <span>Due tomorrow</span>
+  </span>
+</div>
 ```
 
 **Classes:** `.orca-deadline`, `.orca-deadline--soon`, `.orca-deadline-line`
@@ -467,10 +451,6 @@ A due date with a flag is found by scanning (Von Restorff); turning the icon amb
 
 Bold red text with the error glyph and how late it is.
 
-### Why
-
-Overdue items need action now; red, bold, a glyph and the word 'Overdue' together are unmistakable (C03, C04).
-
 ### When to use
 
 - Tasks and deadlines past due.
@@ -483,7 +463,10 @@ Overdue items need action now; red, bold, a glyph and the word 'Overdue' togethe
 #### Example: Example
 
 ```django
-<span class="orca-overdue">{% icon "error" %}Overdue by 2 days</span>
+<span class="orca-overdue">
+  {% icon "error" %}
+  Overdue by 2 days
+</span>
 ```
 
 **Classes:** `.orca-overdue`
@@ -502,10 +485,6 @@ Overdue items need action now; red, bold, a glyph and the word 'Overdue' togethe
 
 A diamond: filled (reached), outlined (upcoming), red outline (missed), green (done).
 
-### Why
-
-The diamond is the convention for milestones in plans and Gantt charts (Jakob's law); fill versus outline shows state without colour.
-
 ### When to use
 
 - Roadmaps, Gantt charts, milestone timelines.
@@ -518,7 +497,11 @@ The diamond is the convention for milestones in plans and Gantt charts (Jakob's 
 #### Example: Example
 
 ```django
-<div class="orca-stack"><span class="orca-with-icon"><span class="orca-milestone orca-milestone--done" aria-hidden="true"></span>Pilot live · done</span><span class="orca-with-icon"><span class="orca-milestone orca-milestone--upcoming" aria-hidden="true"></span>All sites live · 1 Dec</span><span class="orca-with-icon"><span class="orca-milestone orca-milestone--missed" aria-hidden="true"></span>Training complete · missed</span></div>
+<div class="orca-stack">
+  <span class="orca-with-icon"><span class="orca-milestone orca-milestone--done" aria-hidden="true"></span>Pilot live · done</span>
+  <span class="orca-with-icon"><span class="orca-milestone orca-milestone--upcoming" aria-hidden="true"></span>All sites live · 1 Dec</span>
+  <span class="orca-with-icon"><span class="orca-milestone orca-milestone--missed" aria-hidden="true"></span>Training complete · missed</span>
+</div>
 ```
 
 **Classes:** `.orca-milestone`, `.orca-milestone--done`, `.orca-milestone--missed`, `.orca-milestone--upcoming`
@@ -537,10 +520,6 @@ The diamond is the convention for milestones in plans and Gantt charts (Jakob's 
 
 A grip button for moving an item, usable by keyboard too.
 
-### Why
-
-A visible grip tells people the item can be moved (affordance, Jakob's law); a keyboard alternative keeps it usable for everyone (Postel's law).
-
 ### When to use
 
 - Reorderable rows, schedule rows, board cards, events in a week view.
@@ -558,7 +537,12 @@ A visible grip tells people the item can be moved (affordance, Jakob's law); a k
 #### Example: Example
 
 ```django
-<div class="orca-row" style="max-width: 20rem; padding: var(--orca-space-4); border: var(--orca-border-width) solid var(--orca-border)"><button class="orca-drag-handle" type="button" aria-label="Move Entrance A">{% icon "drag" %}</button>Entrance A</div>
+<div class="orca-row" style="max-width: 20rem; padding: var(--orca-space-4); border: var(--orca-border-width) solid var(--orca-border)">
+  <button class="orca-drag-handle" type="button" aria-label="Move Entrance A">
+    {% icon "drag" %}
+  </button>
+  Entrance A
+</div>
 ```
 
 **Classes:** `.orca-drag-handle`, `.orca-is-dragging`
@@ -577,10 +561,6 @@ A visible grip tells people the item can be moved (affordance, Jakob's law); a k
 
 A grip on the edge of an event or panel that changes its length.
 
-### Why
-
-A visible grip on the edge shows the item can be stretched (affordance); a precise field elsewhere remains the accessible way (Postel's law).
-
 ### When to use
 
 - Bottom edge of events in day/week views; edges of Gantt bars (`--x`).
@@ -593,7 +573,10 @@ A visible grip on the edge shows the item can be stretched (affordance); a preci
 #### Example: Example
 
 ```django
-<div style="max-width: 12rem"><div class="orca-event-bar" style="--orca-event: var(--orca-chart-1); min-height: 3rem; align-items: flex-start; padding-top: var(--orca-space-4)">Delivery</div><button class="orca-resize-handle" type="button" aria-label="Change end time of Delivery"></button></div>
+<div style="max-width: 12rem">
+  <div class="orca-event-bar" style="--orca-event: var(--orca-chart-1); min-height: 3rem; align-items: flex-start; padding-top: var(--orca-space-4)">Delivery</div>
+  <button class="orca-resize-handle" type="button" aria-label="Change end time of Delivery"></button>
+</div>
 ```
 
 **Classes:** `.orca-resize-handle`, `.orca-resize-handle--x`
