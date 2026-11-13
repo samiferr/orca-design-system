@@ -1,6 +1,6 @@
 # Identity and controls
 
-Who is signed in, what a panel is, and the small controls that personalise the interface.
+Who is signed in, panel headers, and small controls that personalise the interface.
 
 ## User chip
 
@@ -10,6 +10,28 @@ Avatar, name and role of the signed-in person; opens the account menu.
 
 Built from: `avatar`, `dropdown-menu`
 
+### General description
+
+A small element in the top corner showing the signed-in person's avatar, name and role. It usually opens an account menu.
+
+#### Use cases
+
+- Top bars of web applications.
+- Opening profile, settings and sign out.
+- Showing which account is active.
+
+#### When not to use it
+
+- Public pages with no sign-in; show a Sign in button instead.
+- Long lists of people; use a table row or card.
+
+#### Best practices
+
+- Place it at the top right.
+- Show the name or give the button an accessible name.
+- Include Sign out in the menu.
+- Let it shrink to just the avatar on small screens.
+
 ### When to use
 
 - The end of the top bar.
@@ -17,7 +39,7 @@ Built from: `avatar`, `dropdown-menu`
 ### How to use
 
 - `<button class="orca-user-chip" type="button" aria-haspopup="menu" aria-expanded="false" data-orca-menu aria-controls=…>` with a small avatar and `.orca-user-chip__text` (`__name`, `__role`), inside an `.orca-anchor` with the menu.
-- Menu items: Profile, Settings, separator, Sign out. Below 620px only the avatar shows; the button keeps the name as its accessible name.
+- Menu: Profile, Settings, separator, Sign out. Below 620px only the avatar shows; the button keeps the name as its accessible name.
 
 #### Example: User chip
 
@@ -67,9 +89,31 @@ Built from: `avatar`, `dropdown-menu`
 
 `id: panel-header` · level: component · source: Tangerine
 
-The top of a panel: title, a short description and the panel's actions.
+A panel's top: title, short description and actions.
 
 Built from: `panel-title`, `button`
+
+### General description
+
+The top row of a panel or card with its title, a short description and actions. It says what the panel shows and what can be done with it.
+
+#### Use cases
+
+- Dashboard panels and cards.
+- Table and chart frames.
+- Settings sections in a panel.
+
+#### When not to use it
+
+- Page titles; use a page heading.
+- Panels with no title or actions; skip the header.
+
+#### Best practices
+
+- Keep the title short and about one topic.
+- Place actions next to the title.
+- Limit actions to the most useful few.
+- Let actions wrap on narrow screens.
 
 ### When to use
 
@@ -110,9 +154,31 @@ Built from: `panel-title`, `button`
 
 `id: pin-control` · level: component · source: Tangerine
 
-A pin toggle with a visible 'Pinned' state and an announcement when it changes.
+A pin toggle that shows 'Pinned' in words and announces changes.
 
 Built from: `pin-button`
+
+### General description
+
+A toggle that pins an item so it stays easy to find, for instance at the top of a list or on a dashboard. It shows whether the item is pinned.
+
+#### Use cases
+
+- Pinning favourites to a dashboard.
+- Keeping important items at the top of a list.
+- Saving shortcuts to frequently used pages.
+
+#### When not to use it
+
+- Marking something as done; use a checkbox.
+- Saving to a personal collection; use a bookmark or favourite action.
+
+#### Best practices
+
+- Show the state in words as well as the icon.
+- Announce the change to screen readers.
+- Save at once and undo if saving fails.
+- Name the item being pinned in the label.
 
 ### When to use
 
@@ -150,6 +216,28 @@ A segmented choice of Auto, Light, Dark and Paper themes, remembered per browser
 
 Built from: `radio`
 
+### General description
+
+A control to switch the look of an interface between themes such as light and dark. It follows the system setting by default and remembers the choice.
+
+#### Use cases
+
+- Settings and account pages.
+- Top bar shortcut for switching between light and dark.
+- Reading in different lighting.
+
+#### When not to use it
+
+- Basic colour changes with no real need; follow the system setting.
+- Sites with a single fixed look.
+
+#### Best practices
+
+- Offer an automatic option that follows the system setting.
+- Show all choices at once.
+- Remember the choice for the next visit.
+- Apply it before the page appears to avoid flashes.
+
 ### When to use
 
 - Settings panels and account settings.
@@ -157,7 +245,7 @@ Built from: `radio`
 ### How to use
 
 - `<fieldset class="orca-segmented" data-orca-theme-choice>` with a legend and four radio labels `.orca-segmented__item` (values auto, light, dark, paper).
-- orca.js applies the theme at once and remembers it; ORCA's head script restores it before the page paints.
+- orca.js applies and remembers the theme; ORCA's head script restores it before the page paints.
 - A compact top-bar alternative is the theme toggle button (`data-orca-theme-toggle`, see Themes).
 
 #### Example: Theme choice
@@ -197,6 +285,28 @@ Built from: `radio`
 An email button with the address shown and a Copy button, for when no mail app opens.
 
 Built from: `email-button`, `copy-button`
+
+### General description
+
+An email link paired with the visible address and a Copy button. It covers people whose device has no mail app set up.
+
+#### Use cases
+
+- Contact and support pages.
+- Sharing a report by email.
+- Any link that starts an email.
+
+#### When not to use it
+
+- Long conversations; use a contact form or a chat tool.
+- Sensitive details in the link; avoid putting personal data in it.
+
+#### Best practices
+
+- Show the address in plain text.
+- Add a Copy button and confirm when copied.
+- Prefill a clear subject line.
+- Keep personal data out of the link.
 
 ### When to use
 
@@ -242,22 +352,44 @@ The product logo as a link to the home page.
 
 Built from: `logo`
 
+### General description
+
+A logo that links to the home page. It tells people whose site they are on and gives them a quick way back to the start.
+
+#### Use cases
+
+- Header or top bar of a website or app.
+- Footer, so people can return home after reading to the end.
+- Sign-in pages and emails that carry the brand.
+
+#### When not to use it
+
+- Placing it next to a separate Home link that goes to the same page; keep just one.
+- Using the logo as the only way to reach important sections; add real navigation.
+
+#### Best practices
+
+- Put it in the top left, where people look for it.
+- Give the link a name that includes the brand name.
+- Give the image useful alt text or use the name as text.
+- Link to the home page, and skip the link when already on it.
+
 ### When to use
 
 - Top bar, site header, footer, sign-in card, error pages and emails.
 
 ### When not to use
 
-- A second home link next to it with the same destination.
+- A second home link beside it.
 
 ### How to use
 
 - `{% orca_logo href="/" %}`: the brand logo (or the name as a wordmark) inside a link named after the product.
-- Leave `href` empty where the page is already home, such as the sign-in page; the logo is then not a link.
+- Leave `href` empty where the page is already home, such as sign-in; the logo is then not a link.
 
 ### Accessibility
 
-- The link's accessible name is the product name from `settings.ORCA["BRAND"]["name"]`.
+- The link is named after the product, from `settings.ORCA["BRAND"]["name"]`.
 
 #### Example: Logo link
 
@@ -277,9 +409,31 @@ Built from: `logo`
 
 `id: collapse-toggle` · level: component · source: ORCA
 
-An icon button that collapses or expands a region, says which it will do, and remembers the choice.
+An icon button that collapses or expands a region and remembers the choice. Its label says what a press will do.
 
 Built from: `icon-button`
+
+### General description
+
+A button that folds a panel or sidebar away and brings it back. It gives people more room for content without removing the panel.
+
+#### Use cases
+
+- Collapsing a sidebar menu down to icons.
+- Hiding a side panel on small screens.
+- Giving more width to a table or editor.
+
+#### When not to use it
+
+- Hiding content people need to finish a task; keep it visible instead.
+- Showing or hiding a short block of text; use an accordion or disclosure.
+
+#### Best practices
+
+- Say what the button will do, and update the label when the state changes.
+- Tell assistive technology whether the region is open with the expanded state.
+- Remember the choice for the next visit.
+- Keep the button in the same spot in both states.
 
 ### When to use
 

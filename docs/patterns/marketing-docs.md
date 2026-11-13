@@ -6,9 +6,31 @@ Sections for a product's public pages and its documentation: hero, features, liv
 
 `id: marketing-hero` · level: pattern · source: ORCA
 
-The full-width opening band of a landing page: headline, lead, actions, proof points and an image, edged with the brand bar.
+The full-width opening band of a landing page: headline, lead, actions, proof points and image, edged with the brand bar.
 
 Built from: `hero`
+
+### General description
+
+A hero is the large opening section at the top of a landing page. It states the main benefit and gives one clear next step.
+
+#### Use cases
+
+- Introducing a product on a home page.
+- Starting a campaign or launch page.
+- Pointing visitors to sign up or learn more.
+
+#### When not to use it
+
+- Do not use it on inner pages; use a plain page heading.
+- Do not use it in an application screen.
+
+#### Best practices
+
+- Write a headline that states the benefit.
+- Offer one main button.
+- Add a few real proof points.
+- Use an image that shows the product.
 
 ### When to use
 
@@ -66,6 +88,28 @@ Three to six features, each an icon, a short title and one sentence.
 
 Built from: `feature-item`
 
+### General description
+
+A feature grid is a set of small blocks, each with an icon, a short title and a sentence. Together they summarise what a product offers.
+
+#### Use cases
+
+- Summarising product benefits on a landing page.
+- Highlighting new releases.
+- Giving an overview of a service.
+
+#### When not to use it
+
+- Do not use it for step-by-step instructions; use a numbered list.
+- Do not use it for dense detail; link to a full page.
+
+#### Best practices
+
+- Use three to six features.
+- Keep text lengths similar.
+- Lead with the benefit in each title.
+- Use icons that match the meaning.
+
 ### When to use
 
 - Landing pages, product overviews, release highlights.
@@ -73,7 +117,7 @@ Built from: `feature-item`
 ### How to use
 
 - `<ul class="orca-feature-grid">` of `<li class="orca-feature">` with a large icon, `.orca-feature__title` and `.orca-feature__text`.
-- Keep texts to one sentence of similar length; link a feature title only when there is a page behind it.
+- Use one sentence of similar length per feature; link a title only when a page sits behind it.
 
 #### Example: Features
 
@@ -109,9 +153,31 @@ Built from: `feature-item`
 
 `id: token-panel` · level: pattern · source: ORCA
 
-Controls for the brand tokens beside a live preview, to try a brand before setting it.
+Brand token controls beside a live preview, for trying a brand before setting it.
 
 Built from: `form-field`, `live-example`
+
+### General description
+
+A design-token panel lets people change brand values such as colours and see the effect on sample components straight away.
+
+#### Use cases
+
+- Trying brand colours before applying them.
+- Documenting how a design system is customised.
+- Branding settings pages for admins.
+
+#### When not to use it
+
+- Do not use it for ordinary user preferences; use settings forms.
+- Do not use it for production changes without a save step.
+
+#### Best practices
+
+- Preview on real components.
+- Update the preview instantly.
+- Show contrast results next to each colour.
+- Offer a way to reset.
 
 ### When to use
 
@@ -120,7 +186,7 @@ Built from: `form-field`, `live-example`
 ### How to use
 
 - `<div class="orca-token-panel">` with `.orca-token-panel__controls` (colour inputs carrying `data-orca-token="--orca-brand-strong"` and `aria-controls` pointing at the preview) and `.orca-token-panel__preview` (real components).
-- The preview only shows the effect; ORCA's contrast adjustment happens when the value is saved in `settings.ORCA['BRAND']`. Show the resulting contrast next to the input.
+- The preview only shows the effect; ORCA adjusts contrast when the value is saved in `settings.ORCA['BRAND']`. Show the resulting contrast next to the input.
 
 #### Example: Try a brand colour
 
@@ -167,9 +233,31 @@ Built from: `form-field`, `live-example`
 
 `id: code-samples` · level: pattern · source: ORCA
 
-The same example in several languages or frameworks as tabs of code blocks.
+One example in several languages or frameworks, as tabs of code blocks.
 
 Built from: `tab-bar`, `code-block`
+
+### General description
+
+A code samples block shows the same example in several languages or tools, usually as tabs. Readers pick their own and copy it.
+
+#### Use cases
+
+- Showing API requests in different languages.
+- Giving install steps for several platforms.
+- Comparing framework versions of an example.
+
+#### When not to use it
+
+- Do not use it for a single language; show one code block.
+- Do not use it for long programs; link to a repository.
+
+#### Best practices
+
+- Remember the language the reader chose.
+- Add a copy button to each block.
+- Keep examples equivalent.
+- Keep samples short and runnable.
 
 ### When to use
 
@@ -228,9 +316,31 @@ Built from: `tab-bar`, `code-block`
 
 `id: docs-page-header` · level: pattern · source: ORCA
 
-A documentation page's breadcrumb, title, one-paragraph introduction and meta (status, source, version).
+A documentation page's breadcrumb, title, short introduction and meta (status, source, version).
 
 Built from: `breadcrumbs`, `page-heading`
+
+### General description
+
+A documentation page header sits at the top of a docs page. It gives the trail, title, a short introduction and details like status or version.
+
+#### Use cases
+
+- Starting every page of a documentation site.
+- Showing whether a feature is stable or in beta.
+- Telling readers what a page covers.
+
+#### When not to use it
+
+- Do not use it on marketing pages; use a hero.
+- Do not make the intro long; link to details.
+
+#### Best practices
+
+- Put the answer to what this page is first.
+- Keep the intro to one or two sentences.
+- Show status in words as well as colour.
+- Use the same layout everywhere.
 
 ### When to use
 
@@ -275,13 +385,35 @@ Built from: `breadcrumbs`, `page-heading`
 
 `id: docs-sidebar` · level: pattern · source: ORCA
 
-The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open and visible.
+The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open.
 
 Built from: `docs-nav-tree`, `drawer`
 
+### General description
+
+A docs sidebar is the navigation column of a documentation site. It lists pages in groups, often with a search box to filter them.
+
+#### Use cases
+
+- Browsing the pages of a large docs site.
+- Finding a page by typing part of its name.
+- Showing where the current page sits.
+
+#### When not to use it
+
+- Avoid it for a very small site; use a short top menu.
+- Avoid it as a search replacement across all content.
+
+#### Best practices
+
+- Group pages under clear headings.
+- Open the group of the current page.
+- Offer a filter box.
+- Turn it into a drawer on phones.
+
 ### When to use
 
-- Documentation sites. This site puts the same filter and tree inside the sidebar pattern so it can collapse to a rail.
+- Documentation sites. This site puts the filter and tree inside the sidebar pattern so they collapse to a rail.
 
 ### How to use
 
@@ -350,13 +482,35 @@ Built from: `docs-nav-tree`, `drawer`
 
 `id: table-of-contents` · level: pattern · source: ORCA
 
-An "On this page" list of a long page's sections that marks the section being read.
+An "On this page" list of a long page's sections, marking the one being read.
 
 Built from: `nav-tree`
 
+### General description
+
+A table of contents lists the sections of a long page as links. It shows what the page covers and lets people jump to a section.
+
+#### Use cases
+
+- Guiding readers through long articles.
+- Navigating documentation and guides.
+- Finding a heading in release notes.
+
+#### When not to use it
+
+- Avoid it on short pages with few sections.
+- Do not use it to move between pages; use navigation.
+
+#### Best practices
+
+- Use section titles as labels.
+- Highlight the section being read.
+- Keep it visible while scrolling on wide screens.
+- List top-level headings only.
+
 ### When to use
 
-- Long pages of several sections: documentation, articles, guides, release notes. Put it in the right-hand column of the Blog page.
+- Long pages with several sections: documentation, articles, guides, release notes. On the Blog page, put it in the right-hand column.
 
 ### When not to use
 
@@ -366,13 +520,13 @@ Built from: `nav-tree`
 ### How to use
 
 - `<nav aria-label="On this page"><details class="orca-toc" open data-orca-toc="body-id">` with a `<summary class="orca-toc__title">` and an `<ol class="orca-toc__list">` of links to the sections' `id`s.
-- Leave the list empty and `orca.js` fills it from the `h2` headings of the element named in `data-orca-toc` (adding ids where missing), skipping headings inside live examples, code blocks and dialogs.
-- `orca.js` marks the section being read with `aria-current="location"`, keeps the list open on wide screens and closed behind its summary on narrow ones; without script the list stays open.
+- Leave the list empty: `orca.js` fills it from the `h2` headings of the element named in `data-orca-toc`, adding missing ids and skipping headings inside live examples, code blocks and dialogs.
+- `orca.js` marks the current section with `aria-current="location"` and keeps the list open on wide screens, closed behind its summary on narrow ones. Without script it stays open.
 - Keep labels to the section's name; list `h2` only.
 
 ### Accessibility
 
-- A `nav` landmark labelled "On this page"; the current section is exposed with `aria-current="location"`, not by colour alone (bold text and a bar).
+- A `nav` landmark labelled "On this page"; the current section uses `aria-current="location"` plus bold text and a bar, not colour alone.
 
 #### Example: On this page
 

@@ -3,21 +3,21 @@ from . import Component
 
 C = category(
     "data-display", "Data display",
-    "Ways to present records and numbers: stat cards, lists, key/value lists, cards, tables, timelines and small charts.",
+    "Ways to show records and numbers: stat cards, lists, cards, tables, timelines and small charts.",
     level="component",
 )
 
 add(Component(
     "stat-card", "Stat card", C,
-    "One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.",
+    "One measured value with its label, icon, change and comparison, optionally with a sparkline.",
     why="A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); "
         "a descriptive icon left of the label lets people find the card they want in a grid before reading (Miller's law: recognition), "
         "as in wise_people_analyzer.",
     when=["Dashboards and summary rows: counts, rates, durations."],
-    avoid=["More than about six cards in a row competing for attention: group them or pick the important ones."],
-    how=["`<div class=\"orca-stat-card\">` with `.orca-stat-card__head` (`<span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% templatetag openblock %} icon \"user\" {% templatetag closeblock %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, on no background of its own), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% templatetag openblock %} orca_sparkline values {% templatetag closeblock %}`.",
-         "The icon describes what is measured (people, time, videos, accuracy), never its trend or status; it is decorative because the label says it. "
-         "Use one icon per card and a different one for each card of a grid. In templates, pass `icon` with each stat.",
+    avoid=["More than about six cards in a row: group them or keep the important ones."],
+    how=["`<div class=\"orca-stat-card\">` with `.orca-stat-card__head` (`<span class=\"orca-stat-card__icon\" aria-hidden=\"true\">{% templatetag openblock %} icon \"user\" {% templatetag closeblock %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, with no background), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% templatetag openblock %} orca_sparkline values {% templatetag closeblock %}`.",
+         "The icon shows what is measured (people, time, videos, accuracy), never trend or status; it is decorative because the label says it. "
+         "Use one icon per card, different on each card of a grid. In templates, pass `icon` with each stat.",
          "Make the whole card a link (`<a class=\"orca-stat-card\">`) when it leads to the detail."],
     classes=[".orca-stat-card", ".orca-stat-card__head", ".orca-stat-card__icon", ".orca-stat-card__foot"],
     laws=["restorff", "miller", "W11"],
@@ -71,7 +71,7 @@ add(Component(
     "list-item", "List item", C,
     "One row of a list: leading visual, title and description, trailing detail; static, link, button or selected.",
     why="Fixed slots mean every row reads the same way (Practical UI F09); a 48px row with the whole width clickable is easy to hit (Fitts's law).",
-    when=["Inside a list; inside menus of rich options."],
+    when=["Inside a list or a menu of rich options."],
     how=["`.orca-list-item` (a `span`, `a` or `button`) with an optional avatar, thumbnail or icon, `.orca-list-item__text` (`__title`, `__desc`) and `.orca-list-item__end`.",
          "Selected: `aria-current=\"true\"` (navigation) or `aria-selected=\"true\"` (selection lists)."],
     classes=[".orca-list-item", ".orca-list-item__text", ".orca-list-item__title", ".orca-list-item__desc", ".orca-list-item__end", ".orca-list-item--selected"],
@@ -104,11 +104,11 @@ add(Component(
 
 add(Component(
     "sortable-header", "Sortable column header", C,
-    "A table header that sorts the column, showing the direction with an arrow and aria-sort.",
+    "A table header that sorts its column and shows the direction with an arrow and aria-sort.",
     why="Sorting turns a table into an answer ('which video counted most?') (Tesler's law); the arrow and aria-sort show the order to everyone (C03).",
     when=["Columns people compare: names, counts, dates, status."],
     how=["`<th scope=\"col\" aria-sort=\"descending\"><a class=\"orca-sort\" href=\"?sort=-count\">Count{% templatetag openblock %} icon \"arrow-up\" {% templatetag closeblock %}</a></th>`; columns not sorted have no aria-sort.",
-         "Server-side: keep the other query parameters in the link; first click sorts the most useful way (descending for numbers and dates)."],
+         "Server-side: keep the other query parameters in the link. First click sorts descending for numbers and dates."],
     classes=[".orca-sort"],
     laws=["tesler", "C03"],
     uses=["icon"],
@@ -122,7 +122,7 @@ add(Component(
 
 add(Component(
     "legend-item", "Legend item", C,
-    "A swatch, a series name and optionally its value, keying a chart.",
+    "A swatch, series name and optional value that key a chart.",
     why="Every colour on a chart needs a name next to the same colour, or colour-blind readers lose the chart (Practical UI C03).",
     when=["Below or beside every multi-series chart and map."],
     how=["`<ul class=\"orca-legend\">` of `<li class=\"orca-legend__item\">` with a swatch (or line swatch, or chart dot shape), the name and `.orca-legend__value`.",
@@ -260,7 +260,7 @@ add(Component(
     why="Showing progress through a multi-step task motivates finishing and sets expectations (Peak–end rule, goal gradient); splitting a task into steps lowers each decision (Hick's law).",
     when=["Setup flows and multi-step forms of 3 to 6 steps."],
     how=["`<ol class=\"orca-steps\">` of `.orca-steps__item` (`--done` or `aria-current=\"step\"`) each with a step marker and `.orca-steps__title` (+ `__desc`).",
-         "Done steps may link back for review. `--vertical` for side panels; on phones descriptions hide."],
+         "Done steps may link back for review. `--vertical` for side panels; descriptions hide on phones."],
     classes=[".orca-steps", ".orca-steps__item", ".orca-steps__item--done", ".orca-steps__title", ".orca-steps__desc", ".orca-steps--vertical"],
     laws=["peak-end", "hick", "R16"],
     uses=["step-marker"],
@@ -279,7 +279,7 @@ add(Component(
     when=["Browsing a hierarchy of objects, such as locations or folders."],
     avoid=["Navigation between pages: use the nav tree."],
     how=["`<ul class=\"orca-tree\">` with `<li><details><summary>` for branches and `.orca-tree__leaf` for leaves; `.orca-tree__meta` for counts.",
-         "Built on details, so it works with the keyboard and screen readers without script; current leaf `aria-current=\"true\"`."],
+         "Built on details, so it works with keyboard and screen readers without script; mark the current leaf `aria-current=\"true\"`."],
     classes=[".orca-tree", ".orca-tree__leaf", ".orca-tree__meta"],
     laws=["S04", "miller"],
     uses=["chevron"],
@@ -314,7 +314,7 @@ add(Component(
     why="A titled frame tells people what the rows are before they read them, and keeps the table's actions and paging next to it (Practical UI L01, L14).",
     when=["Tables on dashboards and detail pages."],
     how=["`<section class=\"orca-table-card\">` with a panel header (title, description, actions), `.orca-table-wrap` > `table.orca-table`, then a table pager.",
-         "Numbers right-aligned with `.is-num`; `--compact` table for dense data. Empty: a no-data state in one full-width cell."],
+         "Right-align numbers with `.is-num`; use a `--compact` table for dense data. When empty, show a no-data state in one full-width cell."],
     classes=[".orca-table-card", ".orca-table", ".orca-table-wrap", ".orca-table--compact"],
     laws=["L01", "L14", "W11"],
     uses=["panel-header", "table-pager", "sortable-header"],
@@ -329,7 +329,7 @@ add(Component(
 
 add(Component(
     "property-row", "Property row", C,
-    "One editable key and value pair with a remove button, repeated to edit free-form properties.",
+    "An editable key and value pair with a remove button, repeated to edit free-form properties.",
     why="Free-form metadata is inherently variable (Tesler's law); one row per pair with Add and Remove keeps it structured and forgiving (Postel's law).",
     when=["Custom properties, labels, HTTP headers, environment values."],
     how=["`<div class=\"orca-property-rows\" id=…>` of `<div class=\"orca-property-row\" data-orca-row>` (key field, value field, remove icon button `data-orca-remove-row`).",
@@ -348,7 +348,7 @@ add(Component(
 
 add(Component(
     "activity-entry", "Activity entry", C,
-    "One change in an audit log: what happened, who did it, when, and the before and after values.",
+    "One audit-log change: what happened, who did it, when, and the before and after values.",
     why="Trust in shared data depends on knowing who changed what (Peak–end rule); showing the old value struck through beside the new one makes the change readable without comparing screens.",
     when=["Activity feeds and history tabs of records."],
     how=["`<div class=\"orca-activity\">` with the actor's avatar, `.orca-activity__head` (action badge, actor, `.orca-activity__time`), and a `<dl class=\"orca-activity__change\">` of field, `<del>` old and `<ins>` new values.",
@@ -395,7 +395,7 @@ add(Component(
     why="A peeking next item is the clue that more exists (Practical UI S06); snapping stops half-visible items.",
     when=["Rows of cards on phones; quick filters; recent items."],
     how=["`<ul class=\"orca-scroller\" tabindex=\"0\" aria-label=…>` of items (each 80% wide up to 16rem).",
-         "The scroller is focusable so keyboard users can scroll it with arrow keys."],
+         "It is focusable so keyboard users can scroll with arrow keys."],
     classes=[".orca-scroller"],
     laws=["S06", "fitts"],
     uses=["card"],
@@ -439,7 +439,7 @@ add(Component(
 
 add(Component(
     "chart-frame", "Chart frame", C,
-    "The frame every chart sits in: title, subtitle, legend, a reserved plot area, a source line and the data as a table.",
+    "The frame around every chart: title, subtitle, legend, reserved plot area, source line and a data table.",
     why="A chart is only useful with its title, units and source (Practical UI W04); reserving the plot area prevents layout jumps (Doherty), and the data table gives everyone the exact values (Postel's law).",
     when=["Every chart, whatever draws it (SVG, canvas, a charting library)."],
     how=["`<figure class=\"orca-chart-frame\">` with `.orca-chart-frame__head` (title + subtitle with the unit; actions), the legend, `.orca-chart-frame__plot` (set `--orca-ratio`), `<figcaption class=\"orca-chart-frame__caption\">` for source and time zone, and `<details><summary>Show data</summary>` with a table.",

@@ -3,7 +3,7 @@ from . import Component
 
 C = category(
     "component-actions", "Actions",
-    "Groups of actions: button groups, menus and the action sets that sit on records and rows.",
+    "Button groups, menus, and the action sets on records and rows.",
     level="component",
 )
 
@@ -77,7 +77,7 @@ add(Component(
     why="Copying exact values (keys, addresses) by hand causes errors; one click with visible confirmation is faster and certain (Doherty threshold, Tesler's law).",
     when=["IDs, API keys, addresses, links, commands."],
     how=["`<div class=\"orca-copy\"><code class=\"orca-copy__value\" id=\"v1\">…</code><button class=\"orca-button\" type=\"button\" data-orca-copy=\"v1\">{% templatetag openblock %} icon \"copy\" class=\"orca-icon--copy\" {% templatetag closeblock %}{% templatetag openblock %} icon \"check\" class=\"orca-icon--copied\" {% templatetag closeblock %}<span data-orca-copy-label>Copy</span></button></div>`.",
-         "While it says 'Copied', the copy icon turns into a check mark. The label changes to 'Copied' for 1.5 s and the change is announced. Where the clipboard is blocked, the value is selected instead."],
+         "For 1.5 s the label reads 'Copied', the copy icon becomes a check mark and the change is announced. Where the clipboard is blocked, the value is selected instead."],
     classes=[".orca-copy", ".orca-copy__value", ".orca-icon--copy", ".orca-icon--copied"],
     laws=["doherty", "tesler"],
     uses=["button", "code-text"],

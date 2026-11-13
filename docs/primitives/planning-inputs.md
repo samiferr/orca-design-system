@@ -1,6 +1,6 @@
 # Planning inputs
 
-Date, time and schedule inputs. Native pickers first: they are what people already know, on every device.
+Date, time and schedule inputs. Native pickers come first: people already know them on every device.
 
 ## Date input
 
@@ -8,19 +8,41 @@ Date, time and schedule inputs. Native pickers first: they are what people alrea
 
 A native date field (`type="date"`) with ORCA styling.
 
+### General description
+
+A form field for choosing one calendar date, usually with a pop-up calendar picker. It keeps dates in a consistent format.
+
+#### Use cases
+
+- Setting a deadline, due date or report date.
+- Booking an appointment or delivery day.
+- Filtering a list by a single day.
+
+#### When not to use it
+
+- Birth dates or dates far in the past: separate day, month and year fields are faster to type.
+- A start and end together: use a date range picker.
+
+#### Best practices
+
+- Label the field with what the date means, not with the format.
+- Set minimum and maximum dates when only some days are allowed.
+- Prefill a likely default, such as today.
+- Explain the accepted range in help text.
+
 ### When to use
 
-- Picking a single day: a deadline, a report date, a holiday.
+- Picking one day, such as a deadline, report date or holiday.
 
 ### When not to use
 
-- Dates people know by heart and type faster (birth dates): use the split date input (phase 2) or three numeric fields.
+- Dates people type faster than they pick, like birth dates: use the split date input (phase 2) or three numeric fields.
 
 ### How to use
 
 - `<input class="orca-input" type="date" id=… name=… min=… max=…>`.
-- Set `min`/`max` for allowed ranges; explain the range in help text.
-- Prefill sensible defaults (today, next working day) rather than leaving it empty (Tesler's law).
+- Set `min`/`max` for the allowed range and explain it in help text.
+- Prefill a sensible default (today, next working day) instead of leaving it empty (Tesler's law).
 - The server always receives ISO `YYYY-MM-DD`.
 
 ### Accessibility
@@ -52,6 +74,28 @@ A native date field (`type="date"`) with ORCA styling.
 
 A native time field (`type="time"`).
 
+### General description
+
+A form field for entering a time of day, in hours and minutes. Browsers show it in the user's 12 or 24-hour style.
+
+#### Use cases
+
+- Choosing a start or end time for an event.
+- Setting opening hours.
+- Picking a time for a reminder.
+
+#### When not to use it
+
+- A length of time, like 90 minutes: use a duration field.
+- A full date and time together: use a date-time field.
+
+#### Best practices
+
+- Use a sensible step, such as 15 minutes, to avoid awkward values.
+- Show the timezone when users may be in a different one.
+- Label the field clearly, for example 'Starts at'.
+- Validate that end times come after start times.
+
 ### When to use
 
 - Start and end times, reminder times, opening hours.
@@ -59,7 +103,7 @@ A native time field (`type="time"`).
 ### How to use
 
 - `<input class="orca-input" type="time" step="900">` (step in seconds: 900 = 15 minutes).
-- Show the timezone next to it with a timezone label when people may be in another zone than the place.
+- Add a timezone label when people may be in a different zone from the place.
 
 #### Example: Time with timezone
 
@@ -87,9 +131,31 @@ A native time field (`type="time"`).
 
 A native `datetime-local` field for one moment.
 
+### General description
+
+A single form field for choosing a date and a time together. It captures one exact moment without needing two separate controls.
+
+#### Use cases
+
+- Scheduling when a task or message should run.
+- Setting when a link or offer expires.
+- Recording when an incident happened.
+
+#### When not to use it
+
+- A start and end: use two fields side by side.
+- Only a date or only a time: use the simpler field.
+
+#### Best practices
+
+- State which timezone the value uses, as the field itself holds none.
+- Label it with the event, such as 'Start run at'.
+- Set limits so users cannot pick impossible moments.
+- Test on phones, where pickers differ from desktop.
+
 ### When to use
 
-- A single event moment: when a run starts, when a link expires.
+- One moment, such as when a run starts or a link expires.
 
 ### When not to use
 
@@ -119,6 +185,28 @@ A native `datetime-local` field for one moment.
 `id: duration-input` · level: primitive · source: ORCA
 
 Hours and minutes as two short numeric fields with their units.
+
+### General description
+
+A form field for entering a length of time, such as hours and minutes. Separate labelled parts make the unit clear.
+
+#### Use cases
+
+- Setting how long a shift or meeting lasts.
+- Choosing how long data is kept.
+- Setting a reminder offset, like 15 minutes before.
+
+#### When not to use it
+
+- A specific time of day: use a time field.
+- A short fixed list of lengths: use a select.
+
+#### Best practices
+
+- Show the unit next to each number.
+- Accept values like 90 minutes and tidy them into 1 h 30 min.
+- Set sensible minimum and maximum values.
+- Show the total in plain words after entry.
 
 ### When to use
 
@@ -160,6 +248,28 @@ Hours and minutes as two short numeric fields with their units.
 
 A native select of IANA timezones, grouped by region, preselected from context.
 
+### General description
+
+A dropdown for choosing a timezone, usually listed by region or city name. It makes sure times mean the same to everyone.
+
+#### Use cases
+
+- Setting a user's profile timezone.
+- Setting the timezone of a site, team or event.
+- Showing a meeting time to people in different regions.
+
+#### When not to use it
+
+- When the browser's timezone is enough: detect it instead of asking.
+- Choosing a country or language: those are separate settings.
+
+#### Best practices
+
+- Preselect a likely zone from the user's profile or browser.
+- List places by name, such as Europe/Paris, not only offsets.
+- Store the zone name, not a fixed offset, so daylight saving works.
+- Make long lists searchable.
+
 ### When to use
 
 - Setting a site's, an album's or a user's timezone.
@@ -195,6 +305,28 @@ A native select of IANA timezones, grouped by region, preselected from context.
 
 Seven square toggles for picking days of the week.
 
+### General description
+
+A row of seven buttons for choosing days of the week. People switch each day on or off in place.
+
+#### Use cases
+
+- Choosing which days a task or event repeats.
+- Setting opening days or working days.
+- Selecting days for alerts or reports.
+
+#### When not to use it
+
+- Picking one single day of the week: use a select or radio buttons.
+- Picking specific dates: use a calendar.
+
+#### Best practices
+
+- Start the week on the day the user's region uses.
+- Offer shortcuts like 'Weekdays' and 'Every day'.
+- Show selected days with more than colour alone.
+- Give each toggle its full day name for screen readers.
+
 ### When to use
 
 - Recurrence on chosen days, opening days, shift days.
@@ -207,7 +339,7 @@ Seven square toggles for picking days of the week.
 
 ### Accessibility
 
-- The visible letter is hidden from screen readers; the full day name is read.
+- Screen readers skip the visible letter and read the full day name.
 
 #### Example: Days
 
@@ -266,7 +398,29 @@ Seven square toggles for picking days of the week.
 
 `id: recurrence-select` · level: primitive · source: ORCA
 
-A select of common repeat rules with a 'Custom…' option that reveals more fields.
+A select of common repeat rules, with a 'Custom…' option that shows more fields.
+
+### General description
+
+A dropdown of common repeat patterns, like daily or weekly, with a custom option for more detailed rules.
+
+#### Use cases
+
+- Making an event or task repeat.
+- Scheduling a recurring report or export.
+- Setting up repeating bookings or reminders.
+
+#### When not to use it
+
+- A one-off event: do not show repeat options.
+- Very complex schedules only: use a dedicated schedule editor.
+
+#### Best practices
+
+- Show the actual day in options, such as 'Weekly on Thursday'.
+- Put 'Does not repeat' first as the default.
+- Reveal extra fields only when 'Custom' is chosen.
+- Let users set when the repeat ends.
 
 ### When to use
 
@@ -306,6 +460,28 @@ A select of common repeat rules with a 'Custom…' option that reveals more fiel
 `id: reminder-select` · level: primitive · source: ORCA
 
 A select of reminder offsets before an event.
+
+### General description
+
+A dropdown for choosing how long before an event a reminder is sent. It offers common lead times in one short list.
+
+#### Use cases
+
+- Reminding people before an appointment or meeting.
+- Warning ahead of a task deadline.
+- Setting alerts for bookings or renewals.
+
+#### When not to use it
+
+- Exact reminder times unrelated to an event: use a date-time field.
+- Urgent alerts that need no setup: send them directly.
+
+#### Best practices
+
+- Offer a short list of common lead times.
+- Include 'No reminder' and 'At time of event'.
+- Remember the user's last choice as the default.
+- Allow more than one reminder per event.
 
 ### When to use
 

@@ -1,0 +1,648 @@
+{
+ "form-field": {
+  "what": "A form field pairs one input with its label, hint and error message. It is the basic unit people fill in to give information.",
+  "uses": [
+   "Collecting a name, email address or number in a sign-up or settings form.",
+   "Picking one option from a dropdown inside a form.",
+   "Entering longer text, such as a message or description."
+  ],
+  "avoid": [
+   "For a single yes or no choice, use a checkbox or switch instead.",
+   "For a short list of options, use radio buttons so all choices stay visible."
+  ],
+  "practices": [
+   "Put a visible label above every input; never rely on placeholder text alone.",
+   "Show the hint before the input and the error next to it.",
+   "Say what is wrong and how to fix it in error messages.",
+   "Mark optional fields rather than required ones when most fields are required.",
+   "Use the right input type so phones show a suitable keyboard."
+  ]
+ },
+ "toggle-field": {
+  "what": "A single checkbox or switch with its label and description. It lets people turn one option on or off.",
+  "uses": [
+   "Agreeing to terms or opting in to emails.",
+   "Turning a feature on or off in settings.",
+   "Marking one yes or no answer inside a longer form."
+  ],
+  "avoid": [
+   "For picking one answer from several, use radio buttons instead.",
+   "For a choice that needs a Save button, use a checkbox rather than an instant switch."
+  ],
+  "practices": [
+   "Word the label as the result of turning it on, in positive terms.",
+   "Use a switch only when the change takes effect immediately.",
+   "Make the whole label clickable, not just the small box.",
+   "Keep descriptions short and place them under the label.",
+   "Show an error next to the control if a required box is left unticked."
+  ]
+ },
+ "choice-group": {
+  "what": "A set of radio buttons or checkboxes under one question. Radios allow one answer; checkboxes allow several.",
+  "uses": [
+   "Choosing a plan, delivery method or frequency from a few options.",
+   "Selecting several interests or notification channels.",
+   "Answering a survey question with a short list of answers."
+  ],
+  "avoid": [
+   "For a long list of options, use a dropdown or searchable picker instead.",
+   "For one on or off setting, use a single checkbox or switch."
+  ],
+  "practices": [
+   "Wrap the options in a fieldset with a legend that states the question.",
+   "Keep the list short, usually 2 to 7 options for radios.",
+   "Order options in a logical way, not at random.",
+   "Pre-select a safe default only when most people would choose it.",
+   "Show an error message for the whole group, not each option."
+  ]
+ },
+ "search-field": {
+  "what": "A text box for typing a few words to narrow down what is already on the page, with a clear button and a result count.",
+  "uses": [
+   "Filtering a table, list or menu as the person types.",
+   "Finding one item in a long settings or help list.",
+   "Narrowing results on a page without reloading it."
+  ],
+  "avoid": [
+   "For searching a whole site or large collection, use a full search form with a button.",
+   "For a short list of 5 or fewer items, no search is needed."
+  ],
+  "practices": [
+   "Label the field clearly, even when the label is visually hidden.",
+   "Show the number of results and update it as people type.",
+   "Provide a clear button to reset the filter in one click.",
+   "Wait a moment after typing stops before filtering heavy lists.",
+   "Show a helpful message when nothing matches."
+  ]
+ },
+ "search-bar": {
+  "what": "A search form with a text box and a button, sometimes with a menu to limit the search area. People submit it to see results.",
+  "uses": [
+   "Searching a whole website, shop or knowledge base.",
+   "Finding records in a large database or archive.",
+   "Searching within one category chosen from a menu."
+  ],
+  "avoid": [
+   "To narrow a list already on screen, use an instant filter field instead.",
+   "For a few items, browsing or a menu is quicker than searching."
+  ],
+  "practices": [
+   "Place it where people expect it, usually the top of the page.",
+   "Support the Enter key as well as the button.",
+   "Keep the typed query visible on the results page.",
+   "Put the query in the web address so results can be shared.",
+   "Offer help when there are no results, such as spelling tips."
+  ]
+ },
+ "table-toolbar": {
+  "what": "A row of controls above a table or list that holds search, filters, view options and actions, plus bulk actions for selected rows.",
+  "uses": [
+   "Searching and filtering a large data table.",
+   "Applying one action to many selected rows at once.",
+   "Exporting or adding records from a list page."
+  ],
+  "avoid": [
+   "For short lists with no actions, a toolbar adds clutter; leave it out.",
+   "For actions on a single row, use a row menu instead."
+  ],
+  "practices": [
+   "Group controls by purpose: finding on the left, acting on the right.",
+   "Show the number of selected rows next to the bulk actions.",
+   "Hide actions that do not apply to the current selection.",
+   "Keep the toolbar in one row on wide screens and wrap it cleanly on small ones.",
+   "Give the toolbar a label so screen readers can announce it."
+  ]
+ },
+ "multi-picker": {
+  "what": "A dropdown that lets people filter a long list and tick several items. The chosen items appear as tags that can be removed.",
+  "uses": [
+   "Assigning several people or teams to a task.",
+   "Choosing multiple categories or tags for an item.",
+   "Selecting several sites, devices or products from a long list."
+  ],
+  "avoid": [
+   "For a short list that fits on screen, use a checkbox group instead.",
+   "For picking only one item, use a select or searchable dropdown."
+  ],
+  "practices": [
+   "Add a filter box when the list has more than about 10 items.",
+   "Show chosen items as removable tags so they stay visible.",
+   "Summarize the selection in the button, such as the number chosen.",
+   "Provide Clear and Done buttons inside the list.",
+   "Make every option reachable and selectable by keyboard."
+  ]
+ },
+ "language-switcher": {
+  "what": "A control that lets people change the language of a site or app. Each language is shown in its own name.",
+  "uses": [
+   "Letting visitors switch a site between supported languages.",
+   "Setting the interface language in an account menu.",
+   "Offering translations in a footer of a public website."
+  ],
+  "avoid": [
+   "Do not guess language from location alone; offer a choice as well.",
+   "For a site in one language, leave the switcher out."
+  ],
+  "practices": [
+   "Write each language in its own language, such as Deutsch or Français.",
+   "Do not use flags, since one flag does not stand for one language.",
+   "Place it in a predictable spot, such as the header or footer.",
+   "Keep the person on the same page after switching.",
+   "Mark each option with its language code so screen readers read it correctly."
+  ]
+ },
+ "input-group": {
+  "what": "A text input joined to a fixed piece of text or a button, such as a unit, a currency sign or an action like Copy.",
+  "uses": [
+   "Entering an amount next to a currency or a unit like days or kg.",
+   "Typing a web address with a fixed prefix.",
+   "Adding a Copy or Test button right beside a value."
+  ],
+  "avoid": [
+   "For several unrelated actions, use separate buttons outside the field.",
+   "For plain values with no unit, a normal input is enough."
+  ],
+  "practices": [
+   "Show the unit or prefix beside the value so people do not guess.",
+   "Keep the attached text short.",
+   "Link the addon to the input so screen readers read both.",
+   "Use a button only for an action that directly relates to the input.",
+   "Make sure the group stays readable on narrow screens."
+  ]
+ },
+ "filter-button": {
+  "what": "A button that opens a panel of filters and shows how many are active. It keeps the page simple until filters are needed.",
+  "uses": [
+   "Narrowing a product or record list by many attributes.",
+   "Showing advanced filters that do not fit in a toolbar.",
+   "Telling people at a glance that a list is already filtered."
+  ],
+  "avoid": [
+   "For one or two simple filters, show them directly instead of hiding them.",
+   "For free-text narrowing, use a search field."
+  ],
+  "practices": [
+   "Show the number of active filters on the button.",
+   "Show active filters as removable tags outside the panel.",
+   "Offer a clear all option.",
+   "Tell the person how many results the filters give.",
+   "Announce the open or closed state to assistive technology."
+  ]
+ },
+ "dropdown-select": {
+  "what": "A button that opens a list of options, where each option can include a short description or icon.",
+  "uses": [
+   "Choosing a role and seeing what each role can do.",
+   "Picking a plan with a line explaining its limits.",
+   "Selecting an option that needs a second line to tell it apart."
+  ],
+  "avoid": [
+   "When options are plain words, use the native select; it works better everywhere.",
+   "When people must compare choices side by side, use radio buttons."
+  ],
+  "practices": [
+   "Keep the list to a manageable length, often 5 to 15 options.",
+   "Show the current choice on the button.",
+   "Support arrow keys, Enter and Escape.",
+   "Return focus to the button when the list closes.",
+   "Keep descriptions short and written in plain words."
+  ]
+ },
+ "combobox": {
+  "what": "A text box that suggests matching options as people type. The final value must be one of the suggestions.",
+  "uses": [
+   "Choosing a country, city or person from a long list.",
+   "Finding a product or record by typing part of its name.",
+   "Selecting an item when people know its name already."
+  ],
+  "avoid": [
+   "For short lists of about 15 items or fewer, use a normal select.",
+   "When any text is allowed, use a plain input with optional suggestions."
+  ],
+  "practices": [
+   "Start suggesting after one or two typed letters.",
+   "Highlight the part of each suggestion that matches the typed text.",
+   "Show no more than about 10 suggestions at a time.",
+   "Support arrow keys, Enter and Escape.",
+   "Show a clear message when nothing matches."
+  ]
+ },
+ "auto-suggest": {
+  "what": "A free text box that offers common answers from a list while still allowing anything to be typed.",
+  "uses": [
+   "Entering a tag, department or location where many answers repeat.",
+   "Speeding up typing of common values without limiting them.",
+   "Entering a job title or company name."
+  ],
+  "avoid": [
+   "When the answer must be from a fixed list, use a combobox or select.",
+   "For answers that are always different, plain input is simpler."
+  ],
+  "practices": [
+   "Put the most common suggestions first.",
+   "Keep the list reasonably short.",
+   "Do not block answers that are not in the list.",
+   "Still label the field clearly.",
+   "Check typed values on the server, just as for any input."
+  ]
+ },
+ "otp-input": {
+  "what": "A set of boxes for typing a one-time code, such as a six-digit number sent by text or email to confirm identity.",
+  "uses": [
+   "Confirming a login with two-step verification.",
+   "Verifying a phone number or email address.",
+   "Approving a sensitive action such as a payment."
+  ],
+  "avoid": [
+   "For long passwords, use a password field; codes are meant to be short and single-use.",
+   "Do not use codes where a simpler check would do."
+  ],
+  "practices": [
+   "Tell people where the code was sent and how long it lasts.",
+   "Allow pasting the whole code and browser autofill.",
+   "Offer a Send a new code option after a short wait.",
+   "Show errors that say whether the code was wrong or expired.",
+   "Use a numeric keypad on phones."
+  ]
+ },
+ "rating-input": {
+  "what": "A row of stars people select to give a score, usually from 1 to 5. It is a quick way to collect an opinion.",
+  "uses": [
+   "Rating a product, service or support conversation.",
+   "Collecting quick feedback after a task.",
+   "Letting people review a purchase or place."
+  ],
+  "avoid": [
+   "For detailed feedback, add a text box; stars alone say little.",
+   "For measuring likelihood to recommend, use a 0 to 10 scale instead."
+  ],
+  "practices": [
+   "Show the chosen value in words, such as 4 of 5.",
+   "Label each star so screen readers read the number.",
+   "Make stars large enough to tap easily.",
+   "Let people change their rating before submitting.",
+   "Make clear what the lowest and highest ratings mean."
+  ]
+ },
+ "split-date": {
+  "what": "Three separate boxes for day, month and year. People type a date they already know instead of picking it in a calendar.",
+  "uses": [
+   "Entering a birth date.",
+   "Entering a document date such as an expiry or issue date.",
+   "Any date far in the past or future."
+  ],
+  "avoid": [
+   "For dates near today, such as a booking, use a calendar date picker.",
+   "For relative dates like next week, offer shortcuts or a picker."
+  ],
+  "practices": [
+   "Label each box clearly as Day, Month and Year.",
+   "Give an example, such as 27 3 2024.",
+   "Order the boxes the way the reader's region writes dates.",
+   "Use numeric keypads on phones.",
+   "Show one error for the whole date, not three."
+  ]
+ },
+ "file-field": {
+  "what": "An area where people choose or drag files to upload. It lists the chosen files and states what is allowed.",
+  "uses": [
+   "Uploading documents, photos or a profile picture.",
+   "Importing data from a spreadsheet file.",
+   "Attaching files to a message or request."
+  ],
+  "avoid": [
+   "For tiny text, ask people to type it rather than upload a file.",
+   "For many large files, use a dedicated uploader with progress and retry."
+  ],
+  "practices": [
+   "State accepted file types and the size limit before upload.",
+   "Let people click or drag and drop.",
+   "Show the chosen file names so they can be checked.",
+   "Show progress for large uploads.",
+   "Check file type and size again on the server."
+  ]
+ },
+ "form-alert": {
+  "what": "A message at the top of a form that reports a problem not tied to one field, such as a conflict or permission error.",
+  "uses": [
+   "Showing that a save failed because of a server problem.",
+   "Warning that chosen dates clash with another record.",
+   "Explaining that the person lacks permission to submit."
+  ],
+  "avoid": [
+   "For a problem with one field, show the error next to that field.",
+   "For good news or neutral tips, use an info or success message."
+  ],
+  "practices": [
+   "Place it above the fields so it is seen first.",
+   "Say what went wrong and what to do next.",
+   "Use an error icon as well as colour.",
+   "Announce it to screen readers when it appears.",
+   "Add a summary with links when several fields are invalid."
+  ]
+ },
+ "form-actions": {
+  "what": "The row of buttons at the end of a form, with the main action first and others such as Cancel after it.",
+  "uses": [
+   "Saving or submitting a form.",
+   "Offering Cancel next to Save in a dialog.",
+   "Placing a Delete action away from the main buttons."
+  ],
+  "avoid": [
+   "Do not scatter several equal buttons through the form; keep actions together at the end.",
+   "For actions that apply instantly, such as switches, no button row is needed."
+  ],
+  "practices": [
+   "Make one primary action stand out, labelled with a verb.",
+   "Place buttons directly after the last field.",
+   "Put destructive actions apart and ask to confirm.",
+   "Keep the Cancel option easy to reach.",
+   "Stack buttons full width on small screens."
+  ]
+ },
+ "form-section": {
+  "what": "A group of related fields under a heading, with a short note about what the group is for.",
+  "uses": [
+   "Splitting a long settings page into topics.",
+   "Grouping billing, contact and account details separately.",
+   "Making a long form feel shorter."
+  ],
+  "avoid": [
+   "For a short form with a handful of fields, headings only add clutter.",
+   "For steps that must happen in order, use a multi-step form."
+  ],
+  "practices": [
+   "Give each section a clear, descriptive heading.",
+   "Group only fields that belong together.",
+   "Add a one-sentence description when the purpose is unclear.",
+   "Keep the order logical, with the most important sections first.",
+   "Use proper heading levels so screen readers can navigate."
+  ]
+ },
+ "form-stack": {
+  "what": "A layout that arranges form fields in one column, or in two columns when fields are short and closely related.",
+  "uses": [
+   "Laying out almost any form in one clear column.",
+   "Placing start and end values side by side.",
+   "Fitting many short fields into a compact admin form."
+  ],
+  "avoid": [
+   "Do not use many columns for long forms; people skip fields and lose their place.",
+   "For unrelated fields, keep one column."
+  ],
+  "practices": [
+   "Prefer one column for a single reading path.",
+   "Use two columns only for short, related pairs.",
+   "Keep consistent spacing between fields.",
+   "Limit the line width so inputs are not stretched too wide.",
+   "Fall back to one column on phones."
+  ]
+ },
+ "schedule-editor": {
+  "what": "A form control for setting weekly times, built from rows of day, start and end time that can be added or removed.",
+  "uses": [
+   "Setting opening hours for a shop or service.",
+   "Defining when a recording or alert is active.",
+   "Choosing quiet hours for notifications."
+  ],
+  "avoid": [
+   "For a single date and time, use a date and time picker.",
+   "For a repeating rule like every second Tuesday, use a recurrence form."
+  ],
+  "practices": [
+   "Offer presets such as business hours for common cases.",
+   "Let people add and remove rows easily.",
+   "Warn when rows overlap as soon as they are entered.",
+   "Show a time format people recognise.",
+   "Make each row's remove button describe which row it removes."
+  ]
+ },
+ "zone-editor": {
+  "what": "A tool for drawing shapes or lines over an image or map by clicking points, next to a list of the shapes drawn.",
+  "uses": [
+   "Marking areas of interest on a camera image.",
+   "Drawing a delivery or coverage area.",
+   "Defining regions to include or exclude on a floor plan."
+  ],
+  "avoid": [
+   "For choosing from fixed areas, use a list or select instead of drawing.",
+   "For precise measurements, offer typed coordinates instead of drawing only."
+  ],
+  "practices": [
+   "Offer undo and clear so mistakes cost little.",
+   "Show a status line saying what to do next.",
+   "Provide typed coordinate fields as an alternative to drawing.",
+   "Show a label and colour for each shape.",
+   "Store the shapes as simple data the server can check."
+  ]
+ },
+ "login-card": {
+  "what": "The sign-in form: a small panel with logo, email, password, a remember option, a sign-in button and a link to recover access.",
+  "uses": [
+   "Signing people in to an account or application.",
+   "Starting a session in an admin area.",
+   "Requesting access to a private site."
+  ],
+  "avoid": [
+   "For one-click access to a public site, avoid forcing a login.",
+   "For sign-up, use a registration form with more fields."
+  ],
+  "practices": [
+   "Keep it short: only ask for what is needed to sign in.",
+   "Allow browsers and password managers to fill in the fields.",
+   "Use a general error message that does not say which field was wrong.",
+   "Offer a clear password reset link.",
+   "Let people show the password they typed."
+  ]
+ },
+ "properties-editor": {
+  "what": "A list of key and value rows where people add their own details. It suits free-form data without a fixed structure.",
+  "uses": [
+   "Adding custom fields or labels to a record.",
+   "Editing HTTP headers or settings pairs.",
+   "Storing extra metadata that varies between items."
+  ],
+  "avoid": [
+   "For known fields, use normal form fields; they are clearer and easier to validate.",
+   "For large structured data, use an import or a dedicated editor."
+  ],
+  "practices": [
+   "Provide clear Key and Value labels on every row.",
+   "Reject duplicate keys with an error on the repeated row.",
+   "Trim extra spaces without bothering the person.",
+   "Make Add and Remove buttons easy to find and name.",
+   "Keep focus on the new row after adding it."
+  ]
+ },
+ "rich-text-editor": {
+  "what": "A text area with a small toolbar for formatting, such as bold, italic, lists and links. It produces formatted text.",
+  "uses": [
+   "Writing notes, comments or descriptions that need simple formatting.",
+   "Composing messages with links and lists.",
+   "Editing short content like a product description."
+  ],
+  "avoid": [
+   "For plain notes, use a normal text area.",
+   "For long documents or code, use a dedicated editor."
+  ],
+  "practices": [
+   "Offer only the few formatting options people really need.",
+   "Label every toolbar button and show its pressed state.",
+   "Support common keyboard shortcuts such as Ctrl+B.",
+   "Clean and sanitize the saved HTML on the server.",
+   "Keep a plain text fallback when scripts do not run."
+  ]
+ },
+ "product-item": {
+  "what": "A tile in a shop or catalogue that shows a product's picture, name, price and a main action.",
+  "uses": [
+   "Showing items in a shop grid or list.",
+   "Listing products in a catalogue or quote tool.",
+   "Displaying recommended or related products."
+  ],
+  "avoid": [
+   "For detailed comparison of specs, use a table instead of tiles.",
+   "For a single product page, use a larger detail layout."
+  ],
+  "practices": [
+   "Use a consistent image shape so tiles line up.",
+   "Make the product name a link to the details.",
+   "Show the current price clearly, with any old price marked as such.",
+   "Offer just one main action per tile.",
+   "Let long names wrap instead of cutting them off."
+  ]
+ },
+ "person-block": {
+  "what": "A small block that shows a person's picture, name and role, sometimes with a way to contact them.",
+  "uses": [
+   "Showing the owner or assignee of a task.",
+   "Listing contacts, team members or authors.",
+   "Displaying the author of an article or comment."
+  ],
+  "avoid": [
+   "For a long directory of people, use a table with search.",
+   "For full profiles, use a profile page or card."
+  ],
+  "practices": [
+   "Show the name as the person wrote it.",
+   "Add a role or title to give context.",
+   "Use initials when there is no photo.",
+   "Give contact buttons accurate descriptive names.",
+   "Keep the layout consistent wherever people appear."
+  ]
+ },
+ "post-block": {
+  "what": "A short teaser for an article that shows a headline, a few lines of text, details such as date and a small image.",
+  "uses": [
+   "Listing news, blog posts or release notes.",
+   "Showing related articles under a post.",
+   "Showing help articles in a search result list."
+  ],
+  "avoid": [
+   "For one prominent story, use a larger featured layout.",
+   "For plain lists of links, a simple text list is enough."
+  ],
+  "practices": [
+   "Start with a headline that tells what the article is about.",
+   "Keep the excerpt short and cut at a natural point.",
+   "Show the date and reading time.",
+   "Make the headline the link.",
+   "Move the image above the text on small screens."
+  ]
+ },
+ "hero": {
+  "what": "The large opening section of a landing page. It states what the product offers and gives one clear next step.",
+  "uses": [
+   "Opening a home or marketing page.",
+   "Introducing a new product or campaign.",
+   "Welcoming people at the start of onboarding."
+  ],
+  "avoid": [
+   "Do not use it in everyday application screens where people need to get work done.",
+   "Do not use several heroes on one page."
+  ],
+  "practices": [
+   "State the benefit in a short headline.",
+   "Offer one main action and at most one secondary action.",
+   "Use an image that supports the message.",
+   "Keep the text readable over any background.",
+   "Make sure the main action is visible without scrolling."
+  ]
+ },
+ "photo-actions-bar": {
+  "what": "A row of small buttons under a photo, such as like, comment and share, often with counts.",
+  "uses": [
+   "Letting people react to photos in a feed.",
+   "Offering share and save in a gallery.",
+   "Showing engagement counts under a shared image."
+  ],
+  "avoid": [
+   "For one main action on an image, a single button is clearer.",
+   "For heavy editing actions, use a toolbar or menu."
+  ],
+  "practices": [
+   "Use familiar icons so people know what each does.",
+   "Give every icon button a text name for screen readers.",
+   "Show a pressed state for toggles such as like.",
+   "Show counts beside the related action.",
+   "Make buttons big enough to tap."
+  ]
+ },
+ "video-card": {
+  "what": "A card that shows a video's latest picture with its name, status and quick actions.",
+  "uses": [
+   "Showing cameras or recordings in a dashboard grid.",
+   "Listing videos in a library.",
+   "Monitoring which live feeds are online."
+  ],
+  "avoid": [
+   "To compare many videos by data, use a table.",
+   "To watch one video in detail, use a full player view."
+  ],
+  "practices": [
+   "Show a thumbnail first so people recognise the video.",
+   "Mark the status with text as well as colour.",
+   "Show when the image was taken.",
+   "Make the whole card clickable to open the video.",
+   "Show a clear placeholder when no image is available."
+  ]
+ },
+ "story-feature": {
+  "what": "A large featured article block with a big image, headline, intro text and details. It highlights the top story on a page.",
+  "uses": [
+   "Showing the lead story on a news or blog page.",
+   "Featuring a case study or announcement.",
+   "Highlighting the newest release notes."
+  ],
+  "avoid": [
+   "For lists of many stories, use smaller teaser blocks.",
+   "Do not feature several stories at once; the highlight is lost."
+  ],
+  "practices": [
+   "Use one strong image with a helpful description.",
+   "Write a headline that tells the story.",
+   "Keep the intro to a few lines.",
+   "Show the date and reading time.",
+   "Stack image and text on small screens."
+  ]
+ },
+ "factoid": {
+  "what": "A single large number or fact with a short sentence and its source. It makes one result easy to remember.",
+  "uses": [
+   "Highlighting a key result in a report or case study.",
+   "Adding a striking statistic to a landing page.",
+   "Summarizing one finding in a story."
+  ],
+  "avoid": [
+   "For several figures together, use a grid of summary tiles.",
+   "For data that needs context over time, use a chart."
+  ],
+  "practices": [
+   "Show one number only and make it large.",
+   "Explain in a sentence what the number means.",
+   "Always give the source and date.",
+   "Use a number you can back up.",
+   "Keep text readable against the background."
+  ]
+ }
+}

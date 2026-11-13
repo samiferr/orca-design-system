@@ -3,7 +3,7 @@ from . import Pattern
 
 C = category(
     "process", "Process and status",
-    "Following a long-running job: what is done, what is happening, what failed and what to do.",
+    "Following a long-running job: what is done, what is happening, what failed and what to do next.",
     level="pattern",
 )
 
@@ -11,10 +11,10 @@ add(Pattern(
     "capture-run-progress", "Video export progress", C,
     "A running job's progress: overall bar with counts and time left, the steps, and each video's state.",
     why="Long waits feel shorter and trustworthy when people see progress, the current step and an estimate (Doherty threshold); per-item status shows exactly what failed so it can be retried (Peak–end rule).",
-    when=["Video exports, imports, bulk updates: anything that runs for more than ~10 seconds."],
+    when=["Video exports, imports, bulk updates: anything running longer than ~10 seconds."],
     how=["`<section class=\"orca-run-progress\" aria-live=\"polite\">` with progress-with-counts, steps (done, current), and `<ul class=\"orca-run-progress__cams\">` with each item's status light.",
          "Offer 'Cancel run' (confirmed) while it runs and 'Retry failed' at the end; refresh with htmx polling every few seconds, not every frame.",
-         "End with a clear result: an alert stating what was done and what failed."],
+         "End with an alert stating what was done and what failed."],
     classes=[".orca-run-progress", ".orca-run-progress__cams"],
     laws=["doherty", "peak-end", "miller"],
     uses=["progress-with-counts", "steps", "status-light", "confirm-dialog"],

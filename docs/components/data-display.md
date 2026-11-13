@@ -1,14 +1,36 @@
 # Data display
 
-Ways to present records and numbers: stat cards, lists, key/value lists, cards, tables, timelines and small charts.
+Ways to show records and numbers: stat cards, lists, cards, tables, timelines and small charts.
 
 ## Stat card
 
 `id: stat-card` · level: component · source: Tangerine
 
-One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.
+One measured value with its label, icon, change and comparison, optionally with a sparkline.
 
 Built from: `stat-label`, `delta`, `icon`, `sparkline`
+
+### General description
+
+A small panel that shows one key number with a label and often a comparison, such as the change since last week. It lets people check a metric at a glance.
+
+#### Use cases
+
+- Showing headline figures at the top of a dashboard.
+- Summarising totals, rates or durations on an overview page.
+- Linking a key number to the detailed report behind it.
+
+#### When not to use it
+
+- Comparing many values across categories; use a table or chart instead.
+- Long explanations; put them in text beside the number.
+
+#### Best practices
+
+- Make the number the largest thing on the card.
+- Put the label and the comparison period right next to the number.
+- Show units and the direction of change in words or symbols, not colour alone.
+- Limit a row to a handful of cards so each one stands out.
 
 ### When to use
 
@@ -16,12 +38,12 @@ Built from: `stat-label`, `delta`, `icon`, `sparkline`
 
 ### When not to use
 
-- More than about six cards in a row competing for attention: group them or pick the important ones.
+- More than about six cards in a row: group them or keep the important ones.
 
 ### How to use
 
-- `<div class="orca-stat-card">` with `.orca-stat-card__head` (`<span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, on no background of its own), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
-- The icon describes what is measured (people, time, videos, accuracy), never its trend or status; it is decorative because the label says it. Use one icon per card and a different one for each card of a grid. In templates, pass `icon` with each stat.
+- `<div class="orca-stat-card">` with `.orca-stat-card__head` (`<span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span>` then `orca-stat-label`: the icon sits left of the label, muted, with no background), `orca-stat-value`, then `.orca-stat-card__foot` with a delta and the comparison period; optional `{% orca_sparkline values %}`.
+- The icon shows what is measured (people, time, videos, accuracy), never trend or status; it is decorative because the label says it. Use one icon per card, different on each card of a grid. In templates, pass `icon` with each stat.
 - Make the whole card a link (`<a class="orca-stat-card">`) when it leads to the detail.
 
 #### Example: Stat cards
@@ -110,6 +132,28 @@ Properties of a record as label and value pairs.
 
 Built from: `muted-text`
 
+### General description
+
+A list of labelled facts about one item, with each name paired with its value. It makes the properties of a record quick to scan.
+
+#### Use cases
+
+- Showing the details of a record on a detail page.
+- Summarising an order, account or device in a side panel.
+- Reviewing entered information before confirming.
+
+#### When not to use it
+
+- Comparing the same fields across many records; use a table.
+- Long descriptive text; use normal paragraphs.
+
+#### Best practices
+
+- Keep labels short and consistent in wording.
+- Align labels and values so the eye follows one edge.
+- Show a clear 'Not set' instead of leaving a value blank.
+- Stack labels above values on narrow screens.
+
 ### When to use
 
 - Detail pages and side panels: a video's address, model, location.
@@ -159,6 +203,28 @@ Built from: `muted-text`
 A divided list of items with optional visual, text and end detail.
 
 Built from: `list-item`
+
+### General description
+
+A vertical set of related items shown as rows, each with a title and sometimes an image or extra detail. It is the simplest way to show a short collection.
+
+#### Use cases
+
+- Recent activity, files or members in a side panel.
+- Search results or notifications.
+- Menus of options that need a description for each choice.
+
+#### When not to use it
+
+- Comparing several attributes of many items; use a table.
+- Very long collections without paging or search; add paging, search or filters.
+
+#### Best practices
+
+- Give every row the same structure so it reads the same way.
+- Make the whole row clickable when it opens something.
+- Separate rows with thin lines or spacing, not heavy boxes.
+- Keep the most important text first in each row.
 
 ### When to use
 
@@ -216,9 +282,31 @@ One row of a list: leading visual, title and description, trailing detail; stati
 
 Built from: `avatar`, `thumbnail`, `icon`
 
+### General description
+
+A single row in a list, usually with a small visual, a title, a short description and a detail on the right. It can be plain, clickable or selected.
+
+#### Use cases
+
+- Rows in a list of people, files or messages.
+- Options in a menu that need a short description.
+- Highlighting the current choice in a list of places or items.
+
+#### When not to use it
+
+- Dense data with many columns; use a table row.
+- A group of unrelated actions; use buttons or a menu.
+
+#### Best practices
+
+- Keep rows to about one or two lines of text.
+- Make the click target the full width of the row.
+- Show the selected item with more than colour, such as a check mark.
+- Place the same kind of information in the same spot on every row.
+
 ### When to use
 
-- Inside a list; inside menus of rich options.
+- Inside a list or a menu of rich options.
 
 ### How to use
 
@@ -266,6 +354,28 @@ Built from: `avatar`, `thumbnail`, `icon`
 One event in a vertical timeline: status dot, title, time and description.
 
 Built from: `status-dot`, `time-label`
+
+### General description
+
+One event on a vertical timeline, shown with a marker, a title, a time and a short description. Stacked together, the items tell a story in order.
+
+#### Use cases
+
+- Showing the history of an order, case or record.
+- Listing the steps and results of a process run.
+- Displaying an incident or activity log.
+
+#### When not to use it
+
+- Comparing durations or overlaps between tasks; use a Gantt chart.
+- A handful of unordered facts; use a plain list.
+
+#### Best practices
+
+- Always show a time or date for each event.
+- Order entries consistently: newest first for logs, oldest first for processes.
+- Use marker colour to signal event type, with words too.
+- Keep descriptions to a line or two.
 
 ### When to use
 
@@ -324,9 +434,31 @@ Built from: `status-dot`, `time-label`
 
 `id: sortable-header` · level: component · source: Tangerine
 
-A table header that sorts the column, showing the direction with an arrow and aria-sort.
+A table header that sorts its column and shows the direction with an arrow and aria-sort.
 
 Built from: `icon`
+
+### General description
+
+A table column heading that people can select to sort the rows by that column. An arrow shows which column is sorted and in which direction.
+
+#### Use cases
+
+- Ordering a table by name, date, count or status.
+- Finding the highest or lowest values in a column.
+- Letting people reorder search or report results.
+
+#### When not to use it
+
+- Short tables of a few rows; sorting adds clutter.
+- Columns with no natural order, such as free-form notes.
+
+#### Best practices
+
+- Show the current sort direction with an arrow and a text-based state for assistive technology.
+- Sort numbers and dates from highest to latest first by default.
+- Make only the useful columns sortable.
+- Keep filters and page position when the sort changes.
 
 ### When to use
 
@@ -335,7 +467,7 @@ Built from: `icon`
 ### How to use
 
 - `<th scope="col" aria-sort="descending"><a class="orca-sort" href="?sort=-count">Count{% icon "arrow-up" %}</a></th>`; columns not sorted have no aria-sort.
-- Server-side: keep the other query parameters in the link; first click sorts the most useful way (descending for numbers and dates).
+- Server-side: keep the other query parameters in the link. First click sorts descending for numbers and dates.
 
 #### Example: Header row
 
@@ -390,9 +522,31 @@ Built from: `icon`
 
 `id: legend-item` · level: component · source: ORCA
 
-A swatch, a series name and optionally its value, keying a chart.
+A swatch, series name and optional value that key a chart.
 
 Built from: `swatch`, `chart-dot`
+
+### General description
+
+A small colour swatch beside a name that explains what a colour or line in a chart or map stands for. Together the items form a legend.
+
+#### Use cases
+
+- Naming each series in a multi-series chart.
+- Explaining colours on a map or diagram.
+- Showing values next to each category in a chart summary.
+
+#### When not to use it
+
+- Single-series charts; a clear title is enough.
+- Charts with just a few points; label the points directly.
+
+#### Best practices
+
+- Use the same colour and shape in the legend as in the chart.
+- Place the legend close to the chart.
+- Do not rely on colour alone; add shapes, patterns or direct labels.
+- Keep names short and in the same order as the chart.
 
 ### When to use
 
@@ -428,6 +582,28 @@ Built from: `swatch`, `chart-dot`
 A counting zone in a list: its swatch, name, type, count and actions.
 
 Built from: `zone-swatch`, `badge`, `row-actions`
+
+### General description
+
+A row in a list of areas drawn on a video or image, showing the area's colour, name, type, count and actions. It ties the list to the shapes on screen.
+
+#### Use cases
+
+- Listing the counting areas of a camera view.
+- Managing regions drawn on a map or floor plan.
+- Showing a count for each named area.
+
+#### When not to use it
+
+- Generic lists of records; use a standard list item.
+- Comparing many numbers per area; use a table.
+
+#### Best practices
+
+- Match the row's colour to the area shown on the image.
+- State the area type in words, not just by colour or pattern.
+- Align counts to the right with consistent number formatting.
+- Give each action a clear accessible name that includes the area.
 
 ### When to use
 
@@ -475,6 +651,28 @@ Built from: `zone-swatch`, `badge`, `row-actions`
 A counting line with people in and out, each with a direction arrow.
 
 Built from: `swatch`, `icon`, `tabular-number`
+
+### General description
+
+A row that shows how many people or objects crossed a line in each direction, with arrows for the two directions. It reports counts for each line.
+
+#### Use cases
+
+- Counting people entering and leaving a door.
+- Reporting vehicles crossing a road line.
+- Comparing in and out totals for each entrance.
+
+#### When not to use it
+
+- Counts for areas rather than lines; use an area or zone summary.
+- Trends over time; use a chart.
+
+#### Best practices
+
+- Show direction with arrows and words, not colour alone.
+- Use aligned digits so numbers line up in a list.
+- Label each line with a meaningful name.
+- Keep the same order of in and out on every row.
 
 ### When to use
 
@@ -535,6 +733,28 @@ An image or avatar beside a block of text.
 
 Built from: `thumbnail`, `avatar`
 
+### General description
+
+An image, avatar or icon placed beside a block of text. The picture helps people recognise the item before they read.
+
+#### Use cases
+
+- Comments and messages with the author's avatar.
+- Search results or product summaries with a thumbnail.
+- Notifications with an icon and short text.
+
+#### When not to use it
+
+- Large hero images; use a card with a full-width image.
+- Text-only content; use a plain list.
+
+#### Best practices
+
+- Keep the image size the same across items.
+- Give the image empty alt text when the text already names the thing.
+- Align the picture to the top or centre consistently.
+- Keep the text short enough to avoid wrapping around the picture.
+
 ### When to use
 
 - Comments, notifications, search results, people and product summaries.
@@ -571,6 +791,28 @@ Built from: `thumbnail`, `avatar`
 A container for one object: optional media, body and footer. Outlined (default), elevated or filled.
 
 Built from: `card-kicker`, `card-title`, `card-meta`
+
+### General description
+
+A bordered container that groups the information and actions about one item, such as an image, a title, details and a footer. Cards sit well in grids.
+
+#### Use cases
+
+- Browsing collections such as products, projects or reports.
+- Summarising an item with a picture and key facts.
+- Presenting a set of options side by side.
+
+#### When not to use it
+
+- Wrapping every section of a page; use spacing and headings.
+- Comparing many attributes across items; use a table.
+
+#### Best practices
+
+- Make each card about one thing.
+- Keep the same content order on every card in a set.
+- Give the title the most visual weight.
+- Keep cards in a grid the same height and width for easy scanning.
 
 ### When to use
 
@@ -638,6 +880,28 @@ The bottom strip of a card for status and actions.
 
 Built from: `status-dot`, `icon-button`
 
+### General description
+
+The bottom strip of a card that holds its status and its actions. Keeping them in one place makes every card behave the same way.
+
+#### Use cases
+
+- Showing an item's status, such as online or draft.
+- Adding one or two quick actions to a card.
+- Holding a small menu of more actions.
+
+#### When not to use it
+
+- Many actions on a card; move them to the item's own page.
+- Essential content; keep that in the card body.
+
+#### Best practices
+
+- Put the status on the left and actions on the right.
+- Limit actions to one or two so the footer stays clear.
+- Use clear labels or accessible names for icon buttons.
+- Keep the footer in the same position on all cards.
+
 ### When to use
 
 - Cards with a status or one or two actions.
@@ -684,6 +948,28 @@ Built from: `status-dot`, `icon-button`
 A card whose whole area opens the object, built with one real link on the title.
 
 Built from: `card`
+
+### General description
+
+A card where the whole area can be clicked to open the item it describes. It gives people a large target while exposing just one link to assistive technology.
+
+#### Use cases
+
+- Cards that open a detail page, such as articles or projects.
+- Grids of places, products or reports.
+- Mobile-friendly lists where a big tap target helps.
+
+#### When not to use it
+
+- Cards with several equal actions; use a normal card with buttons.
+- Cards that contain other links; nesting links causes errors.
+
+#### Best practices
+
+- Put one clear link on the card's title.
+- Never place a link inside another link.
+- Keep secondary controls reachable and above the main link area.
+- Show a clear hover and focus state across the whole card.
 
 ### When to use
 
@@ -742,6 +1028,29 @@ Built from: `card`
 A stack of sections that open and close, built on details and summary.
 
 Built from: `chevron`
+
+### General description
+
+A stack of headings that each open and close a section of content. People see all topics first and open only what they need.
+
+#### Use cases
+
+- Frequently asked questions.
+- Advanced settings or optional details.
+- Long pages with grouped information, especially on small screens.
+
+#### When not to use it
+
+- Content most people need; show it directly.
+- Sequential steps in a process; use a step indicator.
+- Navigation between pages; use a menu.
+
+#### Best practices
+
+- Write headings as the topic or question people look for.
+- Use a clear marker, such as an arrow, to show it can open.
+- Allow several sections to be open at once.
+- Keep panel content short and focused.
 
 ### When to use
 
@@ -802,6 +1111,28 @@ The steps of a process with done, current and upcoming markers.
 
 Built from: `step-marker`
 
+### General description
+
+A row or column of numbered stages that shows how far someone has got in a multi-step task. Done, current and upcoming steps look different.
+
+#### Use cases
+
+- Setup or onboarding flows.
+- Multi-page forms such as checkout.
+- Showing progress in a process with a fixed order.
+
+#### When not to use it
+
+- Tasks with one or two steps; just do the task.
+- Free-order sections; use tabs or an accordion.
+
+#### Best practices
+
+- Keep to about three to six steps.
+- Name each step with a short verb or noun phrase.
+- Show done, current and upcoming states with text or icons, not colour alone.
+- Let people go back to completed steps.
+
 ### When to use
 
 - Setup flows and multi-step forms of 3 to 6 steps.
@@ -809,7 +1140,7 @@ Built from: `step-marker`
 ### How to use
 
 - `<ol class="orca-steps">` of `.orca-steps__item` (`--done` or `aria-current="step"`) each with a step marker and `.orca-steps__title` (+ `__desc`).
-- Done steps may link back for review. `--vertical` for side panels; on phones descriptions hide.
+- Done steps may link back for review. `--vertical` for side panels; descriptions hide on phones.
 
 #### Example: Setup steps
 
@@ -850,6 +1181,28 @@ A hierarchy of items that expand and collapse: sites, buildings, videos.
 
 Built from: `chevron`
 
+### General description
+
+A hierarchy of items that people can expand and collapse, like folders within folders. It shows structure and hides depth until needed.
+
+#### Use cases
+
+- Browsing folders, locations or categories.
+- Showing an organisation or site structure.
+- Choosing an item from nested groups.
+
+#### When not to use it
+
+- Flat lists; use a plain list.
+- Main site navigation with only a few levels; use a menu.
+
+#### Best practices
+
+- Indent child items clearly.
+- Support keyboard use with arrow keys and Enter.
+- Show counts or hints on branches so people know what is inside.
+- Mark the current item and keep it visible.
+
 ### When to use
 
 - Browsing a hierarchy of objects, such as locations or folders.
@@ -861,7 +1214,7 @@ Built from: `chevron`
 ### How to use
 
 - `<ul class="orca-tree">` with `<li><details><summary>` for branches and `.orca-tree__leaf` for leaves; `.orca-tree__meta` for counts.
-- Built on details, so it works with the keyboard and screen readers without script; current leaf `aria-current="true"`.
+- Built on details, so it works with keyboard and screen readers without script; mark the current leaf `aria-current="true"`.
 
 #### Example: Sites
 
@@ -937,6 +1290,28 @@ Overlapping avatars of the people involved, with '+N' for the rest.
 
 Built from: `avatar`
 
+### General description
+
+A cluster of overlapping profile pictures showing the people involved with something, with a count for the rest. It shows who is involved without listing everyone.
+
+#### Use cases
+
+- Showing assignees or participants on a task card.
+- Displaying members of a team or project.
+- Showing who is attending an event.
+
+#### When not to use it
+
+- When people need to see every name; use a full list.
+- Showing a single person; use one avatar with the name.
+
+#### Best practices
+
+- Show only a few avatars and a '+N' count for the rest.
+- Give each person a text name for assistive technology.
+- Link the group to the full list of people.
+- Keep avatar sizes the same and overlap small enough to see each face.
+
 ### When to use
 
 - Assignees, attendees, members on cards and headers.
@@ -981,6 +1356,28 @@ A panel holding a titled table and its pager.
 
 Built from: `panel-header`, `table-pager`, `sortable-header`
 
+### General description
+
+A framed panel that holds a titled table together with its actions and page controls. The frame tells people what the rows are before they read them.
+
+#### Use cases
+
+- Showing a top-ten or recent-items table on a dashboard.
+- Listing related records on a detail page.
+- Giving a table its own title, description and links.
+
+#### When not to use it
+
+- A table with no title or context; a plain table may be enough.
+- A table you can't use on a phone; use a list or cards.
+
+#### Best practices
+
+- Give the table a clear title and a short description.
+- Right-align numbers and keep units in the column heading.
+- Put page controls and actions close to the table.
+- Show a helpful message when there is no data.
+
 ### When to use
 
 - Tables on dashboards and detail pages.
@@ -988,7 +1385,7 @@ Built from: `panel-header`, `table-pager`, `sortable-header`
 ### How to use
 
 - `<section class="orca-table-card">` with a panel header (title, description, actions), `.orca-table-wrap` > `table.orca-table`, then a table pager.
-- Numbers right-aligned with `.is-num`; `--compact` table for dense data. Empty: a no-data state in one full-width cell.
+- Right-align numbers with `.is-num`; use a `--compact` table for dense data. When empty, show a no-data state in one full-width cell.
 
 #### Example: Table card
 
@@ -1057,9 +1454,31 @@ Built from: `panel-header`, `table-pager`, `sortable-header`
 
 `id: property-row` · level: component · source: ORCA
 
-One editable key and value pair with a remove button, repeated to edit free-form properties.
+An editable key and value pair with a remove button, repeated to edit free-form properties.
 
 Built from: `text-input`, `icon-button`, `label`
+
+### General description
+
+A row with an editable name and value and a remove button, repeated so people can add their own custom fields. It handles lists that vary in length.
+
+#### Use cases
+
+- Editing custom properties or labels.
+- Adding request headers or environment values.
+- Entering metadata with no fixed set of fields.
+
+#### When not to use it
+
+- Known fixed fields; use ordinary form fields.
+- Choosing from a set of allowed values; use select or checkboxes.
+
+#### Best practices
+
+- Give an Add button that is easy to find and clear.
+- Name each remove button after the row, such as 'Remove property site-code'.
+- Label both fields, even if the labels repeat.
+- Check for empty or duplicate names before saving.
 
 ### When to use
 
@@ -1158,9 +1577,31 @@ def edit_chapters(request, pk):
 
 `id: activity-entry` · level: component · source: ORCA
 
-One change in an audit log: what happened, who did it, when, and the before and after values.
+One audit-log change: what happened, who did it, when, and the before and after values.
 
 Built from: `avatar`, `badge`, `time-label`
+
+### General description
+
+One line in a change history that states what happened, who did it, when, and how a value changed. It builds trust by showing who changed what.
+
+#### Use cases
+
+- Audit logs for shared records.
+- History tabs on a record or setting.
+- Activity feeds of recent changes by a team.
+
+#### When not to use it
+
+- Real-time chat or comments; use a conversation layout.
+- Long-term reporting; use a report with filters.
+
+#### Best practices
+
+- Show who made the change and when.
+- Show old and new values side by side.
+- Use exact times in logs and relative times in feeds.
+- Keep entries short and consistent in structure.
 
 ### When to use
 
@@ -1201,6 +1642,28 @@ Built from: `avatar`, `badge`, `time-label`
 One slide at a time with previous and next buttons, dots and a count.
 
 Built from: `carousel-dot`, `icon-button`, `media-frame`
+
+### General description
+
+A set of items shown one at a time with controls to move forward and back. It fits several related images into a small space.
+
+#### Use cases
+
+- Photo galleries for a product or event.
+- Browsing a short series of related snapshots.
+- Showing screenshots in a small area on phones.
+
+#### When not to use it
+
+- Important content people must not miss; show it on the page.
+- Long collections; use a grid or list.
+
+#### Best practices
+
+- Show previous and next buttons plus a position count.
+- Do not advance slides automatically.
+- Give every image its own text description.
+- Support swiping on touch and arrow keys on keyboards.
 
 ### When to use
 
@@ -1270,6 +1733,28 @@ A horizontal row that scrolls and snaps, showing part of the next item.
 
 Built from: `card`
 
+### General description
+
+A horizontal row of items that scrolls sideways and snaps into place, with part of the next item showing. The partly visible item hints that there is more.
+
+#### Use cases
+
+- Rows of cards on phones.
+- Quick filters or tags in a single line.
+- Recently viewed items.
+
+#### When not to use it
+
+- Content people must see in full; use a wrapped grid.
+- Long lists to scan or compare; use a vertical list.
+
+#### Best practices
+
+- Let the next item peek into view to signal more.
+- Make the row reachable and scrollable by keyboard.
+- Snap to items so none stops half way.
+- Do not hide essential actions off-screen.
+
 ### When to use
 
 - Rows of cards on phones; quick filters; recent items.
@@ -1277,7 +1762,7 @@ Built from: `card`
 ### How to use
 
 - `<ul class="orca-scroller" tabindex="0" aria-label=…>` of items (each 80% wide up to 16rem).
-- The scroller is focusable so keyboard users can scroll it with arrow keys.
+- It is focusable so keyboard users can scroll with arrow keys.
 
 #### Example: Scroller
 
@@ -1319,6 +1804,28 @@ Built from: `card`
 A tiny trend line without axes, ending with a dot on the latest value.
 
 Built from: `stat-value`
+
+### General description
+
+A very small line chart with no axes that shows how a value has changed over time. It adds trend context to a number.
+
+#### Use cases
+
+- Showing a trend next to a key number.
+- Adding a small chart in a table cell.
+- Summarising many series in a compact overview.
+
+#### When not to use it
+
+- When exact values matter; use a full chart with axes.
+- Comparing many categories; use a bar chart.
+
+#### Best practices
+
+- Pair it with the number it summarises.
+- Add a short text description for screen readers.
+- Mark the latest value, for example with a dot.
+- Keep the scale and time span the same across a set of rows.
 
 ### When to use
 
@@ -1374,6 +1881,29 @@ A ring of up to about five shares with the total in the middle and a legend with
 
 Built from: `legend-item`
 
+### General description
+
+A ring split into segments that shows how parts make up a whole, with the total often in the middle. It works best with only a few parts.
+
+#### Use cases
+
+- Showing a share of visitors by source.
+- Showing a status breakdown of alerts or tasks.
+- Displaying how a total divides between a few categories.
+
+#### When not to use it
+
+- More than about five parts; use a bar chart.
+- Comparing similar-sized shares precisely; use bars.
+- Showing change over time; use a line chart.
+
+#### Best practices
+
+- Limit the ring to two to five segments.
+- Add a legend with names and exact values.
+- Do not rely on colour alone to tell segments apart.
+- Show the total in the centre.
+
 ### When to use
 
 - 2 to 5 shares of one total: visitors by entrance, alerts by type.
@@ -1419,9 +1949,31 @@ ctx["by_album"] = list(Video.objects.values_list("album__title").annotate(n=Coun
 
 `id: chart-frame` · level: component · source: ORCA
 
-The frame every chart sits in: title, subtitle, legend, a reserved plot area, a source line and the data as a table.
+The frame around every chart: title, subtitle, legend, reserved plot area, source line and a data table.
 
 Built from: `legend-item`, `no-data-state`, `panel-title`
+
+### General description
+
+A consistent wrapper around a chart that gives it a title, subtitle, legend, source note and a text version of its data. It helps people read and trust the chart.
+
+#### Use cases
+
+- Wrapping any chart on a dashboard or report.
+- Adding units, source and time zone to a chart.
+- Offering the chart's data as a table for exact values.
+
+#### When not to use it
+
+- Decorative images with no data; use a plain figure.
+- A single number; use a stat card.
+
+#### Best practices
+
+- State what is measured, the unit and the period in the title or subtitle.
+- Reserve the chart's space so the page does not jump while it loads.
+- Name the source and update time.
+- Offer the data as a table for those who cannot read the chart.
 
 ### When to use
 
@@ -1485,9 +2037,31 @@ Built from: `legend-item`, `no-data-state`, `panel-title`
 
 `id: big-number` · level: component · source: ORCA
 
-One large figure with the statement it supports and where it comes from.
+One large figure with its statement and source.
 
 Built from: `stat-value`, `small-text`
+
+### General description
+
+One large figure with a short sentence and its source. It makes a single fact stand out.
+
+#### Use cases
+
+- Highlighting a key statistic in an article.
+- Showing a live count next to a video or chart.
+- Summarising a headline result in a report.
+
+#### When not to use it
+
+- Comparing several numbers; use a row of stat cards or a table.
+- Numbers without context; add what they measure.
+
+#### Best practices
+
+- Say what the number measures right beside it.
+- Name the source and date.
+- Write the sign, thousands separators and unit.
+- Use it for only one or two key facts per page.
 
 ### When to use
 
@@ -1500,7 +2074,7 @@ Built from: `stat-value`, `small-text`
 ### How to use
 
 - `<figure class="orca-factoid"><span class="orca-factoid__number">−34%</span><figcaption><p class="orca-factoid__text">…</p><p class="orca-factoid__source">…</p></figcaption></figure>`.
-- Numbers as digits with separators and the sign written (W11).
+- Write digits with separators and the sign (W11).
 
 #### Example: Big number
 
@@ -1526,9 +2100,31 @@ Built from: `stat-value`, `small-text`
 
 `id: summary-tile` · level: component · source: ORCA
 
-A count with its status word, as a link that filters the list to that status.
+A count and status word, as a link that filters the list to that status.
 
 Built from: `stat-value`, `status-dot`
+
+### General description
+
+A small tile showing a count and a status, such as '3 offline'. Clicking it filters the list below to those items.
+
+#### Use cases
+
+- Overview of how many records have each status.
+- Quick filters above a table or list.
+- Dashboards that show what needs attention.
+
+#### When not to use it
+
+- Showing trends over time; use a chart.
+- Counts that do nothing when clicked, if there are many; use plain stat cards.
+
+#### Best practices
+
+- Pair status colour with a word.
+- Show which filter is active.
+- Keep counts up to date after changes.
+- Make tiles large enough to click or tap easily.
 
 ### When to use
 
@@ -1563,6 +2159,28 @@ Built from: `stat-value`, `status-dot`
 One labelled row of heat-map cells, each with its value printed.
 
 Built from: `heat-cell`
+
+### General description
+
+One row of a heat map, with a label and coloured cells where shade shows size. It lets people compare values along a line.
+
+#### Use cases
+
+- Busy hours by weekday.
+- Availability or capacity grids.
+- Activity over time per resource.
+
+#### When not to use it
+
+- Reading exact values only; use a table.
+- Showing trends in a single series; use a line chart.
+
+#### Best practices
+
+- Print the value in each cell as well as the shade.
+- Label every row and column.
+- Use a single colour scale from light to dark.
+- Keep the shade steps easy to tell apart.
 
 ### When to use
 
@@ -1606,6 +2224,28 @@ Built from: `heat-cell`
 A board column's title with its card count and, when set, its limit.
 
 Built from: `badge`
+
+### General description
+
+The title of a column in a board of cards, with a count of items and sometimes a limit. It shows where work is piling up.
+
+#### Use cases
+
+- Kanban boards with stages like To do and Done.
+- Grouped lists with a count per group.
+- Boards that limit work in progress.
+
+#### When not to use it
+
+- Plain tables; use column headings with sorting instead.
+- Very many columns; filter or group differently.
+
+#### Best practices
+
+- Show the number of cards in each column.
+- Show the limit and flag clearly when it is exceeded.
+- Keep titles short.
+- Do not rely on colour alone to show the limit is exceeded.
 
 ### When to use
 

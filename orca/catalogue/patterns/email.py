@@ -3,13 +3,13 @@ from . import Pattern
 
 C = category(
     "email", "Email",
-    "The frame every transactional email is written in: brand bar, title, text, one action, footer.",
+    "The layout for every transactional email: brand bar, title, text, one action, footer.",
     level="pattern",
 )
 
 add(Pattern(
     "email-frame", "Email frame", C,
-    "A table-based, inline-styled email layout in the brand's colours with one action and a copyable link.",
+    "A table-based email layout with inline styles in the brand's colours, one action and a copyable link.",
     why="Email clients ignore CSS variables and most stylesheets, so ORCA computes the colours and writes them inline (Postel's law: work everywhere). One clear action, with the link also printed, works even when buttons are blocked (Peak–end rule).",
     when=["Every transactional email: welcome, password reset, alert, report."],
     avoid=["Marketing newsletters with many sections: use a dedicated email tool."],

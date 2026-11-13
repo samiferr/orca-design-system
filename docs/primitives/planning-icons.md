@@ -1,6 +1,6 @@
 # Planning icons
 
-Icons for time and scheduling ideas, drawn by ORCA on the same 16px grid as the rest of the set.
+Time and scheduling icons, on the same 16px grid as the rest of the set.
 
 ## Planning icons
 
@@ -8,18 +8,40 @@ Icons for time and scheduling ideas, drawn by ORCA on the same 16px grid as the 
 
 calendar, clock, repeat, bell (notifications), alarm, timer, hourglass, flag, pin, calendar-plus, today.
 
+### General description
+
+A set of small pictures for time and scheduling ideas, such as calendar, clock, repeat, reminder and deadline.
+
+#### Use cases
+
+- Labelling date and time fields and buttons.
+- Marking reminders, repeats and deadlines.
+- Adding quick cues in calendars and task lists.
+
+#### When not to use it
+
+- Replacing a clear word when meaning could be missed.
+- Decoration with no meaning.
+
+#### Best practices
+
+- Use one icon for one idea everywhere.
+- Pair icons with words where space allows.
+- Give icon-only buttons an accessible name.
+- Keep size and weight consistent.
+
 ### When to use
 
 - calendar: date fields and date navigation · clock: times and durations · repeat: recurring items · bell/alarm: reminders · timer/hourglass: countdowns and waits · flag: deadlines · pin: pinned dates · calendar-plus: add event · today: jump to today.
 
 ### When not to use
 
-- Using a planning icon without its word, except in icon buttons with an aria-label.
+- An icon without its word, except in icon buttons with an aria-label.
 
 ### How to use
 
 - `{% icon "calendar" %}` etc. Aliases: `bell` → notifications, `date-pin` → pin, `calendar-today` → today.
-- 'Today' buttons should show the word 'Today'; the icon is optional.
+- Today buttons show the word 'Today'; the icon is optional.
 
 #### Example: Planning glyphs
 

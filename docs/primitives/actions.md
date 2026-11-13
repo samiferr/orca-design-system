@@ -6,11 +6,34 @@ Things people press. One primary action per screen; everything else is quieter.
 
 `id: button` · level: primitive · source: Tangerine
 
-A command. Variants express importance: primary, secondary (default), ghost, link, plus brand, danger, neutral, elevated and outlines.
+A command. Variants show importance: primary, secondary (default), ghost, link, plus brand, danger, neutral, elevated and outlines.
+
+### General description
+
+A control that triggers an action when pressed, such as saving a form or opening a dialog. Its style shows how important the action is.
+
+#### Use cases
+
+- Submitting forms and saving changes.
+- Opening dialogs and starting actions.
+- Confirming or cancelling a decision.
+
+#### When not to use it
+
+- Moving to another page: use a link.
+- Several equally strong buttons on one screen: pick one primary action.
+
+#### Best practices
+
+- Start labels with a verb and name the result, such as 'Save image'.
+- Use one primary button per screen.
+- Make buttons at least 44 pixels tall on touch screens.
+- Show a busy state during slow actions.
+- Show disabled state with a clear reason.
 
 ### When to use
 
-- `orca-button--primary`: the one main action of the screen or form (Save, Add image).
+- `orca-button--primary`: the one main action of a screen or form (Save, Add image).
 - default (no modifier): secondary actions and equal alternatives (Cancel, Export).
 - `--ghost`: low-priority or repeated actions in toolbars and rows.
 - `--danger`: only to confirm a destructive action inside a confirm dialog.
@@ -29,15 +52,15 @@ A command. Variants express importance: primary, secondary (default), ghost, lin
 ### How to use
 
 - `<button class="orca-button orca-button--primary" type="submit">Save image</button>`. Always set `type`.
-- Label: verb + object, one to three words, sentence case (B10).
+- Label: verb + object, 1 to 3 words, sentence case (B10).
 - Order: most important first, left to right; stack full width on phones (B08).
 - Icon + label: put `{% icon %}` before the text; the icon is decorative.
 - Busy: set `aria-busy="true"`, disable, and prepend `<span class="orca-spinner orca-spinner--sm"></span>`.
-- Aliases kept from earlier systems: positive = primary, negative = danger, base = ghost, secondary = default.
+- Old aliases still work: positive = primary, negative = danger, base = ghost, secondary = default.
 
 ### Accessibility
 
-- Focus ring is drawn inside the button; on filled variants it uses the on-fill colour so it shows.
+- The focus ring is drawn inside the button; on filled variants it uses the on-fill colour so it stays visible.
 - Disabled buttons cannot be focused: explain why nearby or keep the button enabled and validate on press (B06, B07).
 
 #### Example: Weights
@@ -94,11 +117,33 @@ A command. Variants express importance: primary, secondary (default), ghost, lin
 
 Size modifiers: sm, dense, default, lg, xl, plus block (full width) and icon-only.
 
+### General description
+
+Different heights and widths for buttons, such as small, regular and large, chosen to fit the place and the device where they appear.
+
+#### Use cases
+
+- Using compact buttons in tables and toolbars.
+- Using large buttons for touch screens and main phone actions.
+- Making a full-width button at the bottom of a form.
+
+#### When not to use it
+
+- Showing importance: change the button style, not its size.
+- Mixing many sizes in one row: choose one size for the group.
+
+#### Best practices
+
+- Keep the same size for buttons in a row.
+- Make touch targets at least 44 pixels.
+- Match button height to nearby fields.
+- Add an accessible name to icon-only buttons.
+
 ### When to use
 
-- `--sm` inside table rows; `--dense` in top bars and filter bars; default elsewhere; `--lg`/`--xl` for touch-first and phone primary actions.
+- `--sm` in table rows; `--dense` in top bars and filter bars; default elsewhere; `--lg`/`--xl` for touch-first and phone primary actions.
 - `--block` for the primary action at the bottom of a phone form.
-- `--icon-only` for a square button with just an icon (prefer `icon-button`).
+- `--icon-only` for a square button with only an icon (prefer `icon-button`).
 
 ### When not to use
 
@@ -145,6 +190,28 @@ Size modifiers: sm, dense, default, lg, xl, plus block (full width) and icon-onl
 
 A text-styled button or link for the least important actions.
 
+### General description
+
+A button or link drawn as plain text for low-priority actions, such as 'Clear filters' or 'Show more', that should not compete with main buttons.
+
+#### Use cases
+
+- Clearing filters or resetting a form.
+- Showing more or less content.
+- Linking to related pages within a sentence.
+
+#### When not to use it
+
+- The main action of a screen: use a primary button.
+- Actions that need strong emphasis, such as deleting: use a button with clear styling.
+
+#### Best practices
+
+- Underline or style it so it looks clickable.
+- Name the result, never 'click here'.
+- Use a real link for navigation and a button for actions.
+- Keep the text short.
+
 ### When to use
 
 - 'Show more', 'Clear filters', 'Edit' inside a sentence or summary; secondary navigation like 'Back to images'.
@@ -181,16 +248,38 @@ A text-styled button or link for the least important actions.
 
 `id: pin-button` · level: primitive · source: Tangerine
 
-A toggle that pins an item to the top of a list or to the dashboard.
+A toggle that pins an item to the top of a list or the dashboard.
+
+### General description
+
+A toggle button that pins an item so it stays at the top of a list or on a dashboard. Pressing it again removes the pin.
+
+#### Use cases
+
+- Keeping favourite items at the top of a list.
+- Adding a report or album to a dashboard.
+- Marking items for quick access.
+
+#### When not to use it
+
+- Marking a one-off choice for a bulk action: use a checkbox.
+- Rating or liking content: use a star or heart control.
+
+#### Best practices
+
+- Show pinned and unpinned states clearly.
+- Name the item in the accessible label, such as 'Pin Entrance A'.
+- Save the state on the server.
+- Update the label when the state changes.
 
 ### When to use
 
-- Lists where a few items are used much more than others (albums, reports).
+- Lists where a few items are used far more than the rest (albums, reports).
 
 ### How to use
 
 - `<button class="orca-icon-button orca-pin" type="button" aria-pressed="false" aria-label="Pin Entrance A" data-orca-toggle data-orca-label-on="Unpin Entrance A" data-orca-label-off="Pin Entrance A">{% icon "pin" %}</button>`.
-- Persist the state on the server; `data-orca-toggle` only flips the pressed state in the page.
+- Save the state on the server; `data-orca-toggle` only flips the pressed state in the page.
 
 ### Accessibility
 
@@ -220,7 +309,29 @@ A toggle that pins an item to the top of a list or to the dashboard.
 
 `id: email-button` · level: primitive · source: Tangerine
 
-A mailto link styled as a button, with the address shown as a fallback.
+A mailto link styled as a button, with the address shown beside it.
+
+### General description
+
+A link that opens the user's email app with the recipient, subject and body filled in, styled as a button.
+
+#### Use cases
+
+- Contacting support or sales.
+- Sending a link or report by email.
+- Replying to an alert or notice.
+
+#### When not to use it
+
+- Forms that collect detailed messages: use a contact form.
+- Users without a mail app: always show the address as well.
+
+#### Best practices
+
+- Show the email address beside the button.
+- Set a helpful subject line.
+- Encode special characters in the link.
+- Label it with what will happen, such as 'Email support'.
 
 ### When to use
 
@@ -257,6 +368,28 @@ A mailto link styled as a button, with the address shown as a fallback.
 
 A button that stays pressed to show an on state.
 
+### General description
+
+A button that stays pressed to show something is on and pops back when pressed again, used to switch a mode or a display option.
+
+#### Use cases
+
+- Turning toolbar options on or off, such as grid lines or bold.
+- Switching a live view or mute on and off.
+- Filtering a list with an on-off chip.
+
+#### When not to use it
+
+- Settings that are saved and applied later: use a switch.
+- Choosing one option from several: use radio buttons or a segmented control.
+
+#### Best practices
+
+- Keep the label the same in both states.
+- Show the pressed state with more than colour.
+- Tell assistive tools the pressed state.
+- Make the change take effect right away.
+
 ### When to use
 
 - Toolbar modes: show grid, bold, live view on/off, mute.
@@ -269,11 +402,11 @@ A button that stays pressed to show an on state.
 ### How to use
 
 - `<button class="orca-button" type="button" aria-pressed="false" data-orca-toggle>`.
-- Keep the label constant ('Show grid'); the pressed state says whether it is on.
+- Keep the label fixed ('Show grid'); the pressed state shows whether it is on.
 
 ### Accessibility
 
-- Do not change the label when pressed unless you remove aria-pressed (the two together are confusing).
+- Do not change the label when pressed unless you remove aria-pressed; both together confuse.
 
 #### Example: Toggle
 
@@ -298,11 +431,33 @@ A button that stays pressed to show an on state.
 
 `id: icon-button` · level: primitive · source: Tangerine
 
-A square button with a single 16px icon and an accessible name. Quiet, outlined, accent and neutral-fill variants.
+A square button with one 16px icon and an accessible name. Quiet, outlined, accent and neutral-fill variants.
+
+### General description
+
+A button that shows only an icon, used for common actions such as close, search or more options, when space is limited.
+
+#### Use cases
+
+- Closing dialogs and panels.
+- Providing toolbar actions such as refresh or edit.
+- Opening an overflow menu.
+
+#### When not to use it
+
+- Actions with an unfamiliar icon: use a text button.
+- Destructive actions without confirmation: add a confirm step.
+
+#### Best practices
+
+- Give every icon button an accessible name.
+- Use widely known icons.
+- Make the target at least 44 pixels on touch.
+- Add a tooltip when the meaning may be unclear.
 
 ### When to use
 
-- Close, more actions, refresh, pin, previous/next, toolbar actions people use often.
+- Close, more actions, refresh, pin, previous/next and other often-used toolbar actions.
 
 ### When not to use
 
@@ -313,7 +468,7 @@ A square button with a single 16px icon and an accessible name. Quiet, outlined,
 
 - `<button class="orca-icon-button" type="button" aria-label="Close">{% icon "close" %}</button>`.
 - Variants: default quiet, `--outlined`, `--accent`, `--neutral`. Sizes: `--sm`, `--dense`, `--lg`.
-- Add a visible tooltip with the same text when the meaning might be unclear (tooltip: phase 2).
+- Add a visible tooltip with the same text when the meaning may be unclear (tooltip: phase 2).
 
 ### Accessibility
 
@@ -355,7 +510,29 @@ A square button with a single 16px icon and an accessible name. Quiet, outlined,
 
 `id: fab` · level: primitive · source: ORCA
 
-A large floating button for the one creation action of a phone screen.
+A large floating button for a phone screen's one create action.
+
+### General description
+
+A large round or pill-shaped button that floats above the page, usually at the bottom right of a phone screen, for the main action.
+
+#### Use cases
+
+- Creating a new item on a mobile list screen.
+- Starting the main task of a mobile app.
+- Keeping the primary action in reach while scrolling.
+
+#### When not to use it
+
+- Desktop screens: put the main action in the page header.
+- Screens with several equal actions: use a regular toolbar.
+
+#### Best practices
+
+- Use it for one primary action only.
+- Prefer an icon with a text label.
+- Leave space so it does not cover content.
+- Give icon-only versions an accessible name.
 
 ### When to use
 
@@ -364,13 +541,13 @@ A large floating button for the one creation action of a phone screen.
 ### When not to use
 
 - Desktop layouts: put the action in the page head.
-- More than one FAB, or for anything other than the primary action.
+- More than one FAB, or anything but the primary action.
 
 ### How to use
 
 - Icon-only: `<a class="orca-fab" href="…" aria-label="Add image">{% icon "plus" %}</a>`.
 - Extended (preferred: icon + label): add `.orca-fab--extended` and visible text.
-- Leave 5rem of bottom padding on the page so the FAB never covers the last row.
+- Leave 5rem of bottom padding so the FAB never covers the last row.
 
 ### Accessibility
 

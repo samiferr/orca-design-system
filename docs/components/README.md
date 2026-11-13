@@ -2,79 +2,79 @@
 
 Generated from `orca/catalogue/` by `python -m orca build`. Do not edit by hand.
 
-Every element below has **when**, **when not**, **how**, accessibility notes, the tokens and
+Every element below has a general description, **when**, **when not**, **how**, accessibility notes, the tokens and
 classes it uses, the UX principles it applies, and a copy-ready Django template example.
 Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.
 
 ## [Forms](forms.md) (22)
 
-Fields and the small groups around them. A form field is the unit people complete: label, hint, error and control in a fixed order.
+Fields and the small groups around them. A form field holds a label, hint, error and control in a fixed order.
 
-- `form-field` **Form field**: Label, optional marker, help, error and one control, wired together. Text inputs and selects.
+- `form-field` **Form field**: One control with its label, optional marker, help and error, linked together. For text inputs and selects.
 - `toggle-field` **Toggle field**: One checkbox or switch with its label, description and error.
-- `choice-group` **Choice group**: A fieldset of radios (one answer) or checkboxes (several answers) with a legend, hint and error.
+- `choice-group` **Choice group**: Radios (one answer) or checkboxes (several answers) in a fieldset with a legend, hint and error.
 - `search-field` **Search field**: A labelled search input with magnifier, clear button and a live result count.
 - `search-bar` **Search bar**: A search form: optional scope select, search field and a Search button.
 - `table-toolbar` **Table toolbar**: The row above a table: search, filters and view options on the left, actions on the right, and a bulk-action bar when rows are selected.
 - `multi-picker` **Multi-picker**: A dropdown with a filter and a checkbox list, showing the chosen values as removable tags.
-- `language-switcher` **Language switcher**: A select of languages, each written in its own language, that posts to Django's set_language view.
+- `language-switcher` **Language switcher**: A select of languages, each named in its own language, posting to Django's set_language view.
 - `input-group` **Input group**: An input joined to addons (unit, prefix) or a button that acts on it.
 - `filter-button` **Filter button**: A button that opens the filters, showing how many are active.
-- `dropdown-select` **Dropdown select (picker)**: A select-like button opening a listbox whose options can carry a description.
-- `combobox` **Combobox (autocomplete)**: A text input that suggests matching options as people type; the value must be one of the options.
+- `dropdown-select` **Dropdown select (picker)**: A select-style button that opens a listbox whose options can have a description.
+- `combobox` **Combobox (autocomplete)**: A text input that suggests matching options as people type. The value must be one of them.
 - `auto-suggest` **Auto-suggest input**: A free-text input with browser suggestions from a datalist.
-- `otp-input` **OTP input**: The full one-time-code question: label, digit boxes, hint, error and a resend link.
+- `otp-input` **OTP input**: A one-time-code field: label, digit boxes, hint, error and a resend link.
 - `rating-input` **Rating input**: One to five stars as a radio group, with the chosen value in words.
 - `split-date` **Split date input**: Day, month and year as three labelled numeric fields.
-- `file-field` **File input field**: A labelled drop zone around a native file input, listing the chosen files.
+- `file-field` **File input field**: A labelled drop zone around a native file input that lists chosen files.
 - `form-alert` **Form alert**: A message at the top of a form for errors that belong to no single field.
 - `form-actions` **Form actions**: The row of buttons that ends a form: the primary action first, then the alternatives.
 - `row-select` **Row selection**: A checkbox per table row and a select-all checkbox in the header.
-- `formatting-toolbar` **Formatting toolbar**: A row of pressed-state icon buttons for bold, italic, lists and links over a text area.
-- `applied-filters` **Applied filters**: The filters in effect as removable tags, with Clear all and the number of results.
+- `formatting-toolbar` **Formatting toolbar**: A row of toggle icon buttons for bold, italic, lists and links above a text area.
+- `applied-filters` **Applied filters**: Active filters as removable tags, with Clear all and the result count.
 
 ## [Navigation](navigation.md) (17)
 
-How people move between places and pages. The current location is always marked with aria-current and a shape, not only colour.
+How people move between pages. The current location is marked with aria-current and a shape, not colour alone.
 
-- `primary-navigation` **Primary navigation**: The top-bar links to the main sections of the product.
+- `primary-navigation` **Primary navigation**: Top-bar links to the product's main sections.
 - `utility-navigation` **Utility navigation**: Help, notifications and the user chip at the end of the top bar.
-- `sidebar-link` **Sidebar link**: One destination in the side navigation: icon, label and an optional count.
-- `breadcrumbs` **Breadcrumbs**: The path from the top of the hierarchy to the current page.
+- `sidebar-link` **Sidebar link**: One sidebar destination: icon, label and optional count.
+- `breadcrumbs` **Breadcrumbs**: The path from the top level down to the current page.
 - `pagination` **Pagination**: Previous, page numbers with gaps, next, and a summary of what is shown.
-- `pagination-summary` **Pagination summary**: 'Showing 121–140 of 312 videos': what part of the list is on screen.
-- `table-pager` **Table pager**: A compact pager under a table: rows per page, the range shown, previous and next.
-- `tab-bar` **Tab bar**: Tabs that switch between views of the same object, in place or by page.
-- `child-tabs` **Child tabs (with counts)**: Page tabs on a parent record, one per kind of child, each showing how many there are.
-- `bottom-navigation` **Bottom navigation bar**: Three to five main sections as icon-and-label buttons fixed at the bottom of phone screens.
-- `nav-tree` **Nav tree**: Collapsible sections of navigation links (tree leaves) for large hierarchies.
+- `pagination-summary` **Pagination summary**: 'Showing 121–140 of 312 videos': which part of the list is on screen.
+- `table-pager` **Table pager**: A compact pager under a table: rows per page, range shown, previous and next.
+- `tab-bar` **Tab bar**: Tabs that switch between views of one object, in place or by page.
+- `child-tabs` **Child tabs (with counts)**: Page tabs on a parent record, one per kind of child, each with a count.
+- `bottom-navigation` **Bottom navigation bar**: 3 to 5 main sections as icon-and-label buttons fixed to the bottom of phone screens.
+- `nav-tree` **Nav tree**: Collapsible groups of navigation links for large hierarchies.
 - `back-link` **Back link**: A link to the previous level, above the page title.
-- `view-toggle` **View toggle (cards, table)**: A segmented control switching a collection between cards and a table.
+- `view-toggle` **View toggle (cards, table)**: A segmented control that switches a collection between cards and a table.
 - `settings-toggle` **Settings toggle**: An icon button that opens the display settings panel (theme, density).
-- `create-button` **Create button (floating on phones)**: The page's create action: a primary button in the page head that becomes a floating button on phones.
-- `skip-navigation` **Skip navigation**: The skip link and the focusable main landmark it jumps to.
+- `create-button` **Create button (floating on phones)**: The page's create action: a primary button in the page head that floats on phones.
+- `skip-navigation` **Skip navigation**: A skip link and the focusable main area it jumps to.
 - `link-column` **Link column**: A titled list of links, as in a footer or a site map.
 
 ## [Feedback](feedback.md) (12)
 
-How the system tells people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.
+Messages that tell people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.
 
-- `alert` **Alert**: An event message in a white box with a coloured side bar: icon, title, text and optional actions.
+- `alert` **Alert**: A message about an event, in a box with a coloured side bar, icon, title, text and optional actions.
 - `callout` **Callout (info, success, warning, danger)**: A tinted box of guidance that belongs to the page, not to an event.
-- `empty-state` **Empty state**: Illustration, title, explanation and the next action, where a list or page has nothing yet.
-- `no-data-state` **No-data state**: A compact message inside a chart, table or tile that has no data for the chosen period.
+- `empty-state` **Empty state**: An illustration, title, explanation and next action shown where a list or page is empty.
+- `no-data-state` **No-data state**: A compact message in a chart, table or tile with no data for the chosen period.
 - `status-light` **Status light**: A dot, a status word and an optional time: 'Offline since 08:14'.
-- `dialog` **Dialog**: A modal window with a title, a body and actions, built on the native <dialog>.
-- `confirm-dialog` **Confirm dialog**: A dialog that names the consequence and the action before something irreversible happens.
-- `progress-with-counts` **Progress bar with counts**: A labelled progress bar with the value in words and the counts behind it.
-- `toast` **Toast**: A short message that appears at the bottom corner after an action and goes away by itself; several stack.
+- `dialog` **Dialog**: A modal window with a title, body and actions, built on the native <dialog>.
+- `confirm-dialog` **Confirm dialog**: A dialog that names the consequence and action before something irreversible happens.
+- `progress-with-counts` **Progress bar with counts**: A labelled progress bar showing the value and the counts behind it.
+- `toast` **Toast**: A short message that appears in the bottom corner after an action and goes away on its own; several can stack.
 - `flash-message` **Flash message**: Django messages shown as dismissible alerts at the top of the next page.
 - `tooltip` **Tooltip**: A short label that appears on hover and keyboard focus, naming an icon-only control.
-- `card-skeleton` **Card skeleton**: The grey shape of a card (image, title, two lines) while the real card loads.
+- `card-skeleton` **Card skeleton**: The grey shape of a card (image, title, two lines) while it loads.
 
 ## [Actions](component-actions.md) (6)
 
-Groups of actions: button groups, menus and the action sets that sit on records and rows.
+Button groups, menus, and the action sets on records and rows.
 
 - `button-group` **Button group**: Related buttons joined into one control, or spaced as a set.
 - `dropdown-menu` **Dropdown menu**: A button that opens a list of actions.
@@ -85,15 +85,15 @@ Groups of actions: button groups, menus and the action sets that sit on records 
 
 ## [Data display](data-display.md) (29)
 
-Ways to present records and numbers: stat cards, lists, key/value lists, cards, tables, timelines and small charts.
+Ways to show records and numbers: stat cards, lists, cards, tables, timelines and small charts.
 
-- `stat-card` **Stat card**: One measured value with its label, a descriptive icon, the change and its context, optionally with a sparkline.
+- `stat-card` **Stat card**: One measured value with its label, icon, change and comparison, optionally with a sparkline.
 - `key-value-list` **Key/value list**: Properties of a record as label and value pairs.
 - `list` **List**: A divided list of items with optional visual, text and end detail.
 - `list-item` **List item**: One row of a list: leading visual, title and description, trailing detail; static, link, button or selected.
 - `timeline-item` **Timeline item**: One event in a vertical timeline: status dot, title, time and description.
-- `sortable-header` **Sortable column header**: A table header that sorts the column, showing the direction with an arrow and aria-sort.
-- `legend-item` **Legend item**: A swatch, a series name and optionally its value, keying a chart.
+- `sortable-header` **Sortable column header**: A table header that sorts its column and shows the direction with an arrow and aria-sort.
+- `legend-item` **Legend item**: A swatch, series name and optional value that key a chart.
 - `zone-row` **Zone row**: A counting zone in a list: its swatch, name, type, count and actions.
 - `line-count-item` **Line-count item**: A counting line with people in and out, each with a direction arrow.
 - `media-object` **Media object**: An image or avatar beside a block of text.
@@ -105,15 +105,15 @@ Ways to present records and numbers: stat cards, lists, key/value lists, cards, 
 - `tree` **Tree**: A hierarchy of items that expand and collapse: sites, buildings, videos.
 - `avatar-group` **Avatar group**: Overlapping avatars of the people involved, with '+N' for the rest.
 - `table-card` **Table card**: A panel holding a titled table and its pager.
-- `property-row` **Property row**: One editable key and value pair with a remove button, repeated to edit free-form properties.
-- `activity-entry` **Activity entry**: One change in an audit log: what happened, who did it, when, and the before and after values.
+- `property-row` **Property row**: An editable key and value pair with a remove button, repeated to edit free-form properties.
+- `activity-entry` **Activity entry**: One audit-log change: what happened, who did it, when, and the before and after values.
 - `carousel` **Carousel**: One slide at a time with previous and next buttons, dots and a count.
 - `scroller` **Scroller**: A horizontal row that scrolls and snaps, showing part of the next item.
 - `sparkline` **Sparkline**: A tiny trend line without axes, ending with a dot on the latest value.
 - `donut-chart` **Donut chart**: A ring of up to about five shares with the total in the middle and a legend with values.
-- `chart-frame` **Chart frame**: The frame every chart sits in: title, subtitle, legend, a reserved plot area, a source line and the data as a table.
-- `big-number` **Big number**: One large figure with the statement it supports and where it comes from.
-- `summary-tile` **Summary tile**: A count with its status word, as a link that filters the list to that status.
+- `chart-frame` **Chart frame**: The frame around every chart: title, subtitle, legend, reserved plot area, source line and a data table.
+- `big-number` **Big number**: One large figure with its statement and source.
+- `summary-tile` **Summary tile**: A count and status word, as a link that filters the list to that status.
 - `heat-row` **Heat-map row**: One labelled row of heat-map cells, each with its value printed.
 - `column-header` **Column header**: A board column's title with its card count and, when set, its limit.
 
@@ -127,36 +127,36 @@ Reusable blocks for products, people, posts, heroes and media.
 - `hero` **Hero**: The opening block of a marketing or landing page: kicker, headline, lead, actions and an image.
 - `photo-actions-bar` **Photo-actions bar**: The row under a photo: like, comment and share with counts, and save at the end.
 - `video-card` **Video card**: A video's latest snapshot with its status, name, place and actions.
-- `page-heading` **Page heading**: The page title, the one-sentence subtitle and an optional meta line with status badges.
-- `section-heading` **Section heading**: A section title with an optional one-paragraph introduction.
+- `page-heading` **Page heading**: The page title, a one-sentence subtitle and an optional line of facts and status badges.
+- `section-heading` **Section heading**: A section title with an optional short introduction.
 - `feature-item` **Feature item**: One feature: an icon, a short title and one sentence.
-- `captioned-media` **Captioned media**: An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.
-- `thumbnail-strip` **Thumbnail strip**: A row of thumbnail buttons that choose the image shown, the current one marked.
-- `video-player` **Video player**: A native video in its frame, with a live or recording flag and the current time.
-- `call-to-action` **Call to action**: The one or two actions a section asks for: the primary button and an optional quieter alternative.
-- `fine-print` **Fine print**: Small legal and version text on one line, with its policy links.
+- `captioned-media` **Captioned media**: An image or video in a fixed-ratio frame, with a caption or flag on a solid bar.
+- `thumbnail-strip` **Thumbnail strip**: A row of thumbnail buttons that pick the image shown and mark the current one.
+- `video-player` **Video player**: A native video with a live or recording flag and the current time.
+- `call-to-action` **Call to action**: The one or two actions a section asks for: a primary button and an optional quieter one.
+- `fine-print` **Fine print**: Small legal and version text on one line, with policy links.
 
 ## [Identity and controls](identity-controls.md) (7)
 
-Who is signed in, what a panel is, and the small controls that personalise the interface.
+Who is signed in, panel headers, and small controls that personalise the interface.
 
 - `user-chip` **User chip**: Avatar, name and role of the signed-in person; opens the account menu.
-- `panel-header` **Panel header**: The top of a panel: title, a short description and the panel's actions.
-- `pin-control` **Pin control**: A pin toggle with a visible 'Pinned' state and an announcement when it changes.
+- `panel-header` **Panel header**: A panel's top: title, short description and actions.
+- `pin-control` **Pin control**: A pin toggle that shows 'Pinned' in words and announces changes.
 - `theme-toggle` **Theme toggle**: A segmented choice of Auto, Light, Dark and Paper themes, remembered per browser.
 - `email-fallback` **Email button (with fallback link)**: An email button with the address shown and a Copy button, for when no mail app opens.
 - `logo-link` **Logo link**: The product logo as a link to the home page.
-- `collapse-toggle` **Collapse toggle**: An icon button that collapses or expands a region, says which it will do, and remembers the choice.
+- `collapse-toggle` **Collapse toggle**: An icon button that collapses or expands a region and remembers the choice. Its label says what a press will do.
 
 ## [Date and time pickers](pickers.md) (9)
 
-Native date and time inputs, composed with shortcuts, ranges, time zones and a month grid. Native first: every device already knows how to pick a date.
+Native date and time inputs plus shortcuts, ranges, time zones and a month grid. Native comes first: every device already knows how to pick a date.
 
-- `date-picker` **Date picker**: A labelled native date input with shortcut buttons for the most common dates.
+- `date-picker` **Date picker**: A native date input with shortcut buttons for common dates.
 - `time-picker` **Time picker**: A labelled native time input with a step and its timezone.
-- `datetime-picker` **Date-time picker**: A date and a time as two labelled fields in one group, with the timezone.
-- `date-range-picker` **Date-range picker**: Start and end dates with presets, kept in order, and the length in days.
-- `time-range-input` **Time-range input (start and end)**: Start and end times with the resulting duration, saying when it ends the next day.
+- `datetime-picker` **Date-time picker**: A date field and a time field in one group, with the timezone.
+- `date-range-picker` **Date-range picker**: Start and end dates with presets, always in order, and the length in days.
+- `time-range-input` **Time-range input (start and end)**: Start and end times with the duration, noting when it ends the next day.
 - `duration-picker` **Duration picker**: Hours and minutes fields with quick choices for common durations.
 - `timezone-selector` **Timezone selector**: A timezone select with a 'Use my timezone' button and the current offset.
 - `month-year-switcher` **Month and year switcher**: Previous and next buttons around a month select and a year select.
@@ -177,7 +177,7 @@ Controls that choose days, repeats, reminders, periods, granularity and calendar
 
 ## [Calendar parts](calendar-parts.md) (14)
 
-The pieces month, week, day and agenda views are built from. Each states the date in words for screen readers.
+The building blocks of month, week, day and agenda views. Each gives screen readers the date in words.
 
 - `day-cell` **Day cell**: One day of a month view: day number, up to three events and a '+N more' link.
 - `week-header` **Week header**: The week number and its date range, heading a week view.
@@ -185,13 +185,13 @@ The pieces month, week, day and agenda views are built from. Each states the dat
 - `week-row` **Week row**: One row of a month grid: the week number and seven day cells.
 - `hour-row` **Hour row**: One hour of a day or week view: the hour label and two half-hour slots.
 - `time-slot` **Time slot**: An empty half-hour in a day view that creates an event when chosen; free, busy or selected.
-- `all-day-row` **All-day row**: The strip above the hours of a week view holding all-day and multi-day bars.
+- `all-day-row` **All-day row**: The strip above a week view's hours that holds all-day and multi-day bars.
 - `event-chip` **Event chip**: A one-line event in a month cell: colour dot, time and title.
 - `event-card` **Event card**: An event block in a day or week view: title, time, place and its calendar colour edge.
 - `agenda-item` **Agenda item**: One event in a list view: time column, colour dot, title and details.
 - `date-badge` **Date badge**: A small calendar-page box with month, day number and weekday.
 - `holiday-label` **Holiday label**: The holiday's name on a purple tint with a diamond mark.
-- `more-events-link` **More-events link**: '+3 more' at the bottom of a crowded day cell, opening the full list of that day.
+- `more-events-link` **More-events link**: '+3 more' at the bottom of a crowded day cell; opens that day's full list.
 - `calendar-header` **Calendar header**: The month or period title with navigation and the view switcher.
 
 ## [Schedule parts](schedule-parts.md) (10)
@@ -199,39 +199,39 @@ The pieces month, week, day and agenda views are built from. Each states the dat
 Rows and messages for opening hours, availability, exceptions, time off and bookings.
 
 - `schedule-row` **Schedule row**: One line of a weekly schedule: day, start time, end time and a remove button.
-- `add-row-button` **Add-row button**: A ghost button that adds one more row to a repeating group and focuses it.
-- `remove-row-button` **Remove-row button**: An icon button that removes its row, named after what it removes, with the removal announced.
-- `availability-legend` **Availability legend**: The key to availability marks: free, busy, tentative and not working.
+- `add-row-button` **Add-row button**: A ghost button that adds a row to a repeating group and focuses it.
+- `remove-row-button` **Remove-row button**: An icon button that removes its row; named after the row and announced when used.
+- `availability-legend` **Availability legend**: The key to the availability marks: free, busy, tentative, not working.
 - `exception-entry` **Exception entry**: A one-day override of the usual schedule: date, new hours or Closed, and the reason.
 - `time-off-entry` **Time-off entry**: A person's absence: who, dates, type and approval status.
 - `booking-slot` **Booking slot**: A bookable time as a large button: free, limited ('2 left'), full or chosen.
-- `conflict-warning` **Conflict warning**: A caution message saying what this plan conflicts with and how to resolve it.
-- `overlap-warning` **Overlap warning**: An inline message under a schedule row whose times overlap another row.
+- `conflict-warning` **Conflict warning**: A caution message naming what the plan conflicts with and how to fix it.
+- `overlap-warning` **Overlap warning**: An inline message under a schedule row that overlaps another row.
 - `working-hours-label` **Working-hours label**: 'Open now, closes at 18:00' or 'Closed, opens Monday 08:00', with a status dot.
 
 ## [Plan items](plan-items.md) (14)
 
-Tasks, milestones, deadlines and reminders, and the chips that describe them: assignee, due date, status, priority, progress.
+Tasks, milestones, deadlines and reminders, with chips for assignee, due date, status, priority and progress.
 
-- `task-item` **Task item**: A task row: completion checkbox, title and chips for assignee, due date and priority.
-- `subtask-item` **Subtask item**: A smaller, indented task under its parent with a connecting line.
+- `task-item` **Task item**: A task row with a checkbox, a title, and chips for assignee, due date and priority.
+- `subtask-item` **Subtask item**: A smaller indented task under its parent, joined by a line.
 - `milestone-item` **Milestone item**: A milestone row: diamond marker, name, date and state in words.
-- `deadline-item` **Deadline item**: A deadline row: flag, name, due date and how long is left or how late it is.
+- `deadline-item` **Deadline item**: A deadline row: flag, name, due date and time left or overdue.
 - `reminder-item` **Reminder item**: A reminder that has come due: bell, text, time and Snooze or Done.
-- `assignee-chip` **Assignee chip**: A small avatar and name showing who is responsible.
+- `assignee-chip` **Assignee chip**: A small avatar and name showing who owns the item.
 - `due-date-chip` **Due-date chip**: A calendar icon and the due date, amber when close, red and bold when overdue.
-- `status-chip` **Status chip (planned, in progress, done, overdue)**: A plan item's state with a distinct shape per state: empty circle, half circle, full circle, square.
-- `priority-chip` **Priority chip**: The priority marker in a chip, for use among other chips.
-- `progress-chip` **Progress chip**: A tiny bar and a count ('3/5') of completed sub-items.
-- `gantt-bar` **Gantt bar**: A task as a bar positioned on a time grid, with a progress line and milestones as diamonds.
-- `plan-card` **Plan card**: A plan's summary: name, period, progress and counts of open, done and late items.
+- `status-chip` **Status chip (planned, in progress, done, overdue)**: A plan item's state, each with its own shape: empty circle, half circle, full circle, square.
+- `priority-chip` **Priority chip**: A priority marker in chip form, to sit beside other chips.
+- `progress-chip` **Progress chip**: A tiny bar and a count ('3/5') of finished sub-items.
+- `gantt-bar` **Gantt bar**: A task drawn as a bar on a time grid, with a progress line and milestone diamonds.
+- `plan-card` **Plan card**: A plan summary: name, period, progress and counts of open, done and late items.
 - `board-card` **Board card**: A card on a kanban board: title, labels, due date, assignee and a drag handle.
-- `resource-row` **Resource row**: A person or resource with their load and a row of day cells showing availability.
+- `resource-row` **Resource row**: A person or resource with their workload and a row of day cells showing availability.
 
 ## [Documentation site](docs-site.md) (3)
 
-Components for documenting a design system or an API: live examples, code blocks and the navigation tree.
+Components for documenting a design system or API: live examples, code blocks and a navigation tree.
 
 - `live-example` **Live example**: A rendered example and its source as two tabs.
 - `code-block` **Code block**: Multi-line code with its language and a Copy button.
-- `docs-nav-tree` **Docs navigation tree**: A documentation sidebar: a filter box above a nav tree of sections and pages.
+- `docs-nav-tree` **Docs navigation tree**: A documentation sidebar: a filter box above a tree of sections and pages.

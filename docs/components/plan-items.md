@@ -1,14 +1,36 @@
 # Plan items
 
-Tasks, milestones, deadlines and reminders, and the chips that describe them: assignee, due date, status, priority, progress.
+Tasks, milestones, deadlines and reminders, with chips for assignee, due date, status, priority and progress.
 
 ## Task item
 
 `id: task-item` · level: component · source: ORCA
 
-A task row: completion checkbox, title and chips for assignee, due date and priority.
+A task row with a checkbox, a title, and chips for assignee, due date and priority.
 
 Built from: `checkbox`, `assignee-chip`, `due-date-chip`, `priority-chip`
+
+### General description
+
+A single to-do entry in a list, with a way to mark it done and a short description of what needs doing.
+
+#### Use cases
+
+- Personal and team to-do lists.
+- Checklists for repeated processes such as onboarding or launches.
+- Project follow-up lists with owners and dates.
+
+#### When not to use it
+
+- Complex work with many steps and dependencies: use a timeline or board instead.
+- Plain notes with nothing to complete: use text.
+
+#### Best practices
+
+- Start the title with a verb so it reads as an action.
+- Let people tick a task off with one click.
+- Show owner and due date next to the title.
+- Keep titles short enough to fit on one line.
 
 ### When to use
 
@@ -16,8 +38,8 @@ Built from: `checkbox`, `assignee-chip`, `due-date-chip`, `priority-chip`
 
 ### How to use
 
-- `<div class="orca-task">` with a checkbox (label = task title for screen readers), `.orca-task__title`, `.orca-task__meta` chips and optional `.orca-task__end` actions.
-- Done: `--done` strikes the title; save immediately and offer Undo in a toast.
+- `<div class="orca-task">` with a checkbox labelled by the task title, `.orca-task__title`, `.orca-task__meta` chips and optional `.orca-task__end` actions.
+- Done: `--done` strikes the title. Save at once and offer Undo in a toast.
 
 #### Example: Tasks
 
@@ -68,9 +90,31 @@ Built from: `checkbox`, `assignee-chip`, `due-date-chip`, `priority-chip`
 
 `id: subtask-item` · level: component · source: ORCA
 
-A smaller, indented task under its parent with a connecting line.
+A smaller indented task under its parent, joined by a line.
 
 Built from: `task-item`, `progress-chip`
+
+### General description
+
+A smaller step that belongs to a larger task. It is usually shown indented beneath its parent.
+
+#### Use cases
+
+- Breaking a big task into steps that can be finished one at a time.
+- Checklists inside a task, such as items to pack or review.
+- Letting several people each own a part of one task.
+
+#### When not to use it
+
+- Steps that are really separate pieces of work: make them tasks of their own.
+- Deep nesting: more than two levels gets hard to read.
+
+#### Best practices
+
+- Indent subtasks clearly under their parent.
+- Show how many subtasks are done on the parent.
+- Keep to one level of nesting.
+- Complete the parent only when all steps are done, or say why not.
 
 ### When to use
 
@@ -78,7 +122,7 @@ Built from: `task-item`, `progress-chip`
 
 ### How to use
 
-- `<div class="orca-task orca-task--sub">` after the parent; show the parent's progress as a progress chip ('2/5').
+- `<div class="orca-task orca-task--sub">` after the parent; show the parent's progress in a progress chip ('2/5').
 
 #### Example: Subtasks
 
@@ -127,6 +171,28 @@ A milestone row: diamond marker, name, date and state in words.
 
 Built from: `milestone-marker`, `date-label`, `status-chip`
 
+### General description
+
+A marker for an important point in a plan, such as a launch or approval, shown with its name, date and state.
+
+#### Use cases
+
+- Roadmaps showing key dates.
+- Project overviews that track big checkpoints.
+- Reporting progress to people who do not need task detail.
+
+#### When not to use it
+
+- Everyday work that takes time: use a task.
+- Hard external dates with legal or financial weight: use a deadline.
+
+#### Best practices
+
+- Name milestones as outcomes, such as 'Pilot live'.
+- Show a clear date and a state in words.
+- Keep the list short so each one matters.
+- Mark missed milestones plainly, not only with colour.
+
 ### When to use
 
 - Roadmaps, project overviews, milestone timelines.
@@ -170,9 +236,31 @@ Built from: `milestone-marker`, `date-label`, `status-chip`
 
 `id: deadline-item` · level: component · source: ORCA
 
-A deadline row: flag, name, due date and how long is left or how late it is.
+A deadline row: flag, name, due date and time left or overdue.
 
 Built from: `deadline-marker`, `overdue-marker`, `due-date-chip`
+
+### General description
+
+An entry for a date by which something must be done, showing what is due and how much time is left or how late it is.
+
+#### Use cases
+
+- Compliance and legal dates.
+- Renewals for licences, contracts or subscriptions.
+- Lists of what is due soon across several projects.
+
+#### When not to use it
+
+- Soft targets in a plan: use a milestone.
+- Work that people tick off in a list: use a task.
+
+#### Best practices
+
+- Show the exact date and the time remaining.
+- Make overdue items stand out with words as well as colour.
+- Sort the nearest deadline first.
+- Tell people what is due, not only that something is.
 
 ### When to use
 
@@ -180,7 +268,7 @@ Built from: `deadline-marker`, `overdue-marker`, `due-date-chip`
 
 ### How to use
 
-- `.orca-plan-row` with the deadline marker icon, the body (name + due date) and either a due-date chip (`--soon`) or an overdue marker.
+- `.orca-plan-row` with the deadline marker icon, the body (name + due date) and a due-date chip (`--soon`) or an overdue marker.
 
 #### Example: Deadlines
 
@@ -227,6 +315,28 @@ A reminder that has come due: bell, text, time and Snooze or Done.
 
 Built from: `planning-icons`, `button`, `relative-time`
 
+### General description
+
+A prompt that reminds someone about something at a set time, with quick ways to act on it or put it off.
+
+#### Use cases
+
+- Notification lists of things that have come due.
+- Follow-ups on tasks or appointments.
+- Sidebars that gather what needs attention today.
+
+#### When not to use it
+
+- Messages that need a reply or a decision: use a message or task.
+- System errors and warnings: use an alert.
+
+#### Best practices
+
+- State what the reminder is about in plain words.
+- Show when it was set for.
+- Offer snooze and done right on the item.
+- Let people choose how long to snooze.
+
 ### When to use
 
 - Notification lists, task sidebars.
@@ -265,9 +375,31 @@ Built from: `planning-icons`, `button`, `relative-time`
 
 `id: assignee-chip` · level: component · source: ORCA
 
-A small avatar and name showing who is responsible.
+A small avatar and name showing who owns the item.
 
 Built from: `avatar`
+
+### General description
+
+A small tag showing who is responsible for an item, usually a picture or initials with a name.
+
+#### Use cases
+
+- Showing the owner of a task or ticket.
+- Cards on a board where people scan for their own work.
+- Filter lists by person.
+
+#### When not to use it
+
+- Showing a group of many people: use an avatar stack with a count.
+- Long contact details: link to a profile instead.
+
+#### Best practices
+
+- Show the person's name as well as their picture.
+- Show 'Unassigned' clearly when nobody owns the item.
+- Keep the chip the same size as other chips.
+- Make it clickable only if it does something useful.
 
 ### When to use
 
@@ -275,7 +407,7 @@ Built from: `avatar`
 
 ### How to use
 
-- `<span class="orca-chip"><span class="orca-avatar orca-avatar--xs" aria-hidden="true">AL</span><span class="orca-chip__text">Ada Lovelace</span></span>`; unassigned: the user icon and 'Unassigned'.
+- `<span class="orca-chip"><span class="orca-avatar orca-avatar--xs" aria-hidden="true">AL</span><span class="orca-chip__text">Ada Lovelace</span></span>`; if unassigned, show the user icon and 'Unassigned'.
 
 #### Example: Chips
 
@@ -307,6 +439,28 @@ Built from: `avatar`
 A calendar icon and the due date, amber when close, red and bold when overdue.
 
 Built from: `planning-icons`, `date-label`
+
+### General description
+
+A small tag that shows the date something is due, and changes its look as the date gets close or passes.
+
+#### Use cases
+
+- Tasks and cards that have a due date.
+- Lists where people sort or scan by date.
+- Warning that something is late.
+
+#### When not to use it
+
+- Dates that are only informational, such as when something was created: use plain text.
+- Exact times of meetings: use an event.
+
+#### Best practices
+
+- Use relative words such as 'Tomorrow' for dates close by.
+- Show the full date for dates further away.
+- Mark overdue items with a word, not only red.
+- Use the same date format everywhere.
 
 ### When to use
 
@@ -347,9 +501,31 @@ Built from: `planning-icons`, `date-label`
 
 `id: status-chip` · level: component · source: ORCA
 
-A plan item's state with a distinct shape per state: empty circle, half circle, full circle, square.
+A plan item's state, each with its own shape: empty circle, half circle, full circle, square.
 
 Built from: `badge`
+
+### General description
+
+A small tag that says what state an item is in, such as planned, in progress, done or overdue.
+
+#### Use cases
+
+- Showing progress of tasks, requests or runs.
+- Filtering lists by state.
+- Helping people see at a glance what needs attention.
+
+#### When not to use it
+
+- Counts or percentages of progress: use a progress bar.
+- Urgent system problems: use an alert.
+
+#### Best practices
+
+- Use a short word for every state, never colour alone.
+- Keep the same set of states across the product.
+- Give each state its own shape or icon.
+- Do not invent extra states unless people need them.
 
 ### When to use
 
@@ -383,9 +559,31 @@ Built from: `badge`
 
 `id: priority-chip` · level: component · source: ORCA
 
-The priority marker in a chip, for use among other chips.
+A priority marker in chip form, to sit beside other chips.
 
 Built from: `priority-marker`
+
+### General description
+
+A small tag that shows how important or urgent an item is, such as low, medium, high or urgent.
+
+#### Use cases
+
+- Ordering tasks and tickets by importance.
+- Helping teams decide what to work on first.
+- Filtering lists to the most urgent items.
+
+#### When not to use it
+
+- Dates and deadlines: use a due date.
+- Too many levels: three or four are enough.
+
+#### Best practices
+
+- Pair the symbol with a word so it works without colour.
+- Hide the normal level to reduce clutter.
+- Keep the scale small and the order obvious.
+- Use the same wording everywhere.
 
 ### When to use
 
@@ -393,7 +591,7 @@ Built from: `priority-marker`
 
 ### How to use
 
-- `<span class="orca-chip"><span class="orca-priority orca-priority--medium">…bars…Medium</span></span>`. Omit the chip for 'normal' priority to reduce noise.
+- `<span class="orca-chip"><span class="orca-priority orca-priority--medium">…bars…Medium</span></span>`. Omit it for 'normal' priority to cut noise.
 
 #### Example: Priorities
 
@@ -420,9 +618,31 @@ Built from: `priority-marker`
 
 `id: progress-chip` · level: component · source: ORCA
 
-A tiny bar and a count ('3/5') of completed sub-items.
+A tiny bar and a count ('3/5') of finished sub-items.
 
 Built from: `progress-bar`
+
+### General description
+
+A small tag showing how much of an item is finished, with a tiny bar and a count such as 3/5.
+
+#### Use cases
+
+- Tasks with subtasks or checklists.
+- Plans and projects shown in lists.
+- Letting people see progress without opening the item.
+
+#### When not to use it
+
+- Long waits such as uploads: use a full progress bar.
+- Items with only one step: use a status.
+
+#### Best practices
+
+- Show both the count and the bar.
+- Count finished steps out of the total.
+- Add a text label for screen readers.
+- Update it as soon as a step is done.
 
 ### When to use
 
@@ -450,9 +670,31 @@ Built from: `progress-bar`
 
 `id: gantt-bar` · level: component · source: ORCA
 
-A task as a bar positioned on a time grid, with a progress line and milestones as diamonds.
+A task drawn as a bar on a time grid, with a progress line and milestone diamonds.
 
 Built from: `milestone-marker`, `progress-bar`
+
+### General description
+
+A horizontal bar on a calendar-like grid, showing when a task starts and ends, and often how far along it is.
+
+#### Use cases
+
+- Project timelines with tasks that overlap.
+- Roadmaps showing what happens when.
+- Spotting delays and gaps in a plan.
+
+#### When not to use it
+
+- Simple to-do lists: use a task list.
+- Tracking work by stage: use a board.
+
+#### Best practices
+
+- Show a clear time scale at the top.
+- Mark late and finished work in more than colour.
+- Offer a list version for screen readers.
+- Let the grid scroll sideways on small screens.
 
 ### When to use
 
@@ -461,7 +703,7 @@ Built from: `milestone-marker`, `progress-bar`
 ### How to use
 
 - `<div class="orca-gantt" style="--orca-cols: 7">` of `.orca-gantt-row`s: `.orca-gantt-row__label` and `.orca-gantt-row__lane` holding `<a class="orca-gantt-bar" style="--orca-start: 14%; --orca-span: 43%; --orca-progress: 60%">`.
-- Variants `--done`, `--late`; milestones are milestone markers with `--orca-start`. Wrap in `.orca-table-wrap` for horizontal scroll; offer a list view for screen readers.
+- Variants `--done`, `--late`; milestones are milestone markers with `--orca-start`. Wrap in `.orca-table-wrap` to scroll sideways, and offer a list view for screen readers.
 
 #### Example: Timeline
 
@@ -503,9 +745,31 @@ Built from: `milestone-marker`, `progress-bar`
 
 `id: plan-card` · level: component · source: ORCA
 
-A plan's summary: name, period, progress and counts of open, done and late items.
+A plan summary: name, period, progress and counts of open, done and late items.
 
 Built from: `linked-card`, `progress-with-counts`, `status-chip`
+
+### General description
+
+A card that summarises one plan or project: its name, time period, how far along it is and what remains.
+
+#### Use cases
+
+- Lists of projects, sprints or rollouts.
+- Dashboards showing several plans together.
+- Quickly spotting which plans are late.
+
+#### When not to use it
+
+- Detailed plan content: open the plan page instead.
+- A single task: use a task item.
+
+#### Best practices
+
+- Show the period and progress together.
+- Put the name first and make the whole card clickable.
+- Include counts of open, done and late items.
+- Keep every card the same shape.
 
 ### When to use
 
@@ -513,7 +777,7 @@ Built from: `linked-card`, `progress-with-counts`, `status-chip`
 
 ### How to use
 
-- A linked card with the name, the period as date labels, a progress with counts, and a footer of status chips with counts.
+- A linked card with the name, the period (as date labels), progress with counts, and a footer of status chips with counts.
 
 #### Example: Plan
 
@@ -551,6 +815,28 @@ A card on a kanban board: title, labels, due date, assignee and a drag handle.
 
 Built from: `drag-handle`, `tag`, `due-date-chip`, `avatar`
 
+### General description
+
+A small card for one piece of work on a board of columns, such as a kanban board.
+
+#### Use cases
+
+- Tracking work as it moves between stages.
+- Team task boards.
+- Sales or hiring pipelines.
+
+#### When not to use it
+
+- Long text or lots of detail: link to a full page.
+- Work with strict date order: use a timeline.
+
+#### Best practices
+
+- Show only the key facts: title, owner and date.
+- Keep every card the same layout.
+- Provide a menu to move cards without dragging.
+- Make the title a link to the full item.
+
 ### When to use
 
 - Kanban boards and planners.
@@ -558,7 +844,7 @@ Built from: `drag-handle`, `tag`, `due-date-chip`, `avatar`
 ### How to use
 
 - `<article class="orca-board-card">` with `.orca-board-card__head` (drag handle + `.orca-board-card__title` link), tags, and `.orca-board-card__foot` (due-date chip, priority chip, assignee avatar).
-- Offer a 'Move to' menu as the non-drag alternative.
+- Offer a 'Move to' menu as an alternative to dragging.
 
 #### Example: Card
 
@@ -598,9 +884,31 @@ Built from: `drag-handle`, `tag`, `due-date-chip`, `avatar`
 
 `id: resource-row` · level: component · source: ORCA
 
-A person or resource with their load and a row of day cells showing availability.
+A person or resource with their workload and a row of day cells showing availability.
 
 Built from: `avatar`, `availability-color`
+
+### General description
+
+A row for one person, team or piece of equipment, showing how busy they are across days or weeks.
+
+#### Use cases
+
+- Planning who can take on more work.
+- Staff rosters and shift schedules.
+- Booking shared equipment or rooms.
+
+#### When not to use it
+
+- Individual task lists: use tasks.
+- Showing a single appointment: use a calendar event.
+
+#### Best practices
+
+- Line up every row on the same days.
+- Show hours as numbers, not only colours.
+- Label each day cell for screen readers.
+- Show total load beside the name.
 
 ### When to use
 

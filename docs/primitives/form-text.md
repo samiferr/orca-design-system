@@ -1,12 +1,34 @@
 # Form text
 
-The words around a field: its label, requirement marker, help and errors. They decide whether a form is completed.
+The words around a field: label, requirement marker, help and errors. They decide whether people finish a form.
 
 ## Label
 
 `id: label` · level: primitive · source: Tangerine
 
-A visible, persistent name above every field.
+A name that stays visible above every field.
+
+### General description
+
+A short text above or beside a form field that names what to enter. It tells people and assistive technology what the field is for.
+
+#### Use cases
+
+- Naming every text field, select and text area.
+- Titling a group of options with a legend.
+- Giving a clear click target that focuses the field.
+
+#### When not to use it
+
+- Using placeholder text as the only name; it disappears while typing.
+- Vague words like 'Info'; use specific names.
+
+#### Best practices
+
+- Place the label above the field and keep it visible.
+- Use short nouns in sentence case.
+- Connect the label to its field in the code.
+- Avoid colons and unneeded words like 'Your'.
 
 ### When to use
 
@@ -16,7 +38,7 @@ A visible, persistent name above every field.
 
 - Placeholder text as the only label.
 - 'My' or 'Your' in labels (W09): 'Email', not 'Your email'.
-- Labels to the left of fields in a separate column.
+- Labels in a separate column left of the field.
 
 ### How to use
 
@@ -26,7 +48,7 @@ A visible, persistent name above every field.
 
 ### Accessibility
 
-- `for` must match the input `id`; the accessible name of the field is the label text.
+- `for` must match the input `id`, so the label text becomes the field's accessible name.
 
 #### Example: Label and input
 
@@ -53,9 +75,31 @@ A visible, persistent name above every field.
 
 The word 'required' or 'optional' after a label.
 
+### General description
+
+A short note beside a label, such as '(required)' or '(optional)', that tells people whether they must fill in a field.
+
+#### Use cases
+
+- Marking optional fields in a mostly required form.
+- Marking required fields in a mostly optional form.
+- Long or unfamiliar forms where both states help.
+
+#### When not to use it
+
+- Using only a red asterisk; it can look like an error and may be missed.
+- A general 'all fields required' notice that people skip.
+
+#### Best practices
+
+- Use words rather than symbols alone.
+- Mark whichever kind of field is rarer.
+- Also set the required attribute so assistive technology knows.
+- Keep the marker beside the label, not in the field.
+
 ### When to use
 
-- Mark optional fields when most are required; mark required ones when most are optional. Mark both in long or unfamiliar forms.
+- Mark whichever kind is rarer; mark both in long or unfamiliar forms.
 
 ### When not to use
 
@@ -65,11 +109,11 @@ The word 'required' or 'optional' after a label.
 ### How to use
 
 - Inside the label: `<span class="orca-optional">(optional)</span>` or `<span class="orca-required">(required)</span>`.
-- Always also set the `required` attribute on required controls.
+- Also set the `required` attribute on required controls.
 
 ### Accessibility
 
-- `required` exposes the status to assistive technology; the word makes it visible.
+- `required` tells assistive technology; the word shows it to everyone.
 
 #### Example: Optional field
 
@@ -92,11 +136,34 @@ The word 'required' or 'optional' after a label.
 
 `id: help-text` · level: primitive · source: Tangerine
 
-A hint between the label and the field that helps people answer correctly.
+A hint between label and field that helps people answer correctly.
+
+### General description
+
+A short hint placed with a field that explains what to enter, such as a format or where to find the value. It helps people get it right the first time.
+
+#### Use cases
+
+- Showing the expected format, such as a date or address.
+- Explaining what a choice will cause.
+- Telling people where to find a number or code.
+
+#### When not to use it
+
+- Repeating the label; cut it instead.
+- Long instructions; link to a help page.
+- Hiding essential information in a tooltip.
+
+#### Best practices
+
+- Keep it to one or two short sentences.
+- Place it between the label and the field.
+- Link it to the field so screen readers read it.
+- Use it to prevent errors, not explain them afterwards.
 
 ### When to use
 
-- Format expectations ('Use the address from the video's Share menu'), consequences, or where to find a value.
+- Expected format ('Use the address from the video's Share menu'), consequences, or where to find a value.
 
 ### When not to use
 
@@ -137,6 +204,28 @@ A hint between the label and the field that helps people answer correctly.
 
 A message above the field that says what is wrong and how to fix it.
 
+### General description
+
+A message beside a field that says what is wrong and how to fix it. It helps people correct a mistake and continue.
+
+#### Use cases
+
+- Telling someone a value has the wrong format.
+- Pointing out a missing required answer.
+- Explaining why a value was rejected, such as a duplicate.
+
+#### When not to use it
+
+- Vague messages like 'Invalid input'; say what is wrong.
+- Showing errors while someone is still typing their first answer; wait until they leave the field.
+
+#### Best practices
+
+- Write one sentence: what is wrong and how to fix it.
+- Place it next to the field it belongs to.
+- Use an icon and words, not colour alone.
+- Link it to the field and mark the field as invalid.
+
 ### When to use
 
 - After submit or after leaving a field with an invalid value.
@@ -144,13 +233,13 @@ A message above the field that says what is wrong and how to fix it.
 ### When not to use
 
 - 'Invalid input', 'Error', or technical codes.
-- Showing errors while the person is still typing a first answer (R22).
+- Errors while the person is still typing a first answer (R22).
 
 ### How to use
 
 - `<p class="orca-error" id="x-error">{% icon "error" %}<span>Enter a video address that starts with https://</span></p>` above the input, after the help text.
 - Mark the field `aria-invalid="true"` and add the error id to `aria-describedby` (first).
-- Pattern: what is wrong + how to fix, in one sentence.
+- One sentence: what is wrong and how to fix it.
 
 ### Accessibility
 
@@ -184,7 +273,29 @@ A message above the field that says what is wrong and how to fix it.
 
 `id: help-icon` · level: primitive · source: ORCA
 
-A question-mark button that reveals optional, extra explanation in place.
+A question-mark button that reveals extra explanation in place.
+
+### General description
+
+A small question-mark button that reveals extra explanation on demand. It keeps background information out of the way until someone wants it.
+
+#### Use cases
+
+- Explaining a technical term or how a figure is calculated.
+- Giving extra context in a dense form or report.
+- Offering background that experts may want.
+
+#### When not to use it
+
+- Essential instructions; show them as visible help text.
+- Hover-only tooltips; they fail on touch and for keyboard users.
+
+#### Best practices
+
+- Open it with a click or tap, as well as the keyboard.
+- Give the button a name that says the topic.
+- Keep the explanation brief.
+- Place it right after the text it explains.
 
 ### When to use
 
@@ -202,7 +313,7 @@ A question-mark button that reveals optional, extra explanation in place.
 
 ### Accessibility
 
-- `<summary>` is keyboard reachable and announces expanded/collapsed; the aria-label names the topic.
+- `<summary>` works with the keyboard and announces expanded or collapsed; the aria-label names the topic.
 
 #### Example: Help disclosure
 
@@ -232,19 +343,41 @@ A question-mark button that reveals optional, extra explanation in place.
 
 An error summary at the top of a form, linking to each invalid field.
 
+### General description
+
+A summary at the top of a form that lists every problem and links to each field. It gives people one place to start fixing things.
+
+#### Use cases
+
+- Showing several problems after a failed submit.
+- Reporting an error that applies to the whole form.
+- Helping screen reader users find all the problems.
+
+#### When not to use it
+
+- A single field error; show a message beside the field.
+- Warnings or tips that do not block submitting; use inline messages.
+
+#### Best practices
+
+- State the number of problems in the title.
+- Make each item a link to its field.
+- Move focus to the summary after a failed submit.
+- Repeat each message beside its field.
+
 ### When to use
 
-- After a submit that failed on two or more fields, or on a non-field (form-wide) error.
+- After a failed submit with two or more invalid fields, or a form-wide error.
 
 ### How to use
 
-- Render above the form: `<div class="orca-error-list" role="alert" tabindex="-1">` with the error icon, a title stating the count ('2 fields need attention'), and a `<ul>` of links to `#field-id`.
+- Render above the form: `<div class="orca-error-list" role="alert" tabindex="-1">` with the error icon, a title with the count ('2 fields need attention') and a `<ul>` of links to `#field-id`.
 - Move focus to it after the failed submit.
 - Repeat each message at its field (error-text).
 
 ### Accessibility
 
-- `role="alert"` announces it; `tabindex="-1"` lets you focus it programmatically.
+- `role="alert"` announces it; `tabindex="-1"` lets code move focus to it.
 
 #### Example: Error summary
 

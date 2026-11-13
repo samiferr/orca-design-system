@@ -6,7 +6,29 @@ Images, frames and graphics. Reserve their space, describe them, and keep text r
 
 `id: image` · level: primitive · source: Tangerine
 
-A content image (the primary image of a record), plain or bordered.
+A record's main content image, plain or bordered.
+
+### General description
+
+A picture that carries content, such as a product photo or plan. It needs a text description and reserved space so the page does not shift as it loads.
+
+#### Use cases
+
+- Showing a product, place or person.
+- Illustrating a record's main details.
+- Showing a plan, diagram or screenshot.
+
+#### When not to use it
+
+- Decoration with no meaning: use a background or leave it out.
+- Text content: use real text, not text inside an image.
+
+#### Best practices
+
+- Write alt text that describes what matters, or leave it empty if decorative.
+- Set width and height so the layout does not jump.
+- Load below-the-fold images lazily.
+- Use modern, compressed formats and sensible sizes.
 
 ### When to use
 
@@ -14,8 +36,8 @@ A content image (the primary image of a record), plain or bordered.
 
 ### How to use
 
-- `<img class="orca-img" src=… alt=… width=… height=… loading="lazy">`. Always set width and height or put it in an `orca-ratio` frame.
-- `.orca-img--bordered` when the image's edge could merge with the page (white photos, screenshots).
+- `<img class="orca-img" src=… alt=… width=… height=… loading="lazy">`. Always set width and height, or use an `orca-ratio` frame.
+- `.orca-img--bordered` when the image edge could blend into the page (white photos, screenshots).
 - `alt` describes what matters in the image for the task; decorative images get `alt=""`.
 
 ### Accessibility
@@ -45,6 +67,28 @@ A content image (the primary image of a record), plain or bordered.
 `id: thumbnail` · level: primitive · source: Tangerine
 
 A small square preview (48 or 96px) cropped to fill.
+
+### General description
+
+A small cropped preview of an image, used to recognise an item quickly in lists, tables and pickers.
+
+#### Use cases
+
+- Previewing items in lists and tables.
+- Choosing between images or files.
+- Showing a record's picture in a card.
+
+#### When not to use it
+
+- Viewing details of the image: link to a larger version.
+- Images with essential small text: show a bigger one.
+
+#### Best practices
+
+- Use one size and crop consistently.
+- Leave alt text empty when the name sits beside it.
+- Reserve the space to avoid shifts while loading.
+- Make clickable thumbnails large enough to tap.
 
 ### When to use
 
@@ -80,6 +124,28 @@ A small square preview (48 or 96px) cropped to fill.
 
 A wide image (21:9, 4:3 on phones) heading a marketing or landing page.
 
+### General description
+
+A large, wide image at the top of a page that sets its mood or subject. It is common on marketing and landing pages.
+
+#### Use cases
+
+- Opening a landing or campaign page.
+- Introducing a product, event or story.
+- Giving a section a strong visual start.
+
+#### When not to use it
+
+- Task screens and dashboards: it pushes the task down the page.
+- Conveying information: use text or a chart.
+
+#### Best practices
+
+- Choose an image that supports the message.
+- Make sure text over it stays readable.
+- Serve sizes that fit each screen.
+- Describe it in alt text if it carries meaning.
+
 ### When to use
 
 - Marketing and landing pages only.
@@ -114,11 +180,33 @@ A wide image (21:9, 4:3 on phones) heading a marketing or landing page.
 
 `id: media-frame` · level: primitive · source: Tangerine
 
-A box with a fixed aspect ratio that holds an image, video, map or chart and reserves its space.
+A fixed-ratio box that holds an image, video, map or chart and reserves its space.
+
+### General description
+
+A box that holds a fixed shape, such as 16:9 or square, for an image, video, map or chart. It reserves space before the content loads.
+
+#### Use cases
+
+- Showing images in galleries and cards.
+- Embedding video, maps or charts.
+- Keeping a grid of mixed media neat.
+
+#### When not to use it
+
+- Content that must show in full: use a frame that fits without cropping.
+- Content with its own size: no frame needed.
+
+#### Best practices
+
+- Pick one ratio per group of items.
+- Decide whether to crop or fit the content.
+- Set the frame size before the media loads.
+- Always give the media a text alternative.
 
 ### When to use
 
-- Any media whose dimensions are not known in the HTML; image galleries and cards with images or video stills.
+- Media whose size is not set in the HTML; galleries and cards with images or video stills.
 
 ### How to use
 
@@ -149,11 +237,33 @@ A box with a fixed aspect ratio that holds an image, video, map or chart and res
 
 `id: snapshot-image` · level: primitive · source: ORCA
 
-A still image taken from a video, in a 16:9 frame with its source and capture time on a solid caption bar.
+A video still in a 16:9 frame, with its source and capture time on a solid caption bar.
+
+### General description
+
+A still picture taken from a video or camera, shown with where it came from and when it was captured.
+
+#### Use cases
+
+- Showing key moments from a video.
+- Galleries of captured images.
+- Evidence or audit images that need a time.
+
+#### When not to use it
+
+- Live or moving content: use a video frame.
+- Decorative pictures: use a plain image.
+
+#### Best practices
+
+- Show the source and time on a solid background so text stays readable.
+- Put the time in the alt text too.
+- Show a clear message when an image has expired or been removed.
+- Keep a consistent shape across a gallery.
 
 ### When to use
 
-- Video stills, thumbnails of video moments, image galleries that show when each image was taken.
+- Video stills and galleries that show when each image was taken.
 
 ### How to use
 
@@ -162,7 +272,7 @@ A still image taken from a video, in a 16:9 frame with its source and capture ti
 
 ### Accessibility
 
-- Alt text says what was captured and when; the caption repeats it visibly.
+- Alt text says what was captured and when; the visible caption repeats it.
 
 #### Example: Snapshot and removed snapshot
 
@@ -191,7 +301,29 @@ A still image taken from a video, in a 16:9 frame with its source and capture ti
 
 `id: recording-frame` · level: primitive · source: ORCA
 
-A video or stream frame marked as recording or live with a red outline and a worded flag.
+A video or stream frame marked recording or live with a red outline and a worded flag.
+
+### General description
+
+A video or stream frame that clearly shows it is being recorded or is live. It uses an outline and a word label so the state is hard to miss.
+
+#### Use cases
+
+- Live camera feeds.
+- Screen or meeting recordings in progress.
+- Streams that are being stored.
+
+#### When not to use it
+
+- Recorded clips that are not live: use a normal video frame.
+- General status of a thing: use a status indicator.
+
+#### Best practices
+
+- Use a word such as 'Recording' or 'Live', not only colour.
+- Keep any motion subtle and respect reduced-motion settings.
+- Place the label where people will see it.
+- Remove the marker as soon as recording stops.
 
 ### When to use
 
@@ -227,6 +359,28 @@ A video or stream frame marked as recording or live with a red outline and a wor
 
 A native `<video>` with controls inside an aspect-ratio frame.
 
+### General description
+
+A video player with standard controls inside a fixed-shape box. It plays recorded clips on the page.
+
+#### Use cases
+
+- Tutorials and product demos.
+- Recorded meetings or clips.
+- Short explainers within an article.
+
+#### When not to use it
+
+- Short looping graphics: use an animated image or an animation.
+- Live streams: use a live frame.
+
+#### Best practices
+
+- Add captions for speech.
+- Never start playing with sound automatically.
+- Set a poster image and reserve the space.
+- Keep the browser's own controls so they work with a keyboard.
+
 ### When to use
 
 - Recorded clips, tutorials.
@@ -261,6 +415,28 @@ A native `<video>` with controls inside an aspect-ratio frame.
 `id: illustration` · level: primitive · source: Tangerine
 
 Simple token-coloured line illustrations for empty, no-result and error states.
+
+### General description
+
+A simple drawing used to add friendliness to a page, usually for an empty, no-results or error state.
+
+#### Use cases
+
+- Empty lists and first-use screens.
+- No search results.
+- Error and not-found pages.
+
+#### When not to use it
+
+- Decorating pages that already have content.
+- Explaining steps in detail: use text or a diagram.
+
+#### Best practices
+
+- Pair it with a clear title and a next action.
+- Keep it simple and consistent in style.
+- Treat it as decoration with no alt text.
+- Make sure it works in light and dark themes.
 
 ### When to use
 
@@ -300,7 +476,29 @@ Simple token-coloured line illustrations for empty, no-result and error states.
 
 `id: qr-code` · level: primitive · source: ORCA
 
-A frame for a server-generated QR code: white quiet zone, black modules, and the encoded text below.
+A frame for a server-generated QR code: white quiet zone, black modules, encoded text below.
+
+### General description
+
+A square barcode that a phone camera can scan to open a link or read a code. It is shown with the same text written out.
+
+#### Use cases
+
+- Pairing a phone or device.
+- Linking to a web page from a printed item.
+- Setting up two-factor sign-in.
+
+#### When not to use it
+
+- Links people can simply click: use a normal link.
+- Long text: use a short link, because dense codes scan poorly.
+
+#### Best practices
+
+- Keep dark modules on a light background with a quiet border.
+- Print the text or link below as a fallback.
+- Make it large enough to scan.
+- Test it with a real phone.
 
 ### When to use
 
@@ -338,6 +536,28 @@ A frame for a server-generated QR code: white quiet zone, black modules, and the
 `id: barcode` · level: primitive · source: ORCA
 
 A frame for a server-generated 1D barcode with its human-readable digits below.
+
+### General description
+
+A row of lines that a scanner reads to identify an item, with its number printed underneath.
+
+#### Use cases
+
+- Labelling assets or inventory.
+- Printing tickets and passes.
+- Looking up items at a counter or warehouse.
+
+#### When not to use it
+
+- Phone scanning from a screen: a QR code is easier to read.
+- Showing a number only: use plain text.
+
+#### Best practices
+
+- Keep dark bars on a plain light background.
+- Print the digits below for people.
+- Leave empty space at both ends.
+- Test with a real scanner at the printed size.
 
 ### When to use
 

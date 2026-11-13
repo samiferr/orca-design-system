@@ -1,14 +1,36 @@
 # Record management
 
-Showing and changing one record and its children: detail panels, child tabs, activity, protected deletes and confirmations.
+Showing and changing one record and its children: detail panels, child tabs, activity, blocked deletes and confirmations.
 
 ## Detail panel
 
 `id: detail-panel` · level: pattern · source: Tangerine
 
-One record's summary: title and status, its actions, and a table of its properties.
+A record's title, status, actions and a table of its properties.
 
 Built from: `record-actions`, `key-value-list`, `status-light`
+
+### General description
+
+A block that shows everything about a single record: its name, status, actions and properties. It answers what this is and what can be done with it.
+
+#### Use cases
+
+- Main area of a record's page.
+- Side panel for a selected table row.
+- Quick view of a customer, device or order.
+
+#### When not to use it
+
+- Comparing many records; use a table.
+- Editing many fields at once; use a form.
+
+#### Best practices
+
+- Put the name and status first, then actions.
+- Show properties as aligned label and value pairs.
+- Keep the main action prominent and others in a menu.
+- Show only the most useful facts and link to the rest.
 
 ### When to use
 
@@ -72,18 +94,40 @@ Built from: `record-actions`, `key-value-list`, `status-light`
 
 `id: parent-child-tabs` · level: pattern · source: ORCA
 
-A parent record's summary followed by tabs, one per kind of child, each with its count.
+A parent record's summary above tabs, one per kind of child, each with its count.
 
 Built from: `page-head`, `child-tabs`, `stat-card`
 
+### General description
+
+A page for one record with tabs for the related records it owns, such as a project with tabs for tasks and members. The main record stays visible while people browse its parts.
+
+#### Use cases
+
+- A customer with orders and contacts.
+- A site with its devices and users.
+- A project with tasks and files.
+
+#### When not to use it
+
+- Unrelated sections; use general navigation.
+- Only one kind of related item; list it on the page.
+
+#### Best practices
+
+- Keep the parent's summary visible on every tab.
+- Show a count on each tab.
+- Give each tab its own web address.
+- Name tabs after the kind of child records.
+
 ### When to use
 
-- Records that own lists of other records: a site's videos, zones and users.
+- Records that own other records, such as a site's videos, zones and users.
 
 ### How to use
 
 - `<div class="orca-parent">` with the page head, `.orca-parent__summary` (stat cards or key facts) and child tabs as page links; the active tab's panel holds the child list tab.
-- Each tab is its own URL so it can be shared and survives a reload.
+- Give each tab its own URL so it can be shared and survives a reload.
 
 #### Example: Site
 
@@ -142,9 +186,31 @@ Built from: `page-head`, `child-tabs`, `stat-card`
 
 `id: child-list-tab` · level: pattern · source: ORCA
 
-The content of one child tab: a list header scoped to the parent, the children's table and an empty state.
+One child tab's content: a list header for the parent, the children's table and an empty state.
 
 Built from: `list-header`, `data-table`, `empty-state`
+
+### General description
+
+The content of a tab that lists records belonging to a parent. It looks and works like a normal list but is limited to that parent.
+
+#### Use cases
+
+- Showing a customer's orders.
+- Listing the people in a team.
+- Showing items in a folder or project.
+
+#### When not to use it
+
+- Lists of unrelated records; use a regular list page.
+- Records that rarely have children; show a short list on the main page.
+
+#### Best practices
+
+- Use the same tools as other lists, such as search and sorting.
+- Make Add pre-fill the parent.
+- Show an empty state with a way to add the first item.
+- Show the count in the header.
 
 ### When to use
 
@@ -152,7 +218,7 @@ Built from: `list-header`, `data-table`, `empty-state`
 
 ### How to use
 
-- A list header ('Videos 12', search, 'Add video' that links to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action.
+- A list header ('Videos 12', search, 'Add video' linking to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action.
 
 #### Example: Empty child list
 
@@ -187,9 +253,32 @@ Built from: `list-header`, `data-table`, `empty-state`
 
 `id: activity-feed` · level: pattern · source: ORCA
 
-Changes to a record or a site, grouped by day, each with who, what, when and the before and after values.
+Changes to a record or site, grouped by day, each showing who, what, when and the before and after values.
 
 Built from: `activity-entry`
+
+### General description
+
+A timeline of changes to a record, showing who did what and when. It builds trust and helps explain why something looks different.
+
+#### Use cases
+
+- History tab on a record.
+- Audit logs for administrators.
+- Team updates on a project.
+
+#### When not to use it
+
+- Notifications that need a reaction; use alerts or an inbox.
+- Detailed technical logs; use a log viewer.
+
+#### Best practices
+
+- Group entries by day.
+- Show who, what and when for each entry.
+- Show old and new values for edits.
+- Load older entries with a button rather than endless scrolling.
+- Write entries as plain sentences.
 
 ### When to use
 
@@ -235,9 +324,31 @@ Built from: `activity-entry`
 
 `id: delete-blocked-notice` · level: pattern · source: Tangerine
 
-Why a record cannot be deleted yet, which records depend on it, and how to proceed.
+Why a record cannot be deleted yet, what depends on it and what to do next.
 
 Built from: `callout`, `list`, `button-group`
+
+### General description
+
+A message that explains why something cannot be deleted because other records depend on it. It lists the blockers and what to do instead.
+
+#### Use cases
+
+- Deleting a customer who still has orders.
+- Removing a category that still contains items.
+- Deleting an account with active subscriptions.
+
+#### When not to use it
+
+- Deletes that work; use a normal confirmation.
+- Errors with no clear cause; explain the actual problem instead.
+
+#### Best practices
+
+- Say plainly why it cannot be deleted.
+- Link to each blocking record.
+- Offer a safe alternative such as archiving.
+- Show counts so the size of the problem is clear.
 
 ### When to use
 
@@ -279,13 +390,36 @@ Built from: `callout`, `list`, `button-group`
 
 `id: confirm-action-panel` · level: pattern · source: Tangerine
 
-A full-page confirmation for consequential actions: what will happen, what is kept, and the named action.
+A full-page confirmation for serious actions: what will happen, what is kept and a button naming the action.
 
 Built from: `confirm-dialog`, `form-actions`
 
+### General description
+
+A full page that asks people to confirm a serious action. It has room to explain what will happen, what is kept and to name the action on the button.
+
+#### Use cases
+
+- Deleting an account, site or project.
+- Revoking access for a user.
+- Stopping a process that affects many people.
+
+#### When not to use it
+
+- Small, easily undone actions; use undo or a quick dialog.
+- Routine actions; skip the confirmation to avoid habit clicking.
+
+#### Best practices
+
+- Say what will be lost and what will be kept.
+- Name the action on the button, such as Delete site.
+- Add a Cancel link that goes back.
+- Ask for an extra check for irreversible actions.
+- Make the danger button look different.
+
 ### When to use
 
-- Deleting a site, revoking a user, stopping all runs; the fallback of a confirm dialog.
+- Deleting a site, revoking a user, stopping all runs; also the fallback for a confirm dialog.
 
 ### How to use
 

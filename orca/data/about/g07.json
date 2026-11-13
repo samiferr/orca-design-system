@@ -1,0 +1,686 @@
+{
+ "color-palette": {
+  "what": "A color palette is the fixed set of raw colors a product draws from, usually a gray scale plus a few hues in graded shades.",
+  "uses": [
+   "Choosing colors for charts and illustrations that need several distinct categories.",
+   "Defining the colors that interface roles such as text or errors point to.",
+   "Keeping brand and data colors consistent across pages."
+  ],
+  "avoid": [
+   "Coloring text, buttons or status directly from raw swatches; name colors by their job instead.",
+   "Telling chart series apart by hue alone; add labels, shapes or patterns."
+  ],
+  "practices": [
+   "Keep the palette small and name every shade.",
+   "Make neighboring shades differ enough to tell apart.",
+   "Check text contrast against every background it sits on.",
+   "Give each hue the same range of light to dark steps."
+  ]
+ },
+ "semantic-colors": {
+  "what": "Semantic colors are named by their purpose, such as text, border, error or success, rather than by how they look. They let one design work in many themes.",
+  "uses": [
+   "Coloring text, backgrounds and borders consistently across a product.",
+   "Showing status such as success, warning and error.",
+   "Switching between light and dark themes without changing components."
+  ],
+  "avoid": [
+   "Picking a color for its look instead of its meaning; choose the role it plays.",
+   "Using color alone to show status; add an icon and a word."
+  ],
+  "practices": [
+   "Name colors by job, not by hue.",
+   "Test each role for readable contrast in every theme.",
+   "Pair every status color with an icon and text.",
+   "Use one color per meaning, everywhere."
+  ]
+ },
+ "brand-color": {
+  "what": "The brand color is the one signature color that identifies a product. It marks a few key moments, such as the logo, top bar or a main button.",
+  "uses": [
+   "Coloring the logo, header bar or a single main call to action.",
+   "Re-skinning a product for a new brand.",
+   "Adding a small highlight rule or accent mark."
+  ],
+  "avoid": [
+   "Showing success, warning or error; use status colors instead.",
+   "Filling many elements on one screen; repeated emphasis stops standing out."
+  ],
+  "practices": [
+   "Use the brand color sparingly so it keeps its impact.",
+   "Check that text on brand fills has enough contrast.",
+   "Pair it with neutral grays for most of the page.",
+   "Do not rely on it alone to show state."
+  ]
+ },
+ "accent-color": {
+  "what": "The accent color is the single color that signals something is interactive or selected, such as links, checked boxes and active controls.",
+  "uses": [
+   "Coloring links so people see what they can click.",
+   "Showing checked, on or selected states.",
+   "Filling progress indicators and highlighting selected dates."
+  ],
+  "avoid": [
+   "Coloring static headings or decorative icons; this makes people think they are clickable.",
+   "Large fills behind long text; they are hard to read."
+  ],
+  "practices": [
+   "Use one action color across the whole product.",
+   "Make sure link text reaches readable contrast on every background.",
+   "Do not depend on color alone; add underlines or shapes.",
+   "Reserve the color for things people can act on."
+  ]
+ },
+ "themes": {
+  "what": "A theme is a complete set of colors for the same interface, such as light or dark. People choose one, or the system picks it for them.",
+  "uses": [
+   "Offering a dark mode for low light or light sensitivity.",
+   "Following the person's operating system setting automatically.",
+   "Offering a low-glare paper-like reading mode."
+  ],
+  "avoid": [
+   "Writing separate styles for each theme in every component; define shared color names once.",
+   "Using pure black backgrounds; very dark grays are easier on the eyes."
+  ],
+  "practices": [
+   "Respect the system theme by default and remember a manual choice.",
+   "Keep contrast readable in every theme.",
+   "Define colors by role so components need no theme-specific code.",
+   "Test every screen in all themes."
+  ]
+ },
+ "typography": {
+  "what": "Typography is the choice and arrangement of fonts, sizes and weights so text is easy to read and its importance is clear.",
+  "uses": [
+   "Setting headings, body text, labels and captions.",
+   "Showing code in a monospaced font.",
+   "Building a clear visual hierarchy on a page."
+  ],
+  "avoid": [
+   "Inventing new sizes and weights for each page; use a fixed scale.",
+   "Setting long text in all capitals; use it only for short labels."
+  ],
+  "practices": [
+   "Use one readable font family with few weights.",
+   "Size text in relative units so it follows the user's settings.",
+   "Limit line length to about 70 characters.",
+   "Use tabular figures for numbers in tables."
+  ]
+ },
+ "spacing": {
+  "what": "Spacing is the empty room around and between elements. A fixed scale of steps makes layouts consistent and shows which things belong together.",
+  "uses": [
+   "Setting padding, margins and gaps between elements.",
+   "Grouping related items closer than unrelated ones.",
+   "Separating sections without lines or boxes."
+  ],
+  "avoid": [
+   "Picking one-off values such as 10px or 18px; use the scale.",
+   "Using the same gap at every level; it hides the grouping."
+  ],
+  "practices": [
+   "Base all spacing on one unit, such as 8px.",
+   "Work from the inside out: the smallest gap sits closest to the content.",
+   "Use space before adding borders.",
+   "Keep gaps larger between groups than within them."
+  ]
+ },
+ "borders": {
+  "what": "Borders are lines drawn around or between elements to outline them and separate content. A few set line weights keep them consistent.",
+  "uses": [
+   "Outlining buttons, cards, alerts and fields.",
+   "Separating rows in tables and lists.",
+   "Marking the selected tab or a highlight."
+  ],
+  "avoid": [
+   "Boxing every group; use spacing first and keep borders for real separation.",
+   "Using faint decorative lines as the edge of a control; controls need stronger contrast."
+  ],
+  "practices": [
+   "Use only a few line weights and give each a meaning.",
+   "Give control outlines enough contrast to see.",
+   "Keep thick lines for emphasis only.",
+   "Pick line color by purpose, decorative or functional."
+  ]
+ },
+ "radii": {
+  "what": "Corner radii set how rounded the corners of elements are. A consistent corner style gives a product a recognizable look.",
+  "uses": [
+   "Setting square or rounded corners on buttons, cards and fields.",
+   "Making circles for avatars, status dots and radio buttons.",
+   "Giving pills and progress tracks their rounded ends."
+  ],
+  "avoid": [
+   "Mixing many corner styles in one screen; choose a small set.",
+   "Rounding checkboxes like radio buttons; shape tells people which is which."
+  ],
+  "practices": [
+   "Define radii as named values, even for zero.",
+   "Use round shapes only for round things.",
+   "Apply the same radius to the same kind of element.",
+   "Keep nested corners visually consistent."
+  ]
+ },
+ "shadows": {
+  "what": "Shadows suggest depth by making an element look lifted above the page. They help show what floats, such as menus, or what can be moved.",
+  "uses": [
+   "Lifting menus, dropdowns, popovers and toasts above content.",
+   "Showing a dragged item or a dialog.",
+   "Giving a card a hover lift."
+  ],
+  "avoid": [
+   "Putting shadows on every card and panel; use a border or background tint.",
+   "Using heavy shadows for decoration; they add noise."
+  ],
+  "practices": [
+   "Reserve shadows for things that float.",
+   "Use a few fixed levels, not custom blurs.",
+   "In dark themes, lighten the surface as well.",
+   "Keep shadows soft and subtle."
+  ]
+ },
+ "layers": {
+  "what": "Layers define the stacking order of elements that overlap, such as sticky headers, menus, dialogs and notifications.",
+  "uses": [
+   "Keeping dropdowns above the content around them.",
+   "Making sure notifications are not hidden behind dialogs.",
+   "Placing sticky headers and sidebars correctly."
+  ],
+  "avoid": [
+   "Using ever larger random z-index numbers; use named levels.",
+   "Layering many elements at once; reduce overlap where possible."
+  ],
+  "practices": [
+   "Define a fixed, named stacking order in one place.",
+   "Order levels by how urgent the element is.",
+   "Reference names, not raw numbers.",
+   "Let the skip link and tooltips sit on top."
+  ]
+ },
+ "control-heights": {
+  "what": "Control heights are the standard sizes shared by buttons, fields and selects, so controls line up and are big enough to tap.",
+  "uses": [
+   "Aligning buttons and fields in a row or toolbar.",
+   "Making denser controls for tables and filter bars.",
+   "Making larger controls for touch screens."
+  ],
+  "avoid": [
+   "Mixing heights in one row of controls.",
+   "Small controls on touch screens; make targets at least 44px."
+  ],
+  "practices": [
+   "Offer a few fixed heights, not custom ones.",
+   "Make touch targets at least 44px high.",
+   "Use the default height unless space is tight.",
+   "Grow controls automatically on touch devices."
+  ]
+ },
+ "motion": {
+  "what": "Motion is movement and transition in an interface, such as fades and slides, used to give feedback and explain what changed.",
+  "uses": [
+   "Giving feedback on hover and press.",
+   "Showing something opening, arriving or closing.",
+   "Showing progress or loading."
+  ],
+  "avoid": [
+   "Decorative animation that slows people down.",
+   "Long or looping effects, except loading indicators; keep feedback fast."
+  ],
+  "practices": [
+   "Keep interface animations short, under about 400 milliseconds.",
+   "Use the same timing for the same kind of change.",
+   "Respect the reduced-motion setting and show the end state.",
+   "Use easing that decelerates for things that arrive."
+  ]
+ },
+ "aspect-ratio": {
+  "what": "An aspect ratio is the proportion of an element's width to its height. Setting it ahead of time reserves space before the content loads.",
+  "uses": [
+   "Reserving room for images and video while they load.",
+   "Keeping thumbnails and cards a consistent shape.",
+   "Framing embedded maps or charts."
+  ],
+  "avoid": [
+   "Leaving media without set dimensions; the page jumps when it loads.",
+   "Stretching images to fit; crop or letterbox instead."
+  ],
+  "practices": [
+   "Set the ratio before the media loads.",
+   "Use common ratios such as 16:9, 4:3 and 1:1.",
+   "Crop images to fill the frame without distortion.",
+   "Write alt text for every image."
+  ]
+ },
+ "scrollbar": {
+  "what": "A scrollbar shows that content continues beyond the visible area and lets people move through it. Inner regions can have their own slim scrollbar.",
+  "uses": [
+   "Scrolling long panels, menus and sidebars.",
+   "Scrolling code blocks and long lists inside a page.",
+   "Showing that a region holds more content."
+  ],
+  "avoid": [
+   "Restyling the main page scrollbar; leave the system default.",
+   "Hiding scrollbars completely; people lose the cue that more exists."
+  ],
+  "practices": [
+   "Keep scrollbars visible and with enough contrast.",
+   "Limit nested scrolling regions where possible.",
+   "Give scroll areas a clear height so the edge is obvious.",
+   "Make sure keyboard users can scroll them."
+  ]
+ },
+ "divider": {
+  "what": "A divider is a thin line that separates groups of content, either across a page or between side-by-side items.",
+  "uses": [
+   "Separating groups in menus and panels.",
+   "Splitting groups of toolbar buttons.",
+   "Showing an 'or' between alternative options."
+  ],
+  "avoid": [
+   "Putting lines between every item; use spacing or row separators.",
+   "Faking a heading with a line; use a real section title."
+  ],
+  "practices": [
+   "Use dividers sparingly so they keep meaning.",
+   "Try spacing first.",
+   "Hide purely decorative lines from screen readers.",
+   "Mark real separators with the correct role."
+  ]
+ },
+ "chevron-separator": {
+  "what": "A chevron separator is a small arrow-like mark placed between items in a path, showing that one sits inside the other.",
+  "uses": [
+   "Separating levels in breadcrumbs.",
+   "Showing file or folder paths.",
+   "Showing nested categories."
+  ],
+  "avoid": [
+   "Using it as a button or toggle; use a real control.",
+   "Separating unrelated items; use spacing or a divider."
+  ],
+  "practices": [
+   "Keep it small and muted.",
+   "Hide it from screen readers, since the list carries the meaning.",
+   "Flip it in right-to-left languages.",
+   "Use the same mark everywhere."
+  ]
+ },
+ "sr-only": {
+  "what": "Screen-reader-only text is content hidden from the screen but still read aloud by assistive technology. It supplies meaning that is otherwise only visual.",
+  "uses": [
+   "Naming icon-only buttons and links.",
+   "Adding context such as 'opens in a new tab'.",
+   "Explaining changes shown only by color or arrows."
+  ],
+  "avoid": [
+   "Hiding text that sighted keyboard users also need; show it.",
+   "Repeating text that is already announced."
+  ],
+  "practices": [
+   "Keep hidden text short and clear.",
+   "Write it so it reads naturally in context.",
+   "Show it again when it gets keyboard focus if it is actionable.",
+   "Test with a screen reader."
+  ]
+ },
+ "skip-link": {
+  "what": "A skip link is a link at the very top of a page that lets keyboard and screen reader users jump past repeated navigation to the main content.",
+  "uses": [
+   "Letting keyboard users bypass long menus.",
+   "Helping screen reader users reach content quickly.",
+   "Meeting basic accessibility requirements on every page."
+  ],
+  "avoid": [
+   "Hiding it so it never appears when focused.",
+   "Leaving it out on pages with navigation before the content."
+  ],
+  "practices": [
+   "Make it the first focusable element on the page.",
+   "Show it clearly when it gets focus.",
+   "Point it to the main content area.",
+   "Use plain wording such as 'Skip to main content'."
+  ]
+ },
+ "focus-ring": {
+  "what": "A focus ring is the visible outline around the element that currently has keyboard focus, showing people where they are on the page.",
+  "uses": [
+   "Showing the active control during keyboard navigation.",
+   "Marking custom widgets that handle their own focus.",
+   "Helping low-vision users follow the cursor."
+  ],
+  "avoid": [
+   "Removing the outline without a replacement.",
+   "Hiding it for keyboard users because it looks plain."
+  ],
+  "practices": [
+   "Show it only for keyboard focus where possible.",
+   "Give it at least 3:1 contrast on every background.",
+   "Keep it thick enough to see.",
+   "Make sure it stays visible on filled controls."
+  ]
+ },
+ "chevron": {
+  "what": "A chevron is a small arrow that points down when a section is open and sideways when closed, hinting that the section can expand or collapse.",
+  "uses": [
+   "Showing expandable accordion and disclosure sections.",
+   "Showing opened or closed tree and menu groups.",
+   "Hinting that a row reveals more."
+  ],
+  "avoid": [
+   "Using it as the only sign that something is clickable; add a label.",
+   "Using it for navigation to a new page; use an arrow or link."
+  ],
+  "practices": [
+   "Rotate it when the state changes.",
+   "Place it in the same spot on every row.",
+   "Expose the open state to screen readers separately.",
+   "Animate the turn briefly."
+  ]
+ },
+ "step-marker": {
+  "what": "A step marker is a small mark showing one step of a process, with its state such as to do, current, done or error.",
+  "uses": [
+   "Showing progress through a multi-step form.",
+   "Listing stages in setup or checkout.",
+   "Showing steps on a timeline."
+  ],
+  "avoid": [
+   "Using it for a single-page form; it adds noise.",
+   "Showing state by color alone; add text or an icon."
+  ],
+  "practices": [
+   "Place it beside the step name.",
+   "Say the state in text for screen readers.",
+   "Mark the current step clearly.",
+   "Keep the number of steps small."
+  ]
+ },
+ "carousel-dot": {
+  "what": "A carousel dot is a small clickable marker for one slide in a carousel or gallery. It shows how many slides there are and which one is showing.",
+  "uses": [
+   "Jumping to a specific slide.",
+   "Showing the current position in a gallery.",
+   "Letting people browse a short set of images."
+  ],
+  "avoid": [
+   "Galleries with many items; show a count and thumbnails instead.",
+   "Making dots tiny to tap; keep a large target."
+  ],
+  "practices": [
+   "Give each dot a label such as 'Show image 2 of 5'.",
+   "Mark the current dot by shape, not only color.",
+   "Keep dots to about eight or fewer.",
+   "Make the tap target at least 44px."
+  ]
+ },
+ "pagination-gap": {
+  "what": "A pagination gap is an ellipsis between page numbers showing that some pages are skipped, so long lists of pages stay short.",
+  "uses": [
+   "Shortening page lists with many pages.",
+   "Keeping first, last and nearby pages visible.",
+   "Saving space in narrow layouts."
+  ],
+  "avoid": [
+   "Using it when there are only a few pages; show them all.",
+   "Making it clickable; use a real page link."
+  ],
+  "practices": [
+   "Show the first, last and current pages around it.",
+   "Make it non-interactive.",
+   "Hide it from screen readers.",
+   "Keep it visually quiet."
+  ]
+ },
+ "dialog-backdrop": {
+  "what": "A dialog backdrop is the dimmed layer behind a modal dialog. It focuses attention on the dialog and blocks the page behind it.",
+  "uses": [
+   "Confirming a risky action such as delete.",
+   "Short tasks that must finish before continuing.",
+   "Asking for a decision that cannot wait."
+  ],
+  "avoid": [
+   "Content people need to compare with the page; use a side panel or inline section.",
+   "Long forms; use a full page instead."
+  ],
+  "practices": [
+   "Trap focus inside and return it on close.",
+   "Let Escape and a Cancel button close it.",
+   "Put actions at the bottom with the main one clear.",
+   "Dim enough to separate, but not hide the page."
+  ]
+ },
+ "drawer-backdrop": {
+  "what": "A drawer backdrop is the dimmed layer behind a panel that slides in from the side. Clicking it usually closes the drawer.",
+  "uses": [
+   "Showing filters or settings in a side panel.",
+   "Opening navigation on phones.",
+   "Giving a large target to dismiss the drawer."
+  ],
+  "avoid": [
+   "Panels people must use alongside the page; keep them docked instead.",
+   "Blocking the page without a clear way out."
+  ],
+  "practices": [
+   "Let clicking the backdrop and Escape close the drawer.",
+   "Offer a visible Close button too.",
+   "Keep focus inside while it is open.",
+   "Return focus to the opener when closed."
+  ]
+ },
+ "weekday-selector": {
+  "what": "A weekday selector lets people pick one or more days of the week, usually with seven toggles and shortcuts for common sets.",
+  "uses": [
+   "Choosing which days an event repeats.",
+   "Setting opening days or shift patterns.",
+   "Picking days for a schedule or report."
+  ],
+  "avoid": [
+   "Choosing a single date; use a date picker.",
+   "Picking one day only; use a select or radio group."
+  ],
+  "practices": [
+   "Offer presets such as weekdays and every day.",
+   "Start the week on the local first day.",
+   "Give each day a full accessible name.",
+   "Show clearly which days are selected."
+  ]
+ },
+ "recurrence-selector": {
+  "what": "A recurrence selector lets people set how an event repeats, with common choices like daily or weekly and a custom option for complex rules.",
+  "uses": [
+   "Repeating calendar events and tasks.",
+   "Scheduling recurring reports or runs.",
+   "Setting repeating billing or reminders."
+  ],
+  "avoid": [
+   "One-off events; do not show repeat options.",
+   "Showing every custom field up front; reveal them only when needed."
+  ],
+  "practices": [
+   "Offer the most common rules first.",
+   "Name options with the real day, such as 'Weekly on Thursday'.",
+   "Summarize the custom rule in words.",
+   "Let people choose when the repeat ends."
+  ]
+ },
+ "reminder-selector": {
+  "what": "A reminder selector lets people choose how long before an event or deadline they are notified, and add several reminders.",
+  "uses": [
+   "Setting alerts before events.",
+   "Adding notifications to tasks and deadlines.",
+   "Offering more than one reminder for one item."
+  ],
+  "avoid": [
+   "Requiring a reminder; make it optional.",
+   "Free-typed times when standard offsets suffice."
+  ],
+  "practices": [
+   "Offer standard time offsets.",
+   "Let people add and remove reminders.",
+   "Default to the last choice.",
+   "Cap the number of reminders."
+  ]
+ },
+ "period-selector": {
+  "what": "A period selector lets people choose a time range for data, such as today, this week or a custom range.",
+  "uses": [
+   "Filtering reports and dashboards by time.",
+   "Switching between common time windows.",
+   "Choosing a custom date range."
+  ],
+  "avoid": [
+   "Picking one exact date; use a date picker.",
+   "Long lists of periods; use a select."
+  ],
+  "practices": [
+   "Show the common periods as one visible set.",
+   "Print the actual dates that result.",
+   "Make the selected period obvious.",
+   "Keep the custom option for exceptions."
+  ]
+ },
+ "granularity-selector": {
+  "what": "A granularity selector lets people choose how time-based data is grouped, such as by hour, day, week or month.",
+  "uses": [
+   "Changing the time grouping of a chart.",
+   "Summarizing a report by week or month.",
+   "Zooming between detail and overview."
+  ],
+  "avoid": [
+   "Data with no time dimension; do not offer it.",
+   "Offering groupings that would give unreadable results."
+  ],
+  "practices": [
+   "Place it next to the chart it changes.",
+   "Disable choices that make no sense for the period.",
+   "Explain why a choice is unavailable.",
+   "Choose a sensible default."
+  ]
+ },
+ "calendar-view-switcher": {
+  "what": "A calendar view switcher lets people change how a calendar displays time, such as day, week, month or agenda.",
+  "uses": [
+   "Switching between detailed and overview views of a calendar.",
+   "Viewing a list of upcoming events.",
+   "Adapting to different screen sizes."
+  ],
+  "avoid": [
+   "Switching between unrelated pages; use tabs or navigation.",
+   "Offering unusual views people do not expect."
+  ],
+  "practices": [
+   "Keep the selected date when switching views.",
+   "Use the standard view names.",
+   "Mark the current view clearly.",
+   "Use the agenda view by default on phones."
+  ]
+ },
+ "preset-buttons": {
+  "what": "Preset buttons are a row of one-tap shortcuts that fill in a more detailed control with common values.",
+  "uses": [
+   "Choosing common date ranges.",
+   "Choosing common sets of days.",
+   "Filling in typical durations."
+  ],
+  "avoid": [
+   "Replacing a detailed control entirely; keep it for exceptions.",
+   "Long lists of presets; use a select."
+  ],
+  "practices": [
+   "Offer only a few presets.",
+   "Name them by outcome.",
+   "Show which preset matches the current value.",
+   "Keep the detailed control available."
+  ]
+ },
+ "calendar-navigation": {
+  "what": "Calendar navigation is a group of controls for moving to the previous or next period or jumping back to today, with a label for the period shown.",
+  "uses": [
+   "Moving through weeks or months in a calendar.",
+   "Stepping through report periods.",
+   "Returning to today quickly."
+  ],
+  "avoid": [
+   "Jumping far in time; add a date picker.",
+   "Leaving out the visible period label."
+  ],
+  "practices": [
+   "Show the current period label.",
+   "Name arrows by period, such as 'Previous week'.",
+   "Disable Today when it is already visible.",
+   "Announce label changes politely to screen readers."
+  ]
+ },
+ "progress-bar": {
+  "what": "A progress bar is a horizontal track that fills to show how much of a task is done, or that animates when the time left is unknown.",
+  "uses": [
+   "Showing upload, export or import progress.",
+   "Showing storage or quota use.",
+   "Showing steps completed in a task."
+  ],
+  "avoid": [
+   "Waits under about a second; a spinner is enough.",
+   "Tasks with no measurable progress; use a spinner with a message."
+  ],
+  "practices": [
+   "Label every bar and show the value as text.",
+   "Say what is happening for long waits.",
+   "Announce completion to screen readers.",
+   "Use color tones only with a text value."
+  ]
+ },
+ "progress-ring": {
+  "what": "A progress ring is a circular indicator that fills to show a percentage, often with the value in the middle.",
+  "uses": [
+   "Showing completion in small tiles.",
+   "Showing a task's percent done.",
+   "Showing quota use in a compact space."
+  ],
+  "avoid": [
+   "Long operations whose estimate changes; use a bar with text.",
+   "Showing precise comparisons; a bar is easier to read."
+  ],
+  "practices": [
+   "Put the value in text inside or beside the ring.",
+   "Give it an accessible name.",
+   "Keep it large enough to read.",
+   "Do not rely on color alone."
+  ]
+ },
+ "spinner": {
+  "what": "A spinner is a small rotating icon showing that something is loading when the wait time is unknown.",
+  "uses": [
+   "Showing a busy button.",
+   "Showing a field being checked.",
+   "Showing a small region loading."
+  ],
+  "avoid": [
+   "Whole page loads or long waits; use a skeleton or progress bar.",
+   "Very short waits; flashing feels worse."
+  ],
+  "practices": [
+   "Pair it with a short text message.",
+   "Announce it as a status to screen readers.",
+   "Keep it small and calm.",
+   "Replace it with content as soon as ready."
+  ]
+ },
+ "skeleton": {
+  "what": "A skeleton is a grey placeholder shaped like the content that is loading. It shows the page layout early and makes waiting feel shorter.",
+  "uses": [
+   "Loading cards, lists and tables.",
+   "Loading image and video grids.",
+   "Loading sections that arrive after the page."
+  ],
+  "avoid": [
+   "Content that loads almost instantly; the flash is distracting.",
+   "Waits where no layout is known; use a spinner."
+  ],
+  "practices": [
+   "Match the real layout closely.",
+   "Vary line widths to look like text.",
+   "Mark the region as busy for screen readers.",
+   "Swap in content without moving the layout."
+  ]
+ }
+}

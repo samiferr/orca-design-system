@@ -23,10 +23,10 @@ add(Component(
     why="People expect the logo to take them home (Jakob's law); one component makes it the same link with the same "
         "accessible name in the top bar, the site header, the footer, sign-in and emails.",
     when=["Top bar, site header, footer, sign-in card, error pages and emails."],
-    avoid=["A second home link next to it with the same destination."],
+    avoid=["A second home link beside it."],
     how=["`{% orca_logo href=\"/\" %}`: the brand logo (or the name as a wordmark) inside a link named after the product.",
-         "Leave `href` empty where the page is already home, such as the sign-in page; the logo is then not a link."],
-    a11y=["The link's accessible name is the product name from `settings.ORCA[\"BRAND\"][\"name\"]`."],
+         "Leave `href` empty where the page is already home, such as sign-in; the logo is then not a link."],
+    a11y=["The link is named after the product, from `settings.ORCA[\"BRAND\"][\"name\"]`."],
     classes=[".orca-logo"],
     laws=["jakob", "fitts"],
     uses=["logo"],
@@ -36,7 +36,7 @@ add(Component(
 
 add(Component(
     "collapse-toggle", "Collapse toggle", IDENTITY,
-    "An icon button that collapses or expands a region, says which it will do, and remembers the choice.",
+    "An icon button that collapses or expands a region and remembers the choice. Its label says what a press will do.",
     why="A collapsible region gives space back without losing the way back (Practical UI S04); the button's name "
         "changes with the state so it never lies about what a press will do (Postel's law).",
     when=["The foot of a collapsible sidebar; side panels that can shrink to a rail."],
@@ -55,14 +55,14 @@ add(Component(
 
 add(Component(
     "skip-navigation", "Skip navigation", NAV,
-    "The skip link and the focusable main landmark it jumps to.",
+    "A skip link and the focusable main area it jumps to.",
     why="Keyboard and screen-reader users skip the repeated navigation in one key press (WCAG 2.4.1, Fitts's law for the "
         "keyboard); the link only works with a target that can take focus, so the two belong together.",
-    when=["Every page: the base layout writes it."],
+    when=["Every page; the base layout adds it."],
     how=["First in `<body>`: `<a class=\"orca-skip-link\" href=\"#main\">Skip to main content</a>`; the target is "
          "`<main id=\"main\" tabindex=\"-1\">`.",
          "Keep one main landmark per page."],
-    a11y=["The link is the first focusable element; it shows when focused."],
+    a11y=["It is the first focusable element and appears on focus."],
     classes=[".orca-skip-link"],
     laws=["fitts", "F01"],
     uses=["skip-link"],
@@ -78,7 +78,7 @@ add(Component(
     "A titled list of links, as in a footer or a site map.",
     why="A short title over a few links lets people scan a footer by topic (Miller's law: chunking, Practical UI L01).",
     when=["Footer columns, site maps, 'Related' lists at the end of documentation pages."],
-    avoid=["More than about eight links in one column: split it by topic."],
+    avoid=["More than about eight links: split the column by topic."],
     how=["`<ul class=\"orca-footer__col\"><li class=\"orca-footer__col-title\">Product</li><li><a href=…>Features</a></li>…</ul>`.",
          "Link text names the destination (W14)."],
     classes=[".orca-footer__col", ".orca-footer__col-title"],
@@ -92,7 +92,7 @@ add(Component(
 
 add(Component(
     "page-heading", "Page heading", CONTENT,
-    "The page title, the one-sentence subtitle and an optional meta line with status badges.",
+    "The page title, a one-sentence subtitle and an optional line of facts and status badges.",
     why="People confirm where they are from the title first and what the page is for from the subtitle (Jakob's law, "
         "Practical UI W04); keeping the three together keeps their spacing and order the same on every page.",
     when=["Inside the page head of application pages and documentation pages."],
@@ -112,12 +112,12 @@ add(Component(
 
 add(Component(
     "section-heading", "Section heading", CONTENT,
-    "A section title with an optional one-paragraph introduction.",
+    "A section title with an optional short introduction.",
     why="A title and one sentence of why let people decide whether a section concerns them before reading it "
         "(Practical UI W05: inverted pyramid, L01: grouping).",
     when=["Form sections, settings groups, documentation sections."],
     how=["`<h2 class=\"orca-section-title\">` then `<p class=\"orca-p\">` of one or two sentences.",
-         "Keep heading levels in order on the page."],
+         "Keep heading levels in order."],
     classes=[".orca-section-title"],
     laws=["W05", "L01"],
     uses=["section-title", "paragraph"],
@@ -134,7 +134,7 @@ add(Component(
     when=["Feature grids on marketing pages; 'What you can do' lists on empty dashboards."],
     how=["`<li class=\"orca-feature\">{% icon \"statistics\" size=\"l\" %}<h3 class=\"orca-feature__title\">…</h3>"
          "<p class=\"orca-feature__text\">…</p></li>`.",
-         "The title says the benefit in two to four words."],
+         "Title: the benefit, in two to four words."],
     a11y=["The icon is decorative; the title carries the meaning."],
     classes=[".orca-feature", ".orca-feature__title", ".orca-feature__text"],
     laws=["miller", "W01"],
@@ -145,13 +145,13 @@ add(Component(
 
 add(Component(
     "captioned-media", "Captioned media", CONTENT,
-    "An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.",
+    "An image or video in a fixed-ratio frame, with a caption or flag on a solid bar.",
     why="The frame reserves the space so nothing jumps while the media loads (Doherty threshold); a caption on a "
         "solid bar stays readable over any picture (Practical UI T12).",
     when=["Photo posts, gallery stages, story images, editors that draw over an image."],
     how=["`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\">…</figcaption></figure>`.",
-         "Without a caption, the frame alone: `<div class=\"orca-ratio orca-ratio--4x3\"><img …></div>`."],
-    a11y=["Alt text says what matters in the image; the caption repeats source and time visibly."],
+         "Without a caption, use the frame alone: `<div class=\"orca-ratio orca-ratio--4x3\"><img …></div>`."],
+    a11y=["Alt text says what matters in the image; the caption shows source and time to everyone."],
     classes=[".orca-ratio", ".orca-frame__caption"],
     laws=["doherty", "T12"],
     uses=["media-frame", "snapshot-image"],
@@ -164,13 +164,13 @@ add(Component(
 
 add(Component(
     "thumbnail-strip", "Thumbnail strip", CONTENT,
-    "A row of thumbnail buttons that choose the image shown, the current one marked.",
+    "A row of thumbnail buttons that pick the image shown and mark the current one.",
     why="Thumbnails show what is there and let people jump straight to an image (Miller's law: recognition over recall); "
         "the current one changes shape, not only colour (C03).",
     when=["Image galleries and media pickers with up to about twenty items."],
     how=["`<ul class=\"orca-gallery__thumbs\"><li><button class=\"orca-gallery__thumb\" type=\"button\" aria-current=\"true\" "
          "aria-label=\"Image 1, 08:14\"><img src=… alt=\"\"></button></li>…</ul>`."],
-    a11y=["Each button is named after the image it shows; `aria-current` marks the one on stage."],
+    a11y=["Each button is named after its image; `aria-current` marks the one shown."],
     classes=[".orca-gallery__thumbs", ".orca-gallery__thumb"],
     laws=["miller", "C03"],
     uses=["thumbnail"],
@@ -180,14 +180,14 @@ add(Component(
 
 add(Component(
     "video-player", "Video player", CONTENT,
-    "A native video in its frame, with a live or recording flag and the current time.",
+    "A native video with a live or recording flag and the current time.",
     why="Native controls are familiar and keyboard accessible (Jakob's law, Postel's law); a worded flag makes "
         "'live' or 'recording' impossible to miss (Von Restorff, C03).",
     when=["Recorded clips, live streams, tutorials."],
     how=["`<div class=\"orca-ratio orca-ratio--16x9\"><video class=\"orca-video\" controls preload=\"metadata\" poster=…></video></div>`.",
          "Live or recording: add `.orca-frame--recording` and `<span class=\"orca-frame__flag\">` with a pulsing dot and the word.",
          "Never autoplay with sound."],
-    a11y=["Provide captions for speech; name the video with `aria-label` when no visible title is next to it."],
+    a11y=["Add captions for speech; name the video with `aria-label` when no visible title is nearby."],
     classes=[".orca-video", ".orca-frame--recording", ".orca-frame__flag"],
     laws=["jakob", "postel", "restorff", "C03"],
     uses=["video-frame", "recording-frame", "time-label"],
@@ -200,13 +200,13 @@ add(Component(
 
 add(Component(
     "call-to-action", "Call to action", CONTENT,
-    "The one or two actions a section asks for: the primary button and an optional quieter alternative.",
+    "The one or two actions a section asks for: a primary button and an optional quieter one.",
     why="One clear primary action per section (Practical UI B03, Hick's law) with the alternative visibly quieter (B05).",
     when=["Site headers, heroes, email frames, empty pages."],
-    avoid=["Three or more actions: keep one, move the rest to a menu or a link."],
+    avoid=["Three or more actions: keep one and move the rest to a menu or link."],
     how=["`<div class=\"orca-site-header__actions\"><a class=\"orca-button orca-button--ghost\" href=…>Sign in</a>"
          "<a class=\"orca-button orca-button--brand\" href=…>Start free trial</a></div>`.",
-         "In emails the button is a table-based link with the address written below it."],
+         "In emails, use a table-based link button with the address written below it."],
     classes=[".orca-site-header__actions"],
     laws=["B03", "B05", "hick"],
     uses=["button", "text-link"],
@@ -216,7 +216,7 @@ add(Component(
 
 add(Component(
     "fine-print", "Fine print", CONTENT,
-    "Small legal and version text on one line, with its policy links.",
+    "Small legal and version text on one line, with policy links.",
     why="Legal text must be there but must not compete (Practical UI S02); small, muted and on one line it stays "
         "findable without taking attention (T13: quieter text stays legible).",
     when=["Footers, email footers, sign-in pages."],
@@ -232,13 +232,13 @@ add(Component(
 
 add(Component(
     "big-number", "Big number", DATA,
-    "One large figure with the statement it supports and where it comes from.",
+    "One large figure with its statement and source.",
     why="A single striking number is remembered (Von Restorff, Peak–end rule); the statement and the source keep it honest.",
     when=["Editorial factoids, live counts beside a video, report highlights."],
     avoid=["Several big numbers side by side: use stat cards in a KPI grid."],
     how=["`<figure class=\"orca-factoid\"><span class=\"orca-factoid__number\">−34%</span><figcaption><p class=\"orca-factoid__text\">…</p>"
          "<p class=\"orca-factoid__source\">…</p></figcaption></figure>`.",
-         "Numbers as digits with separators and the sign written (W11)."],
+         "Write digits with separators and the sign (W11)."],
     classes=[".orca-factoid", ".orca-factoid__number", ".orca-factoid__text", ".orca-factoid__source"],
     laws=["restorff", "peak-end", "W11"],
     uses=["stat-value", "small-text"],
@@ -248,7 +248,7 @@ add(Component(
 
 add(Component(
     "summary-tile", "Summary tile", DATA,
-    "A count with its status word, as a link that filters the list to that status.",
+    "A count and status word, as a link that filters the list to that status.",
     why="Counts by status answer 'how many need me?' at a glance (Miller's law) and double as the quickest filter (Fitts's "
         "law: a large target); the dot is paired with a word (C03).",
     when=["Above lists and tables whose records have a status."],
@@ -301,7 +301,7 @@ add(Component(
     when=["Tables that offer bulk actions."],
     how=["Header: `<th scope=\"col\" class=\"orca-table__select\"><label class=\"orca-check\"><input type=\"checkbox\" "
          "aria-label=\"Select all videos\"><span class=\"orca-check__box\"></span></label></th>`; one per row named after the row.",
-         "When rows are selected, the table toolbar shows the count and the bulk actions."],
+         "Selecting rows shows the count and the bulk actions in the table toolbar."],
     a11y=["Each checkbox is named after its row ('Select Entrance A')."],
     classes=[".orca-table__select"],
     laws=["F03", "jakob", "R14"],
@@ -313,13 +313,13 @@ add(Component(
 
 add(Component(
     "formatting-toolbar", "Formatting toolbar", FORMS,
-    "A row of pressed-state icon buttons for bold, italic, lists and links over a text area.",
+    "A row of toggle icon buttons for bold, italic, lists and links above a text area.",
     why="Formatting commands are recognised by their familiar glyphs (Jakob's law); pressed states show what applies to "
         "the selection (Practical UI F10).",
     when=["Above a rich text field."],
     how=["`<div class=\"orca-richtext__toolbar\" role=\"toolbar\" aria-label=\"Formatting\">` with dense icon buttons using "
          "`aria-pressed`, groups separated by a vertical divider."],
-    a11y=["Arrow keys move between the buttons of the toolbar; each has an accessible name."],
+    a11y=["Arrow keys move between buttons; each has an accessible name."],
     classes=[".orca-richtext__toolbar"],
     laws=["jakob", "F10"],
     uses=["icon-button", "divider"],
@@ -329,10 +329,10 @@ add(Component(
 
 add(Component(
     "applied-filters", "Applied filters", FORMS,
-    "The filters in effect as removable tags, with Clear all and the number of results.",
+    "Active filters as removable tags, with Clear all and the result count.",
     why="Filters that are on must stay visible and reversible (Practical UI S06, Postel's law); the count confirms "
         "what they did (Doherty threshold).",
-    when=["Above results while at least one filter is applied; inside a no-results state."],
+    when=["Above results while a filter is applied; inside a no-results state."],
     how=["`<div class=\"orca-filter-bar__applied\"><span class=\"orca-small orca-muted\">Filtered by</span>` then one removable "
          "tag per filter, a 'Clear all' link button and the count in `role=\"status\"`."],
     a11y=["Each remove button names the filter it removes."],
@@ -347,7 +347,7 @@ add(Component(
 
 add(Component(
     "card-skeleton", "Card skeleton", FEEDBACK,
-    "The grey shape of a card (image, title, two lines) while the real card loads.",
+    "The grey shape of a card (image, title, two lines) while it loads.",
     why="A placeholder in the final shape shows that content is coming and where (Doherty threshold) and prevents the "
         "layout from jumping when it arrives.",
     when=["Grids and feeds that load cards after the page."],

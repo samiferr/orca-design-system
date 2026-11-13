@@ -2,17 +2,17 @@ from .registry import Element, add, category
 
 C = category(
     "text", "Text",
-    "Text styles with a fixed role. Choose by what the text is (a page title, a stat value), not by how big you want it.",
+    "Text styles with a fixed role. Choose by what the text is (a page title, a stat value), not by size.",
 )
 
 add(Element(
     "heading", "Heading (h1–h6)", C,
-    "Document headings from h1 to h6, plus a display style for marketing pages.",
+    "Headings h1 to h6, plus a display style for marketing pages.",
     why="A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: "
         "chunking; Practical UI W08). ORCA's thin h2 is the system's typographic signature.",
     when=["Structuring long content: docs, settings pages, reports.",
           "Marketing pages: `.orca-display` for the one hero line."],
-    avoid=["Choosing a heading level for its size: keep levels in order and restyle with a class if needed.",
+    avoid=["Picking a level for its size: keep levels in order and restyle with a class.",
            "Page and panel titles in applications: use `page-title` and `panel-title`."],
     how=["Use real `<h1>`–`<h6>` elements with `.orca-h1`…`.orca-h6`.",
          "One `<h1>` per page. Never skip a level going down.",
@@ -32,17 +32,17 @@ add(Element(
 
 add(Element(
     "page-title", "Page title", C,
-    "The single title naming what this page is.",
+    "The one title that names the page.",
     why="People confirm they are in the right place from the title first (Jakob's law); one clear title gives "
         "the page a single focal point (Von Restorff).",
-    when=["Top of every application page, inside the page head, beside the page actions."],
-    avoid=["Repeating the product name or the breadcrumb's last item word for word with extra decoration.",
+    when=["Top of every application page, in the page head beside the page actions."],
+    avoid=["Repeating the product name or the last breadcrumb item.",
            "Long titles: front-load the distinguishing word (W04)."],
     how=["`<h1 class=\"orca-page-title\">` (28/36, weight 700).",
          "Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.",
-         "Long names wrap; they are never cut, so people can always read the full name (L15).",
+         "Long names wrap and are never cut (L15).",
          "On application pages it sits in the `page-head` pattern, with the page actions beside it."],
-    a11y=["It is the page's `<h1>`; the document `<title>` should start with the same words."],
+    a11y=["It is the page's `<h1>`. Start the document `<title>` with the same words."],
     classes=[".orca-page-title"], tokens=["type-page-title"],
     laws=["jakob", "restorff", "W04", "L15"],
     examples=[("Page title with subtitle", """<div>
@@ -55,11 +55,11 @@ add(Element(
 
 add(Element(
     "page-subtitle", "Page subtitle", C,
-    "One sentence under the page title that says what the page is for or about.",
+    "One sentence under the page title saying what the page is for.",
     why="A short orientation sentence answers 'what can I do here' without a manual (Tesler: help in context; "
         "paradox of the active user).",
-    when=["Pages whose purpose is not obvious from the title, or that need one key fact (scope, time range)."],
-    avoid=["Repeating the title.", "Instructions longer than one sentence: put them in help text where they are needed."],
+    when=["Pages whose purpose is unclear from the title, or that need one key fact (scope, time range)."],
+    avoid=["Repeating the title.", "Instructions longer than one sentence: put them in help text where needed."],
     how=["`<p class=\"orca-page-subtitle\">` directly after the page title; muted, max 70ch.",
          "Under 20 words (W01). A full sentence ends with a full stop."],
     classes=[".orca-page-subtitle"], tokens=["text-muted", "measure"],
@@ -71,12 +71,12 @@ add(Element(
 
 add(Element(
     "section-title", "Section title", C,
-    "Title of a section inside a page (a group of panels or a long form part).",
+    "Title of a section in a page: a group of panels or part of a long form.",
     why="Section titles chunk a long page into a few recognisable parts (Miller's law, Practical UI R17).",
-    when=["Splitting a page into two or more regions; grouping fields of a long form."],
-    avoid=["A section with a single panel that already has a title: use only the panel title."],
+    when=["Splitting a page into two or more regions; grouping fields in a long form."],
+    avoid=["A section holding one titled panel: use only the panel title."],
     how=["`<h2 class=\"orca-section-title\">` (24/32, 550), with `--orca-space-16` below and `--orca-space-32` above.",
-         "Descriptive words people scan for: 'Notifications', not 'Other'."],
+         "Use words people scan for: 'Notifications', not 'Other'."],
     classes=[".orca-section-title"], tokens=["type-h3"],
     laws=["miller", "R17", "W08"],
     examples=[("Section title", """<h2 class="orca-section-title">Notifications</h2>""")],
@@ -85,7 +85,7 @@ add(Element(
 
 add(Element(
     "panel-title", "Panel title", C,
-    "Title at the top of a panel or card group of content.",
+    "Title at the top of a panel or card group.",
     why="Each panel answers one question; its title names that question so it can be found by scanning (Miller's law).",
     when=["Head of every panel, card group, table card or chart frame."],
     avoid=["Uppercase or coloured titles: they look like labels or links."],
@@ -100,7 +100,7 @@ add(Element(
 
 add(Element(
     "alert-title", "Alert title", C,
-    "Bold first line of an alert, callout or notification that states what happened.",
+    "Bold first line of an alert, callout or notification, stating what happened.",
     why="People read the first words and decide; a bold, specific title is enough on its own to act (Practical UI W15).",
     when=["Every alert or callout with more than one sentence."],
     how=["`<p class=\"orca-alert-title\">` (16/24, 550).", "State the fact: 'Video unavailable', 'Report sent'. No 'Error:' prefix, no exclamation marks."],
@@ -115,10 +115,10 @@ add(Element(
     "paragraph", "Paragraph", C,
     "Running text at 16/24 with a 70-character measure.",
     why="Comfortable line length and line height make reading effortless (Practical UI T07, T09).",
-    when=["Any sentence-level text: descriptions, explanations, dialog bodies."],
+    when=["Descriptions, explanations, dialog bodies and other running text."],
     avoid=["Walls of text: split into short paragraphs and lists (W08)."],
     how=["`<p class=\"orca-p\">`. Lead paragraph: `.orca-p--lead` (18/28).",
-         "Front-load the point; one idea per paragraph; under 20 words per sentence where possible."],
+         "Lead with the point; one idea per paragraph; under 20 words per sentence where possible."],
     classes=[".orca-p", ".orca-p--lead"], tokens=["type-body", "measure"],
     laws=["T07", "T09", "W01", "W05"],
     examples=[("Paragraphs", """<p class="orca-p orca-p--lead">Thumbnails are taken from each video at a fixed interval.</p>
@@ -128,15 +128,15 @@ add(Element(
 
 add(Element(
     "text-link", "Text link", C,
-    "An underlined, accent-coloured link inside text.",
+    "An underlined, accent-coloured link in text.",
     why="Colour plus underline is the convention people recognise without thinking (Jakob's law, Practical UI S03) "
         "and it survives colour-blindness (C03).",
-    when=["Navigation to another page or resource from within text."],
+    when=["Linking to another page or resource from within text."],
     avoid=["Actions that change data: use a button.", "'Click here' or 'Learn more': name the destination (W14)."],
     how=["`<a class=\"orca-link\" href=…>`. In navigation lists where position already signals a link: `.orca-link--quiet`.",
          "External links: add `.orca-link--external` (adds ↗) and say so in the text when it matters.",
          "Visited state uses `--orca-link-visited` except with `.orca-link--plain` (for app navigation)."],
-    a11y=["Link text must make sense read alone, as screen-reader users list links.",
+    a11y=["Link text must make sense on its own: screen-reader users list links.",
           "Focus shows the 3px ring; hover thickens the underline."],
     classes=[".orca-link", ".orca-link--quiet", ".orca-link--external", ".orca-link--plain"],
     tokens=["accent", "accent-hover", "link-visited"],
@@ -153,7 +153,7 @@ add(Element(
     why="Lowering the weight of secondary information lets the primary information lead (Practical UI L03) while "
         "staying readable (T13: never pale grey).",
     when=["Meta information, descriptions under titles, empty values ('Not set'), counts beside labels."],
-    avoid=["Placeholder-like grey for content people must read to finish the task.", "Disabled meaning: use the disabled state."],
+    avoid=["Pale grey for content people must read to finish the task.", "Disabled meaning: use the disabled state."],
     how=["Add `.orca-muted` to any text element."],
     classes=[".orca-muted"], tokens=["text-muted"],
     laws=["L03", "T13"],
@@ -176,11 +176,11 @@ add(Element(
 
 add(Element(
     "tabular-number", "Tabular number", C,
-    "Digits of equal width so numbers line up in columns and do not jitter when they update.",
+    "Equal-width digits that line up in columns and do not shift when numbers update.",
     why="Aligned digits can be compared at a glance; live counters that do not shift are easier to read (Practical UI W11).",
     when=["Tables, stats, counters, times, durations, prices, percentages."],
     how=["Add `.orca-num`. Stat values, times and durations already use tabular figures.",
-         "Format with grouping separators and units: '12,480 people', '64%'. Use Django's `intcomma` and `floatformat`."],
+         "Add separators and units: '12,480 people', '64%', using Django's `intcomma` and `floatformat`."],
     classes=[".orca-num"],
     laws=["W11", "miller"],
     examples=[("Aligned digits", """<div class="orca-num" style="text-align: end; width: 8rem">1,204<br>98<br>12,480</div>""")],
@@ -220,7 +220,7 @@ add(Element(
 
 add(Element(
     "stat-value", "Stat value", C,
-    "A large, tabular number that is the point of a KPI tile.",
+    "The large tabular number a KPI tile exists to show.",
     why="The value is what people come for; size and weight make it the first thing seen (Von Restorff, Practical UI L03).",
     when=["KPI tiles, summary tiles, dashboard headers."],
     avoid=["More than one large value per tile."],
@@ -239,8 +239,8 @@ add(Element(
     "Change against a reference: arrow, signed value, colour, and the reference in words.",
     why="Direction must be readable without colour (Practical UI C03): the arrow and the sign carry it, colour only confirms.",
     when=["Beside a stat value comparing with a previous period or a target."],
-    avoid=["Green for 'up' when up is bad (complaints, errors): choose the tone by meaning with `--up`/`--down` classes "
-           "describing good/bad, not direction."],
+    avoid=["Green for 'up' when up is bad (complaints, errors): the `--up`/`--down` classes mean "
+           "good/bad, not direction."],
     how=["`.orca-delta--up` (good, positive colour), `--down` (bad, negative colour), `--flat` (muted).",
          "Content: arrow icon + signed value (+8%, −3) + an `.orca-sr-only` reference ('compared with last week').",
          "Use the true minus sign (−) for negative numbers."],
@@ -319,7 +319,7 @@ add(Element(
     why="A dialog interrupts; its title must say why in a few words so the decision is quick (Hick's law, Practical UI W01).",
     when=["Top of every dialog and drawer."],
     how=["`<h2 class=\"orca-dialog-title\">` (24/32, light 275).",
-         "Confirmations ask the question with the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'."],
+         "Confirmations name the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'."],
     a11y=["Reference it with `aria-labelledby` on the `<dialog>`."],
     classes=[".orca-dialog-title"], tokens=["type-h4"],
     laws=["hick", "B13", "W01"],

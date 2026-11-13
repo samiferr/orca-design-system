@@ -9,7 +9,7 @@ C = category(
 
 add(Pattern(
     "marketing-hero", "Marketing hero", C,
-    "The full-width opening band of a landing page: headline, lead, actions, proof points and an image, edged with the brand bar.",
+    "The full-width opening band of a landing page: headline, lead, actions, proof points and image, edged with the brand bar.",
     why="The first screen decides whether people stay; one headline stating the benefit and one primary action make the next step obvious (Von Restorff, Hick's law). Proof points build trust early (Peak–end rule).",
     when=["The top of landing and product pages."],
     how=["`<section class=\"orca-marketing-hero\">` wrapping the hero component; add `<ul class=\"orca-marketing-hero__proof\">` with 2–3 factual proof points.",
@@ -31,7 +31,7 @@ add(Pattern(
     why="Short, parallel blocks let people scan benefits quickly (Miller's law, Practical UI W08: similar lengths); the title leads with the benefit (W04).",
     when=["Landing pages, product overviews, release highlights."],
     how=["`<ul class=\"orca-feature-grid\">` of `<li class=\"orca-feature\">` with a large icon, `.orca-feature__title` and `.orca-feature__text`.",
-         "Keep texts to one sentence of similar length; link a feature title only when there is a page behind it."],
+         "Use one sentence of similar length per feature; link a title only when a page sits behind it."],
     classes=[".orca-feature-grid", ".orca-feature", ".orca-feature__title", ".orca-feature__text"],
     laws=["miller", "W08", "W04"],
     uses=["feature-item"],
@@ -45,11 +45,11 @@ add(Pattern(
 
 add(Pattern(
     "token-panel", "Live design-token panel", C,
-    "Controls for the brand tokens beside a live preview, to try a brand before setting it.",
+    "Brand token controls beside a live preview, for trying a brand before setting it.",
     why="Seeing a colour on real components is the only way to judge it (Practical UI C08, C09); changing it live closes the loop instantly (Doherty threshold).",
     when=["Design-system documentation; an admin 'branding' page that writes settings."],
     how=["`<div class=\"orca-token-panel\">` with `.orca-token-panel__controls` (colour inputs carrying `data-orca-token=\"--orca-brand-strong\"` and `aria-controls` pointing at the preview) and `.orca-token-panel__preview` (real components).",
-         "The preview only shows the effect; ORCA's contrast adjustment happens when the value is saved in `settings.ORCA['BRAND']`. Show the resulting contrast next to the input."],
+         "The preview only shows the effect; ORCA adjusts contrast when the value is saved in `settings.ORCA['BRAND']`. Show the resulting contrast next to the input."],
     classes=[".orca-token-panel", ".orca-token-panel__controls", ".orca-token-panel__preview"],
     laws=["C08", "C09", "doherty"],
     uses=["form-field", "live-example"],
@@ -63,7 +63,7 @@ add(Pattern(
 
 add(Pattern(
     "code-samples", "Code samples block", C,
-    "The same example in several languages or frameworks as tabs of code blocks.",
+    "One example in several languages or frameworks, as tabs of code blocks.",
     why="People copy the variant for their stack; tabs keep the others out of the way (Hick's law) and Copy buttons make copying exact (Tesler's law).",
     when=["API documentation, installation instructions for several platforms."],
     how=["`<div class=\"orca-live-example\">` with a tab bar (one tab per language) and code blocks as panels; remember the last chosen language."],
@@ -78,7 +78,7 @@ add(Pattern(
 
 add(Pattern(
     "docs-page-header", "Docs page header", C,
-    "A documentation page's breadcrumb, title, one-paragraph introduction and meta (status, source, version).",
+    "A documentation page's breadcrumb, title, short introduction and meta (status, source, version).",
     why="Readers decide in seconds whether a page answers their question; a front-loaded intro (Practical UI W05) and status badges ('Released', 'Beta') answer that.",
     when=["Every documentation page."],
     how=["`<header class=\"orca-docs-head\">` with breadcrumbs, the page title, a lead paragraph (max 2 sentences) and `.orca-docs-head__meta` badges."],
@@ -93,9 +93,9 @@ add(Pattern(
 
 add(Pattern(
     "docs-sidebar", "Docs sidebar tree", C,
-    "The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open and visible.",
+    "The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open.",
     why="Large documentation needs both browsing and finding (Miller's law, Hick's law); a filter finds a page by name while the tree teaches the structure.",
-    when=["Documentation sites. This site puts the same filter and tree inside the sidebar pattern so it can collapse to a rail."],
+    when=["Documentation sites. This site puts the filter and tree inside the sidebar pattern so they collapse to a rail."],
     how=["`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with a dense search input (`data-orca-filter-list`) and the docs navigation tree; on narrow screens it moves into a left drawer."],
     classes=[".orca-docs-sidebar"],
     laws=["miller", "hick"],
@@ -108,15 +108,15 @@ add(Pattern(
 
 add(Pattern(
     "table-of-contents", "Table of contents", C,
-    "An \"On this page\" list of a long page's sections that marks the section being read.",
+    "An \"On this page\" list of a long page's sections, marking the one being read.",
     why="On a long page people want to know what it covers and where they are (Miller's law); links to each section let them jump instead of scrolling, and the marked section keeps them oriented (Jakob's law).",
-    when=["Long pages of several sections: documentation, articles, guides, release notes. Put it in the right-hand column of the Blog page."],
+    when=["Long pages with several sections: documentation, articles, guides, release notes. On the Blog page, put it in the right-hand column."],
     avoid=["Pages with fewer than three sections.", "Navigating between pages: use the nav tree or tabs."],
     how=["`<nav aria-label=\"On this page\"><details class=\"orca-toc\" open data-orca-toc=\"body-id\">` with a `<summary class=\"orca-toc__title\">` and an `<ol class=\"orca-toc__list\">` of links to the sections' `id`s.",
-         "Leave the list empty and `orca.js` fills it from the `h2` headings of the element named in `data-orca-toc` (adding ids where missing), skipping headings inside live examples, code blocks and dialogs.",
-         "`orca.js` marks the section being read with `aria-current=\"location\"`, keeps the list open on wide screens and closed behind its summary on narrow ones; without script the list stays open.",
+         "Leave the list empty: `orca.js` fills it from the `h2` headings of the element named in `data-orca-toc`, adding missing ids and skipping headings inside live examples, code blocks and dialogs.",
+         "`orca.js` marks the current section with `aria-current=\"location\"` and keeps the list open on wide screens, closed behind its summary on narrow ones. Without script it stays open.",
          "Keep labels to the section's name; list `h2` only."],
-    a11y=["A `nav` landmark labelled \"On this page\"; the current section is exposed with `aria-current=\"location\"`, not by colour alone (bold text and a bar)."],
+    a11y=["A `nav` landmark labelled \"On this page\"; the current section uses `aria-current=\"location\"` plus bold text and a bar, not colour alone."],
     classes=[".orca-toc", ".orca-toc__title", ".orca-toc__list"],
     tokens=["brand", "text-inactive"],
     laws=["miller", "jakob"],

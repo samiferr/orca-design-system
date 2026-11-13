@@ -54,6 +54,19 @@ class CatalogueTests(SimpleTestCase):
                 self.assertTrue(el.laws, "every element names the principle it applies")
                 self.assertIn(el.level, registry.RELEASED_LEVELS)
 
+    def test_every_element_has_a_general_description(self):
+        for el in registry.all_elements():
+            with self.subTest(el=el.id):
+                about = el.about
+                self.assertEqual(set(about), {"what", "uses", "avoid", "practices"}, "what, uses, avoid and practices")
+                self.assertGreater(len(about["what"]), 20)
+                self.assertLessEqual(len(about["what"].split()), 40)
+                self.assertTrue(2 <= len(about["uses"]) <= 4)
+                self.assertTrue(1 <= len(about["avoid"]) <= 3)
+                self.assertTrue(3 <= len(about["practices"]) <= 5)
+                for text in [about["what"], *about["uses"], *about["avoid"], *about["practices"]]:
+                    self.assertNotIn("orca-", text.lower(), "the general description is not about ORCA's classes")
+
     def test_principles_are_known(self):
         for el in registry.all_elements():
             for key in el.laws:
@@ -804,6 +817,7 @@ class BuildAndCliTests(SimpleTestCase):
         res = subprocess.run([sys.executable, "-m", "orca", "show", "button"], capture_output=True, text=True, cwd=ROOT)
         self.assertEqual(res.returncode, 0)
         self.assertNotIn("### Why", res.stdout)
+        self.assertLess(res.stdout.index("### General description"), res.stdout.index("### When to use"))
         self.assertIn("### When to use", res.stdout)
         self.assertIn("### How to use", res.stdout)
 

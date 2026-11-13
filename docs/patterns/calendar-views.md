@@ -1,14 +1,36 @@
 # Calendar views
 
-Whole calendars rendered on the server from a list of events: month, week, day, multi-day, agenda and year, plus the toolbar, sidebar and legend around them.
+Server-rendered calendars built from a list of events: month, week, day, multi-day, agenda and year, plus the toolbar, sidebar and legend.
 
 ## Month calendar
 
 `id: month-calendar` · level: pattern · source: ORCA
 
-Weeks of day cells showing each day's events, with '+N more' when a day overflows and a count dot on phones.
+Weeks of day cells showing each day's events, '+N more' when a day overflows, and a count dot on phones.
 
 Built from: `calendar-header`, `weekday-header`, `week-row`
+
+### General description
+
+A calendar page showing a whole month as a grid of days, with the events that fall on each day.
+
+#### Use cases
+
+- Planning bookings, rotas and deadlines across weeks.
+- Seeing which days are busy or free.
+- Choosing dates for events.
+
+#### When not to use it
+
+- Exact times in one or two days: use a day or week view.
+- Many events per day: use an agenda list.
+
+#### Best practices
+
+- Show today clearly.
+- Limit events per day and add a '+N more' link.
+- Start the week on the day users expect.
+- Make each day open its detail.
 
 ### When to use
 
@@ -22,13 +44,13 @@ Built from: `calendar-header`, `weekday-header`, `week-row`
 
 - `{% orca_month_calendar events month="2026-11" today=today selected=day day_url="?day={date}" holidays=holidays max_per_day=3 %}`.
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
-- Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date.
-- Navigation is plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap only the grid.
-- Multi-day all-day events show as bars on each day they cover; holidays label the cell.
+- Pass `today` (and `now` for time grids) from the view, in the site's timezone. Tests and previews pin a fixed date.
+- Navigation uses plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap just the grid.
+- Multi-day all-day events show as bars across their days; holidays label the cell.
 
 ### Accessibility
 
-- Each day is a link or cell labelled with its full date and event count; the table has weekday column headers.
+- Each day is a link or cell labelled with its full date and event count; weekday column headers label the table.
 
 #### Example: November 2026
 
@@ -85,9 +107,31 @@ class CalendarView(TemplateView):
 
 `id: week-view` · level: pattern · source: ORCA
 
-Seven day columns on an hour grid with events positioned by time, an all-day row and a line at the current time.
+Seven day columns on an hour grid, with events placed by time, an all-day row and a current-time line.
 
 Built from: `week-header`, `all-day-row`, `hour-row`, `event-card`, `calendar-header`
+
+### General description
+
+A calendar view with seven day columns on an hour grid, so each event shows its length and time of day.
+
+#### Use cases
+
+- Scheduling meetings, shifts or appointments in a week.
+- Spotting clashes between events.
+- Planning around work hours.
+
+#### When not to use it
+
+- Overview of a whole month: use a month view.
+- Small screens: use a day or agenda view.
+
+#### Best practices
+
+- Show a line for the current time.
+- Place overlapping events side by side.
+- Include an all-day row.
+- Scroll to the start of the working day.
 
 ### When to use
 
@@ -95,11 +139,11 @@ Built from: `week-header`, `all-day-row`, `hour-row`, `event-card`, `calendar-he
 
 ### How to use
 
-- `{% orca_week_view events start=monday today=today now=now start_hour=7 end_hour=19 %}` (start defaults to today's week start).
+- `{% orca_week_view events start=monday today=today now=now start_hour=7 end_hour=19 %}` (start defaults to this week's start).
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
-- Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date.
-- Navigation is plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap only the grid.
-- The grid scrolls horizontally on narrow screens; offer day view as the phone default.
+- Pass `today` (and `now` for time grids) from the view, in the site's timezone. Tests and previews pin a fixed date.
+- Navigation uses plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap just the grid.
+- The grid scrolls sideways on narrow screens; offer day view as the phone default.
 
 ### Accessibility
 
@@ -160,9 +204,31 @@ class CalendarView(TemplateView):
 
 `id: day-view` · level: pattern · source: ORCA
 
-One day on the hour grid: the full detail of a single day, and the phone default.
+One day on the hour grid, with full detail; the phone default.
 
 Built from: `hour-row`, `event-card`, `calendar-navigation`
+
+### General description
+
+A calendar view of one day on an hour grid, with room to show full event details.
+
+#### Use cases
+
+- Phones and narrow screens.
+- A person's or a room's busy day.
+- Days with many events.
+
+#### When not to use it
+
+- Planning across several days: use a week or multi-day view.
+- A simple list of what is next: use an agenda.
+
+#### Best practices
+
+- Make events large enough to tap.
+- Show title, time and place for each event.
+- Let people change day easily.
+- Show the current time.
 
 ### When to use
 
@@ -172,7 +238,7 @@ Built from: `hour-row`, `event-card`, `calendar-navigation`
 
 - `{% orca_week_view events start=day days=1 today=today now=now %}`.
 - Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.
-- Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date.
+- Pass `today` (and `now` for time grids) from the view, in the site's timezone. Tests and previews pin a fixed date.
 - Pair with a mini calendar or a date strip to change day.
 
 #### Example: Friday 6 November
@@ -230,13 +296,35 @@ class CalendarView(TemplateView):
 
 `id: agenda-view` · level: pattern · source: ORCA
 
-Upcoming events listed by day, with times, colours and places: the most readable calendar on any screen.
+Upcoming events listed by day with times, colours and places; readable on any screen.
 
 Built from: `agenda-item`, `empty-state`
 
+### General description
+
+A list of upcoming events grouped by day, with times and details, instead of a grid.
+
+#### Use cases
+
+- Phones and small screens.
+- A 'what is next' panel.
+- A screen reader friendly or printable calendar.
+
+#### When not to use it
+
+- Seeing gaps in a schedule: use a grid view.
+- Dragging events to new times: use a grid view.
+
+#### Best practices
+
+- Group events under clear date headings.
+- Skip days with nothing planned.
+- Show time and place for each event.
+- Show a friendly message when nothing is planned.
+
 ### When to use
 
-- Phones, 'what's next' panels, screen-reader friendly alternative to grids, printing.
+- Phones, 'what's next' panels, printing, and a screen-reader friendly alternative to grids.
 
 ### How to use
 
@@ -299,9 +387,31 @@ class CalendarView(TemplateView):
 
 `id: year-view` · level: pattern · source: ORCA
 
-Twelve small months with event days marked, to see a year's rhythm and jump to any day.
+Twelve small months with event days marked, to see the year at a glance and jump to any day.
 
 Built from: `mini-calendar`
+
+### General description
+
+A calendar showing all twelve months at once, with days that have events marked.
+
+#### Use cases
+
+- Planning holidays and annual schedules.
+- Picking dates far ahead.
+- Seeing the pattern of a whole year.
+
+#### When not to use it
+
+- Details of a single day: use a month or day view.
+- Many events per day: use a list.
+
+#### Best practices
+
+- Mark days with events by a dot, not only colour.
+- Highlight today.
+- Make every day open its detail.
+- Keep month labels clear and consistent.
 
 ### When to use
 
@@ -367,9 +477,31 @@ class CalendarView(TemplateView):
 
 `id: multi-day-view` · level: pattern · source: ORCA
 
-Three (or any number of) days on the hour grid, between the day and week views.
+A chosen number of days (such as three) on the hour grid, between the day and week views.
 
 Built from: `week-header`, `all-day-row`, `event-card`
+
+### General description
+
+A calendar view showing a few days side by side on an hour grid, such as today and the next two days.
+
+#### Use cases
+
+- Tablets and side panels.
+- A short look ahead at upcoming days.
+- Teams planning across a few days.
+
+#### When not to use it
+
+- A full week: use a week view.
+- One busy day: use a day view.
+
+#### Best practices
+
+- Pick a number of days that fits the width.
+- Show times down one side.
+- Show the current time.
+- Let people move forward and back.
 
 ### When to use
 
@@ -435,9 +567,31 @@ class CalendarView(TemplateView):
 
 `id: calendar-toolbar` · level: pattern · source: ORCA
 
-The bar above any calendar view: previous, Today, next, the period title, the view switcher and a create button.
+The bar above a calendar view: previous, Today, next, period title, view switcher and create button.
 
 Built from: `calendar-header`, `create-button`
+
+### General description
+
+The control bar above a calendar, used to move between periods, switch views and add events.
+
+#### Use cases
+
+- Moving to the previous or next period.
+- Switching between day, week and month.
+- Starting a new event.
+
+#### When not to use it
+
+- Page-level navigation: use a site menu.
+- Filtering which calendars show: use a legend.
+
+#### Best practices
+
+- Keep it in the same place on every view.
+- Show the period title clearly.
+- Give a Today button to get back quickly.
+- Put the create button last.
 
 ### When to use
 
@@ -446,8 +600,8 @@ Built from: `calendar-header`, `create-button`
 ### How to use
 
 - `<div class="orca-cal-header">` with the calendar navigation, `h2.orca-cal-header__title` and the view switcher in `.orca-cal-header__end`; add the create button last.
-- Navigation is plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap only the grid.
-- The title announces the period politely when it changes (`aria-live`).
+- Navigation uses plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap just the grid.
+- The title politely announces each new period (`aria-live`).
 
 #### Example: Toolbar
 
@@ -490,13 +644,35 @@ Built from: `calendar-header`, `create-button`
 
 `id: mini-calendar-sidebar` · level: pattern · source: ORCA
 
-A sidebar beside the main calendar: create button, mini calendar to jump to any date, and the calendars legend.
+A calendar sidebar with a create button, a mini calendar to jump to any date, and the legend.
 
 Built from: `mini-calendar`, `create-button`
 
+### General description
+
+A side panel next to a main calendar with a small month for jumping to a date, plus options such as a create button and calendar list.
+
+#### Use cases
+
+- Jumping to a date far from today.
+- Calendars with several sources to filter.
+- Full calendar pages on desktop.
+
+#### When not to use it
+
+- Phone screens with little room: move it below or hide it.
+- Simple calendars with one source.
+
+#### Best practices
+
+- Match the selected day to the main view.
+- Mark days that have events.
+- Keep the create button at the top.
+- Move the panel below the calendar on small screens.
+
 ### When to use
 
-- Full calendar pages with more than one calendar or long-range navigation.
+- Full calendar pages with several calendars or long-range navigation.
 
 ### How to use
 
@@ -572,13 +748,35 @@ class CalendarView(TemplateView):
 
 `id: calendar-legend` · level: pattern · source: ORCA
 
-The list of calendars, each a checkbox in its colour, to show or hide its events.
+A list of calendars, each a coloured checkbox that shows or hides its events.
 
 Built from: `choice-group`, `legend-item`
 
+### General description
+
+A list of the calendars or event types on view, each with its colour, that lets people show or hide them.
+
+#### Use cases
+
+- Calendars that mix events from several sources.
+- Letting people focus on what matters now.
+- Explaining what each colour means.
+
+#### When not to use it
+
+- A single calendar with one colour: no key is needed.
+- Filters with many options: use a filter panel.
+
+#### Best practices
+
+- Show each name beside its colour.
+- Never use colour as the only clue.
+- Use checkboxes to show or hide.
+- Keep the list short.
+
 ### When to use
 
-- Any calendar showing events from more than one source, person or type.
+- Any calendar mixing events from several sources, people or types.
 
 ### How to use
 

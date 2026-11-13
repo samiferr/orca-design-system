@@ -1,13 +1,13 @@
 # ORCA design system
 
-ORCA is a Django design system built so that developers and AI coding agents can produce consistent, accessible
-interfaces without guessing. **Every element documents when (and when not) and how to use it**, the tokens and classes
-it uses, the UX principles it applies, and a copy-ready template example.
+ORCA is a Django design system that helps developers and AI coding agents build consistent, accessible interfaces
+without guessing. **Every element has a general description, then when (and when not) and how to use it in ORCA**,
+the tokens and classes it uses, the UX principles it applies, and a copy-ready template example.
 
-- **Structure:** five levels from the ORCA Design System Guide, each a group of the level before it:
+- **Structure:** five levels from the ORCA Design System Guide, each built from the level before it:
   **Primitives** → **Components** (groups of primitives) → **Patterns** (groups of components) →
   **Templates** (groups of patterns) → **Pages** (templates with real content).
-- **Rules:** *Practical UI* (Dannaway, 2024) and *Laws of UX* (Yablonski, 2024). Each element cites the rules it applies.
+- **Rules:** *Practical UI* (Dannaway, 2024) and *Laws of UX* (Yablonski, 2024). Each element names the rules it applies.
 - **Base:** the Tangerine system from `wise_people_analyzer` (Vanilla framework 4.59 values): square corners,
   1.5px borders, filled fields, an 8px grid, light / dark / paper themes. ORCA has one appearance, named ORCA.
 - **Grounds:** the same backgrounds as `wise_people_analyzer`: a grey page (`--orca-bg-page`), white panels and
@@ -17,11 +17,11 @@ it uses, the UX principles it applies, and a copy-ready template example.
   primitives (date, time, calendar marks) the guide marks as not built yet.
 - **Phase 2: Components.** 145 elements covering all 154 component items of the guide: form fields,
   pickers, menus, tabs, dialogs, toasts, cards, calendar and schedule parts, plan items. Each lists the primitives it is
-  built from, and template tags render the fiddly ones straight from Django objects.
+  built from, and template tags render the fiddly ones from Django objects.
 - **Phase 3: Patterns.** 97 elements covering all 98 pattern items of the guide: page frame (header,
   sidebar, drawer, settings panel), data tables and filtering, forms and editors, media, record management, eight
   chart types, marketing and docs sections, email frame, calendar views, scheduler, event editing and planning boards.
-  Charts are drawn by Chart.js (vendored, loaded only on pages with charts) and calendars render on the server, both
+  Chart.js draws the charts (bundled, and loaded only on pages with charts) and the server renders the calendars, both
   from plain Python data through one template tag.
 - **Phase 4 (this release): Templates.** 60 elements covering all 67 template items of the guide: real Django templates
   you extend (app shell, auth, error, email, marketing, blog and docs layouts), generic list / detail / form / confirm and
@@ -157,15 +157,15 @@ A project changes **brand tokens only**, through `settings.ORCA["BRAND"]`:
 | `accent`, `accent_dark` | `--orca-accent` | Interactive colour per theme; adjusted to reach 4.5:1 |
 | `font_sans`, `font_mono` | `--orca-font-sans`, `--orca-font-mono` | Font stacks |
 
-Input is accepted liberally (`"0F95A1"`, `"#06c"`, `rgb(…)`) and normalised. If a colour would fail contrast, ORCA
-adjusts it and reports what it did as the system-check warning `orca.W001`; unknown keys are errors (`orca.E002`).
-Every other token is fixed, and `python manage.py orca_lint` flags any override of a non-brand `--orca-*` token.
+Write colours as `"0F95A1"`, `"#06c"` or `rgb(…)`; ORCA normalises them. If a colour fails contrast, ORCA adjusts it
+and reports the change as the system-check warning `orca.W001`. Unknown keys are errors (`orca.E002`). Every other
+token is fixed, and `python manage.py orca_lint` flags any override of a non-brand `--orca-*` token.
 
 ## Find the right element
 
 ```bash
 python -m orca list                 # every element by category
-python -m orca show button          # when / how / example
+python -m orca show button          # general description / when / how / example
 python -m orca search date          # search names, guide items and classes
 python -m orca icons                # icon names and aliases
 python -m orca tokens               # token names and usage
@@ -193,6 +193,7 @@ The same content is in [`docs/primitives/`](docs/primitives/README.md) and [`doc
 | `orca/static/orca/js/orca.js` | Optional progressive enhancement, opt-in by data attribute: menus, listbox, combobox, tabs, dialogs and confirm, toasts, date shortcuts and ranges, repeating rows, carousel, steppers, OTP, theme |
 | `orca/components.py` | Server side of the component tags (field wiring, page windows, month grids, charts) |
 | `orca/catalogue/` | The element catalogue: when, how, a11y, tokens, classes, principles, examples |
+| `orca/data/about/` | The general description of every element (what it is, use cases, when not to use it, best practices) |
 | `orca/templatetags/orca.py` | `orca_head`, `orca_html_attrs`, `icon`, `status_icon`, `orca_logo`, `orca_illustration`, `orca_timezone_options`, filters `orca_duration`, `orca_initials` |
 | `orca/icons.py`, `orca/data/` | 106 Vanilla glyphs plus ORCA glyphs (home, edit, calendar, clock, …) |
 | `orca/checks.py` | Django system checks for `settings.ORCA` |
@@ -206,7 +207,7 @@ python -m venv .venv && .venv/bin/pip install -e .
 .venv/bin/python demo/manage.py runserver            # catalogue at http://127.0.0.1:8000/orca/
 ```
 
-The tests check that every guide item is covered, every element has its when/how and a rendering example,
+The tests check that every guide item is covered, every element has a general description, its when/how and a rendering example,
 documented classes and tokens exist, text and control contrast hold in all three themes, and generated files are current.
 
 ## Roadmap

@@ -3,7 +3,7 @@ from . import Component
 
 C = category(
     "calendar-parts", "Calendar parts",
-    "The pieces month, week, day and agenda views are built from. Each states the date in words for screen readers.",
+    "The building blocks of month, week, day and agenda views. Each gives screen readers the date in words.",
     level="component",
 )
 
@@ -90,7 +90,7 @@ add(Component(
     why="Clicking where the event should go is the most direct way to create it (Practical UI F03, Fitts's law); the hint appears on hover and focus only, so the grid stays calm.",
     when=["Day and week views, booking grids."],
     how=["`<button class=\"orca-slot\" type=\"button\" aria-label=\"Add event at 09:30, Friday 6 November\">` with a `.orca-slot__hint`; busy slots are spans with `--busy`; chosen slots use `aria-pressed=\"true\"`.",
-         "Keep at least 24px height; snap new events to the slot."],
+         "Keep slots at least 24px high; snap new events to the slot."],
     classes=[".orca-slot", ".orca-slot__hint", ".orca-slot--busy"],
     laws=["F03", "fitts", "C03"],
     uses=["availability-color"],
@@ -100,7 +100,7 @@ add(Component(
 
 add(Component(
     "all-day-row", "All-day row", C,
-    "The strip above the hours of a week view holding all-day and multi-day bars.",
+    "The strip above a week view's hours that holds all-day and multi-day bars.",
     why="Separating all-day items from timed ones keeps both readable (Miller's law) and shows multi-day spans across columns (Gestalt continuity).",
     when=["Week and day views."],
     how=["`<div class=\"orca-allday-row\">` with `.orca-allday-row__label` ('All day') and `.orca-allday-row__lane` (`--orca-days` columns); place all-day bars with `grid-column: 2 / span 3`."],
@@ -129,8 +129,8 @@ add(Component(
     "event-card", "Event card", C,
     "An event block in a day or week view: title, time, place and its calendar colour edge.",
     why="Blocks sized to their duration show the shape of a day at a glance (Jakob's law); a tinted fill keeps text readable (C01) and hatching marks tentative events without colour alone (C03).",
-    when=["Day and week views; event detail popovers' trigger."],
-    how=["`<button class=\"orca-event-card\" style=\"--orca-event: var(--orca-chart-2)\">` with `.orca-event-card__title` and `.orca-event-card__meta` (time and place); height from duration (positioned by the view).",
+    when=["Day and week views; the trigger for an event's detail popover."],
+    how=["`<button class=\"orca-event-card\" style=\"--orca-event: var(--orca-chart-2)\">` with `.orca-event-card__title` and `.orca-event-card__meta` (time and place); height follows duration (the view positions it).",
          "`--tentative` for unconfirmed events. Overlapping events share the column width."],
     classes=[".orca-event-card", ".orca-event-card__title", ".orca-event-card__meta", ".orca-event-card--tentative"],
     laws=["jakob", "C01", "C03"],
@@ -187,7 +187,7 @@ add(Component(
 
 add(Component(
     "more-events-link", "More-events link", C,
-    "'+3 more' at the bottom of a crowded day cell, opening the full list of that day.",
+    "'+3 more' at the bottom of a crowded day cell; opens that day's full list.",
     why="Capping a cell's events keeps the month legible (Miller's law) while the link proves nothing is hidden (Practical UI S06).",
     when=["Month cells with more events than fit."],
     how=["`<button class=\"orca-more-link\" type=\"button\" aria-label=\"3 more events on 6 November\">+3 more</button>` opening a popover or the day view."],

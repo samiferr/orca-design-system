@@ -1,0 +1,687 @@
+{
+ "primary-navigation": {
+  "what": "A row of links, usually across the top of a site or app, that leads to its main sections. It is always visible so people know where they are.",
+  "uses": [
+   "Switching between the main areas of a website or application.",
+   "Showing the current section on every page.",
+   "Giving first-time visitors a quick overview of what the product offers."
+  ],
+  "avoid": [
+   "Many top-level sections that do not fit in one row: use a sidebar or a grouped menu.",
+   "Steps of a single task: use a stepper or back and next buttons."
+  ],
+  "practices": [
+   "Keep to a handful of clear, short labels.",
+   "Mark the current section visibly, not by colour alone.",
+   "Use the same links in the same order on every page.",
+   "Collapse to a menu on small screens."
+  ]
+ },
+ "utility-navigation": {
+  "what": "A small group of links and buttons, usually at the far end of the header, for account, help, notifications and other tools that are not main sections.",
+  "uses": [
+   "Opening the user account menu or signing out.",
+   "Showing notifications and a help link.",
+   "Offering search, language or settings shortcuts in the header."
+  ],
+  "avoid": [
+   "Main sections of the product: put them in the primary navigation.",
+   "Long lists of options: use a menu or a settings page."
+  ],
+  "practices": [
+   "Keep it to a few well-known items.",
+   "Place it in the same corner on every page.",
+   "Give icon-only items a text label for screen readers.",
+   "Show a count only when something needs attention."
+  ]
+ },
+ "sidebar-link": {
+  "what": "One link in a vertical navigation list at the side of a page, usually with an icon, a label and sometimes a count of items.",
+  "uses": [
+   "Moving between sections of an app with many areas.",
+   "Showing how many items wait in a section, such as unread alerts.",
+   "Grouping related pages under a nested link."
+  ],
+  "avoid": [
+   "A short list of 2 to 5 sections: top navigation is simpler.",
+   "Actions that change data: use a button, not a link."
+  ],
+  "practices": [
+   "Write short labels that fit on one line.",
+   "Highlight the current page with more than colour.",
+   "Make the whole row clickable, not just the text.",
+   "Keep icons consistent and always paired with a label."
+  ]
+ },
+ "breadcrumbs": {
+  "what": "A trail of links showing where the current page sits in the site, from the top level down. Each step links back to a higher level.",
+  "uses": [
+   "Helping people find their way in sites with deep levels.",
+   "Jumping back up to a parent section in one click.",
+   "Showing context on product, document or category pages."
+  ],
+  "avoid": [
+   "Sites with only one or two levels: a simple back link is enough.",
+   "Showing the steps someone took or a process: use a stepper."
+  ],
+  "practices": [
+   "Show the real hierarchy, not the browsing history.",
+   "Make the last item the current page and do not link it.",
+   "Keep labels short and match page titles.",
+   "Place the trail near the top of the page."
+  ]
+ },
+ "pagination": {
+  "what": "Controls that split a long list or set of results into numbered pages, with links to move to the previous, next or a specific page.",
+  "uses": [
+   "Browsing search results or long product lists.",
+   "Moving through large tables of data.",
+   "Letting people return to a known page of results."
+  ],
+  "avoid": [
+   "Short lists that fit on one screen: show everything.",
+   "Endless feeds read in one pass: use infinite scroll or a load more button."
+  ],
+  "practices": [
+   "Show the current page clearly and mark it for screen readers.",
+   "Make links big enough to tap.",
+   "Keep the page in the web address so it can be shared.",
+   "Use previous and next links as well as numbers."
+  ]
+ },
+ "pagination-summary": {
+  "what": "A line of text that tells people which part of a list they are viewing and how many items there are in total, such as 'Showing 21 to 40 of 312'.",
+  "uses": [
+   "Confirming how many results a search or filter returned.",
+   "Orienting people within a long paginated list.",
+   "Showing a total next to page controls."
+  ],
+  "avoid": [
+   "Lists whose total is unknown or constantly changing: say 'many results' or use load more.",
+   "Short lists on one page: a simple count is enough."
+  ],
+  "practices": [
+   "Use real numbers and group digits in long numbers.",
+   "Update the text as soon as filters change.",
+   "Say what the items are, such as videos or orders.",
+   "Handle zero results with a clear message."
+  ]
+ },
+ "table-pager": {
+  "what": "A compact set of controls beneath a data table that lets people choose how many rows to show per page and move between pages.",
+  "uses": [
+   "Browsing large data tables in admin screens.",
+   "Letting people pick 20, 50 or 100 rows per page.",
+   "Showing the range of rows currently displayed."
+  ],
+  "avoid": [
+   "Small tables that fit on one screen: show all rows.",
+   "Card grids or content lists: use regular pagination or load more."
+  ],
+  "practices": [
+   "Put it directly below the table, close to the rows.",
+   "Disable previous on the first page and next on the last.",
+   "Offer a few sensible page sizes.",
+   "Remember the chosen page size between visits."
+  ]
+ },
+ "tab-bar": {
+  "what": "A row of labelled tabs that switches between related views of the same content or object, showing one view at a time.",
+  "uses": [
+   "Splitting a detail page into overview, activity and settings.",
+   "Showing different views of the same data in the same space.",
+   "Keeping a long page short by grouping content."
+  ],
+  "avoid": [
+   "Steps that must happen in order: use a stepper.",
+   "Unrelated pages or sections of a site: use navigation links."
+  ],
+  "practices": [
+   "Use short, clear labels.",
+   "Always show which tab is selected.",
+   "Support arrow keys to move between tabs.",
+   "Keep the number of tabs small and avoid hiding critical content."
+  ]
+ },
+ "child-tabs": {
+  "what": "Tabs on the page of a parent record, each leading to one kind of related item and showing how many it holds, such as Users (12).",
+  "uses": [
+   "Showing the lists that belong to an account, site or project.",
+   "Letting people see at a glance which sections have content.",
+   "Navigating between related lists without leaving the parent."
+  ],
+  "avoid": [
+   "Views that are not related items of one record: use plain tabs or navigation.",
+   "Steps of a process: use a stepper."
+  ],
+  "practices": [
+   "Show a count so empty sections are clear before clicking.",
+   "Keep the parent summary visible above the tabs.",
+   "Order tabs by how often people use them.",
+   "Mark the current tab with more than colour."
+  ]
+ },
+ "bottom-navigation": {
+  "what": "A bar fixed to the bottom of a phone screen with three to five main destinations, each shown as an icon with a short label.",
+  "uses": [
+   "Switching between the main areas of a mobile app or site.",
+   "Making key destinations easy to reach with a thumb.",
+   "Showing a badge for new items on a destination."
+  ],
+  "avoid": [
+   "Desktop screens: use a top bar or sidebar.",
+   "More than five destinations: use a menu or a navigation drawer."
+  ],
+  "practices": [
+   "Pair every icon with a short label.",
+   "Mark the current destination clearly.",
+   "Keep the same items on every screen.",
+   "Leave space for the bar so it does not cover content."
+  ]
+ },
+ "nav-tree": {
+  "what": "A navigation list with collapsible groups, where each group opens to show its links. It organises many destinations into a readable hierarchy.",
+  "uses": [
+   "Navigating large documentation sites or settings areas.",
+   "Grouping many pages under named sections.",
+   "Showing the user's place inside a deep structure."
+  ],
+  "avoid": [
+   "Short lists of links: show them flat.",
+   "Deeply nested content with more than three levels: simplify the structure or add search."
+  ],
+  "practices": [
+   "Open the group that holds the current page.",
+   "Show open and closed state with an icon and text, not colour alone.",
+   "Limit nesting to two levels.",
+   "Make groups work with the keyboard."
+  ]
+ },
+ "back-link": {
+  "what": "A link that takes people to the previous level or page, usually placed above the page heading, labelled with where it goes.",
+  "uses": [
+   "Returning from a detail page to its list.",
+   "Leaving a step in a multi-page form.",
+   "Giving phone users a short way back when breadcrumbs do not fit."
+  ],
+  "avoid": [
+   "Replacing the browser's back button behaviour: link to a real page instead.",
+   "Deep hierarchies where people need many levels: use breadcrumbs."
+  ],
+  "practices": [
+   "Name the destination, such as 'Back to orders'.",
+   "Place it consistently above the title.",
+   "Link to the actual parent page so it works from shared links.",
+   "Include a visible arrow as a hint."
+  ]
+ },
+ "view-toggle": {
+  "what": "A small control that lets people switch how the same collection is shown, for example as cards or as a table, without changing the content.",
+  "uses": [
+   "Switching a list between a visual grid and a dense table.",
+   "Letting people choose between map and list views.",
+   "Matching the view to the task, browsing or comparing."
+  ],
+  "avoid": [
+   "Switching between different content: use tabs.",
+   "Turning a setting on or off: use a switch or checkbox."
+  ],
+  "practices": [
+   "Show all options at once with an icon and a label.",
+   "Mark the active view clearly.",
+   "Remember the choice for next time.",
+   "Keep filters and sorting when the view changes."
+  ]
+ },
+ "settings-toggle": {
+  "what": "A button, usually an icon, that opens or closes a panel of display or app settings without leaving the page.",
+  "uses": [
+   "Opening quick display settings such as theme or density.",
+   "Showing options that are used rarely.",
+   "Keeping the main screen simple while settings stay close."
+  ],
+  "avoid": [
+   "Important settings people need often: show them directly.",
+   "Large sets of preferences: use a full settings page."
+  ],
+  "practices": [
+   "Use a familiar icon with a text label for assistive tools.",
+   "Tell screen readers if the panel is open or closed.",
+   "Let Escape close the panel.",
+   "Save changes right away and show the result."
+  ]
+ },
+ "create-button": {
+  "what": "The main button for adding a new item, such as a new record or document. It sits near the page title and is the page's primary action.",
+  "uses": [
+   "Adding a new item from a list page.",
+   "Starting a new document, report or project.",
+   "Keeping the main create action easy to find on every list."
+  ],
+  "avoid": [
+   "Pages with several equally important actions: group them in a menu or toolbar.",
+   "Actions that change existing items: use a regular button next to the item."
+  ],
+  "practices": [
+   "Start the label with a verb and name the item, such as 'Add video'.",
+   "Show only one primary create action per page.",
+   "Make it easy to reach on phones.",
+   "Use an icon only to support the text."
+  ]
+ },
+ "base-layout": {
+  "what": "The basic page skeleton that every page of a site shares: document setup, language, head content, a skip link and places for the page body and scripts.",
+  "uses": [
+   "Making every page start from the same, correct HTML structure.",
+   "Setting the language, title and theme once.",
+   "Adding shared scripts and styles in one place."
+  ],
+  "avoid": [
+   "Pages that need a header, sidebar or footer: extend a layout that includes them.",
+   "Small fragments loaded inside a page: return only the fragment."
+  ],
+  "practices": [
+   "Set the page language.",
+   "Provide a skip link to the main content.",
+   "Load shared styles in the head and scripts at the end.",
+   "Keep page-specific code out of the shared base."
+  ]
+ },
+ "app-shell": {
+  "what": "The standard frame of a web application: a top bar, a side navigation and a main area for the page title, actions and content.",
+  "uses": [
+   "Building signed-in screens such as lists, forms and dashboards.",
+   "Keeping navigation fixed while content changes.",
+   "Giving every page the same place for title and actions."
+  ],
+  "avoid": [
+   "Public marketing pages: use a simpler site layout with a header and footer.",
+   "Sign-in or error pages: use a focused layout without navigation."
+  ],
+  "practices": [
+   "Keep navigation in the same place on every page.",
+   "Let the sidebar collapse to save space.",
+   "Turn the sidebar into a drawer on phones.",
+   "Provide a skip link to the main content."
+  ]
+ },
+ "auth-layout": {
+  "what": "A simple, focused page for signing in, creating an account or resetting a password, usually with one centred card and no navigation.",
+  "uses": [
+   "Sign-in and sign-up pages.",
+   "Password reset and email confirmation pages.",
+   "Invitation or locked-out account pages."
+  ],
+  "avoid": [
+   "Pages for signed-in users: use the app layout with navigation.",
+   "Long registration with many steps: use a multi-step form layout."
+  ],
+  "practices": [
+   "Show one task and remove distractions.",
+   "Label every field and show errors next to it.",
+   "Allow password managers and show or hide of the password.",
+   "Offer a clear link for help or recovery."
+  ]
+ },
+ "email-layout": {
+  "what": "The shared structure of automatic emails such as receipts and password resets: a brand bar, a heading, short text, one main button and a footer.",
+  "uses": [
+   "Sending order confirmations and receipts.",
+   "Sending password reset and verification emails.",
+   "Sending alerts and notices from an app."
+  ],
+  "avoid": [
+   "Newsletters and campaigns with rich design: use a marketing email tool.",
+   "Messages that need an immediate response: consider an in-app notice or text message."
+  ],
+  "practices": [
+   "Use simple table layouts and inline styles for email apps.",
+   "Include a plain-text version.",
+   "Print the button's link so it works if the button fails.",
+   "Say why the reader got the email."
+  ]
+ },
+ "error-layouts": {
+  "what": "Pages shown when something goes wrong, such as page not found or a server error. They explain what happened and offer a way forward.",
+  "uses": [
+   "Showing a page not found message.",
+   "Telling people they lack permission to open a page.",
+   "Handling server failures with a calm message."
+  ],
+  "avoid": [
+   "Mistakes in a form: show messages next to the fields instead.",
+   "Short problems on a part of a page: use an inline message."
+  ],
+  "practices": [
+   "Explain what happened in plain words.",
+   "Offer a clear next step such as home or search.",
+   "Avoid blame and technical jargon.",
+   "Keep the page light so it loads even when systems fail."
+  ]
+ },
+ "homepage-template": {
+  "what": "The first page people see after signing in to an app, summarising key numbers, recent activity and shortcuts to common tasks.",
+  "uses": [
+   "Giving a quick status overview of an account or project.",
+   "Linking to the tasks people do most.",
+   "Showing recent changes since the last visit."
+  ],
+  "avoid": [
+   "Marketing landing pages for visitors: use a public site layout.",
+   "Detailed analysis: use a dedicated report or dashboard page."
+  ],
+  "practices": [
+   "Answer what needs attention first.",
+   "Show only a few key figures.",
+   "Offer shortcuts to frequent tasks.",
+   "Handle new accounts with no data using a helpful empty state."
+  ]
+ },
+ "feed-skeleton": {
+  "what": "A scrolling column of posts or updates that shows grey placeholder shapes while more content loads, and a message when there is nothing yet.",
+  "uses": [
+   "Showing social posts, photo feeds or timelines.",
+   "Loading more items as people scroll.",
+   "Telling people when a feed is empty."
+  ],
+  "avoid": [
+   "Data that people compare in rows and columns: use a table.",
+   "Content that people need to jump around in: use pages with navigation."
+  ],
+  "practices": [
+   "Match the placeholder shape to the real post.",
+   "Keep the column at a readable width.",
+   "Avoid layout jumps when real content arrives.",
+   "Provide a way to reach the footer or load more with the keyboard."
+  ]
+ },
+ "person-block-grid": {
+  "what": "A grid of cards, one per person, showing a photo or initials, a name, a role and a way to get in touch.",
+  "uses": [
+   "Showing a team or staff page.",
+   "Listing members of a project or group.",
+   "Building a contact directory."
+  ],
+  "avoid": [
+   "Comparing people by several details: use a table.",
+   "Long lists that people need to search or sort: use a searchable list."
+  ],
+  "practices": [
+   "Use the same card layout for everyone.",
+   "Show a name and role next to each photo.",
+   "Use initials when there is no photo.",
+   "Make contact links clear and large enough to tap."
+  ]
+ },
+ "marketing-layout": {
+  "what": "The frame of public pages that promote a product or service: a header with links and a call to action, wide sections and a footer with link columns.",
+  "uses": [
+   "Building landing, product and pricing pages.",
+   "Telling a story in full-width sections.",
+   "Guiding visitors to sign up or contact sales."
+  ],
+  "avoid": [
+   "Signed-in application screens: use an app layout.",
+   "Long reading content: use an article or documentation layout."
+  ],
+  "practices": [
+   "Offer one clear main call to action per screen.",
+   "Keep the header simple and familiar.",
+   "Use generous spacing and short sections.",
+   "Put key links and legal information in the footer."
+  ]
+ },
+ "blog-layout": {
+  "what": "A page designed for reading long text, with a title, an introduction, sections in a comfortable column and a contents list to jump between them.",
+  "uses": [
+   "Articles, guides and release notes.",
+   "Case studies and policies.",
+   "Any page that is mostly sections of text."
+  ],
+  "avoid": [
+   "Short pages of mostly interface: use a standard page layout.",
+   "Data-heavy pages: use a dashboard or table layout."
+  ],
+  "practices": [
+   "Keep lines to about 60 to 75 characters.",
+   "Open with a short summary.",
+   "Use clear headings that match the contents list.",
+   "Show the publish or update date."
+  ]
+ },
+ "docs-layout": {
+  "what": "A page layout for documentation, with a navigation tree on the left, the article in the middle and a list of sections on the right.",
+  "uses": [
+   "Product documentation and help centres.",
+   "Internal handbooks and wikis.",
+   "API or developer guides."
+  ],
+  "avoid": [
+   "Marketing pages: use a public site layout.",
+   "A single short article: a simple reading layout is enough."
+  ],
+  "practices": [
+   "Group pages in clear, named sections.",
+   "Provide search or a filter for navigation.",
+   "Highlight the current page in the tree.",
+   "Show versions and last updated dates."
+  ]
+ },
+ "button": {
+  "what": "A control that triggers an action when pressed, such as saving a form or opening a dialog. Its style shows how important the action is.",
+  "uses": [
+   "Submitting forms and saving changes.",
+   "Opening dialogs and starting actions.",
+   "Confirming or cancelling a decision."
+  ],
+  "avoid": [
+   "Moving to another page: use a link.",
+   "Several equally strong buttons on one screen: pick one primary action."
+  ],
+  "practices": [
+   "Start labels with a verb and name the result, such as 'Save image'.",
+   "Use one primary button per screen.",
+   "Make buttons at least 44 pixels tall on touch screens.",
+   "Show a busy state during slow actions.",
+   "Show disabled state with a clear reason."
+  ]
+ },
+ "button-size": {
+  "what": "Different heights and widths for buttons, such as small, regular and large, chosen to fit the place and the device where they appear.",
+  "uses": [
+   "Using compact buttons in tables and toolbars.",
+   "Using large buttons for touch screens and main phone actions.",
+   "Making a full-width button at the bottom of a form."
+  ],
+  "avoid": [
+   "Showing importance: change the button style, not its size.",
+   "Mixing many sizes in one row: choose one size for the group."
+  ],
+  "practices": [
+   "Keep the same size for buttons in a row.",
+   "Make touch targets at least 44 pixels.",
+   "Match button height to nearby fields.",
+   "Add an accessible name to icon-only buttons."
+  ]
+ },
+ "link-action": {
+  "what": "A button or link drawn as plain text for low-priority actions, such as 'Clear filters' or 'Show more', that should not compete with main buttons.",
+  "uses": [
+   "Clearing filters or resetting a form.",
+   "Showing more or less content.",
+   "Linking to related pages within a sentence."
+  ],
+  "avoid": [
+   "The main action of a screen: use a primary button.",
+   "Actions that need strong emphasis, such as deleting: use a button with clear styling."
+  ],
+  "practices": [
+   "Underline or style it so it looks clickable.",
+   "Name the result, never 'click here'.",
+   "Use a real link for navigation and a button for actions.",
+   "Keep the text short."
+  ]
+ },
+ "pin-button": {
+  "what": "A toggle button that pins an item so it stays at the top of a list or on a dashboard. Pressing it again removes the pin.",
+  "uses": [
+   "Keeping favourite items at the top of a list.",
+   "Adding a report or album to a dashboard.",
+   "Marking items for quick access."
+  ],
+  "avoid": [
+   "Marking a one-off choice for a bulk action: use a checkbox.",
+   "Rating or liking content: use a star or heart control."
+  ],
+  "practices": [
+   "Show pinned and unpinned states clearly.",
+   "Name the item in the accessible label, such as 'Pin Entrance A'.",
+   "Save the state on the server.",
+   "Update the label when the state changes."
+  ]
+ },
+ "email-button": {
+  "what": "A link that opens the user's email app with the recipient, subject and body filled in, styled as a button.",
+  "uses": [
+   "Contacting support or sales.",
+   "Sending a link or report by email.",
+   "Replying to an alert or notice."
+  ],
+  "avoid": [
+   "Forms that collect detailed messages: use a contact form.",
+   "Users without a mail app: always show the address as well."
+  ],
+  "practices": [
+   "Show the email address beside the button.",
+   "Set a helpful subject line.",
+   "Encode special characters in the link.",
+   "Label it with what will happen, such as 'Email support'."
+  ]
+ },
+ "toggle-button": {
+  "what": "A button that stays pressed to show something is on and pops back when pressed again, used to switch a mode or a display option.",
+  "uses": [
+   "Turning toolbar options on or off, such as grid lines or bold.",
+   "Switching a live view or mute on and off.",
+   "Filtering a list with an on-off chip."
+  ],
+  "avoid": [
+   "Settings that are saved and applied later: use a switch.",
+   "Choosing one option from several: use radio buttons or a segmented control."
+  ],
+  "practices": [
+   "Keep the label the same in both states.",
+   "Show the pressed state with more than colour.",
+   "Tell assistive tools the pressed state.",
+   "Make the change take effect right away."
+  ]
+ },
+ "icon-button": {
+  "what": "A button that shows only an icon, used for common actions such as close, search or more options, when space is limited.",
+  "uses": [
+   "Closing dialogs and panels.",
+   "Providing toolbar actions such as refresh or edit.",
+   "Opening an overflow menu."
+  ],
+  "avoid": [
+   "Actions with an unfamiliar icon: use a text button.",
+   "Destructive actions without confirmation: add a confirm step."
+  ],
+  "practices": [
+   "Give every icon button an accessible name.",
+   "Use widely known icons.",
+   "Make the target at least 44 pixels on touch.",
+   "Add a tooltip when the meaning may be unclear."
+  ]
+ },
+ "fab": {
+  "what": "A large round or pill-shaped button that floats above the page, usually at the bottom right of a phone screen, for the main action.",
+  "uses": [
+   "Creating a new item on a mobile list screen.",
+   "Starting the main task of a mobile app.",
+   "Keeping the primary action in reach while scrolling."
+  ],
+  "avoid": [
+   "Desktop screens: put the main action in the page header.",
+   "Screens with several equal actions: use a regular toolbar."
+  ],
+  "practices": [
+   "Use it for one primary action only.",
+   "Prefer an icon with a text label.",
+   "Leave space so it does not cover content.",
+   "Give icon-only versions an accessible name."
+  ]
+ },
+ "icon": {
+  "what": "A small picture that stands for an object or action, such as a magnifier for search. Icons help people recognise things quickly.",
+  "uses": [
+   "Adding meaning next to labels in buttons and menus.",
+   "Marking status in messages and lists.",
+   "Saving space in toolbars with well-known symbols."
+  ],
+  "avoid": [
+   "Ideas without a well-known symbol: use words.",
+   "Decoration that competes with the content."
+  ],
+  "practices": [
+   "Pair icons with text whenever possible.",
+   "Use one style and line weight throughout.",
+   "Give standalone icons an accessible name.",
+   "Let icons inherit the colour of the text."
+  ]
+ },
+ "status-icon": {
+  "what": "A symbol that shows state, such as success, warning, error or information. Each has its own shape and colour so it can be told apart.",
+  "uses": [
+   "Showing results in alerts and messages.",
+   "Marking errors next to form fields.",
+   "Showing the state of a job, device or item."
+  ],
+  "avoid": [
+   "Pure decoration: choose a neutral icon or none.",
+   "Long explanations: use a text message."
+  ],
+  "practices": [
+   "Use different shapes, not only different colours.",
+   "Always add a word with the icon.",
+   "Use the same icon for the same meaning everywhere.",
+   "Keep colours with enough contrast."
+  ]
+ },
+ "icon-set": {
+  "what": "The collection of icons a product draws from, all sharing one size grid, line weight and style so the interface looks consistent.",
+  "uses": [
+   "Choosing a symbol for a new button or menu item.",
+   "Keeping the look of icons consistent across screens.",
+   "Finding standard names for common concepts."
+  ],
+  "avoid": [
+   "Mixing icons from several sets on one screen.",
+   "Inventing new symbols for well-known actions: use the familiar one."
+  ],
+  "practices": [
+   "Pick icons that match the word, such as a bin for delete.",
+   "Keep the same size and weight.",
+   "Do not use one icon for two meanings.",
+   "Add new icons in the same style."
+  ]
+ },
+ "capture-run-progress": {
+  "what": "A view of a long-running job, such as an export, that shows overall progress, the current step, time left and the result for each item.",
+  "uses": [
+   "Following exports, imports and bulk updates.",
+   "Showing which items finished or failed.",
+   "Letting people cancel or retry a job."
+  ],
+  "avoid": [
+   "Quick actions under about 10 seconds: a simple spinner is enough.",
+   "Jobs that run in the background for hours: send a notification when done."
+  ],
+  "practices": [
+   "Show progress, the current step and an estimate.",
+   "Tell screen readers about updates politely.",
+   "Update at a calm pace, not every frame.",
+   "End with a clear summary and a way to retry failures."
+  ]
+ }
+}

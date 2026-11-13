@@ -1,12 +1,34 @@
 # Chart and graphic marks
 
-The small marks charts, legends, zones and heat maps are made of. Every colour mark has a text label nearby.
+The small marks that make up charts, legends, zones and heat maps. Every colour mark has a nearby text label.
 
 ## Swatch
 
 `id: swatch` · level: primitive · source: Tangerine
 
-A small square of colour that keys a legend entry or shows a chosen colour.
+A small colour square that keys a legend entry or shows a chosen colour.
+
+### General description
+
+A small square of colour that stands for a series or a chosen colour. It links a colour on a chart to its name in the legend.
+
+#### Use cases
+
+- Chart legends.
+- Colour pickers and calendar lists.
+- Labelling series next to a list.
+
+#### When not to use it
+
+- Colour alone does not carry meaning; always add a name.
+- Different data types may need different marker shapes.
+
+#### Best practices
+
+- Always place a text label beside the swatch.
+- Use colours that are easy to tell apart.
+- Use a line style for line series.
+- Keep the order the same as in the chart.
 
 ### When to use
 
@@ -44,7 +66,29 @@ A small square of colour that keys a legend entry or shows a chosen colour.
 
 `id: zone-swatch` · level: primitive · source: ORCA
 
-A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.
+A mark that matches a region drawn on an image or video: coloured outline, light fill, hatched when excluded.
+
+### General description
+
+A small mark that copies how a region is drawn on an image or video, so a list entry can be matched to its region.
+
+#### Use cases
+
+- Lists of regions on an image or video.
+- Region editors.
+- Legends laid over images or videos.
+
+#### When not to use it
+
+- Data series in charts need an ordinary legend swatch.
+- Hue alone does not carry meaning; always add a name.
+
+#### Best practices
+
+- Match the mark to the region on the image.
+- Show excluded regions with a pattern, not only colour.
+- Place the region name beside the mark.
+- Keep outline and fill the same as on the image.
 
 ### When to use
 
@@ -80,6 +124,28 @@ A mark matching how a region is drawn on an image or video: coloured outline wit
 
 A data-point marker: round, square, diamond or ring, coloured by series.
 
+### General description
+
+A small shape that marks a data point on a chart or in a legend, such as a circle, square or diamond.
+
+#### Use cases
+
+- Scatter plots.
+- Markers on line charts.
+- Series keys in a legend.
+
+#### When not to use it
+
+- Many points close together need a different chart or grouping.
+- Colour alone fails for colour-blind readers; vary the shape.
+
+#### Best practices
+
+- Use different shapes for different series.
+- Keep markers a readable size.
+- Label each series beside its marker.
+- Use the same marker in the chart and the legend.
+
 ### When to use
 
 - Scatter points, line-chart markers, inline series keys.
@@ -114,7 +180,30 @@ A data-point marker: round, square, diamond or ring, coloured by series.
 
 `id: heat-cell` · level: primitive · source: Tangerine
 
-A cell shaded on a 6-step sequential scale, with its value printed in it.
+A cell shaded on a 6-step sequential scale, with its value printed inside.
+
+### General description
+
+A table cell shaded from light to dark to show how large a value is. A grid of them makes patterns easy to spot.
+
+#### Use cases
+
+- Activity by hour and day.
+- Occupancy or capacity grids.
+- Calendars showing busy and quiet days.
+
+#### When not to use it
+
+- Exact comparisons are easier in a table or bar chart.
+- Data that goes above and below a target needs a two-colour scale.
+
+#### Best practices
+
+- Print the value inside each cell.
+- Show a legend with the ranges.
+- Choose clear thresholds for the steps.
+- Mark empty cells differently from zero.
+- Add row and column headings.
 
 ### When to use
 
@@ -132,7 +221,7 @@ A cell shaded on a 6-step sequential scale, with its value printed in it.
 
 ### Accessibility
 
-- The value is in the cell; add the row and column headers (`<th scope>`) so screen readers give context.
+- The value is in the cell; add row and column headers (`<th scope>`) to give screen readers context.
 
 #### Example: Row of cells
 

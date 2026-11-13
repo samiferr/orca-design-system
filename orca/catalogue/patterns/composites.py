@@ -13,7 +13,7 @@ DATA = "data-filtering"
 
 add(Pattern(
     "page-landmarks", "Page landmarks", FRAME,
-    "The regions every page has: skip navigation, the main landmark and the place dialogs open in.",
+    "The regions every page has: skip navigation, the main landmark and a place for dialogs.",
     why="Landmarks let assistive technology jump straight to the content (WCAG 1.3.1, 2.4.1) and give dialogs one place "
         "outside the content flow, so focus and stacking work the same on every page (Jakob's law, Tesler's law).",
     when=["Every page: the base layout writes them, so pages never do."],
@@ -64,7 +64,7 @@ add(Pattern(
 
 add(Pattern(
     "loading-placeholder", "Loading placeholder", GRIDS,
-    "Placeholder cards in the shape of the content while a grid or feed loads, announced to screen readers.",
+    "Placeholder cards shaped like the content while a grid or feed loads, announced to screen readers.",
     why="Placeholders in the final shape make waiting feel shorter and keep the layout still (Doherty threshold); the busy "
         "region tells assistive technology that content is on its way.",
     when=["Grids and feeds that load after the page, or load more on scroll."],
@@ -79,7 +79,7 @@ add(Pattern(
 
 add(Pattern(
     "no-results", "No results", DATA,
-    "What a list, table or feed shows when it has nothing: the empty state, and the applied filters when filters hide everything.",
+    "What a list, table or feed shows when empty: the empty state, plus the applied filters when filters hide everything.",
     why="An empty list is a dead end unless it says why and what to do (Peak–end rule, Practical UI W15). When filters "
         "caused it, showing them with Clear all is the fastest way back (Postel's law).",
     when=["Every list, table, grid and feed, for the empty and the filtered-empty cases."],

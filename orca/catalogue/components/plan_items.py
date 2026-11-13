@@ -3,17 +3,17 @@ from . import Component
 
 C = category(
     "plan-items", "Plan items",
-    "Tasks, milestones, deadlines and reminders, and the chips that describe them: assignee, due date, status, priority, progress.",
+    "Tasks, milestones, deadlines and reminders, with chips for assignee, due date, status, priority and progress.",
     level="component",
 )
 
 add(Component(
     "task-item", "Task item", C,
-    "A task row: completion checkbox, title and chips for assignee, due date and priority.",
+    "A task row with a checkbox, a title, and chips for assignee, due date and priority.",
     why="The checkbox is the fastest way to complete a task in place (Fitts's law); chips in a fixed order make many tasks scannable (Miller's law).",
     when=["Task lists, checklists, project and run follow-ups."],
-    how=["`<div class=\"orca-task\">` with a checkbox (label = task title for screen readers), `.orca-task__title`, `.orca-task__meta` chips and optional `.orca-task__end` actions.",
-         "Done: `--done` strikes the title; save immediately and offer Undo in a toast."],
+    how=["`<div class=\"orca-task\">` with a checkbox labelled by the task title, `.orca-task__title`, `.orca-task__meta` chips and optional `.orca-task__end` actions.",
+         "Done: `--done` strikes the title. Save at once and offer Undo in a toast."],
     classes=[".orca-task", ".orca-task__title", ".orca-task__meta", ".orca-task__end", ".orca-task--done"],
     laws=["fitts", "miller", "doherty"],
     uses=["checkbox", "assignee-chip", "due-date-chip", "priority-chip"],
@@ -27,10 +27,10 @@ add(Component(
 
 add(Component(
     "subtask-item", "Subtask item", C,
-    "A smaller, indented task under its parent with a connecting line.",
+    "A smaller indented task under its parent, joined by a line.",
     why="Indentation and a guide line show which task each step belongs to (Gestalt, Practical UI L01); a smaller style keeps the parent dominant.",
     when=["Breaking a task into steps."],
-    how=["`<div class=\"orca-task orca-task--sub\">` after the parent; show the parent's progress as a progress chip ('2/5')."],
+    how=["`<div class=\"orca-task orca-task--sub\">` after the parent; show the parent's progress in a progress chip ('2/5')."],
     classes=[".orca-task--sub"],
     laws=["L01", "miller"],
     uses=["task-item", "progress-chip"],
@@ -60,10 +60,10 @@ add(Component(
 
 add(Component(
     "deadline-item", "Deadline item", C,
-    "A deadline row: flag, name, due date and how long is left or how late it is.",
+    "A deadline row: flag, name, due date and time left or overdue.",
     why="Time left is what people act on (Tesler's law: compute it for them); turning amber when close and red when late, with words, prevents surprises (Peak–end rule, C03).",
     when=["Deadline lists, compliance dates, renewals."],
-    how=["`.orca-plan-row` with the deadline marker icon, the body (name + due date) and either a due-date chip (`--soon`) or an overdue marker."],
+    how=["`.orca-plan-row` with the deadline marker icon, the body (name + due date) and a due-date chip (`--soon`) or an overdue marker."],
     classes=[".orca-plan-row"],
     laws=["tesler", "peak-end", "C03"],
     uses=["deadline-marker", "overdue-marker", "due-date-chip"],
@@ -89,10 +89,10 @@ add(Component(
 
 add(Component(
     "assignee-chip", "Assignee chip", C,
-    "A small avatar and name showing who is responsible.",
+    "A small avatar and name showing who owns the item.",
     why="A face and name identify the owner faster than a name alone (Miller's law); 'Unassigned' is shown explicitly so gaps are visible.",
     when=["Tasks, board cards, tickets."],
-    how=["`<span class=\"orca-chip\"><span class=\"orca-avatar orca-avatar--xs\" aria-hidden=\"true\">AL</span><span class=\"orca-chip__text\">Ada Lovelace</span></span>`; unassigned: the user icon and 'Unassigned'."],
+    how=["`<span class=\"orca-chip\"><span class=\"orca-avatar orca-avatar--xs\" aria-hidden=\"true\">AL</span><span class=\"orca-chip__text\">Ada Lovelace</span></span>`; if unassigned, show the user icon and 'Unassigned'."],
     classes=[".orca-chip", ".orca-chip__text"],
     laws=["miller", "S06"],
     uses=["avatar"],
@@ -115,7 +115,7 @@ add(Component(
 
 add(Component(
     "status-chip", "Status chip (planned, in progress, done, overdue)", C,
-    "A plan item's state with a distinct shape per state: empty circle, half circle, full circle, square.",
+    "A plan item's state, each with its own shape: empty circle, half circle, full circle, square.",
     why="Each state has its own shape so states are told apart in greyscale (Practical UI C03); words stay consistent across the product (W10).",
     when=["Tasks, milestones, runs, requests."],
     how=["`<span class=\"orca-chip orca-chip--planned\">Planned</span>`, `--progress` (In progress), `--done` (Done), `--blocked` (Blocked), `--overdue` (Overdue)."],
@@ -128,10 +128,10 @@ add(Component(
 
 add(Component(
     "priority-chip", "Priority chip", C,
-    "The priority marker in a chip, for use among other chips.",
+    "A priority marker in chip form, to sit beside other chips.",
     why="Bars rising with priority and a word work without colour (C03), and the chip aligns with other metadata (Practical UI F09).",
     when=["Tasks and board cards."],
-    how=["`<span class=\"orca-chip\"><span class=\"orca-priority orca-priority--medium\">…bars…Medium</span></span>`. Omit the chip for 'normal' priority to reduce noise."],
+    how=["`<span class=\"orca-chip\"><span class=\"orca-priority orca-priority--medium\">…bars…Medium</span></span>`. Omit it for 'normal' priority to cut noise."],
     classes=[".orca-chip"],
     laws=["C03", "F09", "restorff"],
     uses=["priority-marker"],
@@ -141,7 +141,7 @@ add(Component(
 
 add(Component(
     "progress-chip", "Progress chip", C,
-    "A tiny bar and a count ('3/5') of completed sub-items.",
+    "A tiny bar and a count ('3/5') of finished sub-items.",
     why="A count is exact and a bar is quick; together they show progress without opening the item (Doherty: visible progress).",
     when=["Tasks with subtasks, checklists, plans."],
     how=["`<span class=\"orca-chip\"><span class=\"orca-chip__bar\" style=\"--orca-value: 60%\"><span></span></span>3/5</span>` with an `aria-label` '3 of 5 steps done'."],
@@ -154,11 +154,11 @@ add(Component(
 
 add(Component(
     "gantt-bar", "Gantt bar", C,
-    "A task as a bar positioned on a time grid, with a progress line and milestones as diamonds.",
+    "A task drawn as a bar on a time grid, with a progress line and milestone diamonds.",
     why="Seeing tasks along time shows overlaps, gaps and the critical path at a glance (Gestalt, Practical UI L03); the progress line and late outline add state without colour alone.",
     when=["Project timelines and roadmaps."],
     how=["`<div class=\"orca-gantt\" style=\"--orca-cols: 7\">` of `.orca-gantt-row`s: `.orca-gantt-row__label` and `.orca-gantt-row__lane` holding `<a class=\"orca-gantt-bar\" style=\"--orca-start: 14%; --orca-span: 43%; --orca-progress: 60%\">`.",
-         "Variants `--done`, `--late`; milestones are milestone markers with `--orca-start`. Wrap in `.orca-table-wrap` for horizontal scroll; offer a list view for screen readers."],
+         "Variants `--done`, `--late`; milestones are milestone markers with `--orca-start`. Wrap in `.orca-table-wrap` to scroll sideways, and offer a list view for screen readers."],
     classes=[".orca-gantt", ".orca-gantt-row", ".orca-gantt-row__label", ".orca-gantt-row__lane", ".orca-gantt-bar", ".orca-gantt-bar--done", ".orca-gantt-bar--late"],
     laws=["L03", "C03"],
     uses=["milestone-marker", "progress-bar"],
@@ -172,10 +172,10 @@ add(Component(
 
 add(Component(
     "plan-card", "Plan card", C,
-    "A plan's summary: name, period, progress and counts of open, done and late items.",
+    "A plan summary: name, period, progress and counts of open, done and late items.",
     why="A planner judges a plan by whether it is on track; period, progress and late count in one card answer that at a glance (Miller's law, Peak–end rule).",
     when=["Lists of plans, sprints, projects."],
-    how=["A linked card with the name, the period as date labels, a progress with counts, and a footer of status chips with counts."],
+    how=["A linked card with the name, the period (as date labels), progress with counts, and a footer of status chips with counts."],
     classes=[".orca-card", ".orca-card--link"],
     laws=["miller", "peak-end"],
     uses=["linked-card", "progress-with-counts", "status-chip"],
@@ -191,7 +191,7 @@ add(Component(
     why="Boards show work by state; compact cards with the same slots let people scan a column quickly (Miller's law) and the drag handle with keyboard support makes moving accessible (Postel's law).",
     when=["Kanban boards and planners."],
     how=["`<article class=\"orca-board-card\">` with `.orca-board-card__head` (drag handle + `.orca-board-card__title` link), tags, and `.orca-board-card__foot` (due-date chip, priority chip, assignee avatar).",
-         "Offer a 'Move to' menu as the non-drag alternative."],
+         "Offer a 'Move to' menu as an alternative to dragging."],
     classes=[".orca-board-card", ".orca-board-card__head", ".orca-board-card__title", ".orca-board-card__foot"],
     laws=["miller", "postel", "fitts"],
     uses=["drag-handle", "tag", "due-date-chip", "avatar"],
@@ -203,7 +203,7 @@ add(Component(
 
 add(Component(
     "resource-row", "Resource row", C,
-    "A person or resource with their load and a row of day cells showing availability.",
+    "A person or resource with their workload and a row of day cells showing availability.",
     why="Planners assign work by comparing who is free when; aligning every resource on the same day columns makes that comparison visual (Miller's law), and patterns plus counts avoid colour-only meaning (C03).",
     when=["Capacity planners, rosters, resource schedulers."],
     how=["`<div class=\"orca-resource-row\" style=\"--orca-cols: 7\">` with `.orca-resource-row__who` (avatar, name, `__load` '32 of 40 h') and `.orca-resource-row__slots` of spans using availability fills and hour counts.",

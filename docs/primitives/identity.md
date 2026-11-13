@@ -1,12 +1,34 @@
 # Identity
 
-Who and what: the product's logo and favicon, and people's avatars.
+The product's logo and favicon, and people's avatars.
 
 ## Logo
 
 `id: logo` · level: primitive · source: Tangerine
 
 The product's logo image, or its name as a wordmark with a brand bar when no logo is set.
+
+### General description
+
+The symbol or wordmark that identifies a product or brand. It usually sits in a top bar or header and links to the home page.
+
+#### Use cases
+
+- Showing the brand in the header or top bar.
+- Branding login and sign-up screens.
+- Branding emails and documents.
+
+#### When not to use it
+
+- Repeating it many times on one screen.
+- Using it as decoration.
+
+#### Best practices
+
+- Keep it in the same place on every page.
+- Link it to the home page.
+- Never stretch or recolour the file.
+- Give it the product name as alt text.
 
 ### When to use
 
@@ -24,7 +46,7 @@ The product's logo image, or its name as a wordmark with a brand bar when no log
 
 ### Accessibility
 
-- The image alt is the product name; a linked logo's accessible name is the product name (not 'logo').
+- The image alt is the product name, also for a linked logo (not 'logo').
 
 #### Example: Logo
 
@@ -53,6 +75,28 @@ The product's logo image, or its name as a wordmark with a brand bar when no log
 
 A person's picture or initials in a circle (or square for organisations and devices).
 
+### General description
+
+A small picture or set of initials that stands for a person, team or account.
+
+#### Use cases
+
+- Showing who wrote a comment or made a change.
+- Listing people and team members.
+- Showing the signed-in user in a menu.
+
+#### When not to use it
+
+- Decoration with no meaning.
+- Showing a company brand: use a logo.
+
+#### Best practices
+
+- Show initials when there is no photo.
+- Keep the name nearby or in a tooltip.
+- Offer a few consistent sizes.
+- Give a text alternative when it stands alone.
+
 ### When to use
 
 - Next to a person's name in lists, comments, activity, the user chip.
@@ -60,7 +104,7 @@ A person's picture or initials in a circle (or square for organisations and devi
 
 ### When not to use
 
-- Avatar without the name nearby unless the name is in a tooltip and the list is of known people.
+- An avatar with no name nearby, unless the name is in a tooltip and the people are well known.
 
 ### How to use
 
@@ -71,7 +115,7 @@ A person's picture or initials in a circle (or square for organisations and devi
 
 ### Accessibility
 
-- If the avatar stands alone, give the image `alt` with the person's name, or `role="img" aria-label` on initials.
+- A standalone avatar needs the person's name: `alt` on the image, or `role="img" aria-label` on initials.
 
 #### Example: Sizes and kinds
 
@@ -104,6 +148,28 @@ A person's picture or initials in a circle (or square for organisations and devi
 
 The browser-tab and home-screen icons for the product.
 
+### General description
+
+The small icon that appears in browser tabs, bookmarks and on home screens to represent a site.
+
+#### Use cases
+
+- Helping people find a tab among many.
+- Identifying a site in bookmarks and history.
+- Showing the app icon when saved to a home screen.
+
+#### When not to use it
+
+- Showing the full brand: use a logo.
+- Detailed images that become unreadable when tiny.
+
+#### Best practices
+
+- Keep it simple so it reads at 16px.
+- Provide an SVG or PNG and larger sizes for phones.
+- Make it clear on light and dark tabs.
+- Match it to the brand.
+
 ### When to use
 
 - Every deployment.
@@ -111,7 +177,7 @@ The browser-tab and home-screen icons for the product.
 ### How to use
 
 - Set `ORCA['BRAND']['favicon']` to a 32px PNG or an SVG in your static files; `{% orca_head %}` writes the `<link rel="icon">`.
-- For installable apps also add apple-touch-icon (180px), 192px and 512px icons and a manifest in your base template.
+- Installable apps also need apple-touch-icon (180px), 192px and 512px icons and a manifest in the base template.
 - `theme-color` is written from the brand fill automatically.
 
 #### Example: What orca_head writes

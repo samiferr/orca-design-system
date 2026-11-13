@@ -3,13 +3,13 @@ from . import Pattern
 
 C = category(
     "page-frame", "Page frame",
-    "The parts every page sits in: headers, top bar, sidebar, footer, page head, messages, drawers and filter panels.",
+    "The parts that surround every page: headers, top bar, sidebar, footer, page head, messages, drawers and filter panels.",
     level="pattern",
 )
 
 add(Pattern(
     "site-header", "Header", C,
-    "The public site header: logo, a few section links and one or two actions, sticky at the top.",
+    "Header of public pages: logo, a few section links and one or two actions, sticky at the top.",
     why="People expect the logo top-left (home) and the main sections beside it on every site (Jakob's law); one primary action keeps the next step obvious (Hick's law).",
     when=["Public and marketing pages, documentation sites, sign-in pages."],
     avoid=["Inside the application: use the top bar."],
@@ -28,12 +28,12 @@ add(Pattern(
 
 add(Pattern(
     "top-bar", "Top bar", C,
-    "The application bar: menu button, logo, main sections, search and the user's tools.",
+    "The application's top bar: menu button, logo, main sections, search and user tools.",
     why="A persistent bar in the expected place anchors every page of an application (Jakob's law); dense controls keep it to 56px so content stays in view (Practical UI F03).",
     when=["Every authenticated page of an application."],
     how=["`<header class=\"orca-topbar\">` with `.orca-topbar__start` (menu or sidebar toggle, logo, primary navigation) and `.orca-topbar__end` (search, utility navigation).",
          "It is the wise_people_analyzer bar: `--orca-brand-bar` (the brand colour mixed with 30% black, darkened further if white text would fall below 4.5:1) with `--orca-brand-bar-on` text.",
-         "Below 1036px the navigation and search move into the drawer; the menu button opens it."],
+         "Below 1036px, navigation and search move into the drawer, opened by the menu button."],
     classes=[".orca-topbar", ".orca-topbar__start", ".orca-topbar__end"],
     tokens=["brand-bar", "brand-bar-on", "brand-bar-hover"],
     laws=["jakob", "F03", "fitts"],
@@ -51,14 +51,14 @@ add(Pattern(
 
 add(Pattern(
     "sidebar", "Sidebar", C,
-    "The application's side navigation: grouped section links, collapsible to an icon rail, remembered per person.",
+    "Side navigation for an application: grouped section links that collapse to an icon rail, remembered per person.",
     why="Products with many sections need a persistent, scannable list; groups chunk it (Miller's law) and collapsing gives space back to dense screens (Tesler's law: the person decides).",
     when=["Applications with more than about 5 sections."],
     how=["`<div class=\"orca-app\">` holds `<nav class=\"orca-sidebar\" id=… aria-label=\"Sections\">` and `<main class=\"orca-app__main\">`.",
          "Sections: `.orca-sidebar__section` with an optional `.orca-sidebar__label` and side links; `.orca-sidebar__foot` holds the collapse toggle (`data-orca-sidebar-toggle aria-controls=…`).",
-         "Collapsed (`data-collapsed=\"true\"`): labels become visually hidden but stay readable by screen readers; the rail keeps icons. Give each link a `title` so the rail has tooltips.",
+         "Collapsed (`data-collapsed=\"true\"`): labels are hidden visually but still read by screen readers, and the rail keeps icons. Give each link a `title` for tooltips.",
          "The state is remembered per sidebar in `localStorage` under `orca-sidebar:<id>`, so give the sidebar an `id`.",
-         "Long lists (like this documentation's navigation) nest a nav tree inside a section; hide the tree when collapsed."
+         "Nest a nav tree inside a section for long lists, such as this documentation's navigation; hide it when collapsed.",
          "Below 620px the sidebar hides; put the same links in a drawer opened from the top bar."],
     classes=[".orca-app", ".orca-app__main", ".orca-sidebar", ".orca-sidebar__section", ".orca-sidebar__label", ".orca-sidebar__foot"],
     laws=["miller", "tesler", "jakob"],
@@ -99,11 +99,11 @@ add(Pattern(
 
 add(Pattern(
     "page-head", "Page head", C,
-    "The top of a page's content: breadcrumbs or back link, title, subtitle, meta and the page's actions.",
+    "The top of a page's content: breadcrumbs or back link, title, subtitle, meta info and page actions.",
     why="One consistent head answers 'where am I, what is this, what can I do here' before anything else (Jakob's law); one primary action keeps the priority clear (Practical UI B03).",
     when=["The top of every application page."],
     how=["`<div class=\"orca-page-head\">` with `.orca-page-head__text` (breadcrumbs or back link, `h1.orca-page-title`, `.orca-page-subtitle`, `.orca-page-head__meta`) and `.orca-page-head__actions`.",
-         "Actions: secondary buttons first, the primary (or the create button) last; on phones they stretch full width."],
+         "Actions: secondary buttons first, then the primary or create button; on phones they stretch full width."],
     classes=[".orca-page-head", ".orca-page-head__text", ".orca-page-head__meta", ".orca-page-head__actions"],
     laws=["jakob", "B03", "L03"],
     uses=["page-heading", "breadcrumbs", "create-button"],
@@ -118,11 +118,11 @@ add(Pattern(
 
 add(Pattern(
     "messages-region", "Messages region", C,
-    "The place under the page head where results of the last action appear, announced politely.",
+    "A region under the page head that shows the result of the last action, announced politely.",
     why="Results always in the same place are found at once (Jakob's law); a live region announces them to screen-reader users (Postel's law).",
     when=["Every page, in the base template, between the page head and the content."],
     how=["`<div class=\"orca-messages-region\" aria-live=\"polite\">{% templatetag openblock %} orca_messages {% templatetag closeblock %}</div>`; errors inside use `role=\"alert\"`.",
-         "Toasts float elsewhere; this region holds messages that must stay until read."],
+         "Toasts float elsewhere; this region keeps messages until they are read."],
     classes=[".orca-messages-region", ".orca-messages"],
     laws=["jakob", "postel", "peak-end"],
     uses=["flash-message"],
@@ -134,7 +134,7 @@ add(Pattern(
 
 add(Pattern(
     "drawer", "Drawer", C,
-    "A panel that slides over the page from one edge, built on the native dialog.",
+    "A panel that slides in over the page from one edge, built on the native dialog.",
     why="A drawer keeps the page in view behind it, for tasks that refer to the page (Practical UI L14); the native dialog traps focus and closes with Escape (Postel's law).",
     when=["Navigation on phones, filters, details of a selected row, quick settings."],
     avoid=["Long forms: use a page."],
@@ -154,7 +154,7 @@ add(Pattern(
 
 add(Pattern(
     "top-actions-header", "Top actions header", C,
-    "A thin row above a detail or form page: back link on one side, the page's actions on the other.",
+    "A thin row above a detail or form page with a back link on one side and page actions on the other.",
     why="Putting the way back and the actions on the same line saves height and keeps them at the top where people look first (Fitts's law, Practical UI B09).",
     when=["Detail and form pages reached from a list, especially on tablets and phones."],
     how=["`<div class=\"orca-top-actions\">` with a back link and `.orca-top-actions__end` (record actions)."],
@@ -167,11 +167,11 @@ add(Pattern(
 
 add(Pattern(
     "settings-panel", "Settings panel", C,
-    "Display preferences in groups: theme and density, with a live result. ORCA has a single appearance and brand colours set by the project.",
+    "Grouped display preferences, theme and density, applied live. ORCA has one appearance; the project sets brand colours.",
     why="People adapt the interface to their eyes and work (Tesler's law); grouping preferences and applying them at once confirms each choice (Doherty threshold).",
     when=["A drawer or popover opened by the settings toggle; an account preferences page."],
     how=["`<div class=\"orca-settings-panel\">` of `<fieldset class=\"orca-settings-panel__group\">`: the theme toggle (Auto, Light, Dark, Paper), and switches for personal preferences such as reduced motion or compact tables.",
-         "Apply immediately and remember per person. Brand colour, accent and rounding are project settings (brand tokens), not personal ones: ORCA keeps one shape language."],
+         "Apply at once and remember per person. Brand colour, accent and rounding are project settings (brand tokens), not personal: ORCA keeps one shape language."],
     classes=[".orca-settings-panel", ".orca-settings-panel__group"],
     laws=["tesler", "doherty", "R14"],
     uses=["theme-toggle", "toggle-field", "settings-toggle"],
@@ -185,7 +185,7 @@ add(Pattern(
 
 add(Pattern(
     "filter-panel", "Filter panel", C,
-    "Filters in labelled groups with the number of results and Clear all: the content of the filter drawer.",
+    "Labelled groups of filters with a result count and Clear all: the content of the filter drawer.",
     why="Seeing all filters and the result count at once lets people narrow a list confidently (Miller's law, Doherty threshold); grouping keeps a long set of filters scannable.",
     when=["Inside the filter drawer of every page with filters."],
     avoid=["A side column of filters beside the list: page filters always open in the right drawer."],
@@ -209,7 +209,7 @@ add(Pattern(
 
 add(Pattern(
     "filter-drawer", "Filter drawer", C,
-    "Page filters in a right drawer, opened by a Filters button in the page actions, with Show results and Clear all.",
+    "Page filters in a right drawer opened by a Filters button in the page actions, with Show results and Clear all.",
     why="Filters change what a page shows without taking people away from it: a right drawer keeps the results behind the scrim, keeps the page head "
         "to one Filters button (Hick's law, Practical UI S04: reveal secondary controls when needed), and opens from the same place on every page and "
         "every screen width, so people know where to look (Jakob's law). An explicit Show results avoids reloading on every tap (Doherty threshold).",

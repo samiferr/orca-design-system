@@ -1,12 +1,34 @@
 # Text
 
-Text styles with a fixed role. Choose by what the text is (a page title, a stat value), not by how big you want it.
+Text styles with a fixed role. Choose by what the text is (a page title, a stat value), not by size.
 
 ## Heading (h1–h6)
 
 `id: heading` · level: primitive · source: Tangerine
 
-Document headings from h1 to h6, plus a display style for marketing pages.
+Headings h1 to h6, plus a display style for marketing pages.
+
+### General description
+
+Headings are titles that label each part of a page, from the main title (h1) down to small sub-sections (h6). They give a page an outline that people and software can scan.
+
+#### Use cases
+
+- Breaking long articles, documentation and reports into scannable sections.
+- Letting screen-reader users jump between sections.
+- Showing the main topic of a page in one h1.
+
+#### When not to use it
+
+- Making text bigger or bold only for looks: use a style, not a heading level.
+- Labelling single items like buttons or form fields: use the proper label element.
+
+#### Best practices
+
+- Use one h1 per page.
+- Go down one level at a time and never skip levels.
+- Choose the level for the outline, then adjust the look with styling.
+- Keep headings short and specific.
 
 ### When to use
 
@@ -15,7 +37,7 @@ Document headings from h1 to h6, plus a display style for marketing pages.
 
 ### When not to use
 
-- Choosing a heading level for its size: keep levels in order and restyle with a class if needed.
+- Picking a level for its size: keep levels in order and restyle with a class.
 - Page and panel titles in applications: use `page-title` and `panel-title`.
 
 ### How to use
@@ -54,27 +76,49 @@ Document headings from h1 to h6, plus a display style for marketing pages.
 
 `id: page-title` · level: primitive · source: Tangerine
 
-The single title naming what this page is.
+The one title that names the page.
+
+### General description
+
+The page title is the main heading of a page. It tells people which page or item they are on.
+
+#### Use cases
+
+- Naming the page at the top of an application screen.
+- Naming the record on a detail page.
+- Giving every page one clear focal point.
+
+#### When not to use it
+
+- Putting the site name in every title: use a logo or header for the brand.
+- Long explanations: use a subtitle or help text.
+
+#### Best practices
+
+- Name the thing, such as 'Orders', not the action.
+- Put the distinguishing word first.
+- Make it the page's single h1.
+- Match the browser tab title.
 
 ### When to use
 
-- Top of every application page, inside the page head, beside the page actions.
+- Top of every application page, in the page head beside the page actions.
 
 ### When not to use
 
-- Repeating the product name or the breadcrumb's last item word for word with extra decoration.
+- Repeating the product name or the last breadcrumb item.
 - Long titles: front-load the distinguishing word (W04).
 
 ### How to use
 
 - `<h1 class="orca-page-title">` (28/36, weight 700).
 - Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.
-- Long names wrap; they are never cut, so people can always read the full name (L15).
+- Long names wrap and are never cut (L15).
 - On application pages it sits in the `page-head` pattern, with the page actions beside it.
 
 ### Accessibility
 
-- It is the page's `<h1>`; the document `<title>` should start with the same words.
+- It is the page's `<h1>`. Start the document `<title>` with the same words.
 
 #### Example: Page title with subtitle
 
@@ -101,16 +145,38 @@ The single title naming what this page is.
 
 `id: page-subtitle` · level: primitive · source: Tangerine
 
-One sentence under the page title that says what the page is for or about.
+One sentence under the page title saying what the page is for.
+
+### General description
+
+A page subtitle is one short sentence under the page title. It explains what the page is for or adds one key fact.
+
+#### Use cases
+
+- Clarifying a page whose title alone is vague.
+- Showing scope, such as a date range or filter.
+- Giving first-time visitors a hint of what to do.
+
+#### When not to use it
+
+- Restating the title in other words: leave it out.
+- Long instructions: put help text next to the field that needs it.
+
+#### Best practices
+
+- Keep it to one short sentence.
+- Make it add something the title does not.
+- Use a quieter colour than the title.
+- Keep lines a readable length.
 
 ### When to use
 
-- Pages whose purpose is not obvious from the title, or that need one key fact (scope, time range).
+- Pages whose purpose is unclear from the title, or that need one key fact (scope, time range).
 
 ### When not to use
 
 - Repeating the title.
-- Instructions longer than one sentence: put them in help text where they are needed.
+- Instructions longer than one sentence: put them in help text where needed.
 
 ### How to use
 
@@ -138,20 +204,42 @@ One sentence under the page title that says what the page is for or about.
 
 `id: section-title` · level: primitive · source: Tangerine
 
-Title of a section inside a page (a group of panels or a long form part).
+Title of a section in a page: a group of panels or part of a long form.
+
+### General description
+
+A section title heads a group of related content on a page, such as a set of panels or part of a long form.
+
+#### Use cases
+
+- Splitting a long page into a few named parts.
+- Grouping related fields in a long form.
+- Helping people scan to the part they need.
+
+#### When not to use it
+
+- Titling a section that holds only one titled panel: the panel title is enough.
+- Naming the whole page: use the page title.
+
+#### Best practices
+
+- Use words people would look for, not 'Other' or 'Misc'.
+- Keep the heading level in order.
+- Leave more space above than below.
+- Keep titles to a few words.
 
 ### When to use
 
-- Splitting a page into two or more regions; grouping fields of a long form.
+- Splitting a page into two or more regions; grouping fields in a long form.
 
 ### When not to use
 
-- A section with a single panel that already has a title: use only the panel title.
+- A section holding one titled panel: use only the panel title.
 
 ### How to use
 
 - `<h2 class="orca-section-title">` (24/32, 550), with `--orca-space-16` below and `--orca-space-32` above.
-- Descriptive words people scan for: 'Notifications', not 'Other'.
+- Use words people scan for: 'Notifications', not 'Other'.
 
 #### Example: Section title
 
@@ -173,7 +261,29 @@ Title of a section inside a page (a group of panels or a long form part).
 
 `id: panel-title` · level: primitive · source: Tangerine
 
-Title at the top of a panel or card group of content.
+Title at the top of a panel or card group.
+
+### General description
+
+A panel title is the heading of a boxed block of content, such as a card, table or chart. It names what that block shows.
+
+#### Use cases
+
+- Naming a chart, table or summary card.
+- Heading a settings group in a box.
+- Letting people find a block by scanning.
+
+#### When not to use it
+
+- Naming a whole page section: use a section title.
+- Styling that looks like a link or label, such as colour or all capitals.
+
+#### Best practices
+
+- Describe the content in a few words.
+- Pick the heading level that fits the page outline.
+- Add a short muted description only if needed.
+- Keep style the same on every panel.
 
 ### When to use
 
@@ -209,7 +319,29 @@ Title at the top of a panel or card group of content.
 
 `id: alert-title` · level: primitive · source: Tangerine
 
-Bold first line of an alert, callout or notification that states what happened.
+Bold first line of an alert, callout or notification, stating what happened.
+
+### General description
+
+An alert title is the bold first line of a message box. It states plainly what happened so the reader can decide quickly.
+
+#### Use cases
+
+- Naming the result in a success or error message.
+- Heading a warning or notice with a longer body.
+- Giving screen-reader users the key fact first.
+
+#### When not to use it
+
+- One-line messages: skip the title and write one clear sentence.
+- Vague titles like 'Error' or 'Oops': state the problem.
+
+#### Best practices
+
+- State the fact, such as 'Report sent'.
+- Keep it to a few words.
+- Skip 'Error:' prefixes and exclamation marks.
+- Follow it with what to do next.
 
 ### When to use
 
@@ -243,9 +375,31 @@ Bold first line of an alert, callout or notification that states what happened.
 
 Running text at 16/24 with a 70-character measure.
 
+### General description
+
+A paragraph is a block of running text. It carries explanations and descriptions, and its size and line length set how easy a page is to read.
+
+#### Use cases
+
+- Explaining a feature or a result.
+- Writing the body of a dialog or message.
+- Introducing a section before lists or tables.
+
+#### When not to use it
+
+- Long blocks of dense text: split them or use a list.
+- Content that is really a list of steps: use a numbered list.
+
+#### Best practices
+
+- Put the main point first.
+- Keep one idea in each paragraph.
+- Keep lines around 60 to 75 characters.
+- Use short sentences.
+
 ### When to use
 
-- Any sentence-level text: descriptions, explanations, dialog bodies.
+- Descriptions, explanations, dialog bodies and other running text.
 
 ### When not to use
 
@@ -254,7 +408,7 @@ Running text at 16/24 with a 70-character measure.
 ### How to use
 
 - `<p class="orca-p">`. Lead paragraph: `.orca-p--lead` (18/28).
-- Front-load the point; one idea per paragraph; under 20 words per sentence where possible.
+- Lead with the point; one idea per paragraph; under 20 words per sentence where possible.
 
 #### Example: Paragraphs
 
@@ -277,11 +431,33 @@ Running text at 16/24 with a 70-character measure.
 
 `id: text-link` · level: primitive · source: Tangerine
 
-An underlined, accent-coloured link inside text.
+An underlined, accent-coloured link in text.
+
+### General description
+
+A text link is clickable text that takes the reader to another page, file or place on the same page.
+
+#### Use cases
+
+- Pointing to related pages from within a sentence.
+- Linking to outside sources or documentation.
+- Jumping to a section on the same page.
+
+#### When not to use it
+
+- Actions that change data, such as save or delete: use a button.
+- Vague text like 'click here': say where the link goes.
+
+#### Best practices
+
+- Make link text meaningful on its own.
+- Underline links so colour is not the only cue.
+- Show a clear focus outline.
+- Say when a link opens another site.
 
 ### When to use
 
-- Navigation to another page or resource from within text.
+- Linking to another page or resource from within text.
 
 ### When not to use
 
@@ -296,7 +472,7 @@ An underlined, accent-coloured link inside text.
 
 ### Accessibility
 
-- Link text must make sense read alone, as screen-reader users list links.
+- Link text must make sense on its own: screen-reader users list links.
 - Focus shows the 3px ring; hover thickens the underline.
 
 #### Example: Links
@@ -326,13 +502,34 @@ An underlined, accent-coloured link inside text.
 
 Secondary text in `--orca-text-muted` (60% ink, still 4.5:1).
 
+### General description
+
+Muted text is secondary text shown in a softer colour so the main content stands out. It must still be easy to read.
+
+#### Use cases
+
+- Showing descriptions under titles.
+- Showing meta details such as counts or dates.
+- Showing empty values like 'Not set'.
+
+#### When not to use it
+
+- Text people must read to finish a task: use normal colour.
+- Showing that something is disabled: use a real disabled state.
+
+#### Best practices
+
+- Keep enough contrast: at least 4.5 to 1 against the background.
+- Do not rely on pale grey.
+- Use it only for secondary information.
+
 ### When to use
 
 - Meta information, descriptions under titles, empty values ('Not set'), counts beside labels.
 
 ### When not to use
 
-- Placeholder-like grey for content people must read to finish the task.
+- Pale grey for content people must read to finish the task.
 - Disabled meaning: use the disabled state.
 
 ### How to use
@@ -360,6 +557,28 @@ Secondary text in `--orca-text-muted` (60% ink, still 4.5:1).
 `id: small-text` · level: primitive · source: Tangerine
 
 14/20 detail text for help, meta and timestamps.
+
+### General description
+
+Small text is a smaller type size for supporting information such as help, captions and timestamps.
+
+#### Use cases
+
+- Writing help text under a field.
+- Showing captions, timestamps or footnotes.
+- Adding meta details next to a title.
+
+#### When not to use it
+
+- Body copy or anything essential to read in full: use normal text size.
+- Legal or critical warnings: keep them at normal size.
+
+#### Best practices
+
+- Do not go below about 14px.
+- Keep contrast high.
+- Keep it short.
+- Pair it with a quieter colour for meta details.
 
 ### When to use
 
@@ -393,7 +612,29 @@ Secondary text in `--orca-text-muted` (60% ink, still 4.5:1).
 
 `id: tabular-number` · level: primitive · source: Tangerine
 
-Digits of equal width so numbers line up in columns and do not jitter when they update.
+Equal-width digits that line up in columns and do not shift when numbers update.
+
+### General description
+
+Tabular numbers use digits of equal width, so figures line up in columns and do not shift when values change.
+
+#### Use cases
+
+- Showing prices and totals in tables.
+- Showing live counters and timers.
+- Showing times, durations and percentages.
+
+#### When not to use it
+
+- Running text and headings: normal digits read more naturally there.
+- Codes with letters and digits, such as IDs: use a monospace code style.
+
+#### Best practices
+
+- Right-align numbers in columns.
+- Add thousand separators and units.
+- Use the same decimal places in a column.
+- Use it for values that update.
 
 ### When to use
 
@@ -402,7 +643,7 @@ Digits of equal width so numbers line up in columns and do not jitter when they 
 ### How to use
 
 - Add `.orca-num`. Stat values, times and durations already use tabular figures.
-- Format with grouping separators and units: '12,480 people', '64%'. Use Django's `intcomma` and `floatformat`.
+- Add separators and units: '12,480 people', '64%', using Django's `intcomma` and `floatformat`.
 
 #### Example: Aligned digits
 
@@ -423,6 +664,28 @@ Digits of equal width so numbers line up in columns and do not jitter when they 
 `id: kbd` · level: primitive · source: Tangerine
 
 A key or shortcut the person presses.
+
+### General description
+
+A keyboard key element shows a key or key combination in a key-like shape, so readers can tell it from the surrounding sentence.
+
+#### Use cases
+
+- Documenting shortcuts in help text.
+- Showing shortcuts next to menu items.
+- Writing instructions that name specific keys.
+
+#### When not to use it
+
+- Showing code or commands: use a code style.
+- Making a shortcut the only way to do something: always offer a visible option.
+
+#### Best practices
+
+- Use one element per key.
+- Write key names as printed, such as Ctrl or Esc.
+- Join combinations with a plus sign.
+- Consider Mac and Windows differences.
 
 ### When to use
 
@@ -458,6 +721,28 @@ A key or shortcut the person presses.
 `id: stat-label` · level: primitive · source: Tangerine
 
 The name of a measured value, shown above it.
+
+### General description
+
+A stat label is the short name of a measured value, shown with the number so readers know what it means.
+
+#### Use cases
+
+- Naming a number on a dashboard tile.
+- Labelling a figure in a summary row.
+- Telling apart several similar numbers.
+
+#### When not to use it
+
+- Long explanations: use a tooltip or help text.
+- Labels that repeat the whole tile title.
+
+#### Best practices
+
+- Name the measure and its scope, such as 'Visitors today'.
+- Keep it to a few words.
+- Place it consistently above or beside the value.
+- Use sentence case.
 
 ### When to use
 
@@ -496,7 +781,29 @@ The name of a measured value, shown above it.
 
 `id: stat-value` · level: primitive · source: Tangerine
 
-A large, tabular number that is the point of a KPI tile.
+The large tabular number a KPI tile exists to show.
+
+### General description
+
+A stat value is a large number that shows one key measurement. It is the main thing a summary tile is there to show.
+
+#### Use cases
+
+- Showing key figures on a dashboard.
+- Opening a report with headline numbers.
+- Showing a live count.
+
+#### When not to use it
+
+- Many figures in one tile: use a table or chart.
+- Numbers without context: add a label, unit or comparison.
+
+#### Best practices
+
+- Show one main value per tile.
+- Include the unit, such as % or h.
+- Format with thousand separators.
+- Use equal-width digits.
 
 ### When to use
 
@@ -543,13 +850,35 @@ A large, tabular number that is the point of a KPI tile.
 
 Change against a reference: arrow, signed value, colour, and the reference in words.
 
+### General description
+
+A delta shows how a value changed compared with an earlier period or a target, using an arrow, a signed number and a colour.
+
+#### Use cases
+
+- Comparing today with yesterday on a KPI tile.
+- Showing growth or decline over a period.
+- Showing distance from a target.
+
+#### When not to use it
+
+- Showing a total on its own: use a stat value.
+- Using red and green alone: add an arrow and a sign.
+
+#### Best practices
+
+- Show direction with an arrow and sign, not colour alone.
+- Say what it is compared with.
+- Colour by good or bad, not up or down.
+- Use a true minus sign.
+
 ### When to use
 
 - Beside a stat value comparing with a previous period or a target.
 
 ### When not to use
 
-- Green for 'up' when up is bad (complaints, errors): choose the tone by meaning with `--up`/`--down` classes describing good/bad, not direction.
+- Green for 'up' when up is bad (complaints, errors): the `--up`/`--down` classes mean good/bad, not direction.
 
 ### How to use
 
@@ -599,6 +928,28 @@ Change against a reference: arrow, signed value, colour, and the reference in wo
 
 Inline code, identifiers, file names and values the person may copy.
 
+### General description
+
+Code text shows short technical values in a monospace font, so they stand out from sentences and characters are easy to tell apart.
+
+#### Use cases
+
+- Showing file names, paths and IDs.
+- Showing short commands or settings keys.
+- Showing values people may copy.
+
+#### When not to use it
+
+- Many lines of code: use a code block.
+- Emphasising ordinary words: use bold or italic.
+
+#### Best practices
+
+- Use it only for literal values.
+- Let long values wrap.
+- Offer a copy button for values people copy.
+- Keep contrast high.
+
 ### When to use
 
 - Technical values: IDs, IP addresses, file paths, settings keys, short commands.
@@ -629,6 +980,28 @@ Inline code, identifiers, file names and values the person may copy.
 `id: card-kicker` · level: primitive · source: Tangerine
 
 A short uppercase category label above a card title.
+
+### General description
+
+A card kicker is a short label above a card title that names the card's category, such as 'Video' or 'Guide'.
+
+#### Use cases
+
+- Telling types apart in a mixed list of cards.
+- Adding a category to news or article cards.
+- Helping people scan a grid.
+
+#### When not to use it
+
+- Showing status such as 'Draft' or 'Failed': use a badge.
+- Long labels: keep kickers to one to three words.
+
+#### Best practices
+
+- Use one to three words.
+- Use the same wording across cards.
+- Keep it quieter than the title.
+- Use capitals only for short labels.
 
 ### When to use
 
@@ -671,6 +1044,28 @@ A short uppercase category label above a card title.
 
 The name of the object a card represents.
 
+### General description
+
+A card title is the name of the item a card stands for. It is the first thing people read in a grid of cards.
+
+#### Use cases
+
+- Naming a record, product or article card.
+- Giving a clickable card its link text.
+- Helping people choose between cards.
+
+#### When not to use it
+
+- Decorative or vague titles: use the real name of the item.
+- Cutting off long names: let them wrap.
+
+#### Best practices
+
+- Use the item's real name.
+- Keep the distinguishing words visible.
+- Use the same heading level on every card.
+- Make link text clear if the card is a link.
+
 ### When to use
 
 - Every card.
@@ -704,6 +1099,28 @@ The name of the object a card represents.
 
 Secondary facts under a card title, separated by middle dots.
 
+### General description
+
+Card meta is a line of small secondary facts under a card title, such as type, date or count.
+
+#### Use cases
+
+- Showing dates, sizes or counts on a card.
+- Showing the source or author of an item.
+- Giving extra detail without crowding the title.
+
+#### When not to use it
+
+- Key facts people need to decide: put them in the title or body.
+- Long lists of facts: link to a detail page.
+
+#### Best practices
+
+- Show three facts at most.
+- Separate facts with a dot or space.
+- Use a quieter style than the title.
+- Keep the order the same on every card.
+
 ### When to use
 
 - Type, source, dates, counts shown under a card title.
@@ -735,6 +1152,28 @@ Secondary facts under a card title, separated by middle dots.
 
 The question or statement a dialog or drawer is about.
 
+### General description
+
+A dialog title is the heading of a pop-up window. It says in a few words what the person is being asked or told.
+
+#### Use cases
+
+- Naming a confirmation, such as 'Delete this file?'.
+- Titling a form shown in a dialog.
+- Naming a side panel or drawer.
+
+#### When not to use it
+
+- Vague titles like 'Warning' or 'Are you sure?': name the action and object.
+- Long text: put detail in the body.
+
+#### Best practices
+
+- Ask the question or name the task.
+- Mention the object affected.
+- Repeat the verb on the main button.
+- Link the title to the dialog for screen readers.
+
 ### When to use
 
 - Top of every dialog and drawer.
@@ -742,7 +1181,7 @@ The question or statement a dialog or drawer is about.
 ### How to use
 
 - `<h2 class="orca-dialog-title">` (24/32, light 275).
-- Confirmations ask the question with the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'.
+- Confirmations name the object: 'Delete Harbour at dusk?'. The action button repeats the verb: 'Delete image'.
 
 ### Accessibility
 
@@ -772,6 +1211,28 @@ The question or statement a dialog or drawer is about.
 `id: empty-title` · level: primitive · source: Tangerine
 
 What is missing, said plainly, in an empty region.
+
+### General description
+
+An empty-state title is the short heading shown when a list, table or search has nothing to display. It says plainly what is missing.
+
+#### Use cases
+
+- Showing a new, empty list.
+- Showing a search or filter with no matches.
+- Showing a chart with no data yet.
+
+#### When not to use it
+
+- Content that is still loading: show a loading state instead.
+- Errors: use an error message that says what went wrong.
+
+#### Best practices
+
+- State what is missing in plain words.
+- Keep it calm and short.
+- Avoid blaming the person.
+- Pair it with a next step.
 
 ### When to use
 
@@ -809,6 +1270,28 @@ What is missing, said plainly, in an empty region.
 `id: empty-text` · level: primitive · source: Tangerine
 
 One sentence that says why it is empty and what to do next.
+
+### General description
+
+Empty-state text is a short sentence under the empty-state title. It explains why nothing is shown and what to do next.
+
+#### Use cases
+
+- Inviting people to create their first item.
+- Suggesting they clear filters after no results.
+- Explaining why data is not there yet.
+
+#### When not to use it
+
+- Long help articles: link to documentation.
+- Jokes or blame in work tools: stay neutral and useful.
+
+#### Best practices
+
+- Say what to do next.
+- Keep it to one or two sentences.
+- Offer the action as a button.
+- Fit the text to the cause, new or filtered.
 
 ### When to use
 

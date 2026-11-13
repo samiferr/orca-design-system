@@ -6,9 +6,31 @@ Video players, live streams, photo posts and image galleries.
 
 `id: recording-player` · level: pattern · source: Tangerine
 
-A recorded clip with the native player, a timeline of event marks and a list of events that jump to their moment.
+A recorded clip with the native player, a timeline of event marks and an event list that jumps to each moment.
 
 Built from: `video-player`
+
+### General description
+
+A recording player plays a saved video and shows marks on a timeline for important moments. A list of events lets people jump straight to each one.
+
+#### Use cases
+
+- Reviewing footage after an alert.
+- Checking incidents in recorded clips.
+- Finding key moments in a long recording.
+
+#### When not to use it
+
+- Do not use it for live video; use a live view.
+- Do not use it for short decorative clips; use a plain video element.
+
+#### Best practices
+
+- Use the browser's own video controls.
+- Label timeline marks with time and event.
+- Add captions when the clip has speech.
+- Show a loading message while it prepares.
 
 ### When to use
 
@@ -53,9 +75,31 @@ Built from: `video-player`
 
 `id: live-stream-panel` · level: pattern · source: Tangerine
 
-A live video view with its state, a live flag and the live counts beside it.
+A live video view with its state, a live flag and live counts beside it.
 
 Built from: `panel`, `video-player`, `status-light`, `stat-card`
+
+### General description
+
+A live stream panel shows live video next to its state and current numbers, so one glance tells the whole story.
+
+#### Use cases
+
+- Monitoring cameras or feeds.
+- Watching a live event with live stats.
+- Building a monitoring wall.
+
+#### When not to use it
+
+- Do not use it for saved clips; use a recording player.
+- Do not autoplay sound; it surprises people.
+
+#### Best practices
+
+- Label the stream as live.
+- Show clearly when the stream is offline.
+- Keep counts close to the picture.
+- Offer pause and full-screen controls.
 
 ### When to use
 
@@ -64,7 +108,7 @@ Built from: `panel`, `video-player`, `status-light`, `stat-card`
 ### How to use
 
 - A panel with a panel header (video name, status light, Pause/Full-screen actions), a 16:9 frame with the stream and a `.orca-frame__flag` ('Live'), and `.orca-live-panel__stats` (stat label/value pairs).
-- When the stream drops, replace it with the removed frame and a message, never a frozen image without notice.
+- If the stream drops, replace it with the removed frame and a message; never leave a frozen image unannounced.
 
 #### Example: Live
 
@@ -119,9 +163,31 @@ Built from: `panel`, `video-player`, `status-light`, `stat-card`
 
 `id: photo-post` · level: pattern · source: ORCA
 
-A shared photo with who posted it and when, the photo, actions and caption.
+A shared photo with its poster, time, actions and caption.
 
 Built from: `person-block`, `captioned-media`, `photo-actions-bar`
+
+### General description
+
+A photo post is a shared picture with the author, time, actions and caption. It is the building block of feeds and team updates.
+
+#### Use cases
+
+- Sharing snapshots in a team feed.
+- Showing community posts.
+- Posting progress photos with comments.
+
+#### When not to use it
+
+- Do not use it for a collection of many images; use a gallery.
+- Do not use it for official documents; use a file list.
+
+#### Best practices
+
+- Show who posted and when.
+- Add alternative text to the photo.
+- Keep the caption near the photo.
+- Make like and comment buttons easy to tap.
 
 ### When to use
 
@@ -175,9 +241,31 @@ Built from: `person-block`, `captioned-media`, `photo-actions-bar`
 
 `id: image-gallery` · level: pattern · source: ORCA
 
-A large stage image with a row of thumbnails and a count; thumbnails swap the stage.
+A large main image with a row of thumbnails and a count; clicking a thumbnail swaps the image.
 
 Built from: `captioned-media`, `thumbnail-strip`
+
+### General description
+
+An image gallery shows one large image with a row of small previews below. Clicking a preview swaps the large image.
+
+#### Use cases
+
+- Showing product photos.
+- Comparing before and after pictures.
+- Browsing several snapshots of one event.
+
+#### When not to use it
+
+- Avoid it for a single image; just show the image.
+- Avoid it for hundreds of images; use a paged grid.
+
+#### Best practices
+
+- Give every image useful alternative text.
+- Show which image is selected and how many exist.
+- Make previews big enough to tap.
+- Load previews at small sizes.
 
 ### When to use
 

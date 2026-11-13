@@ -2,7 +2,7 @@ from .registry import Element, add, category
 
 C = category(
     "identity", "Identity",
-    "Who and what: the product's logo and favicon, and people's avatars.",
+    "The product's logo and favicon, and people's avatars.",
 )
 
 add(Element(
@@ -14,7 +14,7 @@ add(Element(
     avoid=["Recolouring or stretching a logo file.", "More than one logo per screen."],
     how=["`{% orca_logo %}` links to '/'. `{% orca_logo href=\"\" %}` renders it without a link; `size=\"lg\"` for login screens.",
          "Configure `ORCA['BRAND']['logo']` (static path, SVG preferred) and `['name']` (alt text and wordmark)."],
-    a11y=["The image alt is the product name; a linked logo's accessible name is the product name (not 'logo')."],
+    a11y=["The image alt is the product name, also for a linked logo (not 'logo')."],
     classes=[".orca-logo", ".orca-logo__img", ".orca-logo__mark", ".orca-logo--lg"],
     tokens=["brand"],
     laws=["jakob", "tesler"],
@@ -29,12 +29,12 @@ add(Element(
     why="Faces and initials let people recognise who did what faster than reading names (Miller's law: recognition "
         "over recall). Initials keep the layout stable when there is no photo (Postel's law).",
     when=["Next to a person's name in lists, comments, activity, the user chip.", "Square: organisations, sites, devices."],
-    avoid=["Avatar without the name nearby unless the name is in a tooltip and the list is of known people."],
+    avoid=["An avatar with no name nearby, unless the name is in a tooltip and the people are well known."],
     how=["Image: `<span class=\"orca-avatar\"><img src=… alt=\"\"></span>` (empty alt when the name is beside it).",
          "Initials: `<span class=\"orca-avatar\" aria-hidden=\"true\">{{ user.get_full_name|orca_initials }}</span>`.",
          "Sizes: `--xs` 24, `--s` 32, default 40, `--l` 48, `--xl` 96. Square: `--square`.",
          "Presence: add `<span class=\"orca-avatar__presence orca-dot--positive\"></span>` and say the presence in text too."],
-    a11y=["If the avatar stands alone, give the image `alt` with the person's name, or `role=\"img\" aria-label` on initials."],
+    a11y=["A standalone avatar needs the person's name: `alt` on the image, or `role=\"img\" aria-label` on initials."],
     classes=[".orca-avatar", ".orca-avatar--xs", ".orca-avatar--s", ".orca-avatar--l", ".orca-avatar--xl", ".orca-avatar--square", ".orca-avatar__presence"],
     tokens=["avatar-xs", "avatar-s", "avatar-m", "avatar-l", "avatar-xl", "neutral-bg"],
     laws=["miller", "postel"],
@@ -54,7 +54,7 @@ add(Element(
     why="People find their tab by its icon among many (Von Restorff); a consistent icon also marks installed apps.",
     when=["Every deployment."],
     how=["Set `ORCA['BRAND']['favicon']` to a 32px PNG or an SVG in your static files; `{% orca_head %}` writes the `<link rel=\"icon\">`.",
-         "For installable apps also add apple-touch-icon (180px), 192px and 512px icons and a manifest in your base template.",
+         "Installable apps also need apple-touch-icon (180px), 192px and 512px icons and a manifest in the base template.",
          "`theme-color` is written from the brand fill automatically."],
     tokens=["brand-strong"],
     laws=["restorff"],

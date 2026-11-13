@@ -3,25 +3,25 @@ from . import Pattern
 
 C = category(
     "calendar-views", "Calendar views",
-    "Whole calendars rendered on the server from a list of events: month, week, day, multi-day, agenda and year, plus the toolbar, sidebar and legend around them.",
+    "Server-rendered calendars built from a list of events: month, week, day, multi-day, agenda and year, plus the toolbar, sidebar and legend.",
     level="pattern",
 )
 
 EVENTS_HOW = ("Events are dicts: `title`, `start` and `end` (ISO date or datetime), `all_day`, `color` (1–8, the chart palette, "
               "or any CSS colour), `url`, `location`, `status` ('tentative', 'cancelled'). Pass your queryset as `.values()` or build the dicts in the view.")
-TODAY_HOW = "Pass `today` (and `now` for time grids) from the view in the site's timezone; tests and previews pin them to a fixed date."
-NAV_HOW = "Navigation is plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap only the grid."
+TODAY_HOW = "Pass `today` (and `now` for time grids) from the view, in the site's timezone. Tests and previews pin a fixed date."
+NAV_HOW = "Navigation uses plain links with the period in the query string (`?month=2026-11`), so back, refresh and sharing work; htmx can swap just the grid."
 
 add(Pattern(
     "month-calendar", "Month calendar", C,
-    "Weeks of day cells showing each day's events, with '+N more' when a day overflows and a count dot on phones.",
+    "Weeks of day cells showing each day's events, '+N more' when a day overflows, and a count dot on phones.",
     why="A month shows how busy each day is and where the gaps are, which is what people plan with (Miller's law: a few events per cell, the rest behind '+N more'). On phones the grid becomes counts and tapping a day opens its agenda (Fitts's law).",
     when=["Planning across weeks: bookings, rotas, events, deadlines."],
     avoid=["Detailed times on one or two days: use the week or day view."],
     how=["`{% templatetag openblock %} orca_month_calendar events month=\"2026-11\" today=today selected=day day_url=\"?day={date}\" holidays=holidays max_per_day=3 {% templatetag closeblock %}`.",
          EVENTS_HOW, TODAY_HOW, NAV_HOW,
-         "Multi-day all-day events show as bars on each day they cover; holidays label the cell."],
-    a11y=["Each day is a link or cell labelled with its full date and event count; the table has weekday column headers."],
+         "Multi-day all-day events show as bars across their days; holidays label the cell."],
+    a11y=["Each day is a link or cell labelled with its full date and event count; weekday column headers label the table."],
     classes=[".orca-month-view", ".orca-cal-cell__count"],
     laws=["miller", "fitts", "jakob"],
     uses=["calendar-header", "weekday-header", "week-row"],
@@ -31,12 +31,12 @@ add(Pattern(
 
 add(Pattern(
     "week-view", "Week view", C,
-    "Seven day columns on an hour grid with events positioned by time, an all-day row and a line at the current time.",
+    "Seven day columns on an hour grid, with events placed by time, an all-day row and a current-time line.",
     why="Seeing time as height makes durations, gaps and overlaps obvious (Practical UI L01, grouping: each day a column); overlapping events share the width side by side so none hides another.",
     when=["Scheduling within a week: meetings, installs, shifts."],
-    how=["`{% templatetag openblock %} orca_week_view events start=monday today=today now=now start_hour=7 end_hour=19 {% templatetag closeblock %}` (start defaults to today's week start).",
+    how=["`{% templatetag openblock %} orca_week_view events start=monday today=today now=now start_hour=7 end_hour=19 {% templatetag closeblock %}` (start defaults to this week's start).",
          EVENTS_HOW, TODAY_HOW, NAV_HOW,
-         "The grid scrolls horizontally on narrow screens; offer day view as the phone default."],
+         "The grid scrolls sideways on narrow screens; offer day view as the phone default."],
     a11y=["Every event is a link or button whose text gives title, day and times; the now-line is decorative."],
     classes=[".orca-timegrid", ".orca-timegrid__head", ".orca-timegrid__allday", ".orca-timegrid__body", ".orca-timegrid__col", ".orca-timegrid__event", ".orca-timegrid__now"],
     laws=["L01", "jakob", "miller"],
@@ -47,7 +47,7 @@ add(Pattern(
 
 add(Pattern(
     "day-view", "Day view", C,
-    "One day on the hour grid: the full detail of a single day, and the phone default.",
+    "One day on the hour grid, with full detail; the phone default.",
     why="One column leaves room for each event's title, time and place, so there is no truncation and no tooltip hunting (Fitts's law: large targets on touch screens).",
     when=["Phones; a person's or a room's day; dense days."],
     how=["`{% templatetag openblock %} orca_week_view events start=day days=1 today=today now=now {% templatetag closeblock %}`.", EVENTS_HOW, TODAY_HOW,
@@ -61,9 +61,9 @@ add(Pattern(
 
 add(Pattern(
     "agenda-view", "Agenda view", C,
-    "Upcoming events listed by day, with times, colours and places: the most readable calendar on any screen.",
+    "Upcoming events listed by day with times, colours and places; readable on any screen.",
     why="A list is read top to bottom without decoding a grid (Jakob's law: like a to-do list) and works on every screen and with screen readers. Empty days are skipped so the list stays short.",
-    when=["Phones, 'what's next' panels, screen-reader friendly alternative to grids, printing."],
+    when=["Phones, 'what's next' panels, printing, and a screen-reader friendly alternative to grids."],
     how=["`{% templatetag openblock %} orca_agenda events start=today days=7 today=today {% templatetag closeblock %}`.", EVENTS_HOW,
          "Show an empty state when nothing is planned ('Nothing planned this week')."],
     classes=[".orca-agenda-view", ".orca-agenda-view__day"],
@@ -75,7 +75,7 @@ add(Pattern(
 
 add(Pattern(
     "year-view", "Year view", C,
-    "Twelve small months with event days marked, to see a year's rhythm and jump to any day.",
+    "Twelve small months with event days marked, to see the year at a glance and jump to any day.",
     why="Long-range planning (holidays, seasons, launches) needs the whole year at once (Practical UI L09: months grouped in a grid); each day links to its detail.",
     when=["Holiday planning, annual schedules, picking dates far ahead."],
     how=["`{% templatetag openblock %} orca_year_view year=2026 events=events today=today url=\"?day={date}\" {% templatetag closeblock %}`.",
@@ -89,7 +89,7 @@ add(Pattern(
 
 add(Pattern(
     "multi-day-view", "Multi-day view", C,
-    "Three (or any number of) days on the hour grid, between the day and week views.",
+    "A chosen number of days (such as three) on the hour grid, between the day and week views.",
     why="Three days fit a tablet or a narrow panel while still showing what comes next (Miller's law); it keeps the hour grid's clarity without the week's horizontal scroll.",
     when=["Tablets, side panels, 'today and the next two days'."],
     how=["`{% templatetag openblock %} orca_week_view events start=today days=3 today=today now=now {% templatetag closeblock %}`.", EVENTS_HOW],
@@ -102,11 +102,11 @@ add(Pattern(
 
 add(Pattern(
     "calendar-toolbar", "Calendar toolbar", C,
-    "The bar above any calendar view: previous, Today, next, the period title, the view switcher and a create button.",
+    "The bar above a calendar view: previous, Today, next, period title, view switcher and create button.",
     why="People move through time and change zoom constantly; the same controls in the same place across every view (Jakob's law) and a large 'Today' to get home (Fitts's law) make that effortless.",
     when=["Above every month, week, day, agenda and year view."],
     how=["`<div class=\"orca-cal-header\">` with the calendar navigation, `h2.orca-cal-header__title` and the view switcher in `.orca-cal-header__end`; add the create button last.",
-         NAV_HOW, "The title announces the period politely when it changes (`aria-live`)."],
+         NAV_HOW, "The title politely announces each new period (`aria-live`)."],
     classes=[".orca-cal-header", ".orca-cal-header__title", ".orca-cal-header__end"],
     laws=["jakob", "fitts"],
     uses=["calendar-header", "create-button"],
@@ -118,9 +118,9 @@ add(Pattern(
 
 add(Pattern(
     "mini-calendar-sidebar", "Mini-calendar sidebar", C,
-    "A sidebar beside the main calendar: create button, mini calendar to jump to any date, and the calendars legend.",
+    "A calendar sidebar with a create button, a mini calendar to jump to any date, and the legend.",
     why="Jumping weeks ahead with arrows is slow; a mini calendar gets there in one click (Fitts's law), and the legend filters what the main view shows (Hick's law: hide what does not matter now). It moves below the calendar on narrow screens.",
-    when=["Full calendar pages with more than one calendar or long-range navigation."],
+    when=["Full calendar pages with several calendars or long-range navigation."],
     how=["`<div class=\"orca-cal-layout\">` with `<aside class=\"orca-cal-sidebar\">` first and the toolbar and view second.",
          "The mini calendar's selected day matches the main view; event days carry a dot."],
     classes=[".orca-cal-layout", ".orca-cal-sidebar"],
@@ -135,9 +135,9 @@ add(Pattern(
 
 add(Pattern(
     "calendar-legend", "Calendar legend", C,
-    "The list of calendars, each a checkbox in its colour, to show or hide its events.",
+    "A list of calendars, each a coloured checkbox that shows or hides its events.",
     why="Colour identifies a calendar only if the key is visible (Practical UI C03); checkboxes let people declutter the view to what matters now (Hick's law). Names carry the meaning so colour is never the only cue.",
-    when=["Any calendar showing events from more than one source, person or type."],
+    when=["Any calendar mixing events from several sources, people or types."],
     how=["`<fieldset class=\"orca-cal-legend\">` with a `legend` and `label.orca-check` items, each setting `--orca-event` to the calendar's colour.",
          "Submit changes as a GET filter (`?cal=deliveries&cal=meetings`) or toggle with htmx."],
     classes=[".orca-cal-legend"],

@@ -1,0 +1,866 @@
+{
+ "date-input": {
+  "what": "A form field for choosing one calendar date, usually with a pop-up calendar picker. It keeps dates in a consistent format.",
+  "uses": [
+   "Setting a deadline, due date or report date.",
+   "Booking an appointment or delivery day.",
+   "Filtering a list by a single day."
+  ],
+  "avoid": [
+   "Birth dates or dates far in the past: separate day, month and year fields are faster to type.",
+   "A start and end together: use a date range picker."
+  ],
+  "practices": [
+   "Label the field with what the date means, not with the format.",
+   "Set minimum and maximum dates when only some days are allowed.",
+   "Prefill a likely default, such as today.",
+   "Explain the accepted range in help text."
+  ]
+ },
+ "time-input": {
+  "what": "A form field for entering a time of day, in hours and minutes. Browsers show it in the user's 12 or 24-hour style.",
+  "uses": [
+   "Choosing a start or end time for an event.",
+   "Setting opening hours.",
+   "Picking a time for a reminder."
+  ],
+  "avoid": [
+   "A length of time, like 90 minutes: use a duration field.",
+   "A full date and time together: use a date-time field."
+  ],
+  "practices": [
+   "Use a sensible step, such as 15 minutes, to avoid awkward values.",
+   "Show the timezone when users may be in a different one.",
+   "Label the field clearly, for example 'Starts at'.",
+   "Validate that end times come after start times."
+  ]
+ },
+ "datetime-input": {
+  "what": "A single form field for choosing a date and a time together. It captures one exact moment without needing two separate controls.",
+  "uses": [
+   "Scheduling when a task or message should run.",
+   "Setting when a link or offer expires.",
+   "Recording when an incident happened."
+  ],
+  "avoid": [
+   "A start and end: use two fields side by side.",
+   "Only a date or only a time: use the simpler field."
+  ],
+  "practices": [
+   "State which timezone the value uses, as the field itself holds none.",
+   "Label it with the event, such as 'Start run at'.",
+   "Set limits so users cannot pick impossible moments.",
+   "Test on phones, where pickers differ from desktop."
+  ]
+ },
+ "duration-input": {
+  "what": "A form field for entering a length of time, such as hours and minutes. Separate labelled parts make the unit clear.",
+  "uses": [
+   "Setting how long a shift or meeting lasts.",
+   "Choosing how long data is kept.",
+   "Setting a reminder offset, like 15 minutes before."
+  ],
+  "avoid": [
+   "A specific time of day: use a time field.",
+   "A short fixed list of lengths: use a select."
+  ],
+  "practices": [
+   "Show the unit next to each number.",
+   "Accept values like 90 minutes and tidy them into 1 h 30 min.",
+   "Set sensible minimum and maximum values.",
+   "Show the total in plain words after entry."
+  ]
+ },
+ "timezone-select": {
+  "what": "A dropdown for choosing a timezone, usually listed by region or city name. It makes sure times mean the same to everyone.",
+  "uses": [
+   "Setting a user's profile timezone.",
+   "Setting the timezone of a site, team or event.",
+   "Showing a meeting time to people in different regions."
+  ],
+  "avoid": [
+   "When the browser's timezone is enough: detect it instead of asking.",
+   "Choosing a country or language: those are separate settings."
+  ],
+  "practices": [
+   "Preselect a likely zone from the user's profile or browser.",
+   "List places by name, such as Europe/Paris, not only offsets.",
+   "Store the zone name, not a fixed offset, so daylight saving works.",
+   "Make long lists searchable."
+  ]
+ },
+ "weekday-toggle": {
+  "what": "A row of seven buttons for choosing days of the week. People switch each day on or off in place.",
+  "uses": [
+   "Choosing which days a task or event repeats.",
+   "Setting opening days or working days.",
+   "Selecting days for alerts or reports."
+  ],
+  "avoid": [
+   "Picking one single day of the week: use a select or radio buttons.",
+   "Picking specific dates: use a calendar."
+  ],
+  "practices": [
+   "Start the week on the day the user's region uses.",
+   "Offer shortcuts like 'Weekdays' and 'Every day'.",
+   "Show selected days with more than colour alone.",
+   "Give each toggle its full day name for screen readers."
+  ]
+ },
+ "recurrence-select": {
+  "what": "A dropdown of common repeat patterns, like daily or weekly, with a custom option for more detailed rules.",
+  "uses": [
+   "Making an event or task repeat.",
+   "Scheduling a recurring report or export.",
+   "Setting up repeating bookings or reminders."
+  ],
+  "avoid": [
+   "A one-off event: do not show repeat options.",
+   "Very complex schedules only: use a dedicated schedule editor."
+  ],
+  "practices": [
+   "Show the actual day in options, such as 'Weekly on Thursday'.",
+   "Put 'Does not repeat' first as the default.",
+   "Reveal extra fields only when 'Custom' is chosen.",
+   "Let users set when the repeat ends."
+  ]
+ },
+ "reminder-select": {
+  "what": "A dropdown for choosing how long before an event a reminder is sent. It offers common lead times in one short list.",
+  "uses": [
+   "Reminding people before an appointment or meeting.",
+   "Warning ahead of a task deadline.",
+   "Setting alerts for bookings or renewals."
+  ],
+  "avoid": [
+   "Exact reminder times unrelated to an event: use a date-time field.",
+   "Urgent alerts that need no setup: send them directly."
+  ],
+  "practices": [
+   "Offer a short list of common lead times.",
+   "Include 'No reminder' and 'At time of event'.",
+   "Remember the user's last choice as the default.",
+   "Allow more than one reminder per event."
+  ]
+ },
+ "day-number": {
+  "what": "The number of the day within a month, shown in a calendar cell or date badge, such as 6 or 23.",
+  "uses": [
+   "Showing each day in a month calendar.",
+   "Labelling small date badges on cards or lists.",
+   "Building mini calendars in date pickers."
+  ],
+  "avoid": [
+   "Showing a full date: write the whole date in words instead.",
+   "Showing the day of the week: use the weekday name."
+  ],
+  "practices": [
+   "Align numbers in columns so they are easy to scan.",
+   "Leave out the leading zero.",
+   "Add the full date in markup for assistive technology.",
+   "Keep the size consistent across cells."
+  ]
+ },
+ "weekday-name": {
+  "what": "The name of a day of the week, short in column headers (Mon) or in full in lists (Monday).",
+  "uses": [
+   "Heading the columns of a calendar.",
+   "Labelling rows in an agenda or schedule.",
+   "Writing dates in a readable way, like 'Friday 6 November'."
+  ],
+  "avoid": [
+   "Where the date number alone is clear.",
+   "Long text where full words fit: avoid cryptic abbreviations."
+  ],
+  "practices": [
+   "Use short forms only where space is tight.",
+   "Keep abbreviations consistent across the page.",
+   "Follow the user's language and locale.",
+   "Provide the full name in a title or label."
+  ]
+ },
+ "month-name": {
+  "what": "The name of a month, often with its year, used as a heading for a calendar or a group of dated items.",
+  "uses": [
+   "Heading a calendar view.",
+   "Separating groups in an agenda or timeline.",
+   "Labelling a month in a report or archive."
+  ],
+  "avoid": [
+   "Showing exact dates: use a full date instead.",
+   "Very short space: a short month form or number may fit better."
+  ],
+  "practices": [
+   "Show the year when it is not the current one.",
+   "Spell out the month to avoid day-month confusion.",
+   "Use a real heading so people can navigate.",
+   "Follow the user's language."
+  ]
+ },
+ "year-label": {
+  "what": "The year shown as a small, quiet label next to a month or as the heading of a yearly view.",
+  "uses": [
+   "Showing the year beside a month name.",
+   "Heading a year view or archive.",
+   "Marking dates that fall outside the current year."
+  ],
+  "avoid": [
+   "When the year is obvious from context: leave it out.",
+   "Showing a complete date: write the whole date together."
+  ],
+  "practices": [
+   "Keep it less prominent than the month or day.",
+   "Use four digits to avoid confusion.",
+   "Show it when the year is not the current one.",
+   "Keep it right next to what it describes."
+  ]
+ },
+ "week-number": {
+  "what": "The number of a week within the year, such as W45. Some regions and teams plan by week number.",
+  "uses": [
+   "Showing week numbers beside month calendar rows.",
+   "Heading weeks in a planning view.",
+   "Naming sprints, shifts or production weeks."
+  ],
+  "avoid": [
+   "Audiences who do not use week numbers: use a date range instead.",
+   "Exact days matter: show real dates."
+  ],
+  "practices": [
+   "Say which numbering system is used, such as ISO weeks.",
+   "Mark it clearly as a week number, for example W45.",
+   "Show it only where the audience uses it.",
+   "Pair it with a date range when space allows."
+  ]
+ },
+ "time-label": {
+  "what": "A time of day written as text, such as 08:30 or 8:30 AM, in the format the reader is used to.",
+  "uses": [
+   "Showing when an event starts or ends.",
+   "Labelling hours on a day view.",
+   "Timestamps in logs and activity lists."
+  ],
+  "avoid": [
+   "Recent events where 'ago' reads better: use a relative time.",
+   "A length of time: use a duration label."
+  ],
+  "practices": [
+   "Follow the reader's 12 or 24-hour habit.",
+   "Align times in columns so they are easy to scan.",
+   "Write ranges with an en dash, like 08:30–10:00.",
+   "Show the timezone when it may differ."
+  ]
+ },
+ "date-label": {
+  "what": "A date written out for people to read, such as 6 November 2026 or Fri 6 Nov.",
+  "uses": [
+   "Showing due dates, publish dates or event dates.",
+   "Labelling rows in tables and lists.",
+   "Showing when something was created or changed."
+  ],
+  "avoid": [
+   "Recent events where '2 minutes ago' reads better: use a relative time.",
+   "Input of a date: use a date field."
+  ],
+  "practices": [
+   "Spell out the month to avoid confusion between day and month.",
+   "Use shorter forms only in dense tables.",
+   "Follow the reader's language and locale.",
+   "Mark up the exact date for machines and screen readers."
+  ]
+ },
+ "relative-time": {
+  "what": "A time written as how long ago or from now it is, such as '2 minutes ago' or 'in 3 days'.",
+  "uses": [
+   "Activity feeds and comments.",
+   "'Last seen' and 'last updated' labels.",
+   "Notifications and recent changes."
+  ],
+  "avoid": [
+   "Logs, audit trails and legal records: show exact times.",
+   "Dates far from now: show the full date."
+  ],
+  "practices": [
+   "Show the exact time on hover or in a tooltip.",
+   "Switch to a full date after about a week.",
+   "Keep the text fresh as time passes.",
+   "Make the exact time available to screen readers."
+  ]
+ },
+ "timezone-label": {
+  "what": "A short label, such as CET or UTC+1, that tells readers which timezone a time is in.",
+  "uses": [
+   "Showing meeting times to people in different places.",
+   "Labelling a site's opening hours.",
+   "Showing times in shared schedules and logs."
+  ],
+  "avoid": [
+   "When everyone is in one zone and it is obvious: leave it out.",
+   "Choosing a zone: use a timezone select."
+  ],
+  "practices": [
+   "Place it right next to the time.",
+   "Give the full zone name in a tooltip.",
+   "Use a familiar abbreviation or UTC offset.",
+   "Be consistent across the page."
+  ]
+ },
+ "duration-label": {
+  "what": "A length of time written in short form, such as 45 min, 1 h 30 min or 3 d.",
+  "uses": [
+   "Showing how long an event or task lasts.",
+   "Showing time spent in tables and reports.",
+   "Labelling video or audio length."
+  ],
+  "avoid": [
+   "A point in time: use a date or time label.",
+   "Entering a duration: use a duration field."
+  ],
+  "practices": [
+   "Use short, consistent units.",
+   "Avoid mixed styles like 90 minutes and 1.5h.",
+   "Skip zero parts, such as '0 min'.",
+   "Include a machine-readable value for assistive tools."
+  ]
+ },
+ "countdown-label": {
+  "what": "A label that shows the time left until a moment and updates as it runs down.",
+  "uses": [
+   "Showing when a session is about to expire.",
+   "Holding a booking or basket for a limited time.",
+   "Counting down to the start of an event."
+  ],
+  "avoid": [
+   "Distant dates: show the date instead.",
+   "Pressure tactics: avoid fake urgency."
+  ],
+  "practices": [
+   "Show a correct starting value without relying on scripts.",
+   "Do not announce every second to screen readers.",
+   "Make it look more urgent only near the end.",
+   "Say what happens when it reaches zero."
+  ]
+ },
+ "today-marker": {
+  "what": "A visual mark that highlights the current day in a calendar so people can find 'now' quickly.",
+  "uses": [
+   "Highlighting today in a month grid.",
+   "Marking today in mini calendars and date pickers.",
+   "Orienting people in a schedule."
+  ],
+  "avoid": [
+   "Marking a chosen day: use a selected-day marker.",
+   "Marking events: use an event dot or bar."
+  ],
+  "practices": [
+   "Mark only one day per view.",
+   "Use shape or weight as well as colour.",
+   "Tell screen readers it is the current date.",
+   "Keep it different from the selected-day style."
+  ]
+ },
+ "selected-day-marker": {
+  "what": "A visual mark showing which calendar day or range the user has chosen.",
+  "uses": [
+   "Showing the chosen date in a date picker.",
+   "Marking the start and end of a date range.",
+   "Showing the active day in a calendar view."
+  ],
+  "avoid": [
+   "Marking today: use a today marker.",
+   "Showing days with events: use event dots."
+  ],
+  "practices": [
+   "Use a strong fill that stands out from other days.",
+   "Do not rely on colour alone.",
+   "Tell screen readers which day is selected.",
+   "Make today and selected states look different."
+  ]
+ },
+ "outside-day-marker": {
+  "what": "A style for days that belong to the previous or next month but appear in a month grid to complete full weeks.",
+  "uses": [
+   "Filling the first and last weeks of a month grid.",
+   "Letting people jump to a neighbouring month.",
+   "Keeping calendar rows a regular length."
+  ],
+  "avoid": [
+   "Days that are unavailable: use a disabled style.",
+   "Days with no real meaning: leave the cells empty."
+  ],
+  "practices": [
+   "Mute them so the current month stands out.",
+   "Keep them readable and keep enough contrast.",
+   "Let them open their own month when clicked.",
+   "Label them clearly for screen readers."
+  ]
+ },
+ "weekend-marker": {
+  "what": "A light tint or style that sets weekend days apart from weekdays in calendars and schedules.",
+  "uses": [
+   "Month grids and week views.",
+   "Gantt charts and resource schedulers.",
+   "Date pickers where weekends matter."
+  ],
+  "avoid": [
+   "Days that are closed or unavailable: use a holiday or off marker.",
+   "Locales with different weekends: do not hard-code Saturday and Sunday."
+  ],
+  "practices": [
+   "Keep the tint subtle so events stay clear.",
+   "Follow the user's local weekend days.",
+   "Do not use colour as the only cue where it matters.",
+   "Keep contrast for text on the tint."
+  ]
+ },
+ "holiday-marker": {
+  "what": "A mark on calendar days that are public holidays or closure days, often with the holiday name.",
+  "uses": [
+   "Showing public holidays in a calendar.",
+   "Marking days a business is closed.",
+   "Warning that a date may be unavailable."
+  ],
+  "avoid": [
+   "Ordinary weekends: use a weekend marker.",
+   "Events: use event markers."
+  ],
+  "practices": [
+   "Show the holiday name, not just a colour.",
+   "Combine tint with a shape or underline.",
+   "Say the holiday in labels for screen readers.",
+   "Let users hide holidays they do not need."
+  ]
+ },
+ "event-dot": {
+  "what": "A small dot in a calendar cell that shows a day has events, or colour-codes an event's calendar.",
+  "uses": [
+   "Showing which days have events in a mini calendar.",
+   "Colour-coding calendars in an agenda.",
+   "Saving space where full event titles do not fit."
+  ],
+  "avoid": [
+   "Showing event details: use an event bar or a list.",
+   "Many events per day: show a count instead."
+  ],
+  "practices": [
+   "Make the day's events one tap away.",
+   "Say 'has events' in the day's label.",
+   "Do not use colour as the only key.",
+   "Keep dots few and spaced clearly."
+  ]
+ },
+ "event-bar": {
+  "what": "A horizontal block in a calendar that shows one timed event with its title and time.",
+  "uses": [
+   "Showing events in month, week and day views.",
+   "Showing meetings and appointments.",
+   "Showing bookings in a resource schedule."
+  ],
+  "avoid": [
+   "Events that last all day or several days: use an all-day bar.",
+   "A quick sign that a day has events: use a dot."
+  ],
+  "practices": [
+   "Show the time and title.",
+   "Truncate long titles and give the full title on hover.",
+   "Mark tentative or cancelled events with more than colour.",
+   "Keep text readable on the tint."
+  ]
+ },
+ "allday-bar": {
+  "what": "A bar that spans the width of a day or several days to show an event with no set time.",
+  "uses": [
+   "Showing all-day events in a week view.",
+   "Showing events that span several days.",
+   "Showing trade fairs, holidays or trips."
+  ],
+  "avoid": [
+   "Events with a start and end time: use an event bar.",
+   "Single marks on a day: use a dot."
+  ],
+  "practices": [
+   "Use a solid fill so it stands apart from timed events.",
+   "Show arrow ends when it continues past the view.",
+   "Keep the title readable.",
+   "Group all-day bars in their own row."
+  ]
+ },
+ "hour-gridline": {
+  "what": "A faint horizontal line across a day or week view that marks each hour, with a time label.",
+  "uses": [
+   "Giving scale to day and week views.",
+   "Resource and room schedulers.",
+   "Helping people place events at the right time."
+  ],
+  "avoid": [
+   "Views that are not time-based: do not add lines.",
+   "Very dense schedules: avoid heavy lines."
+  ],
+  "practices": [
+   "Keep lines light so events stand out.",
+   "Label each hour in the side margin.",
+   "Use a dashed or lighter line for half hours.",
+   "Keep spacing consistent."
+  ]
+ },
+ "now-indicator": {
+  "what": "A line across a day or week view that shows the current time and moves as time passes.",
+  "uses": [
+   "Showing the present in a day or week view.",
+   "Showing progress along a timeline.",
+   "Helping people find what is happening now."
+  ],
+  "avoid": [
+   "Views that show only past or future dates: do not show it.",
+   "Showing a deadline: use a deadline marker."
+  ],
+  "practices": [
+   "Make it clearly different from events and gridlines.",
+   "Use shape as well as colour, such as a line with a dot.",
+   "Update it every minute.",
+   "Scroll to it when the view opens."
+  ]
+ },
+ "availability-color": {
+  "what": "A set of marks that show whether time slots or people are free, busy, tentative or away.",
+  "uses": [
+   "Showing when people or rooms are available.",
+   "Offering free slots for booking.",
+   "Comparing availability across many people."
+  ],
+  "avoid": [
+   "Showing events themselves: use event bars.",
+   "Only free versus busy: fewer states may be clearer."
+  ],
+  "practices": [
+   "Use patterns or labels as well as colour.",
+   "Provide a legend that explains each state.",
+   "Name the state in each slot's label.",
+   "Keep the number of states small."
+  ]
+ },
+ "priority-marker": {
+  "what": "A small mark that shows how important a task, ticket or alert is, such as low, medium, high or urgent.",
+  "uses": [
+   "Ranking tasks in lists and boards.",
+   "Showing urgency on support tickets.",
+   "Sorting alerts by importance."
+  ],
+  "avoid": [
+   "Showing progress or status: use a status badge.",
+   "Items that are all the same importance: do not mark them."
+  ],
+  "practices": [
+   "Use a word as well as an icon or colour.",
+   "Make levels clearly different in shape or size.",
+   "Keep the scale short, with four levels at most.",
+   "Use the same scale everywhere."
+  ]
+ },
+ "deadline-marker": {
+  "what": "A mark that shows when something is due, usually a flag icon with the date.",
+  "uses": [
+   "Showing due dates on tasks.",
+   "Marking deadlines on plans and timelines.",
+   "Warning that a due date is close."
+  ],
+  "avoid": [
+   "Showing something already late: use an overdue marker.",
+   "Showing a completed date: use a plain date label."
+  ],
+  "practices": [
+   "Show the date next to the flag.",
+   "Change the look when the deadline is close.",
+   "Use words like 'Due tomorrow' for close dates.",
+   "Do not rely on colour alone."
+  ]
+ },
+ "overdue-marker": {
+  "what": "A strong mark that shows something has passed its due date, ideally saying how late it is.",
+  "uses": [
+   "Marking late tasks and invoices.",
+   "Highlighting missed deadlines in a list.",
+   "Prompting people to act on late work."
+  ],
+  "avoid": [
+   "Items not yet due: use a deadline marker.",
+   "Items that are finished: show them as done."
+  ],
+  "practices": [
+   "Say how late it is, such as 'Overdue by 2 days'.",
+   "Combine colour with an icon and words.",
+   "Keep it distinct but not alarming for minor delays.",
+   "Remove it once the item is done."
+  ]
+ },
+ "milestone-marker": {
+  "what": "A diamond-shaped mark on a plan or timeline that shows a key point or achievement.",
+  "uses": [
+   "Marking key dates on roadmaps.",
+   "Showing phases on Gantt charts.",
+   "Tracking project stages."
+  ],
+  "avoid": [
+   "Regular tasks with a length: use a bar.",
+   "Single deadlines on a task: use a deadline marker."
+  ],
+  "practices": [
+   "Show state with fill or outline, not colour alone.",
+   "Name each milestone in text.",
+   "State whether it is done, upcoming or missed.",
+   "Use the diamond shape consistently."
+  ]
+ },
+ "drag-handle": {
+  "what": "A small grip control that lets people pick up an item and move it, often to reorder a list.",
+  "uses": [
+   "Reordering list rows or cards.",
+   "Moving events in a schedule.",
+   "Moving cards between board columns."
+  ],
+  "avoid": [
+   "Items that never move: do not add a handle.",
+   "As the only way to reorder: also offer buttons or keys."
+  ],
+  "practices": [
+   "Offer a keyboard or button alternative to dragging.",
+   "Make the handle large enough to grab.",
+   "Show that the item is lifted while dragging.",
+   "Announce moves to screen readers."
+  ]
+ },
+ "resize-handle": {
+  "what": "A grip on the edge of an item or panel that lets people drag to change its size or length.",
+  "uses": [
+   "Changing the length of an event in a calendar.",
+   "Resizing side panels or columns.",
+   "Adjusting the length of bars in a Gantt chart."
+  ],
+  "avoid": [
+   "Precise values: offer a field to type them.",
+   "Items with a fixed size: do not add a handle."
+  ],
+  "practices": [
+   "Show the new value while resizing.",
+   "Snap to sensible steps, such as 15 minutes.",
+   "Offer a keyboard or form alternative.",
+   "Make the grip big enough to reach easily."
+  ]
+ },
+ "planning-icons": {
+  "what": "A set of small pictures for time and scheduling ideas, such as calendar, clock, repeat, reminder and deadline.",
+  "uses": [
+   "Labelling date and time fields and buttons.",
+   "Marking reminders, repeats and deadlines.",
+   "Adding quick cues in calendars and task lists."
+  ],
+  "avoid": [
+   "Replacing a clear word when meaning could be missed.",
+   "Decoration with no meaning."
+  ],
+  "practices": [
+   "Use one icon for one idea everywhere.",
+   "Pair icons with words where space allows.",
+   "Give icon-only buttons an accessible name.",
+   "Keep size and weight consistent."
+  ]
+ },
+ "bar-chart": {
+  "what": "A chart that compares values across categories using bars of different lengths. Bars can be vertical or horizontal.",
+  "uses": [
+   "Comparing amounts across categories.",
+   "Showing values over a few time periods.",
+   "Ranking items from largest to smallest."
+  ],
+  "avoid": [
+   "Many time points showing a trend: use a line chart.",
+   "Showing parts of a whole: use a pie or stacked bar."
+  ],
+  "practices": [
+   "Start the value axis at zero.",
+   "Sort bars by value unless the order is natural.",
+   "Use horizontal bars for long labels.",
+   "Label bars or provide a data table."
+  ]
+ },
+ "line-chart": {
+  "what": "A chart that connects points with lines to show how a value changes over time.",
+  "uses": [
+   "Showing trends over days, months or years.",
+   "Comparing a value with an earlier period.",
+   "Spotting rises, falls and patterns."
+  ],
+  "avoid": [
+   "A few unordered categories: use a bar chart.",
+   "More than a few series: split into smaller charts."
+  ],
+  "practices": [
+   "Put time on the horizontal axis.",
+   "Limit to about four lines.",
+   "Vary line style as well as colour.",
+   "Label the lines directly or in a legend."
+  ]
+ },
+ "pie-chart": {
+  "what": "A circle divided into slices that show how a total splits into parts.",
+  "uses": [
+   "Showing shares of a total.",
+   "Showing a simple split between a few groups.",
+   "Giving a quick overview of proportions."
+  ],
+  "avoid": [
+   "More than five parts or close values: use a bar chart.",
+   "Comparing values over time: use a line chart."
+  ],
+  "practices": [
+   "Keep to two to five slices.",
+   "Order slices from largest, starting at the top.",
+   "Show exact values or percentages in a legend.",
+   "Group small slices as 'Other'."
+  ]
+ },
+ "doughnut-chart": {
+  "what": "A pie chart with a hole in the middle, where the total or a key figure can be shown.",
+  "uses": [
+   "Showing shares of a total with the total in the centre.",
+   "Showing progress toward a goal.",
+   "Giving a compact overview of a split."
+  ],
+  "avoid": [
+   "More than five parts: use a bar chart.",
+   "Comparing values precisely: use a bar chart."
+  ],
+  "practices": [
+   "Show the total in the centre.",
+   "Keep to a few slices.",
+   "Provide values in a legend or table.",
+   "Order slices by size."
+  ]
+ },
+ "scatter-chart": {
+  "what": "A chart that places points by two number values to show whether and how they are related.",
+  "uses": [
+   "Checking whether two measures are related.",
+   "Spotting outliers in data.",
+   "Showing clusters of similar items."
+  ],
+  "avoid": [
+   "One measure only: use a bar or line chart.",
+   "Time trends: use a line chart."
+  ],
+  "practices": [
+   "Label both axes with units.",
+   "Use different marker shapes for groups.",
+   "Avoid too many points that overlap.",
+   "Mention any pattern in text."
+  ]
+ },
+ "bubble-chart": {
+  "what": "A scatter chart where the size of each point shows a third value.",
+  "uses": [
+   "Comparing items across three measures.",
+   "Showing size alongside position, such as sales and share.",
+   "Spotting groups or outliers with weight."
+  ],
+  "avoid": [
+   "Comparing exact sizes: use a table or bars.",
+   "Only two measures: use a scatter chart."
+  ],
+  "practices": [
+   "Scale bubble area, not radius, to value.",
+   "Label the axes and what size means.",
+   "Keep the number of bubbles manageable.",
+   "Provide a table with exact values."
+  ]
+ },
+ "radar-chart": {
+  "what": "A chart that shows scores on several axes as a polygon, so the shape reveals strengths and gaps.",
+  "uses": [
+   "Comparing one or two items across several criteria.",
+   "Showing a profile, such as skills or health scores.",
+   "Spotting weak areas at a glance."
+  ],
+  "avoid": [
+   "More than two items: use a table or bars.",
+   "Criteria on different scales: use bars."
+  ],
+  "practices": [
+   "Use the same scale on every axis.",
+   "Use four to eight axes.",
+   "Order axes in a meaningful way.",
+   "Provide a table for exact values."
+  ]
+ },
+ "polar-area-chart": {
+  "what": "A round chart with equal-angle segments, where each segment's distance from the centre shows its value.",
+  "uses": [
+   "Showing counts across repeating categories, such as weekdays.",
+   "Giving a compact overview by type.",
+   "Comparing a handful of values in a round layout."
+  ],
+  "avoid": [
+   "Precise comparisons: use a bar chart.",
+   "Parts of a whole: use a pie or doughnut chart."
+  ],
+  "practices": [
+   "Order segments by time or size.",
+   "Label each segment.",
+   "Use a scale that starts at zero.",
+   "Provide a table with exact values."
+  ]
+ },
+ "logo": {
+  "what": "The symbol or wordmark that identifies a product or brand. It usually sits in a top bar or header and links to the home page.",
+  "uses": [
+   "Showing the brand in the header or top bar.",
+   "Branding login and sign-up screens.",
+   "Branding emails and documents."
+  ],
+  "avoid": [
+   "Repeating it many times on one screen.",
+   "Using it as decoration."
+  ],
+  "practices": [
+   "Keep it in the same place on every page.",
+   "Link it to the home page.",
+   "Never stretch or recolour the file.",
+   "Give it the product name as alt text."
+  ]
+ },
+ "avatar": {
+  "what": "A small picture or set of initials that stands for a person, team or account.",
+  "uses": [
+   "Showing who wrote a comment or made a change.",
+   "Listing people and team members.",
+   "Showing the signed-in user in a menu."
+  ],
+  "avoid": [
+   "Decoration with no meaning.",
+   "Showing a company brand: use a logo."
+  ],
+  "practices": [
+   "Show initials when there is no photo.",
+   "Keep the name nearby or in a tooltip.",
+   "Offer a few consistent sizes.",
+   "Give a text alternative when it stands alone."
+  ]
+ },
+ "favicon": {
+  "what": "The small icon that appears in browser tabs, bookmarks and on home screens to represent a site.",
+  "uses": [
+   "Helping people find a tab among many.",
+   "Identifying a site in bookmarks and history.",
+   "Showing the app icon when saved to a home screen."
+  ],
+  "avoid": [
+   "Showing the full brand: use a logo.",
+   "Detailed images that become unreadable when tiny."
+  ],
+  "practices": [
+   "Keep it simple so it reads at 16px.",
+   "Provide an SVG or PNG and larger sizes for phones.",
+   "Make it clear on light and dark tabs.",
+   "Match it to the brand."
+  ]
+ }
+}

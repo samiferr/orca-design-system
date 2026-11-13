@@ -10,6 +10,28 @@ One line of a weekly schedule: day, start time, end time and a remove button.
 
 Built from: `select`, `time-input`, `remove-row-button`
 
+### General description
+
+A schedule row is one line of a repeating timetable: a day plus a start and end time. Several rows together describe opening hours or working hours.
+
+#### Use cases
+
+- Setting opening hours for a shop or service.
+- Defining working hours for staff.
+- Setting recurring availability for bookings.
+
+#### When not to use it
+
+- Do not use it for one-off dates; use an exception or a date picker.
+- Do not use it for a single time; use one time field.
+
+#### Best practices
+
+- Allow more than one row per day for split shifts.
+- Use 24-hour times or label AM and PM.
+- Check that end is after start.
+- Label each field for screen readers.
+
 ### When to use
 
 - Opening hours, working hours, capture schedules.
@@ -77,18 +99,40 @@ Built from: `select`, `time-input`, `remove-row-button`
 
 `id: add-row-button` · level: component · source: ORCA
 
-A ghost button that adds one more row to a repeating group and focuses it.
+A ghost button that adds a row to a repeating group and focuses it.
 
 Built from: `button`, `icon`
 
+### General description
+
+An add-row button adds one more empty set of fields to a repeating group, such as another time slot or another phone number.
+
+#### Use cases
+
+- Adding a time span to a schedule.
+- Adding another reminder, address or contact.
+- Building lists of unknown length in a form.
+
+#### When not to use it
+
+- Avoid it when the number of rows is small and fixed; show them all.
+- Avoid it for picking from known options; use checkboxes.
+
+#### Best practices
+
+- Label it with what it adds, such as Add hours.
+- Place it right below the last row.
+- Move focus to the new row.
+- Hide or disable it at the limit and say why.
+
 ### When to use
 
-- Schedules, reminders, properties, any repeating set of fields.
+- Schedules, reminders, properties, any repeating fields.
 
 ### How to use
 
 - `<button class="orca-button orca-button--ghost" type="button" data-orca-add-row="template-id" aria-controls="list-id">{% icon "plus" %}Add hours</button>` below the rows.
-- Name what is added ('Add hours', 'Add reminder'); hide it at the maximum number of rows and say the limit.
+- Name what it adds ('Add hours', 'Add reminder'); at the maximum number of rows, hide it and say the limit.
 
 #### Example: Add row
 
@@ -185,9 +229,31 @@ def edit_chapters(request, pk):
 
 `id: remove-row-button` · level: component · source: ORCA
 
-An icon button that removes its row, named after what it removes, with the removal announced.
+An icon button that removes its row; named after the row and announced when used.
 
 Built from: `icon-button`
+
+### General description
+
+A remove-row button deletes one row from a repeating group of fields. It is usually a small icon button at the end of the row.
+
+#### Use cases
+
+- Deleting a time span from a schedule.
+- Removing an extra contact or reminder.
+- Trimming any repeated set of fields.
+
+#### When not to use it
+
+- Do not use it for deleting important records; use a delete button with confirmation.
+- Do not use it for the only required row.
+
+#### Best practices
+
+- Give it a name saying which row it removes.
+- Move focus to a sensible place afterwards.
+- Announce the removal to screen readers.
+- Make it big enough to tap.
 
 ### When to use
 
@@ -196,7 +262,7 @@ Built from: `icon-button`
 ### How to use
 
 - `<button class="orca-icon-button" type="button" aria-label="Remove Monday 08:00 to 12:00" data-orca-remove-row>{% icon "delete" %}</button>`.
-- With Django formsets, a `-DELETE` checkbox in the row is ticked and the row hidden instead of removed.
+- With Django formsets, tick the row's `-DELETE` checkbox and hide the row instead of removing it.
 - Focus moves to the next row; the removal is announced.
 
 #### Example: Remove
@@ -219,9 +285,31 @@ Built from: `icon-button`
 
 `id: availability-legend` · level: component · source: ORCA
 
-The key to availability marks: free, busy, tentative and not working.
+The key to the availability marks: free, busy, tentative, not working.
 
 Built from: `availability-color`, `legend-item`
+
+### General description
+
+An availability legend is a small key that explains the marks used in a calendar or booking grid, such as free, busy and unavailable.
+
+#### Use cases
+
+- Explaining colours and patterns in a scheduler.
+- Helping people read booking grids.
+- Explaining resource availability rows.
+
+#### When not to use it
+
+- Skip it when marks are labelled directly with words.
+- Do not rely on colour alone; use text or shapes as well.
+
+#### Best practices
+
+- Place it near the grid it explains.
+- Use the same marks as the grid.
+- Pair colour with a word or pattern.
+- Keep the list short.
 
 ### When to use
 
@@ -265,6 +353,28 @@ Built from: `availability-color`, `legend-item`
 A one-day override of the usual schedule: date, new hours or Closed, and the reason.
 
 Built from: `date-badge`, `badge`, `row-actions`
+
+### General description
+
+An exception entry records a single day that differs from the usual schedule, such as a holiday closure or special opening hours, with the reason.
+
+#### Use cases
+
+- Marking public holidays as closed.
+- Setting special hours for an event day.
+- Listing maintenance days.
+
+#### When not to use it
+
+- Do not use it for regular weekly changes; edit the weekly schedule.
+- Do not use it for long absences; use a date range.
+
+#### Best practices
+
+- Show the date clearly.
+- Give the reason in plain words.
+- Sort entries by date.
+- Let people edit or remove an entry.
 
 ### When to use
 
@@ -327,6 +437,28 @@ A person's absence: who, dates, type and approval status.
 
 Built from: `avatar`, `date-label`, `status-chip`
 
+### General description
+
+A time-off entry is a row describing a person's absence: who is away, on which dates, for what reason and whether it is approved.
+
+#### Use cases
+
+- Listing holiday requests for a team.
+- Showing who is away on a team calendar.
+- Reviewing requests waiting for approval.
+
+#### When not to use it
+
+- Do not use it for a single-day opening change; use an exception.
+- Do not use it for tasks or meetings; use calendar events.
+
+#### Best practices
+
+- Show name, dates and length together.
+- Show the status in words, not colour alone.
+- Format dates the way people read them.
+- Sort by start date.
+
 ### When to use
 
 - Time-off lists, team calendars, roster sidebars.
@@ -374,6 +506,28 @@ A bookable time as a large button: free, limited ('2 left'), full or chosen.
 
 Built from: `time-label`
 
+### General description
+
+A booking slot is a button showing one time someone can book, with its state: free, limited, full or chosen.
+
+#### Use cases
+
+- Choosing an appointment time.
+- Booking a table, room or class.
+- Showing which times are still open.
+
+#### When not to use it
+
+- Avoid it for picking a date far ahead; use a calendar.
+- Avoid it when times are free-form; use a time field.
+
+#### Best practices
+
+- Show all times for a day at once.
+- Show full slots as unavailable rather than hiding them.
+- Make buttons big enough to tap.
+- Show the chosen slot clearly.
+
 ### When to use
 
 - Appointment and booking flows.
@@ -414,9 +568,31 @@ Built from: `time-label`
 
 `id: conflict-warning` · level: component · source: ORCA
 
-A caution message saying what this plan conflicts with and how to resolve it.
+A caution message naming what the plan conflicts with and how to fix it.
 
 Built from: `callout`, `button`
+
+### General description
+
+A conflict warning is a message that tells someone their plan clashes with something else, such as a double booking, and how to fix it.
+
+#### Use cases
+
+- Warning about a double-booked person or room.
+- Flagging a shift that overlaps another.
+- Alerting someone about a clash before saving.
+
+#### When not to use it
+
+- Do not use it for ordinary errors; use field error messages.
+- Do not show it if there is no real clash.
+
+#### Best practices
+
+- Say exactly what clashes.
+- Link to the other item.
+- Offer clear ways to fix it.
+- Allow saving anyway only when it is safe.
 
 ### When to use
 
@@ -424,7 +600,7 @@ Built from: `callout`, `button`
 
 ### How to use
 
-- A caution callout: title names the conflict ('Grace Hopper is on holiday that day'), body names the other item with a link, actions offer the fixes ('Pick another person', 'Save anyway').
+- A caution callout: the title names the conflict ('Grace Hopper is on holiday that day'), the body links the other item, actions offer fixes ('Pick another person', 'Save anyway').
 - Use caution when saving is still allowed; negative when it is blocked.
 
 #### Example: Conflict
@@ -455,9 +631,31 @@ Built from: `callout`, `button`
 
 `id: overlap-warning` · level: component · source: ORCA
 
-An inline message under a schedule row whose times overlap another row.
+An inline message under a schedule row that overlaps another row.
 
 Built from: `error-text`, `schedule-row`
+
+### General description
+
+An overlap warning is a short message next to a schedule row saying its times overlap another row, so the person can fix it right there.
+
+#### Use cases
+
+- Checking opening hours rows while editing.
+- Catching overlapping shifts.
+- Validating time ranges in forms.
+
+#### When not to use it
+
+- Do not wait until the form is submitted to report it.
+- Do not use it for unrelated errors; use normal field messages.
+
+#### Best practices
+
+- Show it next to the row it affects.
+- Name the other row it overlaps.
+- Tell people how to fix it.
+- Connect it to the fields for screen readers.
 
 ### When to use
 
@@ -492,6 +690,28 @@ Built from: `error-text`, `schedule-row`
 'Open now, closes at 18:00' or 'Closed, opens Monday 08:00', with a status dot.
 
 Built from: `status-dot`, `time-label`
+
+### General description
+
+A working-hours label is a short line saying whether a place is open right now and when that next changes, often with a small status dot.
+
+#### Use cases
+
+- Showing if a shop or support desk is open.
+- Telling visitors when to call.
+- Showing availability on a contact page.
+
+#### When not to use it
+
+- Do not use it when hours are only approximate; list the hours instead.
+- Do not show it without handling holidays and time zones.
+
+#### Best practices
+
+- Use words as well as a coloured dot.
+- Show the next change, such as closes at 18:00.
+- Use the place's own time zone.
+- Keep it up to date.
 
 ### When to use
 

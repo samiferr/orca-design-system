@@ -10,6 +10,29 @@ A product tile: square image, name, price and one action.
 
 Built from: `image`, `button`
 
+### General description
+
+A tile in a shop or catalogue that shows a product's picture, name, price and a main action.
+
+#### Use cases
+
+- Showing items in a shop grid or list.
+- Listing products in a catalogue or quote tool.
+- Displaying recommended or related products.
+
+#### When not to use it
+
+- For detailed comparison of specs, use a table instead of tiles.
+- For a single product page, use a larger detail layout.
+
+#### Best practices
+
+- Use a consistent image shape so tiles line up.
+- Make the product name a link to the details.
+- Show the current price clearly, with any old price marked as such.
+- Offer just one main action per tile.
+- Let long names wrap instead of cutting them off.
+
 ### When to use
 
 - Product grids and lists in shops and catalogues.
@@ -50,6 +73,29 @@ Avatar, name and role, optionally with a contact action.
 
 Built from: `avatar`
 
+### General description
+
+A small block that shows a person's picture, name and role, sometimes with a way to contact them.
+
+#### Use cases
+
+- Showing the owner or assignee of a task.
+- Listing contacts, team members or authors.
+- Displaying the author of an article or comment.
+
+#### When not to use it
+
+- For a long directory of people, use a table with search.
+- For full profiles, use a profile page or card.
+
+#### Best practices
+
+- Show the name as the person wrote it.
+- Add a role or title to give context.
+- Use initials when there is no photo.
+- Give contact buttons accurate descriptive names.
+- Keep the layout consistent wherever people appear.
+
 ### When to use
 
 - Owners, assignees, contacts, authors.
@@ -57,7 +103,7 @@ Built from: `avatar`
 ### How to use
 
 - `<div class="orca-person">` with an avatar and `.orca-person__text` (`__name`, `__role`); add a link or icon button for contact.
-- Use the person's preferred name; never shorten it in a way they did not choose.
+- Use the person's preferred name; never shorten it unless they chose that.
 
 #### Example: Person
 
@@ -89,6 +135,29 @@ Built from: `avatar`
 An article teaser: kicker, headline, excerpt, meta and a thumbnail.
 
 Built from: `card-kicker`, `card-meta`, `thumbnail`
+
+### General description
+
+A short teaser for an article that shows a headline, a few lines of text, details such as date and a small image.
+
+#### Use cases
+
+- Listing news, blog posts or release notes.
+- Showing related articles under a post.
+- Showing help articles in a search result list.
+
+#### When not to use it
+
+- For one prominent story, use a larger featured layout.
+- For plain lists of links, a simple text list is enough.
+
+#### Best practices
+
+- Start with a headline that tells what the article is about.
+- Keep the excerpt short and cut at a natural point.
+- Show the date and reading time.
+- Make the headline the link.
+- Move the image above the text on small screens.
 
 ### When to use
 
@@ -130,6 +199,29 @@ Built from: `card-kicker`, `card-meta`, `thumbnail`
 The opening block of a marketing or landing page: kicker, headline, lead, actions and an image.
 
 Built from: `heading`, `button`, `hero-image`
+
+### General description
+
+The large opening section of a landing page. It states what the product offers and gives one clear next step.
+
+#### Use cases
+
+- Opening a home or marketing page.
+- Introducing a new product or campaign.
+- Welcoming people at the start of onboarding.
+
+#### When not to use it
+
+- Do not use it in everyday application screens where people need to get work done.
+- Do not use several heroes on one page.
+
+#### Best practices
+
+- State the benefit in a short headline.
+- Offer one main action and at most one secondary action.
+- Use an image that supports the message.
+- Keep the text readable over any background.
+- Make sure the main action is visible without scrolling.
 
 ### When to use
 
@@ -179,6 +271,29 @@ The row under a photo: like, comment and share with counts, and save at the end.
 
 Built from: `icon-button`, `toggle-button`
 
+### General description
+
+A row of small buttons under a photo, such as like, comment and share, often with counts.
+
+#### Use cases
+
+- Letting people react to photos in a feed.
+- Offering share and save in a gallery.
+- Showing engagement counts under a shared image.
+
+#### When not to use it
+
+- For one main action on an image, a single button is clearer.
+- For heavy editing actions, use a toolbar or menu.
+
+#### Best practices
+
+- Use familiar icons so people know what each does.
+- Give every icon button a text name for screen readers.
+- Show a pressed state for toggles such as like.
+- Show counts beside the related action.
+- Make buttons big enough to tap.
+
 ### When to use
 
 - Photo posts, galleries, shared snapshots.
@@ -224,6 +339,29 @@ A video's latest snapshot with its status, name, place and actions.
 
 Built from: `linked-card`, `snapshot-image`, `status-light`, `pin-button`
 
+### General description
+
+A card that shows a video's latest picture with its name, status and quick actions.
+
+#### Use cases
+
+- Showing cameras or recordings in a dashboard grid.
+- Listing videos in a library.
+- Monitoring which live feeds are online.
+
+#### When not to use it
+
+- To compare many videos by data, use a table.
+- To watch one video in detail, use a full player view.
+
+#### Best practices
+
+- Show a thumbnail first so people recognise the video.
+- Mark the status with text as well as colour.
+- Show when the image was taken.
+- Make the whole card clickable to open the video.
+- Show a clear placeholder when no image is available.
+
 ### When to use
 
 - Video grids on dashboards and video lists.
@@ -231,7 +369,7 @@ Built from: `linked-card`, `snapshot-image`, `status-light`, `pin-button`
 ### How to use
 
 - A linked card with `.orca-video-card`: `.orca-ratio--16x9` snapshot (or a removed frame when offline), a badge in `.orca-video-card__flag`, body with title link and status light, footer with pin and more actions.
-- Show the snapshot time; a stale image is labelled as such.
+- Show the snapshot time and label a stale image.
 
 #### Example: Video cards
 
@@ -297,9 +435,32 @@ Built from: `linked-card`, `snapshot-image`, `status-light`, `pin-button`
 
 `id: page-heading` · level: component · source: ORCA
 
-The page title, the one-sentence subtitle and an optional meta line with status badges.
+The page title, a one-sentence subtitle and an optional line of facts and status badges.
 
 Built from: `page-title`, `page-subtitle`, `small-text`, `badge`
+
+### General description
+
+The block at the top of a page that gives its title, often with a short description and status details. It tells people where they are and what the page is for.
+
+#### Use cases
+
+- Top of an application page or settings page.
+- Top of a documentation page.
+- Record pages that show a status next to the title.
+
+#### When not to use it
+
+- Long introductions; put those in the page body.
+- Repeating the site name as the title; name the page itself.
+
+#### Best practices
+
+- Use exactly one main heading per page.
+- Keep the title short and specific.
+- Add one sentence of subtitle at most.
+- Show status with a word as well as a colour.
+- Place it in the same spot on every page.
 
 ### When to use
 
@@ -341,9 +502,31 @@ Built from: `page-title`, `page-subtitle`, `small-text`, `badge`
 
 `id: section-heading` · level: component · source: ORCA
 
-A section title with an optional one-paragraph introduction.
+A section title with an optional short introduction.
 
 Built from: `section-title`, `paragraph`
+
+### General description
+
+A title that introduces a section of a page, sometimes with a short intro. It helps people scan and decide whether to read the section.
+
+#### Use cases
+
+- Dividing a long form into groups.
+- Settings pages with several topics.
+- Documentation and articles with several parts.
+
+#### When not to use it
+
+- Labelling a single control; use a form label instead.
+- Styling plain text bigger; use headings only to introduce real sections.
+
+#### Best practices
+
+- Keep heading levels in order without skipping.
+- Make the title say what the section is about.
+- Keep any intro to one or two sentences.
+- Use the same style for every section on a page.
 
 ### When to use
 
@@ -352,7 +535,7 @@ Built from: `section-title`, `paragraph`
 ### How to use
 
 - `<h2 class="orca-section-title">` then `<p class="orca-p">` of one or two sentences.
-- Keep heading levels in order on the page.
+- Keep heading levels in order.
 
 #### Example: Section heading
 
@@ -377,6 +560,28 @@ One feature: an icon, a short title and one sentence.
 
 Built from: `icon`, `heading`, `paragraph`
 
+### General description
+
+A small block that presents one feature with an icon, a short title and a sentence. Several together give a quick overview of what something offers.
+
+#### Use cases
+
+- Feature lists on a product or marketing page.
+- Showing first steps on an empty dashboard.
+- Summarising benefits on a landing page.
+
+#### When not to use it
+
+- Content that needs long explanation; write a full section or article.
+- Steps that must be done in order; use a numbered list.
+
+#### Best practices
+
+- Write the title as a benefit in a few words.
+- Keep the description to one sentence.
+- Use icons that fit the meaning, and treat them as decoration.
+- Use the same layout for every item in a group.
+
 ### When to use
 
 - Feature grids on marketing pages; 'What you can do' lists on empty dashboards.
@@ -384,7 +589,7 @@ Built from: `icon`, `heading`, `paragraph`
 ### How to use
 
 - `<li class="orca-feature">{% icon "statistics" size="l" %}<h3 class="orca-feature__title">…</h3><p class="orca-feature__text">…</p></li>`.
-- The title says the benefit in two to four words.
+- Title: the benefit, in two to four words.
 
 ### Accessibility
 
@@ -414,9 +619,32 @@ Built from: `icon`, `heading`, `paragraph`
 
 `id: captioned-media` · level: component · source: ORCA
 
-An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.
+An image or video in a fixed-ratio frame, with a caption or flag on a solid bar.
 
 Built from: `media-frame`, `snapshot-image`
+
+### General description
+
+An image or video shown in a fixed frame, with a caption explaining it. The fixed shape stops the page from jumping while the media loads.
+
+#### Use cases
+
+- Photos in articles and posts.
+- Gallery images with a source and time.
+- Screenshots that need an explanation.
+
+#### When not to use it
+
+- Purely decorative pictures; skip the caption.
+- Long explanations; put them in the body text next to the image.
+
+#### Best practices
+
+- Reserve the frame size before the media loads.
+- Write alt text that says what matters in the image.
+- Keep captions short and place them consistently.
+- Make caption text readable on any image.
+- Add source and date when they help.
 
 ### When to use
 
@@ -425,11 +653,11 @@ Built from: `media-frame`, `snapshot-image`
 ### How to use
 
 - `<figure class="orca-ratio orca-ratio--16x9"><img …><figcaption class="orca-frame__caption">…</figcaption></figure>`.
-- Without a caption, the frame alone: `<div class="orca-ratio orca-ratio--4x3"><img …></div>`.
+- Without a caption, use the frame alone: `<div class="orca-ratio orca-ratio--4x3"><img …></div>`.
 
 ### Accessibility
 
-- Alt text says what matters in the image; the caption repeats source and time visibly.
+- Alt text says what matters in the image; the caption shows source and time to everyone.
 
 #### Example: Captioned image
 
@@ -455,9 +683,31 @@ Built from: `media-frame`, `snapshot-image`
 
 `id: thumbnail-strip` · level: component · source: ORCA
 
-A row of thumbnail buttons that choose the image shown, the current one marked.
+A row of thumbnail buttons that pick the image shown and mark the current one.
 
 Built from: `thumbnail`
+
+### General description
+
+A row of small preview images that people click to choose which large image to see. It shows what is available at a glance.
+
+#### Use cases
+
+- Product or photo galleries.
+- Choosing a frame or version of a video.
+- Media pickers with a limited number of items.
+
+#### When not to use it
+
+- Very large sets of images; use a grid with paging or search.
+- Images that look the same at a small size; use text labels.
+
+#### Best practices
+
+- Mark the current thumbnail with more than a colour change.
+- Give each thumbnail a name for screen readers.
+- Keep thumbnails the same size and shape.
+- Let people use arrow keys and tabbing to move through them.
 
 ### When to use
 
@@ -469,7 +719,7 @@ Built from: `thumbnail`
 
 ### Accessibility
 
-- Each button is named after the image it shows; `aria-current` marks the one on stage.
+- Each button is named after its image; `aria-current` marks the one shown.
 
 #### Example: Thumbnails
 
@@ -500,9 +750,32 @@ Built from: `thumbnail`
 
 `id: video-player` · level: component · source: ORCA
 
-A native video in its frame, with a live or recording flag and the current time.
+A native video with a live or recording flag and the current time.
 
 Built from: `video-frame`, `recording-frame`, `time-label`
+
+### General description
+
+A player that shows a video with play, pause, volume and a progress bar. It can also flag a live or recorded feed.
+
+#### Use cases
+
+- Tutorials and product demos.
+- Live streams.
+- Recordings people review, such as meetings or camera footage.
+
+#### When not to use it
+
+- Very short, silent loops; use an animated image or short silent video.
+- Content that is mostly text; write it out instead.
+
+#### Best practices
+
+- Show controls and keep them keyboard accessible.
+- Never start playing with sound automatically.
+- Provide captions for speech.
+- Show a poster image and load the video only when needed.
+- Say clearly when a stream is live.
 
 ### When to use
 
@@ -516,7 +789,7 @@ Built from: `video-frame`, `recording-frame`, `time-label`
 
 ### Accessibility
 
-- Provide captions for speech; name the video with `aria-label` when no visible title is next to it.
+- Add captions for speech; name the video with `aria-label` when no visible title is nearby.
 
 #### Example: Live video
 
@@ -539,9 +812,31 @@ Built from: `video-frame`, `recording-frame`, `time-label`
 
 `id: call-to-action` · level: component · source: ORCA
 
-The one or two actions a section asks for: the primary button and an optional quieter alternative.
+The one or two actions a section asks for: a primary button and an optional quieter one.
 
 Built from: `button`, `text-link`
+
+### General description
+
+The button or link that asks people to take the next step, such as signing up. A section usually has one main action and sometimes a quieter second choice.
+
+#### Use cases
+
+- Hero sections and page headers.
+- Empty pages that need a first step.
+- Emails with one clear task.
+
+#### When not to use it
+
+- Giving several equal options; pick one main action and make the rest quieter.
+- Navigation to other pages; use regular links.
+
+#### Best practices
+
+- Use one main action per section.
+- Start the label with a verb that says what happens.
+- Make the main action look stronger than the alternative.
+- Keep the button large enough to tap easily.
 
 ### When to use
 
@@ -549,12 +844,12 @@ Built from: `button`, `text-link`
 
 ### When not to use
 
-- Three or more actions: keep one, move the rest to a menu or a link.
+- Three or more actions: keep one and move the rest to a menu or link.
 
 ### How to use
 
 - `<div class="orca-site-header__actions"><a class="orca-button orca-button--ghost" href=…>Sign in</a><a class="orca-button orca-button--brand" href=…>Start free trial</a></div>`.
-- In emails the button is a table-based link with the address written below it.
+- In emails, use a table-based link button with the address written below it.
 
 #### Example: Call to action
 
@@ -577,9 +872,31 @@ Built from: `button`, `text-link`
 
 `id: fine-print` · level: component · source: ORCA
 
-Small legal and version text on one line, with its policy links.
+Small legal and version text on one line, with policy links.
 
 Built from: `small-text`, `text-link`
+
+### General description
+
+Small text for legal notes, copyright, version numbers and policy links. It has to be available but should not compete with the main content.
+
+#### Use cases
+
+- Page footers.
+- Email footers.
+- Sign-in and sign-up pages with terms and privacy links.
+
+#### When not to use it
+
+- Important conditions people must know before acting; place them next to the action in normal text.
+- Hiding key information in tiny text.
+
+#### Best practices
+
+- Keep it readable with enough contrast and size.
+- Keep it on a single line where possible.
+- Link to full policies rather than copying them.
+- Place it in the same spot on every page.
 
 ### When to use
 

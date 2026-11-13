@@ -7,11 +7,11 @@ C = category(
 
 add(Element(
     "button", "Button", C,
-    "A command. Variants express importance: primary, secondary (default), ghost, link, plus brand, danger, neutral, elevated and outlines.",
+    "A command. Variants show importance: primary, secondary (default), ghost, link, plus brand, danger, neutral, elevated and outlines.",
     why="Three clearly different weights (filled, outlined, text) let people find the main action instantly and make "
         "the hierarchy survive colour-blindness (Practical UI B01, B02; Von Restorff effect). One primary action per screen "
         "keeps decisions fast (Hick's law, B03).",
-    when=["`orca-button--primary`: the one main action of the screen or form (Save, Add image).",
+    when=["`orca-button--primary`: the one main action of a screen or form (Save, Add image).",
           "default (no modifier): secondary actions and equal alternatives (Cancel, Export).",
           "`--ghost`: low-priority or repeated actions in toolbars and rows.",
           "`--danger`: only to confirm a destructive action inside a confirm dialog.",
@@ -22,12 +22,12 @@ add(Element(
     avoid=["Navigation: use a link.", "Two primary buttons on one screen.", "A red button as the first step of a delete (B13): use the default or `--outline-danger`, confirm with `--danger`.",
            "'OK', 'Submit', 'Yes': name the action."],
     how=["`<button class=\"orca-button orca-button--primary\" type=\"submit\">Save image</button>`. Always set `type`.",
-         "Label: verb + object, one to three words, sentence case (B10).",
+         "Label: verb + object, 1 to 3 words, sentence case (B10).",
          "Order: most important first, left to right; stack full width on phones (B08).",
          "Icon + label: put `{% icon %}` before the text; the icon is decorative.",
          "Busy: set `aria-busy=\"true\"`, disable, and prepend `<span class=\"orca-spinner orca-spinner--sm\"></span>`.",
-         "Aliases kept from earlier systems: positive = primary, negative = danger, base = ghost, secondary = default."],
-    a11y=["Focus ring is drawn inside the button; on filled variants it uses the on-fill colour so it shows.",
+         "Old aliases still work: positive = primary, negative = danger, base = ghost, secondary = default."],
+    a11y=["The focus ring is drawn inside the button; on filled variants it uses the on-fill colour so it stays visible.",
           "Disabled buttons cannot be focused: explain why nearby or keep the button enabled and validate on press (B06, B07)."],
     classes=[".orca-button", ".orca-button--primary", ".orca-button--brand", ".orca-button--danger", ".orca-button--neutral",
              ".orca-button--ghost", ".orca-button--elevated", ".orca-button--outline-accent", ".orca-button--outline-danger"],
@@ -63,8 +63,8 @@ add(Element(
     "Size modifiers: sm, dense, default, lg, xl, plus block (full width) and icon-only.",
     why="Size follows context, not importance: dense toolbars need compact controls, phones need 44–48px targets "
         "(Fitts's law, Practical UI B11). Heights match fields so rows align.",
-    when=["`--sm` inside table rows; `--dense` in top bars and filter bars; default elsewhere; `--lg`/`--xl` for touch-first and phone primary actions.",
-          "`--block` for the primary action at the bottom of a phone form.", "`--icon-only` for a square button with just an icon (prefer `icon-button`)."],
+    when=["`--sm` in table rows; `--dense` in top bars and filter bars; default elsewhere; `--lg`/`--xl` for touch-first and phone primary actions.",
+          "`--block` for the primary action at the bottom of a phone form.", "`--icon-only` for a square button with only an icon (prefer `icon-button`)."],
     avoid=["Using size to signal importance: use the variant.", "Mixing sizes in one row."],
     how=["Add one size modifier to `.orca-button`. On coarse pointers every size grows to 44px automatically.",
          "Icon-only buttons need `aria-label`."],
@@ -101,11 +101,11 @@ add(Element(
 
 add(Element(
     "pin-button", "Pin button", C,
-    "A toggle that pins an item to the top of a list or to the dashboard.",
+    "A toggle that pins an item to the top of a list or the dashboard.",
     why="Letting people keep their most-used items close reduces search effort on every visit (Fitts's law: shorter distance; Practical UI F03).",
-    when=["Lists where a few items are used much more than others (albums, reports)."],
+    when=["Lists where a few items are used far more than the rest (albums, reports)."],
     how=["`<button class=\"orca-icon-button orca-pin\" type=\"button\" aria-pressed=\"false\" aria-label=\"Pin Entrance A\" data-orca-toggle data-orca-label-on=\"Unpin Entrance A\" data-orca-label-off=\"Pin Entrance A\">{% icon \"pin\" %}</button>`.",
-         "Persist the state on the server; `data-orca-toggle` only flips the pressed state in the page."],
+         "Save the state on the server; `data-orca-toggle` only flips the pressed state in the page."],
     a11y=["`aria-pressed` announces pinned/not pinned; the label names the item."],
     classes=[".orca-pin"], tokens=["accent", "bg-active"],
     laws=["fitts", "F03"],
@@ -116,7 +116,7 @@ add(Element(
 
 add(Element(
     "email-button", "Email button", C,
-    "A mailto link styled as a button, with the address shown as a fallback.",
+    "A mailto link styled as a button, with the address shown beside it.",
     why="mailto fails silently when no mail app is set up; showing the address lets people copy it instead "
         "(Postel's law: tolerate every setup).",
     when=["Contact support, send a report link, reply to an alert."],
@@ -139,8 +139,8 @@ add(Element(
     when=["Toolbar modes: show grid, bold, live view on/off, mute."],
     avoid=["Settings that are saved: use a switch.", "Choosing one of several views: use a view toggle group (segmented, phase 2)."],
     how=["`<button class=\"orca-button\" type=\"button\" aria-pressed=\"false\" data-orca-toggle>`.",
-         "Keep the label constant ('Show grid'); the pressed state says whether it is on."],
-    a11y=["Do not change the label when pressed unless you remove aria-pressed (the two together are confusing)."],
+         "Keep the label fixed ('Show grid'); the pressed state shows whether it is on."],
+    a11y=["Do not change the label when pressed unless you remove aria-pressed; both together confuse."],
     classes=[".orca-button[aria-pressed]"], tokens=["bg-active"],
     laws=["jakob", "C03", "R14"],
     examples=[("Toggle", """<button class="orca-button orca-button--dense" type="button" aria-pressed="true" data-orca-toggle>{% icon "grid" %}Show grid</button>""")],
@@ -149,14 +149,14 @@ add(Element(
 
 add(Element(
     "icon-button", "Icon button", C,
-    "A square button with a single 16px icon and an accessible name. Quiet, outlined, accent and neutral-fill variants.",
+    "A square button with one 16px icon and an accessible name. Quiet, outlined, accent and neutral-fill variants.",
     why="Icon buttons save space for frequent, well-known actions (close, more, refresh) while keeping a full "
         "control-height target (Fitts's law). Few icons are universal, so each needs a name (Hick's law: icons without labels).",
-    when=["Close, more actions, refresh, pin, previous/next, toolbar actions people use often."],
+    when=["Close, more actions, refresh, pin, previous/next and other often-used toolbar actions."],
     avoid=["Actions whose icon is not well known: use a button with a label.", "Destructive actions without confirmation."],
     how=["`<button class=\"orca-icon-button\" type=\"button\" aria-label=\"Close\">{% icon \"close\" %}</button>`.",
          "Variants: default quiet, `--outlined`, `--accent`, `--neutral`. Sizes: `--sm`, `--dense`, `--lg`.",
-         "Add a visible tooltip with the same text when the meaning might be unclear (tooltip: phase 2)."],
+         "Add a visible tooltip with the same text when the meaning may be unclear (tooltip: phase 2)."],
     a11y=["`aria-label` is required. The icon is decorative.", "Target grows to 44px on touch."],
     classes=[".orca-icon-button", ".orca-icon-button--outlined", ".orca-icon-button--accent", ".orca-icon-button--neutral"],
     tokens=["icon", "bg-hover", "control-md"],
@@ -173,14 +173,14 @@ add(Element(
 
 add(Element(
     "fab", "Floating action button (FAB)", C,
-    "A large floating button for the one creation action of a phone screen.",
+    "A large floating button for a phone screen's one create action.",
     why="On phones the primary action floats within thumb reach at the bottom (Fitts's law, Practical UI F03) and its "
         "distinct shape makes it the one thing that stands out (Von Restorff). Familiar from mobile platforms (Jakob's law).",
     when=["Phone layouts (below 620px) of list pages with one create action."],
-    avoid=["Desktop layouts: put the action in the page head.", "More than one FAB, or for anything other than the primary action."],
+    avoid=["Desktop layouts: put the action in the page head.", "More than one FAB, or anything but the primary action."],
     how=["Icon-only: `<a class=\"orca-fab\" href=\"…\" aria-label=\"Add image\">{% icon \"plus\" %}</a>`.",
          "Extended (preferred: icon + label): add `.orca-fab--extended` and visible text.",
-         "Leave 5rem of bottom padding on the page so the FAB never covers the last row."],
+         "Leave 5rem of bottom padding so the FAB never covers the last row."],
     a11y=["Icon-only FABs need `aria-label`. The FAB is 56px."],
     classes=[".orca-fab", ".orca-fab--extended", ".orca-fab--static"],
     tokens=["primary", "shadow-dragged", "layer-sticky"],

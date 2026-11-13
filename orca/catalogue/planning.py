@@ -2,22 +2,22 @@ from .registry import Element, add, category
 
 INP = category(
     "planning-inputs", "Planning inputs",
-    "Date, time and schedule inputs. Native pickers first: they are what people already know, on every device.",
+    "Date, time and schedule inputs. Native pickers come first: people already know them on every device.",
 )
 TXT = category(
     "planning-text", "Planning text",
-    "How dates, times and durations are written. Always machine-readable (`<time datetime>`) and formatted for the reader's locale and timezone.",
+    "How dates, times and durations are written: machine-readable (`<time datetime>`) and formatted for the reader's locale and timezone.",
 )
 MRK = category(
     "planning-marks", "Planning marks",
-    "Marks drawn on calendars, schedules and timelines. Each state pairs colour with a shape, a pattern or a word.",
+    "Marks for calendars, schedules and timelines. Each state pairs colour with a shape, pattern or word.",
 )
 ICN = category(
     "planning-icons", "Planning icons",
-    "Icons for time and scheduling ideas, drawn by ORCA on the same 16px grid as the rest of the set.",
+    "Time and scheduling icons, on the same 16px grid as the rest of the set.",
 )
 
-TIME = "Format with Django's `date` filter and `TIME_FORMAT` / `DATE_FORMAT` (locale aware) after converting to the viewer's timezone (`{% load tz %}`, `{% timezone %}`)."
+TIME = "After converting to the viewer's timezone (`{% load tz %}`, `{% timezone %}`), format with Django's `date` filter and the locale-aware `TIME_FORMAT` / `DATE_FORMAT`."
 
 # ------------------------------------------------------------------ inputs
 add(Element(
@@ -25,11 +25,11 @@ add(Element(
     "A native date field (`type=\"date\"`) with ORCA styling.",
     why="The platform date picker is familiar, accessible and localised (Jakob's law, Postel's law); the guide's own advice "
         "is to prefer native date and time inputs for planning UI.",
-    when=["Picking a single day: a deadline, a report date, a holiday."],
-    avoid=["Dates people know by heart and type faster (birth dates): use the split date input (phase 2) or three numeric fields."],
+    when=["Picking one day, such as a deadline, report date or holiday."],
+    avoid=["Dates people type faster than they pick, like birth dates: use the split date input (phase 2) or three numeric fields."],
     how=["`<input class=\"orca-input\" type=\"date\" id=… name=… min=… max=…>`.",
-         "Set `min`/`max` for allowed ranges; explain the range in help text.",
-         "Prefill sensible defaults (today, next working day) rather than leaving it empty (Tesler's law).",
+         "Set `min`/`max` for the allowed range and explain it in help text.",
+         "Prefill a sensible default (today, next working day) instead of leaving it empty (Tesler's law).",
          "The server always receives ISO `YYYY-MM-DD`."],
     a11y=["Label it with the event, not the format: 'Report date', not 'dd/mm/yyyy'."],
     classes=[".orca-input[type=date]"], tokens=["bg-input"],
@@ -45,7 +45,7 @@ add(Element(
     why="Native time fields follow the reader's 12/24-hour convention automatically (Postel's law) and open the platform picker on phones (Jakob's law).",
     when=["Start and end times, reminder times, opening hours."],
     how=["`<input class=\"orca-input\" type=\"time\" step=\"900\">` (step in seconds: 900 = 15 minutes).",
-         "Show the timezone next to it with a timezone label when people may be in another zone than the place."],
+         "Add a timezone label when people may be in a different zone from the place."],
     classes=[".orca-input[type=time]"],
     laws=["postel", "jakob"],
     examples=[("Time with timezone", """<label class="orca-label" for="t1">Opens at</label>
@@ -57,7 +57,7 @@ add(Element(
     "datetime-input", "Date-time input", INP,
     "A native `datetime-local` field for one moment.",
     why="One control for one moment avoids mismatched date and time pairs (Postel's law).",
-    when=["A single event moment: when a run starts, when a link expires."],
+    when=["One moment, such as when a run starts or a link expires."],
     avoid=["Ranges: use two fields (start, end) side by side."],
     how=["`<input class=\"orca-input\" type=\"datetime-local\" step=\"60\">`. The value has no timezone: store it with the place's timezone on the server."],
     classes=[".orca-input[type=datetime-local]"],
@@ -109,7 +109,7 @@ add(Element(
     when=["Recurrence on chosen days, opening days, shift days."],
     how=["`<fieldset class=\"orca-weekday-toggles\"><legend class=\"orca-sr-only\">Repeat on</legend>` with one `<label class=\"orca-weekday\"><input type=\"checkbox\" name=\"days\" value=\"mon\"><span aria-hidden=\"true\">M</span><span class=\"orca-sr-only\">Monday</span></label>` per day.",
          "Start the week on the locale's first day (`FIRST_DAY_OF_WEEK`).", "Offer presets (Weekdays, Every day) next to it."],
-    a11y=["The visible letter is hidden from screen readers; the full day name is read."],
+    a11y=["Screen readers skip the visible letter and read the full day name."],
     classes=[".orca-weekday-toggles", ".orca-weekday"], tokens=["accent", "border-strong"],
     laws=["F03", "R11", "C03"],
     examples=[("Days", """<fieldset class="orca-weekday-toggles"><legend class="orca-label">Repeat on</legend>
@@ -120,7 +120,7 @@ add(Element(
 
 add(Element(
     "recurrence-select", "Recurrence select", INP,
-    "A select of common repeat rules with a 'Custom…' option that reveals more fields.",
+    "A select of common repeat rules, with a 'Custom…' option that shows more fields.",
     why="Most repeats are a few common rules; listing them keeps the choice quick (Hick's law) and reveals the full "
         "rule editor only when needed (Practical UI S04, Tesler's law).",
     when=["Repeating events, reports, video exports."],
@@ -159,7 +159,7 @@ add(Element(
 
 def _txt(eid, name, summary, why, when, how, example, guide, classes, laws=("postel",), avoid=()):
     add(Element(eid, name, TXT, summary, why=why, when=when, how=list(how) + [TIME], avoid=list(avoid),
-                a11y=["Wrap in `<time datetime=\"…\">` with the ISO value so assistive technology and scripts get the exact moment."],
+                a11y=["Use `<time datetime=\"…\">` with the ISO value, so assistive technology and scripts get the exact moment."],
                 classes=classes, laws=list(laws), examples=[("Example", example)], guide=[guide], source="ORCA"))
 
 
@@ -174,7 +174,7 @@ _txt("weekday-name", "Weekday name", "The day of the week as a short uppercase l
      ["Header: `<abbr class=\"orca-weekday-name\" title=\"Monday\">{{ d|date:\"D\" }}</abbr>`.", "Full: `{{ d|date:\"l\" }}`."],
      """<div class="orca-row orca-row--16"><abbr class="orca-weekday-name" title="Monday">Mon</abbr><abbr class="orca-weekday-name" title="Tuesday">Tue</abbr><span>Friday</span></div>""",
      "Weekday name", [".orca-weekday-name"], ("W07",))
-_txt("month-name", "Month name", "The month (and year) heading a calendar or a group of agenda items.",
+_txt("month-name", "Month name", "The month, with its year, heading a calendar or group of agenda items.",
      "A clear month heading orients people in time before they scan days (Miller's law).",
      ["Calendar headers, month separators in agendas and timelines."],
      ["`<h2 class=\"orca-month-name\"><time datetime=\"2026-11\">{{ d|date:\"F\" }}</time> <span class=\"orca-year\">{{ d|date:\"Y\" }}</span></h2>`.",
@@ -183,13 +183,13 @@ _txt("month-name", "Month name", "The month (and year) heading a calendar or a g
      "Month name", [".orca-month-name"], ("miller",))
 _txt("year-label", "Year label", "The year, muted, beside a month or in a year view.",
      "The year is context, not content: muting it keeps the month as the focus (Practical UI L03).",
-     ["Beside month names; year view headings; date labels outside the current year."],
+     ["Beside month names, in year view headings, and on dates outside the current year."],
      ["`<span class=\"orca-year\">2026</span>`; full-strength as a year-view heading."],
      """<span class="orca-year">2026</span>""", "Year label", [".orca-year"], ("L03",))
 _txt("week-number", "Week number", "The ISO week number, labelled.",
      "Many teams plan in weeks; showing the number avoids mental calendar arithmetic (Tesler's law).",
      ["Left column of month views, week view headers, sprint labels."],
-     ["`<span class=\"orca-week-number\" title=\"Week 45\">W45</span>` with `{{ d|date:\"W\" }}`.", "Only show where the audience uses week numbers."],
+     ["`<span class=\"orca-week-number\" title=\"Week 45\">W45</span>` with `{{ d|date:\"W\" }}`.", "Show only where the audience uses week numbers."],
      """<span class="orca-week-number" title="Week 45">W45</span>""", "Week number", [".orca-week-number"], ("tesler",))
 _txt("time-label", "Time label", "A clock time in the reader's 12- or 24-hour convention.",
      "Times must read in the convention people use, and stay aligned in columns (Postel's law, W11).",
@@ -212,7 +212,7 @@ _txt("relative-time", "Relative time label", "'2 minutes ago', 'in 3 days', with
       "Switch to an absolute date after 7 days."],
      """<time class="orca-relative-time" datetime="2026-11-06T08:14" title="6 November 2026, 08:14">2 minutes ago</time>""",
      "Relative time label", [".orca-relative-time"], ("postel",), avoid=["Logs and audit trails: use absolute times."])
-_txt("timezone-label", "Timezone label", "A small outlined abbreviation of the timezone, with the full zone in its title.",
+_txt("timezone-label", "Timezone label", "A small outlined timezone abbreviation, with the full zone in its title.",
      "When people and places are in different zones, an explicit label prevents missed meetings (Postel's law, Tesler's law).",
      ["Beside times whose zone may differ from the reader's: site schedules, shared events."],
      ["`<abbr class=\"orca-tz\" title=\"Europe/Paris (UTC+01:00)\">CET</abbr>` using `{{ t|date:\"T\" }}`.", "Hide it when every time on the page is in the reader's zone."],
@@ -228,7 +228,7 @@ _txt("countdown-label", "Countdown label", "Time left until a moment, updating l
      "announcing every second to screen readers.",
      ["Session expiry, booking holds, run start."],
      ["`<time class=\"orca-countdown\" datetime=\"2026-11-06T09:00:00Z\" data-orca-countdown role=\"timer\">15:00</time>` (orca.js updates it).",
-      "Render the initial value on the server so it reads correctly without script."],
+      "Render the starting value on the server so it works without script."],
      """<time class="orca-countdown" datetime="2030-01-01T00:00:00Z" data-orca-countdown role="timer" aria-label="Time left">–:–</time>""",
      "Countdown label", [".orca-countdown", ".orca-countdown--urgent"], ("restorff", "doherty"))
 
@@ -256,7 +256,7 @@ _mark("selected-day-marker", "Selected-day marker", "The chosen day filled with 
 _mark("outside-day-marker", "Out-of-month day marker", "Days of the previous or next month shown muted.",
       "Muting days outside the month keeps full weeks visible while keeping focus on the month (Practical UI L03).",
       ["Leading and trailing days of a month grid."],
-      ["Add `.orca-day--outside`; they stay clickable and navigate to their month."],
+      ["Add `.orca-day--outside`. They stay clickable and open their month."],
       """<button class="orca-day orca-day--outside" type="button" aria-label="31 October">31</button>""",
       "Out-of-month day marker", [".orca-day--outside"], ["text-muted"], ("L03",))
 _mark("weekend-marker", "Weekend marker", "A faint tint behind weekend days and columns.",
@@ -265,19 +265,19 @@ _mark("weekend-marker", "Weekend marker", "A faint tint behind weekend days and 
       ["`.orca-day--weekend` on days; `background: var(--orca-weekend-bg)` on columns. Weekend days follow the locale."],
       """<div class="orca-row" style="gap: 0"><button class="orca-day" type="button">6</button><button class="orca-day orca-day--weekend" type="button">7</button><button class="orca-day orca-day--weekend" type="button">8</button></div>""",
       "Weekend marker", [".orca-day--weekend"], ["weekend-bg"], ("miller",))
-_mark("holiday-marker", "Holiday marker", "A purple tint and underline mark on holidays and closed days, with the holiday's name.",
+_mark("holiday-marker", "Holiday marker", "A purple tint and underline on holidays and closed days, plus the holiday's name.",
       "Closed days change plans; tint plus a mark plus the name make them noticed and understood (C03).",
       ["Public holidays, site closures, exceptions."],
       ["`.orca-day--holiday` with `title` and an `aria-label` that include the holiday name.", "List the name in the day cell or agenda (holiday label component)."],
       """<button class="orca-day orca-day--holiday" type="button" title="Armistice Day" aria-label="11 November, Armistice Day, closed">11</button>""",
       "Holiday marker", [".orca-day--holiday"], ["holiday-bg", "purple"], ("C03",))
-_mark("event-dot", "Event dot", "A small dot that says 'there are events here' or keys an event's calendar.",
+_mark("event-dot", "Event dot", "A small dot showing a day has events, or marking an event's calendar.",
       "In small cells a dot shows presence without text (Miller's law); the count or list must be one tap away.",
       ["Mini calendars (day has events), agenda rows (calendar colour)."],
       ["`<span class=\"orca-event-dot\" style=\"--orca-event: var(--orca-chart-3)\"></span>`; on a day: `.orca-day--has-events` and say 'has events' in its label."],
       """<div class="orca-row"><span class="orca-with-icon"><span class="orca-event-dot" style="--orca-event: var(--orca-chart-3)"></span>Maintenance</span><button class="orca-day orca-day--has-events" type="button" aria-label="14 November, has events">14</button></div>""",
       "Event dot", [".orca-event-dot", ".orca-day--has-events"], ["chart-3"], ("miller",))
-_mark("event-bar", "Event bar", "A timed event in a day: tinted bar with a 3px leading edge in the calendar colour.",
+_mark("event-bar", "Event bar", "A timed event: a tinted bar with a 3px leading edge in the calendar colour.",
       "The coloured edge keys the calendar while the light tint keeps the title readable (C01); tentative events are "
       "hatched and cancelled ones struck through, so status never relies on colour (C03).",
       ["Events in month cells and week/day columns."],
@@ -354,7 +354,7 @@ _mark("drag-handle", "Drag handle", "A grip button for moving an item, usable by
        "While dragging add `.orca-is-dragging` to the item (lifted shadow)."],
       """<div class="orca-row" style="max-width: 20rem; padding: var(--orca-space-4); border: var(--orca-border-width) solid var(--orca-border)"><button class="orca-drag-handle" type="button" aria-label="Move Entrance A">{% icon "drag" %}</button>Entrance A</div>""",
       "Drag handle", [".orca-drag-handle", ".orca-is-dragging"], ["text-muted", "shadow-dragged"], ("jakob", "postel", "fitts"),
-      a11y=["Always provide a non-drag way (move up/down buttons or the keyboard flow)."])
+      a11y=["Always offer a way to move without dragging (up/down buttons or the keyboard flow)."])
 _mark("resize-handle", "Resize handle", "A grip on the edge of an event or panel that changes its length.",
       "A visible grip on the edge shows the item can be stretched (affordance); a precise field elsewhere remains the accessible way (Postel's law).",
       ["Bottom edge of events in day/week views; edges of Gantt bars (`--x`)."],
@@ -374,9 +374,9 @@ add(Element(
     when=["calendar: date fields and date navigation · clock: times and durations · repeat: recurring items · "
           "bell/alarm: reminders · timer/hourglass: countdowns and waits · flag: deadlines · pin: pinned dates · "
           "calendar-plus: add event · today: jump to today."],
-    avoid=["Using a planning icon without its word, except in icon buttons with an aria-label."],
+    avoid=["An icon without its word, except in icon buttons with an aria-label."],
     how=["`{% icon \"calendar\" %}` etc. Aliases: `bell` → notifications, `date-pin` → pin, `calendar-today` → today.",
-         "'Today' buttons should show the word 'Today'; the icon is optional."],
+         "Today buttons show the word 'Today'; the icon is optional."],
     classes=[".orca-icon"],
     laws=["jakob", "F09", "hick"],
     examples=[("Planning glyphs", "<div class=\"orca-row orca-row--16\">\n  "

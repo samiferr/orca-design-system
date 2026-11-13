@@ -1,23 +1,46 @@
 # Planning boards and timelines
 
-Seeing and steering work over time: task lists, boards, Gantt charts, roadmaps, milestones, capacity, deadlines and plan summaries.
+Show and manage work over time: task lists, boards, Gantt charts, roadmaps, milestones, capacity, deadlines and plan summaries.
 
 ## Task list
 
 `id: task-list` · level: pattern · source: ORCA
 
-Tasks grouped by status or due date, each with a checkbox, assignee, due chip and status, plus an inline add row.
+Tasks grouped by status or due date, each with checkbox, assignee, due date and status, plus a row to add more.
 
 Built from: `task-item`, `status-chip`
 
+### General description
+
+A list of things to do, each with a checkbox so people can tick them off. Tasks often show who owns them and when they are due.
+
+#### Use cases
+
+- Personal to-do lists and team checklists.
+- Showing the open steps of a project or record.
+- Tracking what is due this week.
+
+#### When not to use it
+
+- Work with several stages needs a board, not a flat list.
+- Tasks with dependencies and dates are clearer on a Gantt chart.
+
+#### Best practices
+
+- Group tasks by status or due date so the list is easy to scan.
+- Let people add a task right in the list.
+- Show who owns each task and when it is due.
+- Offer undo after a task is ticked off by mistake.
+- Put overdue tasks first.
+
 ### When to use
 
-- Personal and team to-dos, per-record tasks (a video's maintenance tasks).
+- Personal and team to-dos, and tasks tied to one record (a video's maintenance).
 
 ### How to use
 
-- `<div class="orca-task-list">` with `h3.orca-task-list__group` headings and task items; end with `.orca-task-list__add` (input + Add).
-- Ticking posts immediately (htmx) and moves the task to Done with an undo toast; sort overdue first.
+- `<div class="orca-task-list">` with `h3.orca-task-list__group` headings and task items, ending with `.orca-task-list__add` (input + Add).
+- Ticking saves at once (htmx) and moves the task to Done with an undo toast. Sort overdue tasks first.
 
 #### Example: Tasks
 
@@ -62,13 +85,36 @@ Built from: `task-item`, `status-chip`
 
 `id: kanban-board` · level: pattern · source: ORCA
 
-Columns of cards by status; cards move between columns by drag and drop or a 'Move to' menu, with work-in-progress limits.
+Status columns of cards that move by drag and drop or a 'Move to' menu, with work-in-progress limits.
 
 Built from: `board-card`, `column-header`, `dropdown-menu`
 
+### General description
+
+A board of columns, one per stage of work, with cards that move from left to right as work progresses. It makes the flow of work visible.
+
+#### Use cases
+
+- Team workflows with a few stages.
+- Support tickets, hiring pipelines or installation jobs.
+- Spotting bottlenecks where cards pile up.
+
+#### When not to use it
+
+- Hundreds of cards or many columns are hard to read; use a filtered table.
+- Work with fixed dates is better shown on a timeline.
+
+#### Best practices
+
+- Keep to a handful of columns with clear names.
+- Limit how many cards can be in progress at once.
+- Offer a non-drag way to move cards, for keyboard and touch.
+- Keep card content short: title, owner and date.
+- Show a count at the top of each column.
+
 ### When to use
 
-- Team workflows with a few stages: installation jobs, support tickets.
+- Team workflows with a few stages, such as installation jobs or support tickets.
 
 ### When not to use
 
@@ -77,7 +123,7 @@ Built from: `board-card`, `column-header`, `dropdown-menu`
 ### How to use
 
 - `<div class="orca-board" data-orca-board>` of `section.orca-board__col` each with a head (name, `[data-orca-count]` badge, `.orca-board__limit`) and `<ul class="orca-board__cards" data-orca-column="key">` of board cards with `draggable="true"` and an `id`.
-- Listen for the `orca:moved` event (`detail.id`, `from`, `to`) to save; also give each card a 'Move to' dropdown for keyboard and touch.
+- Save on the `orca:moved` event (`detail.id`, `from`, `to`). Give each card a 'Move to' dropdown for keyboard and touch.
 - Mark a column `is-over` when its count exceeds the limit.
 
 ### Accessibility
@@ -253,13 +299,36 @@ def move_task(request):
 
 `id: gantt-chart` · level: pattern · source: ORCA
 
-Tasks as bars on a time scale with progress, dependencies in order, milestones and a today line.
+Task bars on a time scale, showing progress, dependencies, milestones and a today line.
 
 Built from: `gantt-bar`, `milestone-item`
 
+### General description
+
+A chart that shows tasks as horizontal bars along a time scale. It shows when each task starts and ends, how tasks overlap and how far along they are.
+
+#### Use cases
+
+- Planning projects with dated tasks and dependencies.
+- Tracking rollouts or installations over weeks.
+- Seeing which tasks are running late.
+
+#### When not to use it
+
+- Work without dates is better on a board or task list.
+- High-level plans for stakeholders suit a roadmap.
+
+#### Best practices
+
+- Mark today with a clear line.
+- Show progress inside each bar.
+- Label late tasks with a word, not only a colour.
+- Order tasks so dependencies read top to bottom.
+- Keep the time scale short enough to read without scrolling.
+
 ### When to use
 
-- Projects with dated tasks and dependencies: rollouts, installations.
+- Projects with dated, dependent tasks, such as rollouts and installations.
 
 ### When not to use
 
@@ -268,7 +337,7 @@ Built from: `gantt-bar`, `milestone-item`
 ### How to use
 
 - `<div class="orca-gantt-chart" style="--orca-cols: 7">` with `.orca-gantt-chart__scale` (label column then period labels, `is-today`), then the Gantt rows, and `.orca-gantt-chart__today` with `--orca-at` (0–1) inside the gantt.
-- Compute bar `--orca-start` and `--orca-span` percentages in the view; late bars get the late modifier and the word 'Late'.
+- Compute the `--orca-start` and `--orca-span` percentages in the view. Late bars get the late modifier and the word 'Late'.
 
 #### Example: Week 45
 
@@ -323,9 +392,32 @@ Built from: `gantt-bar`, `milestone-item`
 
 `id: roadmap` · level: pattern · source: ORCA
 
-Themes or teams as lanes across quarters or months, with items placed in the period they are planned for.
+Lanes of themes or teams across quarters or months, with each item in its planned period.
 
 Built from: `gantt-bar`
+
+### General description
+
+A high-level plan showing what is planned for which period, such as quarters or Now, Next and Later. It shares direction without promising exact dates.
+
+#### Use cases
+
+- Sharing product or rollout plans with stakeholders.
+- Showing themes of work across the year.
+- Aligning teams on priorities.
+
+#### When not to use it
+
+- Day-level scheduling belongs on a Gantt chart.
+- A single list of to-dos belongs in a task list.
+
+#### Best practices
+
+- Use coarse periods so the plan does not promise too much.
+- Group work into lanes by theme or team.
+- Highlight the current period.
+- Keep item names short and in plain words.
+- Update it regularly so it stays trusted.
 
 ### When to use
 
@@ -386,9 +478,31 @@ Built from: `gantt-bar`
 
 `id: milestone-timeline` · level: pattern · source: ORCA
 
-Key dates on one horizontal line: reached, next and upcoming milestones with their dates.
+Key dates on one line: reached, next and upcoming milestones with their dates.
 
 Built from: `milestone-item`
+
+### General description
+
+A line of key dates that marks important points in a project, showing which are reached and which are still ahead.
+
+#### Use cases
+
+- Project overviews and status reports.
+- Onboarding or customer journeys.
+- Showing how far a rollout has come.
+
+#### When not to use it
+
+- Detailed task scheduling needs a Gantt chart.
+- A long list of dates is better shown as a deadline list.
+
+#### Best practices
+
+- Keep to a handful of milestones, about 3 to 7.
+- Show each date next to its name.
+- Make reached and upcoming milestones look different, and say which in words.
+- Point out the next milestone and how soon it is.
 
 ### When to use
 
@@ -440,9 +554,32 @@ Built from: `milestone-item`
 
 `id: period-overview` · level: pattern · source: ORCA
 
-A period's dashboard: dates and days left, goal, progress, the plan summary and the open work.
+A sprint or period at a glance: dates, days left, goal, progress, plan summary and open work.
 
 Built from: `summary-tiles`, `planning-summary`, `period-selector`, `callout`
+
+### General description
+
+A summary page for a sprint, month or other period. It shows the dates, the goal, progress and the work still open.
+
+#### Use cases
+
+- Sprint pages in software teams.
+- Monthly plans and reviews.
+- Campaign periods with a goal and a deadline.
+
+#### When not to use it
+
+- A single task list is enough when there is no goal or period.
+- Long-term direction belongs on a roadmap.
+
+#### Best practices
+
+- Show days left next to progress.
+- State the goal in one sentence.
+- Count done, open and late work separately.
+- Let people switch to the previous or next period.
+- Link each number to the tasks behind it.
 
 ### When to use
 
@@ -501,9 +638,31 @@ Built from: `summary-tiles`, `planning-summary`, `period-selector`, `callout`
 
 `id: capacity-planner` · level: pattern · source: ORCA
 
-People as rows with their booked hours per day against capacity, totals and over-allocation flagged.
+One row per person showing booked hours per day against capacity, with totals and over-allocation flagged.
 
 Built from: `resource-row`, `availability-legend`
+
+### General description
+
+A grid of people against days that shows how many hours each person is booked compared with what they can do. It makes overloaded people easy to spot.
+
+#### Use cases
+
+- Assigning tasks or shifts fairly.
+- Weekly planning meetings.
+- Checking whether a team can take on more work.
+
+#### When not to use it
+
+- Tracking tasks themselves is better in a task list or board.
+- Showing availability only is clearer in a calendar.
+
+#### Best practices
+
+- Show each person's total against their capacity.
+- Flag over-allocation with an icon and words, not only colour.
+- Show hours per day, not only a weekly total.
+- Include each person's role for context.
 
 ### When to use
 
@@ -569,9 +728,31 @@ Built from: `resource-row`, `availability-legend`
 
 `id: deadline-list` · level: pattern · source: ORCA
 
-Upcoming deadlines grouped into Overdue, This week and Later, each with its date and time left.
+Deadlines grouped as Overdue, This week and Later, each with its date and time left.
 
 Built from: `deadline-item`
+
+### General description
+
+A list of upcoming due dates, usually grouped as overdue, this week and later. It helps people see what needs attention first.
+
+#### Use cases
+
+- Dashboards and record sidebars.
+- Compliance and renewal tracking.
+- Reminding people what is due soon.
+
+#### When not to use it
+
+- Work with many stages is better on a board.
+- Events at a set time belong in a calendar.
+
+#### Best practices
+
+- Put overdue items first and mark them clearly.
+- Show relative times like 'in 3 days' next to the date.
+- Group by urgency, not by date alone.
+- Keep each row to a name, a date and a state.
 
 ### When to use
 
@@ -636,9 +817,31 @@ Built from: `deadline-item`
 
 `id: planning-summary` · level: pattern · source: ORCA
 
-Planned against done for each team, person or category as paired bars with the numbers.
+Paired bars comparing planned with done for each team, person or category, with the numbers.
 
 Built from: `legend-item`
+
+### General description
+
+A summary that compares what was planned with what was done, usually as paired bars with numbers, for each team, person or category.
+
+#### Use cases
+
+- Sprint reviews and monthly reports.
+- Checking whether plans are realistic.
+- Comparing workload across people or teams.
+
+#### When not to use it
+
+- Trends over many periods are better shown in a line chart.
+- A single progress figure only needs a progress bar.
+
+#### Best practices
+
+- Show the numbers as well as the bars.
+- Use outline and fill, not only colour, to tell planned from done.
+- Scale all bars against the same maximum.
+- Label each bar with a name.
 
 ### When to use
 
@@ -691,9 +894,31 @@ Built from: `legend-item`
 
 `id: plan-filter-bar` · level: pattern · source: ORCA
 
-Above a plan: the period shown, the applied assignee and status filters as removable chips, and the number of results.
+A bar above a plan showing the period, applied assignee and status filters as removable chips, and the result count.
 
 Built from: `filter-bar`, `period-selector`
+
+### General description
+
+A bar above a plan that shows the period being viewed and the filters applied, with a count of results. It keeps the plan's current view clear.
+
+#### Use cases
+
+- Above task lists, boards and Gantt charts.
+- Narrowing a plan by period, person or status.
+- Showing which filters are currently active.
+
+#### When not to use it
+
+- Pages with no filters do not need it.
+- Many filters at once belong in a filter panel.
+
+#### Best practices
+
+- Show applied filters as chips that can be removed one by one.
+- Offer one 'Clear all' action.
+- Show the number of results.
+- Keep the period control always visible.
 
 ### When to use
 
@@ -701,7 +926,7 @@ Built from: `filter-bar`, `period-selector`
 
 ### How to use
 
-- A row with the period selector, then the applied filters as removable chips with 'Clear all', and the results count announced politely.
+- A row with the period selector, the applied filters as removable chips with 'Clear all', and a result count announced politely.
 - Assignee and status are chosen in the `filter-drawer`, opened by the Filters button in the page actions.
 
 #### Example: Plan filters
@@ -739,9 +964,31 @@ Built from: `filter-bar`, `period-selector`
 
 `id: date-range-filter-bar` · level: pattern · source: ORCA
 
-A period filter for reports and plans: quick presets plus a custom from–to range, showing the chosen dates.
+A period filter for reports and plans: quick presets or a custom from–to range, with the chosen dates shown.
 
 Built from: `date-range-picker`, `filter-bar`
+
+### General description
+
+A control for choosing a time period, with quick presets such as 'last 30 days' and a custom start and end date.
+
+#### Use cases
+
+- Filtering reports and charts by period.
+- Choosing the dates of a plan view.
+- Setting the range of an export.
+
+#### When not to use it
+
+- Picking a single date is simpler with a date picker.
+- Filtering by something other than time needs a regular filter.
+
+#### Best practices
+
+- Put common presets first.
+- Always show the exact dates chosen.
+- Use a clear format for dates.
+- Reveal the custom range only when asked.
 
 ### When to use
 
@@ -750,7 +997,7 @@ Built from: `date-range-picker`, `filter-bar`
 ### How to use
 
 - A filter bar with preset buttons (`aria-pressed`), a date range picker revealed by 'Custom', and the resolved dates; submit as `?from=…&to=…`.
-- The period is a view control and stays visible; any other filter of the page goes in the filter drawer.
+- The period is a view control and stays visible; other page filters go in the filter drawer.
 
 #### Example: Period
 
