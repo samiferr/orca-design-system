@@ -31,7 +31,7 @@ the tokens and classes it uses, the UX principles it applies, and a copy-ready t
 ## Install
 
 ```bash
-pip install git+https://github.com/samiferr/orca-design-system.git
+pip install orca-design-system
 ```
 
 ```python

@@ -1,0 +1,61 @@
+name: Release to PyPI
+
+# On every commit to main: test, bump the patch version, commit the bump back,
+# tag it, build and upload to PyPI with the PYPI_API_TOKEN repository secret.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version part to bump
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+
+permissions:
+  contents: write
+
+# One release at a time so two pushes never compute the same version.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    # The bump commit is pushed with GITHUB_TOKEN (which does not retrigger workflows);
+    # this guard is a second safety net against a release loop.
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main # latest main, not the triggering SHA, so queued runs never push a stale tree
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e . build twine
+      - name: Test
+        run: python -m django test tests --settings=tests.settings
+      - name: Bump version
+        id: bump
+        run: echo "version=$(python .github/scripts/bump_version.py "${{ inputs.bump || 'patch' }}")" >> "$GITHUB_OUTPUT"
+      - name: Build
+        run: python -m build
+      - name: Check distributions
+        run: twine check dist/*
+      - name: Upload to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*
+      - name: Commit the bump and tag it
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pyproject.toml orca/__init__.py
+          git commit -m "chore(release): v${{ steps.bump.outputs.version }}"
+          git tag "v${{ steps.bump.outputs.version }}"
+          git push origin main --follow-tags
