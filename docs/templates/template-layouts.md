@@ -10,10 +10,6 @@ The root every ORCA page extends: the html element with language, theme and dens
 
 Built from: `page-landmarks`
 
-### Why
-
-Every page needs the same document skeleton, and getting it slightly wrong breaks accessibility (no language, no skip link) or causes a flash of the wrong theme. One base removes that whole class of mistakes (Tesler's law).
-
 ### When to use
 
 - Directly only for pages with no ORCA chrome (a print view, an embed); otherwise extend the app shell, auth, error, marketing or docs layout.
@@ -36,9 +32,23 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 #### Example: Usage
 
 ```django
-{% templatetag openblock %} extends "orca/layouts/base.html" {% templatetag closeblock %}
-{% templatetag openblock %} block title {% templatetag closeblock %}Print view{% templatetag openblock %} endblock {% templatetag closeblock %}
-{% templatetag openblock %} block content {% templatetag closeblock %}…{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% templatetag openblock %}
+extends "orca/layouts/base.html"
+{% templatetag closeblock %}
+{% templatetag openblock %}
+block title
+{% templatetag closeblock %}
+Print view
+{% templatetag openblock %}
+endblock
+{% templatetag closeblock %}
+{% templatetag openblock %}
+block content
+{% templatetag closeblock %}
+…
+{% templatetag openblock %}
+endblock
+{% templatetag closeblock %}
 ```
 
 ### Server code
@@ -74,10 +84,6 @@ The application frame: top bar with brand, sidebar navigation that collapses to 
 
 Built from: `top-bar`, `sidebar`, `page-head`, `messages-region`
 
-### Why
-
-People learn an application's frame once and then only read what changes (Jakob's law). A fixed place for title, actions and messages makes every page scannable in the same order (Practical UI L03), and the collapsible sidebar gives dense screens their space back.
-
 ### When to use
 
 - Every signed-in page of an application: lists, details, forms, dashboards, calendars.
@@ -109,12 +115,32 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 #### Example: Child template
 
 ```django
-{% extends "orca/layouts/app.html" %}{% load orca %}
-{% block page_actions %}<button class="orca-button" type="button">Secondary action</button><a class="orca-button orca-button--primary orca-create" href="#">{% icon "plus" %}Main action</a>{% endblock %}
-{% block content %}<div class="orca-vstack">
-  <section class="orca-panel" aria-label="Section"><div class="orca-skeleton orca-skeleton--title" style="max-width: 16rem"></div><div class="orca-skeleton orca-skeleton--text"></div><div class="orca-skeleton orca-skeleton--text" style="max-width: 70%"></div></section>
-  <div class="orca-two-col"><section class="orca-panel" aria-label="Section"><div class="orca-skeleton orca-aspect-16x9"></div></section><section class="orca-panel" aria-label="Section"><div class="orca-skeleton orca-aspect-16x9"></div></section></div>
-</div>{% endblock %}
+{% extends "orca/layouts/app.html" %}
+{% load orca %}
+{% block page_actions %}
+  <button class="orca-button" type="button">Secondary action</button>
+  <a class="orca-button orca-button--primary orca-create" href="#">
+    {% icon "plus" %}
+    Main action
+  </a>
+{% endblock %}
+{% block content %}
+  <div class="orca-vstack">
+    <section class="orca-panel" aria-label="Section">
+      <div class="orca-skeleton orca-skeleton--title" style="max-width: 16rem"></div>
+      <div class="orca-skeleton orca-skeleton--text"></div>
+      <div class="orca-skeleton orca-skeleton--text" style="max-width: 70%"></div>
+    </section>
+    <div class="orca-two-col">
+      <section class="orca-panel" aria-label="Section">
+        <div class="orca-skeleton orca-aspect-16x9"></div>
+      </section>
+      <section class="orca-panel" aria-label="Section">
+        <div class="orca-skeleton orca-aspect-16x9"></div>
+      </section>
+    </div>
+  </div>
+{% endblock %}
 ```
 
 ### Server code
@@ -172,10 +198,6 @@ A centred card on the alternate ground for sign-in, password reset and other pag
 
 Built from: `login-card`
 
-### Why
-
-Before sign-in people should see one task and nothing to wander off to (Hick's law); the brand on the card confirms they are in the right place (Practical UI C08).
-
 ### When to use
 
 - Sign in, sign out, password reset and change, locked-out and invitation pages.
@@ -199,8 +221,15 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/auth.html" %}
-{% block form_extra %}<div class="orca-login__row"><label class="orca-check"><input type="checkbox" name="remember"><span class="orca-check__box"></span>Keep me signed in</label><a class="orca-link orca-small" href="#">Forgot your password?</a></div>{% endblock %}
-{% block footer %}<p class="orca-login__foot">No account? Ask your administrator.</p>{% endblock %}
+{% block form_extra %}
+  <div class="orca-login__row">
+    <label class="orca-check"><input type="checkbox" name="remember"><span class="orca-check__box"></span>Keep me signed in</label>
+    <a class="orca-link orca-small" href="#">Forgot your password?</a>
+  </div>
+{% endblock %}
+{% block footer %}
+  <p class="orca-login__foot">No account? Ask your administrator.</p>
+{% endblock %}
 ```
 
 ### Server code
@@ -242,10 +271,6 @@ The page frame of every transactional email: brand bar, title, paragraphs, one a
 
 Built from: `email-frame`
 
-### Why
-
-Email clients ignore stylesheets, so the layout is tables with inline hex colours computed from the brand (Postel's law). One template keeps every email recognisable (Jakob's law).
-
 ### When to use
 
 - Every email the project sends.
@@ -268,7 +293,10 @@ Blocks: `title`, `preheader`, `brand`, `heading`, `content`, `action`, `footer`
 
 ```django
 {% extends "orca/email/base.html" %}
-{% block footer %}{{ footer }} <a href="#">Email settings</a>{% endblock %}
+{% block footer %}
+  {{ footer }}
+  <a href="#">Email settings</a>
+{% endblock %}
 ```
 
 ### Server code
@@ -314,10 +342,6 @@ def send_offline_alert(video, recipients):
 
 Built from: `error-message`
 
-### Why
-
-An error page is the low point of a visit; saying plainly what happened and offering the way out limits the damage (Peak–end rule, Practical UI W15).
-
 ### When to use
 
 - Your project's `templates/403.html`, `404.html` and `500.html`.
@@ -355,10 +379,6 @@ The page people land on after signing in: a greeting, a stat grid, a main column
 
 Built from: `app-shell`, `kpi-grid`, `activity-feed`
 
-### Why
-
-The first screen should answer 'is everything all right, and what needs me?' (Peak–end rule); stats first and shortcuts to frequent tasks shorten every visit (Fitts's law).
-
 ### When to use
 
 - The start page of an application.
@@ -386,9 +406,22 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/home.html" %}
-{% block page_subtitle %}<p class="orca-page-subtitle">Here is what changed since yesterday.</p>{% endblock %}
-{% block home_main %}<section class="orca-panel" aria-labelledby="h-recent"><h2 class="orca-panel-title" id="h-recent">Recent activity</h2>
-  <div class="orca-vstack orca-vstack--tight">{% for i in "123" %}<div class="orca-activity"><span class="orca-avatar orca-avatar--s" aria-hidden="true">PN</span><div class="orca-activity__head"><strong>Person name</strong> changed Record name {{ i }}<time class="orca-activity__time">{{ i }} h ago</time></div></div>{% endfor %}</div></section>{% endblock %}
+{% block page_subtitle %}
+  <p class="orca-page-subtitle">Here is what changed since yesterday.</p>
+{% endblock %}
+{% block home_main %}
+  <section class="orca-panel" aria-labelledby="h-recent">
+    <h2 class="orca-panel-title" id="h-recent">Recent activity</h2>
+    <div class="orca-vstack orca-vstack--tight">
+      {% for i in "123" %}
+        <div class="orca-activity">
+          <span class="orca-avatar orca-avatar--s" aria-hidden="true">PN</span>
+          <div class="orca-activity__head"><strong>Person name</strong> changed Record name {{ i }}<time class="orca-activity__time">{{ i }} h ago</time></div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
 ```
 
 ### Server code
@@ -432,10 +465,6 @@ A centred column of posts with skeleton posts while more load, and an empty stat
 
 Built from: `photo-post`, `loading-placeholder`, `no-results`
 
-### Why
-
-A narrow column keeps photos and captions at a readable width (Practical UI T09); skeletons that match the post shape make loading feel faster and stop the page jumping (Doherty threshold).
-
 ### When to use
 
 - Photo and update feeds, timelines of posts.
@@ -464,7 +493,8 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/feed.html" %}
-{% block page_head %}{% endblock %}
+{% block page_head %}
+{% endblock %}
 ```
 
 ### Server code
@@ -507,10 +537,6 @@ A grid of people cards: avatar, name, role and a contact action.
 
 Built from: `card-grid-layout`
 
-### Why
-
-Faces and names in a regular grid are found by recognition rather than reading (Practical UI L11); the same card for everyone keeps it scannable (Jakob's law).
-
 ### When to use
 
 - Team pages, members of a site or project, directories.
@@ -538,7 +564,9 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/people.html" %}
-{% block page_actions %}<a class="orca-button orca-button--primary" href="#">Invite people</a>{% endblock %}
+{% block page_actions %}
+  <a class="orca-button orca-button--primary" href="#">Invite people</a>
+{% endblock %}
 ```
 
 ### Server code
@@ -581,10 +609,6 @@ The public site frame: site header with navigation and actions, full-width secti
 
 Built from: `site-header`, `marketing-hero`, `feature-grid`, `footer`
 
-### Why
-
-Public pages are scanned, not used: a familiar header, generous sections and a footer of links meet expectations (Jakob's law, Aesthetic–usability effect). One primary call to action per screen (Von Restorff).
-
 ### When to use
 
 - Landing, product, pricing and other public pages.
@@ -607,14 +631,40 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 #### Example: Child template
 
 ```django
-{% extends "orca/layouts/marketing.html" %}{% load orca static %}
-{% block header_actions %}<a class="orca-button orca-button--ghost" href="#">Sign in</a><a class="orca-button orca-button--brand" href="#">Main action</a>{% endblock %}
+{% extends "orca/layouts/marketing.html" %}
+{% load orca static %}
+{% block header_actions %}
+  <a class="orca-button orca-button--ghost" href="#">Sign in</a>
+  <a class="orca-button orca-button--brand" href="#">Main action</a>
+{% endblock %}
 {% block content %}
-<section class="orca-marketing-hero"><div class="orca-hero">
-  <div class="orca-hero__text"><p class="orca-card-kicker">Kicker</p><h1 class="orca-hero__title">Headline: the benefit in under ten words.</h1><p class="orca-hero__lead">Lead: one or two sentences that explain the headline.</p>
-    <div class="orca-row"><a class="orca-button orca-button--brand" href="#">Main action</a><a class="orca-button" href="#">Second action</a></div></div>
-  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="Product picture"></div></div></section>
-<div class="orca-container"><ul class="orca-feature-grid">{% for i in "123" %}<li class="orca-feature">{% icon "success" size="l" %}<h2 class="orca-feature__title">Feature title</h2><p class="orca-feature__text">One sentence about the feature and its benefit.</p></li>{% endfor %}</ul></div>
+  <section class="orca-marketing-hero">
+    <div class="orca-hero">
+      <div class="orca-hero__text">
+        <p class="orca-card-kicker">Kicker</p>
+        <h1 class="orca-hero__title">Headline: the benefit in under ten words.</h1>
+        <p class="orca-hero__lead">Lead: one or two sentences that explain the headline.</p>
+        <div class="orca-row">
+          <a class="orca-button orca-button--brand" href="#">Main action</a>
+          <a class="orca-button" href="#">Second action</a>
+        </div>
+      </div>
+      <div class="orca-hero__media">
+        <img src="{% static "orca/img/sample-street.svg" %}" alt="Product picture">
+      </div>
+    </div>
+  </section>
+  <div class="orca-container">
+    <ul class="orca-feature-grid">
+      {% for i in "123" %}
+        <li class="orca-feature">
+          {% icon "success" size="l" %}
+          <h2 class="orca-feature__title">Feature title</h2>
+          <p class="orca-feature__text">One sentence about the feature and its benefit.</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
 ```
 
@@ -656,10 +706,6 @@ A long-form page that reads well: breadcrumbs, title, introduction, version and 
 
 Built from: `docs-page-header`, `table-of-contents`, `top-bar`
 
-### Why
-
-Long text is read, not scanned: a front-loaded introduction (Practical UI W05), a line length near 70 characters (T09) and a contents column that shows where you are (Miller's law) let people read comfortably on any screen, and a centred column never stretches across a large window. Version and last update tell the reader whether to trust the page.
-
 ### When to use
 
 - Articles, guides, documentation pages, release notes, case studies and policies: any page that is mostly sections of text.
@@ -686,20 +732,27 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/blog.html" %}
-{% block blog_body %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-one">
-  <h2 class="orca-section-title" id="section-one">Section one</h2>
-  <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs; the column stays about 70 characters wide, however large the window.</p>
-  <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
-</section>
-<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-two">
-  <h2 class="orca-section-title" id="section-two">Section two</h2>
-  <p class="orca-p">Each section starts with an <code class="orca-code">h2</code> that has an <code class="orca-code">id</code>, so the contents column can link to it.</p>
-  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>
-</section>
-<section class="orca-vstack orca-vstack--tight" aria-labelledby="section-three">
-  <h2 class="orca-section-title" id="section-three">Section three</h2>
-  <p class="orca-p">Close with what to do next.</p>
-</section>{% endblock %}
+{% block blog_body %}
+  <section class="orca-vstack orca-vstack--tight" aria-labelledby="section-one">
+    <h2 class="orca-section-title" id="section-one">Section one</h2>
+    <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs; the column stays about 70 characters wide, however large the window.</p>
+    <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
+  </section>
+  <section class="orca-vstack orca-vstack--tight" aria-labelledby="section-two">
+    <h2 class="orca-section-title" id="section-two">Section two</h2>
+    <p class="orca-p">Each section starts with an <code class="orca-code">h2</code> that has an <code class="orca-code">id</code>, so the contents column can link to it.</p>
+    <div class="orca-code-block">
+      <div class="orca-code-block__head">
+        <span>Shell</span>
+      </div>
+      <pre><code>pip install example</code></pre>
+    </div>
+  </section>
+  <section class="orca-vstack orca-vstack--tight" aria-labelledby="section-three">
+    <h2 class="orca-section-title" id="section-three">Section three</h2>
+    <p class="orca-p">Close with what to do next.</p>
+  </section>
+{% endblock %}
 ```
 
 ### Server code
@@ -743,10 +796,6 @@ The Blog page with a documentation sidebar: a filter and a page tree on the left
 
 Built from: `docs-sidebar`, `docs-page-header`, `top-bar`
 
-### Why
-
-Documentation readers both browse and look up (Miller's law, Hick's law): a filterable tree supports both, and the Blog page's measured reading column keeps long text comfortable (Practical UI T09, W05).
-
 ### When to use
 
 - Product documentation, help centres, internal handbooks.
@@ -770,15 +819,22 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/docs.html" %}
-{% block blog_body %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="s-one">
-  <h2 class="orca-section-title" id="s-one">Section heading</h2>
-  <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>
-  <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
-</section>
-<section class="orca-vstack orca-vstack--tight" aria-labelledby="s-two">
-  <h2 class="orca-section-title" id="s-two">Another section</h2>
-  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code>pip install example</code></pre></div>
-</section>{% endblock %}
+{% block blog_body %}
+  <section class="orca-vstack orca-vstack--tight" aria-labelledby="s-one">
+    <h2 class="orca-section-title" id="s-one">Section heading</h2>
+    <p class="orca-p">Body text of the page. Keep paragraphs short and lead with what the reader needs.</p>
+    <p class="orca-p">More body text, with <code class="orca-code">inline code</code> and a <a class="orca-link" href="#">link to another page</a>.</p>
+  </section>
+  <section class="orca-vstack orca-vstack--tight" aria-labelledby="s-two">
+    <h2 class="orca-section-title" id="s-two">Another section</h2>
+    <div class="orca-code-block">
+      <div class="orca-code-block__head">
+        <span>Shell</span>
+      </div>
+      <pre><code>pip install example</code></pre>
+    </div>
+  </section>
+{% endblock %}
 ```
 
 ### Server code
@@ -825,10 +881,6 @@ class DocsPage(TemplateView):
 A list page from a ListView: title and Add button, optional filter panel, list header with count and search, a table that becomes cards on phones, pagination and the right empty state.
 
 Built from: `app-shell`, `list-header`, `data-table`, `filter-drawer`, `no-results`
-
-### Why
-
-Most screens of a business application are lists; one template that is always right (sortable header, row actions, empty and no-match states, phone cards) removes repeated decisions and keeps every list familiar (Jakob's law, Tesler's law).
 
 ### When to use
 
@@ -1025,10 +1077,6 @@ A record page from a DetailView: title, Edit and Delete actions, and the record'
 
 Built from: `app-shell`, `detail-panel`
 
-### Why
-
-Details read top to bottom as label and value pairs (Practical UI L01); Edit and Delete in the same place on every record make them findable without searching (Jakob's law).
-
 ### When to use
 
 - Any DetailView: one record with its properties.
@@ -1056,8 +1104,14 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 #### Example: Child template
 
 ```django
-{% extends "orca/generic/detail.html" %}{% load orca %}
-{% block detail_extra %}<section class="orca-panel" aria-labelledby="d-notes"><h2 class="orca-panel-title" id="d-notes">Related section</h2><p class="orca-p orca-muted">Extra panels go in the detail_extra block.</p></section>{% endblock %}
+{% extends "orca/generic/detail.html" %}
+{% load orca %}
+{% block detail_extra %}
+  <section class="orca-panel" aria-labelledby="d-notes">
+    <h2 class="orca-panel-title" id="d-notes">Related section</h2>
+    <p class="orca-p orca-muted">Extra panels go in the detail_extra block.</p>
+  </section>
+{% endblock %}
 ```
 
 ### Server code
@@ -1163,10 +1217,6 @@ urlpatterns = [
 A create or edit page from a CreateView or UpdateView: one column of ORCA fields with the error summary and Save and Cancel.
 
 Built from: `app-shell`, `narrow-form`
-
-### Why
-
-One column is the fastest form to fill (Practical UI R01); the error summary and inline errors from `orca_form_errors` and `orca_field` make every form recover the same way (W15).
 
 ### When to use
 
@@ -1302,10 +1352,6 @@ The delete confirmation from a DeleteView: what will be deleted, what is kept, a
 
 Built from: `app-shell`, `confirm-action-panel`, `delete-blocked-notice`
 
-### Why
-
-Deleting is the most costly mistake, so friction scales with it (Practical UI B13): consequences in words, the danger button named after the action. When related records protect it, saying which ones turns a dead end into a task (W15).
-
 ### When to use
 
 - Any DeleteView; any page confirming a destructive action.
@@ -1440,10 +1486,6 @@ A confirmation page for any consequential action that is not a delete: archive, 
 
 Built from: `app-shell`, `confirm-action-panel`
 
-### Why
-
-A separate page with the consequences listed gives people a moment to check (Practical UI B13) without the alarm of a danger colour when nothing is lost.
-
 ### When to use
 
 - Actions with wide effects that need a second look: send to everyone, disable a site, start a long run.
@@ -1527,10 +1569,6 @@ The frame shared by every page of a parent record: its title and actions, option
 
 Built from: `parent-child-tabs`
 
-### Why
-
-Keeping the parent's header and tabs fixed while the tab content changes tells people where they are and what else the record holds (Practical UI L05, Jakob's law).
-
 ### When to use
 
 - Records that own other records: a site and its videos, a project and its tasks.
@@ -1561,7 +1599,13 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/generic/parent_base.html" %}
-{% block child_content %}<section class="orca-panel" aria-label="Tab content"><div class="orca-skeleton orca-skeleton--title" style="max-width: 14rem"></div><div class="orca-skeleton orca-skeleton--text"></div><div class="orca-skeleton orca-skeleton--text" style="max-width: 60%"></div></section>{% endblock %}
+{% block child_content %}
+  <section class="orca-panel" aria-label="Tab content">
+    <div class="orca-skeleton orca-skeleton--title" style="max-width: 14rem"></div>
+    <div class="orca-skeleton orca-skeleton--text"></div>
+    <div class="orca-skeleton orca-skeleton--text" style="max-width: 60%"></div>
+  </section>
+{% endblock %}
 ```
 
 ### Server code
@@ -1633,10 +1677,6 @@ class AlbumVideos(AlbumTabs, ListView):
 The parent's Overview tab: its fields as a key–value list, with room for more overview panels.
 
 Built from: `parent-base`, `detail-panel`
-
-### Why
-
-The overview answers 'what is this record' before any child list (Practical UI W04), so the first tab is always the parent itself.
 
 ### When to use
 
@@ -1737,10 +1777,6 @@ class AlbumVideos(AlbumTabs, ListView):
 A child list inside a parent tab: header with count and 'Add … to parent', the table, pagination and an empty state naming the parent.
 
 Built from: `parent-base`, `child-list-tab`
-
-### Why
-
-Naming the parent in the add button and the empty state ('No videos for North building') removes any doubt about where a new record goes (Practical UI W04, B10).
 
 ### When to use
 
@@ -1844,10 +1880,6 @@ One child record inside its parent's tab: a back link to the list, Edit and Dele
 
 Built from: `parent-base`, `top-actions-header`, `detail-panel`
 
-### Why
-
-The back link and the parent's header keep the path home visible (Jakob's law); the child's own actions sit next to its title (Practical UI L14).
-
 ### When to use
 
 - Opening a child record without leaving its parent.
@@ -1949,10 +1981,6 @@ Create or edit a child inside its parent's tab, with a heading that names the pa
 
 Built from: `parent-base`, `form-stack`
 
-### Why
-
-A form that says 'Add video to North building' cannot be misread (Practical UI W04), and the parent's tabs stay one click away.
-
 ### When to use
 
 - Adding and editing child records.
@@ -2053,10 +2081,6 @@ class AlbumVideos(AlbumTabs, ListView):
 Confirm removing a child from its parent, or explain what blocks it.
 
 Built from: `parent-base`, `confirm-action-panel`, `delete-blocked-notice`
-
-### Why
-
-The question names both records ('Remove Gate 1 from Warehouse?') so the consequence is clear (Practical UI B13, W04).
 
 ### When to use
 

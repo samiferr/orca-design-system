@@ -10,10 +10,6 @@ Related buttons joined into one control, or spaced as a set.
 
 Built from: `button`
 
-### Why
-
-Joining buttons shows they act on the same thing (Practical UI L01: common region); spacing keeps dangerous neighbours apart (Fitts's law).
-
 ### When to use
 
 - Joined: alternatives on one object (Zoom in, Zoom out, Reset).
@@ -32,8 +28,19 @@ Joining buttons shows they act on the same thing (Practical UI L01: common regio
 
 ```django
 <div class="orca-row orca-row--16">
-  <div class="orca-button-group" role="group" aria-label="Zoom"><button class="orca-button orca-button--dense" type="button" aria-label="Zoom out">{% icon "minus" %}</button><button class="orca-button orca-button--dense" type="button">100%</button><button class="orca-button orca-button--dense" type="button" aria-label="Zoom in">{% icon "plus" %}</button></div>
-  <div class="orca-button-group orca-button-group--spaced" role="group" aria-label="Report"><button class="orca-button" type="button">Export CSV</button><button class="orca-button" type="button">Schedule</button></div>
+  <div class="orca-button-group" role="group" aria-label="Zoom">
+    <button class="orca-button orca-button--dense" type="button" aria-label="Zoom out">
+      {% icon "minus" %}
+    </button>
+    <button class="orca-button orca-button--dense" type="button">100%</button>
+    <button class="orca-button orca-button--dense" type="button" aria-label="Zoom in">
+      {% icon "plus" %}
+    </button>
+  </div>
+  <div class="orca-button-group orca-button-group--spaced" role="group" aria-label="Report">
+    <button class="orca-button" type="button">Export CSV</button>
+    <button class="orca-button" type="button">Schedule</button>
+  </div>
 </div>
 ```
 
@@ -52,10 +59,6 @@ Joining buttons shows they act on the same thing (Practical UI L01: common regio
 A button that opens a list of actions.
 
 Built from: `button`, `dropdown-item`
-
-### Why
-
-Rare or secondary actions go behind one button so the screen keeps one clear priority (Hick's law, Practical UI S04), while staying one click away.
 
 ### When to use
 
@@ -80,13 +83,36 @@ Rare or secondary actions go behind one button so the screen keeps one clear pri
 
 ```django
 <div class="orca-anchor">
-  <button class="orca-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="dm-1" data-orca-menu>Actions{% icon "chevron-down" %}</button>
+  <button class="orca-button" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="dm-1" data-orca-menu>
+    Actions
+    {% icon "chevron-down" %}
+  </button>
   <ul class="orca-popover" role="menu" id="dm-1" hidden>
-    <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "edit" %}Rename</button></li>
-    <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "copy" %}Duplicate</button></li>
-    <li role="none"><a class="orca-menu__item" role="menuitem" href="#">{% icon "external-link" %}Open stream</a></li>
+    <li role="none">
+      <button class="orca-menu__item" role="menuitem" type="button">
+        {% icon "edit" %}
+        Rename
+      </button>
+    </li>
+    <li role="none">
+      <button class="orca-menu__item" role="menuitem" type="button">
+        {% icon "copy" %}
+        Duplicate
+      </button>
+    </li>
+    <li role="none">
+      <a class="orca-menu__item" role="menuitem" href="#">
+        {% icon "external-link" %}
+        Open stream
+      </a>
+    </li>
     <li role="separator" class="orca-menu__separator"></li>
-    <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete</button></li>
+    <li role="none">
+      <button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">
+        {% icon "delete" %}
+        Delete
+      </button>
+    </li>
   </ul>
 </div>
 ```
@@ -107,10 +133,6 @@ One action in a menu: icon, label, optional description or shortcut; danger and 
 
 Built from: `icon`, `kbd`
 
-### Why
-
-Consistent rows with a leading icon and a verb are scanned fast (Miller's law); a description removes doubt about what an item does (Practical UI W04).
-
 ### When to use
 
 - Every row of a dropdown menu.
@@ -125,10 +147,31 @@ Consistent rows with a leading icon and a verb are scanned fast (Miller's law); 
 
 ```django
 <ul class="orca-popover" role="menu" style="position: static; display: block" aria-label="Example items">
-  <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "copy" %}Copy link<kbd class="orca-kbd">Ctrl C</kbd></button></li>
-  <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "upload" %}<span class="orca-menu__text">Export<span class="orca-menu__desc">CSV with one row per hour</span></span></button></li>
-  <li role="none"><button class="orca-menu__item" role="menuitem" type="button" aria-disabled="true">{% icon "archive" %}<span class="orca-menu__text">Archive<span class="orca-menu__desc">Stop the run first</span></span></button></li>
-  <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete</button></li>
+  <li role="none">
+    <button class="orca-menu__item" role="menuitem" type="button">
+      {% icon "copy" %}
+      Copy link
+      <kbd class="orca-kbd">Ctrl C</kbd>
+    </button>
+  </li>
+  <li role="none">
+    <button class="orca-menu__item" role="menuitem" type="button">
+      {% icon "upload" %}
+      <span class="orca-menu__text">Export<span class="orca-menu__desc">CSV with one row per hour</span></span>
+    </button>
+  </li>
+  <li role="none">
+    <button class="orca-menu__item" role="menuitem" type="button" aria-disabled="true">
+      {% icon "archive" %}
+      <span class="orca-menu__text">Archive<span class="orca-menu__desc">Stop the run first</span></span>
+    </button>
+  </li>
+  <li role="none">
+    <button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">
+      {% icon "delete" %}
+      Delete
+    </button>
+  </li>
 </ul>
 ```
 
@@ -148,10 +191,6 @@ A value with a Copy button that confirms 'Copied' in place and for screen reader
 
 Built from: `button`, `code-text`
 
-### Why
-
-Copying exact values (keys, addresses) by hand causes errors; one click with visible confirmation is faster and certain (Doherty threshold, Tesler's law).
-
 ### When to use
 
 - IDs, API keys, addresses, links, commands.
@@ -164,7 +203,14 @@ Copying exact values (keys, addresses) by hand causes errors; one click with vis
 #### Example: Copy a stream address
 
 ```django
-<div class="orca-copy"><code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code><button class="orca-button" type="button" data-orca-copy="cp-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div>
+<div class="orca-copy">
+  <code class="orca-copy__value" id="cp-1">https://media.example.com/v/4821</code>
+  <button class="orca-button" type="button" data-orca-copy="cp-1">
+    {% icon "copy" class="orca-icon--copy" %}
+    {% icon "check" class="orca-icon--copied" %}
+    <span data-orca-copy-label>Copy</span>
+  </button>
+</div>
 ```
 
 **Classes:** `.orca-copy`, `.orca-copy__value`, `.orca-icon--copy`, `.orca-icon--copied`
@@ -183,10 +229,6 @@ On a record's page: one visible main action and a 'More actions' menu for the re
 
 Built from: `icon-button`, `dropdown-menu`
 
-### Why
-
-One visible action keeps the decision simple (Hick's law, Practical UI B03); the overflow menu keeps the rest reachable without crowding the header.
-
 ### When to use
 
 - The header of detail pages and cards with several actions.
@@ -200,13 +242,33 @@ One visible action keeps the decision simple (Hick's law, Practical UI B03); the
 
 ```django
 <div class="orca-record-actions orca-anchor">
-  <a class="orca-button" href="#">{% icon "edit" %}Edit video</a>
-  <button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A" aria-haspopup="menu" aria-expanded="false" aria-controls="ra-menu" data-orca-menu>{% icon "more" %}</button>
+  <a class="orca-button" href="#">
+    {% icon "edit" %}
+    Edit video
+  </a>
+  <button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="More actions for Entrance A" aria-haspopup="menu" aria-expanded="false" aria-controls="ra-menu" data-orca-menu>
+    {% icon "more" %}
+  </button>
   <ul class="orca-popover orca-popover--end" role="menu" id="ra-menu" hidden>
-    <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "pin" %}Pin to dashboard</button></li>
-    <li role="none"><button class="orca-menu__item" role="menuitem" type="button">{% icon "restart" %}Restart stream</button></li>
+    <li role="none">
+      <button class="orca-menu__item" role="menuitem" type="button">
+        {% icon "pin" %}
+        Pin to dashboard
+      </button>
+    </li>
+    <li role="none">
+      <button class="orca-menu__item" role="menuitem" type="button">
+        {% icon "restart" %}
+        Restart stream
+      </button>
+    </li>
     <li role="separator" class="orca-menu__separator"></li>
-    <li role="none"><button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">{% icon "delete" %}Delete video</button></li>
+    <li role="none">
+      <button class="orca-menu__item orca-menu__item--danger" role="menuitem" type="button">
+        {% icon "delete" %}
+        Delete video
+      </button>
+    </li>
   </ul>
 </div>
 ```
@@ -227,10 +289,6 @@ Small actions at the end of a table row: one or two ghost buttons and an overflo
 
 Built from: `icon-button`, `dropdown-menu`
 
-### Why
-
-Actions next to the row they affect shorten travel (Practical UI L14); quiet styling keeps many rows from shouting (B05). They are always visible, never hover-only, so touch and keyboard users find them.
-
 ### When to use
 
 - The last column of data tables.
@@ -243,8 +301,24 @@ Actions next to the row they affect shorten travel (Practical UI L14); quiet sty
 #### Example: In a row
 
 ```django
-<table class="orca-table" style="max-width: 32rem"><tbody><tr><td>Entrance A</td><td><span class="orca-status"><span class="orca-dot orca-dot--positive"></span>Online</span></td>
-  <td><div class="orca-row-actions"><a class="orca-button orca-button--ghost orca-button--sm" href="#">Edit</a><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></div></td></tr></tbody></table>
+<table class="orca-table" style="max-width: 32rem">
+  <tbody>
+    <tr>
+      <td>Entrance A</td>
+      <td>
+        <span class="orca-status"><span class="orca-dot orca-dot--positive"></span>Online</span>
+      </td>
+      <td>
+        <div class="orca-row-actions">
+          <a class="orca-button orca-button--ghost orca-button--sm" href="#">Edit</a>
+          <button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Entrance A">
+            {% icon "more" %}
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 **Classes:** `.orca-row-actions`

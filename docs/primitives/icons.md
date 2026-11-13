@@ -8,10 +8,6 @@ One icon set, 16px, single ink in currentColor. Icons support words; they never 
 
 An inline SVG glyph from the ORCA set, sized by token and coloured by its text.
 
-### Why
-
-Familiar icons speed recognition (Jakob's law) but few are universal, so ORCA icons always sit beside a word or carry an accessible name (Hick's law: oversimplification). One set with one line weight keeps the interface coherent (Practical UI F09).
-
 ### When to use
 
 - Beside a label in buttons, menus, navigation and status messages.
@@ -39,14 +35,21 @@ Familiar icons speed recognition (Jakob's law) but few are universal, so ORCA ic
 
 ```django
 <div class="orca-row orca-row--16">
-  {% icon "statistics" size="xs" %}{% icon "statistics" %}{% icon "statistics" size="m" %}{% icon "statistics" size="l" %}{% icon "statistics" size="xl" %}
+  {% icon "statistics" size="xs" %}
+  {% icon "statistics" %}
+  {% icon "statistics" size="m" %}
+  {% icon "statistics" size="l" %}
+  {% icon "statistics" size="xl" %}
 </div>
 ```
 
 #### Example: Icon with a word
 
 ```django
-<span class="orca-with-icon">{% icon "location" %}North building</span>
+<span class="orca-with-icon">
+  {% icon "location" %}
+  North building
+</span>
 ```
 
 **Classes:** `.orca-icon`, `.orca-icon--xs`, `.orca-icon--m`, `.orca-icon--l`, `.orca-icon--xl`, `.orca-with-icon`
@@ -66,10 +69,6 @@ Familiar icons speed recognition (Jakob's law) but few are universal, so ORCA ic
 `id: status-icon` · level: primitive · source: Tangerine
 
 The four status glyphs (success, warning, error, info), each a distinct shape in its status colour.
-
-### Why
-
-Status must survive colour-blindness: four different shapes plus a word carry the meaning, colour confirms it (Practical UI C03, C04; Von Restorff accessibility).
 
 ### When to use
 
@@ -92,10 +91,22 @@ Status must survive colour-blindness: four different shapes plus a word carry th
 
 ```django
 <div class="orca-stack">
-  <span class="orca-with-icon">{% status_icon "positive" %}Online</span>
-  <span class="orca-with-icon">{% status_icon "caution" %}Disk 90% full</span>
-  <span class="orca-with-icon">{% status_icon "negative" %}Offline since 08:14</span>
-  <span class="orca-with-icon">{% status_icon "info" %}Firmware update available</span>
+  <span class="orca-with-icon">
+    {% status_icon "positive" %}
+    Online
+  </span>
+  <span class="orca-with-icon">
+    {% status_icon "caution" %}
+    Disk 90% full
+  </span>
+  <span class="orca-with-icon">
+    {% status_icon "negative" %}
+    Offline since 08:14
+  </span>
+  <span class="orca-with-icon">
+    {% status_icon "info" %}
+    Firmware update available
+  </span>
 </div>
 ```
 
@@ -117,10 +128,6 @@ Status must survive colour-blindness: four different shapes plus a word carry th
 
 The named glyphs: 106 from Vanilla (via Tangerine) plus ORCA glyphs for ideas Vanilla lacks.
 
-### Why
-
-A single set with one line weight looks intentional (Aesthetic–usability effect, Practical UI F09). ORCA draws the missing glyphs (home, edit, filter, star, calendar…) on Vanilla's 16px grid instead of mixing in a second set.
-
 ### When to use
 
 - Pick a name from the set; use aliases when the guide's word differs (bell → notifications, refresh → restart, pencil → edit).
@@ -139,7 +146,96 @@ A single set with one line weight looks intentional (Aesthetic–usability effec
 
 ```django
 <div class="orca-row orca-row--16" style="max-width: 30rem">
-  <span title="menu">{% icon "menu" size="m" %}</span><span title="notifications">{% icon "notifications" size="m" %}</span><span title="snapshot">{% icon "snapshot" size="m" %}</span><span title="statistics">{% icon "statistics" size="m" %}</span><span title="plus">{% icon "plus" size="m" %}</span><span title="search">{% icon "search" size="m" %}</span><span title="play">{% icon "play" size="m" %}</span><span title="arrow-right">{% icon "arrow-right" size="m" %}</span><span title="chevron-left">{% icon "chevron-left" size="m" %}</span><span title="chevron-right">{% icon "chevron-right" size="m" %}</span><span title="chevron-down">{% icon "chevron-down" size="m" %}</span><span title="close">{% icon "close" size="m" %}</span><span title="delete">{% icon "delete" size="m" %}</span><span title="archive">{% icon "archive" size="m" %}</span><span title="restart">{% icon "restart" size="m" %}</span><span title="location">{% icon "location" size="m" %}</span><span title="edit">{% icon "edit" size="m" %}</span><span title="filter">{% icon "filter" size="m" %}</span><span title="star">{% icon "star" size="m" %}</span><span title="more">{% icon "more" size="m" %}</span><span title="sort">{% icon "sort" size="m" %}</span><span title="grid">{% icon "grid" size="m" %}</span><span title="chat">{% icon "chat" size="m" %}</span><span title="sliders">{% icon "sliders" size="m" %}</span><span title="home">{% icon "home" size="m" %}</span><span title="help">{% icon "help" size="m" %}</span><span title="unlock">{% icon "unlock" size="m" %}</span><span title="success">{% icon "success" size="m" %}</span><span title="error">{% icon "error" size="m" %}</span><span title="settings">{% icon "settings" size="m" %}</span>
+  <span title="menu">
+    {% icon "menu" size="m" %}
+  </span>
+  <span title="notifications">
+    {% icon "notifications" size="m" %}
+  </span>
+  <span title="snapshot">
+    {% icon "snapshot" size="m" %}
+  </span>
+  <span title="statistics">
+    {% icon "statistics" size="m" %}
+  </span>
+  <span title="plus">
+    {% icon "plus" size="m" %}
+  </span>
+  <span title="search">
+    {% icon "search" size="m" %}
+  </span>
+  <span title="play">
+    {% icon "play" size="m" %}
+  </span>
+  <span title="arrow-right">
+    {% icon "arrow-right" size="m" %}
+  </span>
+  <span title="chevron-left">
+    {% icon "chevron-left" size="m" %}
+  </span>
+  <span title="chevron-right">
+    {% icon "chevron-right" size="m" %}
+  </span>
+  <span title="chevron-down">
+    {% icon "chevron-down" size="m" %}
+  </span>
+  <span title="close">
+    {% icon "close" size="m" %}
+  </span>
+  <span title="delete">
+    {% icon "delete" size="m" %}
+  </span>
+  <span title="archive">
+    {% icon "archive" size="m" %}
+  </span>
+  <span title="restart">
+    {% icon "restart" size="m" %}
+  </span>
+  <span title="location">
+    {% icon "location" size="m" %}
+  </span>
+  <span title="edit">
+    {% icon "edit" size="m" %}
+  </span>
+  <span title="filter">
+    {% icon "filter" size="m" %}
+  </span>
+  <span title="star">
+    {% icon "star" size="m" %}
+  </span>
+  <span title="more">
+    {% icon "more" size="m" %}
+  </span>
+  <span title="sort">
+    {% icon "sort" size="m" %}
+  </span>
+  <span title="grid">
+    {% icon "grid" size="m" %}
+  </span>
+  <span title="chat">
+    {% icon "chat" size="m" %}
+  </span>
+  <span title="sliders">
+    {% icon "sliders" size="m" %}
+  </span>
+  <span title="home">
+    {% icon "home" size="m" %}
+  </span>
+  <span title="help">
+    {% icon "help" size="m" %}
+  </span>
+  <span title="unlock">
+    {% icon "unlock" size="m" %}
+  </span>
+  <span title="success">
+    {% icon "success" size="m" %}
+  </span>
+  <span title="error">
+    {% icon "error" size="m" %}
+  </span>
+  <span title="settings">
+    {% icon "settings" size="m" %}
+  </span>
 </div>
 ```
 

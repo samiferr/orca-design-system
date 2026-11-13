@@ -10,10 +10,6 @@ A product tile: square image, name, price and one action.
 
 Built from: `image`, `button`
 
-### Why
-
-Image, name and price grouped by proximity let people compare products at a glance (Miller's law, Practical UI L01); one action keeps the decision simple (Hick's law).
-
 ### When to use
 
 - Product grids and lists in shops and catalogues.
@@ -27,8 +23,12 @@ Image, name and price grouped by proximity let people compare products at a glan
 
 ```django
 <article class="orca-product" style="max-width: 14rem">
-  <div class="orca-product__image"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div>
-  <h3 class="orca-product__name"><a href="#">Ring light, 18 inch, dimmable</a></h3>
+  <div class="orca-product__image">
+    <img src="{% static "orca/img/sample-street.svg" %}" alt="">
+  </div>
+  <h3 class="orca-product__name">
+    <a href="#">Ring light, 18 inch, dimmable</a>
+  </h3>
   <p class="orca-product__price" style="margin: 0">€189<s><span class="orca-sr-only">was </span>€229</s></p>
   <button class="orca-button orca-button--dense" type="button">Add to quote</button>
 </article>
@@ -50,10 +50,6 @@ Avatar, name and role, optionally with a contact action.
 
 Built from: `avatar`
 
-### Why
-
-Faces and roles help people recognise who someone is before reading the name (Miller's law: recognition).
-
 ### When to use
 
 - Owners, assignees, contacts, authors.
@@ -66,7 +62,16 @@ Faces and roles help people recognise who someone is before reading the name (Mi
 #### Example: Person
 
 ```django
-<div class="orca-person"><span class="orca-avatar" aria-hidden="true">AL</span><span class="orca-person__text"><span class="orca-person__name">Ada Lovelace</span><span class="orca-person__role">Site manager, North building</span></span><a class="orca-icon-button" href="#" aria-label="Email Ada Lovelace">{% icon "mail" %}</a></div>
+<div class="orca-person">
+  <span class="orca-avatar" aria-hidden="true">AL</span>
+  <span class="orca-person__text">
+    <span class="orca-person__name">Ada Lovelace</span>
+    <span class="orca-person__role">Site manager, North building</span>
+  </span>
+  <a class="orca-icon-button" href="#" aria-label="Email Ada Lovelace">
+    {% icon "mail" %}
+  </a>
+</div>
 ```
 
 **Classes:** `.orca-person`, `.orca-person__text`, `.orca-person__name`, `.orca-person__role`
@@ -85,10 +90,6 @@ An article teaser: kicker, headline, excerpt, meta and a thumbnail.
 
 Built from: `card-kicker`, `card-meta`, `thumbnail`
 
-### Why
-
-Leading with an informative headline and a short excerpt lets people decide whether to read (Practical UI W04, W05).
-
 ### When to use
 
 - News, release notes, help articles, blog lists.
@@ -101,11 +102,17 @@ Leading with an informative headline and a short excerpt lets people decide whet
 #### Example: Post
 
 ```django
-<article class="orca-post" style="max-width: 36rem"><div>
-  <p class="orca-card-kicker">Release notes</p><h3 class="orca-post__title"><a href="#">Counting now ignores staff areas</a></h3>
-  <p class="orca-post__excerpt">Mark a zone as excluded and people inside it are no longer counted. Existing zones keep their behaviour until you change them.</p>
-  <p class="orca-card-meta">6 November 2026 · 2 min read</p></div>
-  <img class="orca-post__thumb" src="{% static "orca/img/sample-floor.svg" %}" alt=""></article>
+<article class="orca-post" style="max-width: 36rem">
+  <div>
+    <p class="orca-card-kicker">Release notes</p>
+    <h3 class="orca-post__title">
+      <a href="#">Counting now ignores staff areas</a>
+    </h3>
+    <p class="orca-post__excerpt">Mark a zone as excluded and people inside it are no longer counted. Existing zones keep their behaviour until you change them.</p>
+    <p class="orca-card-meta">6 November 2026 · 2 min read</p>
+  </div>
+  <img class="orca-post__thumb" src="{% static "orca/img/sample-floor.svg" %}" alt="">
+</article>
 ```
 
 **Classes:** `.orca-post`, `.orca-post__title`, `.orca-post__excerpt`, `.orca-post__thumb`
@@ -124,10 +131,6 @@ The opening block of a marketing or landing page: kicker, headline, lead, action
 
 Built from: `heading`, `button`, `hero-image`
 
-### Why
-
-The first screen must state what the product does and offer one clear next step (Von Restorff, Peak–end rule).
-
 ### When to use
 
 - Marketing, landing and onboarding pages.
@@ -145,9 +148,18 @@ The first screen must state what the product does and offer one clear next step 
 
 ```django
 <section class="orca-hero">
-  <div class="orca-hero__text"><p class="orca-card-kicker">People counting</p><h1 class="orca-hero__title">Know how busy every door is, right now.</h1><p class="orca-hero__lead">Publish the videos you already have.</p>
-    <div class="orca-row"><a class="orca-button orca-button--brand" href="#">Start free trial</a><a class="orca-button" href="#">See a demo</a></div></div>
-  <div class="orca-hero__media"><img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from above"></div>
+  <div class="orca-hero__text">
+    <p class="orca-card-kicker">People counting</p>
+    <h1 class="orca-hero__title">Know how busy every door is, right now.</h1>
+    <p class="orca-hero__lead">Publish the videos you already have.</p>
+    <div class="orca-row">
+      <a class="orca-button orca-button--brand" href="#">Start free trial</a>
+      <a class="orca-button" href="#">See a demo</a>
+    </div>
+  </div>
+  <div class="orca-hero__media">
+    <img src="{% static "orca/img/sample-street.svg" %}" alt="A shop entrance seen from above">
+  </div>
 </section>
 ```
 
@@ -167,10 +179,6 @@ The row under a photo: like, comment and share with counts, and save at the end.
 
 Built from: `icon-button`, `toggle-button`
 
-### Why
-
-A familiar row of icon actions under media (Jakob's law) with counts and pressed states shows people's own reaction clearly.
-
 ### When to use
 
 - Photo posts, galleries, shared snapshots.
@@ -183,10 +191,20 @@ A familiar row of icon actions under media (Jakob's law) with counts and pressed
 
 ```django
 <div class="orca-photo-actions" style="max-width: 24rem">
-  <button class="orca-icon-button" type="button" aria-pressed="true" aria-label="Like" data-orca-toggle>{% icon "star" %}</button><span class="orca-photo-actions__count">24</span>
-  <button class="orca-icon-button" type="button" aria-label="Comment">{% icon "chat" %}</button><span class="orca-photo-actions__count">3</span>
-  <button class="orca-icon-button" type="button" aria-label="Share">{% icon "share" %}</button>
-  <button class="orca-icon-button orca-photo-actions__end" type="button" aria-pressed="false" aria-label="Save" data-orca-toggle>{% icon "pin" %}</button>
+  <button class="orca-icon-button" type="button" aria-pressed="true" aria-label="Like" data-orca-toggle>
+    {% icon "star" %}
+  </button>
+  <span class="orca-photo-actions__count">24</span>
+  <button class="orca-icon-button" type="button" aria-label="Comment">
+    {% icon "chat" %}
+  </button>
+  <span class="orca-photo-actions__count">3</span>
+  <button class="orca-icon-button" type="button" aria-label="Share">
+    {% icon "share" %}
+  </button>
+  <button class="orca-icon-button orca-photo-actions__end" type="button" aria-pressed="false" aria-label="Save" data-orca-toggle>
+    {% icon "pin" %}
+  </button>
 </div>
 ```
 
@@ -206,10 +224,6 @@ A video's latest snapshot with its status, name, place and actions.
 
 Built from: `linked-card`, `snapshot-image`, `status-light`, `pin-button`
 
-### Why
-
-Operators recognise a video by its view first (Miller's law); a status flag on the image and a status word below make offline videos impossible to miss (Von Restorff, C03).
-
 ### When to use
 
 - Video grids on dashboards and video lists.
@@ -223,12 +237,51 @@ Operators recognise a video by its view first (Miller's law); a status flag on t
 
 ```django
 <ul class="orca-card-grid">
-  <li><article class="orca-card orca-card--link orca-video-card"><div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt=""><span class="orca-frame__caption"><span>Snapshot</span><time datetime="2026-11-06T09:14">09:14</time></span></div>
-    <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">Entrance A</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online · North building</span></div>
-    <div class="orca-card__footer"><span class="orca-small orca-muted orca-num">1,204 today</span><span class="orca-card__footer-end"><button class="orca-icon-button orca-icon-button--sm orca-pin" type="button" aria-pressed="true" aria-label="Unpin Entrance A" data-orca-toggle data-orca-label-on="Unpin Entrance A" data-orca-label-off="Pin Entrance A">{% icon "pin" %}</button></span></div></article></li>
-  <li><article class="orca-card orca-card--link orca-video-card"><div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since 08:14</div><span class="orca-badge orca-badge--negative orca-video-card__flag">Offline</span>
-    <div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">Loading dock</a></h3><span class="orca-status orca-small"><span class="orca-dot orca-dot--negative"></span>Offline since 08:14</span></div>
-    <div class="orca-card__footer"><span class="orca-small orca-muted">Last count 08:14</span><span class="orca-card__footer-end"><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Loading dock">{% icon "more" %}</button></span></div></article></li>
+  <li>
+    <article class="orca-card orca-card--link orca-video-card">
+      <div class="orca-ratio orca-ratio--16x9">
+        <img src="{% static "orca/img/sample-street.svg" %}" alt="">
+        <span class="orca-frame__caption">
+          <span>Snapshot</span>
+          <time datetime="2026-11-06T09:14">09:14</time>
+        </span>
+      </div>
+      <div class="orca-card__body">
+        <h3 class="orca-card-title">
+          <a class="orca-card__link" href="#">Entrance A</a>
+        </h3>
+        <span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online · North building</span>
+      </div>
+      <div class="orca-card__footer">
+        <span class="orca-small orca-muted orca-num">1,204 today</span>
+        <span class="orca-card__footer-end">
+          <button class="orca-icon-button orca-icon-button--sm orca-pin" type="button" aria-pressed="true" aria-label="Unpin Entrance A" data-orca-toggle data-orca-label-on="Unpin Entrance A" data-orca-label-off="Pin Entrance A">
+            {% icon "pin" %}
+          </button>
+        </span>
+      </div>
+    </article>
+  </li>
+  <li>
+    <article class="orca-card orca-card--link orca-video-card">
+      <div class="orca-ratio orca-ratio--16x9 orca-frame--removed">No image since 08:14</div>
+      <span class="orca-badge orca-badge--negative orca-video-card__flag">Offline</span>
+      <div class="orca-card__body">
+        <h3 class="orca-card-title">
+          <a class="orca-card__link" href="#">Loading dock</a>
+        </h3>
+        <span class="orca-status orca-small"><span class="orca-dot orca-dot--negative"></span>Offline since 08:14</span>
+      </div>
+      <div class="orca-card__footer">
+        <span class="orca-small orca-muted">Last count 08:14</span>
+        <span class="orca-card__footer-end">
+          <button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Loading dock">
+            {% icon "more" %}
+          </button>
+        </span>
+      </div>
+    </article>
+  </li>
 </ul>
 ```
 
@@ -248,10 +301,6 @@ The page title, the one-sentence subtitle and an optional meta line with status 
 
 Built from: `page-title`, `page-subtitle`, `small-text`, `badge`
 
-### Why
-
-People confirm where they are from the title first and what the page is for from the subtitle (Jakob's law, Practical UI W04); keeping the three together keeps their spacing and order the same on every page.
-
 ### When to use
 
 - Inside the page head of application pages and documentation pages.
@@ -270,7 +319,13 @@ People confirm where they are from the title first and what the page is for from
 <div class="orca-page-head__text">
   <h1 class="orca-page-title">Videos</h1>
   <p class="orca-page-subtitle">Every video from North building.</p>
-  <p class="orca-page-head__meta"><span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Published</span><span>Updated 2 minutes ago</span></p>
+  <p class="orca-page-head__meta">
+    <span class="orca-badge orca-badge--subtle orca-badge--positive">
+      {% icon "success" %}
+      Published
+    </span>
+    <span>Updated 2 minutes ago</span>
+  </p>
 </div>
 ```
 
@@ -289,10 +344,6 @@ People confirm where they are from the title first and what the page is for from
 A section title with an optional one-paragraph introduction.
 
 Built from: `section-title`, `paragraph`
-
-### Why
-
-A title and one sentence of why let people decide whether a section concerns them before reading it (Practical UI W05: inverted pyramid, L01: grouping).
 
 ### When to use
 
@@ -326,10 +377,6 @@ One feature: an icon, a short title and one sentence.
 
 Built from: `icon`, `heading`, `paragraph`
 
-### Why
-
-An icon and a title are recognised before the sentence is read (Miller's law); one sentence per feature keeps the list scannable (Practical UI W01).
-
 ### When to use
 
 - Feature grids on marketing pages; 'What you can do' lists on empty dashboards.
@@ -346,7 +393,13 @@ An icon and a title are recognised before the sentence is read (Miller's law); o
 #### Example: Feature item
 
 ```django
-<ul style="list-style: none; margin: 0; padding: 0; max-width: 18rem"><li class="orca-feature">{% icon "notifications" size="l" %}<h3 class="orca-feature__title">Upload alerts</h3><p class="orca-feature__text">Get an email when a video fails to process.</p></li></ul>
+<ul style="list-style: none; margin: 0; padding: 0; max-width: 18rem">
+  <li class="orca-feature">
+    {% icon "notifications" size="l" %}
+    <h3 class="orca-feature__title">Upload alerts</h3>
+    <p class="orca-feature__text">Get an email when a video fails to process.</p>
+  </li>
+</ul>
 ```
 
 **Classes:** `.orca-feature`, `.orca-feature__title`, `.orca-feature__text`
@@ -364,10 +417,6 @@ An icon and a title are recognised before the sentence is read (Miller's law); o
 An image or video in its aspect-ratio frame, with a caption or a flag over a solid bar.
 
 Built from: `media-frame`, `snapshot-image`
-
-### Why
-
-The frame reserves the space so nothing jumps while the media loads (Doherty threshold); a caption on a solid bar stays readable over any picture (Practical UI T12).
 
 ### When to use
 
@@ -387,7 +436,10 @@ The frame reserves the space so nothing jumps while the media loads (Doherty thr
 ```django
 <figure class="orca-ratio orca-ratio--16x9" style="max-width: 20rem; margin: 0">
   <img src="{% static "orca/img/sample-street.svg" %}" alt="City street at night">
-  <figcaption class="orca-frame__caption"><span>Harbour timelapse</span><time datetime="2026-11-06T08:14:03">08:14:03</time></figcaption>
+  <figcaption class="orca-frame__caption">
+    <span>Harbour timelapse</span>
+    <time datetime="2026-11-06T08:14:03">08:14:03</time>
+  </figcaption>
 </figure>
 ```
 
@@ -407,10 +459,6 @@ A row of thumbnail buttons that choose the image shown, the current one marked.
 
 Built from: `thumbnail`
 
-### Why
-
-Thumbnails show what is there and let people jump straight to an image (Miller's law: recognition over recall); the current one changes shape, not only colour (C03).
-
 ### When to use
 
 - Image galleries and media pickers with up to about twenty items.
@@ -426,7 +474,18 @@ Thumbnails show what is there and let people jump straight to an image (Miller's
 #### Example: Thumbnails
 
 ```django
-<ul class="orca-gallery__thumbs"><li><button class="orca-gallery__thumb" type="button" aria-current="true" aria-label="Image 1, street"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></button></li><li><button class="orca-gallery__thumb" type="button" aria-label="Image 2, floor plan"><img src="{% static "orca/img/sample-floor.svg" %}" alt=""></button></li></ul>
+<ul class="orca-gallery__thumbs">
+  <li>
+    <button class="orca-gallery__thumb" type="button" aria-current="true" aria-label="Image 1, street">
+      <img src="{% static "orca/img/sample-street.svg" %}" alt="">
+    </button>
+  </li>
+  <li>
+    <button class="orca-gallery__thumb" type="button" aria-label="Image 2, floor plan">
+      <img src="{% static "orca/img/sample-floor.svg" %}" alt="">
+    </button>
+  </li>
+</ul>
 ```
 
 **Classes:** `.orca-gallery__thumbs`, `.orca-gallery__thumb`
@@ -444,10 +503,6 @@ Thumbnails show what is there and let people jump straight to an image (Miller's
 A native video in its frame, with a live or recording flag and the current time.
 
 Built from: `video-frame`, `recording-frame`, `time-label`
-
-### Why
-
-Native controls are familiar and keyboard accessible (Jakob's law, Postel's law); a worded flag makes 'live' or 'recording' impossible to miss (Von Restorff, C03).
 
 ### When to use
 
@@ -488,10 +543,6 @@ The one or two actions a section asks for: the primary button and an optional qu
 
 Built from: `button`, `text-link`
 
-### Why
-
-One clear primary action per section (Practical UI B03, Hick's law) with the alternative visibly quieter (B05).
-
 ### When to use
 
 - Site headers, heroes, email frames, empty pages.
@@ -508,7 +559,10 @@ One clear primary action per section (Practical UI B03, Hick's law) with the alt
 #### Example: Call to action
 
 ```django
-<div class="orca-site-header__actions"><a class="orca-button orca-button--ghost" href="#">Sign in</a><a class="orca-button orca-button--brand" href="#">Start free trial</a></div>
+<div class="orca-site-header__actions">
+  <a class="orca-button orca-button--ghost" href="#">Sign in</a>
+  <a class="orca-button orca-button--brand" href="#">Start free trial</a>
+</div>
 ```
 
 **Classes:** `.orca-site-header__actions`
@@ -526,10 +580,6 @@ One clear primary action per section (Practical UI B03, Hick's law) with the alt
 Small legal and version text on one line, with its policy links.
 
 Built from: `small-text`, `text-link`
-
-### Why
-
-Legal text must be there but must not compete (Practical UI S02); small, muted and on one line it stays findable without taking attention (T13: quieter text stays legible).
 
 ### When to use
 

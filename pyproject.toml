@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "orca-design-system"
 version = "0.4.0"
-description = "ORCA: a Django design system whose every element documents its why, when and how, for developers and AI coding agents."
+description = "ORCA: a Django design system whose every element documents when and how to use it, for developers and AI coding agents."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT AND LGPL-3.0-only AND LicenseRef-Ubuntu-Font-1.0" }

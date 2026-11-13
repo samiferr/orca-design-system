@@ -5,7 +5,7 @@
   <h2 class="orca-section-title">Command line (no project needed)</h2>
   <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span><button class="orca-button orca-button--sm" type="button" data-orca-copy="tooling-code-1">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="tooling-code-1" data-orca-highlight="bash">python -m orca list                 # {{ stats.elements }} elements by category
 python -m orca list inputs          # one category
-python -m orca show button          # why, when, how, example
+python -m orca show button          # when, how, example
 python -m orca search date          # by name, guide item or class
 python -m orca icons                # {{ stats.icons }} icon names and the aliases
 python -m orca tokens               # brand keys, semantic colours, scales
@@ -41,7 +41,7 @@ python -m django test tests --settings=tests.settings  # the suite
 python demo/manage.py runserver                        # this site at /orca/</code></pre></div>
   <ul>
     <li>Tokens live in <code class="orca-code">orca/tokens.py</code>; elements in <code class="orca-code">orca/catalogue/</code>, one module per category.</li>
-    <li>The suite fails when a generated file is stale, when a guide item has no element, when an element lacks its why, when or how, when an example uses a class or token that does not exist, when contrast drops in any theme, or when a page of this site breaks.</li>
+    <li>The suite fails when a generated file is stale, when a guide item has no element, when an element lacks its when or how, when an example uses a class or token that does not exist, when contrast drops in any theme, or when a page of this site breaks.</li>
   </ul>
 </section>
 {% endblock %}

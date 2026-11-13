@@ -1,4 +1,4 @@
-"""ORCA design system for Django: primitives with their why, when and how.
+"""ORCA design system for Django: elements with their when, how and live examples.
 
 Quick start::
 

@@ -45,12 +45,11 @@ class GuideCoverageTests(SimpleTestCase):
 
 
 class CatalogueTests(SimpleTestCase):
-    def test_every_element_has_why_when_how_and_an_example(self):
+    def test_every_element_has_when_how_and_an_example(self):
         for el in registry.all_elements():
             with self.subTest(el=el.id):
                 self.assertTrue(re.fullmatch(r"[a-z0-9-]+", el.id))
                 self.assertGreater(len(el.summary), 10)
-                self.assertGreater(len(el.why), 40)
                 self.assertTrue(el.when and el.how and (el.examples or el.preview))
                 self.assertTrue(el.laws, "every element names the principle it applies")
                 self.assertIn(el.level, registry.RELEASED_LEVELS)
@@ -293,7 +292,8 @@ class DocsSiteTests(SimpleTestCase):
                 res = self.client.get(reverse("orca:element", args=[el.id]))
                 self.assertEqual(res.status_code, 200)
                 self.assertNotContains(res, "Example failed to render")
-                self.assertContains(res, "Why")
+                self.assertContains(res, "How to use")
+                self.assertNotContains(res, 'id="why-h"')
 
     def test_every_guide_page(self):
         from orca.views import GUIDE
@@ -803,5 +803,28 @@ class BuildAndCliTests(SimpleTestCase):
     def test_cli_show(self):
         res = subprocess.run([sys.executable, "-m", "orca", "show", "button"], capture_output=True, text=True, cwd=ROOT)
         self.assertEqual(res.returncode, 0)
-        self.assertIn("### Why", res.stdout)
+        self.assertNotIn("### Why", res.stdout)
+        self.assertIn("### When to use", res.stdout)
         self.assertIn("### How to use", res.stdout)
+
+
+class ExampleFormatTests(SimpleTestCase):
+    def test_one_element_per_line_and_no_blank_lines(self):
+        from orca.catalogue.format import format_example
+
+        out = format_example('<label class="x"><input type="checkbox"><span>On</span></label>\n\n\n<p>a <code>b</code> c</p>')
+        self.assertEqual(out, '<label class="x">\n  <input type="checkbox">\n  <span>On</span>\n</label>\n<p>a <code>b</code> c</p>')
+
+    def test_a_line_breaks_after_every_django_tag(self):
+        from orca.catalogue.format import format_example
+
+        out = format_example('{% block a %}<button type="button">{% icon "copy" %}Copy</button>{% endblock %}')
+        self.assertEqual(out, '{% block a %}\n  <button type="button">\n    {% icon "copy" %}\n    Copy\n  </button>\n{% endblock %}')
+
+    def test_only_whitespace_changes_in_every_example(self):
+        for el in registry.all_elements():
+            for title, html in el.examples:
+                shown = dict(el.example_list())[title] if len(el.examples) == len(dict(el.examples)) else None
+                if shown is not None:
+                    self.assertEqual(re.sub(r"\s+", "", shown), re.sub(r"\s+", "", html), el.id)
+                    self.assertNotIn("\n\n", shown, el.id)

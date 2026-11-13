@@ -13,7 +13,6 @@ def element_markdown(el: registry.Element) -> str:
     out = [f"## {el.name}", "", f"`id: {el.id}` · level: {el.level} · source: {el.source}", "", el.summary, ""]
     if el.uses:
         out += ["Built from: " + ", ".join(f"`{u}`" for u in el.uses), ""]
-    out += ["### Why", "", el.why, ""]
     out += ["### When to use", "", _bullets(el.when), ""]
     if el.avoid:
         out += ["### When not to use", "", _bullets(el.avoid), ""]
@@ -54,7 +53,7 @@ def index_markdown(level: str = "primitive") -> str:
         "",
         "Generated from `orca/catalogue/` by `python -m orca build`. Do not edit by hand.",
         "",
-        "Every element below has a **why**, **when**, **when not**, **how**, accessibility notes, the tokens and",
+        "Every element below has **when**, **when not**, **how**, accessibility notes, the tokens and",
         "classes it uses, the UX principles it applies, and a copy-ready Django template example.",
         "Load the tags with `{% load orca %}` and put `{% orca_head %}` in `<head>`.",
         "",

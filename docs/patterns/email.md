@@ -10,10 +10,6 @@ A table-based, inline-styled email layout in the brand's colours with one action
 
 Built from: `logo-link`, `call-to-action`, `fine-print`
 
-### Why
-
-Email clients ignore CSS variables and most stylesheets, so ORCA computes the colours and writes them inline (Postel's law: work everywhere). One clear action, with the link also printed, works even when buttons are blocked (Peak–end rule).
-
 ### When to use
 
 - Every transactional email: welcome, password reset, alert, report.

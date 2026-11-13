@@ -3,7 +3,7 @@
 {% block html_attrs %}{% orca_html_attrs density="dense" %}{% endblock %}
 {% block title %}{{ title|default:"ORCA" }}{% endblock %}
 {% block title_suffix %} · ORCA design system{% endblock %}
-{% block extra_head %}<meta name="description" content="{% block description %}ORCA is a Django design system where every element documents its why, when and how, for developers and AI coding agents.{% endblock %}">
+{% block extra_head %}<meta name="description" content="{% block description %}ORCA is a Django design system where every element documents when and how to use it, for developers and AI coding agents.{% endblock %}">
   <script src="{% static 'orca/js/docs.js' %}" defer></script>{% endblock %}
 
 {% block brand %}{% url 'orca:home' as home_url %}{% orca_logo href=home_url %}<span class="orca-badge orca-badge--grey">v{{ version }}</span>{% endblock %}

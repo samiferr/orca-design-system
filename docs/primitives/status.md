@@ -8,10 +8,6 @@ Small marks that state a condition or categorise an item. Status always pairs co
 
 A 12px round mark before a word, showing the live state of a thing.
 
-### Why
-
-A dot plus a word is the lightest way to show state in dense lists (Miller's law); the word makes it readable without colour (Practical UI C03).
-
 ### When to use
 
 - Online/offline, running/stopped, enabled/disabled in tables and lists.
@@ -55,10 +51,6 @@ A dot plus a word is the lightest way to show state in dense lists (Miller's law
 
 A compact square label with a status or category word, solid or subtle.
 
-### Why
-
-A filled label stands out in a row of plain text so the state is found by scanning (Von Restorff), and its word keeps it meaningful without colour (C03, C04).
-
 ### When to use
 
 - Status of a record (Approved, Failed, Draft) in tables, cards and headers.
@@ -101,10 +93,22 @@ A filled label stands out in a row of plain text so the state is found by scanni
 
 ```django
 <div class="orca-row">
-  <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %}Online</span>
-  <span class="orca-badge orca-badge--subtle orca-badge--caution">{% icon "warning" %}Degraded</span>
-  <span class="orca-badge orca-badge--subtle orca-badge--negative">{% icon "error" %}Offline</span>
-  <span class="orca-badge orca-badge--subtle orca-badge--info">{% icon "info" %}Updating</span>
+  <span class="orca-badge orca-badge--subtle orca-badge--positive">
+    {% icon "success" %}
+    Online
+  </span>
+  <span class="orca-badge orca-badge--subtle orca-badge--caution">
+    {% icon "warning" %}
+    Degraded
+  </span>
+  <span class="orca-badge orca-badge--subtle orca-badge--negative">
+    {% icon "error" %}
+    Offline
+  </span>
+  <span class="orca-badge orca-badge--subtle orca-badge--info">
+    {% icon "info" %}
+    Updating
+  </span>
 </div>
 ```
 
@@ -126,10 +130,6 @@ A filled label stands out in a row of plain text so the state is found by scanni
 
 The status glyph that leads an alert, callout or field message, placed in the alert's left inset.
 
-### Why
-
-The same glyph in the same place on every message lets people classify it before reading (Jakob's law, C03).
-
 ### When to use
 
 - First element of every alert, callout, toast and error summary.
@@ -143,8 +143,13 @@ The same glyph in the same place on every message lets people classify it before
 
 ```django
 <div class="orca-row" style="align-items: flex-start; gap: var(--orca-space-16); max-width: 30rem; padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border); border-inline-start: var(--orca-bar) solid var(--orca-caution)">
-  <span class="orca-alert-icon">{% status_icon "caution" %}</span>
-  <div><p class="orca-alert-title">Disk almost full</p><p class="orca-p">Videos older than 20 days will be deleted tonight.</p></div>
+  <span class="orca-alert-icon">
+    {% status_icon "caution" %}
+  </span>
+  <div>
+    <p class="orca-alert-title">Disk almost full</p>
+    <p class="orca-p">Videos older than 20 days will be deleted tonight.</p>
+  </div>
 </div>
 ```
 
@@ -166,10 +171,6 @@ The same glyph in the same place on every message lets people classify it before
 
 A small pill with a number: unread items, pending tasks.
 
-### Why
-
-A count tells people whether something needs attention and how much, without opening it (Peak–end: prevent missed events).
-
 ### When to use
 
 - On a notifications button, a navigation item or a tab.
@@ -189,7 +190,10 @@ A count tells people whether something needs attention and how much, without ope
 
 ```django
 <div class="orca-row orca-row--16">
-  <button class="orca-icon-button orca-has-count" type="button" aria-label="Notifications, 3 unread">{% icon "notifications" %}<span class="orca-count" aria-hidden="true">3</span></button>
+  <button class="orca-icon-button orca-has-count" type="button" aria-label="Notifications, 3 unread">
+    {% icon "notifications" %}
+    <span class="orca-count" aria-hidden="true">3</span>
+  </button>
   <span>Videos <span class="orca-count orca-count--neutral">12</span></span>
 </div>
 ```
@@ -209,10 +213,6 @@ A count tells people whether something needs attention and how much, without ope
 `id: tag` · level: primitive · source: Tangerine
 
 A label for a keyword or category; static, selectable (filter) or removable (chosen value).
-
-### Why
-
-Tags make applied filters and chosen values visible and reversible (Practical UI S06, Postel's law); the selected state adds a tick and an outline, not only colour (C03).
 
 ### When to use
 
@@ -241,7 +241,12 @@ Tags make applied filters and chosen values visible and reversible (Practical UI
   <span class="orca-tag">North building</span>
   <button class="orca-tag" type="button" aria-pressed="true" data-orca-toggle>Weekdays</button>
   <button class="orca-tag" type="button" aria-pressed="false" data-orca-toggle>Weekends</button>
-  <span class="orca-tag"><span class="orca-tag__text">Entrance A</span><button class="orca-tag__remove" type="button" aria-label="Remove Entrance A">{% icon "close" %}</button></span>
+  <span class="orca-tag">
+    <span class="orca-tag__text">Entrance A</span>
+    <button class="orca-tag__remove" type="button" aria-label="Remove Entrance A">
+      {% icon "close" %}
+    </button>
+  </span>
 </div>
 ```
 

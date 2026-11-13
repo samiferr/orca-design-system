@@ -8,10 +8,6 @@ Text styles with a fixed role. Choose by what the text is (a page title, a stat 
 
 Document headings from h1 to h6, plus a display style for marketing pages.
 
-### Why
-
-A heading outline lets people scan and lets screen-reader users jump between sections (Miller's law: chunking; Practical UI W08). ORCA's thin h2 is the system's typographic signature.
-
 ### When to use
 
 - Structuring long content: docs, settings pages, reports.
@@ -60,10 +56,6 @@ A heading outline lets people scan and lets screen-reader users jump between sec
 
 The single title naming what this page is.
 
-### Why
-
-People confirm they are in the right place from the title first (Jakob's law); one clear title gives the page a single focal point (Von Restorff).
-
 ### When to use
 
 - Top of every application page, inside the page head, beside the page actions.
@@ -111,10 +103,6 @@ People confirm they are in the right place from the title first (Jakob's law); o
 
 One sentence under the page title that says what the page is for or about.
 
-### Why
-
-A short orientation sentence answers 'what can I do here' without a manual (Tesler: help in context; paradox of the active user).
-
 ### When to use
 
 - Pages whose purpose is not obvious from the title, or that need one key fact (scope, time range).
@@ -152,10 +140,6 @@ A short orientation sentence answers 'what can I do here' without a manual (Tesl
 
 Title of a section inside a page (a group of panels or a long form part).
 
-### Why
-
-Section titles chunk a long page into a few recognisable parts (Miller's law, Practical UI R17).
-
 ### When to use
 
 - Splitting a page into two or more regions; grouping fields of a long form.
@@ -190,10 +174,6 @@ Section titles chunk a long page into a few recognisable parts (Miller's law, Pr
 `id: panel-title` · level: primitive · source: Tangerine
 
 Title at the top of a panel or card group of content.
-
-### Why
-
-Each panel answers one question; its title names that question so it can be found by scanning (Miller's law).
 
 ### When to use
 
@@ -231,10 +211,6 @@ Each panel answers one question; its title names that question so it can be foun
 
 Bold first line of an alert, callout or notification that states what happened.
 
-### Why
-
-People read the first words and decide; a bold, specific title is enough on its own to act (Practical UI W15).
-
 ### When to use
 
 - Every alert or callout with more than one sentence.
@@ -266,10 +242,6 @@ People read the first words and decide; a bold, specific title is enough on its 
 `id: paragraph` · level: primitive · source: Tangerine
 
 Running text at 16/24 with a 70-character measure.
-
-### Why
-
-Comfortable line length and line height make reading effortless (Practical UI T07, T09).
 
 ### When to use
 
@@ -307,10 +279,6 @@ Comfortable line length and line height make reading effortless (Practical UI T0
 
 An underlined, accent-coloured link inside text.
 
-### Why
-
-Colour plus underline is the convention people recognise without thinking (Jakob's law, Practical UI S03) and it survives colour-blindness (C03).
-
 ### When to use
 
 - Navigation to another page or resource from within text.
@@ -335,7 +303,9 @@ Colour plus underline is the convention people recognise without thinking (Jakob
 
 ```django
 <p class="orca-p">Shots are deleted after 30 days. Change this in <a class="orca-link orca-link--plain" href="#">retention settings</a>.</p>
-<p class="orca-p"><a class="orca-link orca-link--external" href="https://www.w3.org/WAI/">WCAG overview</a></p>
+<p class="orca-p">
+  <a class="orca-link orca-link--external" href="https://www.w3.org/WAI/">WCAG overview</a>
+</p>
 ```
 
 **Classes:** `.orca-link`, `.orca-link--quiet`, `.orca-link--external`, `.orca-link--plain`
@@ -355,10 +325,6 @@ Colour plus underline is the convention people recognise without thinking (Jakob
 `id: muted-text` · level: primitive · source: Tangerine
 
 Secondary text in `--orca-text-muted` (60% ink, still 4.5:1).
-
-### Why
-
-Lowering the weight of secondary information lets the primary information lead (Practical UI L03) while staying readable (T13: never pale grey).
 
 ### When to use
 
@@ -395,10 +361,6 @@ Lowering the weight of secondary information lets the primary information lead (
 
 14/20 detail text for help, meta and timestamps.
 
-### Why
-
-A clearly smaller detail size separates supporting facts from content (Practical UI L03, T05).
-
 ### When to use
 
 - Help text, captions, timestamps, table footnotes.
@@ -433,10 +395,6 @@ A clearly smaller detail size separates supporting facts from content (Practical
 
 Digits of equal width so numbers line up in columns and do not jitter when they update.
 
-### Why
-
-Aligned digits can be compared at a glance; live counters that do not shift are easier to read (Practical UI W11).
-
 ### When to use
 
 - Tables, stats, counters, times, durations, prices, percentages.
@@ -465,10 +423,6 @@ Aligned digits can be compared at a glance; live counters that do not shift are 
 `id: kbd` · level: primitive · source: Tangerine
 
 A key or shortcut the person presses.
-
-### Why
-
-Showing the key in a key-like shape is a familiar convention (Jakob's law) and separates it from the sentence around it.
 
 ### When to use
 
@@ -505,10 +459,6 @@ Showing the key in a key-like shape is a familiar convention (Jakob's law) and s
 
 The name of a measured value, shown above it.
 
-### Why
-
-A short, consistent label tells people what the number means before they read it (Miller's law: chunking label with value).
-
 ### When to use
 
 - Above every stat value in KPI tiles and summary rows.
@@ -522,7 +472,10 @@ A short, consistent label tells people what the number means before they read it
 
 ```django
 <div>
-  <p class="orca-stat-label">{% icon "user" size="xs" %} People inside now</p>
+  <p class="orca-stat-label">
+    {% icon "user" size="xs" %}
+    People inside now
+  </p>
   <p class="orca-stat-value">1,204</p>
 </div>
 ```
@@ -545,10 +498,6 @@ A short, consistent label tells people what the number means before they read it
 
 A large, tabular number that is the point of a KPI tile.
 
-### Why
-
-The value is what people come for; size and weight make it the first thing seen (Von Restorff, Practical UI L03).
-
 ### When to use
 
 - KPI tiles, summary tiles, dashboard headers.
@@ -566,7 +515,14 @@ The value is what people come for; size and weight make it the first thing seen 
 
 ```django
 <p class="orca-stat-label">Visitors today</p>
-<p class="orca-stat-value">12,480 <span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}<span>+8%</span><span class="orca-sr-only">compared with yesterday</span></span></p>
+<p class="orca-stat-value">
+  12,480
+  <span class="orca-delta orca-delta--up">
+    {% icon "arrow-up" size="xs" %}
+    <span>+8%</span>
+    <span class="orca-sr-only">compared with yesterday</span>
+  </span>
+</p>
 ```
 
 **Classes:** `.orca-stat-value`, `.orca-stat-value--lg`
@@ -586,10 +542,6 @@ The value is what people come for; size and weight make it the first thing seen 
 `id: delta` · level: primitive · source: ORCA
 
 Change against a reference: arrow, signed value, colour, and the reference in words.
-
-### Why
-
-Direction must be readable without colour (Practical UI C03): the arrow and the sign carry it, colour only confirms.
 
 ### When to use
 
@@ -613,9 +565,21 @@ Direction must be readable without colour (Practical UI C03): the arrow and the 
 
 ```django
 <div class="orca-row orca-row--16">
-  <span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%<span class="orca-sr-only"> compared with last week</span></span>
-  <span class="orca-delta orca-delta--down">{% icon "arrow-down" size="xs" %}−3%<span class="orca-sr-only"> compared with last week</span></span>
-  <span class="orca-delta orca-delta--flat">{% icon "minus" size="xs" %}0%<span class="orca-sr-only"> no change</span></span>
+  <span class="orca-delta orca-delta--up">
+    {% icon "arrow-up" size="xs" %}
+    +8%
+    <span class="orca-sr-only"> compared with last week</span>
+  </span>
+  <span class="orca-delta orca-delta--down">
+    {% icon "arrow-down" size="xs" %}
+    −3%
+    <span class="orca-sr-only"> compared with last week</span>
+  </span>
+  <span class="orca-delta orca-delta--flat">
+    {% icon "minus" size="xs" %}
+    0%
+    <span class="orca-sr-only"> no change</span>
+  </span>
 </div>
 ```
 
@@ -634,10 +598,6 @@ Direction must be readable without colour (Practical UI C03): the arrow and the 
 `id: code-text` · level: primitive · source: Tangerine
 
 Inline code, identifiers, file names and values the person may copy.
-
-### Why
-
-A monospaced face distinguishes literal values from prose and makes characters like 0/O and 1/l distinct (Practical UI T01).
 
 ### When to use
 
@@ -669,10 +629,6 @@ A monospaced face distinguishes literal values from prose and makes characters l
 `id: card-kicker` · level: primitive · source: Tangerine
 
 A short uppercase category label above a card title.
-
-### Why
-
-A kicker places the card in a category before the title is read, aiding scanning of mixed card lists (W07: uppercase only for short labels).
 
 ### When to use
 
@@ -715,10 +671,6 @@ A kicker places the card in a category before the title is read, aiding scanning
 
 The name of the object a card represents.
 
-### Why
-
-The title is the card's identity; it is what people scan for in a grid (Practical UI L03, W04).
-
 ### When to use
 
 - Every card.
@@ -752,10 +704,6 @@ The title is the card's identity; it is what people scan for in a grid (Practica
 
 Secondary facts under a card title, separated by middle dots.
 
-### Why
-
-Grouping the secondary facts on one muted line keeps them available without competing with the title (Miller's law).
-
 ### When to use
 
 - Type, source, dates, counts shown under a card title.
@@ -786,10 +734,6 @@ Grouping the secondary facts on one muted line keeps them available without comp
 `id: dialog-title` · level: primitive · source: Tangerine
 
 The question or statement a dialog or drawer is about.
-
-### Why
-
-A dialog interrupts; its title must say why in a few words so the decision is quick (Hick's law, Practical UI W01).
 
 ### When to use
 
@@ -829,10 +773,6 @@ A dialog interrupts; its title must say why in a few words so the decision is qu
 
 What is missing, said plainly, in an empty region.
 
-### Why
-
-An empty screen is an ending or a beginning; a clear, calm title turns it into a next step instead of a dead end (Peak–end rule).
-
 ### When to use
 
 - A list, table, chart or search that has nothing to show.
@@ -869,10 +809,6 @@ An empty screen is an ending or a beginning; a clear, calm title turns it into a
 `id: empty-text` · level: primitive · source: Tangerine
 
 One sentence that says why it is empty and what to do next.
-
-### Why
-
-Saying what to do next prevents a negative peak (Peak–end rule) and moves the person forward (Tesler: guidance in context).
 
 ### When to use
 

@@ -8,10 +8,6 @@ Images, frames and graphics. Reserve their space, describe them, and keep text r
 
 A content image (the primary image of a record), plain or bordered.
 
-### Why
-
-Images are recognised faster than text but must not jump the layout when they load (Doherty threshold: perceived performance) and must be described for people who cannot see them (Postel's law).
-
 ### When to use
 
 - The primary image of a record (product, floor plan, cover image).
@@ -50,10 +46,6 @@ Images are recognised faster than text but must not jump the layout when they lo
 
 A small square preview (48 or 96px) cropped to fill.
 
-### Why
-
-A consistent small preview lets people spot the right record in a list by sight (Miller's law: recognition).
-
 ### When to use
 
 - List rows, table cells, cards, pickers.
@@ -87,10 +79,6 @@ A consistent small preview lets people spot the right record in a list by sight 
 `id: hero-image` · level: primitive · source: Tangerine
 
 A wide image (21:9, 4:3 on phones) heading a marketing or landing page.
-
-### Why
-
-A single strong image sets the context of a landing page at a glance (Aesthetic–usability effect).
 
 ### When to use
 
@@ -128,10 +116,6 @@ A single strong image sets the context of a landing page at a glance (Aesthetic�
 
 A box with a fixed aspect ratio that holds an image, video, map or chart and reserves its space.
 
-### Why
-
-Reserved space prevents layout shift while media loads, so nothing moves under the pointer (Doherty threshold, Fitts's law).
-
 ### When to use
 
 - Any media whose dimensions are not known in the HTML; image galleries and cards with images or video stills.
@@ -144,7 +128,9 @@ Reserved space prevents layout shift while media loads, so nothing moves under t
 #### Example: 4:3 frame
 
 ```django
-<div class="orca-ratio orca-ratio--4x3" style="max-width: 16rem"><img src="{% static "orca/img/sample-street.svg" %}" alt="City street at night"></div>
+<div class="orca-ratio orca-ratio--4x3" style="max-width: 16rem">
+  <img src="{% static "orca/img/sample-street.svg" %}" alt="City street at night">
+</div>
 ```
 
 **Classes:** `.orca-ratio`, `.orca-ratio--16x9`, `.orca-ratio--contain`
@@ -165,10 +151,6 @@ Reserved space prevents layout shift while media loads, so nothing moves under t
 
 A still image taken from a video, in a 16:9 frame with its source and capture time on a solid caption bar.
 
-### Why
-
-A snapshot is a record of a moment; where it comes from and when it was taken must always be visible and readable over any picture (Practical UI T12: solid backing).
-
 ### When to use
 
 - Video stills, thumbnails of video moments, image galleries that show when each image was taken.
@@ -188,7 +170,10 @@ A snapshot is a record of a moment; where it comes from and when it was taken mu
 <div class="orca-row orca-row--16" style="align-items: flex-start">
   <figure class="orca-ratio orca-ratio--16x9" style="max-width: 18rem; margin: 0">
     <img src="{% static "orca/img/sample-street.svg" %}" alt="Still from the harbour timelapse at 08:14: boats leaving the quay">
-    <figcaption class="orca-frame__caption"><span>Harbour timelapse</span><time datetime="2026-11-06T08:14:03">08:14:03</time></figcaption>
+    <figcaption class="orca-frame__caption">
+      <span>Harbour timelapse</span>
+      <time datetime="2026-11-06T08:14:03">08:14:03</time>
+    </figcaption>
   </figure>
   <div class="orca-ratio orca-ratio--16x9 orca-frame--removed" style="max-width: 18rem">Image removed after 30 days</div>
 </div>
@@ -207,10 +192,6 @@ A snapshot is a record of a moment; where it comes from and when it was taken mu
 `id: recording-frame` · level: primitive · source: ORCA
 
 A video or stream frame marked as recording or live with a red outline and a worded flag.
-
-### Why
-
-Being recorded is a state people must not miss: red outline, pulsing dot and the word 'Recording' together (Von Restorff; C03: never colour alone).
 
 ### When to use
 
@@ -246,10 +227,6 @@ Being recorded is a state people must not miss: red outline, pulsing dot and the
 
 A native `<video>` with controls inside an aspect-ratio frame.
 
-### Why
-
-Native controls are familiar and keyboard accessible (Jakob's law, Postel's law); the frame reserves space (Doherty).
-
 ### When to use
 
 - Recorded clips, tutorials.
@@ -266,7 +243,9 @@ Native controls are familiar and keyboard accessible (Jakob's law, Postel's law)
 #### Example: Video
 
 ```django
-<div class="orca-ratio orca-ratio--16x9" style="max-width: 20rem"><video class="orca-video" controls preload="none" poster="{% static "orca/img/sample-street.svg" %}" aria-label="Clip from the harbour timelapse, 08:14"></video></div>
+<div class="orca-ratio orca-ratio--16x9" style="max-width: 20rem">
+  <video class="orca-video" controls preload="none" poster="{% static "orca/img/sample-street.svg" %}" aria-label="Clip from the harbour timelapse, 08:14"></video>
+</div>
 ```
 
 **Classes:** `.orca-video`
@@ -283,10 +262,6 @@ Native controls are familiar and keyboard accessible (Jakob's law, Postel's law)
 
 Simple token-coloured line illustrations for empty, no-result and error states.
 
-### Why
-
-A calm illustration softens an empty or failed moment and signals that the state is expected (Peak–end rule), while staying in the system's colours in every theme.
-
 ### When to use
 
 - Empty states and no-result states; error pages.
@@ -302,7 +277,11 @@ A calm illustration softens an empty or failed moment and signals that the state
 #### Example: Illustrations
 
 ```django
-<div class="orca-row orca-row--16">{% orca_illustration "empty" %}{% orca_illustration "search" %}{% orca_illustration "error" %}</div>
+<div class="orca-row orca-row--16">
+  {% orca_illustration "empty" %}
+  {% orca_illustration "search" %}
+  {% orca_illustration "error" %}
+</div>
 ```
 
 **Classes:** `.orca-illustration`
@@ -323,10 +302,6 @@ A calm illustration softens an empty or failed moment and signals that the state
 
 A frame for a server-generated QR code: white quiet zone, black modules, and the encoded text below.
 
-### Why
-
-QR codes only scan with enough contrast and quiet zone, so the frame is always black on white whatever the theme; printing the text below gives a fallback (Postel's law).
-
 ### When to use
 
 - Pairing a phone, sharing a link to a physical place, two-factor setup.
@@ -344,7 +319,10 @@ QR codes only scan with enough contrast and quiet zone, so the frame is always b
 #### Example: QR frame (placeholder image)
 
 ```django
-<figure class="orca-code-frame" style="margin: 0"><img src="{% static "orca/img/sample-qr.svg" %}" alt="QR code for the setup link"><figcaption class="orca-code-frame__text">ORCA-7Q2K</figcaption></figure>
+<figure class="orca-code-frame" style="margin: 0">
+  <img src="{% static "orca/img/sample-qr.svg" %}" alt="QR code for the setup link">
+  <figcaption class="orca-code-frame__text">ORCA-7Q2K</figcaption>
+</figure>
 ```
 
 **Classes:** `.orca-code-frame`, `.orca-code-frame__text`
@@ -361,10 +339,6 @@ QR codes only scan with enough contrast and quiet zone, so the frame is always b
 
 A frame for a server-generated 1D barcode with its human-readable digits below.
 
-### Why
-
-Same rules as QR: fixed black on white for scanners, digits for people (Postel's law).
-
 ### When to use
 
 - Asset labels, tickets, inventory.
@@ -377,7 +351,10 @@ Same rules as QR: fixed black on white for scanners, digits for people (Postel's
 #### Example: Barcode frame (placeholder)
 
 ```django
-<figure class="orca-code-frame orca-code-frame--barcode" style="margin: 0"><img src="{% static "orca/img/sample-barcode.svg" %}" alt="Barcode 4006381333931"><figcaption class="orca-code-frame__text">4006381333931</figcaption></figure>
+<figure class="orca-code-frame orca-code-frame--barcode" style="margin: 0">
+  <img src="{% static "orca/img/sample-barcode.svg" %}" alt="Barcode 4006381333931">
+  <figcaption class="orca-code-frame__text">4006381333931</figcaption>
+</figure>
 ```
 
 **Classes:** `.orca-code-frame--barcode`

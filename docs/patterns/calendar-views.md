@@ -10,10 +10,6 @@ Weeks of day cells showing each day's events, with '+N more' when a day overflow
 
 Built from: `calendar-header`, `weekday-header`, `week-row`
 
-### Why
-
-A month shows how busy each day is and where the gaps are, which is what people plan with (Miller's law: a few events per cell, the rest behind '+N more'). On phones the grid becomes counts and tapping a day opens its agenda (Fitts's law).
-
 ### When to use
 
 - Planning across weeks: bookings, rotas, events, deadlines.
@@ -93,10 +89,6 @@ Seven day columns on an hour grid with events positioned by time, an all-day row
 
 Built from: `week-header`, `all-day-row`, `hour-row`, `event-card`, `calendar-header`
 
-### Why
-
-Seeing time as height makes durations, gaps and overlaps obvious (Practical UI L01, grouping: each day a column); overlapping events share the width side by side so none hides another.
-
 ### When to use
 
 - Scheduling within a week: meetings, installs, shifts.
@@ -172,10 +164,6 @@ One day on the hour grid: the full detail of a single day, and the phone default
 
 Built from: `hour-row`, `event-card`, `calendar-navigation`
 
-### Why
-
-One column leaves room for each event's title, time and place, so there is no truncation and no tooltip hunting (Fitts's law: large targets on touch screens).
-
 ### When to use
 
 - Phones; a person's or a room's day; dense days.
@@ -246,10 +234,6 @@ Upcoming events listed by day, with times, colours and places: the most readable
 
 Built from: `agenda-item`, `empty-state`
 
-### Why
-
-A list is read top to bottom without decoding a grid (Jakob's law: like a to-do list) and works on every screen and with screen readers. Empty days are skipped so the list stays short.
-
 ### When to use
 
 - Phones, 'what's next' panels, screen-reader friendly alternative to grids, printing.
@@ -319,10 +303,6 @@ Twelve small months with event days marked, to see a year's rhythm and jump to a
 
 Built from: `mini-calendar`
 
-### Why
-
-Long-range planning (holidays, seasons, launches) needs the whole year at once (Practical UI L09: months grouped in a grid); each day links to its detail.
-
 ### When to use
 
 - Holiday planning, annual schedules, picking dates far ahead.
@@ -390,10 +370,6 @@ class CalendarView(TemplateView):
 Three (or any number of) days on the hour grid, between the day and week views.
 
 Built from: `week-header`, `all-day-row`, `event-card`
-
-### Why
-
-Three days fit a tablet or a narrow panel while still showing what comes next (Miller's law); it keeps the hour grid's clarity without the week's horizontal scroll.
 
 ### When to use
 
@@ -463,10 +439,6 @@ The bar above any calendar view: previous, Today, next, the period title, the vi
 
 Built from: `calendar-header`, `create-button`
 
-### Why
-
-People move through time and change zoom constantly; the same controls in the same place across every view (Jakob's law) and a large 'Today' to get home (Fitts's law) make that effortless.
-
 ### When to use
 
 - Above every month, week, day, agenda and year view.
@@ -480,9 +452,30 @@ People move through time and change zoom constantly; the same controls in the sa
 #### Example: Toolbar
 
 ```django
-<div class="orca-cal-header"><div class="orca-cal-nav"><a class="orca-icon-button orca-icon-button--outlined" href="#" aria-label="Previous week">{% icon "chevron-left" %}</a><a class="orca-button" href="#">Today</a><a class="orca-icon-button orca-icon-button--outlined" href="#" aria-label="Next week">{% icon "chevron-right" %}</a></div>
+<div class="orca-cal-header">
+  <div class="orca-cal-nav">
+    <a class="orca-icon-button orca-icon-button--outlined" href="#" aria-label="Previous week">
+      {% icon "chevron-left" %}
+    </a>
+    <a class="orca-button" href="#">Today</a>
+    <a class="orca-icon-button orca-icon-button--outlined" href="#" aria-label="Next week">
+      {% icon "chevron-right" %}
+    </a>
+  </div>
   <h2 class="orca-cal-header__title" aria-live="polite">2–8 November 2026</h2>
-  <div class="orca-row orca-cal-header__end"><nav class="orca-segmented orca-segmented--dense" aria-label="Calendar view"><a class="orca-segmented__item" href="#">Day</a><a class="orca-segmented__item" href="#" aria-current="page">Week</a><a class="orca-segmented__item" href="#">Month</a><a class="orca-segmented__item" href="#">Agenda</a></nav><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}New event</a></div></div>
+  <div class="orca-row orca-cal-header__end">
+    <nav class="orca-segmented orca-segmented--dense" aria-label="Calendar view">
+      <a class="orca-segmented__item" href="#">Day</a>
+      <a class="orca-segmented__item" href="#" aria-current="page">Week</a>
+      <a class="orca-segmented__item" href="#">Month</a>
+      <a class="orca-segmented__item" href="#">Agenda</a>
+    </nav>
+    <a class="orca-button orca-button--primary" href="#">
+      {% icon "plus" %}
+      New event
+    </a>
+  </div>
+</div>
 ```
 
 **Classes:** `.orca-cal-header`, `.orca-cal-header__title`, `.orca-cal-header__end`
@@ -501,10 +494,6 @@ A sidebar beside the main calendar: create button, mini calendar to jump to any 
 
 Built from: `mini-calendar`, `create-button`
 
-### Why
-
-Jumping weeks ahead with arrows is slow; a mini calendar gets there in one click (Fitts's law), and the legend filters what the main view shows (Hick's law: hide what does not matter now). It moves below the calendar on narrow screens.
-
 ### When to use
 
 - Full calendar pages with more than one calendar or long-range navigation.
@@ -517,10 +506,21 @@ Jumping weeks ahead with arrows is slow; a mini calendar gets there in one click
 #### Example: Sidebar
 
 ```django
-<div class="orca-cal-layout"><aside class="orca-cal-sidebar" aria-label="Calendar options"><a class="orca-button orca-button--primary" href="#">{% icon "plus" %}New event</a>
+<div class="orca-cal-layout">
+  <aside class="orca-cal-sidebar" aria-label="Calendar options">
+    <a class="orca-button orca-button--primary" href="#">
+      {% icon "plus" %}
+      New event
+    </a>
     {% orca_mini_calendar "2026-11-01" selected="2026-11-06" today="2026-11-06" url="#{date}" nav_url="#{month}" events="2026-11-02,2026-11-03,2026-11-04,2026-11-05,2026-11-06,2026-11-10" %}
-    <fieldset class="orca-cal-legend"><legend>Calendars</legend><label class="orca-check" style="--orca-event: var(--orca-chart-1)"><input type="checkbox" checked><span class="orca-check__box"></span>Deliveries</label><label class="orca-check" style="--orca-event: var(--orca-chart-3)"><input type="checkbox" checked><span class="orca-check__box"></span>Meetings</label></fieldset></aside>
-  {% orca_agenda sample.events start="2026-11-06" days=5 today=sample.today %}</div>
+    <fieldset class="orca-cal-legend">
+      <legend>Calendars</legend>
+      <label class="orca-check" style="--orca-event: var(--orca-chart-1)"><input type="checkbox" checked><span class="orca-check__box"></span>Deliveries</label>
+      <label class="orca-check" style="--orca-event: var(--orca-chart-3)"><input type="checkbox" checked><span class="orca-check__box"></span>Meetings</label>
+    </fieldset>
+  </aside>
+  {% orca_agenda sample.events start="2026-11-06" days=5 today=sample.today %}
+</div>
 ```
 
 ### Server code
@@ -576,10 +576,6 @@ The list of calendars, each a checkbox in its colour, to show or hide its events
 
 Built from: `choice-group`, `legend-item`
 
-### Why
-
-Colour identifies a calendar only if the key is visible (Practical UI C03); checkboxes let people declutter the view to what matters now (Hick's law). Names carry the meaning so colour is never the only cue.
-
 ### When to use
 
 - Any calendar showing events from more than one source, person or type.
@@ -592,11 +588,13 @@ Colour identifies a calendar only if the key is visible (Practical UI C03); chec
 #### Example: Calendars
 
 ```django
-<fieldset class="orca-cal-legend"><legend>Calendars</legend>
+<fieldset class="orca-cal-legend">
+  <legend>Calendars</legend>
   <label class="orca-check" style="--orca-event: var(--orca-chart-1)"><input type="checkbox" checked><span class="orca-check__box"></span>Deliveries</label>
   <label class="orca-check" style="--orca-event: var(--orca-chart-2)"><input type="checkbox" checked><span class="orca-check__box"></span>Installs and audits</label>
   <label class="orca-check" style="--orca-event: var(--orca-chart-3)"><input type="checkbox" checked><span class="orca-check__box"></span>Meetings</label>
-  <label class="orca-check" style="--orca-event: var(--orca-chart-4)"><input type="checkbox"><span class="orca-check__box"></span>Public holidays</label></fieldset>
+  <label class="orca-check" style="--orca-event: var(--orca-chart-4)"><input type="checkbox"><span class="orca-check__box"></span>Public holidays</label>
+</fieldset>
 ```
 
 **Classes:** `.orca-cal-legend`

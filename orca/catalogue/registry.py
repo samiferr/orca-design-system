@@ -1,4 +1,4 @@
-"""The element registry: one record per ORCA element with its why, when and how.
+"""The element registry: one record per ORCA element with its when, how, accessibility notes and examples.
 
 Every record is written for an AI coding agent: specific, imperative, and tied to tokens and classes
 that exist. The registry is pure Python (no Django needed) so ``python -m orca show button`` works
@@ -8,6 +8,8 @@ anywhere.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+
+from .format import format_example
 
 
 
@@ -140,11 +142,11 @@ class Element:
     def example_list(self) -> list[tuple[str, str]]:
         """Examples to show and export. A template's example is the child template of its preview."""
         if self.examples or not self.preview:
-            return self.examples
+            return [(title, format_example(html)) for title, html in self.examples]
         from pathlib import Path
 
         path = Path(__file__).resolve().parent.parent / "templates" / self.preview_template()
-        return [("Child template", path.read_text(encoding="utf-8").strip())]
+        return [("Child template", format_example(path.read_text(encoding="utf-8")))]
 
     def law_names(self) -> list[str]:
         out = []
@@ -268,7 +270,7 @@ def as_json() -> dict:
         "brand_tokens": [{"key": t.key, "css": t.css, "default": t.default, "usage": t.usage} for t in BRAND_TOKENS],
         "categories": [asdict(c) for c in categories()],
         "elements": [
-            dict(asdict(el), examples=[{"title": t, "html": h} for t, h in el.example_list()],
+            dict({k: v for k, v in asdict(el).items() if k != "why"}, examples=[{"title": t, "html": h} for t, h in el.example_list()],
                  server=[{"title": t, "python": c} for t, c in el.server], law_names=el.law_names())
             for el in all_elements()
         ],

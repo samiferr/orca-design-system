@@ -8,10 +8,6 @@ Feedback while something takes time. Respond within 400 ms; show progress for lo
 
 A 3px (or 8px large) track with a fill: determinate with a value, indeterminate without.
 
-### Why
-
-A progress bar makes a wait tolerable and shows the system is working (Doherty threshold); a visible end point motivates finishing (goal-gradient). Native `<progress>` is announced by screen readers.
-
 ### When to use
 
 - Uploads, video exports, imports, any task longer than about 1 second whose progress is known (determinate) or not (indeterminate).
@@ -37,12 +33,17 @@ A progress bar makes a wait tolerable and shows the system is working (Doherty t
 
 ```django
 <div class="orca-stack" style="max-width: 20rem">
-  <div class="orca-row" style="justify-content: space-between"><span id="pb1">Video export</span><span class="orca-num orca-muted">64%</span></div>
+  <div class="orca-row" style="justify-content: space-between">
+    <span id="pb1">Video export</span>
+    <span class="orca-num orca-muted">64%</span>
+  </div>
   <progress class="orca-progress" value="64" max="100" aria-labelledby="pb1">64%</progress>
   <span id="pb2" class="orca-small orca-muted">Preparing the video, this can take up to 15 seconds</span>
   <progress class="orca-progress" aria-labelledby="pb2"></progress>
   <span id="pb3">Disk used</span>
-  <span class="orca-progress-track" role="meter" aria-labelledby="pb3" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="height: 0.5rem"><span class="orca-progress-fill orca-progress-fill--negative" style="--orca-value: 91%"></span></span>
+  <span class="orca-progress-track" role="meter" aria-labelledby="pb3" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="height: 0.5rem">
+    <span class="orca-progress-fill orca-progress-fill--negative" style="--orca-value: 91%"></span>
+  </span>
 </div>
 ```
 
@@ -64,10 +65,6 @@ A progress bar makes a wait tolerable and shows the system is working (Doherty t
 
 A circular track and indicator with the value in the middle.
 
-### Why
-
-A ring fits a percentage into a small square (KPI tiles, avatars of tasks) while keeping the value readable in text (Doherty; C03).
-
 ### When to use
 
 - Compact completion values: a task's percent done, a quota in a tile.
@@ -85,8 +82,20 @@ A ring fits a percentage into a small square (KPI tiles, avatars of tasks) while
 
 ```django
 <div class="orca-row orca-row--16">
-  <span class="orca-ring" role="progressbar" aria-label="Setup" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="--orca-value: 72"><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="orca-ring__track" cx="18" cy="18" r="15.9155" pathLength="100"/><circle class="orca-ring__indicator" cx="18" cy="18" r="15.9155" pathLength="100"/></svg><span class="orca-ring__label">72%</span></span>
-  <span class="orca-ring orca-ring--lg" role="progressbar" aria-label="Quota" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="--orca-value: 30"><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="orca-ring__track" cx="18" cy="18" r="15.9155" pathLength="100"/><circle class="orca-ring__indicator" cx="18" cy="18" r="15.9155" pathLength="100"/></svg><span class="orca-ring__label">30%</span></span>
+  <span class="orca-ring" role="progressbar" aria-label="Setup" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="--orca-value: 72">
+    <svg viewBox="0 0 36 36" aria-hidden="true">
+      <circle class="orca-ring__track" cx="18" cy="18" r="15.9155" pathLength="100"/>
+      <circle class="orca-ring__indicator" cx="18" cy="18" r="15.9155" pathLength="100"/>
+    </svg>
+    <span class="orca-ring__label">72%</span>
+  </span>
+  <span class="orca-ring orca-ring--lg" role="progressbar" aria-label="Quota" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="--orca-value: 30">
+    <svg viewBox="0 0 36 36" aria-hidden="true">
+      <circle class="orca-ring__track" cx="18" cy="18" r="15.9155" pathLength="100"/>
+      <circle class="orca-ring__indicator" cx="18" cy="18" r="15.9155" pathLength="100"/>
+    </svg>
+    <span class="orca-ring__label">30%</span>
+  </span>
 </div>
 ```
 
@@ -105,10 +114,6 @@ A ring fits a percentage into a small square (KPI tiles, avatars of tasks) while
 `id: spinner` · level: primitive · source: Tangerine
 
 A small rotating ring for short, unknown waits.
-
-### Why
-
-Acknowledges an action immediately when the result takes more than a moment (Doherty threshold).
 
 ### When to use
 
@@ -154,10 +159,6 @@ Acknowledges an action immediately when the result takes more than a moment (Doh
 `id: skeleton` · level: primitive · source: ORCA
 
 Grey placeholder blocks that hold the shape of content while it loads.
-
-### Why
-
-Showing the layout immediately and filling it in feels faster than a spinner and prevents layout jumps (Doherty threshold: perceived performance). Added to ORCA because the Laws of UX review found no skeleton pattern.
 
 ### When to use
 

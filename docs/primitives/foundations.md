@@ -8,10 +8,6 @@ Tokens every other element is built from: colour, type, space, shape, elevation,
 
 Raw colours: a 13-step gray scale and eleven hues with nine numbered steps each.
 
-### Why
-
-A small, named palette keeps colour consistent and lets semantic tokens point at known values (Practical UI C18: name raw colours separately from their uses). Generating the hues in OKLCH gives every step the same perceived lightness across hues, so a chart's series read as equally important.
-
 ### When to use
 
 - Charts, zones, calendars and illustrations that need several distinguishable categories.
@@ -58,10 +54,6 @@ A small, named palette keeps colour consistent and lets semantic tokens point at
 
 Colours named by their job: text, grounds, lines, interaction, status, actions, planning, data.
 
-### Why
-
-Components written against roles (`--orca-text-muted`, `--orca-border-strong`) work in every theme without change, and every role carries a tested contrast promise (Practical UI C09, C01).
-
 ### When to use
 
 - Every colour in every element and page.
@@ -91,7 +83,10 @@ Components written against roles (`--orca-text-muted`, `--orca-border-strong`) w
 <div style="background: var(--orca-bg-alt); padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border)">
   <p class="orca-p">Body text uses <code class="orca-code">--orca-text</code>.</p>
   <p class="orca-p orca-muted">Secondary text uses <code class="orca-code">--orca-text-muted</code>.</p>
-  <span class="orca-badge orca-badge--subtle orca-badge--positive">{% icon "success" %} Approved</span>
+  <span class="orca-badge orca-badge--subtle orca-badge--positive">
+    {% icon "success" %}
+    Approved
+  </span>
 </div>
 ```
 
@@ -110,10 +105,6 @@ Components written against roles (`--orca-text-muted`, `--orca-border-strong`) w
 `id: brand-color` · level: primitive · source: ORCA
 
 The one brand colour, the fills derived from it, and the page surfaces it sits on.
-
-### Why
-
-One brand colour plus neutrals is usually enough (Practical UI C07). Deriving the text-carrying fill automatically keeps any brand colour readable, moving the contrast work from the developer to the system (Tesler's law).
 
 ### When to use
 
@@ -142,7 +133,9 @@ One brand colour plus neutrals is usually enough (Practical UI C07). Deriving th
 
 ```django
 <div class="orca-stack">
-  <span class="orca-row">{% orca_logo href="" %}</span>
+  <span class="orca-row">
+    {% orca_logo href="" %}
+  </span>
   <hr class="orca-divider orca-divider--brand">
   <button class="orca-button orca-button--brand" type="button">Start free trial</button>
 </div>
@@ -163,10 +156,6 @@ One brand colour plus neutrals is usually enough (Practical UI C07). Deriving th
 `id: accent-color` · level: primitive · source: ORCA
 
 The single interactive colour: links, checked ticks, radios, switches, progress, selected days.
-
-### Why
-
-One consistent action colour teaches people what they can act on (Practical UI C07); using it for every 'on' state makes selection recognisable at a glance.
 
 ### When to use
 
@@ -210,10 +199,6 @@ One consistent action colour teaches people what they can act on (Practical UI C
 
 Light, dark and paper share every token name. ORCA has one appearance, named ORCA.
 
-### Why
-
-Writing components once against shared names means a theme can never break a component (Postel's law: reliable output in every context). Users with light sensitivity or bright surroundings choose what suits them.
-
 ### When to use
 
 - Always: every page supports all three themes for free.
@@ -237,7 +222,9 @@ Writing components once against shared names means a theme can never break a com
 #### Example: Theme toggle
 
 ```django
-<button class="orca-icon-button orca-icon-button--outlined" type="button" data-orca-theme-toggle aria-label="Change theme">{% icon "sun" %}</button>
+<button class="orca-icon-button orca-icon-button--outlined" type="button" data-orca-theme-toggle aria-label="Change theme">
+  {% icon "sun" %}
+</button>
 ```
 
 **Tokens:** `--orca-bg`, `--orca-text`
@@ -255,10 +242,6 @@ Writing components once against shared names means a theme can never break a com
 `id: typography` · level: primitive · source: Tangerine
 
 Ubuntu Sans (variable) for everything, JetBrains Mono for code, on a fixed type scale.
-
-### Why
-
-One legible sans serif with two working weights keeps the interface calm and readable (Practical UI T01, T04); a fixed scale makes hierarchy predictable (T05).
 
 ### When to use
 
@@ -315,10 +298,6 @@ One legible sans serif with two working weights keeps the interface calm and rea
 
 Eleven spacing steps on the 8px unit, named by their pixel value.
 
-### Why
-
-A small set of spacing options removes guesswork and makes grouping visible: related things sit closer than unrelated things (Miller's law, Practical UI L08, L09).
-
 ### When to use
 
 - Every margin, padding and gap.
@@ -338,8 +317,14 @@ A small set of spacing options removes guesswork and makes grouping visible: rel
 
 ```django
 <div style="padding: var(--orca-space-16); border: var(--orca-border-width) solid var(--orca-border); display: grid; gap: var(--orca-space-24)">
-  <div style="display: grid; gap: var(--orca-space-4)"><p class="orca-panel-title">Section one</p><p class="orca-small orca-muted">8px and under inside a group</p></div>
-  <div style="display: grid; gap: var(--orca-space-4)"><p class="orca-panel-title">Section two</p><p class="orca-small orca-muted">24px between groups</p></div>
+  <div style="display: grid; gap: var(--orca-space-4)">
+    <p class="orca-panel-title">Section one</p>
+    <p class="orca-small orca-muted">8px and under inside a group</p>
+  </div>
+  <div style="display: grid; gap: var(--orca-space-4)">
+    <p class="orca-panel-title">Section two</p>
+    <p class="orca-small orca-muted">24px between groups</p>
+  </div>
 </div>
 ```
 
@@ -358,10 +343,6 @@ A small set of spacing options removes guesswork and makes grouping visible: rel
 `id: borders` · level: primitive · source: Tangerine
 
 Three line weights: 1px hairline, 1.5px outline, 3px emphasis bar.
-
-### Why
-
-Consistent line weights make structure readable without decoration (Practical UI S02); the 3px bar is reserved for emphasis so it keeps its meaning.
 
 ### When to use
 
@@ -404,10 +385,6 @@ Consistent line weights make structure readable without decoration (Practical UI
 
 ORCA is square; only round marks and bar ends are rounded.
 
-### Why
-
-One consistent shape language is part of the system's recognisable look (Aesthetic–usability effect); rounding reserved for round marks (radios, dots, avatars) keeps those marks distinct from boxes (checkboxes).
-
 ### When to use
 
 - `--orca-radius-none` for every box: buttons, fields, cards, menus, dialogs, badges, tags.
@@ -446,10 +423,6 @@ One consistent shape language is part of the system's recognisable look (Aesthet
 `id: shadows` · level: primitive · source: Tangerine
 
 Three shadows (card, elevated, dragged) and elevation utilities. Only floating things cast a shadow.
-
-### Why
-
-Depth signals what sits above the page and what can be moved (Practical UI C12, L05). Reserving shadows for floating things keeps them meaningful.
 
 ### When to use
 
@@ -492,10 +465,6 @@ Depth signals what sits above the page and what can be moved (Practical UI C12, 
 
 A fixed stacking order from page content to the skip link.
 
-### Why
-
-A named stacking order prevents the 'z-index: 9999' arms race and guarantees, for example, that a save toast is never hidden behind a dialog (Peak–end rule: the end of an action must be seen).
-
 ### When to use
 
 - Anything positioned that must sit above or below something else.
@@ -530,10 +499,6 @@ A named stacking order prevents the 'z-index: 9999' arms race and guarantees, fo
 `id: control-heights` · level: primitive · source: Tangerine
 
 Five heights shared by buttons, fields, selects and toggles: sm, dense, md, lg, xl.
-
-### Why
-
-Controls that share a height line up in rows and toolbars (alignment), and the 44px touch minimum is applied in one place for every control (Fitts's law, Practical UI B11).
 
 ### When to use
 
@@ -574,10 +539,6 @@ Controls that share a height line up in rows and toolbars (alignment), and the 4
 
 Four durations and two easings, all under the 400 ms Doherty threshold.
 
-### Why
-
-Fast, consistent feedback keeps people in flow (Doherty threshold). Motion explains change; it never decorates. Reduced-motion users get the end state immediately (Von Restorff accessibility note).
-
 ### When to use
 
 - snap 0.1s: hover on buttons, tabs, rows.
@@ -615,10 +576,6 @@ Fast, consistent feedback keeps people in flow (Doherty threshold). Motion expla
 
 Reserve the space of images and video before they load.
 
-### Why
-
-Reserving space stops the page jumping when media arrives, which feels faster and avoids mis-taps (Doherty threshold: perceived performance; Fitts's law).
-
 ### When to use
 
 - Any image, video, snapshot or chart whose size is known only after loading.
@@ -650,10 +607,6 @@ Reserving space stops the page jumping when media arrives, which feels faster an
 
 A thin, token-coloured scrollbar for inner scrolling regions.
 
-### Why
-
-Inner scroll areas need a visible cue that there is more content (Practical UI S06); a thin bar in `border-strong` stays visible without competing with content.
-
 ### When to use
 
 - Scrolling panels, menus, code blocks, sidebars.
@@ -670,7 +623,9 @@ Inner scroll areas need a visible cue that there is more content (Practical UI S
 
 ```django
 <div class="orca-scroll" style="max-height: 6rem; border: var(--orca-border-width) solid var(--orca-border); padding: var(--orca-space-8)">
-  {% for i in "123456789" %}<p class="orca-p">Row {{ i }}</p>{% endfor %}
+  {% for i in "123456789" %}
+    <p class="orca-p">Row {{ i }}</p>
+  {% endfor %}
 </div>
 ```
 

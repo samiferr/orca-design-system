@@ -8,10 +8,6 @@ Things people press. One primary action per screen; everything else is quieter.
 
 A command. Variants express importance: primary, secondary (default), ghost, link, plus brand, danger, neutral, elevated and outlines.
 
-### Why
-
-Three clearly different weights (filled, outlined, text) let people find the main action instantly and make the hierarchy survive colour-blindness (Practical UI B01, B02; Von Restorff effect). One primary action per screen keeps decisions fast (Hick's law, B03).
-
 ### When to use
 
 - `orca-button--primary`: the one main action of the screen or form (Save, Add image).
@@ -50,7 +46,10 @@ Three clearly different weights (filled, outlined, text) let people find the mai
 <div class="orca-row">
   <button class="orca-button orca-button--primary" type="button">Save image</button>
   <button class="orca-button" type="button">Cancel</button>
-  <button class="orca-button orca-button--ghost" type="button">{% icon "copy" %}Duplicate</button>
+  <button class="orca-button orca-button--ghost" type="button">
+    {% icon "copy" %}
+    Duplicate
+  </button>
 </div>
 ```
 
@@ -95,10 +94,6 @@ Three clearly different weights (filled, outlined, text) let people find the mai
 
 Size modifiers: sm, dense, default, lg, xl, plus block (full width) and icon-only.
 
-### Why
-
-Size follows context, not importance: dense toolbars need compact controls, phones need 44–48px targets (Fitts's law, Practical UI B11). Heights match fields so rows align.
-
 ### When to use
 
 - `--sm` inside table rows; `--dense` in top bars and filter bars; default elsewhere; `--lg`/`--xl` for touch-first and phone primary actions.
@@ -123,9 +118,13 @@ Size follows context, not importance: dense toolbars need compact controls, phon
   <button class="orca-button orca-button--dense" type="button">Dense</button>
   <button class="orca-button" type="button">Default</button>
   <button class="orca-button orca-button--lg" type="button">Large</button>
-  <button class="orca-button orca-button--icon-only" type="button" aria-label="Refresh">{% icon "restart" %}</button>
+  <button class="orca-button orca-button--icon-only" type="button" aria-label="Refresh">
+    {% icon "restart" %}
+  </button>
 </div>
-<div style="max-width: 20rem; margin-top: var(--orca-space-16)"><button class="orca-button orca-button--primary orca-button--block orca-button--xl" type="button">Save image</button></div>
+<div style="max-width: 20rem; margin-top: var(--orca-space-16)">
+  <button class="orca-button orca-button--primary orca-button--block orca-button--xl" type="button">Save image</button>
+</div>
 ```
 
 **Classes:** `.orca-button--sm`, `.orca-button--dense`, `.orca-button--lg`, `.orca-button--xl`, `.orca-button--block`, `.orca-button--icon-only`
@@ -145,10 +144,6 @@ Size follows context, not importance: dense toolbars need compact controls, phon
 `id: link-action` · level: primitive · source: Tangerine
 
 A text-styled button or link for the least important actions.
-
-### Why
-
-The tertiary weight keeps rare or repeated actions available without competing with the primary one (Practical UI B01, B05); the underline keeps it recognisably interactive.
 
 ### When to use
 
@@ -188,10 +183,6 @@ The tertiary weight keeps rare or repeated actions available without competing w
 
 A toggle that pins an item to the top of a list or to the dashboard.
 
-### Why
-
-Letting people keep their most-used items close reduces search effort on every visit (Fitts's law: shorter distance; Practical UI F03).
-
 ### When to use
 
 - Lists where a few items are used much more than others (albums, reports).
@@ -208,7 +199,9 @@ Letting people keep their most-used items close reduces search effort on every v
 #### Example: Pin toggle
 
 ```django
-<button class="orca-icon-button orca-pin" type="button" aria-pressed="true" aria-label="Unpin Entrance A" data-orca-toggle data-orca-label-on="Unpin Entrance A" data-orca-label-off="Pin Entrance A">{% icon "pin" %}</button>
+<button class="orca-icon-button orca-pin" type="button" aria-pressed="true" aria-label="Unpin Entrance A" data-orca-toggle data-orca-label-on="Unpin Entrance A" data-orca-label-off="Pin Entrance A">
+  {% icon "pin" %}
+</button>
 ```
 
 **Classes:** `.orca-pin`
@@ -229,10 +222,6 @@ Letting people keep their most-used items close reduces search effort on every v
 
 A mailto link styled as a button, with the address shown as a fallback.
 
-### Why
-
-mailto fails silently when no mail app is set up; showing the address lets people copy it instead (Postel's law: tolerate every setup).
-
 ### When to use
 
 - Contact support, send a report link, reply to an alert.
@@ -246,7 +235,10 @@ mailto fails silently when no mail app is set up; showing the address lets peopl
 
 ```django
 <div>
-  <a class="orca-button" href="mailto:support@example.com?subject=Video%20will%20not%20play">{% icon "mail" %}Email support</a>
+  <a class="orca-button" href="mailto:support@example.com?subject=Video%20will%20not%20play">
+    {% icon "mail" %}
+    Email support
+  </a>
   <span class="orca-email-button__fallback">support@example.com</span>
 </div>
 ```
@@ -264,10 +256,6 @@ mailto fails silently when no mail app is set up; showing the address lets peopl
 `id: toggle-button` · level: primitive · source: Tangerine
 
 A button that stays pressed to show an on state.
-
-### Why
-
-A pressed button is a familiar way to switch a view or a mode in toolbars (Jakob's law), and its pressed fill plus `aria-pressed` makes the state visible and announced (C03).
 
 ### When to use
 
@@ -290,7 +278,10 @@ A pressed button is a familiar way to switch a view or a mode in toolbars (Jakob
 #### Example: Toggle
 
 ```django
-<button class="orca-button orca-button--dense" type="button" aria-pressed="true" data-orca-toggle>{% icon "grid" %}Show grid</button>
+<button class="orca-button orca-button--dense" type="button" aria-pressed="true" data-orca-toggle>
+  {% icon "grid" %}
+  Show grid
+</button>
 ```
 
 **Classes:** `.orca-button[aria-pressed]`
@@ -308,10 +299,6 @@ A pressed button is a familiar way to switch a view or a mode in toolbars (Jakob
 `id: icon-button` · level: primitive · source: Tangerine
 
 A square button with a single 16px icon and an accessible name. Quiet, outlined, accent and neutral-fill variants.
-
-### Why
-
-Icon buttons save space for frequent, well-known actions (close, more, refresh) while keeping a full control-height target (Fitts's law). Few icons are universal, so each needs a name (Hick's law: icons without labels).
 
 ### When to use
 
@@ -337,10 +324,18 @@ Icon buttons save space for frequent, well-known actions (close, more, refresh) 
 
 ```django
 <div class="orca-row">
-  <button class="orca-icon-button" type="button" aria-label="Close">{% icon "close" %}</button>
-  <button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="More actions">{% icon "more" %}</button>
-  <button class="orca-icon-button orca-icon-button--accent" type="button" aria-label="Refresh">{% icon "restart" %}</button>
-  <button class="orca-icon-button orca-icon-button--neutral" type="button" aria-label="Settings">{% icon "settings" %}</button>
+  <button class="orca-icon-button" type="button" aria-label="Close">
+    {% icon "close" %}
+  </button>
+  <button class="orca-icon-button orca-icon-button--outlined" type="button" aria-label="More actions">
+    {% icon "more" %}
+  </button>
+  <button class="orca-icon-button orca-icon-button--accent" type="button" aria-label="Refresh">
+    {% icon "restart" %}
+  </button>
+  <button class="orca-icon-button orca-icon-button--neutral" type="button" aria-label="Settings">
+    {% icon "settings" %}
+  </button>
 </div>
 ```
 
@@ -361,10 +356,6 @@ Icon buttons save space for frequent, well-known actions (close, more, refresh) 
 `id: fab` · level: primitive · source: ORCA
 
 A large floating button for the one creation action of a phone screen.
-
-### Why
-
-On phones the primary action floats within thumb reach at the bottom (Fitts's law, Practical UI F03) and its distinct shape makes it the one thing that stands out (Von Restorff). Familiar from mobile platforms (Jakob's law).
 
 ### When to use
 
@@ -389,8 +380,13 @@ On phones the primary action floats within thumb reach at the bottom (Fitts's la
 
 ```django
 <div class="orca-row orca-row--16">
-  <a class="orca-fab orca-fab--static" href="#" aria-label="Add image">{% icon "plus" %}</a>
-  <a class="orca-fab orca-fab--static orca-fab--extended" href="#">{% icon "plus" %}Add image</a>
+  <a class="orca-fab orca-fab--static" href="#" aria-label="Add image">
+    {% icon "plus" %}
+  </a>
+  <a class="orca-fab orca-fab--static orca-fab--extended" href="#">
+    {% icon "plus" %}
+    Add image
+  </a>
 </div>
 ```
 

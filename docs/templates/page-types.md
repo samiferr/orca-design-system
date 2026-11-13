@@ -10,10 +10,6 @@ An overview page: a period switch, a stat grid, charts in two columns and room f
 
 Built from: `app-shell`, `kpi-grid`, `bar-chart`, `line-chart`, `two-column-grid`
 
-### Why
-
-A dashboard answers 'how are we doing?' at a glance: a few headline numbers first (Miller's law), then the charts that explain them, all for one clearly stated period (Practical UI W11).
-
 ### When to use
 
 - The home of an analytics or operations application; the overview of a site or team.
@@ -87,10 +83,6 @@ class Dashboard(TemplateView):
 A full calendar: toolbar (previous, Today, next, period, view switch), a side panel with a mini calendar and calendars legend, and the month, week, day or agenda view.
 
 Built from: `calendar-toolbar`, `mini-calendar-sidebar`, `calendar-legend`, `month-calendar`, `week-view`, `agenda-view`
-
-### Why
-
-The same toolbar and side panel around every view means people only learn one calendar (Jakob's law); the side panel jumps to any date in one click (Fitts's law).
 
 ### When to use
 
@@ -185,10 +177,6 @@ Resources by time for one day: a date toolbar, a row per person, room or vehicle
 
 Built from: `resource-scheduler`, `calendar-toolbar`
 
-### Why
-
-Rows per resource answer 'who is free when' in one look (Practical UI L01); placing bookings by time makes gaps and double bookings visible.
-
 ### When to use
 
 - Dispatching installers, booking rooms, planning vehicles.
@@ -266,10 +254,6 @@ class Scheduler(TemplateView):
 A kanban board page: filters on top and columns of cards that move by drag and drop.
 
 Built from: `kanban-board`, `plan-filter-bar`
-
-### Why
-
-Columns show the flow of work and where it is stuck (Practical UI L01); work-in-progress limits that turn red stop overloading (Von Restorff).
 
 ### When to use
 
@@ -370,10 +354,6 @@ A Gantt timeline: period toolbar, task bars on a day scale with progress, milest
 
 Built from: `gantt-chart`, `milestone-timeline`
 
-### Why
-
-Bars on a shared scale show sequence, overlap and slippage at once; the today line makes 'are we late?' instant (Von Restorff).
-
 ### When to use
 
 - Project plans, rollouts, installation schedules.
@@ -451,10 +431,6 @@ A step-by-step booking page: steps on top, the current step's choices, and a sum
 
 Built from: `booking-slot-picker`, `appointment-picker`, `split-layout`
 
-### Why
-
-Steps break a booking into small decisions (Practical UI R16, Hick's law); the running summary keeps earlier choices visible and ends the flow on a clear result (Peak–end rule).
-
 ### When to use
 
 - Appointment and slot booking, any short purchase-like flow.
@@ -483,10 +459,41 @@ Blocks: `title`, `title_suffix`, `head`, `theme_bootstrap`, `extra_head`, `body_
 
 ```django
 {% extends "orca/layouts/booking.html" %}
-{% block booking_step %}<p class="orca-small orca-muted">30 minutes · Paris time</p>
-<ul class="orca-date-strip" aria-label="Day"><li><button type="button" aria-pressed="false">Mon<strong>9</strong></button></li><li><button type="button" aria-pressed="true">Tue<strong>10</strong></button></li><li><button type="button" disabled>Wed<strong>11</strong>Full</button></li><li><button type="button" aria-pressed="false">Thu<strong>12</strong></button></li></ul>
-<div><h3 class="orca-booking__group">Morning</h3><ul class="orca-booking-slots"><li><button class="orca-booking-slot" type="button" aria-pressed="false">09:00</button></li><li><button class="orca-booking-slot" type="button" aria-pressed="true">09:30</button></li><li><button class="orca-booking-slot" type="button" disabled>10:00<span class="orca-booking-slot__note">Booked</span></button></li></ul></div>
-<div class="orca-row"><a class="orca-button" href="#">Back</a><button class="orca-button orca-button--primary" type="button">Continue</button></div>{% endblock %}
+{% block booking_step %}
+  <p class="orca-small orca-muted">30 minutes · Paris time</p>
+  <ul class="orca-date-strip" aria-label="Day">
+    <li>
+      <button type="button" aria-pressed="false">Mon<strong>9</strong></button>
+    </li>
+    <li>
+      <button type="button" aria-pressed="true">Tue<strong>10</strong></button>
+    </li>
+    <li>
+      <button type="button" disabled>Wed<strong>11</strong>Full</button>
+    </li>
+    <li>
+      <button type="button" aria-pressed="false">Thu<strong>12</strong></button>
+    </li>
+  </ul>
+  <div>
+    <h3 class="orca-booking__group">Morning</h3>
+    <ul class="orca-booking-slots">
+      <li>
+        <button class="orca-booking-slot" type="button" aria-pressed="false">09:00</button>
+      </li>
+      <li>
+        <button class="orca-booking-slot" type="button" aria-pressed="true">09:30</button>
+      </li>
+      <li>
+        <button class="orca-booking-slot" type="button" disabled>10:00<span class="orca-booking-slot__note">Booked</span></button>
+      </li>
+    </ul>
+  </div>
+  <div class="orca-row">
+    <a class="orca-button" href="#">Back</a>
+    <button class="orca-button orca-button--primary" type="button">Continue</button>
+  </div>
+{% endblock %}
 ```
 
 ### Server code
@@ -528,10 +535,6 @@ def book_time(request):
 Create or edit an event on its own page: the form on the left, conflicts and attendees on the right, Delete apart from Save.
 
 Built from: `event-editor`, `attendee-list`, `split-layout`
-
-### Why
-
-Context beside the form (clashes, who is invited) lets people fix problems before saving (Practical UI W15, L14); Delete sits away from Save so it is never hit by mistake (B13).
 
 ### When to use
 
@@ -609,10 +612,6 @@ class EventEdit(OrcaPageMixin, UpdateView):
 A data page with everything in one place: title bar, summary tiles that filter, search, a filter drawer and the table.
 
 Built from: `summary-tiles`, `list-header`, `filter-drawer`, `data-table`, `no-results`
-
-### Why
-
-Summary tiles answer 'how many of each' and double as the most used filters (Hick's law); the rest of the filters wait in a drawer so the table keeps the space (Practical UI S04).
 
 ### When to use
 

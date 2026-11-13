@@ -10,10 +10,6 @@ One measured value with its label, a descriptive icon, the change and its contex
 
 Built from: `stat-label`, `delta`, `icon`, `sparkline`
 
-### Why
-
-A KPI is read in a second when the number dominates and its label and comparison sit right next to it (Von Restorff, Miller's law); a descriptive icon left of the label lets people find the card they want in a grid before reading (Miller's law: recognition), as in wise_people_analyzer.
-
 ### When to use
 
 - Dashboards and summary rows: counts, rates, durations.
@@ -32,9 +28,49 @@ A KPI is read in a second when the number dominates and its label and comparison
 
 ```django
 <div class="orca-card-grid" style="grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr))">
-  <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "user" %}</span><p class="orca-stat-label">Visitors today</p></div><p class="orca-stat-value">12,480</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%</span>vs last Friday</div>{% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}</div>
-  <a class="orca-stat-card" href="#"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "home" %}</span><p class="orca-stat-label">Inside now</p></div><p class="orca-stat-value">1,204</p><div class="orca-stat-card__foot">of 1,500 capacity</div></a>
-  <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "clock" %}</span><p class="orca-stat-label">Average visit</p></div><p class="orca-stat-value">23 min</p><div class="orca-stat-card__foot"><span class="orca-delta orca-delta--flat">{% icon "minus" size="xs" %}0%</span>vs last week</div></div>
+  <div class="orca-stat-card">
+    <div class="orca-stat-card__head">
+      <span class="orca-stat-card__icon" aria-hidden="true">
+        {% icon "user" %}
+      </span>
+      <p class="orca-stat-label">Visitors today</p>
+    </div>
+    <p class="orca-stat-value">12,480</p>
+    <div class="orca-stat-card__foot">
+      <span class="orca-delta orca-delta--up">
+        {% icon "arrow-up" size="xs" %}
+        +8%
+      </span>
+      vs last Friday
+    </div>
+    {% orca_sparkline "820,940,1200,1100,1480,1620,1540" "Visitors per hour today, rising" %}
+  </div>
+  <a class="orca-stat-card" href="#">
+    <div class="orca-stat-card__head">
+      <span class="orca-stat-card__icon" aria-hidden="true">
+        {% icon "home" %}
+      </span>
+      <p class="orca-stat-label">Inside now</p>
+    </div>
+    <p class="orca-stat-value">1,204</p>
+    <div class="orca-stat-card__foot">of 1,500 capacity</div>
+  </a>
+  <div class="orca-stat-card">
+    <div class="orca-stat-card__head">
+      <span class="orca-stat-card__icon" aria-hidden="true">
+        {% icon "clock" %}
+      </span>
+      <p class="orca-stat-label">Average visit</p>
+    </div>
+    <p class="orca-stat-value">23 min</p>
+    <div class="orca-stat-card__foot">
+      <span class="orca-delta orca-delta--flat">
+        {% icon "minus" size="xs" %}
+        0%
+      </span>
+      vs last week
+    </div>
+  </div>
 </div>
 ```
 
@@ -74,10 +110,6 @@ Properties of a record as label and value pairs.
 
 Built from: `muted-text`
 
-### Why
-
-Aligned labels and values are scanned down one edge and compared quickly (Practical UI L12, Miller's law).
-
 ### When to use
 
 - Detail pages and side panels: a video's address, model, location.
@@ -91,10 +123,24 @@ Aligned labels and values are scanned down one edge and compared quickly (Practi
 
 ```django
 <dl class="orca-kv" style="max-width: 30rem">
-  <div><dt>Format</dt><dd>MP4, 1080p</dd></div>
-  <div><dt>Address</dt><dd><code class="orca-code">media.example.com/v/4821</code></dd></div>
-  <div><dt>Site</dt><dd>North building</dd></div>
-  <div><dt>Notes</dt><dd class="orca-muted">Not set</dd></div>
+  <div>
+    <dt>Format</dt>
+    <dd>MP4, 1080p</dd>
+  </div>
+  <div>
+    <dt>Address</dt>
+    <dd>
+      <code class="orca-code">media.example.com/v/4821</code>
+    </dd>
+  </div>
+  <div>
+    <dt>Site</dt>
+    <dd>North building</dd>
+  </div>
+  <div>
+    <dt>Notes</dt>
+    <dd class="orca-muted">Not set</dd>
+  </div>
 </dl>
 ```
 
@@ -114,10 +160,6 @@ A divided list of items with optional visual, text and end detail.
 
 Built from: `list-item`
 
-### Why
-
-A vertical list with consistent rows is the quickest structure to scan (Miller's law); hairline dividers separate items without boxes (Practical UI L01).
-
 ### When to use
 
 - Short collections in panels: recent events, members, files.
@@ -135,8 +177,26 @@ A vertical list with consistent rows is the quickest structure to scan (Miller's
 
 ```django
 <ul class="orca-list" style="max-width: 26rem">
-  <li><a class="orca-list-item" href="#"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span><span class="orca-list-item__text"><span class="orca-list-item__title">Ada Lovelace</span><span class="orca-list-item__desc">Administrator</span></span><span class="orca-list-item__end">Active today</span></a></li>
-  <li><a class="orca-list-item" href="#"><span class="orca-avatar orca-avatar--s" aria-hidden="true">GH</span><span class="orca-list-item__text"><span class="orca-list-item__title">Grace Hopper</span><span class="orca-list-item__desc">Operator</span></span><span class="orca-list-item__end">3 days ago</span></a></li>
+  <li>
+    <a class="orca-list-item" href="#">
+      <span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span>
+      <span class="orca-list-item__text">
+        <span class="orca-list-item__title">Ada Lovelace</span>
+        <span class="orca-list-item__desc">Administrator</span>
+      </span>
+      <span class="orca-list-item__end">Active today</span>
+    </a>
+  </li>
+  <li>
+    <a class="orca-list-item" href="#">
+      <span class="orca-avatar orca-avatar--s" aria-hidden="true">GH</span>
+      <span class="orca-list-item__text">
+        <span class="orca-list-item__title">Grace Hopper</span>
+        <span class="orca-list-item__desc">Operator</span>
+      </span>
+      <span class="orca-list-item__end">3 days ago</span>
+    </a>
+  </li>
 </ul>
 ```
 
@@ -156,10 +216,6 @@ One row of a list: leading visual, title and description, trailing detail; stati
 
 Built from: `avatar`, `thumbnail`, `icon`
 
-### Why
-
-Fixed slots mean every row reads the same way (Practical UI F09); a 48px row with the whole width clickable is easy to hit (Fitts's law).
-
 ### When to use
 
 - Inside a list; inside menus of rich options.
@@ -173,8 +229,25 @@ Fixed slots mean every row reads the same way (Practical UI F09); a 48px row wit
 
 ```django
 <ul class="orca-list" style="max-width: 26rem">
-  <li><span class="orca-list-item">{% icon "file" size="m" %}<span class="orca-list-item__text"><span class="orca-list-item__title">weekly-report.csv</span><span class="orca-list-item__desc">48 KB</span></span></span></li>
-  <li><button class="orca-list-item" type="button" aria-current="true">{% icon "snapshot" size="m" %}<span class="orca-list-item__text"><span class="orca-list-item__title">Entrance A</span><span class="orca-list-item__desc">Selected</span></span>{% icon "check" %}</button></li>
+  <li>
+    <span class="orca-list-item">
+      {% icon "file" size="m" %}
+      <span class="orca-list-item__text">
+        <span class="orca-list-item__title">weekly-report.csv</span>
+        <span class="orca-list-item__desc">48 KB</span>
+      </span>
+    </span>
+  </li>
+  <li>
+    <button class="orca-list-item" type="button" aria-current="true">
+      {% icon "snapshot" size="m" %}
+      <span class="orca-list-item__text">
+        <span class="orca-list-item__title">Entrance A</span>
+        <span class="orca-list-item__desc">Selected</span>
+      </span>
+      {% icon "check" %}
+    </button>
+  </li>
 </ul>
 ```
 
@@ -194,10 +267,6 @@ One event in a vertical timeline: status dot, title, time and description.
 
 Built from: `status-dot`, `time-label`
 
-### Why
-
-A line joining dots shows sequence at a glance (Gestalt continuity, Practical UI L01); the dot's tone shows what kind of event it was.
-
 ### When to use
 
 - History of a record, a run's steps, an incident log.
@@ -211,9 +280,35 @@ A line joining dots shows sequence at a glance (Gestalt continuity, Practical UI
 
 ```django
 <ol class="orca-timeline" style="max-width: 28rem">
-  <li class="orca-timeline__item"><span class="orca-dot orca-dot--positive"></span><div><div class="orca-timeline__head"><span class="orca-timeline__title">Run finished</span><time class="orca-timeline__time" datetime="2026-11-06T09:12">09:12</time></div><p class="orca-timeline__desc">118 of 120 shots taken.</p></div></li>
-  <li class="orca-timeline__item"><span class="orca-dot orca-dot--caution"></span><div><div class="orca-timeline__head"><span class="orca-timeline__title">2 shots failed</span><time class="orca-timeline__time" datetime="2026-11-06T08:40">08:40</time></div><p class="orca-timeline__desc">Loading dock did not answer.</p></div></li>
-  <li class="orca-timeline__item"><span class="orca-dot"></span><div><div class="orca-timeline__head"><span class="orca-timeline__title">Run started</span><time class="orca-timeline__time" datetime="2026-11-06T08:00">08:00</time></div></div></li>
+  <li class="orca-timeline__item">
+    <span class="orca-dot orca-dot--positive"></span>
+    <div>
+      <div class="orca-timeline__head">
+        <span class="orca-timeline__title">Run finished</span>
+        <time class="orca-timeline__time" datetime="2026-11-06T09:12">09:12</time>
+      </div>
+      <p class="orca-timeline__desc">118 of 120 shots taken.</p>
+    </div>
+  </li>
+  <li class="orca-timeline__item">
+    <span class="orca-dot orca-dot--caution"></span>
+    <div>
+      <div class="orca-timeline__head">
+        <span class="orca-timeline__title">2 shots failed</span>
+        <time class="orca-timeline__time" datetime="2026-11-06T08:40">08:40</time>
+      </div>
+      <p class="orca-timeline__desc">Loading dock did not answer.</p>
+    </div>
+  </li>
+  <li class="orca-timeline__item">
+    <span class="orca-dot"></span>
+    <div>
+      <div class="orca-timeline__head">
+        <span class="orca-timeline__title">Run started</span>
+        <time class="orca-timeline__time" datetime="2026-11-06T08:00">08:00</time>
+      </div>
+    </div>
+  </li>
 </ol>
 ```
 
@@ -233,10 +328,6 @@ A table header that sorts the column, showing the direction with an arrow and ar
 
 Built from: `icon`
 
-### Why
-
-Sorting turns a table into an answer ('which video counted most?') (Tesler's law); the arrow and aria-sort show the order to everyone (C03).
-
 ### When to use
 
 - Columns people compare: names, counts, dates, status.
@@ -249,11 +340,42 @@ Sorting turns a table into an answer ('which video counted most?') (Tesler's law
 #### Example: Header row
 
 ```django
-<table class="orca-table" style="max-width: 32rem"><thead><tr>
-  <th scope="col" aria-sort="ascending"><a class="orca-sort" href="#">Video{% icon "arrow-up" %}</a></th>
-  <th scope="col" class="is-num" aria-sort="none"><a class="orca-sort" href="#">Count{% icon "arrow-up" %}</a></th>
-  <th scope="col"><a class="orca-sort" href="#">Last seen{% icon "arrow-up" %}</a></th>
-</tr></thead><tbody><tr><td>Entrance A</td><td class="is-num">1,204</td><td>2 min ago</td></tr><tr><td>Entrance B</td><td class="is-num">980</td><td>5 min ago</td></tr></tbody></table>
+<table class="orca-table" style="max-width: 32rem">
+  <thead>
+    <tr>
+      <th scope="col" aria-sort="ascending">
+        <a class="orca-sort" href="#">
+          Video
+          {% icon "arrow-up" %}
+        </a>
+      </th>
+      <th scope="col" class="is-num" aria-sort="none">
+        <a class="orca-sort" href="#">
+          Count
+          {% icon "arrow-up" %}
+        </a>
+      </th>
+      <th scope="col">
+        <a class="orca-sort" href="#">
+          Last seen
+          {% icon "arrow-up" %}
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Entrance A</td>
+      <td class="is-num">1,204</td>
+      <td>2 min ago</td>
+    </tr>
+    <tr>
+      <td>Entrance B</td>
+      <td class="is-num">980</td>
+      <td>5 min ago</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 **Classes:** `.orca-sort`
@@ -271,10 +393,6 @@ Sorting turns a table into an answer ('which video counted most?') (Tesler's law
 A swatch, a series name and optionally its value, keying a chart.
 
 Built from: `swatch`, `chart-dot`
-
-### Why
-
-Every colour on a chart needs a name next to the same colour, or colour-blind readers lose the chart (Practical UI C03).
 
 ### When to use
 
@@ -311,10 +429,6 @@ A counting zone in a list: its swatch, name, type, count and actions.
 
 Built from: `zone-swatch`, `badge`, `row-actions`
 
-### Why
-
-The same swatch as on the video lets people match a zone to its row instantly (Miller's law); the type is a word, not only a pattern (C03).
-
 ### When to use
 
 - Zone lists beside the zone editor and on video pages.
@@ -327,8 +441,22 @@ The same swatch as on the video lets people match a zone to its row instantly (M
 
 ```django
 <div style="max-width: 30rem">
-  <div class="orca-zone-row"><span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-500)"></span><span class="orca-zone-row__name">Door line <span class="orca-badge orca-badge--grey">Count</span></span><span class="orca-zone-row__count orca-num">1,204</span><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="Edit Door line">{% icon "edit" %}</button></div>
-  <div class="orca-zone-row"><span class="orca-zone-swatch orca-zone-swatch--exclude" style="--orca-zone: var(--orca-orange-500)"></span><span class="orca-zone-row__name">Staff area <span class="orca-badge orca-badge--grey">Excluded</span></span><span class="orca-zone-row__count orca-muted">–</span><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="Edit Staff area">{% icon "edit" %}</button></div>
+  <div class="orca-zone-row">
+    <span class="orca-zone-swatch" style="--orca-zone: var(--orca-teal-500)"></span>
+    <span class="orca-zone-row__name">Door line <span class="orca-badge orca-badge--grey">Count</span></span>
+    <span class="orca-zone-row__count orca-num">1,204</span>
+    <button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="Edit Door line">
+      {% icon "edit" %}
+    </button>
+  </div>
+  <div class="orca-zone-row">
+    <span class="orca-zone-swatch orca-zone-swatch--exclude" style="--orca-zone: var(--orca-orange-500)"></span>
+    <span class="orca-zone-row__name">Staff area <span class="orca-badge orca-badge--grey">Excluded</span></span>
+    <span class="orca-zone-row__count orca-muted">–</span>
+    <button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="Edit Staff area">
+      {% icon "edit" %}
+    </button>
+  </div>
 </div>
 ```
 
@@ -348,10 +476,6 @@ A counting line with people in and out, each with a direction arrow.
 
 Built from: `swatch`, `icon`, `tabular-number`
 
-### Why
-
-In and out are the two numbers people compare; arrows and words make the direction clear without colour (C03), and tabular digits keep them aligned.
-
 ### When to use
 
 - Line-crossing counts on video and run pages.
@@ -364,8 +488,34 @@ In and out are the two numbers people compare; arrows and words make the directi
 
 ```django
 <div style="max-width: 30rem">
-  <div class="orca-line-count"><span class="orca-swatch" style="--orca-swatch: var(--orca-chart-1)"></span><span class="orca-line-count__name">Main door</span><span class="orca-line-count__dir">{% icon "arrow-down" %}612<span class="orca-sr-only"> in</span></span><span class="orca-line-count__dir">{% icon "arrow-up" %}598<span class="orca-sr-only"> out</span></span></div>
-  <div class="orca-line-count"><span class="orca-swatch" style="--orca-swatch: var(--orca-chart-2)"></span><span class="orca-line-count__name">Side door</span><span class="orca-line-count__dir">{% icon "arrow-down" %}88<span class="orca-sr-only"> in</span></span><span class="orca-line-count__dir">{% icon "arrow-up" %}91<span class="orca-sr-only"> out</span></span></div>
+  <div class="orca-line-count">
+    <span class="orca-swatch" style="--orca-swatch: var(--orca-chart-1)"></span>
+    <span class="orca-line-count__name">Main door</span>
+    <span class="orca-line-count__dir">
+      {% icon "arrow-down" %}
+      612
+      <span class="orca-sr-only"> in</span>
+    </span>
+    <span class="orca-line-count__dir">
+      {% icon "arrow-up" %}
+      598
+      <span class="orca-sr-only"> out</span>
+    </span>
+  </div>
+  <div class="orca-line-count">
+    <span class="orca-swatch" style="--orca-swatch: var(--orca-chart-2)"></span>
+    <span class="orca-line-count__name">Side door</span>
+    <span class="orca-line-count__dir">
+      {% icon "arrow-down" %}
+      88
+      <span class="orca-sr-only"> in</span>
+    </span>
+    <span class="orca-line-count__dir">
+      {% icon "arrow-up" %}
+      91
+      <span class="orca-sr-only"> out</span>
+    </span>
+  </div>
 </div>
 ```
 
@@ -385,10 +535,6 @@ An image or avatar beside a block of text.
 
 Built from: `thumbnail`, `avatar`
 
-### Why
-
-Pairing a picture with its text binds them by proximity (Practical UI L01) and lets the eye recognise the item before reading.
-
 ### When to use
 
 - Comments, notifications, search results, people and product summaries.
@@ -401,7 +547,13 @@ Pairing a picture with its text binds them by proximity (Practical UI L01) and l
 #### Example: Media object
 
 ```django
-<div class="orca-media" style="max-width: 28rem"><img class="orca-thumb" src="{% static "orca/img/sample-street.svg" %}" alt="" width="48" height="48"><div class="orca-media__body"><span class="orca-card-title">Entrance A</span><span class="orca-small orca-muted">2 people at the door · 08:14</span></div></div>
+<div class="orca-media" style="max-width: 28rem">
+  <img class="orca-thumb" src="{% static "orca/img/sample-street.svg" %}" alt="" width="48" height="48">
+  <div class="orca-media__body">
+    <span class="orca-card-title">Entrance A</span>
+    <span class="orca-small orca-muted">2 people at the door · 08:14</span>
+  </div>
+</div>
 ```
 
 **Classes:** `.orca-media`, `.orca-media__body`, `.orca-media--center`
@@ -419,10 +571,6 @@ Pairing a picture with its text binds them by proximity (Practical UI L01) and l
 A container for one object: optional media, body and footer. Outlined (default), elevated or filled.
 
 Built from: `card-kicker`, `card-title`, `card-meta`
-
-### Why
-
-A card groups everything about one object in a common region (Practical UI L01) so grids of objects can be scanned and compared.
 
 ### When to use
 
@@ -442,9 +590,33 @@ A card groups everything about one object in a common region (Practical UI L01) 
 
 ```django
 <ul class="orca-card-grid">
-  <li><article class="orca-card"><div class="orca-card__body"><p class="orca-card-kicker">Outlined</p><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 videos · 5 zones</p></div></article></li>
-  <li><article class="orca-card orca-card--elevated"><div class="orca-card__body"><p class="orca-card-kicker">Elevated</p><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 videos · 2 zones</p></div></article></li>
-  <li><article class="orca-card orca-card--filled"><div class="orca-card__body"><p class="orca-card-kicker">Filled</p><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 videos</p></div></article></li>
+  <li>
+    <article class="orca-card">
+      <div class="orca-card__body">
+        <p class="orca-card-kicker">Outlined</p>
+        <h3 class="orca-card-title">North building</h3>
+        <p class="orca-card-meta">12 videos · 5 zones</p>
+      </div>
+    </article>
+  </li>
+  <li>
+    <article class="orca-card orca-card--elevated">
+      <div class="orca-card__body">
+        <p class="orca-card-kicker">Elevated</p>
+        <h3 class="orca-card-title">Warehouse</h3>
+        <p class="orca-card-meta">4 videos · 2 zones</p>
+      </div>
+    </article>
+  </li>
+  <li>
+    <article class="orca-card orca-card--filled">
+      <div class="orca-card__body">
+        <p class="orca-card-kicker">Filled</p>
+        <h3 class="orca-card-title">Car park</h3>
+        <p class="orca-card-meta">2 videos</p>
+      </div>
+    </article>
+  </li>
 </ul>
 ```
 
@@ -466,10 +638,6 @@ The bottom strip of a card for status and actions.
 
 Built from: `status-dot`, `icon-button`
 
-### Why
-
-Keeping actions in the same place on every card makes them predictable (Practical UI F09) and separates reading from acting.
-
 ### When to use
 
 - Cards with a status or one or two actions.
@@ -482,8 +650,23 @@ Keeping actions in the same place on every card makes them predictable (Practica
 #### Example: Footer
 
 ```django
-<article class="orca-card" style="max-width: 18rem"><div class="orca-card__body"><h3 class="orca-card-title">Entrance A</h3><p class="orca-card-meta">North building</p></div>
-  <div class="orca-card__footer"><span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online</span><span class="orca-card__footer-end"><button class="orca-icon-button orca-icon-button--sm orca-pin" type="button" aria-pressed="false" aria-label="Pin Entrance A" data-orca-toggle>{% icon "pin" %}</button><button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Entrance A">{% icon "more" %}</button></span></div></article>
+<article class="orca-card" style="max-width: 18rem">
+  <div class="orca-card__body">
+    <h3 class="orca-card-title">Entrance A</h3>
+    <p class="orca-card-meta">North building</p>
+  </div>
+  <div class="orca-card__footer">
+    <span class="orca-status orca-small"><span class="orca-dot orca-dot--positive"></span>Online</span>
+    <span class="orca-card__footer-end">
+      <button class="orca-icon-button orca-icon-button--sm orca-pin" type="button" aria-pressed="false" aria-label="Pin Entrance A" data-orca-toggle>
+        {% icon "pin" %}
+      </button>
+      <button class="orca-icon-button orca-icon-button--sm" type="button" aria-label="More actions for Entrance A">
+        {% icon "more" %}
+      </button>
+    </span>
+  </div>
+</article>
 ```
 
 **Classes:** `.orca-card__footer`, `.orca-card__footer-end`
@@ -502,10 +685,6 @@ A card whose whole area opens the object, built with one real link on the title.
 
 Built from: `card`
 
-### Why
-
-The whole card is a large target (Fitts's law) while screen readers hear one clear link, the title, instead of a card full of link text.
-
 ### When to use
 
 - Cards whose main action is opening the object.
@@ -519,8 +698,32 @@ The whole card is a large target (Fitts's law) while screen readers hear one cle
 
 ```django
 <ul class="orca-card-grid">
-  <li><article class="orca-card orca-card--link"><div class="orca-card__media"><img src="{% static "orca/img/sample-street.svg" %}" alt=""></div><div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">Entrance A</a></h3><p class="orca-card-meta">North building · online</p></div></article></li>
-  <li><article class="orca-card orca-card--link"><div class="orca-card__media"><img src="{% static "orca/img/sample-floor.svg" %}" alt=""></div><div class="orca-card__body"><h3 class="orca-card-title"><a class="orca-card__link" href="#">North building plan</a></h3><p class="orca-card-meta">Updated 3 March</p></div></article></li>
+  <li>
+    <article class="orca-card orca-card--link">
+      <div class="orca-card__media">
+        <img src="{% static "orca/img/sample-street.svg" %}" alt="">
+      </div>
+      <div class="orca-card__body">
+        <h3 class="orca-card-title">
+          <a class="orca-card__link" href="#">Entrance A</a>
+        </h3>
+        <p class="orca-card-meta">North building · online</p>
+      </div>
+    </article>
+  </li>
+  <li>
+    <article class="orca-card orca-card--link">
+      <div class="orca-card__media">
+        <img src="{% static "orca/img/sample-floor.svg" %}" alt="">
+      </div>
+      <div class="orca-card__body">
+        <h3 class="orca-card-title">
+          <a class="orca-card__link" href="#">North building plan</a>
+        </h3>
+        <p class="orca-card-meta">Updated 3 March</p>
+      </div>
+    </article>
+  </li>
 </ul>
 ```
 
@@ -540,10 +743,6 @@ A stack of sections that open and close, built on details and summary.
 
 Built from: `chevron`
 
-### Why
-
-Collapsing secondary content lets people see the whole list of topics first and open only what they need (Practical UI S04, Miller's law).
-
 ### When to use
 
 - FAQs, advanced settings, long lists of grouped details.
@@ -562,8 +761,28 @@ Collapsing secondary content lets people see the whole list of topics first and 
 
 ```django
 <div class="orca-accordion" style="max-width: 32rem">
-  <details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>How often are counts updated?</summary><div class="orca-accordion__panel"><p class="orca-p">Every minute. Reports group older data by hour.</p></div></details>
-  <details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Can I export the data?</summary><div class="orca-accordion__panel"><p class="orca-p">Yes, as CSV from any report.</p></div></details>
+  <details open>
+    <summary>
+      <span class="orca-chevron">
+        {% icon "chevron-down" %}
+      </span>
+      How often are counts updated?
+    </summary>
+    <div class="orca-accordion__panel">
+      <p class="orca-p">Every minute. Reports group older data by hour.</p>
+    </div>
+  </details>
+  <details>
+    <summary>
+      <span class="orca-chevron">
+        {% icon "chevron-down" %}
+      </span>
+      Can I export the data?
+    </summary>
+    <div class="orca-accordion__panel">
+      <p class="orca-p">Yes, as CSV from any report.</p>
+    </div>
+  </details>
 </div>
 ```
 
@@ -583,10 +802,6 @@ The steps of a process with done, current and upcoming markers.
 
 Built from: `step-marker`
 
-### Why
-
-Showing progress through a multi-step task motivates finishing and sets expectations (Peak–end rule, goal gradient); splitting a task into steps lowers each decision (Hick's law).
-
 ### When to use
 
 - Setup flows and multi-step forms of 3 to 6 steps.
@@ -600,9 +815,22 @@ Showing progress through a multi-step task motivates finishing and sets expectat
 
 ```django
 <ol class="orca-steps">
-  <li class="orca-steps__item orca-steps__item--done"><span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span><span class="orca-steps__title"><a href="#">Connect media server</a><span class="orca-sr-only">, done</span></span></li>
-  <li class="orca-steps__item" aria-current="step"><span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span><span class="orca-steps__title">Choose videos</span><span class="orca-steps__desc">Pick the doors to count</span></li>
-  <li class="orca-steps__item"><span class="orca-step-marker" aria-hidden="true"></span><span class="orca-steps__title">Draw zones</span></li>
+  <li class="orca-steps__item orca-steps__item--done">
+    <span class="orca-step-marker orca-step-marker--done" aria-hidden="true"></span>
+    <span class="orca-steps__title">
+      <a href="#">Connect media server</a>
+      <span class="orca-sr-only">, done</span>
+    </span>
+  </li>
+  <li class="orca-steps__item" aria-current="step">
+    <span class="orca-step-marker orca-step-marker--current" aria-hidden="true"></span>
+    <span class="orca-steps__title">Choose videos</span>
+    <span class="orca-steps__desc">Pick the doors to count</span>
+  </li>
+  <li class="orca-steps__item">
+    <span class="orca-step-marker" aria-hidden="true"></span>
+    <span class="orca-steps__title">Draw zones</span>
+  </li>
 </ol>
 ```
 
@@ -622,10 +850,6 @@ A hierarchy of items that expand and collapse: sites, buildings, videos.
 
 Built from: `chevron`
 
-### Why
-
-Nested disclosure shows structure and hides depth until needed (Practical UI S04); indentation and a guide line show who belongs to whom (Gestalt).
-
 ### When to use
 
 - Browsing a hierarchy of objects, such as locations or folders.
@@ -643,10 +867,57 @@ Nested disclosure shows structure and hides depth until needed (Practical UI S04
 
 ```django
 <ul class="orca-tree" style="max-width: 20rem">
-  <li><details open><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>North building<span class="orca-tree__meta">3</span></summary>
-    <ul><li><a class="orca-tree__leaf" href="#" aria-current="true">Entrance A</a></li><li><a class="orca-tree__leaf" href="#">Entrance B</a></li>
-      <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Basement<span class="orca-tree__meta">1</span></summary><ul><li><a class="orca-tree__leaf" href="#">Loading dock</a></li></ul></details></li></ul></details></li>
-  <li><details><summary><span class="orca-chevron">{% icon "chevron-down" %}</span>Warehouse<span class="orca-tree__meta">4</span></summary><ul><li><a class="orca-tree__leaf" href="#">Gate 1</a></li></ul></details></li>
+  <li>
+    <details open>
+      <summary>
+        <span class="orca-chevron">
+          {% icon "chevron-down" %}
+        </span>
+        North building
+        <span class="orca-tree__meta">3</span>
+      </summary>
+      <ul>
+        <li>
+          <a class="orca-tree__leaf" href="#" aria-current="true">Entrance A</a>
+        </li>
+        <li>
+          <a class="orca-tree__leaf" href="#">Entrance B</a>
+        </li>
+        <li>
+          <details>
+            <summary>
+              <span class="orca-chevron">
+                {% icon "chevron-down" %}
+              </span>
+              Basement
+              <span class="orca-tree__meta">1</span>
+            </summary>
+            <ul>
+              <li>
+                <a class="orca-tree__leaf" href="#">Loading dock</a>
+              </li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>
+        <span class="orca-chevron">
+          {% icon "chevron-down" %}
+        </span>
+        Warehouse
+        <span class="orca-tree__meta">4</span>
+      </summary>
+      <ul>
+        <li>
+          <a class="orca-tree__leaf" href="#">Gate 1</a>
+        </li>
+      </ul>
+    </details>
+  </li>
 </ul>
 ```
 
@@ -666,10 +937,6 @@ Overlapping avatars of the people involved, with '+N' for the rest.
 
 Built from: `avatar`
 
-### Why
-
-A few faces show who is involved at a glance without listing everyone (Miller's law); the count tells how many more there are.
-
 ### When to use
 
 - Assignees, attendees, members on cards and headers.
@@ -683,7 +950,18 @@ A few faces show who is involved at a glance without listing everyone (Miller's 
 
 ```django
 <ul class="orca-avatar-group" aria-label="5 members: Ada Lovelace, Grace Hopper, Alan Turing and 2 more">
-  <li><span class="orca-avatar orca-avatar--s" title="Ada Lovelace">AL</span></li><li><span class="orca-avatar orca-avatar--s" title="Grace Hopper">GH</span></li><li><span class="orca-avatar orca-avatar--s" title="Alan Turing">AT</span></li><li><span class="orca-avatar orca-avatar--s orca-avatar-group__more">+2</span></li>
+  <li>
+    <span class="orca-avatar orca-avatar--s" title="Ada Lovelace">AL</span>
+  </li>
+  <li>
+    <span class="orca-avatar orca-avatar--s" title="Grace Hopper">GH</span>
+  </li>
+  <li>
+    <span class="orca-avatar orca-avatar--s" title="Alan Turing">AT</span>
+  </li>
+  <li>
+    <span class="orca-avatar orca-avatar--s orca-avatar-group__more">+2</span>
+  </li>
 </ul>
 ```
 
@@ -703,10 +981,6 @@ A panel holding a titled table and its pager.
 
 Built from: `panel-header`, `table-pager`, `sortable-header`
 
-### Why
-
-A titled frame tells people what the rows are before they read them, and keeps the table's actions and paging next to it (Practical UI L01, L14).
-
 ### When to use
 
 - Tables on dashboards and detail pages.
@@ -720,10 +994,54 @@ A titled frame tells people what the rows are before they read them, and keeps t
 
 ```django
 <section class="orca-table-card" aria-labelledby="tc-t">
-  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="tc-t">Busiest entrances</h2><p class="orca-panel-header__desc">Today, all sites</p></div><div class="orca-panel-header__actions"><a class="orca-button orca-button--ghost orca-button--dense" href="#">View report</a></div></div>
-  <div class="orca-table-wrap"><table class="orca-table"><thead><tr><th scope="col">Entrance</th><th scope="col">Site</th><th scope="col" class="is-num">Visitors</th></tr></thead>
-    <tbody><tr><td>Entrance A</td><td>North building</td><td class="is-num">4,812</td></tr><tr><td>Gate 1</td><td>Warehouse</td><td class="is-num">2,140</td></tr><tr><td>Entrance B</td><td>North building</td><td class="is-num">1,980</td></tr></tbody></table></div>
-  <div class="orca-table-pager"><span class="orca-num">1–3 of 14</span><span class="orca-table-pager__nav"><button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Previous page" disabled>{% icon "chevron-left" %}</button><button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Next page">{% icon "chevron-right" %}</button></span></div>
+  <div class="orca-panel-header">
+    <div class="orca-panel-header__text">
+      <h2 class="orca-panel-title" id="tc-t">Busiest entrances</h2>
+      <p class="orca-panel-header__desc">Today, all sites</p>
+    </div>
+    <div class="orca-panel-header__actions">
+      <a class="orca-button orca-button--ghost orca-button--dense" href="#">View report</a>
+    </div>
+  </div>
+  <div class="orca-table-wrap">
+    <table class="orca-table">
+      <thead>
+        <tr>
+          <th scope="col">Entrance</th>
+          <th scope="col">Site</th>
+          <th scope="col" class="is-num">Visitors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Entrance A</td>
+          <td>North building</td>
+          <td class="is-num">4,812</td>
+        </tr>
+        <tr>
+          <td>Gate 1</td>
+          <td>Warehouse</td>
+          <td class="is-num">2,140</td>
+        </tr>
+        <tr>
+          <td>Entrance B</td>
+          <td>North building</td>
+          <td class="is-num">1,980</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="orca-table-pager">
+    <span class="orca-num">1–3 of 14</span>
+    <span class="orca-table-pager__nav">
+      <button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Previous page" disabled>
+        {% icon "chevron-left" %}
+      </button>
+      <button class="orca-icon-button orca-icon-button--dense" type="button" aria-label="Next page">
+        {% icon "chevron-right" %}
+      </button>
+    </span>
+  </div>
 </section>
 ```
 
@@ -743,10 +1061,6 @@ One editable key and value pair with a remove button, repeated to edit free-form
 
 Built from: `text-input`, `icon-button`, `label`
 
-### Why
-
-Free-form metadata is inherently variable (Tesler's law); one row per pair with Add and Remove keeps it structured and forgiving (Postel's law).
-
 ### When to use
 
 - Custom properties, labels, HTTP headers, environment values.
@@ -761,10 +1075,39 @@ Free-form metadata is inherently variable (Tesler's law); one row per pair with 
 
 ```django
 <div class="orca-property-rows" id="pr-list">
-  <div class="orca-property-row" data-orca-row><div><label class="orca-label" for="pr-k0">Key</label><input class="orca-input" id="pr-k0" value="site-code"></div><div><label class="orca-label" for="pr-v0">Value</label><input class="orca-input" id="pr-v0" value="NB-01"></div><button class="orca-icon-button" type="button" aria-label="Remove property site-code" data-orca-remove-row>{% icon "delete" %}</button></div>
+  <div class="orca-property-row" data-orca-row>
+    <div>
+      <label class="orca-label" for="pr-k0">Key</label>
+      <input class="orca-input" id="pr-k0" value="site-code">
+    </div>
+    <div>
+      <label class="orca-label" for="pr-v0">Value</label>
+      <input class="orca-input" id="pr-v0" value="NB-01">
+    </div>
+    <button class="orca-icon-button" type="button" aria-label="Remove property site-code" data-orca-remove-row>
+      {% icon "delete" %}
+    </button>
+  </div>
 </div>
-<template id="pr-tpl"><div class="orca-property-row" data-orca-row><div><label class="orca-label" for="pr-k__prefix__">Key</label><input class="orca-input" id="pr-k__prefix__"></div><div><label class="orca-label" for="pr-v__prefix__">Value</label><input class="orca-input" id="pr-v__prefix__"></div><button class="orca-icon-button" type="button" aria-label="Remove property" data-orca-remove-row>{% icon "delete" %}</button></div></template>
-<button class="orca-button orca-button--ghost" type="button" data-orca-add-row="pr-tpl" aria-controls="pr-list" style="margin-top: var(--orca-space-8)">{% icon "plus" %}Add property</button>
+<template id="pr-tpl">
+  <div class="orca-property-row" data-orca-row>
+    <div>
+      <label class="orca-label" for="pr-k__prefix__">Key</label>
+      <input class="orca-input" id="pr-k__prefix__">
+    </div>
+    <div>
+      <label class="orca-label" for="pr-v__prefix__">Value</label>
+      <input class="orca-input" id="pr-v__prefix__">
+    </div>
+    <button class="orca-icon-button" type="button" aria-label="Remove property" data-orca-remove-row>
+      {% icon "delete" %}
+    </button>
+  </div>
+</template>
+<button class="orca-button orca-button--ghost" type="button" data-orca-add-row="pr-tpl" aria-controls="pr-list" style="margin-top: var(--orca-space-8)">
+  {% icon "plus" %}
+  Add property
+</button>
 ```
 
 ### Server code
@@ -819,10 +1162,6 @@ One change in an audit log: what happened, who did it, when, and the before and 
 
 Built from: `avatar`, `badge`, `time-label`
 
-### Why
-
-Trust in shared data depends on knowing who changed what (Peak–end rule); showing the old value struck through beside the new one makes the change readable without comparing screens.
-
 ### When to use
 
 - Activity feeds and history tabs of records.
@@ -835,9 +1174,16 @@ Trust in shared data depends on knowing who changed what (Peak–end rule); show
 #### Example: Change
 
 ```django
-<div class="orca-activity" style="max-width: 34rem"><span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span>
+<div class="orca-activity" style="max-width: 34rem">
+  <span class="orca-avatar orca-avatar--s" aria-hidden="true">AL</span>
   <div class="orca-activity__head"><span class="orca-badge orca-badge--subtle orca-badge--info">Updated</span><strong>Ada Lovelace</strong> changed Entrance A<time class="orca-activity__time" datetime="2026-11-06T08:14">6 Nov, 08:14</time></div>
-  <dl class="orca-activity__change"><dt>Name</dt><dd><del>Front door</del> → <ins>Entrance A</ins></dd><dt>Interval</dt><dd><del>15 min</del> → <ins>5 min</ins></dd></dl></div>
+  <dl class="orca-activity__change">
+    <dt>Name</dt>
+    <dd><del>Front door</del> → <ins>Entrance A</ins></dd>
+    <dt>Interval</dt>
+    <dd><del>15 min</del> → <ins>5 min</ins></dd>
+  </dl>
+</div>
 ```
 
 **Classes:** `.orca-activity`, `.orca-activity__head`, `.orca-activity__time`, `.orca-activity__change`
@@ -855,10 +1201,6 @@ Trust in shared data depends on knowing who changed what (Peak–end rule); show
 One slide at a time with previous and next buttons, dots and a count.
 
 Built from: `carousel-dot`, `icon-button`, `media-frame`
-
-### Why
-
-When only one image fits, controls and a count ('2 of 5') show there is more and where you are (Practical UI S06); native scroll-snap keeps swiping natural on touch.
 
 ### When to use
 
@@ -879,14 +1221,34 @@ When only one image fits, controls and a count ('2 of 5') show there is more and
 ```django
 <section class="orca-carousel" data-orca-carousel aria-roledescription="carousel" aria-label="Event snapshots" style="max-width: 24rem">
   <ul class="orca-carousel__track">
-    <li><div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt="08:14, two people at the door"></div></li>
-    <li><div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-floor.svg" %}" alt="Floor plan with the door highlighted"></div></li>
-    <li><div class="orca-ratio orca-ratio--16x9"><img src="{% static "orca/img/sample-street.svg" %}" alt="08:15, the door is clear"></div></li>
+    <li>
+      <div class="orca-ratio orca-ratio--16x9">
+        <img src="{% static "orca/img/sample-street.svg" %}" alt="08:14, two people at the door">
+      </div>
+    </li>
+    <li>
+      <div class="orca-ratio orca-ratio--16x9">
+        <img src="{% static "orca/img/sample-floor.svg" %}" alt="Floor plan with the door highlighted">
+      </div>
+    </li>
+    <li>
+      <div class="orca-ratio orca-ratio--16x9">
+        <img src="{% static "orca/img/sample-street.svg" %}" alt="08:15, the door is clear">
+      </div>
+    </li>
   </ul>
   <div class="orca-carousel__controls">
-    <button class="orca-icon-button" type="button" aria-label="Previous image" data-orca-prev>{% icon "chevron-left" %}</button>
-    <div class="orca-carousel__dots"><button class="orca-carousel-dot" type="button" aria-label="Image 1" data-orca-slide="0"></button><button class="orca-carousel-dot" type="button" aria-label="Image 2" data-orca-slide="1"></button><button class="orca-carousel-dot" type="button" aria-label="Image 3" data-orca-slide="2"></button></div>
-    <button class="orca-icon-button" type="button" aria-label="Next image" data-orca-next>{% icon "chevron-right" %}</button>
+    <button class="orca-icon-button" type="button" aria-label="Previous image" data-orca-prev>
+      {% icon "chevron-left" %}
+    </button>
+    <div class="orca-carousel__dots">
+      <button class="orca-carousel-dot" type="button" aria-label="Image 1" data-orca-slide="0"></button>
+      <button class="orca-carousel-dot" type="button" aria-label="Image 2" data-orca-slide="1"></button>
+      <button class="orca-carousel-dot" type="button" aria-label="Image 3" data-orca-slide="2"></button>
+    </div>
+    <button class="orca-icon-button" type="button" aria-label="Next image" data-orca-next>
+      {% icon "chevron-right" %}
+    </button>
     <span class="orca-carousel__count" aria-live="polite">1 of 3</span>
   </div>
 </section>
@@ -908,10 +1270,6 @@ A horizontal row that scrolls and snaps, showing part of the next item.
 
 Built from: `card`
 
-### Why
-
-A peeking next item is the clue that more exists (Practical UI S06); snapping stops half-visible items.
-
 ### When to use
 
 - Rows of cards on phones; quick filters; recent items.
@@ -925,9 +1283,24 @@ A peeking next item is the clue that more exists (Practical UI S06); snapping st
 
 ```django
 <ul class="orca-scroller" tabindex="0" aria-label="Sites" style="max-width: 30rem; padding-inline: 0">
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">North building</h3><p class="orca-card-meta">12 videos</p></div></li>
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Warehouse</h3><p class="orca-card-meta">4 videos</p></div></li>
-  <li class="orca-card"><div class="orca-card__body"><h3 class="orca-card-title">Car park</h3><p class="orca-card-meta">2 videos</p></div></li>
+  <li class="orca-card">
+    <div class="orca-card__body">
+      <h3 class="orca-card-title">North building</h3>
+      <p class="orca-card-meta">12 videos</p>
+    </div>
+  </li>
+  <li class="orca-card">
+    <div class="orca-card__body">
+      <h3 class="orca-card-title">Warehouse</h3>
+      <p class="orca-card-meta">4 videos</p>
+    </div>
+  </li>
+  <li class="orca-card">
+    <div class="orca-card__body">
+      <h3 class="orca-card-title">Car park</h3>
+      <p class="orca-card-meta">2 videos</p>
+    </div>
+  </li>
 </ul>
 ```
 
@@ -947,10 +1320,6 @@ A tiny trend line without axes, ending with a dot on the latest value.
 
 Built from: `stat-value`
 
-### Why
-
-The shape of a trend is understood pre-attentively; a sparkline adds that context to a number without a full chart (Miller's law). The end dot marks 'now'.
-
 ### When to use
 
 - Beside a stat value or in a table cell.
@@ -967,7 +1336,10 @@ The shape of a trend is understood pre-attentively; a sparkline adds that contex
 #### Example: Sparklines
 
 ```django
-<div class="orca-stack" style="max-width: 12rem">{% orca_sparkline "5,8,6,9,12,10,14,13,16" %}{% orca_sparkline "20,18,19,15,12,13,9" "Errors per day, falling" %}</div>
+<div class="orca-stack" style="max-width: 12rem">
+  {% orca_sparkline "5,8,6,9,12,10,14,13,16" %}
+  {% orca_sparkline "20,18,19,15,12,13,9" "Errors per day, falling" %}
+</div>
 ```
 
 ### Server code
@@ -1001,10 +1373,6 @@ ctx["trend"] = [row["n"] for row in daily]   # {% orca_sparkline trend "Views pe
 A ring of up to about five shares with the total in the middle and a legend with values.
 
 Built from: `legend-item`
-
-### Why
-
-A part-of-whole split is grasped quickly when there are few parts; the legend gives the exact numbers and names every colour (Practical UI C03).
 
 ### When to use
 
@@ -1055,10 +1423,6 @@ The frame every chart sits in: title, subtitle, legend, a reserved plot area, a 
 
 Built from: `legend-item`, `no-data-state`, `panel-title`
 
-### Why
-
-A chart is only useful with its title, units and source (Practical UI W04); reserving the plot area prevents layout jumps (Doherty), and the data table gives everyone the exact values (Postel's law).
-
 ### When to use
 
 - Every chart, whatever draws it (SVG, canvas, a charting library).
@@ -1072,11 +1436,40 @@ A chart is only useful with its title, units and source (Practical UI W04); rese
 
 ```django
 <figure class="orca-chart-frame" style="max-width: 36rem">
-  <div class="orca-chart-frame__head"><div><h3 class="orca-panel-title">Visitors per hour</h3><p class="orca-small orca-muted">Today, people per hour, all entrances</p></div><button class="orca-button orca-button--ghost orca-button--dense" type="button">Export</button></div>
-  <ul class="orca-legend"><li class="orca-legend__item"><span class="orca-swatch" style="--orca-swatch: var(--orca-chart-1)"></span>Entrance A</li><li class="orca-legend__item"><span class="orca-swatch" style="--orca-swatch: var(--orca-chart-2)"></span>Entrance B</li></ul>
-  <div class="orca-chart-frame__plot" style="--orca-ratio: 3 / 1"><div class="orca-no-data" style="height: 100%"><strong>Chart area</strong>Draw the chart here.</div></div>
+  <div class="orca-chart-frame__head">
+    <div>
+      <h3 class="orca-panel-title">Visitors per hour</h3>
+      <p class="orca-small orca-muted">Today, people per hour, all entrances</p>
+    </div>
+    <button class="orca-button orca-button--ghost orca-button--dense" type="button">Export</button>
+  </div>
+  <ul class="orca-legend">
+    <li class="orca-legend__item"><span class="orca-swatch" style="--orca-swatch: var(--orca-chart-1)"></span>Entrance A</li>
+    <li class="orca-legend__item"><span class="orca-swatch" style="--orca-swatch: var(--orca-chart-2)"></span>Entrance B</li>
+  </ul>
+  <div class="orca-chart-frame__plot" style="--orca-ratio: 3 / 1">
+    <div class="orca-no-data" style="height: 100%"><strong>Chart area</strong>Draw the chart here.</div>
+  </div>
   <figcaption class="orca-chart-frame__caption">Source: line counts · Europe/Paris · updated 09:14</figcaption>
-  <details><summary>Show data</summary><table class="orca-table orca-table--compact"><thead><tr><th scope="col">Hour</th><th scope="col" class="is-num">Entrance A</th><th scope="col" class="is-num">Entrance B</th></tr></thead><tbody><tr><td>08:00</td><td class="is-num">412</td><td class="is-num">380</td></tr></tbody></table></details>
+  <details>
+    <summary>Show data</summary>
+    <table class="orca-table orca-table--compact">
+      <thead>
+        <tr>
+          <th scope="col">Hour</th>
+          <th scope="col" class="is-num">Entrance A</th>
+          <th scope="col" class="is-num">Entrance B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>08:00</td>
+          <td class="is-num">412</td>
+          <td class="is-num">380</td>
+        </tr>
+      </tbody>
+    </table>
+  </details>
 </figure>
 ```
 
@@ -1096,10 +1489,6 @@ One large figure with the statement it supports and where it comes from.
 
 Built from: `stat-value`, `small-text`
 
-### Why
-
-A single striking number is remembered (Von Restorff, Peak–end rule); the statement and the source keep it honest.
-
 ### When to use
 
 - Editorial factoids, live counts beside a video, report highlights.
@@ -1116,7 +1505,13 @@ A single striking number is remembered (Von Restorff, Peak–end rule); the stat
 #### Example: Big number
 
 ```django
-<figure class="orca-factoid" style="margin: 0"><span class="orca-factoid__number">2,480</span><figcaption><p class="orca-factoid__text">videos published this year</p><p class="orca-factoid__source">Library, November 2026</p></figcaption></figure>
+<figure class="orca-factoid" style="margin: 0">
+  <span class="orca-factoid__number">2,480</span>
+  <figcaption>
+    <p class="orca-factoid__text">videos published this year</p>
+    <p class="orca-factoid__source">Library, November 2026</p>
+  </figcaption>
+</figure>
 ```
 
 **Classes:** `.orca-factoid`, `.orca-factoid__number`, `.orca-factoid__text`, `.orca-factoid__source`
@@ -1135,10 +1530,6 @@ A count with its status word, as a link that filters the list to that status.
 
 Built from: `stat-value`, `status-dot`
 
-### Why
-
-Counts by status answer 'how many need me?' at a glance (Miller's law) and double as the quickest filter (Fitts's law: a large target); the dot is paired with a word (C03).
-
 ### When to use
 
 - Above lists and tables whose records have a status.
@@ -1151,7 +1542,10 @@ Counts by status answer 'how many need me?' at a glance (Miller's law) and doubl
 #### Example: Summary tile
 
 ```django
-<a class="orca-summary-tile" href="#" style="max-width: 10rem"><span class="orca-summary-tile__value">10</span><span class="orca-summary-tile__label"><span class="orca-dot orca-dot--positive"></span>Published</span></a>
+<a class="orca-summary-tile" href="#" style="max-width: 10rem">
+  <span class="orca-summary-tile__value">10</span>
+  <span class="orca-summary-tile__label"><span class="orca-dot orca-dot--positive"></span>Published</span>
+</a>
 ```
 
 **Classes:** `.orca-summary-tile`, `.orca-summary-tile__value`, `.orca-summary-tile__label`
@@ -1170,10 +1564,6 @@ One labelled row of heat-map cells, each with its value printed.
 
 Built from: `heat-cell`
 
-### Why
-
-A row per weekday or resource lets people compare hours along a line (Miller's law); printing the value means the shade is never the only carrier of meaning (C03).
-
 ### When to use
 
 - Capacity and occupancy heat maps, availability grids.
@@ -1189,7 +1579,16 @@ A row per weekday or resource lets people compare hours along a line (Miller's l
 #### Example: Row
 
 ```django
-<table class="orca-heatmap"><tbody><tr><th scope="row">Mon</th><td class="orca-heat orca-heat--1">12</td><td class="orca-heat orca-heat--3">142</td><td class="orca-heat orca-heat--5">310</td></tr></tbody></table>
+<table class="orca-heatmap">
+  <tbody>
+    <tr>
+      <th scope="row">Mon</th>
+      <td class="orca-heat orca-heat--1">12</td>
+      <td class="orca-heat orca-heat--3">142</td>
+      <td class="orca-heat orca-heat--5">310</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 **Classes:** `.orca-heatmap`, `.orca-heat`
@@ -1207,10 +1606,6 @@ A row per weekday or resource lets people compare hours along a line (Miller's l
 A board column's title with its card count and, when set, its limit.
 
 Built from: `badge`
-
-### Why
-
-The count and the limit show at a glance where work piles up (Miller's law, Von Restorff when over the limit).
 
 ### When to use
 

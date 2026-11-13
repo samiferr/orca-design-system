@@ -1,55 +1,91 @@
-{% extends "orca/docs/base.html" %}{% load orca %}
-{% block blog_modifier %} orca-blog--wide{% endblock %}
-{% block blog_kicker %}<p class="orca-card-kicker">Django design system · phase 4: templates</p>{% endblock %}
-{% block page_title %}Every element says why, when and how.{% endblock %}
-{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA gives Django developers and AI coding agents an exhaustive, documented set of interface elements. Each one carries its reason, its rules of use, the tokens it reads and a working example, so the interface is built the same way every time.</p>{% endblock %}
+{% extends "orca/docs/base.html" %}{% load orca static %}
+{# The overview, written as a blog post on the Blog page template. Screenshots live in static/orca/img/overview/. #}
+{% block blog_kicker %}<p class="orca-card-kicker">Overview · Django design system</p>{% endblock %}
+{% block page_title %}Build Django interfaces the same way every time{% endblock %}
+{% block page_subtitle %}<p class="orca-p orca-p--lead orca-blog__intro">ORCA gives Django developers and AI coding agents a documented set of {{ stats.elements }} interface elements, from a single button to a complete dashboard page. Each one says when to use it, when not to, how to build it, and ships a working example.</p>{% endblock %}
 {% block page_actions %}<a class="orca-button orca-button--primary" href="{% url 'orca:guide' 'installation' %}">Install ORCA</a><a class="orca-button" href="{% url 'orca:templates' %}">Browse templates</a>{% endblock %}
-{% block page %}
-<section class="orca-panel" aria-labelledby="hero-sample">
-  <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="hero-sample">Live ORCA primitives</h2><p class="orca-panel-header__desc">Rendered by the package you install.</p></div></div>
-  <div class="orca-panel__body">{{ hero }}</div>
+{% block blog_body %}
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="problem-h">
+  <h2 class="orca-section-title" id="problem-h">Interfaces drift when nobody writes the rules down</h2>
+  <p class="orca-p">Two developers build two list pages and end up with two kinds of buttons, three shades of grey and a delete action that is sometimes red and sometimes not. An AI coding agent makes the same mistake faster, because it has no rulebook to read: it guesses a class name, hard-codes a colour and moves on.</p>
+  <p class="orca-p">ORCA is the rulebook, kept next to the code. Every element lives in a catalogue that people read on this site and agents read from the command line, so a dashboard built on Monday and a dashboard built in March look like one product.</p>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/dashboard-light.png' %}" alt="A dashboard page: four stat cards above a bar chart and a line chart, with a navigation sidebar on the left and a teal top bar" width="2560" height="1600" loading="lazy">
+    <p class="orca-small orca-muted">The <a class="orca-link" href="{% url 'orca:element' 'dashboard' %}">Dashboard template</a> with placeholder content. The charts come from one template tag each.</p>
+  </div>
 </section>
 
-<section class="orca-vstack orca-vstack--tight" aria-labelledby="facts-h">
-  <h2 class="orca-section-title" id="facts-h">In numbers</h2>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="levels-h">
+  <h2 class="orca-section-title" id="levels-h">Four levels, from a button to a page</h2>
+  <p class="orca-p">The catalogue is built bottom-up, and each level is made only of the level below it.</p>
   <div class="orca-stat-grid">
     <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "grid" %}</span><p class="orca-stat-label">Primitives</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.primitives }}</p></div>
     <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "cluster-host" %}</span><p class="orca-stat-label">Components</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.components }}</p></div>
     <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "blueprint" %}</span><p class="orca-stat-label">Patterns</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.patterns }}</p></div>
     <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "folder" %}</span><p class="orca-stat-label">Templates</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.templates }}</p></div>
-    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "book" %}</span><p class="orca-stat-label">Guide items covered</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.guide_items }} of {{ stats.guide_items }}</p></div>
-    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "sliders" %}</span><p class="orca-stat-label">Brand keys</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.brand_keys }}</p></div>
-    <div class="orca-stat-card"><div class="orca-stat-card__head"><span class="orca-stat-card__icon" aria-hidden="true">{% icon "star" %}</span><p class="orca-stat-label">Icons</p></div><p class="orca-stat-value orca-stat-value--lg">{{ stats.icons }}</p></div>
+  </div>
+  <p class="orca-p"><strong>Primitives</strong> are the smallest pieces: buttons, inputs, badges, icons. <strong>Components</strong> group a few of them into one job, such as a field with its label and help text. <strong>Patterns</strong> are recurring sections: data tables, forms, charts, calendars, schedulers, planning boards. <strong>Templates</strong> are whole pages you extend.</p>
+  <p class="orca-p">Prefer the highest level that fits. A list page needs one template and your queryset, not forty primitives.</p>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/list-page.png' %}" alt="A records list page: a title with Filters and Add record buttons, a search field, a table of eight records with edit and delete icons, and pagination below" width="2560" height="1600" loading="lazy">
+    <p class="orca-small orca-muted">A records list from the <a class="orca-link" href="{% url 'orca:element' 'generic-list' %}">Generic list template</a>. One primary action, filters in a drawer, pagination and counts included.</p>
   </div>
 </section>
 
-<div class="orca-split orca-split--wide-aside">
-  <section class="orca-vstack orca-vstack--tight" aria-labelledby="anatomy-h">
-    <h2 class="orca-section-title" id="anatomy-h">What an element looks like</h2>
-    <p class="orca-p">Each record in the catalogue answers the same questions, in the same order. Developers read it on these pages; agents read it with <code class="orca-code">python -m orca show switch</code> or from <code class="orca-code">catalogue.json</code>.</p>
-    <dl class="orca-kv">
-      <div><dt>Why</dt><dd>The user need, tied to a named principle.</dd></div>
-      <div><dt>When, and when not</dt><dd>The situations it fits and the alternatives to use instead.</dd></div>
-      <div><dt>How</dt><dd>Exact markup, classes, sizes and wording rules.</dd></div>
-      <div><dt>Accessibility</dt><dd>What assistive technology needs from the markup.</dd></div>
-      <div><dt>Tokens and principles</dt><dd>The <code class="orca-code">--orca-*</code> values it reads and the rules it applies.</dd></div>
-      <div><dt>Example</dt><dd>A template snippet that renders on this site and in your project.</dd></div>
-    </dl>
-  </section>
-  <aside>
-    <figure class="orca-card">
-      <div class="orca-card__body">
-        <figcaption class="orca-card-kicker">From the catalogue · switch</figcaption>
-        <p class="orca-card-title">Switch</p>
-        <p class="orca-small"><strong>Why.</strong> A switch mirrors a physical switch: flipping it changes something now. Immediate effect needs immediate feedback.</p>
-        <p class="orca-small"><strong>When.</strong> Settings saved at once: play videos automatically, turn notifications on.</p>
-        <p class="orca-small"><strong>Not when.</strong> Inside forms that need a Save button: use a checkbox.</p>
-        <label class="orca-switch"><input type="checkbox" role="switch" checked id="home-switch"><span class="orca-switch__track"></span><span>Autoplay videos</span></label>
-      </div>
-      <div class="orca-card__footer"><a class="orca-link orca-link--plain orca-small" href="{% url 'orca:element' 'switch' %}">Read the full switch entry</a></div>
-    </figure>
-  </aside>
-</div>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="anatomy-h">
+  <h2 class="orca-section-title" id="anatomy-h">Every element answers the same questions</h2>
+  <p class="orca-p">Open any element and you find the same sections in the same order. Developers read them on these pages. Agents read the same text with <code class="orca-code">python -m orca show button</code> or from <code class="orca-code">catalogue.json</code>.</p>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/element-button.png' %}" alt="The Button page of this site: a summary, then live previews of button weights, variants and busy states, each with a Preview and a Code tab, and an On this page list on the right" width="2560" height="1800" loading="lazy">
+    <p class="orca-small orca-muted">The <a class="orca-link" href="{% url 'orca:element' 'button' %}">Button</a> entry. Every example is rendered by the package you install, and the Code tab holds the template to copy.</p>
+  </div>
+  <dl class="orca-kv">
+    <div><dt>When, and when not</dt><dd>The situations it fits and the element to use instead.</dd></div>
+    <div><dt>How</dt><dd>Exact markup, classes, sizes and wording rules.</dd></div>
+    <div><dt>Accessibility</dt><dd>What assistive technology needs from the markup.</dd></div>
+    <div><dt>Tokens and principles</dt><dd>The <code class="orca-code">--orca-*</code> values it reads and the UX principles it applies.</dd></div>
+    <div><dt>Example</dt><dd>A template snippet that renders here and in your project.</dd></div>
+  </dl>
+</section>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="pages-h">
+  <h2 class="orca-section-title" id="pages-h">Complex screens come from your data</h2>
+  <p class="orca-p">Charts, calendars and boards are not drawn by hand. You pass plain data to a template tag and ORCA draws the result in token colours, so it follows your brand and your theme.</p>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Django template</span></div><pre><code data-orca-highlight="django">{% verbatim %}{% orca_chart "bar" data %}
+{% orca_month_calendar events %}
+{% orca_week_view events days=7 %}{% endverbatim %}</code></pre></div>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/calendar-page.png' %}" alt="A calendar page: toolbar with previous, Today and next, a view switch, a month grid with events and a side panel with a mini calendar" width="2560" height="1600" loading="lazy">
+    <p class="orca-small orca-muted">The <a class="orca-link" href="{% url 'orca:element' 'calendar-page' %}">Calendar page</a>: toolbar, month view and side panel from a list of events.</p>
+  </div>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/planning-board.png' %}" alt="A kanban board with three columns, To do, In progress and Done, each holding task cards with a tag, a due date and an owner's initials" width="2560" height="880" loading="lazy">
+    <p class="orca-small orca-muted">The <a class="orca-link" href="{% url 'orca:element' 'planning-board-page' %}">Planning board page</a>. Column limits and due dates carry a word as well as a colour.</p>
+  </div>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/scheduler-page.png' %}" alt="A scheduler page: resources listed down the left and time across the top, with bookings laid out on the grid" width="2560" height="1600" loading="lazy">
+    <p class="orca-small orca-muted">The <a class="orca-link" href="{% url 'orca:element' 'scheduler-page' %}">Scheduler page</a>: resources by time.</p>
+  </div>
+</section>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="brand-h">
+  <h2 class="orca-section-title" id="brand-h">One brand setting, three themes</h2>
+  <p class="orca-p">Only brand tokens can change, and only in <code class="orca-code">settings.ORCA["BRAND"]</code>: {{ stats.brand_keys }} keys including name, logo, colour and fonts. Light, dark and paper themes ship with the system and every text and control colour is contrast-checked in all three.</p>
+  <div class="orca-vstack orca-vstack--tight">
+    <img class="orca-img orca-img--bordered" src="{% static 'orca/img/overview/dashboard-dark.png' %}" alt="The same dashboard in the dark theme: dark grey page and panels, light text, and the charts redrawn in lighter blue and orange" width="2560" height="1600" loading="lazy">
+    <p class="orca-small orca-muted">The dashboard from the top of this page in the dark theme. Nothing was restyled: the tokens switched, and the charts redrew.</p>
+  </div>
+  <p class="orca-p">Read more in <a class="orca-link" href="{% url 'orca:guide' 'brand-and-themes' %}">Brand and themes</a> and <a class="orca-link" href="{% url 'orca:guide' 'accessibility' %}">Accessibility</a>.</p>
+</section>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="agents-h">
+  <h2 class="orca-section-title" id="agents-h">Made for agents as much as for people</h2>
+  <p class="orca-p">Look up before you write. An agent searches the catalogue, prints the element it needs and copies the example, instead of inventing class names.</p>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Shell</span></div><pre><code data-orca-highlight="bash">python -m orca search switch
+python -m orca show switch
+python manage.py orca_lint templates/</code></pre></div>
+  <p class="orca-p">The last command checks your templates for hard-coded colours, unknown classes, buttons without a type and images without alt text. The <a class="orca-link" href="{% url 'orca:guide' 'ai-agents' %}">guide for AI agents</a> and the repository's <code class="orca-code">AGENTS.md</code> give the rules in full.</p>
+</section>
 
 <section class="orca-vstack orca-vstack--tight" aria-labelledby="start-h">
   <h2 class="orca-section-title" id="start-h">Start in three steps</h2>
@@ -64,17 +100,17 @@ ORCA = {"BRAND": {"name": "Acme", "color": "#0f95a1"}}</code></pre></div></div><
 &lt;html {% orca_html_attrs %}&gt;
 &lt;head&gt;{% orca_head %}&lt;/head&gt;{% endverbatim %}</code></pre></div></div></li>
   </ol>
-  <p class="orca-p"><a class="orca-link orca-link--plain" href="{% url 'orca:guide' 'installation' %}">Full installation guide</a></p>
+  <p class="orca-p">Then extend a template: the <a class="orca-link" href="{% url 'orca:guide' 'installation' %}">installation guide</a> covers the rest.</p>
 </section>
 
-{% for lvl in levels %}<section class="orca-vstack orca-vstack--tight" aria-labelledby="cats-{{ lvl.key }}">
-  <h2 class="orca-section-title" id="cats-{{ lvl.key }}">{{ lvl.title }} by category</h2>
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="browse-h">
+  <h2 class="orca-section-title" id="browse-h">Browse the catalogue</h2>
+  {% for lvl in levels %}<h3 class="orca-h5">{{ lvl.title }} by category</h3>
   <ul class="orca-card-grid">
     {% for cat, els in lvl.nav %}<li class="orca-card orca-card--link"><div class="orca-card__body">
-      <h3 class="orca-card-title"><a class="orca-card__link" href="{% url lvl.url %}#cat-{{ cat.key }}">{{ cat.title }}</a></h3>
+      <h4 class="orca-card-title"><a class="orca-card__link" href="{% url lvl.url %}#cat-{{ cat.key }}">{{ cat.title }}</a></h4>
       <p class="orca-card-meta">{{ els|length }} element{{ els|length|pluralize }} · {{ cat.intro|truncatewords:14 }}</p>
     </div></li>{% endfor %}
-  </ul>
+  </ul>{% endfor %}
 </section>
-{% endfor %}
 {% endblock %}
