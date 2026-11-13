@@ -78,6 +78,6 @@ python manage.py orca_lint templates/</code></pre></div>
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Content Security Policy</h2>
-  <p class="orca-p">ORCA writes one small inline <code class="orca-code">&lt;style&gt;</code> for your brand values. With the automatic theme it also writes one inline <code class="orca-code">&lt;script&gt;</code> that restores the reader's theme before the page paints. If the request has a <code class="orca-code">csp_nonce</code> attribute (django-csp sets one), ORCA adds it to both. To drop the script, fix a theme or use <code class="orca-code">{% templatetag openblock %} orca_head theme_restore=False {% templatetag closeblock %}</code>.</p>
+  <p class="orca-p">ORCA writes one inline <code class="orca-code">&lt;style&gt;</code> for your brand values and, with the automatic theme, one inline <code class="orca-code">&lt;script&gt;</code> that restores the reader's theme before the page paints. If the request has a <code class="orca-code">csp_nonce</code> (django-csp sets one), ORCA adds it to both. To drop the script, fix a theme or use <code class="orca-code">{% templatetag openblock %} orca_head theme_restore=False {% templatetag closeblock %}</code>.</p>
 </section>
 {% endblock %}

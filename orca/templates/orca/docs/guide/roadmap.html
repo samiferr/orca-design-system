@@ -13,12 +13,12 @@
     </li>
     {% endwith %}{% endfor %}
   </ol>
-  <p class="orca-p">Each component, pattern and template lists what it is built from. That means elements from the level directly below, or from its own level when it nests one. No level is skipped, and a part is listed once: if a listed element already contains it, it is not listed again. The tests enforce both rules.</p>
+  <p class="orca-p">Each component, pattern and template lists what it is built from: elements one level down, or from its own level when it nests one. No level is skipped, and a part already contained in a listed element is not listed again. The tests enforce both rules.</p>
 </section>
 
 <section class="orca-vstack orca-vstack--tight">
   <h2 class="orca-section-title">Coverage</h2>
-  <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components, {{ stats.patterns }} patterns and {{ stats.templates }} templates cover all {{ stats.guide_items }} primitive, component, pattern and template items of the ORCA guide, including the planning items the guide lists as not built yet. Items that are variants of one thing share an element. The tests fail if any item loses its element.</p>
+  <p class="orca-p">{{ stats.primitives }} primitives, {{ stats.components }} components, {{ stats.patterns }} patterns and {{ stats.templates }} templates cover all {{ stats.guide_items }} items in the ORCA guide, including the planning items it lists as not built yet. Variants of one thing share an element, and the tests fail if any item loses its element.</p>
   {% for title, sections in coverage %}
   <section class="orca-table-card" aria-label="{{ title }}">
   <div class="orca-panel-header"><div class="orca-panel-header__text"><h3 class="orca-panel-title">{{ title }}</h3></div></div>
