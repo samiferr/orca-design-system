@@ -49,7 +49,6 @@
   </dl></div>
 </section>{% endif %}
 
-<div class="orca-panels">
   <section class="orca-panel" aria-labelledby="when-h">
     <div class="orca-panel-header"><div class="orca-panel-header__text"><h2 class="orca-panel-title" id="when-h">When to use</h2></div></div>
     <div class="orca-panel__body orca-vstack orca-vstack--tight">
@@ -86,5 +85,4 @@
       {% if related %}<div><dt>Related</dt><dd><span class="orca-row">{% for r in related %}<a class="orca-link orca-link--plain" href="{% url 'orca:element' r.id %}">{{ r.name }}</a>{% endfor %}</span></dd></div>{% endif %}
     </dl></div>
   </section>{% endif %}
-</div>
 {% endblock %}
