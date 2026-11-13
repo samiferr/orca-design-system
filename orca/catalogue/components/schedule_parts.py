@@ -30,11 +30,11 @@ add(Component(
 
 add(Component(
     "add-row-button", "Add-row button", C,
-    "A ghost button that adds one more row to a repeating group and focuses it.",
+    "A ghost button that adds a row to a repeating group and focuses it.",
     why="Letting people add rows only when needed keeps the default form short (Practical UI R02); focusing the new row saves a click (Fitts's law).",
-    when=["Schedules, reminders, properties, any repeating set of fields."],
+    when=["Schedules, reminders, properties, any repeating fields."],
     how=["`<button class=\"orca-button orca-button--ghost\" type=\"button\" data-orca-add-row=\"template-id\" aria-controls=\"list-id\">{% templatetag openblock %} icon \"plus\" {% templatetag closeblock %}Add hours</button>` below the rows.",
-         "Name what is added ('Add hours', 'Add reminder'); hide it at the maximum number of rows and say the limit."],
+         "Name what it adds ('Add hours', 'Add reminder'); at the maximum number of rows, hide it and say the limit."],
     classes=[".orca-button--ghost"],
     laws=["R02", "fitts", "B10"],
     uses=["button", "icon"],
@@ -46,11 +46,11 @@ add(Component(
 
 add(Component(
     "remove-row-button", "Remove-row button", C,
-    "An icon button that removes its row, named after what it removes, with the removal announced.",
+    "An icon button that removes its row; named after the row and announced when used.",
     why="Removing a row is low risk and easy to redo, so it needs no confirmation (Doherty: friction only where costly), but its name must say which row it removes (Hick's law: labelled icons).",
     when=["The end of every removable row."],
     how=["`<button class=\"orca-icon-button\" type=\"button\" aria-label=\"Remove Monday 08:00 to 12:00\" data-orca-remove-row>{% templatetag openblock %} icon \"delete\" {% templatetag closeblock %}</button>`.",
-         "With Django formsets, a `-DELETE` checkbox in the row is ticked and the row hidden instead of removed.",
+         "With Django formsets, tick the row's `-DELETE` checkbox and hide the row instead of removing it.",
          "Focus moves to the next row; the removal is announced."],
     classes=[".orca-icon-button"],
     laws=["doherty", "hick"],
@@ -61,7 +61,7 @@ add(Component(
 
 add(Component(
     "availability-legend", "Availability legend", C,
-    "The key to availability marks: free, busy, tentative and not working.",
+    "The key to the availability marks: free, busy, tentative, not working.",
     why="Patterns only help if their meaning is stated next to them (Practical UI C03).",
     when=["Above schedulers, booking grids and resource rows."],
     how=["`<ul class=\"orca-legend\">` of availability marks: `<li><span class=\"orca-avail orca-avail--free\">Free</span></li>` etc."],
@@ -125,10 +125,10 @@ add(Component(
 
 add(Component(
     "conflict-warning", "Conflict warning", C,
-    "A caution message saying what this plan conflicts with and how to resolve it.",
+    "A caution message naming what the plan conflicts with and how to fix it.",
     why="Conflicts found early are cheap to fix (Peak–end rule: prevent the negative peak); naming the other item and offering the fix turns a warning into a decision.",
     when=["Saving an event, shift or run that clashes with another one."],
-    how=["A caution callout: title names the conflict ('Grace Hopper is on holiday that day'), body names the other item with a link, actions offer the fixes ('Pick another person', 'Save anyway').",
+    how=["A caution callout: the title names the conflict ('Grace Hopper is on holiday that day'), the body links the other item, actions offer fixes ('Pick another person', 'Save anyway').",
          "Use caution when saving is still allowed; negative when it is blocked."],
     classes=[".orca-callout--caution"],
     laws=["peak-end", "W15"],
@@ -139,7 +139,7 @@ add(Component(
 
 add(Component(
     "overlap-warning", "Overlap warning", C,
-    "An inline message under a schedule row whose times overlap another row.",
+    "An inline message under a schedule row that overlaps another row.",
     why="Pointing at the exact row and the row it overlaps lets people fix it in place (Practical UI R21, W15).",
     when=["Schedule editors, as rows change (after leaving the field)."],
     how=["A `.orca-error` (or caution `.orca-help` with the warning icon when allowed) as `.orca-schedule-row__msg` inside the row: 'Overlaps Monday 08:00–12:00. Change the start or remove one row.'",

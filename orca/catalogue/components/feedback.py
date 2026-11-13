@@ -3,15 +3,15 @@ from . import Component
 
 C = category(
     "feedback", "Feedback",
-    "How the system tells people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.",
+    "Messages that tell people what happened and what to do next: alerts, callouts, toasts, dialogs, empty states and progress.",
     level="component",
 )
 
 add(Component(
     "alert", "Alert", C,
-    "An event message in a white box with a coloured side bar: icon, title, text and optional actions.",
+    "A message about an event, in a box with a coloured side bar, icon, title, text and optional actions.",
     why="Something happened that needs attention; a distinct shape, a status glyph and a title that states the fact make it noticed and understood (Von Restorff, Practical UI W15). Saying what to do next prevents a negative peak (Peak–end rule).",
-    when=["Results of an action that stay on the page: a failed test, a video offline, a saved setting with a warning.",
+    when=["Action results that stay on the page: a failed test, an offline video, a setting saved with a warning.",
           "Server messages after a redirect (see flash message)."],
     avoid=["Permanent guidance: use a callout.", "Short success confirmations: use a toast."],
     how=["`<div class=\"orca-alert orca-alert--negative\" role=\"alert\">` with `{% templatetag openblock %} status_icon \"negative\" {% templatetag closeblock %}`, `.orca-alert__title`, `.orca-alert__body`, optional `.orca-alert__actions` and a dismiss button `.orca-alert__close` with `data-orca-dismiss`.",
@@ -33,7 +33,7 @@ add(Component(
     "callout", "Callout (info, success, warning, danger)", C,
     "A tinted box of guidance that belongs to the page, not to an event.",
     why="Persistent information that changes how people act (a limit, a consequence) must stand apart from body text without looking like an error (Von Restorff, Practical UI C04).",
-    when=["Explaining a consequence before people act ('Deleting a site deletes its videos').", "Tips and limits on settings pages."],
+    when=["Stating a consequence before people act ('Deleting a site deletes its videos').", "Tips and limits on settings pages."],
     avoid=["Events and results: use an alert.", "More than one callout per section (banner blindness)."],
     how=["`<div class=\"orca-callout orca-callout--caution\">{% templatetag openblock %} icon \"warning\" {% templatetag closeblock %}<p class=\"orca-callout__title\">…</p><div class=\"orca-callout__body\">…</div></div>`.",
          "Tones: info (default), positive (success), caution (warning), negative (danger). Danger only for irreversible consequences."],
@@ -51,7 +51,7 @@ add(Component(
 
 add(Component(
     "empty-state", "Empty state", C,
-    "Illustration, title, explanation and the next action, where a list or page has nothing yet.",
+    "An illustration, title, explanation and next action shown where a list or page is empty.",
     why="An empty screen is either a beginning or the end of a search; explaining it and offering the next step turns a dead end into progress (Peak–end rule, Tesler's law).",
     when=["First use (no records yet); filters that match nothing; a cleared inbox."],
     avoid=["Small regions like a chart or a table cell: use the no-data state."],
@@ -69,7 +69,7 @@ add(Component(
 
 add(Component(
     "no-data-state", "No-data state", C,
-    "A compact message inside a chart, table or tile that has no data for the chosen period.",
+    "A compact message in a chart, table or tile with no data for the chosen period.",
     why="A blank chart reads as broken; saying that there is no data, and why, keeps trust (Peak–end rule) without a large empty state in a small space.",
     when=["Charts, KPI tiles and table bodies with no data for the current filters or period."],
     how=["`<div class=\"orca-no-data\" role=\"status\"><strong>No data for this period</strong>Counting started on 3 March.</div>` sized like the content it replaces.",
@@ -101,10 +101,10 @@ add(Component(
 
 add(Component(
     "dialog", "Dialog", C,
-    "A modal window with a title, a body and actions, built on the native <dialog>.",
+    "A modal window with a title, body and actions, built on the native <dialog>.",
     why="A short task that must finish before going back is clearest in focus (Von Restorff); the native element traps focus, closes with Escape and returns focus for free (Postel's law).",
     when=["Short focused tasks: rename, confirm, pick an option."],
-    avoid=["Long forms or content people compare with the page: use a page or a drawer."],
+    avoid=["Long forms, or content people compare with the page: use a page or drawer."],
     how=["`<dialog class=\"orca-dialog\" id=… aria-labelledby=…>` with `.orca-dialog__header` (title + close icon button with `data-orca-dialog-close`), `.orca-dialog__body` and `.orca-dialog__footer`.",
          "Open with a button carrying `data-orca-dialog-open=\"id\"`; forms inside use `method=\"dialog\"` or post normally.",
          "`--lg` for wider content. Primary action first in the footer."],
@@ -126,13 +126,13 @@ add(Component(
 
 add(Component(
     "confirm-dialog", "Confirm dialog", C,
-    "A dialog that names the consequence and the action before something irreversible happens.",
+    "A dialog that names the consequence and action before something irreversible happens.",
     why="A deliberate pause before an irreversible action is useful friction (Doherty threshold: friction; Practical UI B13); naming the action on the button ('Delete video') prevents a reflex 'OK'.",
     when=["Deleting, cancelling a run, revoking access: anything that cannot be undone."],
     avoid=["Reversible actions: do them and offer Undo in a toast."],
-    how=["Markup: a dialog with a question title ('Delete Entrance A?'), one sentence of consequence, a `--danger` button repeating the verb and object, and Cancel (focused first).",
+    how=["A dialog with a question title ('Delete Entrance A?'), one sentence on the consequence, a `--danger` button repeating the verb and object, and Cancel (focused first).",
          "Shortcut: add `data-orca-confirm=\"Its zones and alert rules are deleted.\" data-orca-confirm-title=\"Delete Entrance A?\" data-orca-confirm-action=\"Delete video\"` to the form or submit button.",
-         "Very serious consequences: add a required acknowledgement checkbox in `.orca-dialog__ack`."],
+         "For very serious consequences, add a required acknowledgement checkbox in `.orca-dialog__ack`."],
     classes=[".orca-dialog", ".orca-dialog__ack"],
     laws=["doherty", "B13", "peak-end", "restorff"],
     uses=["dialog-title", "button", "checkbox"],
@@ -151,7 +151,7 @@ add(Component(
 
 add(Component(
     "progress-with-counts", "Progress bar with counts", C,
-    "A labelled progress bar with the value in words and the counts behind it.",
+    "A labelled progress bar showing the value and the counts behind it.",
     why="For waits longer than a few seconds, saying how much is done and how much remains makes the wait tolerable and trustworthy (Doherty threshold, Peak–end rule).",
     when=["Video exports, imports, uploads, batch operations."],
     how=["`<div class=\"orca-progress-counts\">` with `__head` (label and `__value` '64%'), a `<progress class=\"orca-progress\">`, and `__meta` ('77 of 120 shots · about 4 minutes left · 2 failed').",
@@ -169,7 +169,7 @@ add(Component(
 
 add(Component(
     "toast", "Toast", C,
-    "A short message that appears at the bottom corner after an action and goes away by itself; several stack.",
+    "A short message that appears in the bottom corner after an action and goes away on its own; several can stack.",
     why="Confirming an action within moments, without moving the page, closes the loop (Doherty threshold, Peak–end rule); an Undo action makes mistakes cheap.",
     when=["Confirmations of completed, low-risk actions: 'Report sent', 'Video disabled. Undo'."],
     avoid=["Errors that need action: use an alert (toasts with errors do not auto-dismiss).", "Anything people must read later."],

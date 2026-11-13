@@ -3,13 +3,13 @@ from . import Pattern
 
 C = category(
     "grids", "Grids and collections",
-    "Repeating one component in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.",
+    "One component repeated in a responsive grid or sequence: products, videos, KPIs, a heat map, an event timeline.",
     level="pattern",
 )
 
 add(Pattern(
     "product-grid", "Product grid", C,
-    "Product items in a responsive grid that adapts the number of columns to the screen.",
+    "Product items in a responsive grid whose column count adapts to the screen.",
     why="A grid of equal tiles lets people compare many products by sight (Miller's law: recognition); responsive columns keep tiles readable on every screen (Postel's law).",
     when=["Catalogues and shop listings."],
     how=["`<ul class=\"orca-product-grid\">` of `<li>` product items; tiles are at least 12rem wide.",
@@ -38,7 +38,7 @@ add(Pattern(
 
 add(Pattern(
     "kpi-grid", "KPI grid", C,
-    "A row of stat cards summarising the state of things, linking to the detail behind each.",
+    "A row of stat cards that summarise current state, each linking to its detail.",
     why="A few key numbers at the top answer 'is everything fine?' at a glance (Miller's law); limiting them keeps each one meaningful (Von Restorff).",
     when=["The top of dashboards and report pages."],
     avoid=["More than about six cards: choose the ones people act on."],
@@ -57,7 +57,7 @@ add(Pattern(
 
 add(Pattern(
     "capacity-heat-map", "Capacity heat map", C,
-    "Occupancy by weekday and hour as shaded cells with the value printed, and a legend of the scale.",
+    "Occupancy by weekday and hour as shaded cells with printed values and a scale legend.",
     why="The busiest hours jump out from lightness alone (pre-attentive processing) while printed values keep it exact and accessible (Practical UI C03, W11).",
     when=["Capacity reports, staffing and opening-hours decisions."],
     how=["`<table class=\"orca-heatmap\">` with a caption, hour headers (`th scope=\"col\"`), weekday headers (`th scope=\"row\"`) and `td.orca-heat.orca-heat--0…5` cells; `--empty` for no data.",

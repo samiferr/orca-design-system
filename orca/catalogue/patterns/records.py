@@ -3,13 +3,13 @@ from . import Pattern
 
 C = category(
     "records", "Record management",
-    "Showing and changing one record and its children: detail panels, child tabs, activity, protected deletes and confirmations.",
+    "Showing and changing one record and its children: detail panels, child tabs, activity, blocked deletes and confirmations.",
     level="pattern",
 )
 
 add(Pattern(
     "detail-panel", "Detail panel", C,
-    "One record's summary: title and status, its actions, and a table of its properties.",
+    "A record's title, status, actions and a table of its properties.",
     why="A record page answers 'what is it, what state is it in, what can I do' in that order (Practical UI L03); properties as aligned pairs are scanned fast (Miller's law).",
     when=["The main panel of a detail page; a side panel for the selected row."],
     how=["`<section class=\"orca-detail-panel\">` with `.orca-detail-panel__head` (`__title`: name + status light; record actions) and a key/value list or table card below."],
@@ -26,11 +26,11 @@ add(Pattern(
 
 add(Pattern(
     "parent-child-tabs", "Parent record with child tabs", C,
-    "A parent record's summary followed by tabs, one per kind of child, each with its count.",
+    "A parent record's summary above tabs, one per kind of child, each with its count.",
     why="Keeping the parent visible while browsing its children preserves context (Miller's law); counts on tabs say where the content is before clicking (Practical UI S06).",
-    when=["Records that own lists of other records: a site's videos, zones and users."],
+    when=["Records that own other records, such as a site's videos, zones and users."],
     how=["`<div class=\"orca-parent\">` with the page head, `.orca-parent__summary` (stat cards or key facts) and child tabs as page links; the active tab's panel holds the child list tab.",
-         "Each tab is its own URL so it can be shared and survives a reload."],
+         "Give each tab its own URL so it can be shared and survives a reload."],
     classes=[".orca-parent", ".orca-parent__summary"],
     laws=["miller", "S06", "jakob"],
     uses=["page-head", "child-tabs", "stat-card"],
@@ -44,10 +44,10 @@ add(Pattern(
 
 add(Pattern(
     "child-list-tab", "Child list tab", C,
-    "The content of one child tab: a list header scoped to the parent, the children's table and an empty state.",
+    "One child tab's content: a list header for the parent, the children's table and an empty state.",
     why="The same list tools as a top-level list make child lists familiar (Jakob's law); creating a child from here pre-fills the parent (Tesler's law).",
     when=["Inside parent-with-child-tabs pages."],
-    how=["A list header ('Videos 12', search, 'Add video' that links to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action."],
+    how=["A list header ('Videos 12', search, 'Add video' linking to the form with `?site=…`), then a data table or card list; when empty, an empty state with the same create action."],
     classes=[".orca-list-header", ".orca-data-table"],
     laws=["jakob", "tesler"],
     uses=["list-header", "data-table", "empty-state"],
@@ -58,7 +58,7 @@ add(Pattern(
 
 add(Pattern(
     "activity-feed", "Activity feed", C,
-    "Changes to a record or a site, grouped by day, each with who, what, when and the before and after values.",
+    "Changes to a record or site, grouped by day, each showing who, what, when and the before and after values.",
     why="Seeing who changed what builds trust in shared data and answers 'why does this look different?' (Peak–end rule); grouping by day keeps a long history scannable (Miller's law).",
     when=["A history tab on records; an audit page for administrators."],
     how=["`<div class=\"orca-activity-feed\">` with `<h3 class=\"orca-activity-feed__day\">` headings and activity entries; 'Load older' at the end (never infinite scroll in an audit log)."],
@@ -75,7 +75,7 @@ add(Pattern(
 
 add(Pattern(
     "delete-blocked-notice", "Delete-blocked notice", C,
-    "Why a record cannot be deleted yet, which records depend on it, and how to proceed.",
+    "Why a record cannot be deleted yet, what depends on it and what to do next.",
     why="A refusal without a reason is a dead end (Peak–end rule); listing the blockers with links turns it into a to-do list (Practical UI W15, Tesler's law).",
     when=["Deleting a record that protected relations still use (Django `ProtectedError`)."],
     how=["A negative callout titled 'Entrance A cannot be deleted yet', the reason, `<ul class=\"orca-blocked-list\">` of linked dependants with counts, and the alternative (disable or archive) as a button.",
@@ -91,9 +91,9 @@ add(Pattern(
 
 add(Pattern(
     "confirm-action-panel", "Confirm action panel", C,
-    "A full-page confirmation for consequential actions: what will happen, what is kept, and the named action.",
+    "A full-page confirmation for serious actions: what will happen, what is kept and a button naming the action.",
     why="For actions too important for a small dialog, a page gives room to list consequences and needs a deliberate step (Practical UI B13; Doherty: useful friction), and works without script.",
-    when=["Deleting a site, revoking a user, stopping all runs; the fallback of a confirm dialog."],
+    when=["Deleting a site, revoking a user, stopping all runs; also the fallback for a confirm dialog."],
     how=["`<form class=\"orca-confirm-panel\" method=\"post\">` with a `.orca-confirm-panel__title` question, a list of what is removed and what is kept, an acknowledgement checkbox for irreversible cases, and form actions (danger button naming the action, Cancel link back).",
          "`--neutral` for non-destructive confirmations."],
     classes=[".orca-confirm-panel", ".orca-confirm-panel__title", ".orca-confirm-panel--neutral"],

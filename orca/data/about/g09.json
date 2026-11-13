@@ -1,0 +1,618 @@
+{
+ "weekly-availability-editor": {
+  "what": "A form where each day of the week can be switched on or off and given one or more time ranges. It sets when a place is open or a person is available.",
+  "uses": [
+   "Setting a shop's opening hours.",
+   "Letting staff or contractors set when they can work.",
+   "Defining when a service accepts bookings.",
+   "Setting a recording or maintenance schedule."
+  ],
+  "avoid": [
+   "Single dates such as holidays: use a separate list of exceptions.",
+   "Hours that are the same every day: use a simpler start and end form."
+  ],
+  "practices": [
+   "Allow several time ranges per day for lunch breaks and split shifts.",
+   "Show errors such as overlapping or reversed times on the row they affect.",
+   "Show the timezone the hours apply to.",
+   "Offer a shortcut to copy one day's hours to others."
+  ]
+ },
+ "working-hours-editor": {
+  "what": "A short form for regular working hours: which days, one start and end time, an optional break and a timezone. It suits hours that repeat every working day.",
+  "uses": [
+   "Setting a person's standard working week.",
+   "Defining a team's core hours.",
+   "Setting default hours for a new account or location."
+  ],
+  "avoid": [
+   "Hours that differ by day: use a day-by-day editor.",
+   "One-off changes like holidays: use an exceptions list."
+  ],
+  "practices": [
+   "Preselect the most common days and times.",
+   "Write the result out in words so people can check it.",
+   "Always ask for or show the timezone.",
+   "Link to a per-day option for unusual weeks."
+  ]
+ },
+ "recurrence-editor": {
+  "what": "A control for making an event, task or report repeat. People pick how often, on which days and when it stops, and see the rule in plain words.",
+  "uses": [
+   "Repeating meetings or appointments.",
+   "Scheduling recurring tasks and reminders.",
+   "Setting up reports that send on a schedule.",
+   "Repeating payments or deadlines."
+  ],
+  "avoid": [
+   "Events that happen once: a plain date picker is enough.",
+   "Irregular dates that follow no pattern: list the dates individually."
+  ],
+  "practices": [
+   "Offer common presets such as daily or weekly before a custom option.",
+   "Summarise the rule in a sentence, for example 'Every 2 weeks on Monday'.",
+   "Show the next few dates so mistakes are easy to spot.",
+   "Always give a clear way to end the repeat."
+  ]
+ },
+ "exception-editor": {
+  "what": "A list of dates that break from the usual schedule, such as holidays, closures or short days, with a way to add another.",
+  "uses": [
+   "Listing public holidays and closing days.",
+   "Setting special opening hours for an event or season.",
+   "Recording planned absences of a person or place."
+  ],
+  "avoid": [
+   "Changing the regular weekly pattern: edit the regular hours instead.",
+   "Recurring changes: use a repeat rule."
+  ],
+  "practices": [
+   "Sort by date and hide past entries by default.",
+   "Show the date prominently and the reason beside it.",
+   "Offer to import public holidays for the user's country.",
+   "Let people edit or remove an entry in one step."
+  ]
+ },
+ "time-off-editor": {
+  "what": "A form for requesting leave, shown with the person's remaining balance and their existing requests. It can also let managers approve or decline.",
+  "uses": [
+   "Requesting holiday, sick leave or training days.",
+   "Managers approving or declining leave.",
+   "Showing a person's leave history and balance."
+  ],
+  "avoid": [
+   "Rostering who works when: use a schedule or roster view.",
+   "Recording hours worked: use a timesheet."
+  ],
+  "practices": [
+   "Show the remaining balance and how many days the request uses before sending.",
+   "Support half days at the start and end.",
+   "Show each request's status clearly, with a word and not only colour.",
+   "Tell people what happens next after they send."
+  ]
+ },
+ "resource-scheduler": {
+  "what": "A timeline grid with one row per person, room or item and bookings shown as bars along a time scale. It shows who or what is free when.",
+  "uses": [
+   "Assigning staff, rooms or vehicles to jobs.",
+   "Seeing a team's day at a glance.",
+   "Spotting gaps and double bookings."
+  ],
+  "avoid": [
+   "A single person's calendar: use a standard calendar view.",
+   "Long lists of events without a time dimension: use a table."
+  ],
+  "practices": [
+   "Keep resource names visible while scrolling sideways.",
+   "Label bars with a short title and the time.",
+   "Make the time scale and current time easy to read.",
+   "Allow horizontal scrolling on small screens rather than squeezing the grid."
+  ]
+ },
+ "shift-planner": {
+  "what": "A table of people against days showing each person's shifts, with totals per week. It lets managers see coverage and workload together.",
+  "uses": [
+   "Planning weekly staff rotas.",
+   "Setting on-call schedules.",
+   "Checking people's hours against their contracts."
+  ],
+  "avoid": [
+   "Booking rooms or equipment by the hour: use a resource timeline.",
+   "Tracking hours already worked: use a timesheet."
+  ],
+  "practices": [
+   "Show totals next to contract hours and flag overtime in words and colour.",
+   "Mark weekends and days off clearly.",
+   "Distinguish shift types by label as well as colour.",
+   "Confirm before publishing the roster to staff."
+  ]
+ },
+ "booking-slot-picker": {
+  "what": "A way for visitors to choose a date, then pick from the free time slots on that day. Slots have a fixed length and are often grouped by morning and afternoon.",
+  "uses": [
+   "Booking a call, visit or demo.",
+   "Reserving a time at a clinic, salon or service desk.",
+   "Scheduling a delivery or collection."
+  ],
+  "avoid": [
+   "Choosing a date range such as a stay: use a date range picker.",
+   "Bookings that depend on service or staff: use a stepped booking flow."
+  ],
+  "practices": [
+   "Show only times that can be booked, or show full ones as disabled with a reason.",
+   "Display the slot length and timezone near the slots.",
+   "Group times by part of day to shorten scanning.",
+   "Summarise the chosen time before the final confirm."
+  ]
+ },
+ "appointment-picker": {
+  "what": "A step-by-step booking flow: choose a service and person, then a date and time, then confirm. A running summary keeps earlier choices visible.",
+  "uses": [
+   "Booking appointments where the service sets the length.",
+   "Choosing a specific staff member or location.",
+   "Reserving a time with a deposit or contact details."
+  ],
+  "avoid": [
+   "One service and one person: a simple slot picker is enough.",
+   "Booking a long stay or date range: use a date range picker."
+  ],
+  "practices": [
+   "Keep each step to one decision.",
+   "Show duration and price with each service.",
+   "Hold the chosen slot briefly and say how long.",
+   "Let people go back and change a choice without losing others."
+  ]
+ },
+ "conflict-resolver": {
+  "what": "A view that shows two bookings that overlap, side by side, and gives clear options to fix it such as moving or keeping both.",
+  "uses": [
+   "Saving an event that overlaps another.",
+   "Importing a calendar or schedule with clashes.",
+   "Handling double-booked rooms or people."
+  ],
+  "avoid": [
+   "Simple warnings that need no decision: use an inline message.",
+   "Preventing clashes altogether: hide or disable unavailable times."
+  ],
+  "practices": [
+   "Explain exactly what clashes and when.",
+   "Show both items so they can be compared.",
+   "Offer concrete actions, including a suggested free time.",
+   "Say what will change before the person confirms."
+  ]
+ },
+ "data-table": {
+  "what": "A grid of rows and columns for comparing records across several attributes. It usually supports sorting, selecting rows, searching and paging.",
+  "uses": [
+   "Lists of users, orders, devices or documents.",
+   "Comparing records on several fields at once.",
+   "Acting on many rows together."
+  ],
+  "avoid": [
+   "Browsing items mostly by image: use a card grid.",
+   "Layout of a page: use layout elements, not a table.",
+   "Two or three simple facts per item: use a list."
+  ],
+  "practices": [
+   "Give every column a clear header and a table caption.",
+   "Align numbers to the right and text to the left.",
+   "Show a helpful empty state when there are no rows.",
+   "Keep search, bulk actions and paging close to the table."
+  ]
+ },
+ "accuracy-table": {
+  "what": "A table comparing a measured value with a reference value, showing the difference and how close it is. Colour and words flag results that are too far off.",
+  "uses": [
+   "Checking automatic counts against manual counts.",
+   "Comparing model or test runs with expected results.",
+   "Reviewing measurement quality across sites."
+  ],
+  "avoid": [
+   "Showing a single score: use a progress bar or stat.",
+   "Trends over time: use a chart."
+  ],
+  "practices": [
+   "Show the difference as a signed number so direction is clear.",
+   "Say what the thresholds are in a caption.",
+   "Flag poor results with a word, not only colour.",
+   "Right-align the numbers so they compare easily."
+  ]
+ },
+ "filter-bar": {
+  "what": "A row above a list or table that shows which filters are active, usually as removable tags, with the result count and a way to clear them all.",
+  "uses": [
+   "Showing which filters narrow a list.",
+   "Letting people remove one filter at a time.",
+   "Confirming how many results match."
+  ],
+  "avoid": [
+   "The filter controls themselves: use a filter panel or drawer.",
+   "Choosing one view among a few: use tabs."
+  ],
+  "practices": [
+   "Show only filters that are applied.",
+   "Make each tag removable with one click.",
+   "Offer a single 'Clear all' action.",
+   "Announce the new result count to screen readers."
+  ]
+ },
+ "panel": {
+  "what": "A bordered section of a page with a header and a body, grouping related content into one clearly labelled block. It may have actions in a footer.",
+  "uses": [
+   "Dashboard blocks such as charts or summaries.",
+   "Sections of a settings or detail page.",
+   "Grouping a form's related fields."
+  ],
+  "avoid": [
+   "Wrapping every small item: too many boxes create clutter.",
+   "Content that needs to stay hidden until asked for: use an accordion."
+  ],
+  "practices": [
+   "Give every panel a clear title that says what it answers.",
+   "Put actions that affect the panel in its header or footer.",
+   "Keep panels in a grid that reflows on small screens.",
+   "Avoid nesting panels inside panels."
+  ]
+ },
+ "tabbed-panel-set": {
+  "what": "A single box with tabs along the top that switch between related views of the same thing. Only one view shows at a time.",
+  "uses": [
+   "Switching a metric between day, week and month.",
+   "Showing the same data as a chart or a table.",
+   "Splitting a detail view into a few related parts."
+  ],
+  "avoid": [
+   "Steps that must happen in order: use a stepper.",
+   "Views people need to compare side by side: show them together."
+  ],
+  "practices": [
+   "Keep tab labels short and clear.",
+   "Keep the content height steady so the page does not jump.",
+   "Remember the last selected tab where that helps.",
+   "Limit tabs to a handful."
+  ]
+ },
+ "card-list": {
+  "what": "A vertical list where each record is a card showing its name, a few key facts and actions. It reads well on narrow screens.",
+  "uses": [
+   "Showing records on phones.",
+   "Browsing items with long names.",
+   "Lists where people read more than they compare."
+  ],
+  "avoid": [
+   "Comparing many attributes across rows: use a table.",
+   "Image-led browsing: use a card grid."
+  ],
+  "practices": [
+   "Make the whole card easy to tap.",
+   "Put the most important fact first.",
+   "Keep every card in the same layout.",
+   "Keep actions few and clearly labelled."
+  ]
+ },
+ "list-header": {
+  "what": "The area above a list with its title, item count, search, view options and create button. It gathers the controls that change the list.",
+  "uses": [
+   "Top of a list page.",
+   "Top of a list inside a dashboard panel.",
+   "Putting search and create actions together."
+  ],
+  "avoid": [
+   "Page titles with no list below: use a page header.",
+   "Complex filtering: use a filter panel."
+  ],
+  "practices": [
+   "Show the count next to the title.",
+   "Keep controls in a predictable order.",
+   "Put the main create action at the end.",
+   "Stack the tools below the title on small screens."
+  ]
+ },
+ "summary-tiles": {
+  "what": "A row of small tiles, each showing a count for a status or group. They give a quick overview and often act as shortcuts to filter a list.",
+  "uses": [
+   "Counting items by state such as online or offline.",
+   "Showing open and closed tasks.",
+   "Counting issues by severity."
+  ],
+  "avoid": [
+   "Trends over time: use a chart.",
+   "Many categories: use a filter menu or a table."
+  ],
+  "practices": [
+   "Put a clear label with each number.",
+   "Start with an 'All' tile.",
+   "Highlight the active tile with more than colour.",
+   "Keep to a few meaningful states."
+  ]
+ },
+ "autocomplete-results-table": {
+  "what": "Search results shown as you type, in a compact table with the matching text highlighted. Several attributes per result help people tell them apart.",
+  "uses": [
+   "Finding records by name or code.",
+   "Telling apart similar names on different sites.",
+   "Quick lookup before opening a record."
+  ],
+  "avoid": [
+   "Choosing one value from a short fixed list: use a select.",
+   "Single-field suggestions: use a plain suggestion list."
+  ],
+  "practices": [
+   "Wait a moment after typing before searching.",
+   "Highlight the matching text.",
+   "Limit the rows and link to the full results.",
+   "Announce the result count to screen readers."
+  ]
+ },
+ "image": {
+  "what": "A picture that carries content, such as a product photo or plan. It needs a text description and reserved space so the page does not shift as it loads.",
+  "uses": [
+   "Showing a product, place or person.",
+   "Illustrating a record's main details.",
+   "Showing a plan, diagram or screenshot."
+  ],
+  "avoid": [
+   "Decoration with no meaning: use a background or leave it out.",
+   "Text content: use real text, not text inside an image."
+  ],
+  "practices": [
+   "Write alt text that describes what matters, or leave it empty if decorative.",
+   "Set width and height so the layout does not jump.",
+   "Load below-the-fold images lazily.",
+   "Use modern, compressed formats and sensible sizes."
+  ]
+ },
+ "thumbnail": {
+  "what": "A small cropped preview of an image, used to recognise an item quickly in lists, tables and pickers.",
+  "uses": [
+   "Previewing items in lists and tables.",
+   "Choosing between images or files.",
+   "Showing a record's picture in a card."
+  ],
+  "avoid": [
+   "Viewing details of the image: link to a larger version.",
+   "Images with essential small text: show a bigger one."
+  ],
+  "practices": [
+   "Use one size and crop consistently.",
+   "Leave alt text empty when the name sits beside it.",
+   "Reserve the space to avoid shifts while loading.",
+   "Make clickable thumbnails large enough to tap."
+  ]
+ },
+ "hero-image": {
+  "what": "A large, wide image at the top of a page that sets its mood or subject. It is common on marketing and landing pages.",
+  "uses": [
+   "Opening a landing or campaign page.",
+   "Introducing a product, event or story.",
+   "Giving a section a strong visual start."
+  ],
+  "avoid": [
+   "Task screens and dashboards: it pushes the task down the page.",
+   "Conveying information: use text or a chart."
+  ],
+  "practices": [
+   "Choose an image that supports the message.",
+   "Make sure text over it stays readable.",
+   "Serve sizes that fit each screen.",
+   "Describe it in alt text if it carries meaning."
+  ]
+ },
+ "media-frame": {
+  "what": "A box that holds a fixed shape, such as 16:9 or square, for an image, video, map or chart. It reserves space before the content loads.",
+  "uses": [
+   "Showing images in galleries and cards.",
+   "Embedding video, maps or charts.",
+   "Keeping a grid of mixed media neat."
+  ],
+  "avoid": [
+   "Content that must show in full: use a frame that fits without cropping.",
+   "Content with its own size: no frame needed."
+  ],
+  "practices": [
+   "Pick one ratio per group of items.",
+   "Decide whether to crop or fit the content.",
+   "Set the frame size before the media loads.",
+   "Always give the media a text alternative."
+  ]
+ },
+ "snapshot-image": {
+  "what": "A still picture taken from a video or camera, shown with where it came from and when it was captured.",
+  "uses": [
+   "Showing key moments from a video.",
+   "Galleries of captured images.",
+   "Evidence or audit images that need a time."
+  ],
+  "avoid": [
+   "Live or moving content: use a video frame.",
+   "Decorative pictures: use a plain image."
+  ],
+  "practices": [
+   "Show the source and time on a solid background so text stays readable.",
+   "Put the time in the alt text too.",
+   "Show a clear message when an image has expired or been removed.",
+   "Keep a consistent shape across a gallery."
+  ]
+ },
+ "recording-frame": {
+  "what": "A video or stream frame that clearly shows it is being recorded or is live. It uses an outline and a word label so the state is hard to miss.",
+  "uses": [
+   "Live camera feeds.",
+   "Screen or meeting recordings in progress.",
+   "Streams that are being stored."
+  ],
+  "avoid": [
+   "Recorded clips that are not live: use a normal video frame.",
+   "General status of a thing: use a status indicator."
+  ],
+  "practices": [
+   "Use a word such as 'Recording' or 'Live', not only colour.",
+   "Keep any motion subtle and respect reduced-motion settings.",
+   "Place the label where people will see it.",
+   "Remove the marker as soon as recording stops."
+  ]
+ },
+ "video-frame": {
+  "what": "A video player with standard controls inside a fixed-shape box. It plays recorded clips on the page.",
+  "uses": [
+   "Tutorials and product demos.",
+   "Recorded meetings or clips.",
+   "Short explainers within an article."
+  ],
+  "avoid": [
+   "Short looping graphics: use an animated image or an animation.",
+   "Live streams: use a live frame."
+  ],
+  "practices": [
+   "Add captions for speech.",
+   "Never start playing with sound automatically.",
+   "Set a poster image and reserve the space.",
+   "Keep the browser's own controls so they work with a keyboard."
+  ]
+ },
+ "illustration": {
+  "what": "A simple drawing used to add friendliness to a page, usually for an empty, no-results or error state.",
+  "uses": [
+   "Empty lists and first-use screens.",
+   "No search results.",
+   "Error and not-found pages."
+  ],
+  "avoid": [
+   "Decorating pages that already have content.",
+   "Explaining steps in detail: use text or a diagram."
+  ],
+  "practices": [
+   "Pair it with a clear title and a next action.",
+   "Keep it simple and consistent in style.",
+   "Treat it as decoration with no alt text.",
+   "Make sure it works in light and dark themes."
+  ]
+ },
+ "qr-code": {
+  "what": "A square barcode that a phone camera can scan to open a link or read a code. It is shown with the same text written out.",
+  "uses": [
+   "Pairing a phone or device.",
+   "Linking to a web page from a printed item.",
+   "Setting up two-factor sign-in."
+  ],
+  "avoid": [
+   "Links people can simply click: use a normal link.",
+   "Long text: use a short link, because dense codes scan poorly."
+  ],
+  "practices": [
+   "Keep dark modules on a light background with a quiet border.",
+   "Print the text or link below as a fallback.",
+   "Make it large enough to scan.",
+   "Test it with a real phone."
+  ]
+ },
+ "barcode": {
+  "what": "A row of lines that a scanner reads to identify an item, with its number printed underneath.",
+  "uses": [
+   "Labelling assets or inventory.",
+   "Printing tickets and passes.",
+   "Looking up items at a counter or warehouse."
+  ],
+  "avoid": [
+   "Phone scanning from a screen: a QR code is easier to read.",
+   "Showing a number only: use plain text."
+  ],
+  "practices": [
+   "Keep dark bars on a plain light background.",
+   "Print the digits below for people.",
+   "Leave empty space at both ends.",
+   "Test with a real scanner at the printed size."
+  ]
+ },
+ "status-dot": {
+  "what": "A small coloured circle next to a word showing the current state of something, such as online, offline or stopped.",
+  "uses": [
+   "Showing online or offline in a list.",
+   "Showing running or stopped services.",
+   "Showing enabled or disabled items."
+  ],
+  "avoid": [
+   "Statuses that need more emphasis: use a badge.",
+   "Alerts and messages: use an alert."
+  ],
+  "practices": [
+   "Always pair the dot with a word.",
+   "Keep the number of colours small.",
+   "Use the same colour for the same meaning everywhere.",
+   "Use motion only for live states, and stop it for reduced motion."
+  ]
+ },
+ "badge": {
+  "what": "A small label with a short word that shows a status or category, such as Approved, Draft or New.",
+  "uses": [
+   "Showing a record's status in a table.",
+   "Marking items as new or beta.",
+   "Showing a plan or role."
+  ],
+  "avoid": [
+   "Filter choices people can click: use tags.",
+   "Showing a number: use a count badge.",
+   "Long text: use a normal label."
+  ],
+  "practices": [
+   "Use one or two words.",
+   "Do not rely on colour alone.",
+   "Keep colours consistent in meaning.",
+   "Check text contrast on the background."
+  ]
+ },
+ "alert-icon": {
+  "what": "The symbol at the start of a message that shows its type, such as an error, warning or success.",
+  "uses": [
+   "Leading an alert or banner.",
+   "Marking error and success messages in forms.",
+   "Showing the type of a notification."
+  ],
+  "avoid": [
+   "Decoration with no meaning: leave it out.",
+   "Showing an item's status in a list: use a status dot or badge."
+  ],
+  "practices": [
+   "Use the same symbol for the same type everywhere.",
+   "Place it in the same spot on every message.",
+   "Never rely on the icon alone, include text.",
+   "Match the symbol to the colour of the message."
+  ]
+ },
+ "count-badge": {
+  "what": "A small circle or pill with a number showing how many items need attention, such as unread messages or open tasks.",
+  "uses": [
+   "Unread notifications on a bell icon.",
+   "Pending items on a navigation link.",
+   "Item totals on a tab."
+  ],
+  "avoid": [
+   "Status words: use a badge.",
+   "Counts that never reach zero: they stop being noticed."
+  ],
+  "practices": [
+   "Cap large numbers, for example 99+.",
+   "Hide the count when it is zero if that fits.",
+   "Give screen readers the meaning, such as '3 unread'.",
+   "Keep it small and placed on the corner."
+  ]
+ },
+ "tag": {
+  "what": "A small label for a keyword or category. Tags can be plain, clickable to filter, or removable when they show chosen values.",
+  "uses": [
+   "Keywords on a record.",
+   "Active filters that can be removed.",
+   "Chosen values in a multi-select field."
+  ],
+  "avoid": [
+   "Showing a status: use a badge.",
+   "Navigating between pages: use links or tabs."
+  ],
+  "practices": [
+   "Keep text short.",
+   "Let people remove a tag with a clearly named button.",
+   "Show the selected state with more than colour.",
+   "Shorten long values and give the full text on hover."
+  ]
+ }
+}

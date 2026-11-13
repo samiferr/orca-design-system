@@ -1,0 +1,611 @@
+{
+ "task-list": {
+  "what": "A list of things to do, each with a checkbox so people can tick them off. Tasks often show who owns them and when they are due.",
+  "uses": [
+   "Personal to-do lists and team checklists.",
+   "Showing the open steps of a project or record.",
+   "Tracking what is due this week."
+  ],
+  "avoid": [
+   "Work with several stages needs a board, not a flat list.",
+   "Tasks with dependencies and dates are clearer on a Gantt chart."
+  ],
+  "practices": [
+   "Group tasks by status or due date so the list is easy to scan.",
+   "Let people add a task right in the list.",
+   "Show who owns each task and when it is due.",
+   "Offer undo after a task is ticked off by mistake.",
+   "Put overdue tasks first."
+  ]
+ },
+ "kanban-board": {
+  "what": "A board of columns, one per stage of work, with cards that move from left to right as work progresses. It makes the flow of work visible.",
+  "uses": [
+   "Team workflows with a few stages.",
+   "Support tickets, hiring pipelines or installation jobs.",
+   "Spotting bottlenecks where cards pile up."
+  ],
+  "avoid": [
+   "Hundreds of cards or many columns are hard to read; use a filtered table.",
+   "Work with fixed dates is better shown on a timeline."
+  ],
+  "practices": [
+   "Keep to a handful of columns with clear names.",
+   "Limit how many cards can be in progress at once.",
+   "Offer a non-drag way to move cards, for keyboard and touch.",
+   "Keep card content short: title, owner and date.",
+   "Show a count at the top of each column."
+  ]
+ },
+ "gantt-chart": {
+  "what": "A chart that shows tasks as horizontal bars along a time scale. It shows when each task starts and ends, how tasks overlap and how far along they are.",
+  "uses": [
+   "Planning projects with dated tasks and dependencies.",
+   "Tracking rollouts or installations over weeks.",
+   "Seeing which tasks are running late."
+  ],
+  "avoid": [
+   "Work without dates is better on a board or task list.",
+   "High-level plans for stakeholders suit a roadmap."
+  ],
+  "practices": [
+   "Mark today with a clear line.",
+   "Show progress inside each bar.",
+   "Label late tasks with a word, not only a colour.",
+   "Order tasks so dependencies read top to bottom.",
+   "Keep the time scale short enough to read without scrolling."
+  ]
+ },
+ "roadmap": {
+  "what": "A high-level plan showing what is planned for which period, such as quarters or Now, Next and Later. It shares direction without promising exact dates.",
+  "uses": [
+   "Sharing product or rollout plans with stakeholders.",
+   "Showing themes of work across the year.",
+   "Aligning teams on priorities."
+  ],
+  "avoid": [
+   "Day-level scheduling belongs on a Gantt chart.",
+   "A single list of to-dos belongs in a task list."
+  ],
+  "practices": [
+   "Use coarse periods so the plan does not promise too much.",
+   "Group work into lanes by theme or team.",
+   "Highlight the current period.",
+   "Keep item names short and in plain words.",
+   "Update it regularly so it stays trusted."
+  ]
+ },
+ "milestone-timeline": {
+  "what": "A line of key dates that marks important points in a project, showing which are reached and which are still ahead.",
+  "uses": [
+   "Project overviews and status reports.",
+   "Onboarding or customer journeys.",
+   "Showing how far a rollout has come."
+  ],
+  "avoid": [
+   "Detailed task scheduling needs a Gantt chart.",
+   "A long list of dates is better shown as a deadline list."
+  ],
+  "practices": [
+   "Keep to a handful of milestones, about 3 to 7.",
+   "Show each date next to its name.",
+   "Make reached and upcoming milestones look different, and say which in words.",
+   "Point out the next milestone and how soon it is."
+  ]
+ },
+ "period-overview": {
+  "what": "A summary page for a sprint, month or other period. It shows the dates, the goal, progress and the work still open.",
+  "uses": [
+   "Sprint pages in software teams.",
+   "Monthly plans and reviews.",
+   "Campaign periods with a goal and a deadline."
+  ],
+  "avoid": [
+   "A single task list is enough when there is no goal or period.",
+   "Long-term direction belongs on a roadmap."
+  ],
+  "practices": [
+   "Show days left next to progress.",
+   "State the goal in one sentence.",
+   "Count done, open and late work separately.",
+   "Let people switch to the previous or next period.",
+   "Link each number to the tasks behind it."
+  ]
+ },
+ "capacity-planner": {
+  "what": "A grid of people against days that shows how many hours each person is booked compared with what they can do. It makes overloaded people easy to spot.",
+  "uses": [
+   "Assigning tasks or shifts fairly.",
+   "Weekly planning meetings.",
+   "Checking whether a team can take on more work."
+  ],
+  "avoid": [
+   "Tracking tasks themselves is better in a task list or board.",
+   "Showing availability only is clearer in a calendar."
+  ],
+  "practices": [
+   "Show each person's total against their capacity.",
+   "Flag over-allocation with an icon and words, not only colour.",
+   "Show hours per day, not only a weekly total.",
+   "Include each person's role for context."
+  ]
+ },
+ "deadline-list": {
+  "what": "A list of upcoming due dates, usually grouped as overdue, this week and later. It helps people see what needs attention first.",
+  "uses": [
+   "Dashboards and record sidebars.",
+   "Compliance and renewal tracking.",
+   "Reminding people what is due soon."
+  ],
+  "avoid": [
+   "Work with many stages is better on a board.",
+   "Events at a set time belong in a calendar."
+  ],
+  "practices": [
+   "Put overdue items first and mark them clearly.",
+   "Show relative times like 'in 3 days' next to the date.",
+   "Group by urgency, not by date alone.",
+   "Keep each row to a name, a date and a state."
+  ]
+ },
+ "planning-summary": {
+  "what": "A summary that compares what was planned with what was done, usually as paired bars with numbers, for each team, person or category.",
+  "uses": [
+   "Sprint reviews and monthly reports.",
+   "Checking whether plans are realistic.",
+   "Comparing workload across people or teams."
+  ],
+  "avoid": [
+   "Trends over many periods are better shown in a line chart.",
+   "A single progress figure only needs a progress bar."
+  ],
+  "practices": [
+   "Show the numbers as well as the bars.",
+   "Use outline and fill, not only colour, to tell planned from done.",
+   "Scale all bars against the same maximum.",
+   "Label each bar with a name."
+  ]
+ },
+ "plan-filter-bar": {
+  "what": "A bar above a plan that shows the period being viewed and the filters applied, with a count of results. It keeps the plan's current view clear.",
+  "uses": [
+   "Above task lists, boards and Gantt charts.",
+   "Narrowing a plan by period, person or status.",
+   "Showing which filters are currently active."
+  ],
+  "avoid": [
+   "Pages with no filters do not need it.",
+   "Many filters at once belong in a filter panel."
+  ],
+  "practices": [
+   "Show applied filters as chips that can be removed one by one.",
+   "Offer one 'Clear all' action.",
+   "Show the number of results.",
+   "Keep the period control always visible."
+  ]
+ },
+ "date-range-filter-bar": {
+  "what": "A control for choosing a time period, with quick presets such as 'last 30 days' and a custom start and end date.",
+  "uses": [
+   "Filtering reports and charts by period.",
+   "Choosing the dates of a plan view.",
+   "Setting the range of an export."
+  ],
+  "avoid": [
+   "Picking a single date is simpler with a date picker.",
+   "Filtering by something other than time needs a regular filter."
+  ],
+  "practices": [
+   "Put common presets first.",
+   "Always show the exact dates chosen.",
+   "Use a clear format for dates.",
+   "Reveal the custom range only when asked."
+  ]
+ },
+ "site-header": {
+  "what": "The bar at the top of a website with the logo, a few main links and one or two actions. It helps visitors know where they are and where to go.",
+  "uses": [
+   "Marketing pages and documentation sites.",
+   "Sign-in and sign-up pages.",
+   "Public pages with a few main sections."
+  ],
+  "avoid": [
+   "Inside an application with many sections, use a top bar and a sidebar.",
+   "Many links are better in a menu or footer."
+  ],
+  "practices": [
+   "Put the logo at the left and link it to the home page.",
+   "Keep to about 5 links.",
+   "Mark the current page.",
+   "Make one action stand out.",
+   "Let links wrap or collapse on small screens."
+  ]
+ },
+ "top-bar": {
+  "what": "The bar across the top of a web application. It usually holds the menu, the logo, main sections, search and tools for the signed-in person.",
+  "uses": [
+   "Every signed-in page of an application.",
+   "Giving quick access to search and notifications.",
+   "Showing the signed-in person and their menu."
+  ],
+  "avoid": [
+   "Public marketing pages suit a simple site header.",
+   "Long lists of sections fit better in a sidebar."
+  ],
+  "practices": [
+   "Keep it the same on every page.",
+   "Keep it low in height so content stays in view.",
+   "Move links into a menu on small screens.",
+   "Label icon-only buttons for screen readers.",
+   "Make sure text stays readable against the bar colour."
+  ]
+ },
+ "sidebar": {
+  "what": "A vertical list of links down the side of an application. It shows the main sections at all times and often collapses to icons.",
+  "uses": [
+   "Applications with many sections.",
+   "Grouping links by area, such as admin.",
+   "Giving dense screens more room when collapsed."
+  ],
+  "avoid": [
+   "Sites with only a few sections work with a top bar.",
+   "On phones, show these links in a drawer instead."
+  ],
+  "practices": [
+   "Group related links under short headings.",
+   "Mark the current page.",
+   "Remember whether the person collapsed it.",
+   "Give icons text labels or tooltips.",
+   "Keep the order stable between visits."
+  ]
+ },
+ "footer": {
+  "what": "The area at the bottom of a page with links, legal text and company details. People look there for help, contact and policy links.",
+  "uses": [
+   "Contact, help and policy links.",
+   "Legal notices and copyright.",
+   "Secondary links not in the main navigation."
+  ],
+  "avoid": [
+   "Primary navigation belongs in the header.",
+   "Important actions should not hide in the footer."
+  ],
+  "practices": [
+   "Group links in columns with short titles.",
+   "Include privacy and terms links.",
+   "Keep it simple and consistent on every page.",
+   "Make links big enough to tap."
+  ]
+ },
+ "page-head": {
+  "what": "The top part of a page's content. It tells people where they are with a title and breadcrumbs, and offers the main actions for the page.",
+  "uses": [
+   "The top of every application page.",
+   "Showing the title with a short description.",
+   "Placing the main actions in a predictable spot."
+  ],
+  "avoid": [
+   "Marketing pages usually use a hero section instead.",
+   "Actions for a single row belong in that row."
+  ],
+  "practices": [
+   "Use one clear page title.",
+   "Show breadcrumbs or a back link to say where the page sits.",
+   "Make one action the main one.",
+   "Put the main action in the same place on every page."
+  ]
+ },
+ "messages-region": {
+  "what": "A fixed spot on a page where messages about the result of an action appear, such as 'Saved' or a warning. Screen readers can announce them.",
+  "uses": [
+   "Confirming that a save or delete worked.",
+   "Showing errors that need attention.",
+   "Messages that must stay until read."
+  ],
+  "avoid": [
+   "Short, passing confirmations suit a toast.",
+   "Errors on one field belong next to that field."
+  ],
+  "practices": [
+   "Always show messages in the same place.",
+   "Announce them to screen readers.",
+   "Say what happened and what to do next.",
+   "Let people dismiss messages.",
+   "Do not rely on colour alone."
+  ]
+ },
+ "drawer": {
+  "what": "A panel that slides in from the edge of the screen over the page. People can do a task there while still seeing the page behind it.",
+  "uses": [
+   "Navigation on phones.",
+   "Filters and quick settings.",
+   "Details of a selected row."
+  ],
+  "avoid": [
+   "Long forms need their own page.",
+   "A short yes or no question suits a dialog."
+  ],
+  "practices": [
+   "Trap focus inside while it is open.",
+   "Close it with Escape, the close button or a click outside.",
+   "Give it a clear title.",
+   "Return focus to the button that opened it.",
+   "Keep its content short."
+  ]
+ },
+ "top-actions-header": {
+  "what": "A thin row at the top of a detail or form page with a back link on one side and the page's actions on the other.",
+  "uses": [
+   "Detail pages reached from a list.",
+   "Form pages with Save and Cancel actions.",
+   "Tablet and phone layouts that need little height."
+  ],
+  "avoid": [
+   "Pages needing a title and subtitle need a full page head.",
+   "Navigation between sections belongs in the main navigation."
+  ],
+  "practices": [
+   "Name the place the back link goes to.",
+   "Keep the actions few.",
+   "Put less common actions in a 'More' menu.",
+   "Label icon-only buttons."
+  ]
+ },
+ "settings-panel": {
+  "what": "A panel where people adjust how the interface looks and behaves, such as theme, density or reduced motion. Changes take effect straight away.",
+  "uses": [
+   "Theme and density choices.",
+   "Accessibility preferences such as reduced motion.",
+   "Account preferences."
+  ],
+  "avoid": [
+   "Rarely changed technical settings belong on a settings page.",
+   "Preferences everyone must share are project settings, not personal ones."
+  ],
+  "practices": [
+   "Group related options under clear headings.",
+   "Apply changes at once and show the result.",
+   "Remember choices for each person.",
+   "Offer sensible defaults.",
+   "Use plain labels for each option."
+  ]
+ },
+ "filter-panel": {
+  "what": "A set of filters in labelled groups with the number of matching results. People use it to narrow a long list or table to what they want.",
+  "uses": [
+   "Narrowing lists, tables and galleries.",
+   "Combining several filters at once.",
+   "Showing how many results match."
+  ],
+  "avoid": [
+   "A few simple options can be a dropdown or tabs.",
+   "Free text search alone needs only a search field."
+  ],
+  "practices": [
+   "Group filters under clear headings.",
+   "Show a live result count.",
+   "Offer one 'Clear all' action.",
+   "Put a search field first for long lists.",
+   "Use checkboxes for choosing several values."
+  ]
+ },
+ "filter-drawer": {
+  "what": "A drawer that holds a page's filters. A button opens it, people choose filters, and the results update behind it.",
+  "uses": [
+   "Filtering lists, tables and galleries.",
+   "Pages with many filters.",
+   "Reports and boards."
+  ],
+  "avoid": [
+   "One or two simple filters can sit above the results.",
+   "Quick sorting is better as a dropdown."
+  ],
+  "practices": [
+   "Show the number of applied filters on the button.",
+   "Use a clear 'Show results' button with the count.",
+   "List applied filters above the results so they can be removed.",
+   "Offer 'Clear all'.",
+   "Open it from the same place on every page."
+  ]
+ },
+ "event-editor": {
+  "what": "A full form for creating or changing a calendar event, with title, date and time, repeat, place, people, reminders and notes.",
+  "uses": [
+   "Creating a new event with all details.",
+   "Changing an event's time, place or guests.",
+   "Setting repeats and reminders."
+  ],
+  "avoid": [
+   "Simple events can be created with a quick-add field.",
+   "Just viewing an event only needs a detail view."
+  ],
+  "practices": [
+   "Put title and time first, and optional fields after.",
+   "Use sensible defaults for time, length and reminder.",
+   "Warn about conflicts without blocking save.",
+   "Keep Delete apart from Save.",
+   "Label every field."
+  ]
+ },
+ "event-popover": {
+  "what": "A small card that opens over the calendar when someone clicks an event. It shows the main details without leaving the calendar.",
+  "uses": [
+   "Checking an event's time and place.",
+   "Quick actions such as edit or delete.",
+   "Calendar month, week and day views."
+  ],
+  "avoid": [
+   "Phones have little room; use a full detail page or bottom drawer.",
+   "Long descriptions fit better in a detail panel."
+  ],
+  "practices": [
+   "Keep it short: title, time, place and people.",
+   "Close it with Escape or a click outside.",
+   "Offer a link to open the full event.",
+   "Make sure keyboard users can open and close it."
+  ]
+ },
+ "event-detail-panel": {
+  "what": "A panel or page that shows everything about one event: title, time, place, notes, guests and actions. It has room for the full detail.",
+  "uses": [
+   "Opening an event on a phone.",
+   "Showing an event from a notification or list.",
+   "A side panel next to a calendar."
+  ],
+  "avoid": [
+   "A quick peek at details suits a popover.",
+   "Editing needs the event editor."
+  ],
+  "practices": [
+   "Put time and place near the top.",
+   "Show guests and their answers.",
+   "Offer actions such as edit and duplicate.",
+   "Show the response bar if the person is invited."
+  ]
+ },
+ "quick-add-event": {
+  "what": "A single text box where someone types a sentence like 'Lunch Friday 12:00' and the event is created. It shows what it understood before saving.",
+  "uses": [
+   "Adding simple events fast.",
+   "The top of a calendar or task list.",
+   "Command palettes."
+  ],
+  "avoid": [
+   "Events with many details need the full event editor.",
+   "Choosing from fixed options is clearer in a form."
+  ],
+  "practices": [
+   "Show the parsed date, time and place before saving.",
+   "Let people correct a wrong reading.",
+   "Link to the full editor for more options.",
+   "Give an example in the field."
+  ]
+ },
+ "reminder-manager": {
+  "what": "A list of upcoming reminders where people can snooze or mark them done, plus a place to set the defaults for new events.",
+  "uses": [
+   "A reminders page or panel.",
+   "Notification settings for events.",
+   "Acting on reminders when they fire."
+  ],
+  "avoid": [
+   "Reminders that need a message to the person belong in notifications.",
+   "Tasks with due dates belong in a task list."
+  ],
+  "practices": [
+   "Make Snooze and Done one tap each.",
+   "Group reminders by when they are due.",
+   "Offer common snooze times.",
+   "Show what each reminder is for and when."
+  ]
+ },
+ "attendee-list": {
+  "what": "A list of people invited to an event, with their answers and a count of how many are coming. Organisers use it to see who will attend.",
+  "uses": [
+   "Event details and editors.",
+   "Checking who has replied.",
+   "Adding or removing guests."
+  ],
+  "avoid": [
+   "Large groups are better summarised as counts.",
+   "A single contact list is a general people list."
+  ],
+  "practices": [
+   "Put the summary count first.",
+   "Show each answer as an icon and a word, not only colour.",
+   "Mark the organiser.",
+   "Let organisers add and remove guests easily."
+  ]
+ },
+ "invitation-response-bar": {
+  "what": "A bar on an invitation with buttons for answering, usually Yes, Maybe and No. It shows the person's current answer and lets them change it.",
+  "uses": [
+   "Answering an event invitation.",
+   "Event detail views and popovers.",
+   "Pages opened from an invitation email."
+  ],
+  "avoid": [
+   "Events with no invitees need no response.",
+   "Detailed replies need a form with a note."
+  ],
+  "practices": [
+   "Answer in one click.",
+   "Show the current answer clearly.",
+   "Let people change their answer later.",
+   "Offer a note only after answering."
+  ]
+ },
+ "swatch": {
+  "what": "A small square of colour that stands for a series or a chosen colour. It links a colour on a chart to its name in the legend.",
+  "uses": [
+   "Chart legends.",
+   "Colour pickers and calendar lists.",
+   "Labelling series next to a list."
+  ],
+  "avoid": [
+   "Colour alone does not carry meaning; always add a name.",
+   "Different data types may need different marker shapes."
+  ],
+  "practices": [
+   "Always place a text label beside the swatch.",
+   "Use colours that are easy to tell apart.",
+   "Use a line style for line series.",
+   "Keep the order the same as in the chart."
+  ]
+ },
+ "zone-swatch": {
+  "what": "A small mark that copies how a region is drawn on an image or video, so a list entry can be matched to its region.",
+  "uses": [
+   "Lists of regions on an image or video.",
+   "Region editors.",
+   "Legends laid over images or videos."
+  ],
+  "avoid": [
+   "Data series in charts need an ordinary legend swatch.",
+   "Hue alone does not carry meaning; always add a name."
+  ],
+  "practices": [
+   "Match the mark to the region on the image.",
+   "Show excluded regions with a pattern, not only colour.",
+   "Place the region name beside the mark.",
+   "Keep outline and fill the same as on the image."
+  ]
+ },
+ "chart-dot": {
+  "what": "A small shape that marks a data point on a chart or in a legend, such as a circle, square or diamond.",
+  "uses": [
+   "Scatter plots.",
+   "Markers on line charts.",
+   "Series keys in a legend."
+  ],
+  "avoid": [
+   "Many points close together need a different chart or grouping.",
+   "Colour alone fails for colour-blind readers; vary the shape."
+  ],
+  "practices": [
+   "Use different shapes for different series.",
+   "Keep markers a readable size.",
+   "Label each series beside its marker.",
+   "Use the same marker in the chart and the legend."
+  ]
+ },
+ "heat-cell": {
+  "what": "A table cell shaded from light to dark to show how large a value is. A grid of them makes patterns easy to spot.",
+  "uses": [
+   "Activity by hour and day.",
+   "Occupancy or capacity grids.",
+   "Calendars showing busy and quiet days."
+  ],
+  "avoid": [
+   "Exact comparisons are easier in a table or bar chart.",
+   "Data that goes above and below a target needs a two-colour scale."
+  ],
+  "practices": [
+   "Print the value inside each cell.",
+   "Show a legend with the ranges.",
+   "Choose clear thresholds for the steps.",
+   "Mark empty cells differently from zero.",
+   "Add row and column headings."
+  ]
+ }
+}

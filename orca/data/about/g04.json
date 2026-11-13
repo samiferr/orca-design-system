@@ -1,0 +1,731 @@
+{
+ "logo-link": {
+  "what": "A logo that links to the home page. It tells people whose site they are on and gives them a quick way back to the start.",
+  "uses": [
+   "Header or top bar of a website or app.",
+   "Footer, so people can return home after reading to the end.",
+   "Sign-in pages and emails that carry the brand."
+  ],
+  "avoid": [
+   "Placing it next to a separate Home link that goes to the same page; keep just one.",
+   "Using the logo as the only way to reach important sections; add real navigation."
+  ],
+  "practices": [
+   "Put it in the top left, where people look for it.",
+   "Give the link a name that includes the brand name.",
+   "Give the image useful alt text or use the name as text.",
+   "Link to the home page, and skip the link when already on it."
+  ]
+ },
+ "collapse-toggle": {
+  "what": "A button that folds a panel or sidebar away and brings it back. It gives people more room for content without removing the panel.",
+  "uses": [
+   "Collapsing a sidebar menu down to icons.",
+   "Hiding a side panel on small screens.",
+   "Giving more width to a table or editor."
+  ],
+  "avoid": [
+   "Hiding content people need to finish a task; keep it visible instead.",
+   "Showing or hiding a short block of text; use an accordion or disclosure."
+  ],
+  "practices": [
+   "Say what the button will do, and update the label when the state changes.",
+   "Tell assistive technology whether the region is open with the expanded state.",
+   "Remember the choice for the next visit.",
+   "Keep the button in the same spot in both states."
+  ]
+ },
+ "skip-navigation": {
+  "what": "A link at the very top of a page that jumps straight to the main content. Keyboard and screen reader users use it to avoid tabbing through the menu on every page.",
+  "uses": [
+   "Pages with a long header or menu before the content.",
+   "Any site that people navigate by keyboard.",
+   "Sites that must meet accessibility standards."
+  ],
+  "avoid": [
+   "Replacing good page structure; headings and landmarks are still needed.",
+   "Hiding it permanently; it must appear when it receives focus."
+  ],
+  "practices": [
+   "Make it the first thing keyboard focus reaches.",
+   "Show it clearly when focused.",
+   "Point it to a target that can take focus.",
+   "Use words like 'Skip to main content'.",
+   "Use one main area per page."
+  ]
+ },
+ "link-column": {
+  "what": "A short heading with a list of related links beneath it. Several columns side by side organise many links by topic.",
+  "uses": [
+   "Website footers with product, company and help links.",
+   "Site maps.",
+   "Related links at the end of an article or help page."
+  ],
+  "avoid": [
+   "Main navigation people use all the time; use a navigation bar or menu.",
+   "Long lists of links in one column; split by topic or search instead."
+  ],
+  "practices": [
+   "Give each column a clear topic title.",
+   "Keep columns to about eight links or fewer.",
+   "Write link text that names the destination.",
+   "Order links by how often people need them."
+  ]
+ },
+ "page-heading": {
+  "what": "The block at the top of a page that gives its title, often with a short description and status details. It tells people where they are and what the page is for.",
+  "uses": [
+   "Top of an application page or settings page.",
+   "Top of a documentation page.",
+   "Record pages that show a status next to the title."
+  ],
+  "avoid": [
+   "Long introductions; put those in the page body.",
+   "Repeating the site name as the title; name the page itself."
+  ],
+  "practices": [
+   "Use exactly one main heading per page.",
+   "Keep the title short and specific.",
+   "Add one sentence of subtitle at most.",
+   "Show status with a word as well as a colour.",
+   "Place it in the same spot on every page."
+  ]
+ },
+ "section-heading": {
+  "what": "A title that introduces a section of a page, sometimes with a short intro. It helps people scan and decide whether to read the section.",
+  "uses": [
+   "Dividing a long form into groups.",
+   "Settings pages with several topics.",
+   "Documentation and articles with several parts."
+  ],
+  "avoid": [
+   "Labelling a single control; use a form label instead.",
+   "Styling plain text bigger; use headings only to introduce real sections."
+  ],
+  "practices": [
+   "Keep heading levels in order without skipping.",
+   "Make the title say what the section is about.",
+   "Keep any intro to one or two sentences.",
+   "Use the same style for every section on a page."
+  ]
+ },
+ "feature-item": {
+  "what": "A small block that presents one feature with an icon, a short title and a sentence. Several together give a quick overview of what something offers.",
+  "uses": [
+   "Feature lists on a product or marketing page.",
+   "Showing first steps on an empty dashboard.",
+   "Summarising benefits on a landing page."
+  ],
+  "avoid": [
+   "Content that needs long explanation; write a full section or article.",
+   "Steps that must be done in order; use a numbered list."
+  ],
+  "practices": [
+   "Write the title as a benefit in a few words.",
+   "Keep the description to one sentence.",
+   "Use icons that fit the meaning, and treat them as decoration.",
+   "Use the same layout for every item in a group."
+  ]
+ },
+ "captioned-media": {
+  "what": "An image or video shown in a fixed frame, with a caption explaining it. The fixed shape stops the page from jumping while the media loads.",
+  "uses": [
+   "Photos in articles and posts.",
+   "Gallery images with a source and time.",
+   "Screenshots that need an explanation."
+  ],
+  "avoid": [
+   "Purely decorative pictures; skip the caption.",
+   "Long explanations; put them in the body text next to the image."
+  ],
+  "practices": [
+   "Reserve the frame size before the media loads.",
+   "Write alt text that says what matters in the image.",
+   "Keep captions short and place them consistently.",
+   "Make caption text readable on any image.",
+   "Add source and date when they help."
+  ]
+ },
+ "thumbnail-strip": {
+  "what": "A row of small preview images that people click to choose which large image to see. It shows what is available at a glance.",
+  "uses": [
+   "Product or photo galleries.",
+   "Choosing a frame or version of a video.",
+   "Media pickers with a limited number of items."
+  ],
+  "avoid": [
+   "Very large sets of images; use a grid with paging or search.",
+   "Images that look the same at a small size; use text labels."
+  ],
+  "practices": [
+   "Mark the current thumbnail with more than a colour change.",
+   "Give each thumbnail a name for screen readers.",
+   "Keep thumbnails the same size and shape.",
+   "Let people use arrow keys and tabbing to move through them."
+  ]
+ },
+ "video-player": {
+  "what": "A player that shows a video with play, pause, volume and a progress bar. It can also flag a live or recorded feed.",
+  "uses": [
+   "Tutorials and product demos.",
+   "Live streams.",
+   "Recordings people review, such as meetings or camera footage."
+  ],
+  "avoid": [
+   "Very short, silent loops; use an animated image or short silent video.",
+   "Content that is mostly text; write it out instead."
+  ],
+  "practices": [
+   "Show controls and keep them keyboard accessible.",
+   "Never start playing with sound automatically.",
+   "Provide captions for speech.",
+   "Show a poster image and load the video only when needed.",
+   "Say clearly when a stream is live."
+  ]
+ },
+ "call-to-action": {
+  "what": "The button or link that asks people to take the next step, such as signing up. A section usually has one main action and sometimes a quieter second choice.",
+  "uses": [
+   "Hero sections and page headers.",
+   "Empty pages that need a first step.",
+   "Emails with one clear task."
+  ],
+  "avoid": [
+   "Giving several equal options; pick one main action and make the rest quieter.",
+   "Navigation to other pages; use regular links."
+  ],
+  "practices": [
+   "Use one main action per section.",
+   "Start the label with a verb that says what happens.",
+   "Make the main action look stronger than the alternative.",
+   "Keep the button large enough to tap easily."
+  ]
+ },
+ "fine-print": {
+  "what": "Small text for legal notes, copyright, version numbers and policy links. It has to be available but should not compete with the main content.",
+  "uses": [
+   "Page footers.",
+   "Email footers.",
+   "Sign-in and sign-up pages with terms and privacy links."
+  ],
+  "avoid": [
+   "Important conditions people must know before acting; place them next to the action in normal text.",
+   "Hiding key information in tiny text."
+  ],
+  "practices": [
+   "Keep it readable with enough contrast and size.",
+   "Keep it on a single line where possible.",
+   "Link to full policies rather than copying them.",
+   "Place it in the same spot on every page."
+  ]
+ },
+ "big-number": {
+  "what": "One large figure with a short sentence and its source. It makes a single fact stand out.",
+  "uses": [
+   "Highlighting a key statistic in an article.",
+   "Showing a live count next to a video or chart.",
+   "Summarising a headline result in a report."
+  ],
+  "avoid": [
+   "Comparing several numbers; use a row of stat cards or a table.",
+   "Numbers without context; add what they measure."
+  ],
+  "practices": [
+   "Say what the number measures right beside it.",
+   "Name the source and date.",
+   "Write the sign, thousands separators and unit.",
+   "Use it for only one or two key facts per page."
+  ]
+ },
+ "summary-tile": {
+  "what": "A small tile showing a count and a status, such as '3 offline'. Clicking it filters the list below to those items.",
+  "uses": [
+   "Overview of how many records have each status.",
+   "Quick filters above a table or list.",
+   "Dashboards that show what needs attention."
+  ],
+  "avoid": [
+   "Showing trends over time; use a chart.",
+   "Counts that do nothing when clicked, if there are many; use plain stat cards."
+  ],
+  "practices": [
+   "Pair status colour with a word.",
+   "Show which filter is active.",
+   "Keep counts up to date after changes.",
+   "Make tiles large enough to click or tap easily."
+  ]
+ },
+ "heat-row": {
+  "what": "One row of a heat map, with a label and coloured cells where shade shows size. It lets people compare values along a line.",
+  "uses": [
+   "Busy hours by weekday.",
+   "Availability or capacity grids.",
+   "Activity over time per resource."
+  ],
+  "avoid": [
+   "Reading exact values only; use a table.",
+   "Showing trends in a single series; use a line chart."
+  ],
+  "practices": [
+   "Print the value in each cell as well as the shade.",
+   "Label every row and column.",
+   "Use a single colour scale from light to dark.",
+   "Keep the shade steps easy to tell apart."
+  ]
+ },
+ "column-header": {
+  "what": "The title of a column in a board of cards, with a count of items and sometimes a limit. It shows where work is piling up.",
+  "uses": [
+   "Kanban boards with stages like To do and Done.",
+   "Grouped lists with a count per group.",
+   "Boards that limit work in progress."
+  ],
+  "avoid": [
+   "Plain tables; use column headings with sorting instead.",
+   "Very many columns; filter or group differently."
+  ],
+  "practices": [
+   "Show the number of cards in each column.",
+   "Show the limit and flag clearly when it is exceeded.",
+   "Keep titles short.",
+   "Do not rely on colour alone to show the limit is exceeded."
+  ]
+ },
+ "row-select": {
+  "what": "Checkboxes at the start of table rows, with one at the top to select all. People pick several records and then act on them together.",
+  "uses": [
+   "Bulk delete, archive or export from a table.",
+   "Moving or assigning many items at once.",
+   "Comparing chosen rows."
+  ],
+  "avoid": [
+   "Tables where only a single action per row is needed; use row buttons.",
+   "Choosing just one row from a few; use radio buttons."
+  ],
+  "practices": [
+   "Name each checkbox after its row for screen readers.",
+   "Show how many rows are selected.",
+   "Show the available bulk actions as soon as something is selected.",
+   "Make select all clear about what it covers, such as this page or all results."
+  ]
+ },
+ "formatting-toolbar": {
+  "what": "A row of small buttons for formatting text, such as bold, italic, lists and links. It sits above a text area that supports rich text.",
+  "uses": [
+   "Writing comments or descriptions with formatting.",
+   "Editing articles or emails.",
+   "Rich notes fields."
+  ],
+  "avoid": [
+   "Plain text fields; leave the toolbar out.",
+   "Very long documents needing many options; use a full editor with menus."
+  ],
+  "practices": [
+   "Use familiar icons with text names for assistive technology.",
+   "Show which formats are on.",
+   "Support keyboard shortcuts such as Ctrl+B.",
+   "Group related buttons and keep the set small."
+  ]
+ },
+ "applied-filters": {
+  "what": "A row showing which filters are currently active, each as a tag that can be removed. It also gives a way to clear them all and the number of results.",
+  "uses": [
+   "Above search results or lists that have been filtered.",
+   "Product listings with several filters.",
+   "Empty results, to show what caused them."
+  ],
+  "avoid": [
+   "When no filter is active; show nothing.",
+   "Choosing filters; use a filter panel or menu for that."
+  ],
+  "practices": [
+   "Show every active filter, never hide any.",
+   "Let people remove one filter with one click.",
+   "Offer Clear all when more than one is active.",
+   "Show the result count and update it right away."
+  ]
+ },
+ "card-skeleton": {
+  "what": "A grey outline shaped like a card, shown while the real card is loading. It tells people content is coming and keeps the page from jumping.",
+  "uses": [
+   "Grids and feeds that load content after the page appears.",
+   "Product, video or article cards.",
+   "Slow data that takes more than a moment."
+  ],
+  "avoid": [
+   "Quick loads under about a second; show nothing instead.",
+   "Actions in progress such as saving; use a spinner or progress message."
+  ],
+  "practices": [
+   "Match the size and shape of the real card.",
+   "Replace it in place when content arrives.",
+   "Hide the shapes from screen readers and announce loading instead.",
+   "Use a calm look and avoid fast flashing."
+  ]
+ },
+ "date-picker": {
+  "what": "A field for choosing a date, usually through the browser's calendar or typing. Shortcuts can speed up the most common choices.",
+  "uses": [
+   "Due dates, start dates and report dates.",
+   "Booking or scheduling a single day.",
+   "Filtering by a date."
+  ],
+  "avoid": [
+   "Birthdates and other dates far in the past; use separate day, month and year fields.",
+   "Choosing a period; use a date range picker."
+  ],
+  "practices": [
+   "Use the native date input where possible.",
+   "Label the field and state the allowed range.",
+   "Offer shortcuts like Today and Tomorrow.",
+   "Allow typing as well as picking.",
+   "Show the date format people should use."
+  ]
+ },
+ "time-picker": {
+  "what": "A field for choosing a time of day. It follows the person's 12 or 24 hour habit and often moves in set steps.",
+  "uses": [
+   "Start times and reminders.",
+   "Opening hours.",
+   "Scheduling appointments."
+  ],
+  "avoid": [
+   "Lengths of time such as 90 minutes; use a duration picker.",
+   "Both a date and a time; use a date and time picker."
+  ],
+  "practices": [
+   "Use the native time input.",
+   "Use steps such as 15 minutes when exact minutes do not matter.",
+   "Show the time zone when it could be unclear.",
+   "Label the field clearly."
+  ]
+ },
+ "datetime-picker": {
+  "what": "A pair of fields for a date and a time, together describing one moment. Keeping them separate makes each easy to fill in and correct.",
+  "uses": [
+   "When a task starts or access expires.",
+   "Scheduling a message or publication.",
+   "Setting a deadline with a time."
+  ],
+  "avoid": [
+   "Date only; use a date picker.",
+   "A start and an end; use a date range picker."
+  ],
+  "practices": [
+   "Group the date and time under one label.",
+   "Show the time zone.",
+   "Store the moment in a standard form such as UTC.",
+   "Check that the moment is allowed, for example not in the past."
+  ]
+ },
+ "date-range-picker": {
+  "what": "A control to choose a start and end date. Presets like Last 7 days make common periods quick, and the end stays after the start.",
+  "uses": [
+   "Report periods.",
+   "Booking time off or travel dates.",
+   "Filtering lists by date."
+  ],
+  "avoid": [
+   "A single day; use a date picker.",
+   "Ranges of time within one day; use a time range input."
+  ],
+  "practices": [
+   "Offer common presets.",
+   "Keep the end date on or after the start date.",
+   "Show the length of the chosen range.",
+   "Label the start and the end clearly.",
+   "Say whether the end date is included."
+  ]
+ },
+ "time-range-input": {
+  "what": "Two time fields for a start and an end, usually with the resulting length. It helps people set periods within a day, including overnight ones.",
+  "uses": [
+   "Opening hours.",
+   "Work shifts.",
+   "Booking windows."
+  ],
+  "avoid": [
+   "Periods across several days; use a date range picker.",
+   "Only a length of time; use a duration picker."
+  ],
+  "practices": [
+   "Show the length that results.",
+   "Say clearly when the end is the next day.",
+   "Validate on the server as well.",
+   "Label start and end clearly.",
+   "Use steps that suit the task, such as 15 minutes."
+  ]
+ },
+ "duration-picker": {
+  "what": "A control for entering a length of time, such as hours and minutes. Quick choices cover usual lengths while fields allow exact values.",
+  "uses": [
+   "Meeting lengths.",
+   "Timeouts and retention periods.",
+   "Reminder offsets."
+  ],
+  "avoid": [
+   "A specific time of day; use a time picker.",
+   "A start and end; use a time range input."
+  ],
+  "practices": [
+   "Show units next to each field.",
+   "Offer common lengths as quick buttons.",
+   "Accept values like 90 minutes and tidy them up.",
+   "Set sensible minimum and maximum limits."
+  ]
+ },
+ "timezone-selector": {
+  "what": "A control for choosing a time zone, often with a button to use the person's own. It prevents mix-ups when schedules cross regions.",
+  "uses": [
+   "Account or site settings.",
+   "Scheduling events for people in other places.",
+   "Reports that depend on local time."
+  ],
+  "avoid": [
+   "Sites where everything uses one fixed zone; just state the zone.",
+   "Guessing the zone silently; let people confirm it."
+  ],
+  "practices": [
+   "Detect the person's zone and let them change it.",
+   "Show the zone's current offset or local time.",
+   "Make the list searchable and use readable place names.",
+   "Store the zone by its standard name."
+  ]
+ },
+ "month-year-switcher": {
+  "what": "Buttons and selects for moving a calendar or report between months and years. Arrows handle small steps and the selects allow big jumps.",
+  "uses": [
+   "Calendar headers.",
+   "Monthly reports.",
+   "Browsing archives by month."
+  ],
+  "avoid": [
+   "Picking one date to submit; use a date picker.",
+   "Browsing only a few days; use simple next and previous links."
+  ],
+  "practices": [
+   "Name the previous and next buttons with the month they lead to.",
+   "Show the current month and year clearly.",
+   "Limit years to a useful range.",
+   "Let people return to today quickly."
+  ]
+ },
+ "mini-calendar": {
+  "what": "A small month grid that shows dates in context. Days can be marked as today, selected, holidays or days with events.",
+  "uses": [
+   "Sidebars on calendar pages.",
+   "Filtering a list by day.",
+   "Showing which days have events."
+  ],
+  "avoid": [
+   "Picking a single date in a form; a date input is simpler.",
+   "Detailed schedules with times; use a full calendar view."
+  ],
+  "practices": [
+   "Mark today and the selected day clearly, with more than colour.",
+   "Name each day with its full date for screen readers.",
+   "Start the week on the day people expect.",
+   "Make day cells large enough to tap."
+  ]
+ },
+ "detail-panel": {
+  "what": "A block that shows everything about a single record: its name, status, actions and properties. It answers what this is and what can be done with it.",
+  "uses": [
+   "Main area of a record's page.",
+   "Side panel for a selected table row.",
+   "Quick view of a customer, device or order."
+  ],
+  "avoid": [
+   "Comparing many records; use a table.",
+   "Editing many fields at once; use a form."
+  ],
+  "practices": [
+   "Put the name and status first, then actions.",
+   "Show properties as aligned label and value pairs.",
+   "Keep the main action prominent and others in a menu.",
+   "Show only the most useful facts and link to the rest."
+  ]
+ },
+ "parent-child-tabs": {
+  "what": "A page for one record with tabs for the related records it owns, such as a project with tabs for tasks and members. The main record stays visible while people browse its parts.",
+  "uses": [
+   "A customer with orders and contacts.",
+   "A site with its devices and users.",
+   "A project with tasks and files."
+  ],
+  "avoid": [
+   "Unrelated sections; use general navigation.",
+   "Only one kind of related item; list it on the page."
+  ],
+  "practices": [
+   "Keep the parent's summary visible on every tab.",
+   "Show a count on each tab.",
+   "Give each tab its own web address.",
+   "Name tabs after the kind of child records."
+  ]
+ },
+ "child-list-tab": {
+  "what": "The content of a tab that lists records belonging to a parent. It looks and works like a normal list but is limited to that parent.",
+  "uses": [
+   "Showing a customer's orders.",
+   "Listing the people in a team.",
+   "Showing items in a folder or project."
+  ],
+  "avoid": [
+   "Lists of unrelated records; use a regular list page.",
+   "Records that rarely have children; show a short list on the main page."
+  ],
+  "practices": [
+   "Use the same tools as other lists, such as search and sorting.",
+   "Make Add pre-fill the parent.",
+   "Show an empty state with a way to add the first item.",
+   "Show the count in the header."
+  ]
+ },
+ "activity-feed": {
+  "what": "A timeline of changes to a record, showing who did what and when. It builds trust and helps explain why something looks different.",
+  "uses": [
+   "History tab on a record.",
+   "Audit logs for administrators.",
+   "Team updates on a project."
+  ],
+  "avoid": [
+   "Notifications that need a reaction; use alerts or an inbox.",
+   "Detailed technical logs; use a log viewer."
+  ],
+  "practices": [
+   "Group entries by day.",
+   "Show who, what and when for each entry.",
+   "Show old and new values for edits.",
+   "Load older entries with a button rather than endless scrolling.",
+   "Write entries as plain sentences."
+  ]
+ },
+ "delete-blocked-notice": {
+  "what": "A message that explains why something cannot be deleted because other records depend on it. It lists the blockers and what to do instead.",
+  "uses": [
+   "Deleting a customer who still has orders.",
+   "Removing a category that still contains items.",
+   "Deleting an account with active subscriptions."
+  ],
+  "avoid": [
+   "Deletes that work; use a normal confirmation.",
+   "Errors with no clear cause; explain the actual problem instead."
+  ],
+  "practices": [
+   "Say plainly why it cannot be deleted.",
+   "Link to each blocking record.",
+   "Offer a safe alternative such as archiving.",
+   "Show counts so the size of the problem is clear."
+  ]
+ },
+ "confirm-action-panel": {
+  "what": "A full page that asks people to confirm a serious action. It has room to explain what will happen, what is kept and to name the action on the button.",
+  "uses": [
+   "Deleting an account, site or project.",
+   "Revoking access for a user.",
+   "Stopping a process that affects many people."
+  ],
+  "avoid": [
+   "Small, easily undone actions; use undo or a quick dialog.",
+   "Routine actions; skip the confirmation to avoid habit clicking."
+  ],
+  "practices": [
+   "Say what will be lost and what will be kept.",
+   "Name the action on the button, such as Delete site.",
+   "Add a Cancel link that goes back.",
+   "Ask for an extra check for irreversible actions.",
+   "Make the danger button look different."
+  ]
+ },
+ "user-chip": {
+  "what": "A small element in the top corner showing the signed-in person's avatar, name and role. It usually opens an account menu.",
+  "uses": [
+   "Top bars of web applications.",
+   "Opening profile, settings and sign out.",
+   "Showing which account is active."
+  ],
+  "avoid": [
+   "Public pages with no sign-in; show a Sign in button instead.",
+   "Long lists of people; use a table row or card."
+  ],
+  "practices": [
+   "Place it at the top right.",
+   "Show the name or give the button an accessible name.",
+   "Include Sign out in the menu.",
+   "Let it shrink to just the avatar on small screens."
+  ]
+ },
+ "panel-header": {
+  "what": "The top row of a panel or card with its title, a short description and actions. It says what the panel shows and what can be done with it.",
+  "uses": [
+   "Dashboard panels and cards.",
+   "Table and chart frames.",
+   "Settings sections in a panel."
+  ],
+  "avoid": [
+   "Page titles; use a page heading.",
+   "Panels with no title or actions; skip the header."
+  ],
+  "practices": [
+   "Keep the title short and about one topic.",
+   "Place actions next to the title.",
+   "Limit actions to the most useful few.",
+   "Let actions wrap on narrow screens."
+  ]
+ },
+ "pin-control": {
+  "what": "A toggle that pins an item so it stays easy to find, for instance at the top of a list or on a dashboard. It shows whether the item is pinned.",
+  "uses": [
+   "Pinning favourites to a dashboard.",
+   "Keeping important items at the top of a list.",
+   "Saving shortcuts to frequently used pages."
+  ],
+  "avoid": [
+   "Marking something as done; use a checkbox.",
+   "Saving to a personal collection; use a bookmark or favourite action."
+  ],
+  "practices": [
+   "Show the state in words as well as the icon.",
+   "Announce the change to screen readers.",
+   "Save at once and undo if saving fails.",
+   "Name the item being pinned in the label."
+  ]
+ },
+ "theme-toggle": {
+  "what": "A control to switch the look of an interface between themes such as light and dark. It follows the system setting by default and remembers the choice.",
+  "uses": [
+   "Settings and account pages.",
+   "Top bar shortcut for switching between light and dark.",
+   "Reading in different lighting."
+  ],
+  "avoid": [
+   "Basic colour changes with no real need; follow the system setting.",
+   "Sites with a single fixed look."
+  ],
+  "practices": [
+   "Offer an automatic option that follows the system setting.",
+   "Show all choices at once.",
+   "Remember the choice for the next visit.",
+   "Apply it before the page appears to avoid flashes."
+  ]
+ },
+ "email-fallback": {
+  "what": "An email link paired with the visible address and a Copy button. It covers people whose device has no mail app set up.",
+  "uses": [
+   "Contact and support pages.",
+   "Sharing a report by email.",
+   "Any link that starts an email."
+  ],
+  "avoid": [
+   "Long conversations; use a contact form or a chat tool.",
+   "Sensitive details in the link; avoid putting personal data in it."
+  ],
+  "practices": [
+   "Show the address in plain text.",
+   "Add a Copy button and confirm when copied.",
+   "Prefill a clear subject line.",
+   "Keep personal data out of the link."
+  ]
+ }
+}

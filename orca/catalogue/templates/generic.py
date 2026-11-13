@@ -22,13 +22,13 @@ def generic(eid, name, template, summary, why, when, how, laws, uses, guide, blo
 
 
 generic("generic-list", "Generic list template", "orca/generic/list.html",
-        "A list page from a ListView: title and Add button, optional filter panel, list header with count and search, "
-        "a table that becomes cards on phones, pagination and the right empty state.",
+        "A ListView page: title and Add button, optional filter panel, list header with count and search, "
+        "a table that becomes cards on phones, pagination and empty states.",
         "Most screens of a business application are lists; one template that is always right (sortable header, row actions, empty and no-match states, "
         "phone cards) removes repeated decisions and keeps every list familiar (Jakob's law, Tesler's law).",
         ["Any ListView: records people find, compare and open."],
         [MIXIN, "Set `template_name = \"orca/generic/list.html\"`, `list_columns` and `paginate_by`; filter the queryset on `request.GET[\"q\"]` for the search box.",
-         "Pass a `filter_form` (a GET form) to get the filter panel; override `list` to change the rows completely, `list_actions` for the buttons."],
+         "Pass a `filter_form` (a GET form) for the filter panel; override `list` to replace the rows, `list_actions` to change the buttons."],
         ["jakob", "tesler", "miller", "L14"], ["app-shell", "list-header", "data-table", "filter-drawer", "no-results"],
         ["Generic list template", "List page"], APP_BLOCKS + ["list_actions", "filter_panel", "list_header", "list"],
         APP_CONTEXT + ["`object_list`, `page_obj`, `paginator` (from ListView).", "`columns`: `[{\"label\", \"name\", \"numeric\"}]`.", URLS,
@@ -36,7 +36,7 @@ generic("generic-list", "Generic list template", "orca/generic/list.html",
         classes=[".orca-list-layout"])
 
 generic("generic-detail", "Generic detail template", "orca/generic/detail.html",
-        "A record page from a DetailView: title, Edit and Delete actions, and the record's fields as a key–value list.",
+        "A DetailView page: title, Edit and Delete actions, and the record's fields as a key–value list.",
         "Details read top to bottom as label and value pairs (Practical UI L01); Edit and Delete in the same place on every record make them findable without searching (Jakob's law).",
         ["Any DetailView: one record with its properties."],
         [MIXIN, "Set `detail_fields`; add related lists or history in `detail_extra`, change the buttons in `detail_actions`."],
@@ -45,18 +45,18 @@ generic("generic-detail", "Generic detail template", "orca/generic/detail.html",
         APP_CONTEXT + ["`object`, `fields`, `update_url`, `delete_url`."])
 
 generic("generic-form", "Generic form template", "orca/generic/form.html",
-        "A create or edit page from a CreateView or UpdateView: one column of ORCA fields with the error summary and Save and Cancel.",
+        "A CreateView or UpdateView page: one column of ORCA fields with an error summary, Save and Cancel.",
         "One column is the fastest form to fill (Practical UI R01); the error summary and inline errors from `orca_form_errors` and `orca_field` "
         "make every form recover the same way (W15).",
         ["Any CreateView or UpdateView; any page whose main job is one form."],
-        [MIXIN, "Add help text on the model or form field: it is shown under the label. Use `form_fields` to group fields in form sections."],
+        [MIXIN, "Help text on the model or form field shows under the label. Use `form_fields` to group fields in sections."],
         ["R01", "W15", "R09"], ["app-shell", "narrow-form"],
         ["Generic form template", "Form page"], APP_BLOCKS + ["form_fields", "form_actions"],
         APP_CONTEXT + ["`form`, `object` (when editing), `submit_label`, `cancel_url`."])
 
 generic("generic-confirm-delete", "Generic confirm (delete) template", "orca/generic/confirm_delete.html",
-        "The delete confirmation from a DeleteView: what will be deleted, what is kept, a danger button and Cancel; "
-        "or, when other records still use it, why it cannot be deleted yet.",
+        "A DeleteView confirmation: what will be deleted, what is kept, a danger button and Cancel; "
+        "or, if other records still use it, why it cannot be deleted yet.",
         "Deleting is the most costly mistake, so friction scales with it (Practical UI B13): consequences in words, the danger button named after the action. "
         "When related records protect it, saying which ones turns a dead end into a task (W15).",
         ["Any DeleteView; any page confirming a destructive action."],
@@ -67,7 +67,7 @@ generic("generic-confirm-delete", "Generic confirm (delete) template", "orca/gen
         APP_CONTEXT + ["`object`, `deleted`, `kept`, `confirm_text`, `blocked_by`, `submit_label`, `cancel_url`."])
 
 generic("generic-confirm-action", "Generic confirm-action template", "orca/generic/confirm_action.html",
-        "A confirmation page for any consequential action that is not a delete: archive, send, disable, run.",
+        "A confirmation page for a consequential action other than delete: archive, send, disable, run.",
         "A separate page with the consequences listed gives people a moment to check (Practical UI B13) without the alarm of a danger colour when nothing is lost.",
         ["Actions with wide effects that need a second look: send to everyone, disable a site, start a long run."],
         ["Pass `title` (a question), `text`, `items` and `submit_label` (the verb); set `danger=True` only when something is lost.",
@@ -77,11 +77,11 @@ generic("generic-confirm-action", "Generic confirm-action template", "orca/gener
         APP_CONTEXT + ["`title`, `text`, `items`, `form`, `danger`, `submit_label`, `cancel_url`."])
 
 generic("parent-base", "Parent base template", "orca/generic/parent_base.html",
-        "The frame shared by every page of a parent record: its title and actions, optional summary stats, and tabs for the overview and each child list.",
+        "The frame shared by a parent record's pages: title and actions, optional summary stats, and tabs for the overview and each child list.",
         "Keeping the parent's header and tabs fixed while the tab content changes tells people where they are and what else the record holds (Practical UI L05, Jakob's law).",
         ["Records that own other records: a site and its videos, a project and its tasks."],
         ["Extend it for each tab and fill `child_content`; mark the current tab in `parent_tabs`.",
-         "Each tab is its own URL (and view), so tabs can be linked, bookmarked and refreshed."],
+         "Each tab has its own URL and view, so it can be linked, bookmarked and refreshed."],
         ["L05", "jakob", "miller"], ["parent-child-tabs"],
         ["Parent base template"], PARENT_BLOCKS, PARENT_CONTEXT, classes=[".orca-parent__panel"])
 

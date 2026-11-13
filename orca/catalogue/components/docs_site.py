@@ -3,7 +3,7 @@ from . import Component
 
 C = category(
     "docs-site", "Documentation site",
-    "Components for documenting a design system or an API: live examples, code blocks and the navigation tree.",
+    "Components for documenting a design system or API: live examples, code blocks and a navigation tree.",
     level="component",
 )
 
@@ -13,7 +13,7 @@ add(Component(
     why="Seeing the result and the code side by side lets people copy exactly what they saw (Jakob's law, Tesler's law); tabs keep the code out of the way until wanted.",
     when=["Design-system documentation, component galleries, internal style guides."],
     how=["`<div class=\"orca-live-example\">` with a tab bar (Preview, Code) and two panels; the code panel holds a code block.",
-         "Render the preview from the same source string you print, so they can never differ (this site does)."],
+         "Render the preview from the same source string you print so they never differ (this site does)."],
     classes=[".orca-live-example"],
     laws=["jakob", "tesler"],
     uses=["tab-bar", "code-block"],
@@ -29,11 +29,11 @@ add(Component(
     "code-block", "Code block", C,
     "Multi-line code with its language and a Copy button.",
     why="Copying code by selecting is error-prone; a Copy button with confirmation is exact and fast (Doherty threshold, Tesler's law). A monospaced face keeps similar characters distinct (Practical UI T01).",
-    when=["Commands, configuration and code samples in documentation and settings (API keys use the copy button)."],
+    when=["Commands, configuration and code samples in docs and settings (API keys use the copy button)."],
     how=["`<div class=\"orca-code-block\"><div class=\"orca-code-block__head\"><span>Python</span><button class=\"orca-button orca-button--sm\" type=\"button\" data-orca-copy=\"code-id\"><span data-orca-copy-label>Copy</span></button></div><pre><code id=\"code-id\">…</code></pre></div>`.",
-         "The Copy button carries the copy icon and a check icon (`class=\"orca-icon--copy\"` and `\"orca-icon--copied\"`); the check shows while it says Copied.",
-         "Code is coloured by `orca.js` (the vendored highlight.js, loaded only on pages with code) in the `--orca-code-*` colours of the theme, "
-         "set in the JetBrains Mono font. Name the language with `data-orca-highlight=\"python\"` on the `<code>`, or leave it out to detect it.",
+         "The Copy button holds a copy icon and a check icon (`class=\"orca-icon--copy\"` and `\"orca-icon--copied\"`); the check shows while it says Copied.",
+         "`orca.js` colours code (using the vendored highlight.js, loaded only on pages with code) in the theme's `--orca-code-*` colours, "
+         "in the JetBrains Mono font. Name the language with `data-orca-highlight=\"python\"` on the `<code>`, or leave it out to detect it.",
          "Lines scroll sideways instead of wrapping; keep samples short and runnable."],
     classes=[".orca-code-block", ".orca-code-block__head", ".orca-hl-keyword", ".orca-hl-string", ".orca-hl-comment"],
     tokens=["font-mono", "code-keyword", "code-tag", "code-attr", "code-string", "code-number", "code-template", "code-title", "code-comment"],
@@ -47,10 +47,10 @@ add(Component(
 
 add(Component(
     "docs-nav-tree", "Docs navigation tree", C,
-    "A documentation sidebar: a filter box above a nav tree of sections and pages.",
+    "A documentation sidebar: a filter box above a tree of sections and pages.",
     why="Documentation has many pages; filtering by name finds one faster than browsing (Hick's law), while the grouped tree teaches the structure (Miller's law).",
     when=["Documentation sites and long help centres (this site uses it)."],
-    how=["A search field with `data-orca-filter-list=\"tree-id\"` above a nav tree `<ul id=\"tree-id\">`; matching sections open while filtering, empty ones hide.",
+    how=["A search field with `data-orca-filter-list=\"tree-id\"` above a nav tree `<ul id=\"tree-id\">`; while filtering, matching sections open and empty ones hide.",
          "Keep the current page highlighted and scrolled into view."],
     classes=[".orca-nav-tree", ".orca-search"],
     laws=["hick", "miller"],

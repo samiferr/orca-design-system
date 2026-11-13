@@ -1,0 +1,794 @@
+{
+ "heading": {
+  "what": "Headings are titles that label each part of a page, from the main title (h1) down to small sub-sections (h6). They give a page an outline that people and software can scan.",
+  "uses": [
+   "Breaking long articles, documentation and reports into scannable sections.",
+   "Letting screen-reader users jump between sections.",
+   "Showing the main topic of a page in one h1."
+  ],
+  "avoid": [
+   "Making text bigger or bold only for looks: use a style, not a heading level.",
+   "Labelling single items like buttons or form fields: use the proper label element."
+  ],
+  "practices": [
+   "Use one h1 per page.",
+   "Go down one level at a time and never skip levels.",
+   "Choose the level for the outline, then adjust the look with styling.",
+   "Keep headings short and specific."
+  ]
+ },
+ "page-title": {
+  "what": "The page title is the main heading of a page. It tells people which page or item they are on.",
+  "uses": [
+   "Naming the page at the top of an application screen.",
+   "Naming the record on a detail page.",
+   "Giving every page one clear focal point."
+  ],
+  "avoid": [
+   "Putting the site name in every title: use a logo or header for the brand.",
+   "Long explanations: use a subtitle or help text."
+  ],
+  "practices": [
+   "Name the thing, such as 'Orders', not the action.",
+   "Put the distinguishing word first.",
+   "Make it the page's single h1.",
+   "Match the browser tab title."
+  ]
+ },
+ "page-subtitle": {
+  "what": "A page subtitle is one short sentence under the page title. It explains what the page is for or adds one key fact.",
+  "uses": [
+   "Clarifying a page whose title alone is vague.",
+   "Showing scope, such as a date range or filter.",
+   "Giving first-time visitors a hint of what to do."
+  ],
+  "avoid": [
+   "Restating the title in other words: leave it out.",
+   "Long instructions: put help text next to the field that needs it."
+  ],
+  "practices": [
+   "Keep it to one short sentence.",
+   "Make it add something the title does not.",
+   "Use a quieter colour than the title.",
+   "Keep lines a readable length."
+  ]
+ },
+ "section-title": {
+  "what": "A section title heads a group of related content on a page, such as a set of panels or part of a long form.",
+  "uses": [
+   "Splitting a long page into a few named parts.",
+   "Grouping related fields in a long form.",
+   "Helping people scan to the part they need."
+  ],
+  "avoid": [
+   "Titling a section that holds only one titled panel: the panel title is enough.",
+   "Naming the whole page: use the page title."
+  ],
+  "practices": [
+   "Use words people would look for, not 'Other' or 'Misc'.",
+   "Keep the heading level in order.",
+   "Leave more space above than below.",
+   "Keep titles to a few words."
+  ]
+ },
+ "panel-title": {
+  "what": "A panel title is the heading of a boxed block of content, such as a card, table or chart. It names what that block shows.",
+  "uses": [
+   "Naming a chart, table or summary card.",
+   "Heading a settings group in a box.",
+   "Letting people find a block by scanning."
+  ],
+  "avoid": [
+   "Naming a whole page section: use a section title.",
+   "Styling that looks like a link or label, such as colour or all capitals."
+  ],
+  "practices": [
+   "Describe the content in a few words.",
+   "Pick the heading level that fits the page outline.",
+   "Add a short muted description only if needed.",
+   "Keep style the same on every panel."
+  ]
+ },
+ "alert-title": {
+  "what": "An alert title is the bold first line of a message box. It states plainly what happened so the reader can decide quickly.",
+  "uses": [
+   "Naming the result in a success or error message.",
+   "Heading a warning or notice with a longer body.",
+   "Giving screen-reader users the key fact first."
+  ],
+  "avoid": [
+   "One-line messages: skip the title and write one clear sentence.",
+   "Vague titles like 'Error' or 'Oops': state the problem."
+  ],
+  "practices": [
+   "State the fact, such as 'Report sent'.",
+   "Keep it to a few words.",
+   "Skip 'Error:' prefixes and exclamation marks.",
+   "Follow it with what to do next."
+  ]
+ },
+ "paragraph": {
+  "what": "A paragraph is a block of running text. It carries explanations and descriptions, and its size and line length set how easy a page is to read.",
+  "uses": [
+   "Explaining a feature or a result.",
+   "Writing the body of a dialog or message.",
+   "Introducing a section before lists or tables."
+  ],
+  "avoid": [
+   "Long blocks of dense text: split them or use a list.",
+   "Content that is really a list of steps: use a numbered list."
+  ],
+  "practices": [
+   "Put the main point first.",
+   "Keep one idea in each paragraph.",
+   "Keep lines around 60 to 75 characters.",
+   "Use short sentences."
+  ]
+ },
+ "text-link": {
+  "what": "A text link is clickable text that takes the reader to another page, file or place on the same page.",
+  "uses": [
+   "Pointing to related pages from within a sentence.",
+   "Linking to outside sources or documentation.",
+   "Jumping to a section on the same page."
+  ],
+  "avoid": [
+   "Actions that change data, such as save or delete: use a button.",
+   "Vague text like 'click here': say where the link goes."
+  ],
+  "practices": [
+   "Make link text meaningful on its own.",
+   "Underline links so colour is not the only cue.",
+   "Show a clear focus outline.",
+   "Say when a link opens another site."
+  ]
+ },
+ "muted-text": {
+  "what": "Muted text is secondary text shown in a softer colour so the main content stands out. It must still be easy to read.",
+  "uses": [
+   "Showing descriptions under titles.",
+   "Showing meta details such as counts or dates.",
+   "Showing empty values like 'Not set'."
+  ],
+  "avoid": [
+   "Text people must read to finish a task: use normal colour.",
+   "Showing that something is disabled: use a real disabled state."
+  ],
+  "practices": [
+   "Keep enough contrast: at least 4.5 to 1 against the background.",
+   "Do not rely on pale grey.",
+   "Use it only for secondary information."
+  ]
+ },
+ "small-text": {
+  "what": "Small text is a smaller type size for supporting information such as help, captions and timestamps.",
+  "uses": [
+   "Writing help text under a field.",
+   "Showing captions, timestamps or footnotes.",
+   "Adding meta details next to a title."
+  ],
+  "avoid": [
+   "Body copy or anything essential to read in full: use normal text size.",
+   "Legal or critical warnings: keep them at normal size."
+  ],
+  "practices": [
+   "Do not go below about 14px.",
+   "Keep contrast high.",
+   "Keep it short.",
+   "Pair it with a quieter colour for meta details."
+  ]
+ },
+ "tabular-number": {
+  "what": "Tabular numbers use digits of equal width, so figures line up in columns and do not shift when values change.",
+  "uses": [
+   "Showing prices and totals in tables.",
+   "Showing live counters and timers.",
+   "Showing times, durations and percentages."
+  ],
+  "avoid": [
+   "Running text and headings: normal digits read more naturally there.",
+   "Codes with letters and digits, such as IDs: use a monospace code style."
+  ],
+  "practices": [
+   "Right-align numbers in columns.",
+   "Add thousand separators and units.",
+   "Use the same decimal places in a column.",
+   "Use it for values that update."
+  ]
+ },
+ "kbd": {
+  "what": "A keyboard key element shows a key or key combination in a key-like shape, so readers can tell it from the surrounding sentence.",
+  "uses": [
+   "Documenting shortcuts in help text.",
+   "Showing shortcuts next to menu items.",
+   "Writing instructions that name specific keys."
+  ],
+  "avoid": [
+   "Showing code or commands: use a code style.",
+   "Making a shortcut the only way to do something: always offer a visible option."
+  ],
+  "practices": [
+   "Use one element per key.",
+   "Write key names as printed, such as Ctrl or Esc.",
+   "Join combinations with a plus sign.",
+   "Consider Mac and Windows differences."
+  ]
+ },
+ "stat-label": {
+  "what": "A stat label is the short name of a measured value, shown with the number so readers know what it means.",
+  "uses": [
+   "Naming a number on a dashboard tile.",
+   "Labelling a figure in a summary row.",
+   "Telling apart several similar numbers."
+  ],
+  "avoid": [
+   "Long explanations: use a tooltip or help text.",
+   "Labels that repeat the whole tile title."
+  ],
+  "practices": [
+   "Name the measure and its scope, such as 'Visitors today'.",
+   "Keep it to a few words.",
+   "Place it consistently above or beside the value.",
+   "Use sentence case."
+  ]
+ },
+ "stat-value": {
+  "what": "A stat value is a large number that shows one key measurement. It is the main thing a summary tile is there to show.",
+  "uses": [
+   "Showing key figures on a dashboard.",
+   "Opening a report with headline numbers.",
+   "Showing a live count."
+  ],
+  "avoid": [
+   "Many figures in one tile: use a table or chart.",
+   "Numbers without context: add a label, unit or comparison."
+  ],
+  "practices": [
+   "Show one main value per tile.",
+   "Include the unit, such as % or h.",
+   "Format with thousand separators.",
+   "Use equal-width digits."
+  ]
+ },
+ "delta": {
+  "what": "A delta shows how a value changed compared with an earlier period or a target, using an arrow, a signed number and a colour.",
+  "uses": [
+   "Comparing today with yesterday on a KPI tile.",
+   "Showing growth or decline over a period.",
+   "Showing distance from a target."
+  ],
+  "avoid": [
+   "Showing a total on its own: use a stat value.",
+   "Using red and green alone: add an arrow and a sign."
+  ],
+  "practices": [
+   "Show direction with an arrow and sign, not colour alone.",
+   "Say what it is compared with.",
+   "Colour by good or bad, not up or down.",
+   "Use a true minus sign."
+  ]
+ },
+ "code-text": {
+  "what": "Code text shows short technical values in a monospace font, so they stand out from sentences and characters are easy to tell apart.",
+  "uses": [
+   "Showing file names, paths and IDs.",
+   "Showing short commands or settings keys.",
+   "Showing values people may copy."
+  ],
+  "avoid": [
+   "Many lines of code: use a code block.",
+   "Emphasising ordinary words: use bold or italic."
+  ],
+  "practices": [
+   "Use it only for literal values.",
+   "Let long values wrap.",
+   "Offer a copy button for values people copy.",
+   "Keep contrast high."
+  ]
+ },
+ "card-kicker": {
+  "what": "A card kicker is a short label above a card title that names the card's category, such as 'Video' or 'Guide'.",
+  "uses": [
+   "Telling types apart in a mixed list of cards.",
+   "Adding a category to news or article cards.",
+   "Helping people scan a grid."
+  ],
+  "avoid": [
+   "Showing status such as 'Draft' or 'Failed': use a badge.",
+   "Long labels: keep kickers to one to three words."
+  ],
+  "practices": [
+   "Use one to three words.",
+   "Use the same wording across cards.",
+   "Keep it quieter than the title.",
+   "Use capitals only for short labels."
+  ]
+ },
+ "card-title": {
+  "what": "A card title is the name of the item a card stands for. It is the first thing people read in a grid of cards.",
+  "uses": [
+   "Naming a record, product or article card.",
+   "Giving a clickable card its link text.",
+   "Helping people choose between cards."
+  ],
+  "avoid": [
+   "Decorative or vague titles: use the real name of the item.",
+   "Cutting off long names: let them wrap."
+  ],
+  "practices": [
+   "Use the item's real name.",
+   "Keep the distinguishing words visible.",
+   "Use the same heading level on every card.",
+   "Make link text clear if the card is a link."
+  ]
+ },
+ "card-meta": {
+  "what": "Card meta is a line of small secondary facts under a card title, such as type, date or count.",
+  "uses": [
+   "Showing dates, sizes or counts on a card.",
+   "Showing the source or author of an item.",
+   "Giving extra detail without crowding the title."
+  ],
+  "avoid": [
+   "Key facts people need to decide: put them in the title or body.",
+   "Long lists of facts: link to a detail page."
+  ],
+  "practices": [
+   "Show three facts at most.",
+   "Separate facts with a dot or space.",
+   "Use a quieter style than the title.",
+   "Keep the order the same on every card."
+  ]
+ },
+ "dialog-title": {
+  "what": "A dialog title is the heading of a pop-up window. It says in a few words what the person is being asked or told.",
+  "uses": [
+   "Naming a confirmation, such as 'Delete this file?'.",
+   "Titling a form shown in a dialog.",
+   "Naming a side panel or drawer."
+  ],
+  "avoid": [
+   "Vague titles like 'Warning' or 'Are you sure?': name the action and object.",
+   "Long text: put detail in the body."
+  ],
+  "practices": [
+   "Ask the question or name the task.",
+   "Mention the object affected.",
+   "Repeat the verb on the main button.",
+   "Link the title to the dialog for screen readers."
+  ]
+ },
+ "empty-title": {
+  "what": "An empty-state title is the short heading shown when a list, table or search has nothing to display. It says plainly what is missing.",
+  "uses": [
+   "Showing a new, empty list.",
+   "Showing a search or filter with no matches.",
+   "Showing a chart with no data yet."
+  ],
+  "avoid": [
+   "Content that is still loading: show a loading state instead.",
+   "Errors: use an error message that says what went wrong."
+  ],
+  "practices": [
+   "State what is missing in plain words.",
+   "Keep it calm and short.",
+   "Avoid blaming the person.",
+   "Pair it with a next step."
+  ]
+ },
+ "empty-text": {
+  "what": "Empty-state text is a short sentence under the empty-state title. It explains why nothing is shown and what to do next.",
+  "uses": [
+   "Inviting people to create their first item.",
+   "Suggesting they clear filters after no results.",
+   "Explaining why data is not there yet."
+  ],
+  "avoid": [
+   "Long help articles: link to documentation.",
+   "Jokes or blame in work tools: stay neutral and useful."
+  ],
+  "practices": [
+   "Say what to do next.",
+   "Keep it to one or two sentences.",
+   "Offer the action as a button.",
+   "Fit the text to the cause, new or filtered."
+  ]
+ },
+ "generic-list": {
+  "what": "A list page shows many records of one kind, with a title, search or filters, sortable rows and paging. It is the most common screen in business applications.",
+  "uses": [
+   "Browsing orders, customers or other records.",
+   "Finding and opening a record.",
+   "Adding a new record from the list."
+  ],
+  "avoid": [
+   "Comparing a few items in depth: use a detail or comparison view.",
+   "Browsing visual items: a card grid may suit better."
+  ],
+  "practices": [
+   "Show the total count.",
+   "Offer search and filters for long lists.",
+   "Add paging for long lists.",
+   "Show a helpful empty state and a no-results state.",
+   "Make rows open the record."
+  ]
+ },
+ "generic-detail": {
+  "what": "A detail page shows everything about one record as label and value pairs, with the actions that apply to it, such as edit or delete.",
+  "uses": [
+   "Reading all fields of a record.",
+   "Starting an edit or a delete.",
+   "Checking a record before acting on it."
+  ],
+  "avoid": [
+   "Editing fields: use a form page.",
+   "Browsing many records: use a list page."
+  ],
+  "practices": [
+   "Put the record's name in the title.",
+   "Show label and value pairs in a steady order.",
+   "Keep actions in the same place on every record.",
+   "Show empty values clearly."
+  ]
+ },
+ "generic-form": {
+  "what": "A form page is a page whose main job is one form to create or edit a record, with save and cancel actions.",
+  "uses": [
+   "Creating a new record.",
+   "Editing an existing record.",
+   "Collecting a few inputs on a page of their own."
+  ],
+  "avoid": [
+   "Very short edits: edit in place or in a dialog.",
+   "Long, many-step processes: use a step-by-step flow."
+  ],
+  "practices": [
+   "Use one column of fields.",
+   "Put clear labels above fields.",
+   "Show an error summary and inline errors.",
+   "Make Save the clear main action and add Cancel."
+  ]
+ },
+ "generic-confirm-delete": {
+  "what": "A delete confirmation page asks people to confirm before a record is removed. It says what will be lost, or why it cannot be deleted.",
+  "uses": [
+   "Confirming permanent removal.",
+   "Explaining what else will be removed.",
+   "Explaining that related records block deletion."
+  ],
+  "avoid": [
+   "Deletes that can be undone: allow undo instead of asking first.",
+   "Minor, low-cost actions: do not add confirmation."
+  ],
+  "practices": [
+   "Name the record being deleted.",
+   "List what will be lost.",
+   "Label the button with the action, such as 'Delete order'.",
+   "Make Cancel easy to find."
+  ]
+ },
+ "generic-confirm-action": {
+  "what": "A confirm-action page asks for a second look before a consequential action that is not a delete, such as sending to everyone or disabling something.",
+  "uses": [
+   "Sending a message to many people.",
+   "Disabling or archiving a site or account.",
+   "Starting a long or costly run."
+  ],
+  "avoid": [
+   "Harmless, easily undone actions: just do them.",
+   "Deleting: use the delete confirmation."
+  ],
+  "practices": [
+   "Ask a clear question.",
+   "List the consequences.",
+   "Name the button with the action's verb.",
+   "Use a danger style only when something is lost."
+  ]
+ },
+ "parent-base": {
+  "what": "A parent page is the shared frame for a record that owns other records. It keeps the record's title and tabs in place while the content changes.",
+  "uses": [
+   "Showing a project with its tasks and files.",
+   "Showing a customer with orders and invoices.",
+   "Keeping people oriented across related pages."
+  ],
+  "avoid": [
+   "Records with no related lists: use a single detail page.",
+   "Unrelated pages: use normal navigation."
+  ],
+  "practices": [
+   "Keep the header and tabs identical on every tab.",
+   "Mark the current tab.",
+   "Give each tab its own address.",
+   "Show key figures above the tabs."
+  ]
+ },
+ "parent-detail": {
+  "what": "A parent overview tab shows the main facts about a record that owns other records, before its related lists.",
+  "uses": [
+   "Showing the main details of a project, site or customer.",
+   "Starting point before related lists.",
+   "Adding summary panels."
+  ],
+  "avoid": [
+   "Long related lists: put them on their own tabs.",
+   "Editing: use a form page."
+  ],
+  "practices": [
+   "Make Overview the first tab.",
+   "Show label and value pairs.",
+   "Keep it short.",
+   "Link to the related lists."
+  ]
+ },
+ "parent-child-list": {
+  "what": "A child list tab shows the records that belong to a parent, such as the tasks of a project, with a count and an add action.",
+  "uses": [
+   "Listing items owned by one parent.",
+   "Adding a new item to that parent.",
+   "Showing how many related items exist."
+  ],
+  "avoid": [
+   "Listing records from many parents: use a normal list page.",
+   "Single related item: show it on the overview."
+  ],
+  "practices": [
+   "Name the parent in the add button.",
+   "Show a count.",
+   "Name the parent in the empty state.",
+   "Add paging for long lists."
+  ]
+ },
+ "parent-child-detail": {
+  "what": "A child detail page shows one record that belongs to a parent, while keeping the parent's header and a way back to the list.",
+  "uses": [
+   "Reading a single task, invoice or video of a parent.",
+   "Starting an edit or a delete.",
+   "Moving back to the parent's list."
+  ],
+  "avoid": [
+   "Records that stand alone: use a normal detail page.",
+   "Editing: use a form page."
+  ],
+  "practices": [
+   "Provide a back link to the list.",
+   "Keep the parent's header visible.",
+   "Place edit and delete beside the title.",
+   "Use a steady field order."
+  ]
+ },
+ "parent-child-form": {
+  "what": "A child form page creates or edits a record that belongs to a parent, with a heading that names the parent.",
+  "uses": [
+   "Adding a new item to a parent.",
+   "Editing an item of a parent.",
+   "Keeping context while entering data."
+  ],
+  "avoid": [
+   "Items that belong to no parent: use a normal form page.",
+   "Tiny edits: edit in place."
+  ],
+  "practices": [
+   "Name the parent in the heading.",
+   "Do not ask people to choose the parent again.",
+   "Use one column of fields.",
+   "Add Cancel back to the list."
+  ]
+ },
+ "parent-child-confirm": {
+  "what": "A child confirm page asks people to confirm removing a record from its parent, or explains why it cannot be removed.",
+  "uses": [
+   "Confirming removal of an item from a parent.",
+   "Explaining what else will go with it.",
+   "Explaining why removal is blocked."
+  ],
+  "avoid": [
+   "Actions that can be undone: offer undo instead.",
+   "Deleting a whole parent: use a delete confirmation."
+  ],
+  "practices": [
+   "Name both the item and the parent.",
+   "List the consequences.",
+   "Name the button with the verb.",
+   "Give a way to cancel."
+  ]
+ },
+ "button-group": {
+  "what": "A button group is a set of related buttons placed together. Joined buttons act on the same thing, and spaced ones are separate actions.",
+  "uses": [
+   "Offering alternatives on one object, such as zoom in and out.",
+   "Grouping related actions like Export and Print.",
+   "Keeping toolbars tidy."
+  ],
+  "avoid": [
+   "Choosing one mode among several: use a segmented control or toggle buttons.",
+   "Many actions: use a menu."
+  ],
+  "practices": [
+   "Keep a consistent style in a group.",
+   "Label the group for screen readers.",
+   "Keep destructive actions apart.",
+   "Keep a group to a few buttons."
+  ]
+ },
+ "dropdown-menu": {
+  "what": "A dropdown menu is a button that opens a list of actions. It hides less common actions to keep the screen simple.",
+  "uses": [
+   "Grouping secondary actions on a record.",
+   "Account or user menus.",
+   "An 'Add' button with several kinds."
+  ],
+  "avoid": [
+   "Choosing a value for a field: use a select.",
+   "The main action: show it as a visible button."
+  ],
+  "practices": [
+   "Make the menu work with the keyboard.",
+   "Put destructive items last.",
+   "Use short verb labels.",
+   "Close on Escape and return focus."
+  ]
+ },
+ "dropdown-item": {
+  "what": "A dropdown item is one action in a menu, shown as a row with a label and often an icon, description or shortcut.",
+  "uses": [
+   "Listing actions in a menu.",
+   "Showing a shortcut next to an action.",
+   "Explaining why an action is unavailable."
+  ],
+  "avoid": [
+   "Navigation between main sections: use navigation links.",
+   "Setting options: use a checkbox or radio menu item."
+  ],
+  "practices": [
+   "Start labels with a verb.",
+   "Use icons the same way on every row.",
+   "Mark destructive items clearly.",
+   "Say why an item is disabled."
+  ]
+ },
+ "copy-button": {
+  "what": "A copy button copies a value to the clipboard in one click and confirms that it worked.",
+  "uses": [
+   "Copying API keys, links or IDs.",
+   "Copying commands or addresses.",
+   "Avoiding typing mistakes with exact values."
+  ],
+  "avoid": [
+   "Long documents: offer a download instead.",
+   "Secrets that must not be shown: do not display them."
+  ],
+  "practices": [
+   "Show the value next to the button.",
+   "Confirm with 'Copied' and announce it to screen readers.",
+   "Give a fallback if the clipboard is blocked.",
+   "Keep the label clear."
+  ]
+ },
+ "record-actions": {
+  "what": "Record actions put the main action of a record in view and tuck the others into a 'More actions' menu.",
+  "uses": [
+   "The header of a detail page.",
+   "A card with several actions.",
+   "Keeping a toolbar simple."
+  ],
+  "avoid": [
+   "Records with one action: show only a button.",
+   "Many equal actions: consider a toolbar."
+  ],
+  "practices": [
+   "Show one main action.",
+   "Name the record in the menu button's label.",
+   "Put destructive actions last.",
+   "Ask before destructive actions."
+  ]
+ },
+ "row-actions": {
+  "what": "Row actions are small buttons at the end of a table row that act on that row, with extra actions in a menu.",
+  "uses": [
+   "Editing or viewing a row.",
+   "Opening a menu of more actions.",
+   "Acting on a row without leaving the table."
+  ],
+  "avoid": [
+   "Actions for many rows at once: use bulk selection.",
+   "Hover-only actions: they fail on touch screens and keyboards."
+  ],
+  "practices": [
+   "Show at most two actions.",
+   "Name the row in each button's label.",
+   "Keep actions always visible.",
+   "Use a quiet button style."
+  ]
+ },
+ "page-landmarks": {
+  "what": "Page landmarks are the main regions every page has, such as a skip link, the main content and navigation. They let assistive technology jump straight to the content.",
+  "uses": [
+   "Letting keyboard users skip repeated navigation.",
+   "Helping screen-reader users move between regions.",
+   "Giving dialogs one place to open."
+  ],
+  "avoid": [
+   "Dividing content for looks only: use plain containers.",
+   "Multiple main areas: use only one per page."
+  ],
+  "practices": [
+   "Use one main region per page.",
+   "Make the skip link the first thing to tab to.",
+   "Label regions that appear more than once.",
+   "Use real landmark elements."
+  ]
+ },
+ "error-message": {
+  "what": "An error page tells people that something went wrong, such as a missing page or a server problem, in plain words and offers a way forward.",
+  "uses": [
+   "Showing a page not found (404).",
+   "Showing no access (403) or server error (500).",
+   "Replacing a section that cannot load."
+  ],
+  "avoid": [
+   "Mistakes in a form: show inline field errors.",
+   "Short-lived issues: show a banner or toast."
+  ],
+  "practices": [
+   "Say what happened in plain words.",
+   "Offer a clear next step.",
+   "Do not blame the person.",
+   "Never show technical traces."
+  ]
+ },
+ "card-grid": {
+  "what": "A card grid arranges cards in equal columns that adjust to the screen width. It suits browsing a collection.",
+  "uses": [
+   "Browsing products, people or media.",
+   "Showing records with an image.",
+   "Dashboards of equal items."
+  ],
+  "avoid": [
+   "Comparing items field by field: use a table.",
+   "A single long list of text: use a list."
+  ],
+  "practices": [
+   "Keep cards equal in size and layout.",
+   "Put content in the same order in each card.",
+   "Make the whole card clickable if it opens a record.",
+   "Keep spacing even."
+  ]
+ },
+ "loading-placeholder": {
+  "what": "A loading placeholder shows grey shapes in the form of the content while it loads. It keeps the layout stable and shows that something is coming.",
+  "uses": [
+   "Loading a grid or feed.",
+   "Loading more items on scroll.",
+   "Loading content that takes over a second."
+  ],
+  "avoid": [
+   "Very quick loads: show nothing extra.",
+   "Long processes with known progress: use a progress bar."
+  ],
+  "practices": [
+   "Match the shape of the final content.",
+   "Mark the region as busy for screen readers.",
+   "Replace it all at once.",
+   "Avoid layout shifts."
+  ]
+ },
+ "no-results": {
+  "what": "A no-results state is what a list, table or search shows when there is nothing to display. It explains why and what to do next.",
+  "uses": [
+   "A new list with no items yet.",
+   "A search or filter that matches nothing.",
+   "A feed that is empty."
+  ],
+  "avoid": [
+   "Content that is still loading: show a loading state.",
+   "Errors: use an error message."
+  ],
+  "practices": [
+   "Say whether it is empty or filtered.",
+   "Offer a clear next step.",
+   "Show the active filters and a Clear all action.",
+   "Keep the tone calm."
+  ]
+ }
+}

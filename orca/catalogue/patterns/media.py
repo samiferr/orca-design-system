@@ -9,7 +9,7 @@ C = category(
 
 add(Pattern(
     "recording-player", "Recording player", C,
-    "A recorded clip with the native player, a timeline of event marks and a list of events that jump to their moment.",
+    "A recorded clip with the native player, a timeline of event marks and an event list that jumps to each moment.",
     why="People review recordings to find moments; marking events on the timeline and listing them turns searching into one click (Tesler's law, Fitts's law), and native controls work for everyone (Postel's law).",
     when=["Alert details, incident reviews, recorded runs."],
     how=["`<div class=\"orca-player\">` with a video frame (`<video id=… controls preload=\"metadata\">`), `.orca-player__timeline` of `.orca-player__mark` buttons (`style=\"--orca-at: 25%\"`, `data-orca-seek=\"seconds\"`, `aria-controls`), and `.orca-player__events` buttons with time and description.",
@@ -27,11 +27,11 @@ add(Pattern(
 
 add(Pattern(
     "live-stream-panel", "Live stream panel", C,
-    "A live video view with its state, a live flag and the live counts beside it.",
+    "A live video view with its state, a live flag and live counts beside it.",
     why="Operators watch a stream to confirm what the numbers say; showing the live state in words and the counts next to the picture keeps both in one glance (Miller's law, C03).",
     when=["Video detail pages and monitoring walls."],
     how=["A panel with a panel header (video name, status light, Pause/Full-screen actions), a 16:9 frame with the stream and a `.orca-frame__flag` ('Live'), and `.orca-live-panel__stats` (stat label/value pairs).",
-         "When the stream drops, replace it with the removed frame and a message, never a frozen image without notice."],
+         "If the stream drops, replace it with the removed frame and a message; never leave a frozen image unannounced."],
     classes=[".orca-live-panel", ".orca-live-panel__stats"],
     laws=["miller", "C03", "peak-end"],
     uses=["panel", "video-player", "status-light", "stat-card"],
@@ -45,7 +45,7 @@ add(Pattern(
 
 add(Pattern(
     "photo-post", "Photo post", C,
-    "A shared photo with who posted it and when, the photo, actions and caption.",
+    "A shared photo with its poster, time, actions and caption.",
     why="The familiar order (person, photo, actions, caption) needs no learning (Jakob's law) and keeps the author visible for trust.",
     when=["Shared snapshots, community or team feeds."],
     how=["`<article class=\"orca-photo-post\">` with `.orca-photo-post__head` (person block + relative time), the photo in a 4:3 frame with alt text, `.orca-photo-post__foot` (photo-actions bar + `.orca-photo-post__caption`)."],
@@ -63,7 +63,7 @@ add(Pattern(
 
 add(Pattern(
     "image-gallery", "Image gallery", C,
-    "A large stage image with a row of thumbnails and a count; thumbnails swap the stage.",
+    "A large main image with a row of thumbnails and a count; clicking a thumbnail swaps the image.",
     why="Thumbnails show how many images exist and which one is shown (Practical UI S06), and choosing one is a single click (Fitts's law).",
     when=["Several snapshots of one event; product photos; before/after views."],
     how=["`<div class=\"orca-gallery\" data-orca-gallery>` with a frame holding `<img data-orca-gallery-stage>`, a count (`data-orca-gallery-count`, polite), and `<ul class=\"orca-gallery__thumbs\">` of `<button class=\"orca-gallery__thumb\" data-orca-gallery-src=… data-orca-gallery-alt=…>`.",

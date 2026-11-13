@@ -3,7 +3,7 @@ from . import Pattern
 
 C = category(
     "pattern-forms", "Forms",
-    "Whole form sections and specialised editors: sections, stacks, sign-in, schedules, zones, properties and rich text.",
+    "Form sections, stacks and sign-in, plus editors for schedules, zones, properties and rich text.",
     level="pattern",
 )
 
@@ -47,10 +47,10 @@ add(Pattern(
 
 add(Pattern(
     "schedule-editor", "Schedule editor", C,
-    "A weekly schedule made of rows (day, start, end), with presets, add and remove, and overlap checks.",
+    "A weekly schedule of rows (day, start, end) with presets, add and remove, and overlap checks.",
     why="Schedules vary day by day; rows handle every shape without special fields (Tesler's law) and checking overlaps as people edit prevents a broken schedule (Peak–end rule, Practical UI R21).",
     when=["Capture schedules, opening hours, alert quiet hours."],
-    how=["A form section containing preset buttons, the schedule rows (`<div class=\"orca-schedule\" id=…>`), an add-row button with its `<template>`, and overlap warnings inside invalid rows.",
+    how=["A form section with preset buttons, the schedule rows (`<div class=\"orca-schedule\" id=…>`), an add-row button with its `<template>`, and overlap warnings in invalid rows.",
          "Django: a formset; the template uses `__prefix__` and `data-orca-total` points at TOTAL_FORMS."],
     classes=[".orca-schedule"],
     laws=["tesler", "peak-end", "R21"],
@@ -69,11 +69,11 @@ add(Pattern(
 
 add(Pattern(
     "zone-editor", "Zone/line editor", C,
-    "Draw a counting zone on the video image by clicking its corners, with a list of zones beside it.",
+    "Draw a counting zone by clicking its corners on the video image, with the zone list beside it.",
     why="Zones are spatial, so they are drawn where they apply (Practical UI F03: direct manipulation); undo, clear and a status line make mistakes cheap, and coordinates are saved as plain data the server validates (Postel's law).",
     when=["Defining counting zones, lines and excluded areas on a video view."],
     how=["`<div class=\"orca-zone-editor\" data-orca-zone-editor>` with `.orca-zone-editor__stage` (the snapshot image + an empty `<svg viewBox=\"0 0 100 100\" preserveAspectRatio=\"none\">`), a toolbar (`data-orca-zone-action=\"undo|clear|close\"`), a status line (`data-orca-zone-status`, polite) and a hidden input receiving the points as JSON percentages.",
-         "Beside it: the zone rows. Offer a coordinates form as the keyboard alternative."],
+         "Beside it: the zone rows, plus a coordinates form as the keyboard alternative."],
     a11y=["Drawing needs a pointer; provide numeric corner fields for keyboard and screen-reader users."],
     classes=[".orca-zone-editor", ".orca-zone-editor__stage", ".orca-zone-editor__toolbar", ".orca-zone-editor__hint"],
     laws=["F03", "postel", "peak-end"],
@@ -90,7 +90,7 @@ add(Pattern(
 
 add(Pattern(
     "login-card", "Login card", C,
-    "The sign-in form: logo, title, email, password, remember me, the sign-in button and recovery link.",
+    "The sign-in form: logo, title, email, password, remember me, sign-in button and recovery link.",
     why="Sign-in is the first step every day; a familiar layout (Jakob's law), browser autofill and clear errors make it fast, and an error that never says which field was wrong protects accounts (Postel's law, security).",
     when=["Sign-in pages (with the auth layout)."],
     how=["`<form class=\"orca-login\" method=\"post\">` with the logo, `h1.orca-login__title`, a form alert for failures, email (`autocomplete=\"username\"`) and password (`autocomplete=\"current-password\"`) fields, `.orca-login__row` (remember me + 'Forgot your password?'), a full-width primary button and `.orca-login__foot`.",

@@ -3,7 +3,7 @@ from . import Pattern
 
 C = category(
     "scheduler", "Scheduler",
-    "Editing when things and people are available, and booking time against that availability.",
+    "Setting when people and things are available, and booking time within that.",
     level="pattern",
 )
 
@@ -35,13 +35,13 @@ TPL = ('<template id="we-tpl"><div class="orca-schedule-row" data-orca-row><inpu
 
 add(Pattern(
     "weekly-availability-editor", "Weekly availability editor", C,
-    "Each day of the week with an open switch and one or more time spans, to set when something is open or someone is available.",
+    "Each weekday with an open switch and one or more time spans, to set opening hours or availability.",
     why="Availability is naturally weekly with breaks (lunch, split shifts); a row per day with add and remove spans fits that model exactly (Tesler's law). Overlaps and reversed times are flagged on the row, not at the top (Practical UI R21).",
     when=["Opening hours of a site, a person's availability, video recording schedules."],
     avoid=["One-off dates: use the exception and holiday editor."],
     how=["`<div class=\"orca-week-editor\">` with one `.orca-week-editor__day` per weekday: a switch and name, then `.orca-week-editor__spans` holding schedule rows and an 'Add hours' button.",
-         "Offer 'Copy Monday to weekdays' when most days are the same; validate on the server (end after start, no overlaps) and show the overlap warning on the row.",
-         "Store spans as `(weekday, start, end)` in the site's timezone and show that timezone."],
+         "Offer 'Copy Monday to weekdays' when most days match. Validate on the server (end after start, no overlaps) and show the overlap warning on the row.",
+         "Store spans as `(weekday, start, end)` in the site's timezone, and show it."],
     classes=[".orca-week-editor", ".orca-week-editor__day", ".orca-week-editor__name", ".orca-week-editor__spans", ".orca-week-editor__closed"],
     laws=["tesler", "R21", "L09"],
     uses=["add-row-button", "toggle-field", "overlap-warning"],
@@ -51,11 +51,11 @@ add(Pattern(
 
 add(Pattern(
     "working-hours-editor", "Working-hours editor", C,
-    "A compact editor for regular hours: the working days, one start and end time, a break and the timezone.",
+    "A compact editor for regular hours: working days, one start and end time, a break and the timezone.",
     why="Most people work the same hours every working day; asking for days plus one time range is far quicker than editing seven rows (Hick's law, Tesler's law). The summary sentence confirms the result in words.",
-    when=["A person's or team's standard hours; anything where days share the same hours."],
+    when=["Standard hours of a person or team, or any days that share the same hours."],
     avoid=["Hours that differ by day: use the weekly availability editor."],
-    how=["A form stack with the weekday selector, a time range input, an optional break range and the timezone selector, ending with a summary line ('Monday to Friday, 08:00–17:00, Paris time').",
+    how=["A form stack with the weekday selector, a time range input, an optional break range and the timezone selector, then a summary line ('Monday to Friday, 08:00–17:00, Paris time').",
          "Offer 'Different hours per day' as a link to the weekly editor."],
     classes=[".orca-form-stack"],
     laws=["hick", "tesler"],
@@ -71,10 +71,10 @@ add(Pattern(
 
 add(Pattern(
     "recurrence-editor", "Recurrence editor", C,
-    "Repeat rules for an event or task: frequency, interval, days, end condition and a plain-language summary.",
+    "Repeat rules for an event or task: frequency, interval, days, end and a plain-language summary.",
     why="Recurrence rules are complex; common presets cover most needs in one choice (Hick's law) and the summary sentence ('Every 2 weeks on Monday and Thursday, 10 times') catches mistakes before saving (Practical UI R22).",
     when=["Events, reminders, tasks and reports that repeat."],
-    how=["Start with the recurrence selector (presets plus Custom…); the custom part reveals interval, weekdays (for weekly), day-of-month or weekday-of-month (for monthly) and the end (never, on a date, after N times).",
+    how=["Start with the recurrence selector (presets plus Custom…). Custom reveals interval, weekdays (weekly), day-of-month or weekday-of-month (monthly) and the end (never, on a date, after N times).",
          "Store as an RFC 5545 RRULE; show the next three dates as a check."],
     classes=[".orca-recurrence__custom"],
     laws=["hick", "R22", "tesler"],
@@ -91,10 +91,10 @@ add(Pattern(
 
 add(Pattern(
     "exception-editor", "Exception and holiday editor", C,
-    "The list of dates that differ from the regular hours (closed days, short days) with a form to add one.",
+    "A list of dates that differ from regular hours (closed or short days), with a form to add one.",
     why="Regular hours plus exceptions is how people think about schedules (Tesler's law); listing exceptions by date with a date badge makes the next one easy to spot (Practical UI L09).",
     when=["Public holidays, closures, special opening hours for a site or person."],
-    how=["A panel listing exception entries sorted by date (past ones hidden behind 'Show past'), followed by an add form: date, 'Closed all day' switch or a time range, and a reason.",
+    how=["A panel of exception entries sorted by date (past ones behind 'Show past'), then an add form: date, 'Closed all day' switch or time range, and a reason.",
          "Offer 'Import public holidays' for the site's country."],
     classes=[".orca-exception"],
     laws=["tesler", "L09"],
@@ -108,7 +108,7 @@ add(Pattern(
 
 add(Pattern(
     "time-off-editor", "Time-off editor", C,
-    "A request form for time off (type, dates, half days, note) beside the person's balance and their existing requests.",
+    "A time-off request form (type, dates, half days, note) beside the person's balance and existing requests.",
     why="Showing the balance and the working days the request costs before submitting prevents rejected requests (Practical UI R22, Peak–end rule); the list of existing requests shows status at a glance.",
     when=["Holiday, sick leave and training requests; approving them."],
     how=["A form stack: type (radio cards or select), date range picker, 'Half day' options for the first and last day, an optional note, and a live summary ('3 working days, 22 left').",
@@ -127,10 +127,10 @@ add(Pattern(
 
 add(Pattern(
     "resource-scheduler", "Resource scheduler", C,
-    "Resources (people, rooms, videos) as rows against a time scale, with bookings as bars on each row.",
+    "Resources (people, rooms, videos) as rows on a time scale, with bookings as bars.",
     why="Rows per resource answer 'who is free when' directly (Practical UI L01, grouping), which a calendar per person cannot. Bars are positioned by time so gaps and double bookings are visible.",
     when=["Assigning installers, rooms or vehicles; seeing a team's day."],
-    how=["`<div class=\"orca-scheduler\" style=\"--orca-cols: 10\">`: a corner and `.orca-scheduler__scale` of hours, then per resource `.orca-scheduler__who` and `.orca-scheduler__lane` containing event cards placed with `--orca-start` and `--orca-span` (percentages of the day).",
+    how=["`<div class=\"orca-scheduler\" style=\"--orca-cols: 10\">`: a corner and `.orca-scheduler__scale` of hours, then per resource `.orca-scheduler__who` and `.orca-scheduler__lane` with event cards placed by `--orca-start` and `--orca-span` (percentages of the day).",
          "Compute the percentages in the view: `(start - day_start) / (day_end - day_start)`; wrap in `.orca-table-wrap` to scroll on phones."],
     classes=[".orca-scheduler", ".orca-scheduler__corner", ".orca-scheduler__scale", ".orca-scheduler__who", ".orca-scheduler__lane"],
     laws=["L01", "L09"],
@@ -146,7 +146,7 @@ add(Pattern(
 
 add(Pattern(
     "shift-planner", "Shift planner", C,
-    "A roster table of people by days with shifts in each cell, weekly totals and over-hours highlighted.",
+    "A roster table of people by day, with shifts in each cell, weekly totals and over-hours highlighted.",
     why="Rosters are read both ways, 'who works Tuesday' and 'what does Grace work', which a table does best (Practical UI L01, grouping). Totals against contract hours catch overwork before publishing (Von Restorff: over-hours stand out).",
     when=["Weekly staff rotas, on-call schedules."],
     how=["`<table class=\"orca-roster\">`: people as row headers, days as column headers (weekends `is-weekend`), each cell holding `.orca-shift` blocks (`--orca-event` colours the shift type), and a `.orca-roster__total` column; mark over-hours cells `is-over` and say it in text.",
@@ -163,9 +163,9 @@ add(Pattern(
 
 add(Pattern(
     "booking-slot-picker", "Booking slot picker", C,
-    "A strip of dates and the free slots on the chosen date, grouped by part of day, for booking a fixed-length slot.",
+    "A date strip and the free slots on the chosen date, grouped by part of day.",
     why="Showing only bookable times removes failed attempts (Practical UI R22); grouping by morning and afternoon shortens the scan (Practical UI L09, Hick's law). Full days are visible but disabled so people know why.",
-    when=["Booking a visit, a call, a calibration slot: fixed length, chosen by the visitor."],
+    when=["Visitors booking a fixed-length visit, call or calibration slot."],
     how=["`<div class=\"orca-booking\">`: `<ul class=\"orca-date-strip\">` of day buttons (`aria-pressed`, disabled when full), then groups with `.orca-booking__group` headings and booking slots.",
          "Show the duration and timezone above the slots; confirm the choice in a summary before booking."],
     classes=[".orca-booking", ".orca-date-strip", ".orca-booking__group"],
@@ -181,7 +181,7 @@ add(Pattern(
 
 add(Pattern(
     "appointment-picker", "Appointment picker", C,
-    "Booking in steps: choose the service and person, then the date and time, then confirm, with a running summary.",
+    "Booking in steps: service and person, then date and time, then confirm, with a running summary.",
     why="Each choice narrows the next (the person changes the free times), so steps keep each decision small (Hick's law) and the summary keeps earlier choices visible and editable (Peak–end rule).",
     when=["Bookings that depend on a service type, duration or staff member."],
     avoid=["Single service, single person: the booking slot picker alone is enough."],
@@ -201,7 +201,7 @@ add(Pattern(
 
 add(Pattern(
     "conflict-resolver", "Conflict resolver", C,
-    "When two bookings clash: both side by side with what conflicts, and clear choices to resolve it.",
+    "Shows two clashing bookings side by side, with what conflicts and clear choices to resolve it.",
     why="Resolving a clash needs both items compared (Practical UI L09); offering concrete resolutions (move, keep both, cancel one) turns a problem into one decision (Hick's law, Peak–end rule).",
     when=["Saving an event that overlaps another for the same person or room; importing schedules."],
     how=["`<div class=\"orca-conflict\">` with a caution callout naming the conflict, `.orca-conflict__pair` of two `label.orca-conflict__option` (radio + event card) to choose which to keep, a 'Keep both' option, and the actions.",

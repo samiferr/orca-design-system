@@ -2,12 +2,12 @@ from .registry import Element, add, category
 
 C = category(
     "charts", "Chart and graphic marks",
-    "The small marks charts, legends, zones and heat maps are made of. Every colour mark has a text label nearby.",
+    "The small marks that make up charts, legends, zones and heat maps. Every colour mark has a nearby text label.",
 )
 
 add(Element(
     "swatch", "Swatch", C,
-    "A small square of colour that keys a legend entry or shows a chosen colour.",
+    "A small colour square that keys a legend entry or shows a chosen colour.",
     why="A legend links a colour to a name; without the name, colour-blind readers lose the chart (Practical UI C03).",
     when=["Chart legends, colour pickers, calendar lists, zone lists."],
     how=["`<span class=\"orca-swatch\" style=\"--orca-swatch: var(--orca-chart-2)\"></span>` followed by the series name.",
@@ -24,7 +24,7 @@ add(Element(
 
 add(Element(
     "zone-swatch", "Zone swatch", C,
-    "A mark matching how a region is drawn on an image or video: coloured outline with a light fill, hatched when excluded.",
+    "A mark that matches a region drawn on an image or video: coloured outline, light fill, hatched when excluded.",
     why="Using the same mark in lists as on the image or video lets people match a zone to its row without reading (Miller's law); "
         "hatching distinguishes excluded zones without relying on hue (C03).",
     when=["Region lists, region editors, legends over images and videos."],
@@ -60,13 +60,13 @@ add(Element(
 
 add(Element(
     "heat-cell", "Heat-map cell", C,
-    "A cell shaded on a 6-step sequential scale, with its value printed in it.",
+    "A cell shaded on a 6-step sequential scale, with its value printed inside.",
     why="Lightness steps show intensity at a glance (pre-attentive), and printing the value keeps it exact and accessible (C03, W11).",
     when=["Capacity by hour and day, occupancy grids, activity calendars."],
     avoid=["Diverging data (above/below a target) on this scale: use two hues (phase 2)."],
     how=["`<td class=\"orca-heat orca-heat--3\">142</td>`; levels `--0`…`--5` mapped by your own thresholds, `--empty` for no data.",
          "Text colour flips automatically on dark levels.", "Show the scale's legend with the same cells and their ranges."],
-    a11y=["The value is in the cell; add the row and column headers (`<th scope>`) so screen readers give context."],
+    a11y=["The value is in the cell; add row and column headers (`<th scope>`) to give screen readers context."],
     classes=[".orca-heat", ".orca-heat--1", ".orca-heat--5", ".orca-heat--empty"], tokens=["heat-0", "heat-5"],
     laws=["C03", "W11"],
     examples=[("Row of cells", """<table style="border-collapse: separate; border-spacing: 2px"><tr>

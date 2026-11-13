@@ -3,18 +3,18 @@ from . import Pattern
 
 C = category(
     "pattern-charts", "Charts",
-    "Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and its data as a table. One template tag; no chart code to write.",
+    "Charts drawn by Chart.js in a chart frame, in token colours, each with a text summary and a data table. One template tag, no chart code.",
     level="pattern",
 )
 
 COMMON = [
     "Every chart: `{% templatetag openblock %} orca_chart kind data title=\"…\" subtitle=\"unit and period\" caption=\"source\" unit=\"%\" {% templatetag closeblock %}`.",
     "`data` is a dict `{\"labels\": […], \"series\": [{\"name\", \"values\"}]}` or a string `\"labels=Mon,Tue | Entrance A=120,180\"`.",
-    "The tag writes a `<canvas>` with the chart spec; `orca.js` loads the vendored Chart.js only on pages with charts and draws it in the `--orca-chart-*` colours, redrawing when the theme changes.",
-    "The canvas carries a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which also works without JavaScript.",
-    "Never write a Chart.js configuration yourself: pass data to the tag so every chart reads the same.",
+    "The tag writes a `<canvas>` with the chart spec. `orca.js` loads the vendored Chart.js only on pages with charts, draws it in the `--orca-chart-*` colours and redraws on theme change.",
+    "The canvas has a text summary (`aria-label`), each mark has a tooltip, and 'Show data' reveals the table, which works without JavaScript too.",
+    "Never write Chart.js configuration yourself; pass data to the tag so all charts look the same.",
 ]
-A11Y = ["Colour is never the only key: series have a legend; lines change dash; scatter series change shape."]
+A11Y = ["Colour is never the only key: series have a legend, lines vary in dash and scatter series vary in shape."]
 
 
 def chart(eid, name, kind, summary, why, when, avoid, how, data, guide, extra="", laws=("C03", "W11")):
@@ -26,7 +26,7 @@ def chart(eid, name, kind, summary, why, when, avoid, how, data, guide, extra=""
 chart("bar-chart", "Bar chart", "bar",
       "Bars comparing values across categories; grouped, stacked or horizontal.",
       "Lengths from a common baseline are the most accurately compared visual encoding, so bars are the default for comparing categories (Miller's law: one comparison at a glance).",
-      ["Comparing quantities across categories or a few periods: visitors per day, alerts per site."],
+      ["Comparing categories or a few periods, such as visitors per day or alerts per site."],
       ["Many periods (more than about 15): use a line chart.", "Parts of a whole: a stacked bar, or a doughnut for 2–5 parts."],
       ["`stacked=True` stacks series; `horizontal=True` for long category names or many categories.", "Start the value axis at zero; sort categories by value unless they have a natural order (days, hours)."],
       'sample.visitors_week title="Visitors per day" subtitle="This week, people" caption="Source: line counts"', "Bar chart")
@@ -36,11 +36,11 @@ chart("line-chart", "Line chart", "line",
       "A line shows trend and change over time better than bars, and comparing with a reference period answers 'is this normal?' (Peak–end rule: context).",
       ["Values over many time points: visitors per hour, accuracy per day."],
       ["Few categories with no order: use bars.", "More than 4 series: split into small multiples."],
-      ["Use `\"area\"` as the kind for one series where the volume matters.", "The second series is dashed so it differs without colour; label the reference ('Last Friday')."],
+      ["Use `\"area\"` as the kind for one series when volume matters.", "The second series is dashed so it differs without colour; label the reference ('Last Friday')."],
       'sample.visitors_hours title="Visitors per hour" subtitle="Today compared with last Friday"', "Line chart")
 
 chart("pie-chart", "Pie chart", "pie",
-      "A circle split into the shares of one total, with a legend giving each value and percentage.",
+      "A circle split into shares of one total, with a legend showing each value and percentage.",
       "Part-to-whole is understood at a glance when there are few parts; the legend gives exact numbers because angles are hard to compare (Practical UI C03, W11).",
       ["2–5 shares of one total."], ["More than 5 parts or similar shares: use a horizontal bar chart."],
       ["Order slices from largest, clockwise from 12 o'clock; group small ones into 'Other'."],

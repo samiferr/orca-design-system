@@ -5,7 +5,7 @@ from . import Template
 
 C = category(
     "structural-layouts", "Structural layouts",
-    "Layout classes that arrange sections inside a page: stacks, grids and splits. They hold patterns and never style them.",
+    "Layout classes for arranging sections in a page: stacks, grids and splits. They hold patterns, never style them.",
     level="template",
 )
 
@@ -13,7 +13,7 @@ PANEL = '<section class="orca-panel" aria-label="{0}"><p class="orca-panel-title
 
 add(Template(
     "vertical-stack", "Vertical stack", C,
-    "Sections one under another with one spacing step between them; tight and loose variants.",
+    "Sections stacked with one spacing step between them, in tight and loose variants.",
     why="Equal gaps between sections show they are siblings, and larger gaps than inside a section show where one ends (Practical UI L09).",
     when=["The main column of almost every page; the sections of a side panel."],
     how=["`<div class=\"orca-vstack\">` around the sections; `--tight` (12px) inside panels, `--loose` (40px) between page regions.",
@@ -59,7 +59,7 @@ add(Template(
 
 add(Template(
     "split-layout", "Split (main + aside)", C,
-    "A main column and a 20rem aside (end by default, start or wider as variants); the aside drops below on narrow screens.",
+    "A main column and a 20rem aside (at the end by default; start and wider variants) that drops below on narrow screens.",
     why="Primary content gets the width and secondary context sits beside it, not in the way (Practical UI L03); below 1036px the aside follows the main content so reading order holds.",
     when=["A form with help or conflicts beside it, a record with related items, a booking with its summary."],
     how=["`<div class=\"orca-split\">` with the main element first, then `<aside>`; `--aside-start` puts the aside first on wide screens, `--wide-aside` makes it 26rem."],
@@ -70,7 +70,7 @@ add(Template(
 
 add(Template(
     "media-split", "Media split", C,
-    "The live picture in two thirds, details and actions in one third; the picture stays in view while the details scroll.",
+    "The live picture in two thirds, details and actions in one third; the picture stays in view as the details scroll.",
     why="When watching and adjusting at the same time (zones, settings), the picture must stay visible next to the controls (Practical UI L14: less travel between related things).",
     when=["Video, zone and recording pages; any media with its settings."],
     how=["`<div class=\"orca-media-split\">` with `.orca-media-split__media` (the player or snapshot) and `.orca-media-split__side` (panels)."],

@@ -1,0 +1,707 @@
+{
+ "stat-card": {
+  "what": "A small panel that shows one key number with a label and often a comparison, such as the change since last week. It lets people check a metric at a glance.",
+  "uses": [
+   "Showing headline figures at the top of a dashboard.",
+   "Summarising totals, rates or durations on an overview page.",
+   "Linking a key number to the detailed report behind it."
+  ],
+  "avoid": [
+   "Comparing many values across categories; use a table or chart instead.",
+   "Long explanations; put them in text beside the number."
+  ],
+  "practices": [
+   "Make the number the largest thing on the card.",
+   "Put the label and the comparison period right next to the number.",
+   "Show units and the direction of change in words or symbols, not colour alone.",
+   "Limit a row to a handful of cards so each one stands out."
+  ]
+ },
+ "key-value-list": {
+  "what": "A list of labelled facts about one item, with each name paired with its value. It makes the properties of a record quick to scan.",
+  "uses": [
+   "Showing the details of a record on a detail page.",
+   "Summarising an order, account or device in a side panel.",
+   "Reviewing entered information before confirming."
+  ],
+  "avoid": [
+   "Comparing the same fields across many records; use a table.",
+   "Long descriptive text; use normal paragraphs."
+  ],
+  "practices": [
+   "Keep labels short and consistent in wording.",
+   "Align labels and values so the eye follows one edge.",
+   "Show a clear 'Not set' instead of leaving a value blank.",
+   "Stack labels above values on narrow screens."
+  ]
+ },
+ "list": {
+  "what": "A vertical set of related items shown as rows, each with a title and sometimes an image or extra detail. It is the simplest way to show a short collection.",
+  "uses": [
+   "Recent activity, files or members in a side panel.",
+   "Search results or notifications.",
+   "Menus of options that need a description for each choice."
+  ],
+  "avoid": [
+   "Comparing several attributes of many items; use a table.",
+   "Very long collections without paging or search; add paging, search or filters."
+  ],
+  "practices": [
+   "Give every row the same structure so it reads the same way.",
+   "Make the whole row clickable when it opens something.",
+   "Separate rows with thin lines or spacing, not heavy boxes.",
+   "Keep the most important text first in each row."
+  ]
+ },
+ "list-item": {
+  "what": "A single row in a list, usually with a small visual, a title, a short description and a detail on the right. It can be plain, clickable or selected.",
+  "uses": [
+   "Rows in a list of people, files or messages.",
+   "Options in a menu that need a short description.",
+   "Highlighting the current choice in a list of places or items."
+  ],
+  "avoid": [
+   "Dense data with many columns; use a table row.",
+   "A group of unrelated actions; use buttons or a menu."
+  ],
+  "practices": [
+   "Keep rows to about one or two lines of text.",
+   "Make the click target the full width of the row.",
+   "Show the selected item with more than colour, such as a check mark.",
+   "Place the same kind of information in the same spot on every row."
+  ]
+ },
+ "timeline-item": {
+  "what": "One event on a vertical timeline, shown with a marker, a title, a time and a short description. Stacked together, the items tell a story in order.",
+  "uses": [
+   "Showing the history of an order, case or record.",
+   "Listing the steps and results of a process run.",
+   "Displaying an incident or activity log."
+  ],
+  "avoid": [
+   "Comparing durations or overlaps between tasks; use a Gantt chart.",
+   "A handful of unordered facts; use a plain list."
+  ],
+  "practices": [
+   "Always show a time or date for each event.",
+   "Order entries consistently: newest first for logs, oldest first for processes.",
+   "Use marker colour to signal event type, with words too.",
+   "Keep descriptions to a line or two."
+  ]
+ },
+ "sortable-header": {
+  "what": "A table column heading that people can select to sort the rows by that column. An arrow shows which column is sorted and in which direction.",
+  "uses": [
+   "Ordering a table by name, date, count or status.",
+   "Finding the highest or lowest values in a column.",
+   "Letting people reorder search or report results."
+  ],
+  "avoid": [
+   "Short tables of a few rows; sorting adds clutter.",
+   "Columns with no natural order, such as free-form notes."
+  ],
+  "practices": [
+   "Show the current sort direction with an arrow and a text-based state for assistive technology.",
+   "Sort numbers and dates from highest to latest first by default.",
+   "Make only the useful columns sortable.",
+   "Keep filters and page position when the sort changes."
+  ]
+ },
+ "legend-item": {
+  "what": "A small colour swatch beside a name that explains what a colour or line in a chart or map stands for. Together the items form a legend.",
+  "uses": [
+   "Naming each series in a multi-series chart.",
+   "Explaining colours on a map or diagram.",
+   "Showing values next to each category in a chart summary."
+  ],
+  "avoid": [
+   "Single-series charts; a clear title is enough.",
+   "Charts with just a few points; label the points directly."
+  ],
+  "practices": [
+   "Use the same colour and shape in the legend as in the chart.",
+   "Place the legend close to the chart.",
+   "Do not rely on colour alone; add shapes, patterns or direct labels.",
+   "Keep names short and in the same order as the chart."
+  ]
+ },
+ "zone-row": {
+  "what": "A row in a list of areas drawn on a video or image, showing the area's colour, name, type, count and actions. It ties the list to the shapes on screen.",
+  "uses": [
+   "Listing the counting areas of a camera view.",
+   "Managing regions drawn on a map or floor plan.",
+   "Showing a count for each named area."
+  ],
+  "avoid": [
+   "Generic lists of records; use a standard list item.",
+   "Comparing many numbers per area; use a table."
+  ],
+  "practices": [
+   "Match the row's colour to the area shown on the image.",
+   "State the area type in words, not just by colour or pattern.",
+   "Align counts to the right with consistent number formatting.",
+   "Give each action a clear accessible name that includes the area."
+  ]
+ },
+ "line-count-item": {
+  "what": "A row that shows how many people or objects crossed a line in each direction, with arrows for the two directions. It reports counts for each line.",
+  "uses": [
+   "Counting people entering and leaving a door.",
+   "Reporting vehicles crossing a road line.",
+   "Comparing in and out totals for each entrance."
+  ],
+  "avoid": [
+   "Counts for areas rather than lines; use an area or zone summary.",
+   "Trends over time; use a chart."
+  ],
+  "practices": [
+   "Show direction with arrows and words, not colour alone.",
+   "Use aligned digits so numbers line up in a list.",
+   "Label each line with a meaningful name.",
+   "Keep the same order of in and out on every row."
+  ]
+ },
+ "media-object": {
+  "what": "An image, avatar or icon placed beside a block of text. The picture helps people recognise the item before they read.",
+  "uses": [
+   "Comments and messages with the author's avatar.",
+   "Search results or product summaries with a thumbnail.",
+   "Notifications with an icon and short text."
+  ],
+  "avoid": [
+   "Large hero images; use a card with a full-width image.",
+   "Text-only content; use a plain list."
+  ],
+  "practices": [
+   "Keep the image size the same across items.",
+   "Give the image empty alt text when the text already names the thing.",
+   "Align the picture to the top or centre consistently.",
+   "Keep the text short enough to avoid wrapping around the picture."
+  ]
+ },
+ "card": {
+  "what": "A bordered container that groups the information and actions about one item, such as an image, a title, details and a footer. Cards sit well in grids.",
+  "uses": [
+   "Browsing collections such as products, projects or reports.",
+   "Summarising an item with a picture and key facts.",
+   "Presenting a set of options side by side."
+  ],
+  "avoid": [
+   "Wrapping every section of a page; use spacing and headings.",
+   "Comparing many attributes across items; use a table."
+  ],
+  "practices": [
+   "Make each card about one thing.",
+   "Keep the same content order on every card in a set.",
+   "Give the title the most visual weight.",
+   "Keep cards in a grid the same height and width for easy scanning."
+  ]
+ },
+ "card-footer": {
+  "what": "The bottom strip of a card that holds its status and its actions. Keeping them in one place makes every card behave the same way.",
+  "uses": [
+   "Showing an item's status, such as online or draft.",
+   "Adding one or two quick actions to a card.",
+   "Holding a small menu of more actions."
+  ],
+  "avoid": [
+   "Many actions on a card; move them to the item's own page.",
+   "Essential content; keep that in the card body."
+  ],
+  "practices": [
+   "Put the status on the left and actions on the right.",
+   "Limit actions to one or two so the footer stays clear.",
+   "Use clear labels or accessible names for icon buttons.",
+   "Keep the footer in the same position on all cards."
+  ]
+ },
+ "linked-card": {
+  "what": "A card where the whole area can be clicked to open the item it describes. It gives people a large target while exposing just one link to assistive technology.",
+  "uses": [
+   "Cards that open a detail page, such as articles or projects.",
+   "Grids of places, products or reports.",
+   "Mobile-friendly lists where a big tap target helps."
+  ],
+  "avoid": [
+   "Cards with several equal actions; use a normal card with buttons.",
+   "Cards that contain other links; nesting links causes errors."
+  ],
+  "practices": [
+   "Put one clear link on the card's title.",
+   "Never place a link inside another link.",
+   "Keep secondary controls reachable and above the main link area.",
+   "Show a clear hover and focus state across the whole card."
+  ]
+ },
+ "accordion": {
+  "what": "A stack of headings that each open and close a section of content. People see all topics first and open only what they need.",
+  "uses": [
+   "Frequently asked questions.",
+   "Advanced settings or optional details.",
+   "Long pages with grouped information, especially on small screens."
+  ],
+  "avoid": [
+   "Content most people need; show it directly.",
+   "Sequential steps in a process; use a step indicator.",
+   "Navigation between pages; use a menu."
+  ],
+  "practices": [
+   "Write headings as the topic or question people look for.",
+   "Use a clear marker, such as an arrow, to show it can open.",
+   "Allow several sections to be open at once.",
+   "Keep panel content short and focused."
+  ]
+ },
+ "steps": {
+  "what": "A row or column of numbered stages that shows how far someone has got in a multi-step task. Done, current and upcoming steps look different.",
+  "uses": [
+   "Setup or onboarding flows.",
+   "Multi-page forms such as checkout.",
+   "Showing progress in a process with a fixed order."
+  ],
+  "avoid": [
+   "Tasks with one or two steps; just do the task.",
+   "Free-order sections; use tabs or an accordion."
+  ],
+  "practices": [
+   "Keep to about three to six steps.",
+   "Name each step with a short verb or noun phrase.",
+   "Show done, current and upcoming states with text or icons, not colour alone.",
+   "Let people go back to completed steps."
+  ]
+ },
+ "tree": {
+  "what": "A hierarchy of items that people can expand and collapse, like folders within folders. It shows structure and hides depth until needed.",
+  "uses": [
+   "Browsing folders, locations or categories.",
+   "Showing an organisation or site structure.",
+   "Choosing an item from nested groups."
+  ],
+  "avoid": [
+   "Flat lists; use a plain list.",
+   "Main site navigation with only a few levels; use a menu."
+  ],
+  "practices": [
+   "Indent child items clearly.",
+   "Support keyboard use with arrow keys and Enter.",
+   "Show counts or hints on branches so people know what is inside.",
+   "Mark the current item and keep it visible."
+  ]
+ },
+ "avatar-group": {
+  "what": "A cluster of overlapping profile pictures showing the people involved with something, with a count for the rest. It shows who is involved without listing everyone.",
+  "uses": [
+   "Showing assignees or participants on a task card.",
+   "Displaying members of a team or project.",
+   "Showing who is attending an event."
+  ],
+  "avoid": [
+   "When people need to see every name; use a full list.",
+   "Showing a single person; use one avatar with the name."
+  ],
+  "practices": [
+   "Show only a few avatars and a '+N' count for the rest.",
+   "Give each person a text name for assistive technology.",
+   "Link the group to the full list of people.",
+   "Keep avatar sizes the same and overlap small enough to see each face."
+  ]
+ },
+ "table-card": {
+  "what": "A framed panel that holds a titled table together with its actions and page controls. The frame tells people what the rows are before they read them.",
+  "uses": [
+   "Showing a top-ten or recent-items table on a dashboard.",
+   "Listing related records on a detail page.",
+   "Giving a table its own title, description and links."
+  ],
+  "avoid": [
+   "A table with no title or context; a plain table may be enough.",
+   "A table you can't use on a phone; use a list or cards."
+  ],
+  "practices": [
+   "Give the table a clear title and a short description.",
+   "Right-align numbers and keep units in the column heading.",
+   "Put page controls and actions close to the table.",
+   "Show a helpful message when there is no data."
+  ]
+ },
+ "property-row": {
+  "what": "A row with an editable name and value and a remove button, repeated so people can add their own custom fields. It handles lists that vary in length.",
+  "uses": [
+   "Editing custom properties or labels.",
+   "Adding request headers or environment values.",
+   "Entering metadata with no fixed set of fields."
+  ],
+  "avoid": [
+   "Known fixed fields; use ordinary form fields.",
+   "Choosing from a set of allowed values; use select or checkboxes."
+  ],
+  "practices": [
+   "Give an Add button that is easy to find and clear.",
+   "Name each remove button after the row, such as 'Remove property site-code'.",
+   "Label both fields, even if the labels repeat.",
+   "Check for empty or duplicate names before saving."
+  ]
+ },
+ "activity-entry": {
+  "what": "One line in a change history that states what happened, who did it, when, and how a value changed. It builds trust by showing who changed what.",
+  "uses": [
+   "Audit logs for shared records.",
+   "History tabs on a record or setting.",
+   "Activity feeds of recent changes by a team."
+  ],
+  "avoid": [
+   "Real-time chat or comments; use a conversation layout.",
+   "Long-term reporting; use a report with filters."
+  ],
+  "practices": [
+   "Show who made the change and when.",
+   "Show old and new values side by side.",
+   "Use exact times in logs and relative times in feeds.",
+   "Keep entries short and consistent in structure."
+  ]
+ },
+ "carousel": {
+  "what": "A set of items shown one at a time with controls to move forward and back. It fits several related images into a small space.",
+  "uses": [
+   "Photo galleries for a product or event.",
+   "Browsing a short series of related snapshots.",
+   "Showing screenshots in a small area on phones."
+  ],
+  "avoid": [
+   "Important content people must not miss; show it on the page.",
+   "Long collections; use a grid or list."
+  ],
+  "practices": [
+   "Show previous and next buttons plus a position count.",
+   "Do not advance slides automatically.",
+   "Give every image its own text description.",
+   "Support swiping on touch and arrow keys on keyboards."
+  ]
+ },
+ "scroller": {
+  "what": "A horizontal row of items that scrolls sideways and snaps into place, with part of the next item showing. The partly visible item hints that there is more.",
+  "uses": [
+   "Rows of cards on phones.",
+   "Quick filters or tags in a single line.",
+   "Recently viewed items."
+  ],
+  "avoid": [
+   "Content people must see in full; use a wrapped grid.",
+   "Long lists to scan or compare; use a vertical list."
+  ],
+  "practices": [
+   "Let the next item peek into view to signal more.",
+   "Make the row reachable and scrollable by keyboard.",
+   "Snap to items so none stops half way.",
+   "Do not hide essential actions off-screen."
+  ]
+ },
+ "sparkline": {
+  "what": "A very small line chart with no axes that shows how a value has changed over time. It adds trend context to a number.",
+  "uses": [
+   "Showing a trend next to a key number.",
+   "Adding a small chart in a table cell.",
+   "Summarising many series in a compact overview."
+  ],
+  "avoid": [
+   "When exact values matter; use a full chart with axes.",
+   "Comparing many categories; use a bar chart."
+  ],
+  "practices": [
+   "Pair it with the number it summarises.",
+   "Add a short text description for screen readers.",
+   "Mark the latest value, for example with a dot.",
+   "Keep the scale and time span the same across a set of rows."
+  ]
+ },
+ "donut-chart": {
+  "what": "A ring split into segments that shows how parts make up a whole, with the total often in the middle. It works best with only a few parts.",
+  "uses": [
+   "Showing a share of visitors by source.",
+   "Showing a status breakdown of alerts or tasks.",
+   "Displaying how a total divides between a few categories."
+  ],
+  "avoid": [
+   "More than about five parts; use a bar chart.",
+   "Comparing similar-sized shares precisely; use bars.",
+   "Showing change over time; use a line chart."
+  ],
+  "practices": [
+   "Limit the ring to two to five segments.",
+   "Add a legend with names and exact values.",
+   "Do not rely on colour alone to tell segments apart.",
+   "Show the total in the centre."
+  ]
+ },
+ "chart-frame": {
+  "what": "A consistent wrapper around a chart that gives it a title, subtitle, legend, source note and a text version of its data. It helps people read and trust the chart.",
+  "uses": [
+   "Wrapping any chart on a dashboard or report.",
+   "Adding units, source and time zone to a chart.",
+   "Offering the chart's data as a table for exact values."
+  ],
+  "avoid": [
+   "Decorative images with no data; use a plain figure.",
+   "A single number; use a stat card."
+  ],
+  "practices": [
+   "State what is measured, the unit and the period in the title or subtitle.",
+   "Reserve the chart's space so the page does not jump while it loads.",
+   "Name the source and update time.",
+   "Offer the data as a table for those who cannot read the chart."
+  ]
+ },
+ "dashboard": {
+  "what": "An overview page that gathers key numbers, charts and lists in one view so people can see how things are going at a glance.",
+  "uses": [
+   "The home screen of an analytics or admin tool.",
+   "A team or site overview for managers.",
+   "Monitoring key figures over a chosen period."
+  ],
+  "avoid": [
+   "Detailed work on single records; use detail or list pages.",
+   "Dense data exploration; use a report or table with filters."
+  ],
+  "practices": [
+   "Put the most important numbers at the top.",
+   "State the time period the figures cover.",
+   "Keep to a few charts, each answering one question.",
+   "Link each number to the detail behind it."
+  ]
+ },
+ "calendar-page": {
+  "what": "A full page for viewing events by month, week, day or agenda, with controls to move between dates and switch views.",
+  "uses": [
+   "Event, booking or shift calendars.",
+   "Planning a team's schedule.",
+   "Finding free days at a glance."
+  ],
+  "avoid": [
+   "A single date choice in a form; use a date picker.",
+   "Resource-by-time planning; use a scheduler."
+  ],
+  "practices": [
+   "Offer Today, previous and next controls in the same place.",
+   "Show the current period clearly in the title.",
+   "Let people switch between month, week, day and agenda views.",
+   "Do not rely on colour alone to tell event types apart."
+  ]
+ },
+ "scheduler-page": {
+  "what": "A page that shows one day or week by resource, such as people, rooms or vehicles, with bookings placed along a time axis. It shows who is free and when.",
+  "uses": [
+   "Dispatching staff or installers.",
+   "Booking rooms or equipment.",
+   "Planning vehicle use."
+  ],
+  "avoid": [
+   "General event calendars; use a calendar page.",
+   "Tasks with dependencies; use a timeline."
+  ],
+  "practices": [
+   "Put one row per resource with a clear name.",
+   "Show the hours along the top.",
+   "Make double bookings and gaps easy to see.",
+   "Keep date controls close to the grid."
+  ]
+ },
+ "planning-board-page": {
+  "what": "A page that shows work as columns of cards, one column per stage, which people drag between columns. It is often called a kanban board.",
+  "uses": [
+   "Tracking tasks through stages such as to do, doing and done.",
+   "Managing a pipeline of requests or leads.",
+   "Team workflows with a few clear stages."
+  ],
+  "avoid": [
+   "Date-driven plans; use a timeline or calendar.",
+   "Large sets of records to sort or search; use a table."
+  ],
+  "practices": [
+   "Keep to a few stages with clear names.",
+   "Show a card's owner and due date at a glance.",
+   "Offer a keyboard-friendly alternative to dragging.",
+   "Show limits on work in progress and mark when one is exceeded."
+  ]
+ },
+ "timeline-page": {
+  "what": "A page that shows tasks as bars along a time scale, with progress, milestones and a line for today. It is also known as a Gantt chart.",
+  "uses": [
+   "Project plans and roll-outs.",
+   "Installation or production schedules.",
+   "Seeing which tasks overlap or slip."
+  ],
+  "avoid": [
+   "Simple ordered history; use a vertical timeline.",
+   "Planning by resource; use a scheduler."
+  ],
+  "practices": [
+   "Draw a clear marker for today.",
+   "Show progress on each bar.",
+   "Label bars with text, not colour alone.",
+   "Allow zooming or scrolling when the plan is long."
+  ]
+ },
+ "booking-flow": {
+  "what": "A page that guides someone through booking a service or time slot in a short series of steps, with a summary that updates as they choose.",
+  "uses": [
+   "Booking appointments or classes.",
+   "Reserving a time slot or table.",
+   "Short purchase-like processes."
+  ],
+  "avoid": [
+   "Long applications; use a multi-page form with saved progress.",
+   "A single quick choice; use one form."
+  ],
+  "practices": [
+   "Show all steps and where the person is.",
+   "Keep a running summary of the choices made.",
+   "Offer clear Back and Continue buttons.",
+   "End with a confirmation that shows what was booked."
+  ]
+ },
+ "event-editor-page": {
+  "what": "A full page for creating or changing an event, with the form beside helpful context such as conflicts and guests. It gives space for many details.",
+  "uses": [
+   "Creating or editing events, shifts or bookings.",
+   "Checking for clashes before saving.",
+   "Inviting and reviewing attendees."
+  ],
+  "avoid": [
+   "A quick one-field edit; use inline editing.",
+   "Simple confirmations; use a dialog."
+  ],
+  "practices": [
+   "Show conflicts next to the form before people save.",
+   "Keep Delete apart from Save and ask for confirmation.",
+   "Offer a clear Cancel route back.",
+   "Group related fields, such as date and time, together."
+  ]
+ },
+ "simple-data-page": {
+  "what": "A page that lists records in a table, with summary counts, search and filters above it. It is the standard page for browsing and managing data.",
+  "uses": [
+   "Lists of orders, tickets, alerts or users.",
+   "Operational screens where counts by status matter.",
+   "Pages for searching and filtering records."
+  ],
+  "avoid": [
+   "Overview of key figures; use a dashboard.",
+   "Editing one record in depth; use a detail page."
+  ],
+  "practices": [
+   "Show counts by status as quick filters.",
+   "Keep search easy to find.",
+   "Show which filters are active and how to clear them.",
+   "Show a helpful message when nothing matches."
+  ]
+ },
+ "label": {
+  "what": "A short text above or beside a form field that names what to enter. It tells people and assistive technology what the field is for.",
+  "uses": [
+   "Naming every text field, select and text area.",
+   "Titling a group of options with a legend.",
+   "Giving a clear click target that focuses the field."
+  ],
+  "avoid": [
+   "Using placeholder text as the only name; it disappears while typing.",
+   "Vague words like 'Info'; use specific names."
+  ],
+  "practices": [
+   "Place the label above the field and keep it visible.",
+   "Use short nouns in sentence case.",
+   "Connect the label to its field in the code.",
+   "Avoid colons and unneeded words like 'Your'."
+  ]
+ },
+ "required-marker": {
+  "what": "A short note beside a label, such as '(required)' or '(optional)', that tells people whether they must fill in a field.",
+  "uses": [
+   "Marking optional fields in a mostly required form.",
+   "Marking required fields in a mostly optional form.",
+   "Long or unfamiliar forms where both states help."
+  ],
+  "avoid": [
+   "Using only a red asterisk; it can look like an error and may be missed.",
+   "A general 'all fields required' notice that people skip."
+  ],
+  "practices": [
+   "Use words rather than symbols alone.",
+   "Mark whichever kind of field is rarer.",
+   "Also set the required attribute so assistive technology knows.",
+   "Keep the marker beside the label, not in the field."
+  ]
+ },
+ "help-text": {
+  "what": "A short hint placed with a field that explains what to enter, such as a format or where to find the value. It helps people get it right the first time.",
+  "uses": [
+   "Showing the expected format, such as a date or address.",
+   "Explaining what a choice will cause.",
+   "Telling people where to find a number or code."
+  ],
+  "avoid": [
+   "Repeating the label; cut it instead.",
+   "Long instructions; link to a help page.",
+   "Hiding essential information in a tooltip."
+  ],
+  "practices": [
+   "Keep it to one or two short sentences.",
+   "Place it between the label and the field.",
+   "Link it to the field so screen readers read it.",
+   "Use it to prevent errors, not explain them afterwards."
+  ]
+ },
+ "error-text": {
+  "what": "A message beside a field that says what is wrong and how to fix it. It helps people correct a mistake and continue.",
+  "uses": [
+   "Telling someone a value has the wrong format.",
+   "Pointing out a missing required answer.",
+   "Explaining why a value was rejected, such as a duplicate."
+  ],
+  "avoid": [
+   "Vague messages like 'Invalid input'; say what is wrong.",
+   "Showing errors while someone is still typing their first answer; wait until they leave the field."
+  ],
+  "practices": [
+   "Write one sentence: what is wrong and how to fix it.",
+   "Place it next to the field it belongs to.",
+   "Use an icon and words, not colour alone.",
+   "Link it to the field and mark the field as invalid."
+  ]
+ },
+ "help-icon": {
+  "what": "A small question-mark button that reveals extra explanation on demand. It keeps background information out of the way until someone wants it.",
+  "uses": [
+   "Explaining a technical term or how a figure is calculated.",
+   "Giving extra context in a dense form or report.",
+   "Offering background that experts may want."
+  ],
+  "avoid": [
+   "Essential instructions; show them as visible help text.",
+   "Hover-only tooltips; they fail on touch and for keyboard users."
+  ],
+  "practices": [
+   "Open it with a click or tap, as well as the keyboard.",
+   "Give the button a name that says the topic.",
+   "Keep the explanation brief.",
+   "Place it right after the text it explains."
+  ]
+ },
+ "error-list": {
+  "what": "A summary at the top of a form that lists every problem and links to each field. It gives people one place to start fixing things.",
+  "uses": [
+   "Showing several problems after a failed submit.",
+   "Reporting an error that applies to the whole form.",
+   "Helping screen reader users find all the problems."
+  ],
+  "avoid": [
+   "A single field error; show a message beside the field.",
+   "Warnings or tips that do not block submitting; use inline messages."
+  ],
+  "practices": [
+   "State the number of problems in the title.",
+   "Make each item a link to its field.",
+   "Move focus to the summary after a failed submit.",
+   "Repeat each message beside its field."
+  ]
+ }
+}

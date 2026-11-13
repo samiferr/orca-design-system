@@ -2,16 +2,16 @@ from .registry import Element, add, category
 
 C = category(
     "structure", "Structure marks",
-    "Marks that organise and connect: rules, separators, focus, markers and backdrops. Plus the accessibility helpers every page needs.",
+    "Marks that organise and connect (rules, separators, focus, markers, backdrops), plus the accessibility helpers every page needs.",
 )
 
 add(Element(
     "divider", "Divider", C,
     "A horizontal or vertical rule: default, muted, medium and large spacing, labelled, highlight and brand.",
     why="A rule separates groups when space alone is not enough (Practical UI L01); used sparingly it chunks content (Miller's law).",
-    when=["Between groups in a menu, between sections of a panel, between toolbar groups (vertical).",
+    when=["Between menu groups, panel sections and (vertical) toolbar groups.",
           "Labelled: 'or' between alternative sign-in methods."],
-    avoid=["Between every item: use spacing or row separators.", "To fake a heading: use a section title."],
+    avoid=["Between every item: use spacing or row separators.", "As a fake heading: use a section title."],
     how=["`<hr class=\"orca-divider\">` (16px above and below). `--md` 24px, `--lg` 48px, `--flush` 0, `--muted` lighter line.",
          "Vertical: `<span class=\"orca-divider orca-divider--vertical\" role=\"separator\" aria-orientation=\"vertical\"></span>` inside a flex row.",
          "Labelled: `<div class=\"orca-divider orca-divider--labeled\" role=\"separator\">or</div>`.",
@@ -44,13 +44,13 @@ add(Element(
 
 add(Element(
     "sr-only", "Screen-reader-only text", C,
-    "Text that is read by assistive technology but not shown.",
+    "Text that assistive technology reads but the screen does not show.",
     why="Some meaning is visual only (an arrow, a position in a grid); hidden text gives screen-reader users the same "
         "information (Postel's law, Practical UI F01).",
-    when=["Completing a visual cue: '(opens in a new tab)', 'compared with last week', the name of an icon-only control in a table."],
-    avoid=["Hiding text sighted keyboard users also need.", "Duplicating text that is already read."],
+    when=["Completing a visual cue: '(opens in a new tab)', 'compared with last week', or the name of an icon-only control."],
+    avoid=["Hiding text sighted keyboard users also need.", "Repeating text that is already read."],
     how=["`<span class=\"orca-sr-only\">compared with last week</span>`.",
-         "`.orca-sr-only-focusable` shows the element again when it receives focus."],
+         "`.orca-sr-only-focusable` shows the element when it gets focus."],
     classes=[".orca-sr-only", ".orca-sr-only-focusable"],
     laws=["postel", "F01"],
     examples=[("Hidden context", """<span class="orca-delta orca-delta--up">{% icon "arrow-up" size="xs" %}+8%<span class="orca-sr-only"> compared with last week</span></span>""")],
@@ -59,12 +59,12 @@ add(Element(
 
 add(Element(
     "skip-link", "Skip link", C,
-    "The first focusable link on every page, jumping past navigation to the main content.",
+    "The first focusable link on a page; it jumps past the navigation to the main content.",
     why="Keyboard and screen-reader users would otherwise tab through the whole navigation on every page (Fitts's law for "
         "the keyboard: shortest path; WCAG 2.4.1).",
     when=["Every page with navigation before the content."],
     how=["First element in `<body>`: `<a class=\"orca-skip-link\" href=\"#main\">Skip to main content</a>` and `<main id=\"main\" tabindex=\"-1\">`.",
-         "It is invisible until focused, then appears top-left above everything."],
+         "Hidden until focused, then shown top-left above everything."],
     classes=[".orca-skip-link"], tokens=["layer-skip", "bg-elevated"],
     laws=["fitts", "F01"],
     examples=[("Skip link (press Tab inside this example)", """<div style="position: relative; height: 3rem; overflow: hidden">
@@ -79,12 +79,12 @@ add(Element(
     "The 3px keyboard focus outline, drawn inside controls (outside for ticks and switches).",
     why="Keyboard users must always see where they are (Von Restorff accessibility, Practical UI F10). ORCA darkens Vanilla's "
         "light-theme focus blue so the ring holds 3:1 on every ground.",
-    when=["Automatically on `:focus-visible` for every interactive element. Use `.orca-focus-ring` only for custom widgets that manage focus themselves."],
-    avoid=["`outline: none` without a replacement. Never remove it."],
+    when=["Automatic on `:focus-visible` for every interactive element. Add `.orca-focus-ring` only to custom widgets that manage their own focus."],
+    avoid=["`outline: none` without a replacement; never remove the ring."],
     how=["Token: `--orca-focus`, width `--orca-focus-width` (3px), offset inside (−3px).",
          "Filled buttons switch to `--orca-focus-on-fill` or a double ring so it stays visible.",
          "Custom widget: add `.orca-focus-ring` (inside) or `.orca-focus-ring--outside` while it has focus."],
-    a11y=["Shown for keyboard focus only (`:focus-visible`), never hidden for mouse focus inside text fields."],
+    a11y=["Shown for keyboard focus only (`:focus-visible`); text fields still show it on mouse focus."],
     classes=[".orca-focus-ring", ".orca-focus-ring--outside"], tokens=["focus", "focus-width", "focus-on-fill"],
     laws=["restorff", "F10", "C01"],
     examples=[("Ring shown", """<div class="orca-row orca-row--16">
@@ -100,7 +100,7 @@ add(Element(
     why="The rotating chevron is the familiar cue for 'this expands' (Jakob's law, Practical UI F06), and its motion confirms the change.",
     when=["Disclosure and accordion triggers, collapsible sidebar groups, tree nodes."],
     how=["Inside a `<summary>` or a button with `aria-expanded`: `<span class=\"orca-chevron\">{% icon \"chevron-down\" %}</span>`. It rotates automatically when closed.",
-         "Accordions and trees: at the start of the row, in the same place on every row. Navigation trees: small, at the end of the row (see the nav tree)."],
+         "Accordions and trees: at the start of every row. Navigation trees: small, at the row end (see the nav tree)."],
     a11y=["`<details>`/`<summary>` or `aria-expanded` announces the state; the chevron is decorative."],
     classes=[".orca-chevron"], tokens=["duration-fast"],
     laws=["jakob", "F06"],
@@ -117,7 +117,7 @@ add(Element(
     why="Showing where people are in a sequence motivates completion (goal-gradient effect, Peak–end rule) and splits long tasks (Hick's law).",
     when=["Steps of a multi-step form or setup, timelines of a process."],
     how=["`<span class=\"orca-step-marker orca-step-marker--done\"></span>` · `--current` · default (to do) · `--error`.",
-         "Always next to the step's name, and the current step has `aria-current=\"step\"` on its item."],
+         "Always beside the step's name; the current step's item has `aria-current=\"step\"`."],
     a11y=["The state must also be in text for screen readers: 'Step 2 of 4, current'."],
     classes=[".orca-step-marker", ".orca-step-marker--current", ".orca-step-marker--done", ".orca-step-marker--error"],
     tokens=["accent", "border-strong", "negative"],
@@ -138,7 +138,7 @@ add(Element(
         "changes shape, not only colour (C03), and the target is a full 29px/44px button (Fitts's law).",
     when=["Carousels and image galleries with fewer than about 8 items."],
     avoid=["Many items: show a count ('3 of 24') and thumbnails instead."],
-    how=["`<button class=\"orca-carousel-dot\" type=\"button\" aria-label=\"Show image 2 of 5\" aria-current=\"true\"></button>`; one per slide in a group with `aria-label`."],
+    how=["`<button class=\"orca-carousel-dot\" type=\"button\" aria-label=\"Show image 2 of 5\" aria-current=\"true\"></button>`; one per slide, grouped with an `aria-label`."],
     classes=[".orca-carousel-dot"], tokens=["text", "border-strong"],
     laws=["S06", "C03", "fitts"],
     examples=[("Dots", """<div class="orca-row" role="group" aria-label="Choose image" style="gap: 0">
@@ -190,10 +190,10 @@ add(Element(
     "drawer-backdrop", "Drawer backdrop", C,
     "The scrim behind a side drawer; pressing it closes the drawer.",
     why="The scrim shows the drawer sits above the page and offers a large, familiar target to dismiss it (Fitts's law, Jakob's law).",
-    when=["Behind the filter drawer (page filters always open in a right drawer) and behind navigation drawers on phones."],
-    how=["With the `drawer` pattern (`<dialog class=\"orca-drawer\" data-orca-light-dismiss>`), the native `::backdrop` is this scrim: write nothing more.",
+    when=["Behind the filter drawer (page filters always open in a right drawer) and phone navigation drawers."],
+    how=["With the `drawer` pattern (`<dialog class=\"orca-drawer\" data-orca-light-dismiss>`), the native `::backdrop` is this scrim: nothing more to write.",
          "Non-native overlays: `<div class=\"orca-scrim\" data-close></div>` before the drawer; `--contained` keeps it inside a positioned parent.",
-         "Clicking the scrim must do the same as the drawer's Close button; Escape too."],
+         "Clicking the scrim must do what the drawer's Close button does, and so must Escape."],
     classes=[".orca-scrim", ".orca-scrim--contained"], tokens=["bg-overlay", "layer-drawer"],
     laws=["fitts", "jakob"],
     examples=[("Contained scrim", """<div style="position: relative; height: 8rem; overflow: hidden; border: var(--orca-border-width) solid var(--orca-border)">

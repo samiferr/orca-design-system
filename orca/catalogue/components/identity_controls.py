@@ -3,7 +3,7 @@ from . import Component
 
 C = category(
     "identity-controls", "Identity and controls",
-    "Who is signed in, what a panel is, and the small controls that personalise the interface.",
+    "Who is signed in, panel headers, and small controls that personalise the interface.",
     level="component",
 )
 
@@ -13,7 +13,7 @@ add(Component(
     why="Showing who is signed in, in the familiar top-right place, prevents acting under the wrong account (Jakob's law, Peak–end rule).",
     when=["The end of the top bar."],
     how=["`<button class=\"orca-user-chip\" type=\"button\" aria-haspopup=\"menu\" aria-expanded=\"false\" data-orca-menu aria-controls=…>` with a small avatar and `.orca-user-chip__text` (`__name`, `__role`), inside an `.orca-anchor` with the menu.",
-         "Menu items: Profile, Settings, separator, Sign out. Below 620px only the avatar shows; the button keeps the name as its accessible name."],
+         "Menu: Profile, Settings, separator, Sign out. Below 620px only the avatar shows; the button keeps the name as its accessible name."],
     classes=[".orca-user-chip", ".orca-user-chip__text", ".orca-user-chip__name", ".orca-user-chip__role"],
     laws=["jakob", "peak-end"],
     uses=["avatar", "dropdown-menu"],
@@ -31,7 +31,7 @@ add(Component(
 
 add(Component(
     "panel-header", "Panel header", C,
-    "The top of a panel: title, a short description and the panel's actions.",
+    "A panel's top: title, short description and actions.",
     why="Each panel answers one question; naming it and placing its actions beside the name keeps controls next to what they change (Practical UI L14, Miller's law).",
     when=["Every panel, table card and chart frame."],
     how=["`<div class=\"orca-panel-header\">` with `.orca-panel-header__text` (`h2.orca-panel-title` + `.orca-panel-header__desc`) and `.orca-panel-header__actions` (ghost or dense buttons).",
@@ -46,7 +46,7 @@ add(Component(
 
 add(Component(
     "pin-control", "Pin control", C,
-    "A pin toggle with a visible 'Pinned' state and an announcement when it changes.",
+    "A pin toggle that shows 'Pinned' in words and announces changes.",
     why="Pinning changes where an item appears; saying so in words and announcing it confirms the action for everyone (Doherty threshold, C03).",
     when=["Detail pages and cards of items that can be pinned to a dashboard or list top."],
     how=["`<span class=\"orca-pin-control\">` with a pin button (`id`, `aria-pressed`, `data-orca-toggle`, `data-orca-state-on=\"Pinned\"`, `data-orca-state-off=\"Not pinned\"`) and `<span class=\"orca-pin-control__state\" data-orca-state-for=\"button-id\">`.",
@@ -64,7 +64,7 @@ add(Component(
     why="People choose a theme for their eyes and surroundings; showing all options at once is clearer than a cycling button (Practical UI R11), and Auto respects the system setting by default (Tesler's law).",
     when=["Settings panels and account settings."],
     how=["`<fieldset class=\"orca-segmented\" data-orca-theme-choice>` with a legend and four radio labels `.orca-segmented__item` (values auto, light, dark, paper).",
-         "orca.js applies the theme at once and remembers it; ORCA's head script restores it before the page paints.",
+         "orca.js applies and remembers the theme; ORCA's head script restores it before the page paints.",
          "A compact top-bar alternative is the theme toggle button (`data-orca-theme-toggle`, see Themes)."],
     classes=[".orca-segmented", ".orca-segmented__item"],
     laws=["R11", "tesler", "postel"],

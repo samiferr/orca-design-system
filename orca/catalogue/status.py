@@ -2,12 +2,12 @@ from .registry import Element, add, category
 
 C = category(
     "status", "Status marks and labels",
-    "Small marks that state a condition or categorise an item. Status always pairs colour with a word and, where it matters, a shape.",
+    "Small marks that show a condition or categorise an item. Status pairs colour with a word and, where it matters, a shape.",
 )
 
 add(Element(
     "status-dot", "Status dot", C,
-    "A 12px round mark before a word, showing the live state of a thing.",
+    "A 12px round mark before a word that shows live state.",
     why="A dot plus a word is the lightest way to show state in dense lists (Miller's law); the word makes it readable "
         "without colour (Practical UI C03).",
     when=["Online/offline, running/stopped, enabled/disabled in tables and lists."],
@@ -37,7 +37,7 @@ add(Element(
     how=["`<span class=\"orca-badge orca-badge--positive\">Approved</span>`.",
          "Tones: `--info` (informative, action), `--positive`, `--caution`, `--negative`, default neutral grey fill, `--grey` (light neutral), `--purple` (tertiary), `--accent`, `--brand`.",
          "Subtle tint with dark text: add `--subtle` (info, positive, caution, negative); add a status icon inside.",
-         "Uppercase is not applied: write sentence case; badges use the 12px label style."],
+         "Write sentence case; badges are not uppercased and use the 12px label style."],
     a11y=["Text in solid badges holds 4.5:1 (caution uses black text)."],
     classes=[".orca-badge", ".orca-badge--info", ".orca-badge--positive", ".orca-badge--caution", ".orca-badge--negative",
              ".orca-badge--grey", ".orca-badge--purple", ".orca-badge--accent", ".orca-badge--brand", ".orca-badge--subtle"],
@@ -69,7 +69,7 @@ add(Element(
 
 add(Element(
     "alert-icon", "Alert icon", C,
-    "The status glyph that leads an alert, callout or field message, placed in the alert's left inset.",
+    "The status glyph at the start of an alert, callout or field message, in its left inset.",
     why="The same glyph in the same place on every message lets people classify it before reading (Jakob's law, C03).",
     when=["First element of every alert, callout, toast and error summary."],
     how=["`{% status_icon \"negative\" %}` with `.orca-alert-icon` when placed in a flex row.",
@@ -93,7 +93,7 @@ add(Element(
     how=["`<span class=\"orca-count\">3</span>`; red by default for 'needs attention'; `--neutral` for plain totals; `--accent`.",
          "On an icon button: add `.orca-has-count` to the button and put the count inside it.",
          "Cap at 99+: `{% if n > 99 %}99+{% else %}{{ n }}{% endif %}`.",
-         "Include the meaning for screen readers: `aria-label=\"Notifications, 3 unread\"` on the button."],
+         "Give screen readers the meaning: `aria-label=\"Notifications, 3 unread\"` on the button."],
     classes=[".orca-count", ".orca-count--neutral", ".orca-count--accent", ".orca-has-count"],
     tokens=["negative-fill", "radius-pill"],
     laws=["peak-end", "restorff"],

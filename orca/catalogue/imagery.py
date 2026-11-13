@@ -7,12 +7,12 @@ C = category(
 
 add(Element(
     "image", "Image", C,
-    "A content image (the primary image of a record), plain or bordered.",
+    "A record's main content image, plain or bordered.",
     why="Images are recognised faster than text but must not jump the layout when they load (Doherty threshold: perceived "
         "performance) and must be described for people who cannot see them (Postel's law).",
     when=["The primary image of a record (product, floor plan, cover image)."],
-    how=["`<img class=\"orca-img\" src=… alt=… width=… height=… loading=\"lazy\">`. Always set width and height or put it in an `orca-ratio` frame.",
-         "`.orca-img--bordered` when the image's edge could merge with the page (white photos, screenshots).",
+    how=["`<img class=\"orca-img\" src=… alt=… width=… height=… loading=\"lazy\">`. Always set width and height, or use an `orca-ratio` frame.",
+         "`.orca-img--bordered` when the image edge could blend into the page (white photos, screenshots).",
          "`alt` describes what matters in the image for the task; decorative images get `alt=\"\"`."],
     a11y=["Never put text people must read inside the image."],
     classes=[".orca-img", ".orca-img--bordered", ".orca-img--cover"], tokens=["bg-alt", "border"],
@@ -53,9 +53,9 @@ add(Element(
 
 add(Element(
     "media-frame", "Aspect-ratio frame", C,
-    "A box with a fixed aspect ratio that holds an image, video, map or chart and reserves its space.",
+    "A fixed-ratio box that holds an image, video, map or chart and reserves its space.",
     why="Reserved space prevents layout shift while media loads, so nothing moves under the pointer (Doherty threshold, Fitts's law).",
-    when=["Any media whose dimensions are not known in the HTML; image galleries and cards with images or video stills."],
+    when=["Media whose size is not set in the HTML; galleries and cards with images or video stills."],
     how=["`<div class=\"orca-ratio orca-ratio--16x9\"><img src=… alt=…></div>`. Ratios: 1x1, 4x3, 3x2, 16x9, 21x9, 3x4, or `style=\"--orca-ratio: 5 / 4\"`.",
          "Media fills and crops by default; `.orca-ratio--contain` letterboxes instead (floor plans, documents)."],
     classes=[".orca-ratio", ".orca-ratio--16x9", ".orca-ratio--contain"], tokens=["bg-alt"],
@@ -67,12 +67,12 @@ add(Element(
 
 add(Element(
     "snapshot-image", "Snapshot image", C,
-    "A still image taken from a video, in a 16:9 frame with its source and capture time on a solid caption bar.",
+    "A video still in a 16:9 frame, with its source and capture time on a solid caption bar.",
     why="A snapshot is a record of a moment; where it comes from and when it was taken must always be visible and readable over any picture (Practical UI T12: solid backing).",
-    when=["Video stills, thumbnails of video moments, image galleries that show when each image was taken."],
+    when=["Video stills and galleries that show when each image was taken."],
     how=["`<figure class=\"orca-ratio orca-ratio--16x9\"><img …><figcaption class=\"orca-frame__caption\"><span>Harbour timelapse</span><time datetime=…>08:14:03</time></figcaption></figure>`.",
          "Removed or expired image: replace the img with `<div class=\"orca-ratio orca-ratio--16x9 orca-frame--removed\">Image removed after 30 days</div>`."],
-    a11y=["Alt text says what was captured and when; the caption repeats it visibly."],
+    a11y=["Alt text says what was captured and when; the visible caption repeats it."],
     classes=[".orca-frame__caption", ".orca-frame--removed"],
     laws=["T12", "postel"],
     examples=[("Snapshot and removed snapshot", """<div class="orca-row orca-row--16" style="align-items: flex-start">
@@ -87,7 +87,7 @@ add(Element(
 
 add(Element(
     "recording-frame", "Recording frame", C,
-    "A video or stream frame marked as recording or live with a red outline and a worded flag.",
+    "A video or stream frame marked recording or live with a red outline and a worded flag.",
     why="Being recorded is a state people must not miss: red outline, pulsing dot and the word 'Recording' together "
         "(Von Restorff; C03: never colour alone).",
     when=["Live streams and recordings in progress."],
@@ -133,7 +133,7 @@ add(Element(
 
 add(Element(
     "qr-code", "QR code", C,
-    "A frame for a server-generated QR code: white quiet zone, black modules, and the encoded text below.",
+    "A frame for a server-generated QR code: white quiet zone, black modules, encoded text below.",
     why="QR codes only scan with enough contrast and quiet zone, so the frame is always black on white whatever the theme; "
         "printing the text below gives a fallback (Postel's law).",
     when=["Pairing a phone, sharing a link to a physical place, two-factor setup."],

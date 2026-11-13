@@ -3,17 +3,17 @@ from . import Pattern
 
 C = category(
     "event-editing", "Event editing",
-    "Creating, viewing and answering events: full editor, popover, panel, quick add, reminders, attendees and RSVP.",
+    "Creating, viewing and answering events: editor, popover, panel, quick add, reminders, attendees and RSVP.",
     level="pattern",
 )
 
 add(Pattern(
     "event-editor", "Event editor", C,
-    "The full form for an event: title, date and time (or all day), repeat, place, people, reminders, calendar and notes.",
+    "The full event form: title, date and time (or all day), repeat, place, people, reminders, calendar and notes.",
     why="Events have many optional fields; putting the essentials first (title, when) and the rest in labelled sections keeps the form short to read (Practical UI F01, F05) while still complete. Defaults (next round half hour, 1 hour, 15-minute reminder) mean most events need two fields (Tesler's law).",
     when=["Creating or editing an event in full, on its own page or in a drawer."],
     how=["A form stack: title (autofocus), date-time range with an 'All day' switch, recurrence selector, location, attendees (multi picker), reminders, calendar (select with colour), notes.",
-         "Warn about conflicts inline (conflict warning) without blocking save; keep 'Save' and 'Cancel' at the bottom and 'Delete' apart from them."],
+         "Warn about conflicts inline (conflict warning) without blocking save. Put 'Save' and 'Cancel' at the bottom, with 'Delete' apart from them."],
     classes=[".orca-form-stack"],
     laws=["F01", "F05", "tesler"],
     uses=["form-stack", "datetime-picker", "recurrence-selector", "reminder-selector", "multi-picker", "conflict-warning"],
@@ -30,12 +30,12 @@ add(Pattern(
 
 add(Pattern(
     "event-popover", "Event detail popover", C,
-    "A small card that opens over the calendar when an event is clicked: title, time, place, people and quick actions.",
+    "A small card over the calendar when an event is clicked, showing title, time, place, people and quick actions.",
     why="Most clicks on an event just check details; a popover answers in place without losing the calendar (Doherty threshold, Jakob's law) and offers Edit for the rest.",
     when=["Clicking an event in month, week or day views on wide screens."],
     avoid=["Phones: open the event detail panel as a page or bottom drawer instead."],
     how=["A native popover: `<div class=\"orca-event-popover\" id=\"…\" popover>` opened by `<button popovertarget=\"…\">` on the event; `--orca-event` colours its edge.",
-         "Head with title and close button; body lines with icons (time, place, calendar); foot with Edit, Delete and 'Open'. Escape and outside click close it (built into popover)."],
+         "Head with title and close button; body lines with icons (time, place, calendar); foot with Edit, Delete and 'Open'. Escape and outside click close it (built in)."],
     classes=[".orca-event-popover", ".orca-event-popover__head", ".orca-event-popover__title", ".orca-event-popover__body", ".orca-event-popover__foot"],
     laws=["doherty", "jakob", "L09"],
     uses=["event-chip", "panel-header", "button-group"],
@@ -48,7 +48,7 @@ add(Pattern(
 
 add(Pattern(
     "event-detail-panel", "Event detail panel", C,
-    "All of an event's details in a panel or page: title, status, time, place, description, attendees and actions.",
+    "An event's full details in a panel or page: title, status, time, place, description, attendees and actions.",
     why="When people need the whole event (notes, everyone's answers) a panel gives room and stays readable on phones (Practical UI L01); the coloured top edge ties it to its calendar (Practical UI F09).",
     when=["Opening an event on phones, from notifications or from lists; a drawer beside the calendar."],
     how=["`<article class=\"orca-event-panel\" style=\"--orca-event: …\">` with the title, a key–value list (when, where, calendar, repeat), the description, the attendee list and the invitation response bar at the bottom."],
@@ -64,7 +64,7 @@ add(Pattern(
 
 add(Pattern(
     "quick-add-event", "Quick-add event", C,
-    "One text field that creates an event from a sentence ('Audit Friday 10:00 at North building'), showing what it understood before saving.",
+    "One text field that creates an event from a sentence ('Audit Friday 10:00 at North building') and shows what it understood before saving.",
     why="Typing one sentence is faster than filling a form for simple events (Tesler's law); previewing the parsed date and time prevents wrong events (Practical UI R22).",
     when=["Fast entry at the top of a calendar or task list; command palettes."],
     how=["`<form class=\"orca-quick-add\">` with `.orca-quick-add__row` (input + Add button) and `.orca-quick-add__preview` (aria-live) showing the parsed result; parse on the server and return the preview with htmx.",
@@ -96,7 +96,7 @@ add(Pattern(
 
 add(Pattern(
     "attendee-list", "Attendee list", C,
-    "People invited to an event with their answers, a summary count and controls to add or remove.",
+    "Invitees with their answers, a summary count and controls to add or remove people.",
     why="Organisers need to know who is coming at a glance; the summary ('3 yes, 1 waiting') answers first (Practical UI W05) and each answer has an icon and a word, not just a colour.",
     when=["Event editor and event detail panel."],
     how=["`<p class=\"orca-attendees__summary\">` then `<ul class=\"orca-attendees\">` of `.orca-attendee`: avatar, name (and role 'Organiser'), and `.orca-attendee__resp--yes|no|maybe|waiting` with icon and text.",
@@ -114,7 +114,7 @@ add(Pattern(
 
 add(Pattern(
     "invitation-response-bar", "Invitation response bar", C,
-    "A bar on an invitation asking 'Going?' with Yes, Maybe and No, showing the current answer.",
+    "A bar on an invitation asking 'Going?' with Yes, Maybe and No buttons, showing the current answer.",
     why="Answering an invitation should be one click where the question is asked (Fitts's law); the pressed state shows the current answer and can be changed (Practical UI B03).",
     when=["On an event the viewer is invited to: detail panel, popover, invitation email landing page."],
     how=["`<div class=\"orca-rsvp\">` with `.orca-rsvp__question` and a segmented group of three buttons using `aria-pressed`; post the answer and update the attendee list.",
