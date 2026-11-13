@@ -1,0 +1,794 @@
+{
+ "slot-title": {
+  "what": "The page title is the text shown on the browser tab, in history and in bookmarks. It also becomes the headline of a search result.",
+  "uses": [
+   "Telling open tabs apart.",
+   "Naming a page in browser history and bookmarks.",
+   "Giving search engines a clear headline for the page."
+  ],
+  "avoid": [
+   "Do not use it as the visible page heading; use the page's h1 for that.",
+   "Do not repeat the same title on every page."
+  ],
+  "practices": [
+   "Put the part that is specific to the page first.",
+   "Keep it short enough to avoid being cut off in a tab.",
+   "Add the site name at the end.",
+   "Make every page's title unique."
+  ]
+ },
+ "slot-page-title": {
+  "what": "The page title is the single main heading at the top of a page. It tells people what the page is and gives screen readers a way to jump to the start.",
+  "uses": [
+   "Naming a list, a record or a form.",
+   "Giving screen-reader users a clear starting point.",
+   "Confirming people landed where they meant to."
+  ],
+  "avoid": [
+   "Do not use several top-level headings on one page; use lower heading levels for sections.",
+   "Do not use it for long sentences; use a subtitle."
+  ],
+  "practices": [
+   "Use exactly one per page.",
+   "Keep it short and specific.",
+   "Match the label of the link people clicked to get there.",
+   "Use a real heading element, not styled plain text."
+  ]
+ },
+ "slot-page-subtitle": {
+  "what": "A page subtitle is one short line under the main heading. It explains what the page is for or what it covers.",
+  "uses": [
+   "Explaining the scope of a list or report.",
+   "Adding context the title is too short to give.",
+   "Reassuring people they are in the right place."
+  ],
+  "avoid": [
+   "Skip it when the title already says everything.",
+   "Do not use it for instructions that belong next to a form field."
+  ],
+  "practices": [
+   "Write one sentence, not a paragraph.",
+   "Say something the title does not.",
+   "Use plain words, not jargon.",
+   "Keep the style the same on every page."
+  ]
+ },
+ "slot-page-actions": {
+  "what": "Page actions are the main buttons of a page, placed in a fixed spot near the heading. They hold the things a person can do with the whole page.",
+  "uses": [
+   "Adding a new record from a list page.",
+   "Exporting or printing a report.",
+   "Editing the record shown on a detail page."
+  ],
+  "avoid": [
+   "Do not put actions for a single row there; place them on the row.",
+   "Do not fill it with many equal buttons; group extras in a menu."
+  ],
+  "practices": [
+   "Show one clear primary action.",
+   "Keep the same position on every page.",
+   "Start button labels with a verb.",
+   "Move rarely used actions into an overflow menu."
+  ]
+ },
+ "slot-breadcrumbs": {
+  "what": "Breadcrumbs are a row of links showing the pages above the current one. They show where you are and let you jump back up.",
+  "uses": [
+   "Orienting people deep inside a site or app.",
+   "Going back to a parent list in one click.",
+   "Helping visitors who arrive from search on a nested page."
+  ],
+  "avoid": [
+   "Do not use them on flat sites with only one level; use plain navigation.",
+   "Do not use them as the main way to move around."
+  ],
+  "practices": [
+   "Show the path from the top level to the current page.",
+   "Make the last item plain text, not a link.",
+   "Keep labels short and match page titles.",
+   "Place them above the page title."
+  ]
+ },
+ "slot-content": {
+  "what": "The content region is the main area of a page where its own material goes. Everything around it, such as the header and navigation, stays the same from page to page.",
+  "uses": [
+   "Holding the main text, forms or tables of a page.",
+   "Keeping a consistent frame around changing content.",
+   "Letting screen readers skip straight to the main part."
+  ],
+  "avoid": [
+   "Do not put site-wide navigation or footers inside it.",
+   "Do not make several competing main regions on one page."
+  ],
+  "practices": [
+   "Use one main region per page.",
+   "Mark it so skip links can reach it.",
+   "Structure it with clear headings and spacing.",
+   "Leave the surrounding frame untouched."
+  ]
+ },
+ "slot-scripts": {
+  "what": "A scripts region holds the JavaScript files a page loads, placed at the end of the page. This lets the visible content appear first.",
+  "uses": [
+   "Loading site-wide behaviour such as menus.",
+   "Adding analytics or a shared library.",
+   "Keeping all script tags in one predictable place."
+  ],
+  "avoid": [
+   "Do not load scripts for one page on every page; load them only where needed.",
+   "Do not put code the page needs before it renders at the end."
+  ],
+  "practices": [
+   "Load scripts at the end or with defer.",
+   "Include only what the page uses.",
+   "Keep scripts in one place.",
+   "Make sure the page still works with scripts that fail to load."
+  ]
+ },
+ "slot-head": {
+  "what": "The head of a page holds information for the browser that is not shown on screen: stylesheets, the icon, the title and meta tags.",
+  "uses": [
+   "Linking stylesheets and fonts.",
+   "Setting the page icon and character set.",
+   "Adding meta tags for phones and search engines."
+  ],
+  "avoid": [
+   "Do not put visible content in it; use the body.",
+   "Do not copy the head into every page by hand; share it."
+  ],
+  "practices": [
+   "Set the character encoding first.",
+   "Include the viewport meta tag for phones.",
+   "Keep it in one shared place.",
+   "Load only the styles the page needs."
+  ]
+ },
+ "slot-body-class": {
+  "what": "A body class is a name added to the page's body element so styles can target one kind of page. It changes a page's look without touching shared code.",
+  "uses": [
+   "Giving a single page its own layout tweak.",
+   "Marking the type of page, such as an app or a report.",
+   "Switching a page to a full-width mode."
+  ],
+  "avoid": [
+   "Do not use it to restyle individual components; style those directly.",
+   "Do not use it to store state that scripts depend on."
+  ],
+  "practices": [
+   "Use short, descriptive names.",
+   "Keep the classes the layout already needs.",
+   "Scope styles with the class instead of overriding globally.",
+   "Remove unused classes."
+  ]
+ },
+ "slot-sidebar": {
+  "what": "A sidebar is a vertical panel at the side of a page. It usually holds the main navigation and can collapse to save room.",
+  "uses": [
+   "Showing the main sections of an application.",
+   "Keeping navigation visible while content scrolls.",
+   "Docs sites with a long list of pages."
+  ],
+  "avoid": [
+   "Avoid it on short flows such as sign-up or checkout; use a simple page.",
+   "Avoid it for sites with only a few links; use a top bar."
+  ],
+  "practices": [
+   "Keep the order of items the same everywhere.",
+   "Mark the current page.",
+   "Let it collapse on small screens.",
+   "Limit the number of top-level items."
+  ]
+ },
+ "slot-top-bar": {
+  "what": "A top bar is a strip across the top of every page. It holds the brand, main links and the person's own controls such as search or account.",
+  "uses": [
+   "Showing the logo and a link home.",
+   "Offering search, notifications and the account menu.",
+   "Giving public sites their main navigation."
+  ],
+  "avoid": [
+   "Do not crowd it with many links; move extras to a sidebar or menu.",
+   "Do not hide it on every scroll when people need quick access."
+  ],
+  "practices": [
+   "Keep it in the same place on every page.",
+   "Put the logo on the left and personal tools on the right.",
+   "Keep the height small.",
+   "Collapse links into a menu on phones."
+  ]
+ },
+ "slot-brand": {
+  "what": "The brand area shows the logo or name of a product or company. It usually links back to the home page.",
+  "uses": [
+   "Confirming whose site this is.",
+   "Giving a one-click way back home.",
+   "Repeating identity across all pages."
+  ],
+  "avoid": [
+   "Do not use large logos that push content down; keep them compact.",
+   "Do not make it the only way to reach home on small screens without a label."
+  ],
+  "practices": [
+   "Place it in the same corner on every page.",
+   "Link it to the home page.",
+   "Give the logo image useful alternative text.",
+   "Use a version that stays readable on small screens."
+  ]
+ },
+ "slot-sidebar-extra": {
+  "what": "A sidebar extra area is space under the main navigation for secondary items, such as a site switcher, a usage meter or a help link.",
+  "uses": [
+   "Switching between sites or workspaces.",
+   "Showing plan or storage usage.",
+   "Linking to help and support."
+  ],
+  "avoid": [
+   "Do not put main navigation here; keep it in the navigation list.",
+   "Do not add long content; it crowds the navigation."
+  ],
+  "practices": [
+   "Keep it short.",
+   "Group related items together.",
+   "Put the most useful item first.",
+   "Make sure it works when the sidebar is narrow."
+  ]
+ },
+ "slot-sidebar-nav": {
+  "what": "Sidebar navigation is a list of links to the main sections of an app, usually grouped under short labels. It stays on screen as you move around.",
+  "uses": [
+   "Moving between the main areas of an application.",
+   "Showing where you are right now.",
+   "Grouping many pages into clear sections."
+  ],
+  "avoid": [
+   "Avoid it for a handful of links; use a top bar.",
+   "Avoid deep nesting; use breadcrumbs or tabs for lower levels."
+  ],
+  "practices": [
+   "Group related links under clear labels.",
+   "Mark the current page.",
+   "Use short, plain item names.",
+   "Keep the order stable between visits."
+  ]
+ },
+ "slot-filter-panel": {
+  "what": "A filter panel is a set of controls for narrowing a list, often in a drawer or side panel. People pick values and the list updates.",
+  "uses": [
+   "Narrowing a long list by status, date or owner.",
+   "Combining several filters at once.",
+   "Keeping the list visible while filters stay out of the way."
+  ],
+  "avoid": [
+   "Avoid it for one or two simple filters; show them above the list.",
+   "Avoid it for finding by name; use a search box."
+  ],
+  "practices": [
+   "Open it from a clearly labelled Filters button.",
+   "Show which filters are active.",
+   "Offer a way to clear all filters.",
+   "Apply filters without losing the person's place."
+  ]
+ },
+ "slot-body": {
+  "what": "The body of a page is everything people see in the browser window. A layout fills it with the frame around the page's own content.",
+  "uses": [
+   "Defining the overall structure of a page type.",
+   "Building a new kind of layout.",
+   "Placing the skip link, main area and dialogs."
+  ],
+  "avoid": [
+   "Do not replace it on ordinary pages; fill the content area instead.",
+   "Do not put hidden tracking content in it."
+  ],
+  "practices": [
+   "Use proper landmark regions such as header, main and footer.",
+   "Keep one main region.",
+   "Place a skip link first.",
+   "Keep structure the same across pages."
+  ]
+ },
+ "slot-modal": {
+  "what": "A modal region is the place in a page where dialogs and drawers are kept. They appear above everything else when opened.",
+  "uses": [
+   "Holding confirmation dialogs.",
+   "Holding side drawers with forms or details.",
+   "Keeping overlays out of the page's normal flow."
+  ],
+  "avoid": [
+   "Do not use a dialog for content people need to compare with the page; use a panel.",
+   "Do not open dialogs automatically on load."
+  ],
+  "practices": [
+   "Give each dialog a title.",
+   "Move focus into it when it opens.",
+   "Let Escape close it.",
+   "Return focus to the button that opened it."
+  ]
+ },
+ "slot-footer": {
+  "what": "A footer is the area at the end of a page. It holds links people expect to find last, such as legal notices, contact details and help.",
+  "uses": [
+   "Linking to terms, privacy and contact pages.",
+   "Showing the app version or copyright.",
+   "Repeating key links for people who reach the bottom."
+  ],
+  "avoid": [
+   "Do not hide essential actions there; people may never scroll that far.",
+   "Do not overload it with every site link."
+  ],
+  "practices": [
+   "Keep it the same on every page.",
+   "Group links under short headings.",
+   "Keep text small but readable.",
+   "Include only links people need."
+  ]
+ },
+ "slot-extra-head": {
+  "what": "An extra head area lets one page add its own items to the head: a stylesheet, meta tags or preloaded files, without copying the shared head.",
+  "uses": [
+   "Adding a page-specific stylesheet.",
+   "Setting a page's social sharing tags.",
+   "Telling search engines not to index one page."
+  ],
+  "avoid": [
+   "Do not use it for content every page needs; add that to the shared head.",
+   "Do not use it to restyle the whole site."
+  ],
+  "practices": [
+   "Add only what this page needs.",
+   "Keep additions small.",
+   "Do not repeat tags the shared head already sets.",
+   "Test that the page still loads fast."
+  ]
+ },
+ "slot-extra-scripts": {
+  "what": "An extra scripts area lets one page load its own JavaScript after the site-wide scripts. Other pages stay lighter because they skip it.",
+  "uses": [
+   "Loading a chart library on a report page.",
+   "Adding behaviour for one form.",
+   "Running a small page-specific script."
+  ],
+  "avoid": [
+   "Do not use it for scripts every page needs; load those site-wide.",
+   "Do not use it for behaviour a plain HTML feature already gives."
+  ],
+  "practices": [
+   "Load with defer.",
+   "Include only what the page uses.",
+   "Keep files small.",
+   "Make sure the page still works if the script fails."
+  ]
+ },
+ "slot-theme-bootstrap": {
+  "what": "A theme bootstrap is a tiny script that runs early and applies the reader's saved light or dark choice before the page is drawn, so there is no flash of the wrong colours.",
+  "uses": [
+   "Remembering a dark theme between visits.",
+   "Avoiding a white flash on page load.",
+   "Applying a theme set by the system."
+  ],
+  "avoid": [
+   "Do not use it if the site has only one theme; it is not needed.",
+   "Do not make it large; slow code defeats the purpose."
+  ],
+  "practices": [
+   "Run it before the page is drawn.",
+   "Keep it very small.",
+   "Fall back to the system preference.",
+   "Save the choice in a place the script can read."
+  ]
+ },
+ "slot-list-actions": {
+  "what": "List actions are the buttons at the top of a list page, such as adding a record, exporting or running bulk tools.",
+  "uses": [
+   "Adding a new item to a list.",
+   "Exporting the list to a file.",
+   "Starting actions on many selected rows."
+  ],
+  "avoid": [
+   "Do not put actions for one row here; keep them on that row.",
+   "Do not show many equal buttons; keep one primary action."
+  ],
+  "practices": [
+   "Put the main add button first.",
+   "Start labels with a verb and name the item.",
+   "Keep the position the same on every list.",
+   "Group less common actions in a menu."
+  ]
+ },
+ "slot-detail-actions": {
+  "what": "Detail actions are the buttons on the page of a single record, such as edit, duplicate or delete. They sit together near the record's title.",
+  "uses": [
+   "Editing the record being viewed.",
+   "Deleting or archiving the record.",
+   "Running other one-off actions such as export."
+  ],
+  "avoid": [
+   "Do not place delete beside the main action without separation; set it apart.",
+   "Do not hide Edit in a menu on a detail page."
+  ],
+  "practices": [
+   "Put Edit first and Delete last.",
+   "Make Delete look quieter and ask for confirmation.",
+   "Use clear verb labels.",
+   "Keep the same positions on every record."
+  ]
+ },
+ "schedule-row": {
+  "what": "A schedule row is one line of a repeating timetable: a day plus a start and end time. Several rows together describe opening hours or working hours.",
+  "uses": [
+   "Setting opening hours for a shop or service.",
+   "Defining working hours for staff.",
+   "Setting recurring availability for bookings."
+  ],
+  "avoid": [
+   "Do not use it for one-off dates; use an exception or a date picker.",
+   "Do not use it for a single time; use one time field."
+  ],
+  "practices": [
+   "Allow more than one row per day for split shifts.",
+   "Use 24-hour times or label AM and PM.",
+   "Check that end is after start.",
+   "Label each field for screen readers."
+  ]
+ },
+ "add-row-button": {
+  "what": "An add-row button adds one more empty set of fields to a repeating group, such as another time slot or another phone number.",
+  "uses": [
+   "Adding a time span to a schedule.",
+   "Adding another reminder, address or contact.",
+   "Building lists of unknown length in a form."
+  ],
+  "avoid": [
+   "Avoid it when the number of rows is small and fixed; show them all.",
+   "Avoid it for picking from known options; use checkboxes."
+  ],
+  "practices": [
+   "Label it with what it adds, such as Add hours.",
+   "Place it right below the last row.",
+   "Move focus to the new row.",
+   "Hide or disable it at the limit and say why."
+  ]
+ },
+ "remove-row-button": {
+  "what": "A remove-row button deletes one row from a repeating group of fields. It is usually a small icon button at the end of the row.",
+  "uses": [
+   "Deleting a time span from a schedule.",
+   "Removing an extra contact or reminder.",
+   "Trimming any repeated set of fields."
+  ],
+  "avoid": [
+   "Do not use it for deleting important records; use a delete button with confirmation.",
+   "Do not use it for the only required row."
+  ],
+  "practices": [
+   "Give it a name saying which row it removes.",
+   "Move focus to a sensible place afterwards.",
+   "Announce the removal to screen readers.",
+   "Make it big enough to tap."
+  ]
+ },
+ "availability-legend": {
+  "what": "An availability legend is a small key that explains the marks used in a calendar or booking grid, such as free, busy and unavailable.",
+  "uses": [
+   "Explaining colours and patterns in a scheduler.",
+   "Helping people read booking grids.",
+   "Explaining resource availability rows."
+  ],
+  "avoid": [
+   "Skip it when marks are labelled directly with words.",
+   "Do not rely on colour alone; use text or shapes as well."
+  ],
+  "practices": [
+   "Place it near the grid it explains.",
+   "Use the same marks as the grid.",
+   "Pair colour with a word or pattern.",
+   "Keep the list short."
+  ]
+ },
+ "exception-entry": {
+  "what": "An exception entry records a single day that differs from the usual schedule, such as a holiday closure or special opening hours, with the reason.",
+  "uses": [
+   "Marking public holidays as closed.",
+   "Setting special hours for an event day.",
+   "Listing maintenance days."
+  ],
+  "avoid": [
+   "Do not use it for regular weekly changes; edit the weekly schedule.",
+   "Do not use it for long absences; use a date range."
+  ],
+  "practices": [
+   "Show the date clearly.",
+   "Give the reason in plain words.",
+   "Sort entries by date.",
+   "Let people edit or remove an entry."
+  ]
+ },
+ "time-off-entry": {
+  "what": "A time-off entry is a row describing a person's absence: who is away, on which dates, for what reason and whether it is approved.",
+  "uses": [
+   "Listing holiday requests for a team.",
+   "Showing who is away on a team calendar.",
+   "Reviewing requests waiting for approval."
+  ],
+  "avoid": [
+   "Do not use it for a single-day opening change; use an exception.",
+   "Do not use it for tasks or meetings; use calendar events."
+  ],
+  "practices": [
+   "Show name, dates and length together.",
+   "Show the status in words, not colour alone.",
+   "Format dates the way people read them.",
+   "Sort by start date."
+  ]
+ },
+ "booking-slot": {
+  "what": "A booking slot is a button showing one time someone can book, with its state: free, limited, full or chosen.",
+  "uses": [
+   "Choosing an appointment time.",
+   "Booking a table, room or class.",
+   "Showing which times are still open."
+  ],
+  "avoid": [
+   "Avoid it for picking a date far ahead; use a calendar.",
+   "Avoid it when times are free-form; use a time field."
+  ],
+  "practices": [
+   "Show all times for a day at once.",
+   "Show full slots as unavailable rather than hiding them.",
+   "Make buttons big enough to tap.",
+   "Show the chosen slot clearly."
+  ]
+ },
+ "conflict-warning": {
+  "what": "A conflict warning is a message that tells someone their plan clashes with something else, such as a double booking, and how to fix it.",
+  "uses": [
+   "Warning about a double-booked person or room.",
+   "Flagging a shift that overlaps another.",
+   "Alerting someone about a clash before saving."
+  ],
+  "avoid": [
+   "Do not use it for ordinary errors; use field error messages.",
+   "Do not show it if there is no real clash."
+  ],
+  "practices": [
+   "Say exactly what clashes.",
+   "Link to the other item.",
+   "Offer clear ways to fix it.",
+   "Allow saving anyway only when it is safe."
+  ]
+ },
+ "overlap-warning": {
+  "what": "An overlap warning is a short message next to a schedule row saying its times overlap another row, so the person can fix it right there.",
+  "uses": [
+   "Checking opening hours rows while editing.",
+   "Catching overlapping shifts.",
+   "Validating time ranges in forms."
+  ],
+  "avoid": [
+   "Do not wait until the form is submitted to report it.",
+   "Do not use it for unrelated errors; use normal field messages."
+  ],
+  "practices": [
+   "Show it next to the row it affects.",
+   "Name the other row it overlaps.",
+   "Tell people how to fix it.",
+   "Connect it to the fields for screen readers."
+  ]
+ },
+ "working-hours-label": {
+  "what": "A working-hours label is a short line saying whether a place is open right now and when that next changes, often with a small status dot.",
+  "uses": [
+   "Showing if a shop or support desk is open.",
+   "Telling visitors when to call.",
+   "Showing availability on a contact page."
+  ],
+  "avoid": [
+   "Do not use it when hours are only approximate; list the hours instead.",
+   "Do not show it without handling holidays and time zones."
+  ],
+  "practices": [
+   "Use words as well as a coloured dot.",
+   "Show the next change, such as closes at 18:00.",
+   "Use the place's own time zone.",
+   "Keep it up to date."
+  ]
+ },
+ "marketing-hero": {
+  "what": "A hero is the large opening section at the top of a landing page. It states the main benefit and gives one clear next step.",
+  "uses": [
+   "Introducing a product on a home page.",
+   "Starting a campaign or launch page.",
+   "Pointing visitors to sign up or learn more."
+  ],
+  "avoid": [
+   "Do not use it on inner pages; use a plain page heading.",
+   "Do not use it in an application screen."
+  ],
+  "practices": [
+   "Write a headline that states the benefit.",
+   "Offer one main button.",
+   "Add a few real proof points.",
+   "Use an image that shows the product."
+  ]
+ },
+ "feature-grid": {
+  "what": "A feature grid is a set of small blocks, each with an icon, a short title and a sentence. Together they summarise what a product offers.",
+  "uses": [
+   "Summarising product benefits on a landing page.",
+   "Highlighting new releases.",
+   "Giving an overview of a service."
+  ],
+  "avoid": [
+   "Do not use it for step-by-step instructions; use a numbered list.",
+   "Do not use it for dense detail; link to a full page."
+  ],
+  "practices": [
+   "Use three to six features.",
+   "Keep text lengths similar.",
+   "Lead with the benefit in each title.",
+   "Use icons that match the meaning."
+  ]
+ },
+ "token-panel": {
+  "what": "A design-token panel lets people change brand values such as colours and see the effect on sample components straight away.",
+  "uses": [
+   "Trying brand colours before applying them.",
+   "Documenting how a design system is customised.",
+   "Branding settings pages for admins."
+  ],
+  "avoid": [
+   "Do not use it for ordinary user preferences; use settings forms.",
+   "Do not use it for production changes without a save step."
+  ],
+  "practices": [
+   "Preview on real components.",
+   "Update the preview instantly.",
+   "Show contrast results next to each colour.",
+   "Offer a way to reset."
+  ]
+ },
+ "code-samples": {
+  "what": "A code samples block shows the same example in several languages or tools, usually as tabs. Readers pick their own and copy it.",
+  "uses": [
+   "Showing API requests in different languages.",
+   "Giving install steps for several platforms.",
+   "Comparing framework versions of an example."
+  ],
+  "avoid": [
+   "Do not use it for a single language; show one code block.",
+   "Do not use it for long programs; link to a repository."
+  ],
+  "practices": [
+   "Remember the language the reader chose.",
+   "Add a copy button to each block.",
+   "Keep examples equivalent.",
+   "Keep samples short and runnable."
+  ]
+ },
+ "docs-page-header": {
+  "what": "A documentation page header sits at the top of a docs page. It gives the trail, title, a short introduction and details like status or version.",
+  "uses": [
+   "Starting every page of a documentation site.",
+   "Showing whether a feature is stable or in beta.",
+   "Telling readers what a page covers."
+  ],
+  "avoid": [
+   "Do not use it on marketing pages; use a hero.",
+   "Do not make the intro long; link to details."
+  ],
+  "practices": [
+   "Put the answer to what this page is first.",
+   "Keep the intro to one or two sentences.",
+   "Show status in words as well as colour.",
+   "Use the same layout everywhere."
+  ]
+ },
+ "docs-sidebar": {
+  "what": "A docs sidebar is the navigation column of a documentation site. It lists pages in groups, often with a search box to filter them.",
+  "uses": [
+   "Browsing the pages of a large docs site.",
+   "Finding a page by typing part of its name.",
+   "Showing where the current page sits."
+  ],
+  "avoid": [
+   "Avoid it for a very small site; use a short top menu.",
+   "Avoid it as a search replacement across all content."
+  ],
+  "practices": [
+   "Group pages under clear headings.",
+   "Open the group of the current page.",
+   "Offer a filter box.",
+   "Turn it into a drawer on phones."
+  ]
+ },
+ "table-of-contents": {
+  "what": "A table of contents lists the sections of a long page as links. It shows what the page covers and lets people jump to a section.",
+  "uses": [
+   "Guiding readers through long articles.",
+   "Navigating documentation and guides.",
+   "Finding a heading in release notes."
+  ],
+  "avoid": [
+   "Avoid it on short pages with few sections.",
+   "Do not use it to move between pages; use navigation."
+  ],
+  "practices": [
+   "Use section titles as labels.",
+   "Highlight the section being read.",
+   "Keep it visible while scrolling on wide screens.",
+   "List top-level headings only."
+  ]
+ },
+ "recording-player": {
+  "what": "A recording player plays a saved video and shows marks on a timeline for important moments. A list of events lets people jump straight to each one.",
+  "uses": [
+   "Reviewing footage after an alert.",
+   "Checking incidents in recorded clips.",
+   "Finding key moments in a long recording."
+  ],
+  "avoid": [
+   "Do not use it for live video; use a live view.",
+   "Do not use it for short decorative clips; use a plain video element."
+  ],
+  "practices": [
+   "Use the browser's own video controls.",
+   "Label timeline marks with time and event.",
+   "Add captions when the clip has speech.",
+   "Show a loading message while it prepares."
+  ]
+ },
+ "live-stream-panel": {
+  "what": "A live stream panel shows live video next to its state and current numbers, so one glance tells the whole story.",
+  "uses": [
+   "Monitoring cameras or feeds.",
+   "Watching a live event with live stats.",
+   "Building a monitoring wall."
+  ],
+  "avoid": [
+   "Do not use it for saved clips; use a recording player.",
+   "Do not autoplay sound; it surprises people."
+  ],
+  "practices": [
+   "Label the stream as live.",
+   "Show clearly when the stream is offline.",
+   "Keep counts close to the picture.",
+   "Offer pause and full-screen controls."
+  ]
+ },
+ "photo-post": {
+  "what": "A photo post is a shared picture with the author, time, actions and caption. It is the building block of feeds and team updates.",
+  "uses": [
+   "Sharing snapshots in a team feed.",
+   "Showing community posts.",
+   "Posting progress photos with comments."
+  ],
+  "avoid": [
+   "Do not use it for a collection of many images; use a gallery.",
+   "Do not use it for official documents; use a file list."
+  ],
+  "practices": [
+   "Show who posted and when.",
+   "Add alternative text to the photo.",
+   "Keep the caption near the photo.",
+   "Make like and comment buttons easy to tap."
+  ]
+ },
+ "image-gallery": {
+  "what": "An image gallery shows one large image with a row of small previews below. Clicking a preview swaps the large image.",
+  "uses": [
+   "Showing product photos.",
+   "Comparing before and after pictures.",
+   "Browsing several snapshots of one event."
+  ],
+  "avoid": [
+   "Avoid it for a single image; just show the image.",
+   "Avoid it for hundreds of images; use a paged grid."
+  ],
+  "practices": [
+   "Give every image useful alternative text.",
+   "Show which image is selected and how many exist.",
+   "Make previews big enough to tap.",
+   "Load previews at small sizes."
+  ]
+ }
+}

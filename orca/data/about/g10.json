@@ -1,0 +1,686 @@
+{
+ "task-item": {
+  "what": "A single to-do entry in a list, with a way to mark it done and a short description of what needs doing.",
+  "uses": [
+   "Personal and team to-do lists.",
+   "Checklists for repeated processes such as onboarding or launches.",
+   "Project follow-up lists with owners and dates."
+  ],
+  "avoid": [
+   "Complex work with many steps and dependencies: use a timeline or board instead.",
+   "Plain notes with nothing to complete: use text."
+  ],
+  "practices": [
+   "Start the title with a verb so it reads as an action.",
+   "Let people tick a task off with one click.",
+   "Show owner and due date next to the title.",
+   "Keep titles short enough to fit on one line."
+  ]
+ },
+ "subtask-item": {
+  "what": "A smaller step that belongs to a larger task. It is usually shown indented beneath its parent.",
+  "uses": [
+   "Breaking a big task into steps that can be finished one at a time.",
+   "Checklists inside a task, such as items to pack or review.",
+   "Letting several people each own a part of one task."
+  ],
+  "avoid": [
+   "Steps that are really separate pieces of work: make them tasks of their own.",
+   "Deep nesting: more than two levels gets hard to read."
+  ],
+  "practices": [
+   "Indent subtasks clearly under their parent.",
+   "Show how many subtasks are done on the parent.",
+   "Keep to one level of nesting.",
+   "Complete the parent only when all steps are done, or say why not."
+  ]
+ },
+ "milestone-item": {
+  "what": "A marker for an important point in a plan, such as a launch or approval, shown with its name, date and state.",
+  "uses": [
+   "Roadmaps showing key dates.",
+   "Project overviews that track big checkpoints.",
+   "Reporting progress to people who do not need task detail."
+  ],
+  "avoid": [
+   "Everyday work that takes time: use a task.",
+   "Hard external dates with legal or financial weight: use a deadline."
+  ],
+  "practices": [
+   "Name milestones as outcomes, such as 'Pilot live'.",
+   "Show a clear date and a state in words.",
+   "Keep the list short so each one matters.",
+   "Mark missed milestones plainly, not only with colour."
+  ]
+ },
+ "deadline-item": {
+  "what": "An entry for a date by which something must be done, showing what is due and how much time is left or how late it is.",
+  "uses": [
+   "Compliance and legal dates.",
+   "Renewals for licences, contracts or subscriptions.",
+   "Lists of what is due soon across several projects."
+  ],
+  "avoid": [
+   "Soft targets in a plan: use a milestone.",
+   "Work that people tick off in a list: use a task."
+  ],
+  "practices": [
+   "Show the exact date and the time remaining.",
+   "Make overdue items stand out with words as well as colour.",
+   "Sort the nearest deadline first.",
+   "Tell people what is due, not only that something is."
+  ]
+ },
+ "reminder-item": {
+  "what": "A prompt that reminds someone about something at a set time, with quick ways to act on it or put it off.",
+  "uses": [
+   "Notification lists of things that have come due.",
+   "Follow-ups on tasks or appointments.",
+   "Sidebars that gather what needs attention today."
+  ],
+  "avoid": [
+   "Messages that need a reply or a decision: use a message or task.",
+   "System errors and warnings: use an alert."
+  ],
+  "practices": [
+   "State what the reminder is about in plain words.",
+   "Show when it was set for.",
+   "Offer snooze and done right on the item.",
+   "Let people choose how long to snooze."
+  ]
+ },
+ "assignee-chip": {
+  "what": "A small tag showing who is responsible for an item, usually a picture or initials with a name.",
+  "uses": [
+   "Showing the owner of a task or ticket.",
+   "Cards on a board where people scan for their own work.",
+   "Filter lists by person."
+  ],
+  "avoid": [
+   "Showing a group of many people: use an avatar stack with a count.",
+   "Long contact details: link to a profile instead."
+  ],
+  "practices": [
+   "Show the person's name as well as their picture.",
+   "Show 'Unassigned' clearly when nobody owns the item.",
+   "Keep the chip the same size as other chips.",
+   "Make it clickable only if it does something useful."
+  ]
+ },
+ "due-date-chip": {
+  "what": "A small tag that shows the date something is due, and changes its look as the date gets close or passes.",
+  "uses": [
+   "Tasks and cards that have a due date.",
+   "Lists where people sort or scan by date.",
+   "Warning that something is late."
+  ],
+  "avoid": [
+   "Dates that are only informational, such as when something was created: use plain text.",
+   "Exact times of meetings: use an event."
+  ],
+  "practices": [
+   "Use relative words such as 'Tomorrow' for dates close by.",
+   "Show the full date for dates further away.",
+   "Mark overdue items with a word, not only red.",
+   "Use the same date format everywhere."
+  ]
+ },
+ "status-chip": {
+  "what": "A small tag that says what state an item is in, such as planned, in progress, done or overdue.",
+  "uses": [
+   "Showing progress of tasks, requests or runs.",
+   "Filtering lists by state.",
+   "Helping people see at a glance what needs attention."
+  ],
+  "avoid": [
+   "Counts or percentages of progress: use a progress bar.",
+   "Urgent system problems: use an alert."
+  ],
+  "practices": [
+   "Use a short word for every state, never colour alone.",
+   "Keep the same set of states across the product.",
+   "Give each state its own shape or icon.",
+   "Do not invent extra states unless people need them."
+  ]
+ },
+ "priority-chip": {
+  "what": "A small tag that shows how important or urgent an item is, such as low, medium, high or urgent.",
+  "uses": [
+   "Ordering tasks and tickets by importance.",
+   "Helping teams decide what to work on first.",
+   "Filtering lists to the most urgent items."
+  ],
+  "avoid": [
+   "Dates and deadlines: use a due date.",
+   "Too many levels: three or four are enough."
+  ],
+  "practices": [
+   "Pair the symbol with a word so it works without colour.",
+   "Hide the normal level to reduce clutter.",
+   "Keep the scale small and the order obvious.",
+   "Use the same wording everywhere."
+  ]
+ },
+ "progress-chip": {
+  "what": "A small tag showing how much of an item is finished, with a tiny bar and a count such as 3/5.",
+  "uses": [
+   "Tasks with subtasks or checklists.",
+   "Plans and projects shown in lists.",
+   "Letting people see progress without opening the item."
+  ],
+  "avoid": [
+   "Long waits such as uploads: use a full progress bar.",
+   "Items with only one step: use a status."
+  ],
+  "practices": [
+   "Show both the count and the bar.",
+   "Count finished steps out of the total.",
+   "Add a text label for screen readers.",
+   "Update it as soon as a step is done."
+  ]
+ },
+ "gantt-bar": {
+  "what": "A horizontal bar on a calendar-like grid, showing when a task starts and ends, and often how far along it is.",
+  "uses": [
+   "Project timelines with tasks that overlap.",
+   "Roadmaps showing what happens when.",
+   "Spotting delays and gaps in a plan."
+  ],
+  "avoid": [
+   "Simple to-do lists: use a task list.",
+   "Tracking work by stage: use a board."
+  ],
+  "practices": [
+   "Show a clear time scale at the top.",
+   "Mark late and finished work in more than colour.",
+   "Offer a list version for screen readers.",
+   "Let the grid scroll sideways on small screens."
+  ]
+ },
+ "plan-card": {
+  "what": "A card that summarises one plan or project: its name, time period, how far along it is and what remains.",
+  "uses": [
+   "Lists of projects, sprints or rollouts.",
+   "Dashboards showing several plans together.",
+   "Quickly spotting which plans are late."
+  ],
+  "avoid": [
+   "Detailed plan content: open the plan page instead.",
+   "A single task: use a task item."
+  ],
+  "practices": [
+   "Show the period and progress together.",
+   "Put the name first and make the whole card clickable.",
+   "Include counts of open, done and late items.",
+   "Keep every card the same shape."
+  ]
+ },
+ "board-card": {
+  "what": "A small card for one piece of work on a board of columns, such as a kanban board.",
+  "uses": [
+   "Tracking work as it moves between stages.",
+   "Team task boards.",
+   "Sales or hiring pipelines."
+  ],
+  "avoid": [
+   "Long text or lots of detail: link to a full page.",
+   "Work with strict date order: use a timeline."
+  ],
+  "practices": [
+   "Show only the key facts: title, owner and date.",
+   "Keep every card the same layout.",
+   "Provide a menu to move cards without dragging.",
+   "Make the title a link to the full item."
+  ]
+ },
+ "resource-row": {
+  "what": "A row for one person, team or piece of equipment, showing how busy they are across days or weeks.",
+  "uses": [
+   "Planning who can take on more work.",
+   "Staff rosters and shift schedules.",
+   "Booking shared equipment or rooms."
+  ],
+  "avoid": [
+   "Individual task lists: use tasks.",
+   "Showing a single appointment: use a calendar event."
+  ],
+  "practices": [
+   "Line up every row on the same days.",
+   "Show hours as numbers, not only colours.",
+   "Label each day cell for screen readers.",
+   "Show total load beside the name."
+  ]
+ },
+ "alert": {
+  "what": "A message that tells people something happened and needs their attention, such as an error, a warning or a success.",
+  "uses": [
+   "Showing that an action failed and how to fix it.",
+   "Warnings about problems with the system or an account.",
+   "Results that should stay visible on the page."
+  ],
+  "avoid": [
+   "Quick confirmations that can disappear: use a toast.",
+   "Permanent tips and notes: use a callout."
+  ],
+  "practices": [
+   "Say what happened in the title and what to do in the text.",
+   "Use plain words, not codes.",
+   "Never rely on colour alone to show the type.",
+   "Do not show more than one or two at a time."
+  ]
+ },
+ "callout": {
+  "what": "A highlighted box that draws attention to a note, tip, warning or limit within the content of a page.",
+  "uses": [
+   "Explaining a consequence before someone acts.",
+   "Tips and limits on settings pages.",
+   "Pointing out an important note inside documentation."
+  ],
+  "avoid": [
+   "Results of something the user just did: use an alert.",
+   "Content that makes up most of the page: use normal text."
+  ],
+  "practices": [
+   "Keep it to a sentence or two.",
+   "Use a clear title and an icon.",
+   "Pick the tone to match the message.",
+   "Use few callouts per page or they get ignored."
+  ]
+ },
+ "empty-state": {
+  "what": "What people see when a page or list has nothing to show yet, such as a new account or a search with no results.",
+  "uses": [
+   "First use, before any content exists.",
+   "Searches or filters with no matches.",
+   "A cleared inbox or finished list."
+  ],
+  "avoid": [
+   "Small areas such as one chart: use a short no-data message.",
+   "Loading in progress: use a loading indicator."
+  ],
+  "practices": [
+   "Say why it is empty in plain words.",
+   "Offer the next step, such as a create button.",
+   "Keep a friendly, calm tone.",
+   "Suggest how to change the search when nothing matches."
+  ]
+ },
+ "no-data-state": {
+  "what": "A short message in a chart, table or tile that has nothing to show, saying there is no data and why.",
+  "uses": [
+   "Charts with no data for the chosen dates.",
+   "Table bodies when filters match nothing.",
+   "Dashboard tiles that have not collected data yet."
+  ],
+  "avoid": [
+   "Whole pages with nothing yet: use an empty state.",
+   "Content still loading: use a loading indicator."
+  ],
+  "practices": [
+   "Say there is no data, and give the reason if known.",
+   "Keep the message the same size as what it replaces.",
+   "Do not leave charts or tables blank.",
+   "Tell people how to get data if they can."
+  ]
+ },
+ "status-light": {
+  "what": "A small coloured dot with a word showing whether something is working, such as online, offline or degraded.",
+  "uses": [
+   "Showing whether a device or service is up.",
+   "Job or connection state in lists and headers.",
+   "Dashboards of many systems."
+  ],
+  "avoid": [
+   "Progress of a task: use a progress bar.",
+   "Anything that needs explaining: use an alert."
+  ],
+  "practices": [
+   "Always include a word, not only a colour.",
+   "Show since when the state has held.",
+   "Use the same state words everywhere.",
+   "Keep the dot small and consistent in size."
+  ]
+ },
+ "dialog": {
+  "what": "A window that opens on top of the page and asks people to finish a short task or make a choice before going on.",
+  "uses": [
+   "Short tasks such as renaming or choosing an option.",
+   "Confirming a choice.",
+   "Collecting one or two details."
+  ],
+  "avoid": [
+   "Long forms: use a separate page.",
+   "Content people need to compare with the page: use a side panel."
+  ],
+  "practices": [
+   "Give it a clear title that names the task.",
+   "Move focus into the dialog and back when it closes.",
+   "Let Escape and a close button dismiss it.",
+   "Put the main action first and label it with a verb."
+  ]
+ },
+ "confirm-dialog": {
+  "what": "A dialog that asks people to confirm before something that cannot be undone, such as a deletion.",
+  "uses": [
+   "Deleting data or accounts.",
+   "Cancelling a running process.",
+   "Removing someone's access."
+  ],
+  "avoid": [
+   "Actions that can be reversed: do them and offer Undo.",
+   "Common, harmless actions: asking each time causes fatigue."
+  ],
+  "practices": [
+   "Ask a question that names the thing affected.",
+   "Say what will happen in one sentence.",
+   "Label the button with the action, such as Delete video.",
+   "Put focus on the safe choice, Cancel."
+  ]
+ },
+ "progress-with-counts": {
+  "what": "A progress bar with a label and numbers saying how much is done, how much remains and how long it may take.",
+  "uses": [
+   "Uploads, exports and imports.",
+   "Batch jobs that process many items.",
+   "Multi-step tasks that take more than a few seconds."
+  ],
+  "avoid": [
+   "Waits under a second or two: no indicator is needed.",
+   "Unknown length: use a simple loading spinner."
+  ],
+  "practices": [
+   "Show real numbers, such as 77 of 120.",
+   "Give a time estimate when it is reliable.",
+   "Tell people about failures as they happen.",
+   "Announce when it finishes."
+  ]
+ },
+ "toast": {
+  "what": "A small message that appears briefly, usually at the edge of the screen, to confirm something just happened.",
+  "uses": [
+   "Confirming a saved or sent item.",
+   "Offering Undo after a quick action.",
+   "Short updates that need no reply."
+  ],
+  "avoid": [
+   "Errors and warnings people must act on: use an alert.",
+   "Messages people must be able to read later: keep them on the page."
+  ],
+  "practices": [
+   "Keep it to one short sentence.",
+   "Leave it up long enough to read, about 5 seconds.",
+   "Pause it while someone points at it.",
+   "Never move keyboard focus to it."
+  ]
+ },
+ "flash-message": {
+  "what": "A message shown at the top of the next page after a form is sent, telling people what the result was.",
+  "uses": [
+   "Confirming a record was created, saved or deleted.",
+   "Reporting that a form submission failed.",
+   "Showing the result after a redirect."
+  ],
+  "avoid": [
+   "Errors next to a form field: show them beside the field.",
+   "Instant feedback without leaving the page: use a toast."
+  ],
+  "practices": [
+   "Place it where people will see it first.",
+   "State clearly what was done.",
+   "Let people dismiss it.",
+   "Use the right tone for success, warning and error."
+  ]
+ },
+ "tooltip": {
+  "what": "A small label that appears when someone hovers over or focuses on an item, to name or explain it.",
+  "uses": [
+   "Naming icon-only buttons.",
+   "Showing the full text of a shortened label.",
+   "Giving a quick hint about a control."
+  ],
+  "avoid": [
+   "Important information: put it on the page where everyone can see it.",
+   "Touch devices, where hover does not exist: show the label."
+  ],
+  "practices": [
+   "Keep it to a few words.",
+   "Make it appear on keyboard focus, not only on hover.",
+   "Do not put links or buttons inside it.",
+   "Let Escape close it."
+  ]
+ },
+ "month-calendar": {
+  "what": "A calendar page showing a whole month as a grid of days, with the events that fall on each day.",
+  "uses": [
+   "Planning bookings, rotas and deadlines across weeks.",
+   "Seeing which days are busy or free.",
+   "Choosing dates for events."
+  ],
+  "avoid": [
+   "Exact times in one or two days: use a day or week view.",
+   "Many events per day: use an agenda list."
+  ],
+  "practices": [
+   "Show today clearly.",
+   "Limit events per day and add a '+N more' link.",
+   "Start the week on the day users expect.",
+   "Make each day open its detail."
+  ]
+ },
+ "week-view": {
+  "what": "A calendar view with seven day columns on an hour grid, so each event shows its length and time of day.",
+  "uses": [
+   "Scheduling meetings, shifts or appointments in a week.",
+   "Spotting clashes between events.",
+   "Planning around work hours."
+  ],
+  "avoid": [
+   "Overview of a whole month: use a month view.",
+   "Small screens: use a day or agenda view."
+  ],
+  "practices": [
+   "Show a line for the current time.",
+   "Place overlapping events side by side.",
+   "Include an all-day row.",
+   "Scroll to the start of the working day."
+  ]
+ },
+ "day-view": {
+  "what": "A calendar view of one day on an hour grid, with room to show full event details.",
+  "uses": [
+   "Phones and narrow screens.",
+   "A person's or a room's busy day.",
+   "Days with many events."
+  ],
+  "avoid": [
+   "Planning across several days: use a week or multi-day view.",
+   "A simple list of what is next: use an agenda."
+  ],
+  "practices": [
+   "Make events large enough to tap.",
+   "Show title, time and place for each event.",
+   "Let people change day easily.",
+   "Show the current time."
+  ]
+ },
+ "agenda-view": {
+  "what": "A list of upcoming events grouped by day, with times and details, instead of a grid.",
+  "uses": [
+   "Phones and small screens.",
+   "A 'what is next' panel.",
+   "A screen reader friendly or printable calendar."
+  ],
+  "avoid": [
+   "Seeing gaps in a schedule: use a grid view.",
+   "Dragging events to new times: use a grid view."
+  ],
+  "practices": [
+   "Group events under clear date headings.",
+   "Skip days with nothing planned.",
+   "Show time and place for each event.",
+   "Show a friendly message when nothing is planned."
+  ]
+ },
+ "year-view": {
+  "what": "A calendar showing all twelve months at once, with days that have events marked.",
+  "uses": [
+   "Planning holidays and annual schedules.",
+   "Picking dates far ahead.",
+   "Seeing the pattern of a whole year."
+  ],
+  "avoid": [
+   "Details of a single day: use a month or day view.",
+   "Many events per day: use a list."
+  ],
+  "practices": [
+   "Mark days with events by a dot, not only colour.",
+   "Highlight today.",
+   "Make every day open its detail.",
+   "Keep month labels clear and consistent."
+  ]
+ },
+ "multi-day-view": {
+  "what": "A calendar view showing a few days side by side on an hour grid, such as today and the next two days.",
+  "uses": [
+   "Tablets and side panels.",
+   "A short look ahead at upcoming days.",
+   "Teams planning across a few days."
+  ],
+  "avoid": [
+   "A full week: use a week view.",
+   "One busy day: use a day view."
+  ],
+  "practices": [
+   "Pick a number of days that fits the width.",
+   "Show times down one side.",
+   "Show the current time.",
+   "Let people move forward and back."
+  ]
+ },
+ "calendar-toolbar": {
+  "what": "The control bar above a calendar, used to move between periods, switch views and add events.",
+  "uses": [
+   "Moving to the previous or next period.",
+   "Switching between day, week and month.",
+   "Starting a new event."
+  ],
+  "avoid": [
+   "Page-level navigation: use a site menu.",
+   "Filtering which calendars show: use a legend."
+  ],
+  "practices": [
+   "Keep it in the same place on every view.",
+   "Show the period title clearly.",
+   "Give a Today button to get back quickly.",
+   "Put the create button last."
+  ]
+ },
+ "mini-calendar-sidebar": {
+  "what": "A side panel next to a main calendar with a small month for jumping to a date, plus options such as a create button and calendar list.",
+  "uses": [
+   "Jumping to a date far from today.",
+   "Calendars with several sources to filter.",
+   "Full calendar pages on desktop."
+  ],
+  "avoid": [
+   "Phone screens with little room: move it below or hide it.",
+   "Simple calendars with one source."
+  ],
+  "practices": [
+   "Match the selected day to the main view.",
+   "Mark days that have events.",
+   "Keep the create button at the top.",
+   "Move the panel below the calendar on small screens."
+  ]
+ },
+ "calendar-legend": {
+  "what": "A list of the calendars or event types on view, each with its colour, that lets people show or hide them.",
+  "uses": [
+   "Calendars that mix events from several sources.",
+   "Letting people focus on what matters now.",
+   "Explaining what each colour means."
+  ],
+  "avoid": [
+   "A single calendar with one colour: no key is needed.",
+   "Filters with many options: use a filter panel."
+  ],
+  "practices": [
+   "Show each name beside its colour.",
+   "Never use colour as the only clue.",
+   "Use checkboxes to show or hide.",
+   "Keep the list short."
+  ]
+ },
+ "live-example": {
+  "what": "A panel that shows a working example of a piece of interface next to the code that makes it.",
+  "uses": [
+   "Design-system and component documentation.",
+   "Style guides and tutorials.",
+   "Showing how an API or widget behaves."
+  ],
+  "avoid": [
+   "Long code files: link to the source instead.",
+   "Screenshots of static content: use an image."
+  ],
+  "practices": [
+   "Make sure the preview and code match.",
+   "Show the preview first, code second.",
+   "Let people copy the code easily.",
+   "Keep each example small and focused."
+  ]
+ },
+ "code-block": {
+  "what": "A formatted area that shows lines of code or commands in an even-width font, usually with a copy button.",
+  "uses": [
+   "Documentation with commands and examples.",
+   "Showing settings or configuration.",
+   "Sharing API keys or tokens that people copy."
+  ],
+  "avoid": [
+   "A single word or short name in a sentence: use inline code.",
+   "Long files: link to the source."
+  ],
+  "practices": [
+   "Offer a Copy button and confirm it worked.",
+   "Name the language.",
+   "Keep samples short and runnable.",
+   "Scroll sideways instead of wrapping lines."
+  ]
+ },
+ "docs-nav-tree": {
+  "what": "A side menu for documentation that groups pages into sections and often has a search box to find a page quickly.",
+  "uses": [
+   "Documentation sites with many pages.",
+   "Help centres.",
+   "Design-system guides."
+  ],
+  "avoid": [
+   "Sites with only a few pages: use a simple menu.",
+   "Main product navigation: use a site menu."
+  ],
+  "practices": [
+   "Group pages into clear sections.",
+   "Highlight the current page.",
+   "Let people filter by name.",
+   "Keep section names short."
+  ]
+ },
+ "email-frame": {
+  "what": "The standard layout wrapped around an automatic email, with a header, message, one main button and a footer.",
+  "uses": [
+   "Welcome and sign-up emails.",
+   "Password reset messages.",
+   "Alerts and report notifications."
+  ],
+  "avoid": [
+   "Marketing newsletters with many sections: use an email tool.",
+   "Long documents: link to a web page."
+  ],
+  "practices": [
+   "Keep the width around 600 pixels or less.",
+   "Offer one clear action and print its link too.",
+   "Always include a plain-text version.",
+   "Say the event in the subject line."
+  ]
+ }
+}
