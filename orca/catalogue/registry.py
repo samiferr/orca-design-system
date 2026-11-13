@@ -135,6 +135,9 @@ class Element:
     preview: str = ""
     blocks: list[str] = field(default_factory=list)
     context: list[str] = field(default_factory=list)
+    # General guidance about this kind of UI element, shown before ORCA's own description. Loaded from
+    # orca/data/about/*.json: {"what": str, "uses": [...], "avoid": [...], "practices": [...]}.
+    about: dict = field(default_factory=dict)
 
     def preview_template(self) -> str:
         return f"orca/previews/{self.preview}.html" if self.preview else ""
@@ -216,6 +219,19 @@ def _load() -> None:
     from . import server_code
 
     server_code.attach()
+    _attach_about()
+
+
+def _attach_about() -> None:
+    """Attach the general description of each element, kept as data in orca/data/about/*.json."""
+    import json
+    from pathlib import Path
+
+    for path in sorted((Path(__file__).resolve().parent.parent / "data" / "about").glob("*.json")):
+        for element_id, about in json.loads(path.read_text(encoding="utf-8")).items():
+            if element_id not in _ELEMENTS:
+                raise KeyError(f"{path.name}: general description for unknown ORCA element {element_id!r}")
+            _ELEMENTS[element_id].about = about
 
 
 LEVEL_TITLES = {level.key: level.title for level in LEVEL_DEFS}
