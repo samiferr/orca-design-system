@@ -12,5 +12,5 @@ Look up any element from a terminal: ``python -m orca show button``.
 
 import datetime as _datetime
 
-__version__ = "0.4.5"
+__version__ = "0.4.6"
 __released__ = _datetime.date(2026, 11, 14)  # shown as "Last updated" on the documentation pages; set it when you release
