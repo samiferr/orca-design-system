@@ -1,0 +1,96 @@
+{% extends "orca/docs/guide/_base.html" %}{% load orca static %}
+{% block extra_head %}{{ block.super }}<script src="{% static 'orca/js/brand-generator.js' %}" defer></script>{% endblock %}
+{% block lead %}<p class="orca-p orca-p--lead orca-blog__intro">Try a brand on this very page, then copy the settings into your project. Nothing is saved or sent: reload the page to get the documentation's own look back.</p>{% endblock %}
+{% block article %}
+{{ brand_data|json_script:"brand-generator-data" }}
+<div class="orca-vstack" data-brand-generator>
+<form class="orca-vstack" novalidate>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="bg-h-colour">
+  <h2 class="orca-section-title" id="bg-h-colour">1. Colours</h2>
+  <p class="orca-p">Start from a colour, or type your own. The top bar, buttons, badges and links of this page change as you go; change the theme in section 2 to see them in light, dark and paper.</p>
+  <div class="orca-row" role="group" aria-label="Starting colours">{% for name, hex in presets %}<button class="orca-button orca-button--sm" type="button" data-brand-preset="{{ hex }}" aria-pressed="false"><span class="orca-swatch" aria-hidden="true"></span>{{ name }}</button>{% endfor %}</div>
+  <div class="orca-token-panel">
+    <div class="orca-token-panel__controls">
+      <div class="orca-field"><label class="orca-label" for="bg-color">Brand colour</label>
+        <p class="orca-help" id="bg-color-help">The colour of your logo. ORCA derives fills, the top bar and hover states from it.</p>
+        <p class="orca-error" id="bg-color-error" hidden>{% icon "error" %}<span></span></p>
+        <div class="orca-color"><input type="color" id="bg-color-pick" value="{{ brand_defaults.color }}" aria-label="Pick the brand colour"><input class="orca-input" id="bg-color" value="{{ brand_defaults.color }}" spellcheck="false" autocomplete="off" data-help="bg-color-help"></div></div>
+      <div class="orca-field"><label class="orca-label" for="bg-on">Text on brand fills</label>
+        <select class="orca-select" id="bg-on"><option value="" selected>Automatic (black or white)</option><option value="#ffffff">White</option><option value="#000000">Black</option></select></div>
+      <div class="orca-field"><label class="orca-label" for="bg-accent">Accent</label>
+        <p class="orca-help" id="bg-accent-help">The colour of links, checked controls and progress.</p>
+        <p class="orca-error" id="bg-accent-error" hidden>{% icon "error" %}<span></span></p>
+        <div class="orca-color"><input type="color" id="bg-accent-pick" value="{{ brand_defaults.accent }}" aria-label="Pick the accent"><input class="orca-input" id="bg-accent" value="{{ brand_defaults.accent }}" spellcheck="false" autocomplete="off" data-help="bg-accent-help"></div></div>
+      <label class="orca-switch"><input type="checkbox" role="switch" id="bg-dark-custom"><span class="orca-switch__track"></span><span>Choose the dark theme accent myself</span></label>
+      <div class="orca-field" id="bg-dark-row" hidden><label class="orca-label" for="bg-accent-dark">Dark theme accent</label>
+        <p class="orca-error" id="bg-accent-dark-error" hidden>{% icon "error" %}<span></span></p>
+        <div class="orca-color"><input type="color" id="bg-accent-dark-pick" value="{{ brand_defaults.accent_dark }}" aria-label="Pick the dark theme accent"><input class="orca-input" id="bg-accent-dark" value="{{ brand_defaults.accent_dark }}" spellcheck="false" autocomplete="off"></div></div>
+    </div>
+    <div class="orca-token-panel__preview">
+      <span class="orca-logo"><span class="orca-logo__mark" aria-hidden="true"></span><span id="bg-preview-name">{{ brand_defaults.name }}</span></span>
+      <div class="orca-row"><button class="orca-button orca-button--brand" type="button">Brand button</button><button class="orca-button orca-button--primary" type="button">Primary</button><span class="orca-badge orca-badge--brand">Pro</span></div>
+      <p class="orca-p">Read the <a class="orca-link" href="#bg-h-colour">retention policy</a>.</p>
+      <label class="orca-switch"><input type="checkbox" role="switch" checked><span class="orca-switch__track"></span><span>Email alerts</span></label>
+      <progress class="orca-progress" value="62" max="100" aria-label="Storage used">62%</progress>
+    </div>
+  </div>
+  <div class="orca-callout orca-callout--caution" id="bg-notes" hidden>{% icon "warning" %}<p class="orca-callout__title">ORCA will adjust these colours for contrast</p><ul class="orca-callout__body" id="bg-notes-list"></ul></div>
+  <div class="orca-table-wrap"><table class="orca-table" id="bg-derived">
+    <caption class="orca-sr-only">Colours ORCA derives from your choices, with their contrast</caption>
+    <thead><tr><th scope="col">Used for</th><th scope="col">Value</th><th scope="col">Contrast</th><th scope="col">Notes</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</section>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="bg-h-behaviour">
+  <h2 class="orca-section-title" id="bg-h-behaviour">2. Name, theme and density</h2>
+  <div class="orca-field"><label class="orca-label" for="bg-name">Product name</label>
+    <p class="orca-help" id="bg-name-help">Shown as the wordmark and as the logo's alt text.</p>
+    <input class="orca-input orca-input--w20" id="bg-name" value="Acme" autocomplete="off" aria-describedby="bg-name-help"></div>
+  <fieldset class="orca-segmented"><legend class="orca-label">Theme</legend>
+    <label class="orca-segmented__item"><input type="radio" name="bg-theme" value="auto" checked>Auto</label>
+    <label class="orca-segmented__item"><input type="radio" name="bg-theme" value="light">{% icon "sun" %}Light</label>
+    <label class="orca-segmented__item"><input type="radio" name="bg-theme" value="dark">{% icon "moon" %}Dark</label>
+    <label class="orca-segmented__item"><input type="radio" name="bg-theme" value="paper">Paper</label>
+  </fieldset>
+  <fieldset class="orca-segmented"><legend class="orca-label">Density</legend>
+    <label class="orca-segmented__item"><input type="radio" name="bg-density" value="comfortable" checked>Comfortable</label>
+    <label class="orca-segmented__item"><input type="radio" name="bg-density" value="dense">Dense</label>
+  </fieldset>
+  <label class="orca-switch"><input type="checkbox" role="switch" id="bg-docs" checked><span class="orca-switch__track"></span><span>Serve this documentation in my project</span></label>
+</section>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="bg-h-files">
+  <h2 class="orca-section-title" id="bg-h-files">3. Logo, favicon and fonts <span class="orca-muted">(optional)</span></h2>
+  <p class="orca-p">Logo and favicon are paths in your static files, so they are not previewed here. Fonts must be loaded by your project, and show here only if they are installed on your computer.</p>
+  <div class="orca-row">
+    <div class="orca-field"><label class="orca-label" for="bg-logo">Logo path</label><input class="orca-input orca-input--w20" id="bg-logo" placeholder="brand/logo.svg" autocomplete="off" spellcheck="false"></div>
+    <div class="orca-field"><label class="orca-label" for="bg-favicon">Favicon path</label><input class="orca-input orca-input--w20" id="bg-favicon" placeholder="brand/favicon.svg" autocomplete="off" spellcheck="false"></div>
+  </div>
+  <div class="orca-field"><label class="orca-label" for="bg-font-sans">Interface font</label>
+    <p class="orca-error" id="bg-font-sans-error" hidden>{% icon "error" %}<span></span></p>
+    <input class="orca-input" id="bg-font-sans" value="{{ brand_defaults.font_sans }}" autocomplete="off" spellcheck="false"></div>
+  <div class="orca-field"><label class="orca-label" for="bg-font-mono">Code font</label>
+    <p class="orca-error" id="bg-font-mono-error" hidden>{% icon "error" %}<span></span></p>
+    <input class="orca-input" id="bg-font-mono" value="{{ brand_defaults.font_mono }}" autocomplete="off" spellcheck="false"></div>
+</section>
+
+<section class="orca-vstack orca-vstack--tight" aria-labelledby="bg-h-code">
+  <h2 class="orca-section-title" id="bg-h-code">4. Copy the settings</h2>
+  <p class="orca-p">Paste this into your <code class="orca-code">settings.py</code>. Keys you leave at their defaults are not written.</p>
+  <div class="orca-code-block"><div class="orca-code-block__head"><span>Python</span><button class="orca-button orca-button--sm" type="button" id="bg-copy" data-orca-copy="bg-code">{% icon "copy" class="orca-icon--copy" %}{% icon "check" class="orca-icon--copied" %}<span data-orca-copy-label>Copy</span></button></div><pre><code id="bg-code" data-orca-highlight="python">ORCA = {
+    "BRAND": {
+        "name": "Acme",
+        "color": "#0f95a1",
+    },
+    "THEME": "auto",                    # auto, light, dark or paper
+    "DENSITY": "comfortable",           # or "dense"
+    "DOCS_ENABLED": True,               # serve this documentation in your project
+}</code></pre></div>
+  <p class="orca-help" id="bg-status" role="status"></p>
+  <div class="orca-row"><button class="orca-button" type="button" data-brand-reset>Reset to defaults</button></div>
+</section>
+</form>
+</div>
+{% endblock %}
