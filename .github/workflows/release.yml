@@ -49,8 +49,19 @@ jobs:
       - name: Upload to PyPI
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-        run: twine upload dist/*
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          # A pasted token often carries a trailing newline or space, which PyPI rejects with 403.
+          token="$(printf %s "$PYPI_API_TOKEN" | tr -d '[:space:]')"
+          if [ -z "$token" ]; then
+            echo "::error::Repository secret PYPI_API_TOKEN is empty or not available to this workflow."
+            exit 1
+          fi
+          case "$token" in
+            pypi-*) ;;
+            *) echo "::error::PYPI_API_TOKEN does not start with 'pypi-': paste the full token created at pypi.org/manage/account/token/."; exit 1 ;;
+          esac
+          TWINE_PASSWORD="$token" twine upload --verbose dist/*
       - name: Commit the bump and tag it
         run: |
           git config user.name "github-actions[bot]"
