@@ -598,7 +598,8 @@
       side.setAttribute("data-open", open ? "true" : "false");
       el.setAttribute("aria-expanded", open ? "true" : "false");
       el.setAttribute("aria-label", open ? "Hide navigation" : "Show navigation");
-      if (open) { var first = side.querySelector("a, button, input"); if (first) first.focus(); }
+      /* Focus the current page's link (else the first control): a filter at the top would open a phone's keyboard */
+      if (open) { var first = side.querySelector("a[aria-current=\"page\"]") || side.querySelector("a, button, input"); if (first) first.focus(); }
       return;
     }
     if ((el = closest(t, "[data-orca-tree-toggle]"))) {

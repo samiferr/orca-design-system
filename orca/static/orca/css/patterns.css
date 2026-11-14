@@ -38,6 +38,20 @@
 .orca-sidebar[data-collapsed="true"] .orca-side-link__label, .orca-sidebar[data-collapsed="true"] .orca-sidebar__label, .orca-sidebar[data-collapsed="true"] .orca-side-link .orca-count { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .orca-sidebar[data-collapsed="true"] .orca-side-link { justify-content: center; padding-inline: 0; }
 .orca-sidebar[data-collapsed="true"] .orca-sidebar__toggle .orca-icon { transform: scaleX(-1); }
+/* A nav tree in the sidebar (long navigation): a filter and Collapse all stay above it; collapsed, the rail keeps each
+   section's icon, and the full menu opens over the page while the pointer or keyboard focus is in it. */
+.orca-sidebar__tools { position: sticky; top: 0; z-index: var(--orca-layer-raised); display: flex; align-items: center; gap: var(--orca-space-8); padding: var(--orca-space-8) var(--orca-space-16); background: var(--orca-bg-panel); box-shadow: inset 0 calc(-1 * var(--orca-hairline)) 0 var(--orca-border-weak); }
+.orca-sidebar__tools > .orca-search { flex: 1 1 auto; min-width: 0; width: auto; }
+.orca-sidebar__tools > .orca-icon-button { flex: none; }
+@media (min-width: 620px) {
+  .orca-sidebar[data-collapsed="true"]:not(:hover, :has(:focus-visible)) .orca-sidebar__tools,
+  .orca-sidebar[data-collapsed="true"]:not(:hover, :has(:focus-visible)) .orca-nav-tree details > ul,
+  .orca-sidebar[data-collapsed="true"]:not(:hover, :has(:focus-visible)) .orca-nav-tree summary > :is(.orca-chevron, .orca-count) { display: none; }
+  .orca-sidebar[data-collapsed="true"]:not(:hover, :has(:focus-visible)) .orca-nav-tree summary { justify-content: center; gap: 0; padding-inline: 0; font-size: 0; }
+  .orca-sidebar[data-collapsed="true"]:has(.orca-nav-tree):is(:hover, :has(:focus-visible)) { z-index: var(--orca-layer-sidebar); width: var(--orca-sidebar-width); margin-inline-end: calc(var(--orca-sidebar-width-collapsed) - var(--orca-sidebar-width)); box-shadow: inset calc(-1 * var(--orca-hairline)) 0 0 var(--orca-border), var(--orca-shadow-dragged); }
+  .orca-sidebar[data-collapsed="true"]:has(.orca-nav-tree):is(:hover, :has(:focus-visible)) :is(.orca-side-link__label, .orca-sidebar__label, .orca-side-link .orca-count) { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  .orca-sidebar[data-collapsed="true"]:has(.orca-nav-tree):is(:hover, :has(:focus-visible)) .orca-side-link { justify-content: flex-start; padding-inline: var(--orca-space-16); }
+}
 @media (max-width: 619px) { .orca-app { grid-template-columns: minmax(0, 1fr); } .orca-app > .orca-sidebar { display: none; } }
 @media (prefers-reduced-motion: reduce) { .orca-sidebar { transition: none; } }
 

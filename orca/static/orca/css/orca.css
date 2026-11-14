@@ -49,6 +49,8 @@
 .orca-h5 { font: var(--orca-type-h5); }
 .orca-h6 { font: var(--orca-type-h6); }
 .orca-page-title { margin: 0; font: var(--orca-type-page-title); color: var(--orca-text); text-wrap: balance; overflow-wrap: anywhere; }
+.orca-page-title:has(> .orca-icon:first-child) { display: flex; align-items: center; gap: var(--orca-space-8); }
+.orca-page-title > .orca-icon:first-child { flex: none; }
 .orca-page-subtitle { margin: var(--orca-space-4) 0 0; max-width: var(--orca-measure); font: var(--orca-type-body); color: var(--orca-text-muted); }
 .orca-section-title { margin: 0; font: var(--orca-type-h3); color: var(--orca-text); }
 .orca-panel-title { margin: 0; font: var(--orca-type-title); color: var(--orca-text); }

@@ -58,9 +58,12 @@ add(Pattern(
          "Sections: `.orca-sidebar__section` with an optional `.orca-sidebar__label` and side links; `.orca-sidebar__foot` holds the collapse toggle (`data-orca-sidebar-toggle aria-controls=…`).",
          "Collapsed (`data-collapsed=\"true\"`): labels are hidden visually but still read by screen readers, and the rail keeps icons. Give each link a `title` for tooltips.",
          "The state is remembered per sidebar in `localStorage` under `orca-sidebar:<id>`, so give the sidebar an `id`.",
-         "Nest a nav tree inside a section for long lists, such as this documentation's navigation; hide it when collapsed.",
+         "For long navigation, put a nav tree in a section: first-level `<summary>`s start with an icon, the section holding the current page is open. "
+         "Above it, `.orca-sidebar__tools` holds a filter (`data-orca-filter-list`) and Collapse all (`data-orca-tree-toggle`); it stays at the top while the menu scrolls.",
+         "Collapsed with a nav tree, the rail keeps each section's icon and the tools and pages are hidden; while the pointer or keyboard focus is in it, "
+         "the whole menu opens over the page without moving it.",
          "Below 620px the sidebar hides; put the same links in a drawer opened from the top bar."],
-    classes=[".orca-app", ".orca-app__main", ".orca-sidebar", ".orca-sidebar__section", ".orca-sidebar__label", ".orca-sidebar__foot"],
+    classes=[".orca-app", ".orca-app__main", ".orca-sidebar", ".orca-sidebar__section", ".orca-sidebar__label", ".orca-sidebar__tools", ".orca-sidebar__foot"],
     laws=["miller", "tesler", "jakob"],
     uses=["sidebar-link", "nav-tree", "collapse-toggle"],
     examples=[("Sidebar with collapse", """<div class="orca-app" style="min-height: 22rem; border: var(--orca-border-width) solid var(--orca-border)">
@@ -73,6 +76,22 @@ add(Pattern(
     <div class="orca-sidebar__foot"><button class="orca-icon-button orca-sidebar__toggle" type="button" aria-controls="sb-demo" aria-expanded="true" aria-label="Collapse navigation" data-orca-sidebar-toggle>{% icon "chevron-left" %}</button></div>
   </nav>
   <main class="orca-app__main"><h1 class="orca-page-title">Dashboard</h1></main>
+</div>"""), ("Sidebar with a nav tree", """<div class="orca-app" style="min-height: 26rem; border: var(--orca-border-width) solid var(--orca-border)">
+  <nav class="orca-sidebar" id="sb-tree" aria-label="Sections" data-collapsed="false">
+    <div class="orca-sidebar__tools">
+      <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter the menu" aria-label="Filter the menu" data-orca-filter-list="sb-tree-list"></div>
+      <button class="orca-icon-button orca-icon-button--dense" type="button" aria-controls="sb-tree-list" aria-label="Collapse all sections" title="Collapse all sections" data-orca-tree-toggle>{% icon "collapse" class="orca-icon--collapse" %}{% icon "expand" class="orca-icon--expand" %}</button>
+    </div>
+    <div class="orca-sidebar__section"><ul class="orca-side-nav"><li><a class="orca-side-link" href="#" title="Home">{% icon "home" %}<span class="orca-side-link__label">Home</span></a></li></ul></div>
+    <div class="orca-sidebar__section"><ul class="orca-nav-tree" id="sb-tree-list">
+      <li><details open><summary>{% icon "snapshot" %}Devices<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
+        <ul><li><a href="#" aria-current="page">Videos</a></li><li><a href="#">Media servers</a></li></ul></details></li>
+      <li><details><summary>{% icon "settings" %}Settings<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary>
+        <ul><li><a href="#">Users</a></li><li><a href="#">Roles</a></li></ul></details></li>
+    </ul></div>
+    <div class="orca-sidebar__foot"><button class="orca-icon-button orca-sidebar__toggle" type="button" aria-controls="sb-tree" aria-expanded="true" aria-label="Collapse navigation" data-orca-sidebar-toggle>{% icon "chevron-left" %}</button></div>
+  </nav>
+  <main class="orca-app__main"><h1 class="orca-page-title">{% icon "snapshot" size="m" %}Videos</h1></main>
 </div>""")],
     guide=["Sidebar"], source="Tangerine",
 ))

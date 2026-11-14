@@ -1644,14 +1644,16 @@
     "`<h1 class=\"orca-page-title\">` (28/36, weight 700).",
     "Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.",
     "Long names wrap and are never cut (L15).",
-    "On application pages it sits in the `page-head` pattern, with the page actions beside it."
+    "On application pages it sits in the `page-head` pattern, with the page actions beside it.",
+    "It may start with the icon its page has in the sidebar (`{% icon \"name\" size=\"m\" %}` as the first child), so the page and its menu entry are recognised together; the icon is decorative."
    ],
    "avoid": [
     "Repeating the product name or the last breadcrumb item.",
     "Long titles: front-load the distinguishing word (W04)."
    ],
    "a11y": [
-    "It is the page's `<h1>`. Start the document `<title>` with the same words."
+    "It is the page's `<h1>`. Start the document `<title>` with the same words.",
+    "A leading icon is decorative (`aria-hidden`): the words alone name the page."
    ],
    "tokens": [
     "type-page-title"
@@ -22400,7 +22402,8 @@
     "Sections: `.orca-sidebar__section` with an optional `.orca-sidebar__label` and side links; `.orca-sidebar__foot` holds the collapse toggle (`data-orca-sidebar-toggle aria-controls=…`).",
     "Collapsed (`data-collapsed=\"true\"`): labels are hidden visually but still read by screen readers, and the rail keeps icons. Give each link a `title` for tooltips.",
     "The state is remembered per sidebar in `localStorage` under `orca-sidebar:<id>`, so give the sidebar an `id`.",
-    "Nest a nav tree inside a section for long lists, such as this documentation's navigation; hide it when collapsed.",
+    "For long navigation, put a nav tree in a section: first-level `<summary>`s start with an icon, the section holding the current page is open. Above it, `.orca-sidebar__tools` holds a filter (`data-orca-filter-list`) and Collapse all (`data-orca-tree-toggle`); it stays at the top while the menu scrolls.",
+    "Collapsed with a nav tree, the rail keeps each section's icon and the tools and pages are hidden; while the pointer or keyboard focus is in it, the whole menu opens over the page without moving it.",
     "Below 620px the sidebar hides; put the same links in a drawer opened from the top bar."
    ],
    "avoid": [],
@@ -22412,6 +22415,7 @@
     ".orca-sidebar",
     ".orca-sidebar__section",
     ".orca-sidebar__label",
+    ".orca-sidebar__tools",
     ".orca-sidebar__foot"
    ],
    "laws": [
@@ -22423,6 +22427,10 @@
     {
      "title": "Sidebar with collapse",
      "html": "<div class=\"orca-app\" style=\"min-height: 22rem; border: var(--orca-border-width) solid var(--orca-border)\">\n  <nav class=\"orca-sidebar\" id=\"sb-demo\" aria-label=\"Sections\" data-collapsed=\"false\">\n    <div class=\"orca-sidebar__section\">\n      <ul class=\"orca-side-nav\">\n        <li>\n          <a class=\"orca-side-link\" href=\"#\" aria-current=\"page\">\n            {% icon \"home\" %}\n            <span class=\"orca-side-link__label\">Dashboard</span>\n          </a>\n        </li>\n        <li>\n          <a class=\"orca-side-link\" href=\"#\">\n            {% icon \"snapshot\" %}\n            <span class=\"orca-side-link__label\">Videos</span>\n            <span class=\"orca-count orca-count--neutral\">12</span>\n          </a>\n        </li>\n        <li>\n          <a class=\"orca-side-link\" href=\"#\">\n            {% icon \"statistics\" %}\n            <span class=\"orca-side-link__label\">Reports</span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"orca-sidebar__section\">\n      <p class=\"orca-sidebar__label\">Admin</p>\n      <ul class=\"orca-side-nav\">\n        <li>\n          <a class=\"orca-side-link\" href=\"#\">\n            {% icon \"user\" %}\n            <span class=\"orca-side-link__label\">Users</span>\n          </a>\n        </li>\n        <li>\n          <a class=\"orca-side-link\" href=\"#\">\n            {% icon \"settings\" %}\n            <span class=\"orca-side-link__label\">Settings</span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"orca-sidebar__foot\">\n      <button class=\"orca-icon-button orca-sidebar__toggle\" type=\"button\" aria-controls=\"sb-demo\" aria-expanded=\"true\" aria-label=\"Collapse navigation\" data-orca-sidebar-toggle>\n        {% icon \"chevron-left\" %}\n      </button>\n    </div>\n  </nav>\n  <main class=\"orca-app__main\">\n    <h1 class=\"orca-page-title\">Dashboard</h1>\n  </main>\n</div>"
+    },
+    {
+     "title": "Sidebar with a nav tree",
+     "html": "<div class=\"orca-app\" style=\"min-height: 26rem; border: var(--orca-border-width) solid var(--orca-border)\">\n  <nav class=\"orca-sidebar\" id=\"sb-tree\" aria-label=\"Sections\" data-collapsed=\"false\">\n    <div class=\"orca-sidebar__tools\">\n      <div class=\"orca-search\">\n        {% icon \"search\" %}\n        <input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter the menu\" aria-label=\"Filter the menu\" data-orca-filter-list=\"sb-tree-list\">\n      </div>\n      <button class=\"orca-icon-button orca-icon-button--dense\" type=\"button\" aria-controls=\"sb-tree-list\" aria-label=\"Collapse all sections\" title=\"Collapse all sections\" data-orca-tree-toggle>\n        {% icon \"collapse\" class=\"orca-icon--collapse\" %}\n        {% icon \"expand\" class=\"orca-icon--expand\" %}\n      </button>\n    </div>\n    <div class=\"orca-sidebar__section\">\n      <ul class=\"orca-side-nav\">\n        <li>\n          <a class=\"orca-side-link\" href=\"#\" title=\"Home\">\n            {% icon \"home\" %}\n            <span class=\"orca-side-link__label\">Home</span>\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"orca-sidebar__section\">\n      <ul class=\"orca-nav-tree\" id=\"sb-tree-list\">\n        <li>\n          <details open>\n            <summary>\n              {% icon \"snapshot\" %}\n              Devices\n              <span class=\"orca-chevron\">\n                {% icon \"chevron-down\" size=\"xs\" %}\n              </span>\n            </summary>\n            <ul>\n              <li>\n                <a href=\"#\" aria-current=\"page\">Videos</a>\n              </li>\n              <li>\n                <a href=\"#\">Media servers</a>\n              </li>\n            </ul>\n          </details>\n        </li>\n        <li>\n          <details>\n            <summary>\n              {% icon \"settings\" %}\n              Settings\n              <span class=\"orca-chevron\">\n                {% icon \"chevron-down\" size=\"xs\" %}\n              </span>\n            </summary>\n            <ul>\n              <li>\n                <a href=\"#\">Users</a>\n              </li>\n              <li>\n                <a href=\"#\">Roles</a>\n              </li>\n            </ul>\n          </details>\n        </li>\n      </ul>\n    </div>\n    <div class=\"orca-sidebar__foot\">\n      <button class=\"orca-icon-button orca-sidebar__toggle\" type=\"button\" aria-controls=\"sb-tree\" aria-expanded=\"true\" aria-label=\"Collapse navigation\" data-orca-sidebar-toggle>\n        {% icon \"chevron-left\" %}\n      </button>\n    </div>\n  </nav>\n  <main class=\"orca-app__main\">\n    <h1 class=\"orca-page-title\">\n      {% icon \"snapshot\" size=\"m\" %}\n      Videos\n    </h1>\n  </main>\n</div>"
     }
    ],
    "guide": [

@@ -115,10 +115,12 @@ The page title is the main heading of a page. It tells people which page or item
 - Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.
 - Long names wrap and are never cut (L15).
 - On application pages it sits in the `page-head` pattern, with the page actions beside it.
+- It may start with the icon its page has in the sidebar (`{% icon "name" size="m" %}` as the first child), so the page and its menu entry are recognised together; the icon is decorative.
 
 ### Accessibility
 
 - It is the page's `<h1>`. Start the document `<title>` with the same words.
+- A leading icon is decorative (`aria-hidden`): the words alone name the page.
 
 #### Example: Page title with subtitle
 
