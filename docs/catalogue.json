@@ -20776,12 +20776,14 @@
    "id": "docs-nav-tree",
    "name": "Docs navigation tree",
    "category": "docs-site",
-   "summary": "A documentation sidebar: a filter box above a tree of sections and pages.",
+   "summary": "A documentation sidebar: an optional filter box and an optional Collapse all button above a tree of sections and pages.",
    "when": [
     "Documentation sites and long help centres (this site uses it)."
    ],
    "how": [
     "A search field with `data-orca-filter-list=\"tree-id\"` above a nav tree `<ul id=\"tree-id\">`; while filtering, matching sections open and empty ones hide.",
+    "Both tools are optional. Leave the filter out for a short tree (under about ten pages); add the Collapse all button (`data-orca-tree-toggle aria-controls=\"tree-id\"`, an icon button holding the `collapse` and `expand` icons) for a long one. It collapses every section while any is open, then offers Expand all, and its label follows.",
+    "In the docs layout, pass `sidebar_search=False` to drop the filter (on by default) and `sidebar_collapse_all=True` to add the button (off by default).",
     "Keep the current page highlighted and scrolled into view."
    ],
    "avoid": [],
@@ -20789,7 +20791,8 @@
    "tokens": [],
    "classes": [
     ".orca-nav-tree",
-    ".orca-search"
+    ".orca-search",
+    ".orca-docs-sidebar__tools"
    ],
    "laws": [
     "hick",
@@ -20798,7 +20801,7 @@
    "examples": [
     {
      "title": "Docs tree",
-     "html": "<nav aria-label=\"Documentation\" style=\"max-width: 16rem\">\n  <div class=\"orca-search\" style=\"margin-bottom: var(--orca-space-8)\">\n    {% icon \"search\" %}\n    <input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dnt\">\n  </div>\n  <ul class=\"orca-nav-tree\" id=\"dnt\">\n    <li>\n      <details open>\n        <summary>\n          {% icon \"book\" %}\n          Get started\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Installation</a>\n          </li>\n          <li>\n            <a href=\"#\" aria-current=\"page\">Usage</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n    <li>\n      <details>\n        <summary>\n          {% icon \"grid\" %}\n          Forms\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Form field</a>\n          </li>\n          <li>\n            <a href=\"#\">Combobox</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n  </ul>\n</nav>"
+     "html": "<nav aria-label=\"Documentation\" style=\"max-width: 16rem\">\n  <div class=\"orca-docs-sidebar__tools\" style=\"margin-inline: 0\">\n    <div class=\"orca-search\">\n      {% icon \"search\" %}\n      <input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dnt\">\n    </div>\n    <button class=\"orca-icon-button orca-icon-button--dense\" type=\"button\" aria-controls=\"dnt\" aria-label=\"Collapse all sections\" title=\"Collapse all sections\" data-orca-tree-toggle>\n      {% icon \"collapse\" class=\"orca-icon--collapse\" %}\n      {% icon \"expand\" class=\"orca-icon--expand\" %}\n    </button>\n  </div>\n  <ul class=\"orca-nav-tree\" id=\"dnt\">\n    <li>\n      <details open>\n        <summary>\n          {% icon \"book\" %}\n          Get started\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Installation</a>\n          </li>\n          <li>\n            <a href=\"#\" aria-current=\"page\">Usage</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n    <li>\n      <details>\n        <summary>\n          {% icon \"grid\" %}\n          Forms\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Form field</a>\n          </li>\n          <li>\n            <a href=\"#\">Combobox</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n  </ul>\n</nav>"
     }
    ],
    "guide": [
@@ -26264,18 +26267,19 @@
    "id": "docs-sidebar",
    "name": "Docs sidebar tree",
    "category": "marketing-docs",
-   "summary": "The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open.",
+   "summary": "The documentation sidebar: an optional filter box and an optional Collapse all button over grouped, collapsible page links, with the current page open.",
    "when": [
     "Documentation sites. This site puts the filter and tree inside the sidebar pattern so they collapse to a rail."
    ],
    "how": [
-    "`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with a dense search input (`data-orca-filter-list`) and the docs navigation tree; on narrow screens it moves into a left drawer."
+    "`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with an optional dense search input (`data-orca-filter-list`), an optional Collapse all button (`data-orca-tree-toggle`) and the docs navigation tree, the first two in one `.orca-docs-sidebar__tools` row; on narrow screens it moves into a left drawer."
    ],
    "avoid": [],
    "a11y": [],
    "tokens": [],
    "classes": [
-    ".orca-docs-sidebar"
+    ".orca-docs-sidebar",
+    ".orca-docs-sidebar__tools"
    ],
    "laws": [
     "miller",
@@ -26284,7 +26288,7 @@
    "examples": [
     {
      "title": "Sidebar",
-     "html": "<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">\n  <div class=\"orca-search\">\n    {% icon \"search\" %}\n    <input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dsb\">\n  </div>\n  <ul class=\"orca-nav-tree\" id=\"dsb\">\n    <li>\n      <details open>\n        <summary>\n          {% icon \"book\" %}\n          Get started\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Installation</a>\n          </li>\n          <li>\n            <a href=\"#\" aria-current=\"page\">Usage</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n    <li>\n      <details>\n        <summary>\n          {% icon \"blueprint\" %}\n          Patterns\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Data table</a>\n          </li>\n          <li>\n            <a href=\"#\">Month calendar</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n  </ul>\n</nav>"
+     "html": "<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">\n  <div class=\"orca-docs-sidebar__tools\">\n    <div class=\"orca-search\">\n      {% icon \"search\" %}\n      <input class=\"orca-input orca-input--dense\" type=\"search\" placeholder=\"Filter pages\" aria-label=\"Filter pages\" data-orca-filter-list=\"dsb\">\n    </div>\n    <button class=\"orca-icon-button orca-icon-button--dense\" type=\"button\" aria-controls=\"dsb\" aria-label=\"Collapse all sections\" title=\"Collapse all sections\" data-orca-tree-toggle>\n      {% icon \"collapse\" class=\"orca-icon--collapse\" %}\n      {% icon \"expand\" class=\"orca-icon--expand\" %}\n    </button>\n  </div>\n  <ul class=\"orca-nav-tree\" id=\"dsb\">\n    <li>\n      <details open>\n        <summary>\n          {% icon \"book\" %}\n          Get started\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Installation</a>\n          </li>\n          <li>\n            <a href=\"#\" aria-current=\"page\">Usage</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n    <li>\n      <details>\n        <summary>\n          {% icon \"blueprint\" %}\n          Patterns\n          <span class=\"orca-chevron\">\n            {% icon \"chevron-down\" size=\"xs\" %}\n          </span>\n        </summary>\n        <ul>\n          <li>\n            <a href=\"#\">Data table</a>\n          </li>\n          <li>\n            <a href=\"#\">Month calendar</a>\n          </li>\n        </ul>\n      </details>\n    </li>\n  </ul>\n</nav>"
     }
    ],
    "guide": [

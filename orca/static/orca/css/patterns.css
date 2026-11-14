@@ -282,6 +282,12 @@ a.orca-summary-tile:hover, button.orca-summary-tile:hover { border-color: var(--
 .orca-docs-head__meta { display: flex; flex-wrap: wrap; gap: var(--orca-space-8); }
 .orca-docs-sidebar { width: 100%; max-width: 17rem; padding: var(--orca-space-16) 0; background: var(--orca-bg-panel); }
 .orca-docs-sidebar > .orca-search { margin: 0 var(--orca-space-16) var(--orca-space-12); width: auto; }
+.orca-docs-sidebar__tools { display: flex; align-items: center; gap: var(--orca-space-8); margin: 0 var(--orca-space-16) var(--orca-space-12); }
+.orca-docs-sidebar__tools > .orca-search { flex: 1 1 auto; min-width: 0; width: auto; }
+.orca-docs-sidebar__tools > .orca-icon-button { flex: none; }
+.orca-icon--expand { display: none; }
+[data-orca-tree-toggle][data-all-closed] > .orca-icon--collapse { display: none; }
+[data-orca-tree-toggle][data-all-closed] > .orca-icon--expand { display: inline-block; }
 
 /* ===================================================================== Process, editorial, email */
 .orca-run-progress { display: flex; flex-direction: column; gap: var(--orca-space-16); }

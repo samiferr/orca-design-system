@@ -385,7 +385,7 @@ A documentation page header sits at the top of a docs page. It gives the trail, 
 
 `id: docs-sidebar` · level: pattern · source: ORCA
 
-The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open.
+The documentation sidebar: an optional filter box and an optional Collapse all button over grouped, collapsible page links, with the current page open.
 
 Built from: `docs-nav-tree`, `drawer`
 
@@ -417,15 +417,21 @@ A docs sidebar is the navigation column of a documentation site. It lists pages 
 
 ### How to use
 
-- `<nav class="orca-docs-sidebar" aria-label="Documentation">` with a dense search input (`data-orca-filter-list`) and the docs navigation tree; on narrow screens it moves into a left drawer.
+- `<nav class="orca-docs-sidebar" aria-label="Documentation">` with an optional dense search input (`data-orca-filter-list`), an optional Collapse all button (`data-orca-tree-toggle`) and the docs navigation tree, the first two in one `.orca-docs-sidebar__tools` row; on narrow screens it moves into a left drawer.
 
 #### Example: Sidebar
 
 ```django
 <nav class="orca-docs-sidebar" aria-label="Documentation">
-  <div class="orca-search">
-    {% icon "search" %}
-    <input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dsb">
+  <div class="orca-docs-sidebar__tools">
+    <div class="orca-search">
+      {% icon "search" %}
+      <input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dsb">
+    </div>
+    <button class="orca-icon-button orca-icon-button--dense" type="button" aria-controls="dsb" aria-label="Collapse all sections" title="Collapse all sections" data-orca-tree-toggle>
+      {% icon "collapse" class="orca-icon--collapse" %}
+      {% icon "expand" class="orca-icon--expand" %}
+    </button>
   </div>
   <ul class="orca-nav-tree" id="dsb">
     <li>
@@ -470,7 +476,7 @@ A docs sidebar is the navigation column of a documentation site. It lists pages 
 </nav>
 ```
 
-**Classes:** `.orca-docs-sidebar`
+**Classes:** `.orca-docs-sidebar`, `.orca-docs-sidebar__tools`
 
 **Principles applied:** Miller's law: chunk information so working memory is not overloaded; Hick's law: fewer, clearer choices mean faster decisions
 

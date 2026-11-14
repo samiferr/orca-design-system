@@ -1,8 +1,12 @@
 {% extends "orca/layouts/blog.html" %}{% load orca %}
-{# Docs page: the Blog page with a documentation sidebar. Fill blog_body with sections; pass docs_nav, title, subtitle, version, updated. #}
+{# Docs page: the Blog page with a documentation sidebar. Fill blog_body with sections; pass docs_nav, title, subtitle, version, updated.
+   Both sidebar tools are optional: pass sidebar_search=False to drop the filter box (on by default) and sidebar_collapse_all=True to add a Collapse all / Expand all button (off by default). #}
 {% block body_class %}orca-shell orca-blog-page orca-docs-page{% endblock %}
 {% block sidebar %}<nav class="orca-sidebar orca-docs-sidebar" id="orca-sidebar" aria-label="Documentation" data-collapsed="false">
-  {% block sidebar_nav %}<div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="orca-docs-tree"></div>
+  {% block sidebar_nav %}{% if sidebar_search != False or sidebar_collapse_all %}<div class="orca-docs-sidebar__tools">
+    {% if sidebar_search != False %}<div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="orca-docs-tree"></div>{% endif %}
+    {% if sidebar_collapse_all %}<button class="orca-icon-button orca-icon-button--dense" type="button" aria-controls="orca-docs-tree" aria-label="Collapse all sections" title="Collapse all sections" data-orca-tree-toggle>{% icon "collapse" class="orca-icon--collapse" %}{% icon "expand" class="orca-icon--expand" %}</button>{% endif %}
+  </div>{% endif %}
   <ul class="orca-nav-tree" id="orca-docs-tree">{% for section in docs_nav %}<li><details{% if section.open %} open{% endif %}><summary>{% icon section.icon|default:"book" %}{{ section.label }}<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul>{% for item in section.items %}<li><a href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.label }}</a></li>{% endfor %}</ul></details></li>{% endfor %}</ul>{% endblock %}
   {% block sidebar_extra %}{% endblock %}
 </nav>{% endblock %}

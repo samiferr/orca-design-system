@@ -16,7 +16,10 @@
 <button class="orca-icon-button orca-icon-button--dense" type="button" data-orca-theme-toggle aria-label="Change theme">{% icon "sun" %}</button>{% endblock %}
 
 {% block sidebar %}<nav class="orca-sidebar orca-docs-sidebar" id="orca-sidebar" aria-label="Documentation">
-  <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="orca-docs-tree" data-orca-status="orca-docs-tree-status"></div>
+  <div class="orca-docs-sidebar__tools">
+    <div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="orca-docs-tree" data-orca-status="orca-docs-tree-status"></div>
+    <button class="orca-icon-button orca-icon-button--dense" type="button" aria-controls="orca-docs-tree" aria-label="Collapse all sections" title="Collapse all sections" data-orca-tree-toggle>{% icon "collapse" class="orca-icon--collapse" %}{% icon "expand" class="orca-icon--expand" %}</button>
+  </div>
   <p class="orca-sr-only" id="orca-docs-tree-status" role="status"></p>
   <ul class="orca-nav-tree" id="orca-docs-tree">
     <li><details open><summary>{% icon "book" %}Get started<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul>

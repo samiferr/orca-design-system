@@ -234,4 +234,4 @@ Components for documenting a design system or API: live examples, code blocks an
 
 - `live-example` **Live example**: A rendered example and its source as two tabs.
 - `code-block` **Code block**: Multi-line code with its language and a Copy button.
-- `docs-nav-tree` **Docs navigation tree**: A documentation sidebar: a filter box above a tree of sections and pages.
+- `docs-nav-tree` **Docs navigation tree**: A documentation sidebar: an optional filter box and an optional Collapse all button above a tree of sections and pages.

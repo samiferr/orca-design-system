@@ -27,6 +27,7 @@
      data-orca-weekdays="mon,…" sets the weekday toggles in the fieldset it controls
      data-orca-reveal="id" data-orca-reveal-value="custom"   select that shows an element for one value
      data-orca-filter-list="id" input filtering the <li> of a list
+     data-orca-tree-toggle      aria-controls=tree id: button that collapses every section of a nav tree, or expands them when all are closed
      data-orca-carousel         carousel: prev/next, dots, count
      data-orca-file-list="id"   file input listing chosen files in a list
      data-orca-autosubmit       select or input that submits its form on change
@@ -570,6 +571,19 @@
     track.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(function () { updateCarousel(car, Math.abs(carouselIndex(car))); }, 100); });
   });
 
+  /* Collapse all / Expand all: the button offers whichever is useful now (collapse while any section is open) */
+  function syncTreeToggles() {
+    doc.querySelectorAll("[data-orca-tree-toggle]").forEach(function (b) {
+      var tree = controlled(b); if (!tree) return;
+      var anyOpen = Array.prototype.some.call(tree.querySelectorAll("details"), function (d) { return d.open; });
+      var label = anyOpen ? "Collapse all sections" : "Expand all sections";
+      if (anyOpen) b.removeAttribute("data-all-closed"); else b.setAttribute("data-all-closed", "");
+      b.setAttribute("aria-label", label); b.setAttribute("title", label);
+    });
+  }
+  doc.addEventListener("toggle", function (e) { if (closest(e.target, ".orca-nav-tree")) syncTreeToggles(); }, true);
+  syncTreeToggles();
+
   /* ---------------------------------------------------------------- patterns */
   doc.addEventListener("click", function (e) {
     var t = e.target, el;
@@ -585,6 +599,14 @@
       el.setAttribute("aria-expanded", open ? "true" : "false");
       el.setAttribute("aria-label", open ? "Hide navigation" : "Show navigation");
       if (open) { var first = side.querySelector("a, button, input"); if (first) first.focus(); }
+      return;
+    }
+    if ((el = closest(t, "[data-orca-tree-toggle]"))) {
+      var tree = controlled(el); if (!tree) return;
+      var sections = tree.querySelectorAll("details");
+      var anyOpen = Array.prototype.some.call(sections, function (d) { return d.open; });
+      sections.forEach(function (d) { d.open = !anyOpen; });
+      syncTreeToggles();
       return;
     }
     if ((el = closest(t, "[data-orca-sidebar-toggle]"))) {

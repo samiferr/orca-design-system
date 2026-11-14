@@ -93,14 +93,14 @@ add(Pattern(
 
 add(Pattern(
     "docs-sidebar", "Docs sidebar tree", C,
-    "The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open.",
+    "The documentation sidebar: an optional filter box and an optional Collapse all button over grouped, collapsible page links, with the current page open.",
     why="Large documentation needs both browsing and finding (Miller's law, Hick's law); a filter finds a page by name while the tree teaches the structure.",
     when=["Documentation sites. This site puts the filter and tree inside the sidebar pattern so they collapse to a rail."],
-    how=["`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with a dense search input (`data-orca-filter-list`) and the docs navigation tree; on narrow screens it moves into a left drawer."],
-    classes=[".orca-docs-sidebar"],
+    how=["`<nav class=\"orca-docs-sidebar\" aria-label=\"Documentation\">` with an optional dense search input (`data-orca-filter-list`), an optional Collapse all button (`data-orca-tree-toggle`) and the docs navigation tree, the first two in one `.orca-docs-sidebar__tools` row; on narrow screens it moves into a left drawer."],
+    classes=[".orca-docs-sidebar", ".orca-docs-sidebar__tools"],
     laws=["miller", "hick"],
     uses=["docs-nav-tree", "drawer"],
-    examples=[("Sidebar", """<nav class="orca-docs-sidebar" aria-label="Documentation"><div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dsb"></div>
+    examples=[("Sidebar", """<nav class="orca-docs-sidebar" aria-label="Documentation"><div class="orca-docs-sidebar__tools"><div class="orca-search">{% icon "search" %}<input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dsb"></div><button class="orca-icon-button orca-icon-button--dense" type="button" aria-controls="dsb" aria-label="Collapse all sections" title="Collapse all sections" data-orca-tree-toggle>{% icon "collapse" class="orca-icon--collapse" %}{% icon "expand" class="orca-icon--expand" %}</button></div>
   <ul class="orca-nav-tree" id="dsb"><li><details open><summary>{% icon "book" %}Get started<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul><li><a href="#">Installation</a></li><li><a href="#" aria-current="page">Usage</a></li></ul></details></li>
     <li><details><summary>{% icon "blueprint" %}Patterns<span class="orca-chevron">{% icon "chevron-down" size="xs" %}</span></summary><ul><li><a href="#">Data table</a></li><li><a href="#">Month calendar</a></li></ul></details></li></ul></nav>""")],
     guide=["Docs sidebar tree"],

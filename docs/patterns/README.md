@@ -105,7 +105,7 @@ Sections for a product's public pages and its documentation: hero, features, liv
 - `token-panel` **Live design-token panel**: Brand token controls beside a live preview, for trying a brand before setting it.
 - `code-samples` **Code samples block**: One example in several languages or frameworks, as tabs of code blocks.
 - `docs-page-header` **Docs page header**: A documentation page's breadcrumb, title, short introduction and meta (status, source, version).
-- `docs-sidebar` **Docs sidebar tree**: The documentation sidebar: a filter box over grouped, collapsible page links, with the current page open.
+- `docs-sidebar` **Docs sidebar tree**: The documentation sidebar: an optional filter box and an optional Collapse all button over grouped, collapsible page links, with the current page open.
 - `table-of-contents` **Table of contents**: An "On this page" list of a long page's sections, marking the one being read.
 
 ## [Process and status](process.md) (1)

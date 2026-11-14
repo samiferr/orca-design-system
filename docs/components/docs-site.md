@@ -141,7 +141,7 @@ A formatted area that shows lines of code or commands in an even-width font, usu
 
 `id: docs-nav-tree` · level: component · source: ORCA
 
-A documentation sidebar: a filter box above a tree of sections and pages.
+A documentation sidebar: an optional filter box and an optional Collapse all button above a tree of sections and pages.
 
 Built from: `nav-tree`, `search-field`
 
@@ -174,15 +174,23 @@ A side menu for documentation that groups pages into sections and often has a se
 ### How to use
 
 - A search field with `data-orca-filter-list="tree-id"` above a nav tree `<ul id="tree-id">`; while filtering, matching sections open and empty ones hide.
+- Both tools are optional. Leave the filter out for a short tree (under about ten pages); add the Collapse all button (`data-orca-tree-toggle aria-controls="tree-id"`, an icon button holding the `collapse` and `expand` icons) for a long one. It collapses every section while any is open, then offers Expand all, and its label follows.
+- In the docs layout, pass `sidebar_search=False` to drop the filter (on by default) and `sidebar_collapse_all=True` to add the button (off by default).
 - Keep the current page highlighted and scrolled into view.
 
 #### Example: Docs tree
 
 ```django
 <nav aria-label="Documentation" style="max-width: 16rem">
-  <div class="orca-search" style="margin-bottom: var(--orca-space-8)">
-    {% icon "search" %}
-    <input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dnt">
+  <div class="orca-docs-sidebar__tools" style="margin-inline: 0">
+    <div class="orca-search">
+      {% icon "search" %}
+      <input class="orca-input orca-input--dense" type="search" placeholder="Filter pages" aria-label="Filter pages" data-orca-filter-list="dnt">
+    </div>
+    <button class="orca-icon-button orca-icon-button--dense" type="button" aria-controls="dnt" aria-label="Collapse all sections" title="Collapse all sections" data-orca-tree-toggle>
+      {% icon "collapse" class="orca-icon--collapse" %}
+      {% icon "expand" class="orca-icon--expand" %}
+    </button>
   </div>
   <ul class="orca-nav-tree" id="dnt">
     <li>
@@ -227,7 +235,7 @@ A side menu for documentation that groups pages into sections and often has a se
 </nav>
 ```
 
-**Classes:** `.orca-nav-tree`, `.orca-search`
+**Classes:** `.orca-nav-tree`, `.orca-search`, `.orca-docs-sidebar__tools`
 
 **Principles applied:** Hick's law: fewer, clearer choices mean faster decisions; Miller's law: chunk information so working memory is not overloaded
 
