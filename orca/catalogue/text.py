@@ -41,8 +41,11 @@ add(Element(
     how=["`<h1 class=\"orca-page-title\">` (28/36, weight 700).",
          "Name the object, not the action: 'Videos', 'Harbour at dusk', 'New album'.",
          "Long names wrap and are never cut (L15).",
-         "On application pages it sits in the `page-head` pattern, with the page actions beside it."],
-    a11y=["It is the page's `<h1>`. Start the document `<title>` with the same words."],
+         "On application pages it sits in the `page-head` pattern, with the page actions beside it.",
+         "It may start with the icon its page has in the sidebar (`{% icon \"name\" size=\"m\" %}` as the first child), "
+         "so the page and its menu entry are recognised together; the icon is decorative."],
+    a11y=["It is the page's `<h1>`. Start the document `<title>` with the same words.",
+          "A leading icon is decorative (`aria-hidden`): the words alone name the page."],
     classes=[".orca-page-title"], tokens=["type-page-title"],
     laws=["jakob", "restorff", "W04", "L15"],
     examples=[("Page title with subtitle", """<div>
