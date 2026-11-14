@@ -21,6 +21,7 @@
     <li><strong>Reported.</strong> Every adjustment appears as the system-check warning <code class="orca-code">orca.W001</code> with the value used, so you can set that value yourself and silence the warning.</li>
     <li><strong>Strict about the rest.</strong> Unknown keys and unreadable values are errors (<code class="orca-code">orca.E002</code>), and <code class="orca-code">orca_lint</code> flags any stylesheet that redefines a non-brand <code class="orca-code">--orca-*</code> token.</li>
   </ul>
+  <p class="orca-p">Want to see a colour before you commit to it? Use the <a class="orca-link" href="{% url 'orca:guide' 'brand-generator' %}">Brand generator</a>: it previews your brand on this site and writes the settings for you.</p>
   <p class="orca-p">Current values on this site:</p>
   <div class="orca-row orca-row--16">
     <span class="orca-with-icon"><span class="orca-swatch" style="--orca-swatch: var(--orca-brand)"></span>Brand <code class="orca-code">{{ brand.values.color }}</code></span>

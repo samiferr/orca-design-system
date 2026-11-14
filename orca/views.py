@@ -18,8 +18,12 @@ from . import __released__, __version__, icons, tokens
 from .catalogue import registry
 from .catalogue.format import format_example
 from .catalogue.guide import LEVELS
-from .conf import compute_brand, docs_enabled
+from .conf import DARK_GROUNDS, LIGHT_GROUNDS, PAPER_GROUNDS, compute_brand, docs_enabled
 from .samples import SAMPLE
+
+# Starting points for the brand generator: (name, colour). Each is a plain brand colour; ORCA adjusts it for contrast.
+BRAND_PRESETS = [("Teal", "#0f95a1"), ("Indigo", "#4f46e5"), ("Purple", "#7a1fa2"), ("Green", "#1a7f4b"),
+                 ("Orange", "#d9480f"), ("Crimson", "#c2185b"), ("Slate", "#475569")]
 
 PRELUDE = "{% load orca static %}"
 
@@ -28,6 +32,7 @@ GUIDE = [
     ("installation", "Installation", "Install the package, add the app and load ORCA in your base template."),
     ("usage", "Usage", "Template tags, filters, the page skeleton and the optional script behaviours."),
     ("brand-and-themes", "Brand and themes", "The brand tokens a project may change, and the light, dark and paper themes."),
+    ("brand-generator", "Brand generator", "Try a brand colour, theme and density on this page, then copy the ORCA settings into your project."),
     ("ai-agents", "For AI agents", "How coding agents look elements up, the hard rules they follow and how their output is checked."),
     ("principles", "Principles", "The Practical UI and Laws of UX rules ORCA applies, and the elements that apply each one."),
     ("accessibility", "Accessibility", "Contrast, focus, touch targets, motion and markup commitments, and how they are tested."),
@@ -37,7 +42,7 @@ GUIDE = [
 ]
 GUIDE_TITLES = {slug: title for slug, title, _ in GUIDE}
 # Icons of the documentation sidebar (shown alone when it is collapsed to a rail).
-GUIDE_ICONS = {"installation": "repository", "usage": "code", "brand-and-themes": "sun", "ai-agents": "generative-ai",
+GUIDE_ICONS = {"installation": "repository", "usage": "code", "brand-and-themes": "sun", "brand-generator": "settings", "ai-agents": "generative-ai",
                "principles": "book", "accessibility": "show", "localization": "website", "tooling": "devtools", "roadmap": "map"}
 LEVEL_ICONS = {"primitive": "grid", "component": "cluster-host", "pattern": "blueprint", "template": "folder"}
 
@@ -154,6 +159,10 @@ def guide(request, slug):
     extra = {"title": GUIDE_TITLES[slug], "kicker": "Guide", "slug": slug, "breadcrumbs": [("Overview", reverse("orca:home")), ("Guide", "")]}
     if slug == "brand-and-themes":
         extra.update(brand_tokens=tokens.BRAND_TOKENS, brand=compute_brand())
+    if slug == "brand-generator":
+        extra.update(brand_data={"defaults": {t.key: t.default for t in tokens.BRAND_TOKENS},
+                                 "grounds": {"light": list(LIGHT_GROUNDS), "paper": list(PAPER_GROUNDS), "dark": list(DARK_GROUNDS)}},
+                     brand_defaults={t.key: t.default for t in tokens.BRAND_TOKENS}, presets=BRAND_PRESETS)
     if slug == "principles":
         extra.update(principles=_principles())
     if slug == "roadmap":
