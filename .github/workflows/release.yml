@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  actions: write # to dispatch the documentation deploy after the bump commit
 
 # One release at a time so two pushes never compute the same version.
 concurrency:
@@ -70,3 +71,9 @@ jobs:
           git commit -m "chore(release): v${{ steps.bump.outputs.version }}"
           git tag -a "v${{ steps.bump.outputs.version }}" -m "Release v${{ steps.bump.outputs.version }}"
           git push origin main "v${{ steps.bump.outputs.version }}"
+      # The bump commit is pushed with GITHUB_TOKEN, which does not trigger the push workflows,
+      # so deploy the documentation explicitly to show the new version and release date.
+      - name: Deploy the documentation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run docs.yml --ref main
